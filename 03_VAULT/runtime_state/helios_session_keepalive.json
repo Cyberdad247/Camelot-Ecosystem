@@ -1,12 +1,12 @@
 {
-  "timestamp_utc": "2026-09-27T03:22:02.822241+00:00",
+  "timestamp_utc": "2026-10-10T04:52:03.600329+00:00",
   "guardian": "SIR_HELIOS",
   "knight_title": "Sovereign Spire Sentinel & Session Keep-Alive Cron Guardian",
   "status": "REMOTE_UNSYNC",
-  "storage_path": "C:\\Users\\vizio\\.notebooklm\\profiles\\default\\storage_state.json",
+  "storage_path": "C:\\Users\\vizio\\.notebooklm\\storage_state.json",
   "cookies_tracked": 39,
-  "expired_cookies": 2,
-  "nearest_expiration_sec": 824553.18,
+  "expired_cookies": 4,
+  "nearest_expiration_sec": 339544.4,
   "last_ping_status": "PULSE_ACKNOWLEDGED",
   "cron_interval_minutes": 30,
   "cycles_completed": 1,
@@ -14,7 +14,7 @@
     "NotebookLM prime unreachable \u2014 open-notebook twin serving. Run '.venv\\Scripts\\notebooklm login' to re-authenticate the prime."
   ],
   "remote_sync": "REMOTE_UNSYNC_LOCAL_FALLBACK",
-  "notebooklm_age_days": 0.0,
-  "remote_checked_utc": "2026-09-27T03:22:02.822241+00:00",
+  "notebooklm_age_days": 7.6,
+  "remote_checked_utc": "2026-10-10T04:52:03.600329+00:00",
   "remote_cached": false
 }

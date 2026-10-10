@@ -1,0 +1,42 @@
+{
+  "crystal_id": "VKG_30BB0938F9EA26A6",
+  "schema_version": "v1000-VKG-SINGULARITY",
+  "anya_seal": "ANYA_IS_THE_GATE",
+  "category": "BENCHMARK",
+  "knight": "SIR_HELIOS",
+  "title": "Memory Stability Benchmark Node 0",
+  "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Memory|Stability|Benchmark|Node|Benchmark|payload|Helios|routes|telemetry|Anya|Gate|validates|execution\u27e9",
+  "anchor_tokens": [
+    "Memory",
+    "Stability",
+    "Benchmark",
+    "Node",
+    "Benchmark",
+    "payload",
+    "Helios",
+    "routes",
+    "telemetry",
+    "Anya",
+    "Gate",
+    "validates",
+    "execution"
+  ],
+  "sources_count": 1,
+  "manifest_sha256": "f4bb1938a81ad4fab8fdf819d513f60185ead695235398866b8aecb8cc24e89f",
+  "triplets": [
+    {
+      "head": "Benchmark payload 0 Sir Helios",
+      "relation": "route",
+      "tail": "telemetry"
+    },
+    {
+      "head": "Anya Gate",
+      "relation": "validate",
+      "tail": "execution"
+    }
+  ],
+  "triplet_count": 2,
+  "vfs_coordinate": "vfs://worldtree/crystals/vkg_30bb0938f9ea26a6.vkg",
+  "created_at": "2026-10-06T15:10:10.918579+00:00",
+  "finalized_content": "Benchmark payload 0: Sir Helios routes telemetry. Anya Gate validates execution."
+}

@@ -66,6 +66,9 @@ SAFE_DIR_NAMES = {
     ".next",
     ".cache",
     "target",  # rust build output, cargo cleanable
+    # Go build cache. Regenerable via `go clean -cache`; observed under logs/.
+    "go-build-cache",
+    ".gocache",
 }
 
 REVIEW_DIR_NAMES = {
@@ -84,6 +87,13 @@ PROTECTED_DIR_NAMES = {
 
 # Never descend into these — they are protected or uninteresting.
 PRUNE_DIRS = PROTECTED_DIR_NAMES | {"data", "_tmp"}
+
+# Caches whose rebuild costs more than the disk they free. These match a SAFE
+# name (".cache") but deleting them is a net loss, so they are protected by
+# path rather than by name: graft/.cache is a parsed index of the entire repo,
+# so removing it forces a full tree-sitter reparse, and that native parse has a
+# documented abort (0xC0000409, upstream Graft#122) on memory-pressured hosts.
+PROTECTED_PATH_PREFIXES = ("graft/.cache",)
 
 VAULT_PREFIX = "03_VAULT"
 LEDGER_NAMES = {"PROVENANCE_LEDGER.md"}
@@ -171,6 +181,9 @@ def _dir_age_days(path: Path) -> int:
 def _is_protected_path(rel: Path) -> tuple[bool, str]:
     """Hard guard: returns (blocked, reason) for paths that must never be deleted."""
     posix = rel.as_posix()
+    for prefix in PROTECTED_PATH_PREFIXES:
+        if posix == prefix or posix.startswith(prefix + "/"):
+            return True, "expensive-to-rebuild index cache"
     if posix.startswith(VAULT_PREFIX):
         return True, "under 03_VAULT (ledger + runtime state)"
     if rel.name in LEDGER_NAMES:

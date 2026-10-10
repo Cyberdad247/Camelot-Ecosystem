@@ -3,14 +3,14 @@
   "tailscale_ip": "100.118.224.52",
   "status": "ONLINE",
   "mode": "ALWAYS_ON_MASTER",
-  "timestamp": "2026-09-04T22:23:32.193923+00:00",
-  "healthy_daemons": "4/6",
+  "timestamp": "2026-10-02T12:59:32.407429+00:00",
+  "healthy_daemons": "3/6",
   "memory": {
-    "load_pct": 94,
+    "load_pct": 85,
     "total_phys_mb": 7895,
-    "avail_phys_mb": 422,
+    "avail_phys_mb": 1113,
     "total_page_mb": 16087,
-    "avail_page_mb": 543,
+    "avail_page_mb": 1763,
     "pressure_alarm": false
   },
   "daemons": [
@@ -20,19 +20,19 @@
       "description": "Go SSE command router & Tailscale Funnel ingress",
       "live": true,
       "proc_alive": true,
-      "pid": 26536,
+      "pid": 80412,
       "restart_count": 1,
-      "last_restart": 1788560607.54477
+      "last_restart": 1790945958.5766556
     },
     {
       "name": "bifrost_sidecar",
       "port": 8011,
       "description": "Bifrost Go Sidecar mTLS bridge",
       "live": true,
-      "proc_alive": false,
-      "pid": null,
-      "restart_count": 0,
-      "last_restart": null
+      "proc_alive": true,
+      "pid": 100208,
+      "restart_count": 1,
+      "last_restart": 1790945963.7852023
     },
     {
       "name": "cognitive_service",
@@ -40,9 +40,9 @@
       "description": "MemCastle / Graphify / WorldTree cognitive service",
       "live": false,
       "proc_alive": true,
-      "pid": 3576,
+      "pid": 92032,
       "restart_count": 1,
-      "last_restart": 1788560609.129039
+      "last_restart": 1790945965.319939
     },
     {
       "name": "opencodex",
@@ -50,29 +50,29 @@
       "description": "OpenCodex universal OpenAI Responses proxy",
       "live": false,
       "proc_alive": true,
-      "pid": 25456,
+      "pid": 94548,
       "restart_count": 1,
-      "last_restart": 1788560611.2859962
+      "last_restart": 1790945967.8034947
     },
     {
       "name": "omnivoice",
       "port": 3002,
       "description": "OmniVoice WebSocket & Voice switchboard",
       "live": true,
-      "proc_alive": false,
-      "pid": null,
-      "restart_count": 0,
-      "last_restart": null
+      "proc_alive": true,
+      "pid": 94104,
+      "restart_count": 1,
+      "last_restart": 1790945969.9406078
     },
     {
       "name": "kitten_tts",
       "port": 8300,
       "description": "Kitten TTS low-latency audio stream",
-      "live": true,
-      "proc_alive": false,
-      "pid": null,
-      "restart_count": 0,
-      "last_restart": null
+      "live": false,
+      "proc_alive": true,
+      "pid": 99148,
+      "restart_count": 1,
+      "last_restart": 1790945971.502221
     }
   ],
   "version": "1.0.0"

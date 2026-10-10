@@ -1,0 +1,58 @@
+{
+  "schema_version": "camelot-cartridge/1",
+  "cartridge_id": "dub-link-engine",
+  "version": "0.1.0",
+  "signer": "camelot-community",
+  "signer_trust_band": "camelot-community",
+  "entrypoints": [
+    "fetch",
+    "execute",
+    "audit"
+  ],
+  "supported_node_profiles": [
+    "hub",
+    "experience",
+    "engineering"
+  ],
+  "requested_capabilities": [
+    "network.scoped",
+    "vfs.read",
+    "process.allowlisted"
+  ],
+  "denied_capabilities": [
+    "lease.issue",
+    "policy.admin",
+    "secret.export",
+    "unrestricted.network",
+    "direct_main_branch_write",
+    "auto_merge",
+    "auto_deploy",
+    "promotion.issue",
+    "epoch.increment"
+  ],
+  "resource_profile": {
+    "memory_mb": 512,
+    "timeout_s": 60,
+    "max_workers": 2
+  },
+  "verification": [
+    "contract_test",
+    "Gideon_verdict",
+    "receipt_issued"
+  ],
+  "risk_tier_invariant_cap": "T1",
+  "rollback": {
+    "strategy": "compensating_action"
+  },
+  "compat": {
+    "supported_knight_classes": [
+      "link_router",
+      "gateway_proxy",
+      "telemetry_sentinel"
+    ]
+  },
+  "hash_algorithm": "sha256",
+  "signature_algorithm": "ed25519",
+  "artifact_hash": "sha256:65af2105f00f194a07480f5f58deb61dc36c8c4d308118a142977fbdf4b4dca9",
+  "signature": "ed25519:o6jN1vjzwclijFNi5XDsrPjBpDySnfZOZ8LEST7wsy-BdFNd8LZ_v0ljYiREJk3qlgUGyeXUbcQVbg6aGsJ3Bw"
+}

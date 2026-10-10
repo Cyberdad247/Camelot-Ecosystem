@@ -1,0 +1,31 @@
+[
+  {
+    "node_id": "UNLIMITED_AI_ACCESS_ANTIGRAVITY_OMNIROUTE",
+    "cloudbrain_uuid": "6fd09912-c216-44c7-a3b2-d5357d185ab6",
+    "title": "Unlimited AI Access via AntiGravity and OmniRoute",
+    "category": "AI_MULTIAGENT_RESEARCH",
+    "spark_id": "0x6FD09912C21644C7A3B2D5357D185AB6",
+    "role": "Universal Sovereign Model Routing, Multi-Provider Pooling & Zero-Cost Frontier Orchestration",
+    "model": "FastMCP / agy (OmniRoute Mesh 350+ / 1200+ Models)",
+    "summoning_rune": "Omega_OmniRoute",
+    "vfs_mount": "vfs/notebooks/6fd09912-c216-44c7-a3b2-d5357d185ab6/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "capabilities": [
+      "free_frontier_first_routing",
+      "sub_10ms_provider_failover",
+      "token_pool_multiplexing",
+      "local_ollama_edge_fallback",
+      "bifrost_mesh_tailscale_transport",
+      "multi_agent_workload_tiering"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-27T18:22:00-04:00"
+  }
+]

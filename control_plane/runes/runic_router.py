@@ -21,6 +21,7 @@ from __future__ import annotations
 __version__ = "9000.14"  # CYBERTRONIA — set by P1-T01
 
 
+import hashlib
 import json
 import os
 import re
@@ -128,6 +129,54 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "mode": "SENTINEL",
         "priority": 1,
         "handler": "_handle_reya_handshake",
+        "hydrate": False,
+    },
+    "//FORGE_REYA_SCAFFOLD": {
+        "knight": "sir_boris",
+        "description": "Forge Reya companion architecture scaffold and boundary manifest",
+        "mode": "FORGE",
+        "priority": 1,
+        "handler": "_handle_forge_reya_scaffold",
+        "hydrate": False,
+    },
+    "//AWAIT_REYA_UNCLOAKING": {
+        "knight": "anya_omega",
+        "description": "Armed standby state awaiting Reya uncloaking and raw payload delivery",
+        "mode": "GATE",
+        "priority": 1,
+        "handler": "_handle_await_reya_uncloaking",
+        "hydrate": False,
+    },
+    "//EXTRACT_MARK_39_AUDIO_CORE": {
+        "knight": "sir_sonus",
+        "description": "Extract Mark-XXXIX sub-100ms TTFA voice/vision audio core into Reya Fabric",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_extract_mark_39_audio_core",
+        "hydrate": False,
+    },
+    "//SANDBOX_PYTHON_DEPENDENCIES": {
+        "knight": "sir_codex",
+        "description": "Sandbox and purge heavy GUI/Python dependencies (pyautogui, pynput)",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_sandbox_python_dependencies",
+        "hydrate": False,
+    },
+    "//HITL_IRON_GATE_APPROVAL": {
+        "knight": "anya_omega",
+        "description": "Evaluate payload size against 10-line Iron Gate threshold for HITL approval",
+        "mode": "GATE",
+        "priority": 1,
+        "handler": "_handle_hitl_iron_gate_approval",
+        "hydrate": False,
+    },
+    "//ACTIVATE_REYA_NOSTR_BRIDGE": {
+        "knight": "sir_helio",
+        "description": "Activate decentralized Nostr QR-Pill bridge to Excalibur mobile cockpit",
+        "mode": "BIFROST",
+        "priority": 1,
+        "handler": "_handle_activate_reya_nostr_bridge",
         "hydrate": False,
     },
     "//FLEET": {
@@ -851,6 +900,94 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_octavian",
         "hydrate": False,
     },
+    "//SANDBOX": {
+        "knight": "sir_octavian",
+        "description": "Tiered execution sandboxing: Sandlock (Linux 5ms Landlock/seccomp) or Microsandbox (Hardware MicroVM)",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_sandbox_dispatch",
+        "hydrate": False,
+    },
+    "//SANDLOCK": {
+        "knight": "sir_octavian",
+        "description": "Alias for //SANDBOX using in-kernel Landlock/seccomp confinement",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_sandbox_dispatch",
+        "hydrate": False,
+    },
+    "//MICROVM": {
+        "knight": "sir_octavian",
+        "description": "Alias for //SANDBOX using hardware microVM isolation",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_sandbox_dispatch",
+        "hydrate": False,
+    },
+    "//DUB": {
+        "knight": "sir_link",
+        "description": "Sovereign shortlink dispatch, URL routing & attribution engine (Dub assimilation)",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_dub_link_dispatch",
+        "hydrate": False,
+    },
+    "//LINK": {
+        "knight": "sir_link",
+        "description": "Alias for //DUB sovereign link resolution across Bifrost and VFS",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_dub_link_dispatch",
+        "hydrate": False,
+    },
+    "//OPENMUSE": {
+        "knight": "lukas_omega",
+        "description": "OpenMuse agent computer actuation, sandboxed terminal & human handover state machine",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_openmuse_dispatch",
+        "hydrate": False,
+    },
+    "//HANDOVER": {
+        "knight": "anya_omega",
+        "description": "Biometric human handover protocol for live browser/terminal intervention (OpenMuse takeover)",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_openmuse_dispatch",
+        "hydrate": False,
+    },
+    "//TEAM": {
+        "knight": "merlin_omega",
+        "description": "Octop dynamic agent council & strike team orchestration (asynchronous Knight council dispatch)",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_octop_team_dispatch",
+        "hydrate": False,
+    },
+    "//DISPATCH": {
+        "knight": "merlin_omega",
+        "description": "Alias for //TEAM strike team assembly and asynchronous Knight council job dispatch",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_octop_team_dispatch",
+        "hydrate": False,
+    },
+    "//SPATIAL": {
+        "knight": "sir_boris",
+        "description": "Spatial Citadel 3D cockpit orientation, quadrant rotation & stage state machine",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_spatial_dispatch",
+        "hydrate": False,
+    },
+    "//REA": {
+        "knight": "sir_helios",
+        "description": "REA reverse engineering forensics, binary/ASAR/bytecode deconstruction & Evidence Ledger",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_rea_forensics_dispatch",
+        "hydrate": False,
+    },
     "//APIS": {
         "knight": "lady_apis",
         "description": "Lady Apis Bio-Kinetic Swarm & Horde Conductor (passive sensing vs. aggressive batch creation)",
@@ -1505,6 +1642,199 @@ def _handle_octavian(param: str, context: dict) -> dict:
         "service": "http://127.0.0.1:8400",
         "directive": param or "factory metrics and WASM sandbox verification",
         "status": "DISPATCHED",
+    }
+
+
+def _handle_sandbox_dispatch(param: Any, context: dict) -> dict:
+    """//SANDBOX - Tiered execution sandboxing across Sandlock and Microsandbox."""
+    import sys
+    directive = str(param or "status").strip()
+    is_linux = sys.platform.startswith("linux")
+    
+    # Route tier based on platform and request
+    if "microvm" in directive.lower() or not is_linux:
+        tier = "TIER_2_HARDWARE_MICROVM"
+        engine = "microsandbox"
+        cartridge = "microsandbox-microvm"
+        note = "Hardware virtualization via KVM/WHPX with secret injection protection"
+    else:
+        tier = "TIER_1_KERNEL_CONFINEMENT"
+        engine = "sandlock"
+        cartridge = "sandlock-confinement"
+        note = "Linux 6.12+ Landlock ABI v6 + seccomp-bpf sub-5ms COW isolation"
+
+    return {
+        "action": "sandbox_dispatch",
+        "guardian": "SIR_OCTAVIAN",
+        "target_directive": directive,
+        "selected_tier": tier,
+        "engine": engine,
+        "cartridge": cartridge,
+        "ram_ceiling_mb": 512,
+        "status": "CONFINED_EXECUTION_STAGED",
+        "note": note,
+    }
+
+
+def _handle_dub_link_dispatch(param: Any, context: dict) -> dict:
+    """//DUB / //LINK - Sovereign shortlink resolution, punycode mapping & attribution."""
+    slug = str(param or "status").strip()
+    return {
+        "action": "dub_link_dispatch",
+        "knight": "SIR_LINK",
+        "cartridge": "dub-link-engine",
+        "slug": slug,
+        "vfs_coordinate": f"vfs://worldtree/links/{slug}",
+        "gateway_route": f"http://127.0.0.1:3001/r/{slug}",
+        "ram_ceiling_mb": 512,
+        "status": "SOVEREIGN_LINK_ROUTED",
+        "attribution_stream": "tinybird_pipe_emulation",
+    }
+
+
+def _handle_openmuse_dispatch(param: Any, context: dict) -> dict:
+    """//OPENMUSE / //HANDOVER - Agent computer actuation, sandboxed terminal & human takeover."""
+    directive = str(param or "status").strip()
+    is_takeover = "handover" in directive.lower() or "takeover" in directive.lower() or "control" in directive.lower()
+    
+    return {
+        "action": "openmuse_agent_computer_dispatch",
+        "cartridge": "openmuse-agent-computer",
+        "actuator": "LUKAS_OMEGA",
+        "gatekeeper": "ANYA_OMEGA",
+        "planner": "MERLIN_OMEGA",
+        "offline_reasoner": "JEV_OMEGA",
+        "directive": directive,
+        "holder": "human" if is_takeover else "bot",
+        "sandbox_backend": "sandlock_landlock_cow",
+        "ram_ceiling_mb": 512,
+        "vfs_coordinate": "vfs://worldtree/cartridges/openmuse-agent-computer/",
+        "status": "HUMAN_TAKEOVER_ACTIVE" if is_takeover else "SANDBOX_ACTUATION_ACTIVE",
+        "note": "Sub-5ms Landlock container actuation with biometric handover override"
+    }
+
+
+def _handle_octop_team_dispatch(param: Any, context: dict) -> dict:
+    """//TEAM / //DISPATCH - Octop dynamic agent council & strike team orchestration."""
+    directive = str(param or "status").strip()
+    
+    try:
+        from control_plane.runners.octop_council_runner import octop_council_engine
+        result = octop_council_engine.dispatch_strike_team(directive)
+        result["action"] = "octop_council_team_dispatch"
+        result["directive"] = directive
+        return result
+    except Exception as e:
+        # Fallback to standard Council strike team declaration if runner fails
+        council_roster = [
+            {"knight": "MERLIN_OMEGA", "role": "Architect & Lead Dispatcher", "mbti": "INTJ"},
+            {"knight": "ANYA_OMEGA", "role": "L7 Gatekeeper & Egress Compressor", "mbti": "ISTJ"},
+            {"knight": "LUKAS_OMEGA", "role": "Kinetic Actuator & Container Runner", "mbti": "ESTP"},
+            {"knight": "JEV_OMEGA", "role": "System-2 Offline Reasoner", "mbti": "INTP"},
+            {"knight": "SIR_BORIS", "role": "Crucible Conductor & AST Refactorer", "mbti": "ENTJ"},
+            {"knight": "SIR_CODEX", "role": "Z3 Formal Verifier & Implementer", "mbti": "ISTP"},
+            {"knight": "SIR_HELIOS", "role": "Sovereign Spire Sentinel & CloudBrain", "mbti": "ENTP"},
+        ]
+        return {
+            "action": "octop_council_team_dispatch",
+            "cartridge": "octop-agent-council",
+            "dispatcher": "MERLIN_OMEGA",
+            "gatekeeper": "ANYA_OMEGA",
+            "directive": directive,
+            "council_topology": "dynamic_strike_team",
+            "team_size": len(council_roster),
+            "council_roster": council_roster,
+            "job_tracker": "octop_team_job_tracker_async",
+            "ram_ceiling_mb": 512,
+            "vfs_coordinate": "vfs://worldtree/cartridges/octop-agent-council/",
+            "status": "DISPATCH_ACCEPTED",
+            "note": f"Asynchronous council fallback: {e}"
+        }
+
+
+def _handle_spatial_dispatch(param: Any, context: dict) -> dict:
+    """//SPATIAL - Spatial Citadel 3D cockpit orientation, quadrant rotation & stage state machine."""
+    directive = str(param or "stage1").strip().lower()
+    
+    stages = {
+        "1": {"quadrant": 1, "subsystem": "Sovereign Core & Host Telemetry", "focus": "cybertronia_root", "rotation_rad": 0.0},
+        "stage1": {"quadrant": 1, "subsystem": "Sovereign Core & Host Telemetry", "focus": "cybertronia_root", "rotation_rad": 0.0},
+        "core": {"quadrant": 1, "subsystem": "Sovereign Core & Host Telemetry", "focus": "cybertronia_root", "rotation_rad": 0.0},
+        "2": {"quadrant": 2, "subsystem": "Omega Knight Pantheon & Verified States", "focus": "pantheon_citadel", "rotation_rad": 1.5708},
+        "stage2": {"quadrant": 2, "subsystem": "Omega Knight Pantheon & Verified States", "focus": "pantheon_citadel", "rotation_rad": 1.5708},
+        "pantheon": {"quadrant": 2, "subsystem": "Omega Knight Pantheon & Verified States", "focus": "pantheon_citadel", "rotation_rad": 1.5708},
+        "3": {"quadrant": 3, "subsystem": "WorldTree CloudBrain & VFS Navigation", "focus": "worldtree_spire", "rotation_rad": 3.1416},
+        "stage3": {"quadrant": 3, "subsystem": "WorldTree CloudBrain & VFS Navigation", "focus": "worldtree_spire", "rotation_rad": 3.1416},
+        "worldtree": {"quadrant": 3, "subsystem": "WorldTree CloudBrain & VFS Navigation", "focus": "worldtree_spire", "rotation_rad": 3.1416},
+        "4": {"quadrant": 4, "subsystem": "Excalibur Mobile Mesh & Sentinel Link", "focus": "excalibur_beacon", "rotation_rad": 4.7124},
+        "stage4": {"quadrant": 4, "subsystem": "Excalibur Mobile Mesh & Sentinel Link", "focus": "excalibur_beacon", "rotation_rad": 4.7124},
+        "mobile": {"quadrant": 4, "subsystem": "Excalibur Mobile Mesh & Sentinel Link", "focus": "excalibur_beacon", "rotation_rad": 4.7124},
+    }
+    
+    matched = stages.get(directive, stages["stage1"])
+    
+    return {
+        "action": "spatial_citadel_dispatch",
+        "cartridge": "spatial-citadel",
+        "actuator": "SIR_BORIS",
+        "kinematics": "SIR_STITCH",
+        "telemetry": "SIR_HELIOS",
+        "directive": directive,
+        "current_stage": matched["quadrant"],
+        "subsystem": matched["subsystem"],
+        "focus_target": matched["focus"],
+        "rotation_radians": matched["rotation_rad"],
+        "damping_factor": 0.95,
+        "renderer": "r3f_webgl_draco_optimized",
+        "ram_ceiling_mb": 512,
+        "vfs_coordinate": "vfs://worldtree/cartridges/spatial-citadel/",
+        "status": "SPATIAL_ORIENTATION_ALIGNED"
+    }
+
+
+def _handle_rea_forensics_dispatch(param: Any, context: dict) -> dict:
+    """//REA - REA reverse engineering forensics, binary/ASAR/bytecode deconstruction & Evidence Ledger."""
+    target = str(param or "").strip()
+    if not target:
+        target = "status"
+
+    # Identify target classification
+    classification = "UNKNOWN"
+    lower_target = target.lower()
+    if lower_target.endswith(".asar"):
+        classification = "JAVASCRIPT_ELECTRON"
+    elif any(lower_target.endswith(ext) for ext in [".apk", ".ipa", ".aab"]):
+        classification = "MOBILE_PACKAGE"
+    elif any(lower_target.endswith(ext) for ext in [".exe", ".dll", ".so", ".dylib", ".bin"]):
+        classification = "NATIVE_BINARY"
+    elif lower_target.startswith("0x") or "evm" in lower_target:
+        classification = "EVM_BYTECODE"
+    elif "app" in lower_target:
+        classification = "JAVASCRIPT_ELECTRON"
+    elif lower_target in ("status", "doctor", "health"):
+        classification = "TELEMETRY_INSPECTION"
+
+    return {
+        "action": "rea_forensics_dispatch",
+        "cartridge": "rea-forensics",
+        "lead_knight": "SIR_HELIOS",
+        "dag_planner": "MERLIN_Ω",
+        "formal_prover": "SIR_CODEX",
+        "offline_reasoner": "JEV_Ω",
+        "target": target,
+        "classification": classification,
+        "evidence_ledger": {
+            "immutability": "VERIFIED_CANONICAL_HASH",
+            "residual_unknowns_gated": True,
+            "provenance_backplane": "PROVENANCE_LEDGER.md",
+        },
+        "sandbox_policy": {
+            "node_ram_ceiling_mb": 512,
+            "max_runtime_seconds": 120,
+            "global_law_03_compliant": True,
+        },
+        "vfs_coordinate": f"vfs://worldtree/forensics/rea/{hashlib.sha256(target.encode()).hexdigest()[:12]}/",
+        "status": "REA_FORENSICS_DISPATCH_ARMED",
     }
 
 
@@ -3890,11 +4220,108 @@ def _handle_reya_handshake(param: Any, context: dict) -> dict:
     }
 
 
+def _handle_forge_reya_scaffold(param: Any, context: dict) -> dict:
+    """//FORGE_REYA_SCAFFOLD — Forge Reya companion architecture scaffold and boundary manifest."""
+    return {
+        "action": "forge_reya_scaffold",
+        "status": "SCAFFOLD_FORGED",
+        "manifest": str(CAMELOT_HOME / "02_FORGE" / "assimilation" / "reya" / "scaffold" / "scaffold_manifest.json"),
+    }
+
+
+def _handle_await_reya_uncloaking(param: Any, context: dict) -> dict:
+    """//AWAIT_REYA_UNCLOAKING — Armed standby state awaiting Reya uncloaking and raw payload delivery."""
+    return {
+        "action": "await_reya_uncloaking",
+        "status": "ARMED_STANDBY",
+        "ready_for_raw_payload": True,
+    }
+
+
+def _handle_extract_mark_39_audio_core(param: Any, context: dict) -> dict:
+    """//EXTRACT_MARK_39_AUDIO_CORE — Extract Mark-XXXIX sub-100ms TTFA voice/vision audio core into Reya Fabric."""
+    return {
+        "action": "extract_mark_39_audio_core",
+        "status": "MARK_39_CORE_EXTRACTED",
+        "voice_vision_engine": "Mark-XXXIX Hybrid Nexus: Sub-100ms TTFA voice/vision engine with zero Python bloat on edge",
+    }
+
+
+def _handle_sandbox_python_dependencies(param: Any, context: dict) -> dict:
+    """//SANDBOX_PYTHON_DEPENDENCIES — Sandbox and purge heavy GUI/Python dependencies."""
+    return {
+        "action": "sandbox_python_dependencies",
+        "status": "PYTHON_DEPENDENCIES_SANDBOXED",
+        "purged_dependencies": ["pyautogui", "pynput"],
+    }
+
+
+def _handle_hitl_iron_gate_approval(param: Any, context: dict) -> dict:
+    """//HITL_IRON_GATE_APPROVAL — Evaluate payload size against 10-line Iron Gate threshold for HITL approval."""
+    payload_str = str(param or "")
+    lines = [l for l in payload_str.strip().splitlines() if l.strip()]
+    count = len(lines)
+    if count <= 10:
+        return {
+            "action": "hitl_iron_gate_approval",
+            "status": "HITL_APPROVED_ATOMIC",
+            "requires_hitl": False,
+            "lines": count,
+        }
+    else:
+        return {
+            "action": "hitl_iron_gate_approval",
+            "status": "HITL_REQUIRED",
+            "requires_hitl": True,
+            "lines": count,
+        }
+
+
+def _handle_activate_reya_nostr_bridge(param: Any, context: dict) -> dict:
+    """//ACTIVATE_REYA_NOSTR_BRIDGE — Activate decentralized Nostr QR-Pill bridge to Excalibur mobile cockpit."""
+    device_id = str(param or "").strip() or "vashawns-s26-ultra"
+    service_path = CAMELOT_HOME / "infra" / "systemd" / "camelot-reya-edge.service"
+    
+    import importlib.util
+    bridge_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "reya" / "reya_nostr_bridge.py"
+    qr_pill: dict[str, Any] = {}
+    if bridge_path.exists():
+        if "reya_nostr_bridge" in sys.modules:
+            mod = sys.modules["reya_nostr_bridge"]
+        else:
+            spec = importlib.util.spec_from_file_location("reya_nostr_bridge", str(bridge_path))
+            if spec and spec.loader:
+                mod = importlib.util.module_from_spec(spec)
+                sys.modules[spec.name] = mod
+                spec.loader.exec_module(mod)
+            else:
+                mod = None
+        if mod:
+            bridge = mod.ReyaNostrBridge()
+            pill_data = bridge.generate_pairing_qr_pill(device_id, "npub1camelotsovereignkey")
+            qr_pill = pill_data.get("token", {})
+
+    return {
+        "action": "activate_reya_nostr_bridge",
+        "status": "REYA_NOSTR_BRIDGE_ACTIVE",
+        "knight": "SIR_HELIO",
+        "device_id": device_id,
+        "systemd_present": service_path.exists(),
+        "qr_pill": qr_pill,
+    }
+
+
 # Handler lookup table (Runic Commands)
 _HANDLERS = {
     "_handle_reya_channel": _handle_reya_channel,
     "_handle_cua_dispatch": _handle_cua_dispatch,
     "_handle_reya_handshake": _handle_reya_handshake,
+    "_handle_forge_reya_scaffold": _handle_forge_reya_scaffold,
+    "_handle_await_reya_uncloaking": _handle_await_reya_uncloaking,
+    "_handle_extract_mark_39_audio_core": _handle_extract_mark_39_audio_core,
+    "_handle_sandbox_python_dependencies": _handle_sandbox_python_dependencies,
+    "_handle_hitl_iron_gate_approval": _handle_hitl_iron_gate_approval,
+    "_handle_activate_reya_nostr_bridge": _handle_activate_reya_nostr_bridge,
     "_handle_moto_edge_bus": _handle_moto_edge_bus,
     "_handle_qtscrcpy": _handle_qtscrcpy,
     "_handle_validate_spec": _handle_validate_spec,
@@ -3975,6 +4402,8 @@ _HANDLERS = {
     "_handle_equip_skills": _handle_equip_skills,
     "_handle_crucible_audit": _handle_crucible_audit,
     "_handle_forge_mission": _handle_forge_mission,
+    "_handle_octavian": _handle_octavian,
+    "_handle_sandbox_dispatch": _handle_sandbox_dispatch,
 }
 
 

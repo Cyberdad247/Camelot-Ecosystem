@@ -1,0 +1,59 @@
+{
+  "schema_version": "camelot-cartridge/1",
+  "cartridge_id": "rea-forensics",
+  "version": "0.1.0",
+  "signer": "camelot-community",
+  "signer_trust_band": "camelot-community",
+  "entrypoints": [
+    "fetch",
+    "execute",
+    "audit",
+    "plan"
+  ],
+  "supported_node_profiles": [
+    "hub",
+    "experience",
+    "engineering"
+  ],
+  "requested_capabilities": [
+    "network.scoped",
+    "vfs.read",
+    "process.allowlisted"
+  ],
+  "denied_capabilities": [
+    "lease.issue",
+    "policy.admin",
+    "secret.export",
+    "unrestricted.network",
+    "direct_main_branch_write",
+    "auto_merge",
+    "auto_deploy",
+    "promotion.issue",
+    "epoch.increment"
+  ],
+  "resource_profile": {
+    "memory_mb": 512,
+    "timeout_s": 120,
+    "max_workers": 2
+  },
+  "verification": [
+    "contract_test",
+    "Gideon_verdict",
+    "receipt_issued"
+  ],
+  "risk_tier_invariant_cap": "T1",
+  "rollback": {
+    "strategy": "destroy_ephemeral_worktree"
+  },
+  "compat": {
+    "supported_knight_classes": [
+      "kinetic_actuator",
+      "gatekeeper",
+      "cognitive_planner"
+    ]
+  },
+  "hash_algorithm": "sha256",
+  "signature_algorithm": "ed25519",
+  "artifact_hash": "sha256:d7d36ca6a3e1070454a44b8257b054924cb81024c3c2f978ceb0050c83bc5afe",
+  "signature": "ed25519:rgW5KaXsun78jyDvpaSFrMiOtPX7zr7ZnI0KArAp168RHZ6JRNfpxB41i8AYQO_Kgi4m98HHy9PTdIuf5oroAw"
+}

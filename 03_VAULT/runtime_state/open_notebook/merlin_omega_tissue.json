@@ -1,6 +1,61 @@
 [
   {
     "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree",
+    "content": "{\"action\": \"symbolect_compilation\", \"architect\": \"MERLIN_OMEGA\", \"compiler\": \"ANYA_\\u03a9\", \"protocol\": \"Triple-QFT Context-as-a-Compiler\", \"original_prompt\": \"Synthesize character sheet for Sir Hermes Prime from World Tree\", \"symbolect_glyph\": \"|\\ud83e\\udde0\\u2297(\\u26a1\\ud83d\\udcac)\\u27e9 \\u27e8Omega:Synthesize|character|sheet|Hermes|Prime|World|Tree\\u27e9\", \"anchor_tokens\": [\"Synthesize\", \"character\", \"sheet\", \"Hermes\", \"Prime\", \"World\", \"Tree\"], \"reduction_percentage\": \"20.0%\", \"token_savings\": \"80%+ inter-knight token reduction\", \"status\": \"COMPILED\"}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-10-06T02:12:07.733867+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree",
+    "content": "{\"action\": \"symbolect_compilation\", \"architect\": \"MERLIN_OMEGA\", \"compiler\": \"ANYA_\\u03a9\", \"protocol\": \"Triple-QFT Context-as-a-Compiler\", \"original_prompt\": \"Synthesize character sheet for Sir Hermes Prime from World Tree\", \"symbolect_glyph\": \"|\\ud83e\\udde0\\u2297(\\u26a1\\ud83d\\udcac)\\u27e9 \\u27e8Omega:Synthesize|character|sheet|Hermes|Prime|World|Tree\\u27e9\", \"anchor_tokens\": [\"Synthesize\", \"character\", \"sheet\", \"Hermes\", \"Prime\", \"World\", \"Tree\"], \"reduction_percentage\": \"20.0%\", \"token_savings\": \"80%+ inter-knight token reduction\", \"status\": \"COMPILED\"}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-10-06T01:43:54.833971+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//SYMBOLECT Compile high performance rust deduplication engine",
+    "content": "{\"action\": \"symbolect_compilation\", \"architect\": \"MERLIN_OMEGA\", \"compiler\": \"ANYA_\\u03a9\", \"protocol\": \"Triple-QFT Context-as-a-Compiler\", \"original_prompt\": \"Compile high performance rust deduplication engine\", \"symbolect_glyph\": \"|\\ud83e\\udde0\\u2297(\\u26a1\\ud83d\\udcac)\\u27e9 \\u27e8Omega:Compile|high|performance|rust|deduplication|engine\\u27e9\", \"anchor_tokens\": [\"Compile\", \"high\", \"performance\", \"rust\", \"deduplication\", \"engine\"], \"reduction_percentage\": \"0.0%\", \"token_savings\": \"80%+ inter-knight token reduction\", \"status\": \"COMPILED\"}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-10-04T14:19:40.997313+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree",
+    "content": "{\"action\": \"symbolect_compilation\", \"architect\": \"MERLIN_OMEGA\", \"compiler\": \"ANYA_\\u03a9\", \"protocol\": \"Triple-QFT Context-as-a-Compiler\", \"original_prompt\": \"Synthesize character sheet for Sir Hermes Prime from World Tree\", \"symbolect_glyph\": \"|\\ud83e\\udde0\\u2297(\\u26a1\\ud83d\\udcac)\\u27e9 \\u27e8Omega:Synthesize|character|sheet|Hermes|Prime|World|Tree\\u27e9\", \"anchor_tokens\": [\"Synthesize\", \"character\", \"sheet\", \"Hermes\", \"Prime\", \"World\", \"Tree\"], \"reduction_percentage\": \"20.0%\", \"token_savings\": \"80%+ inter-knight token reduction\", \"status\": \"COMPILED\"}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-10-04T07:35:33.707808+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree",
+    "content": "{\"action\": \"symbolect_compilation\", \"architect\": \"MERLIN_OMEGA\", \"compiler\": \"ANYA_\\u03a9\", \"protocol\": \"Triple-QFT Context-as-a-Compiler\", \"original_prompt\": \"Synthesize character sheet for Sir Hermes Prime from World Tree\", \"symbolect_glyph\": \"|\\ud83e\\udde0\\u2297(\\u26a1\\ud83d\\udcac)\\u27e9 \\u27e8Omega:Synthesize|character|sheet|Hermes|Prime|World|Tree\\u27e9\", \"anchor_tokens\": [\"Synthesize\", \"character\", \"sheet\", \"Hermes\", \"Prime\", \"World\", \"Tree\"], \"reduction_percentage\": \"20.0%\", \"token_savings\": \"80%+ inter-knight token reduction\", \"status\": \"COMPILED\"}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-10-04T02:59:48.875728+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
     "cloudbrain_uuid": "af927fde-d7eb-42ee-8c79-51b3e78ef39b",
     "spark_id": "0xAF927FDED7EB42EE8C7951B3E78EF39B",
     "role": "System 2 Orchestration & TTC Deep DAG",

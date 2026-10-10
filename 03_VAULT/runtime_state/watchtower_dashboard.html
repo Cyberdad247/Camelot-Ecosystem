@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="refresh" content="5"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CAMELOT-OS — Watchtower Sovereign Dashboard</title>
+  <style>
+    :root {
+      --bg: #090a0f;
+      --card-bg: rgba(22, 24, 34, 0.75);
+      --card-border: rgba(212, 175, 55, 0.25);
+      --gold: #D4AF37;
+      --gold-glow: rgba(212, 175, 55, 0.4);
+      --cyan: #00e5ff;
+      --green: #00e676;
+      --yellow: #ffd600;
+      --red: #ff1744;
+      --text: #e0e2ec;
+      --muted: #8b90a0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at 50% 0%, #171926, var(--bg));
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace;
+      padding: 24px;
+      min-height: 100vh;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+    }
+    .title-area h1 {
+      font-size: 24px;
+      letter-spacing: 2px;
+      color: var(--gold);
+      text-transform: uppercase;
+      text-shadow: 0 0 12px var(--gold-glow);
+    }
+    .title-area p {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .badge-green { background: rgba(0, 230, 118, 0.15); color: var(--green); border: 1px solid var(--green); }
+    .badge-yellow { background: rgba(255, 214, 0, 0.15); color: var(--yellow); border: 1px solid var(--yellow); }
+    .badge-red { background: rgba(255, 23, 68, 0.15); color: var(--red); border: 1px solid var(--red); }
+    .badge-gold { background: rgba(212, 175, 55, 0.15); color: var(--gold); border: 1px solid var(--gold); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--gold); }
+    .card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 13px;
+    }
+    .metric-label { color: var(--muted); }
+    .metric-val { font-family: monospace; font-weight: bold; }
+
+    .meter-bar {
+      width: 100%;
+      height: 8px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 4px;
+      margin-bottom: 16px;
+    }
+    .meter-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--cyan), var(--gold));
+      transition: width 0.3s ease;
+    }
+    .footer {
+      margin-top: 32px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="title-area">
+      <h1>🛡️ Watchtower Sovereign Cockpit</h1>
+      <p>Camelot-OS Telemetry & High-Altitude Memory Governance · Auto-refreshing 5s</p>
+    </div>
+    <div>
+      <span class="badge badge-yellow">WARN</span>
+      <span class="badge badge-gold" style="margin-left: 8px;">Cycle #1</span>
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- Card 1: Host Pressure -->
+    <div class="card">
+      <div class="card-title">
+        <span>Host Pressure (Cybertronia)</span>
+        <span class="badge badge-green">Node Cap 4GB</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">CPU Busy</span>
+        <span class="metric-val">12.4%</span>
+      </div>
+      <div class="meter-bar"><div class="meter-fill" style="width: 12.429378531073446%;"></div></div>
+
+      <div class="metric-row">
+        <span class="metric-label">Physical RAM Commit</span>
+        <span class="metric-val">86.0%</span>
+      </div>
+      <div class="meter-bar"><div class="meter-fill" style="width: 86.04810399141046%; background: linear-gradient(90deg, #00e5ff, #ff1744);"></div></div>
+
+      <div class="metric-row">
+        <span class="metric-label">Available Physical RAM</span>
+        <span class="metric-val">389.2 MB</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Node Working Set (Law 03)</span>
+        <span class="metric-val" style="color: var(--green);">80.4 MB</span>
+      </div>
+    </div>
+
+    <!-- Card 2: PageKeeper RS -->
+    <div class="card">
+      <div class="card-title">
+        <span>Squire PageKeeper RS</span>
+        <span class="badge badge-red">OFFLINE</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Substrate / Hotpath</span>
+        <span class="metric-val" style="color: var(--cyan);">Native Rust 1.85 (0% Python)</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Daemon PID</span>
+        <span class="metric-val">128948</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Resident Set (RSS)</span>
+        <span class="metric-val" style="color: var(--green); font-size: 15px;">0.0 MB</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Cadence / Threshold</span>
+        <span class="metric-val">60s / 80.0%</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Compaction Stats</span>
+        <span class="metric-val">97 trims · 115.9 MB freed</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Last Action</span>
+        <span class="metric-val" style="font-size: 11px; color: var(--gold);">TRIM_EXECUTED (purged 1 processes, recla</span>
+      </div>
+    </div>
+
+    <!-- Card 3: Excalibur Mobile -->
+    <div class="card">
+      <div class="card-title">
+        <span>Excalibur Mobile Sentinel</span>
+        <span class="badge badge-gold">STANDBY</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Hardware Device</span>
+        <span class="metric-val">Samsung Galaxy S26 Ultra</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Processor & GPU</span>
+        <span class="metric-val">Snapdragon 8 Elite / Adreno 840</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Unified Memory Headroom</span>
+        <span class="metric-val" style="color: var(--cyan);">6.29 GB Free LPDDR5X</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">120Hz QtScrcpy Stream</span>
+        <span class="metric-val">ACTIVE (1440x3120)</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Warp Gate Keypass</span>
+        <span class="metric-val" style="font-size: 11px; color: var(--gold);">KP-EXCALIBUR_MOBILE-56820318</span>
+      </div>
+    </div>
+
+    <!-- Card 4: Fleet Mesh & Knights -->
+    <div class="card">
+      <div class="card-title">
+        <span>Fleet Mesh & Knighthood</span>
+        <span class="badge badge-gold">STANDBY</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">VPS Sovereign Hub</span>
+        <span class="metric-val">vps_hub_kvm563 (Port 18095)</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Server Memory Ceiling</span>
+        <span class="metric-val">8,192 MB Max (Law 03 Compliant)</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Co-Governors</span>
+        <span class="metric-val" style="color: var(--gold);">HERMES_PRIME, SIR_HEIMDALL</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Active Escorts</span>
+        <span class="metric-val">SIR_FORGE, LADY_APIS, SIR_SENTINEL</span>
+      </div>
+    </div>
+
+    <!-- Card 5: Fail-Stop Integrity -->
+    <div class="card">
+      <div class="card-title">
+        <span>Fail-Stop Integrity</span>
+        <span class="badge badge-green">CLEAN</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">NUL Byte Corruption</span>
+        <span class="metric-val" style="color: var(--green);">0 findings</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Conform Merkle Catalog</span>
+        <span class="metric-val">STANDBY (0 items)</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Warp Gate Access</span>
+        <span class="metric-val" style="color: var(--cyan);">GUARDED (8 Forever Keypasses)</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Snapshot Timestamp</span>
+        <span class="metric-val">2026-10-05T16:44:42Z</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    CAMELOT-OS APEX COGNITIVE CONTROL PLANE · GLOBAL LAWS 03 & 04 ENFORCED · ZERO HOTPATH BLOAT
+  </div>
+</body>
+</html>

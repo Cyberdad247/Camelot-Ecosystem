@@ -538,9 +538,97 @@
       "entrypoints": ["serve", "health"],
       "domain_tags": ["operator_console", "go_server", "htmx", "threejs_canvas", "vps_cockpit", "omarchy"],
       "status": "ONLINE_ACTIVE"
+    },
+    {
+      "cartridge_id": "lmcache-kv-engine",
+      "vfs_path": "vfs://worldtree/cartridges/lmcache-kv-engine/",
+      "cloudbrain_notebook_id": "74895628-d98d-4d93-a789-dde10e7f27ff",
+      "cloudbrain_title": "Camelot-OS: Leech-Lattice Quantization for Swarm-Scale Agentic Systems",
+      "bound_knights": ["SIR_CODEX", "SIR_OCTAVIAN", "SIR_BORIS", "SIR_HELIOS"],
+      "risk_tier_cap": "T1",
+      "entrypoints": ["execute", "summarize"],
+      "domain_tags": ["kv_cache", "prefill_skip", "kivi_quant", "tier1_flash", "tiered_storage", "vllm"],
+      "status": "ONLINE_ACTIVE"
+    },
+    {
+      "cartridge_id": "sandlock-confinement",
+      "vfs_path": "vfs://worldtree/cartridges/sandlock-confinement/",
+      "cloudbrain_notebook_id": "8c656cfa-a189-409e-a72d-07692a47f17e",
+      "cloudbrain_title": "Camelot-OS v.1000 / Sovereign Codex",
+      "bound_knights": ["SIR_OCTAVIAN", "SIR_CODEX", "SIR_FORGE"],
+      "risk_tier_cap": "T1",
+      "entrypoints": ["execute", "test", "audit"],
+      "domain_tags": ["landlock", "seccomp_bpf", "process_confinement", "cow_filesystem", "linux_security"],
+      "status": "ONLINE_ACTIVE"
+    },
+    {
+      "cartridge_id": "microsandbox-microvm",
+      "vfs_path": "vfs://worldtree/cartridges/microsandbox-microvm/",
+      "cloudbrain_notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "cloudbrain_title": "Camelot WorldTree Root & Operator Infrastructure",
+      "bound_knights": ["SIR_OCTAVIAN", "SIR_BORIS", "SIR_CODEX"],
+      "risk_tier_cap": "T1",
+      "entrypoints": ["execute", "forge", "test"],
+      "domain_tags": ["microvm", "hardware_isolation", "kvm_whpx", "libkrun", "vsock_secret_shield"],
+      "status": "ONLINE_ACTIVE"
+    },
+    {
+      "cartridge_id": "dub-link-engine",
+      "vfs_path": "vfs://worldtree/cartridges/dub-link-engine/",
+      "cloudbrain_notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "cloudbrain_title": "Camelot WorldTree Root & Operator Infrastructure",
+      "bound_knights": ["SIR_LINK", "SIR_HERMES", "SIR_HELIOS"],
+      "risk_tier_cap": "T1",
+      "entrypoints": ["fetch", "execute", "audit"],
+      "domain_tags": ["link_management", "url_shortener", "bifrost_redirect", "htmx_dashboard", "attribution_engine", "vfs_links"],
+      "status": "ONLINE_ACTIVE"
+    },
+    {
+      "cartridge_id": "openmuse-agent-computer",
+      "vfs_path": "vfs://worldtree/cartridges/openmuse-agent-computer/",
+      "cloudbrain_notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "cloudbrain_title": "Camelot WorldTree Root & Operator Infrastructure",
+      "bound_knights": ["LUKAS_OMEGA", "MERLIN_OMEGA", "ANYA_OMEGA", "JEV_OMEGA"],
+      "risk_tier_cap": "T1",
+      "entrypoints": ["fetch", "execute", "test", "audit"],
+      "domain_tags": ["agent_computer", "workspace_terminal", "human_takeover", "landlock_actuation", "offline_system2", "durable_tasks"],
+      "status": "ONLINE_ACTIVE"
+    },
+    {
+      "cartridge_id": "octop-agent-council",
+      "vfs_path": "vfs://worldtree/cartridges/octop-agent-council/",
+      "cloudbrain_notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "cloudbrain_title": "Camelot WorldTree Root & Operator Infrastructure",
+      "bound_knights": ["MERLIN_OMEGA", "ANYA_OMEGA", "LUKAS_OMEGA", "JEV_OMEGA", "SIR_BORIS", "SIR_CODEX", "SIR_HELIOS"],
+      "risk_tier_cap": "T1",
+      "entrypoints": ["fetch", "execute", "audit", "plan"],
+      "domain_tags": ["agent_council", "dynamic_teams", "mbti_dynamics", "async_dispatch", "strike_teams", "gateway_routing"],
+      "status": "ONLINE_ACTIVE"
+    },
+    {
+      "cartridge_id": "spatial-citadel",
+      "vfs_path": "vfs://worldtree/cartridges/spatial-citadel/",
+      "cloudbrain_notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "cloudbrain_title": "Camelot WorldTree Root & Operator Infrastructure",
+      "bound_knights": ["SIR_BORIS", "SIR_STITCH", "SIR_HELIOS", "MERLIN_OMEGA"],
+      "risk_tier_cap": "T1",
+      "entrypoints": ["fetch", "execute", "audit", "plan"],
+      "domain_tags": ["spatial_interface", "3d_cockpit", "r3f_webgl", "rotational_damping", "stage_navigation", "gpu_acceleration"],
+      "status": "ONLINE_ACTIVE"
+    },
+    {
+      "cartridge_id": "rea-forensics",
+      "vfs_path": "vfs://worldtree/cartridges/rea-forensics/",
+      "cloudbrain_notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "cloudbrain_title": "Camelot WorldTree Root & Operator Infrastructure",
+      "bound_knights": ["SIR_HELIOS", "MERLIN_OMEGA", "SIR_CODEX", "JEV_OMEGA"],
+      "risk_tier_cap": "T1",
+      "entrypoints": ["fetch", "execute", "audit", "plan"],
+      "domain_tags": ["reverse_engineering", "binary_analysis", "evidence_ledger", "mcp_server", "decompiler", "disassembler"],
+      "status": "ONLINE_ACTIVE"
     }
   ],
-  "updated": "2026-09-20T03:25:00.000000+00:00",
+  "updated": "2026-10-09T11:24:00.000000+00:00",
   "verified_knights_count": 44,
-  "verified_cartridges_count": 11
+  "verified_cartridges_count": 19
 }

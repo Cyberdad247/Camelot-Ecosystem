@@ -1,0 +1,1617 @@
+{
+ "phase": "C1-HYDRATE",
+ "run": "mbc-v1",
+ "timestamp": "2026-09-27T00:28:42+00:00",
+ "main_sha": "ef7603b60b526fe836b27885b340ef29e85a4ad3",
+ "oldest_merge_base": "2219bbf9245f4a0749e92f875055fc9a0ad9c4b2",
+ "eligible_branches": 27,
+ "skipped": [
+  {
+   "ref": "refs/remotes/camelot-os/cloudbrain-prod-hardening",
+   "reason": "unrelated_history"
+  },
+  {
+   "ref": "refs/remotes/camelot-os/main",
+   "reason": "unrelated_history"
+  },
+  {
+   "ref": "refs/remotes/excalibur-cmd-1/main",
+   "reason": "unrelated_history"
+  },
+  {
+   "ref": "refs/remotes/kba-services/main",
+   "reason": "unrelated_history"
+  },
+  {
+   "ref": "refs/remotes/kba-v3/main",
+   "reason": "unrelated_history"
+  },
+  {
+   "ref": "refs/remotes/multivoice-remote/claude/claude-md-docs-tw6ptq",
+   "reason": "unrelated_history"
+  },
+  {
+   "ref": "refs/remotes/multivoice-remote/feature/bifrost-bridge-implementation",
+   "reason": "unrelated_history"
+  },
+  {
+   "ref": "refs/remotes/multivoice-remote/main",
+   "reason": "unrelated_history"
+  },
+  {
+   "ref": "refs/remotes/vuejs-pwa/development",
+   "reason": "unrelated_history"
+  },
+  {
+   "ref": "refs/remotes/vuejs-pwa/master",
+   "reason": "unrelated_history"
+  },
+  {
+   "ref": "refs/remotes/vuejs-pwa/prototype",
+   "reason": "unrelated_history"
+  },
+  {
+   "ref": "refs/remotes/vuejs-pwa/styles",
+   "reason": "unrelated_history"
+  }
+ ],
+ "file_totals": {
+  "changed": 2220,
+  "unique": 1252,
+  "multi": 968,
+  "main_side_overlap": 1591,
+  "conflict_set": 2010
+ },
+ "winner_map": {
+  ".camelot/": {
+   "winner": "refs/remotes/origin/fix/lint-format-pass",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 7,
+     "tests": 1
+    },
+    "refs/remotes/camelot-vps/cloudbrain-prod-hardening": {
+     "files": 6,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser": {
+     "files": 6,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle": {
+     "files": 6,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo": {
+     "files": 6,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock": {
+     "files": 6,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration": {
+     "files": 6,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1": {
+     "files": 6,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1": {
+     "files": 6,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/main": {
+     "files": 6,
+     "tests": 0
+    },
+    "refs/remotes/kickbox-audio/main": {
+     "files": 6,
+     "tests": 0
+    },
+    "refs/heads/cartridge/vps-hub-cartridge-v1": {
+     "files": 6,
+     "tests": 0
+    }
+   }
+  },
+  "(root)": {
+   "winner": "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/camelot-vps/cloudbrain-prod-hardening": {
+     "files": 29,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser": {
+     "files": 29,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle": {
+     "files": 29,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo": {
+     "files": 29,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock": {
+     "files": 29,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration": {
+     "files": 29,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1": {
+     "files": 29,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1": {
+     "files": 29,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/main": {
+     "files": 29,
+     "tests": 0
+    },
+    "refs/heads/cartridge/vps-hub-cartridge-v1": {
+     "files": 25,
+     "tests": 0
+    },
+    "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg": {
+     "files": 18,
+     "tests": 11
+    },
+    "refs/remotes/origin/main": {
+     "files": 10,
+     "tests": 0
+    },
+    "refs/heads/perf/optimize-get-all-data-9582424866941690986": {
+     "files": 10,
+     "tests": 0
+    },
+    "refs/remotes/kickbox-audio/main": {
+     "files": 8,
+     "tests": 0
+    },
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 4,
+     "tests": 0
+    },
+    "refs/heads/feature/reya-fabric": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519": {
+     "files": 2,
+     "tests": 0
+    },
+    "refs/remotes/origin/claude/camelot-mvp-velocity": {
+     "files": 2,
+     "tests": 0
+    },
+    "refs/remotes/origin/claude/agency-blueprint": {
+     "files": 2,
+     "tests": 0
+    },
+    "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi": {
+     "files": 2,
+     "tests": 0
+    },
+    "refs/heads/feat/android-edge-supervisor": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  "adapters/": {
+   "winner": "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/camelot-vps/cloudbrain-prod-hardening": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/main": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/heads/cartridge/vps-hub-cartridge-v1": {
+     "files": 3,
+     "tests": 0
+    }
+   }
+  },
+  "apps/": {
+   "winner": "refs/remotes/kickbox-audio/main",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/kickbox-audio/main": {
+     "files": 189,
+     "tests": 1
+    },
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 59,
+     "tests": 3
+    },
+    "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser": {
+     "files": 55,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle": {
+     "files": 55,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo": {
+     "files": 55,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock": {
+     "files": 55,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration": {
+     "files": 55,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1": {
+     "files": 55,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/cloudbrain-prod-hardening": {
+     "files": 51,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1": {
+     "files": 51,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/main": {
+     "files": 51,
+     "tests": 0
+    },
+    "refs/heads/cartridge/vps-hub-cartridge-v1": {
+     "files": 18,
+     "tests": 0
+    },
+    "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519": {
+     "files": 10,
+     "tests": 2
+    },
+    "refs/remotes/origin/main": {
+     "files": 2,
+     "tests": 0
+    },
+    "refs/heads/perf/optimize-get-all-data-9582424866941690986": {
+     "files": 2,
+     "tests": 0
+    }
+   }
+  },
+  "contracts/": {
+   "winner": "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser": {
+     "files": 29,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock": {
+     "files": 27,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle": {
+     "files": 26,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo": {
+     "files": 26,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration": {
+     "files": 25,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1": {
+     "files": 25,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1": {
+     "files": 24,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/cloudbrain-prod-hardening": {
+     "files": 20,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/main": {
+     "files": 20,
+     "tests": 0
+    },
+    "refs/heads/cartridge/vps-hub-cartridge-v1": {
+     "files": 8,
+     "tests": 0
+    }
+   }
+  },
+  "crates/": {
+   "winner": "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser": {
+     "files": 17,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo": {
+     "files": 17,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle": {
+     "files": 15,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock": {
+     "files": 15,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration": {
+     "files": 15,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1": {
+     "files": 15,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1": {
+     "files": 15,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/cloudbrain-prod-hardening": {
+     "files": 13,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/main": {
+     "files": 13,
+     "tests": 0
+    },
+    "refs/heads/cartridge/vps-hub-cartridge-v1": {
+     "files": 8,
+     "tests": 0
+    }
+   }
+  },
+  "docs/": {
+   "winner": "refs/remotes/origin/fix/lint-format-pass",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 33,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser": {
+     "files": 24,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle": {
+     "files": 24,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo": {
+     "files": 24,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock": {
+     "files": 24,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration": {
+     "files": 24,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1": {
+     "files": 23,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1": {
+     "files": 22,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/cloudbrain-prod-hardening": {
+     "files": 21,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/main": {
+     "files": 21,
+     "tests": 0
+    },
+    "refs/heads/cartridge/vps-hub-cartridge-v1": {
+     "files": 14,
+     "tests": 0
+    },
+    "refs/remotes/origin/main": {
+     "files": 9,
+     "tests": 0
+    },
+    "refs/heads/perf/optimize-get-all-data-9582424866941690986": {
+     "files": 9,
+     "tests": 0
+    },
+    "refs/remotes/origin/claude/camelot-mvp-velocity": {
+     "files": 7,
+     "tests": 0
+    },
+    "refs/remotes/origin/claude/agency-blueprint": {
+     "files": 7,
+     "tests": 0
+    },
+    "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi": {
+     "files": 6,
+     "tests": 0
+    },
+    "refs/heads/feature/reya-fabric": {
+     "files": 2,
+     "tests": 0
+    },
+    "refs/remotes/kickbox-audio/main": {
+     "files": 2,
+     "tests": 0
+    },
+    "refs/heads/feat/android-edge-supervisor": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  "infra/": {
+   "winner": "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser": {
+     "files": 28,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle": {
+     "files": 28,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo": {
+     "files": 28,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock": {
+     "files": 28,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration": {
+     "files": 28,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1": {
+     "files": 28,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/cloudbrain-prod-hardening": {
+     "files": 26,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1": {
+     "files": 26,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/main": {
+     "files": 26,
+     "tests": 0
+    },
+    "refs/heads/cartridge/vps-hub-cartridge-v1": {
+     "files": 19,
+     "tests": 0
+    },
+    "refs/remotes/origin/main": {
+     "files": 6,
+     "tests": 0
+    },
+    "refs/heads/perf/optimize-get-all-data-9582424866941690986": {
+     "files": 6,
+     "tests": 0
+    },
+    "refs/heads/feature/reya-fabric": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/heads/feat/android-edge-supervisor": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  "public/": {
+   "winner": "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/camelot-vps/cloudbrain-prod-hardening": {
+     "files": 2,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser": {
+     "files": 2,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle": {
+     "files": 2,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo": {
+     "files": 2,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock": {
+     "files": 2,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration": {
+     "files": 2,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1": {
+     "files": 2,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1": {
+     "files": 2,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/main": {
+     "files": 2,
+     "tests": 0
+    },
+    "refs/heads/cartridge/vps-hub-cartridge-v1": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  "src/": {
+   "winner": "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/camelot-vps/cloudbrain-prod-hardening": {
+     "files": 77,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser": {
+     "files": 77,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle": {
+     "files": 77,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo": {
+     "files": 77,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock": {
+     "files": 77,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration": {
+     "files": 77,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1": {
+     "files": 77,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1": {
+     "files": 77,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/main": {
+     "files": 77,
+     "tests": 0
+    },
+    "refs/heads/cartridge/vps-hub-cartridge-v1": {
+     "files": 44,
+     "tests": 0
+    },
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 2,
+     "tests": 0
+    },
+    "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  "03_VAULT/": {
+   "winner": "refs/remotes/origin/fix/lint-format-pass",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 234,
+     "tests": 15
+    },
+    "refs/remotes/origin/main": {
+     "files": 92,
+     "tests": 0
+    },
+    "refs/heads/perf/optimize-get-all-data-9582424866941690986": {
+     "files": 92,
+     "tests": 0
+    },
+    "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519": {
+     "files": 49,
+     "tests": 11
+    },
+    "refs/heads/feature/reya-fabric": {
+     "files": 13,
+     "tests": 0
+    },
+    "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg": {
+     "files": 10,
+     "tests": 7
+    },
+    "refs/heads/feat/android-edge-supervisor": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  "control_plane/": {
+   "winner": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg": {
+     "files": 98,
+     "tests": 7
+    },
+    "refs/remotes/origin/main": {
+     "files": 55,
+     "tests": 0
+    },
+    "refs/heads/perf/optimize-get-all-data-9582424866941690986": {
+     "files": 55,
+     "tests": 0
+    },
+    "refs/heads/feature/reya-fabric": {
+     "files": 39,
+     "tests": 0
+    },
+    "refs/heads/feat/android-edge-supervisor": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/heads/feat/unified-bootstrap-hud": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  "kinetic_edge/": {
+   "winner": "refs/heads/feat/android-edge-supervisor",
+   "rule": "sole-contender",
+   "contenders": {
+    "refs/heads/feat/android-edge-supervisor": {
+     "files": 11,
+     "tests": 4
+    }
+   }
+  },
+  "tests/": {
+   "winner": "refs/remotes/origin/main",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/origin/main": {
+     "files": 63,
+     "tests": 63
+    },
+    "refs/heads/perf/optimize-get-all-data-9582424866941690986": {
+     "files": 63,
+     "tests": 63
+    },
+    "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg": {
+     "files": 58,
+     "tests": 58
+    },
+    "refs/heads/feature/reya-fabric": {
+     "files": 54,
+     "tests": 54
+    },
+    "refs/heads/feat/android-edge-supervisor": {
+     "files": 3,
+     "tests": 3
+    },
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 2,
+     "tests": 2
+    },
+    "refs/heads/feat/unified-bootstrap-hud": {
+     "files": 1,
+     "tests": 1
+    },
+    "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598": {
+     "files": 1,
+     "tests": 1
+    }
+   }
+  },
+  "bin/": {
+   "winner": "refs/remotes/origin/main",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/origin/main": {
+     "files": 11,
+     "tests": 0
+    },
+    "refs/heads/perf/optimize-get-all-data-9582424866941690986": {
+     "files": 11,
+     "tests": 0
+    },
+    "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg": {
+     "files": 11,
+     "tests": 1
+    },
+    "refs/heads/feature/reya-fabric": {
+     "files": 8,
+     "tests": 0
+    }
+   }
+  },
+  "scripts/": {
+   "winner": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598": {
+     "files": 39,
+     "tests": 0
+    },
+    "refs/remotes/origin/fix/ruff-530-manual": {
+     "files": 20,
+     "tests": 0
+    },
+    "refs/remotes/origin/main": {
+     "files": 16,
+     "tests": 0
+    },
+    "refs/heads/perf/optimize-get-all-data-9582424866941690986": {
+     "files": 16,
+     "tests": 0
+    },
+    "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg": {
+     "files": 16,
+     "tests": 0
+    },
+    "refs/remotes/kickbox-audio/main": {
+     "files": 12,
+     "tests": 0
+    },
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 11,
+     "tests": 0
+    },
+    "refs/heads/feature/reya-fabric": {
+     "files": 10,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/cloudbrain-prod-hardening": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/main": {
+     "files": 3,
+     "tests": 0
+    }
+   }
+  },
+  "01_KERNEL/": {
+   "winner": "refs/remotes/origin/fix/ruff-530-manual",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/origin/fix/ruff-530-manual": {
+     "files": 127,
+     "tests": 9
+    },
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 119,
+     "tests": 16
+    },
+    "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519": {
+     "files": 51,
+     "tests": 12
+    },
+    "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598": {
+     "files": 42,
+     "tests": 6
+    },
+    "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg": {
+     "files": 8,
+     "tests": 0
+    },
+    "refs/heads/perf/optimize-n-plus-1-queries-13777398068298918860": {
+     "files": 2,
+     "tests": 0
+    },
+    "refs/remotes/origin/main": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/heads/perf/optimize-get-all-data-9582424866941690986": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/heads/perf/embedding-n-plus-1-optimization-15445770156298811611": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  ".freebuff/": {
+   "winner": "refs/remotes/origin/main",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/origin/main": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/heads/perf/optimize-get-all-data-9582424866941690986": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  ".github/": {
+   "winner": "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser": {
+     "files": 9,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle": {
+     "files": 9,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo": {
+     "files": 9,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock": {
+     "files": 9,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration": {
+     "files": 8,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1": {
+     "files": 8,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1": {
+     "files": 7,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/cloudbrain-prod-hardening": {
+     "files": 6,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/main": {
+     "files": 6,
+     "tests": 0
+    },
+    "refs/remotes/origin/main": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/heads/perf/optimize-get-all-data-9582424866941690986": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/kickbox-audio/main": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/origin/fix/ruff-530-manual": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  ".grok/": {
+   "winner": "refs/remotes/origin/main",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/origin/main": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/heads/perf/optimize-get-all-data-9582424866941690986": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  ".kiro/": {
+   "winner": "refs/remotes/origin/main",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/origin/main": {
+     "files": 2,
+     "tests": 0
+    },
+    "refs/heads/perf/optimize-get-all-data-9582424866941690986": {
+     "files": 2,
+     "tests": 0
+    }
+   }
+  },
+  ".windsurf/": {
+   "winner": "refs/remotes/origin/main",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/origin/main": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/heads/perf/optimize-get-all-data-9582424866941690986": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  "04_KINETIC/": {
+   "winner": "refs/remotes/origin/main",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/origin/main": {
+     "files": 4,
+     "tests": 0
+    },
+    "refs/heads/perf/optimize-get-all-data-9582424866941690986": {
+     "files": 4,
+     "tests": 0
+    }
+   }
+  },
+  "squires/": {
+   "winner": "refs/remotes/origin/main",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/origin/main": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/heads/perf/optimize-get-all-data-9582424866941690986": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  "vfs/": {
+   "winner": "refs/remotes/origin/fix/lint-format-pass",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 6,
+     "tests": 0
+    },
+    "refs/remotes/origin/main": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/heads/perf/optimize-get-all-data-9582424866941690986": {
+     "files": 3,
+     "tests": 0
+    }
+   }
+  },
+  ".agent/": {
+   "winner": "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/camelot-vps/cloudbrain-prod-hardening": {
+     "files": 5,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser": {
+     "files": 5,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle": {
+     "files": 5,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo": {
+     "files": 5,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock": {
+     "files": 5,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration": {
+     "files": 5,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1": {
+     "files": 5,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1": {
+     "files": 5,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/main": {
+     "files": 5,
+     "tests": 0
+    },
+    "refs/remotes/kickbox-audio/main": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  ".helios/": {
+   "winner": "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/camelot-vps/cloudbrain-prod-hardening": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/main": {
+     "files": 3,
+     "tests": 0
+    }
+   }
+  },
+  "cartridges/": {
+   "winner": "refs/remotes/origin/fix/lint-format-pass",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 21,
+     "tests": 0
+    },
+    "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519": {
+     "files": 4,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/cloudbrain-prod-hardening": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/main": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  "cloudbrain/": {
+   "winner": "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/camelot-vps/cloudbrain-prod-hardening": {
+     "files": 38,
+     "tests": 8
+    },
+    "refs/remotes/origin/cloudbrain-prod-hardening": {
+     "files": 38,
+     "tests": 8
+    }
+   }
+  },
+  "crystal/": {
+   "winner": "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/camelot-vps/cloudbrain-prod-hardening": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/main": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  "prototypes/": {
+   "winner": "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/camelot-vps/cloudbrain-prod-hardening": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/main": {
+     "files": 3,
+     "tests": 0
+    }
+   }
+  },
+  "config/": {
+   "winner": "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/kickbox-audio/main": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  "tools/": {
+   "winner": "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+   "rule": "sole-contender",
+   "contenders": {
+    "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  "core/": {
+   "winner": "refs/remotes/kickbox-audio/main",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/kickbox-audio/main": {
+     "files": 16,
+     "tests": 0
+    },
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 10,
+     "tests": 0
+    }
+   }
+  },
+  "packages/": {
+   "winner": "refs/remotes/kickbox-audio/main",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/kickbox-audio/main": {
+     "files": 3,
+     "tests": 0
+    },
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 3,
+     "tests": 0
+    }
+   }
+  },
+  "integration/": {
+   "winner": "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/origin/claude/camelot-mvp-velocity": {
+     "files": 111,
+     "tests": 15
+    },
+    "refs/remotes/origin/claude/agency-blueprint": {
+     "files": 109,
+     "tests": 15
+    },
+    "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi": {
+     "files": 99,
+     "tests": 12
+    },
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 16,
+     "tests": 7
+    }
+   }
+  },
+  ".cargo/": {
+   "winner": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "rule": "sole-contender",
+   "contenders": {
+    "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  "02_FORGE/": {
+   "winner": "refs/remotes/origin/fix/lint-format-pass",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 319,
+     "tests": 4
+    },
+    "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519": {
+     "files": 47,
+     "tests": 1
+    },
+    "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg": {
+     "files": 2,
+     "tests": 0
+    },
+    "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  "99_ARCHIVE/": {
+   "winner": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "rule": "sole-contender",
+   "contenders": {
+    "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg": {
+     "files": 2,
+     "tests": 0
+    }
+   }
+  },
+  "blueprints/": {
+   "winner": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519": {
+     "files": 1,
+     "tests": 0
+    },
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  "kickbox-audio/": {
+   "winner": "refs/remotes/origin/fix/lint-format-pass",
+   "rule": "largest-delta-then-recency",
+   "contenders": {
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 10,
+     "tests": 3
+    },
+    "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519": {
+     "files": 5,
+     "tests": 2
+    }
+   }
+  },
+  ".agents/": {
+   "winner": "refs/remotes/origin/fix/lint-format-pass",
+   "rule": "sole-contender",
+   "contenders": {
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  "\"03_VAULT/": {
+   "winner": "refs/remotes/origin/fix/lint-format-pass",
+   "rule": "sole-contender",
+   "contenders": {
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 2,
+     "tests": 0
+    }
+   }
+  },
+  "_tmp/": {
+   "winner": "refs/remotes/origin/fix/lint-format-pass",
+   "rule": "sole-contender",
+   "contenders": {
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  "data/": {
+   "winner": "refs/remotes/origin/fix/lint-format-pass",
+   "rule": "sole-contender",
+   "contenders": {
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 2,
+     "tests": 0
+    }
+   }
+  },
+  "extensions/": {
+   "winner": "refs/remotes/origin/fix/lint-format-pass",
+   "rule": "sole-contender",
+   "contenders": {
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 2,
+     "tests": 0
+    }
+   }
+  },
+  "grafana/": {
+   "winner": "refs/remotes/origin/fix/lint-format-pass",
+   "rule": "sole-contender",
+   "contenders": {
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  "handover/": {
+   "winner": "refs/remotes/origin/fix/lint-format-pass",
+   "rule": "sole-contender",
+   "contenders": {
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 9,
+     "tests": 0
+    }
+   }
+  },
+  "opendesign/": {
+   "winner": "refs/remotes/origin/fix/lint-format-pass",
+   "rule": "sole-contender",
+   "contenders": {
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 1,
+     "tests": 0
+    }
+   }
+  },
+  "tower-r3f/": {
+   "winner": "refs/remotes/origin/fix/lint-format-pass",
+   "rule": "sole-contender",
+   "contenders": {
+    "refs/remotes/origin/fix/lint-format-pass": {
+     "files": 9,
+     "tests": 1
+    }
+   }
+  }
+ },
+ "contested_subsystems": [
+  "(root)",
+  ".agent/",
+  ".camelot/",
+  ".freebuff/",
+  ".github/",
+  ".grok/",
+  ".helios/",
+  ".kiro/",
+  ".windsurf/",
+  "01_KERNEL/",
+  "02_FORGE/",
+  "03_VAULT/",
+  "04_KINETIC/",
+  "adapters/",
+  "apps/",
+  "bin/",
+  "blueprints/",
+  "cartridges/",
+  "cloudbrain/",
+  "config/",
+  "contracts/",
+  "control_plane/",
+  "core/",
+  "crates/",
+  "crystal/",
+  "docs/",
+  "infra/",
+  "integration/",
+  "kickbox-audio/",
+  "packages/",
+  "prototypes/",
+  "public/",
+  "scripts/",
+  "squires/",
+  "src/",
+  "tests/",
+  "vfs/"
+ ],
+ "evidence_class": "heuristic-mechanical",
+ "gate_recommendation": "PASS",
+ "reviewer": "SIR_BORIS"
+}

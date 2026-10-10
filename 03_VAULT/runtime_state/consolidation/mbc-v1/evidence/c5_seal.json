@@ -1,0 +1,50 @@
+{
+ "phase": "C5-T04-SEAL",
+ "run": "mbc-v1",
+ "timestamp": "2026-09-27T08:20:00+00:00",
+ "sealed": true,
+ "gate5": "PASS",
+ "operator_approval": "evidence/c5_hitl.json (approved=true, 2026-09-27T08:10:15+00:00)",
+ "T02_roundtrip": {
+  "worktree_status_porcelain": 0,
+  "head": "9d30f239 fix(apps/pwa): C4 remediation — align tenant handle and root metadata with tests-source ref",
+  "branch": "feat/unified-v1000",
+  "commits_local_only": ["247e8bd7 (C2/C3 port)", "ec29d1eb (C4 orphan-module remediation + incident record)", "9d30f239 (C4 pwa winner-mismatch remediation)"],
+  "remote_tracking_ref": "absent (refs/remotes/origin/feat/unified-v1000 not found)",
+  "remote_branches_containing_head": [],
+  "trunk_untouched": "main checkout = perf/optimize-get-all-data-... @ 2ec1508a (unchanged)",
+  "verdict": "local only; no push; no trunk merge"
+ },
+ "T03_provenance": {
+  "entry_writer": "scripts/claude_ledger_hook.py (sanctioned PostToolUse writer, invoked directly — opencode session has no hook wiring)",
+  "entry": "ledger id 1850 — [AUTO] Bash seal entry marker 9d30f239 / mbc-v1 C5 SEAL",
+  "cascade": "scripts/sync_provenance.py rc=0 — LEDGER ALIGNMENT SUCCESSFUL, all 4 mirrors identical",
+  "mirror_hashes_identical": true,
+  "hash": "0CD97560C118B932B9A35F4F222867112C1578A7DA8C4757E915333D3176343D",
+  "grep_per_mirror": {"PROVENANCE_LEDGER.md": 1, "03_VAULT/PROVENANCE_LEDGER.md": 1, "docs/PROVENANCE_LEDGER.md": 1, "03_VAULT/training/configs/PROVENANCE_LEDGER.md": 1, "total": 4},
+  "hand_edits": "none (hook + sync script only)",
+  "note": "mirror drift (root had 1 uncommitted pending line) fixed by the cascade; ledgers left dirty in main checkout for the operator's normal ledger-batch commit"
+ },
+ "T04_prune": {
+  "before": ["C:/Users/vizio/CAMELOT_OS [perf/...]", "C:/Users/vizio/camelot-wt/unified [feat/unified-v1000 @ 9d30f239]"],
+  "remove": "git worktree remove (non-force) deleted pointer+admin then failed on non-empty dir; content dir removed via Remove-Item -Recurse; git worktree prune rc=0; empty camelot-wt parent removed",
+  "after": ["C:/Users/vizio/CAMELOT_OS [perf/optimize-get-all-data-... @ 2ec1508a]"],
+  "admin_dir": ".git/worktrees empty (no leftovers)",
+  "branch_ref_intact": "refs/heads/feat/unified-v1000 = 9d30f239ffd389b1622388639a30ab24d865aacd",
+  "reaper_note": "symbiotic_maintenance _prune_git_worktrees would never match the moved path; worktree now removed by design at C5 anyway",
+  "node_modules_note": "healed node_modules (donor copies) discarded with prune — rehydrate from main checkout if the branch is revived for push/merge"
+ },
+ "evidence_inventory": {
+  "dir": "03_VAULT/runtime_state/consolidation/mbc-v1/evidence/",
+  "files": ["c0_discovery.json", "c1_baseline.json", "c1_hydrate.json", "c2_worktrees.json", "c3_ghost.json", "c3_ghost.txt", "c3_manual_review.txt", "c3_port.json", "c3_resolutions.json", "c3_z3_receipts.json", "c4_gate.json", "c4_remediation.json", "c5_hitl.json", "c5_seal.json"],
+  "logs": 14
+ },
+ "criterion_summary": {
+  "c4_gate": "PASS — 7/7 steps, rc classes == baseline, npm_test failed-file set strict subset of baseline (2 of 3), pytest error-set identical, 218 pass vs 160 baseline",
+  "z3_full_diff": "133642 added lines, 43 pattern hits, all adjudicated benign/by-design (c4_gate.json z3_full_diff.adjudication)",
+  "c5_hitl": "operator approval precedes seal; never auto-approved",
+  "left_for_operator": ["push feat/unified-v1000 (separate directive)", "trunk merge = HUMAN_GATE (separate directive)", "ledger dirty files commit in main checkout (operator's normal batch)"]
+ },
+ "evidence_class": "confirmed",
+ "reviewer": "ANYA_Ω"
+}

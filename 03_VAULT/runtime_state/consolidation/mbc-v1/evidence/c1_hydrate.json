@@ -1,0 +1,14 @@
+{
+ "phase": "C1-HYDRATE",
+ "run": "mbc-v1",
+ "timestamp": "2026-09-27T00:28:42+00:00",
+ "main_sha": "ef7603b60b526fe836b27885b340ef29e85a4ad3",
+ "file_totals": {
+  "changed": 2220,
+  "unique": 1252,
+  "multi": 968,
+  "main_side_overlap": 1591,
+  "conflict_set": 2010
+ },
+ "gate_recommendation": "PASS"
+}

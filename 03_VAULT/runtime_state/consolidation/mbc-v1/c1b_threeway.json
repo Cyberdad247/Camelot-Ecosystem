@@ -1,0 +1,181 @@
+{
+ "phase": "C1b-THREEWAY",
+ "run": "mbc-v1",
+ "timestamp": "2026-09-27T00:32:03+00:00",
+ "main_sha": "ef7603b60b526fe836b27885b340ef29e85a4ad3",
+ "eligible": 27,
+ "elapsed_s": 132.1,
+ "totals": {
+  "port_files": 1704,
+  "contest_files": 524,
+  "multi_branch_contests": 165,
+  "single_branch_contests": 359,
+  "main-won": 124738
+ },
+ "per_branch": {
+  "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle": {
+   "port": 277,
+   "skip": 7351,
+   "contest": 19,
+   "tree_diff": 7647
+  },
+  "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo": {
+   "port": 279,
+   "skip": 7350,
+   "contest": 19,
+   "tree_diff": 7648
+  },
+  "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock": {
+   "port": 279,
+   "skip": 7350,
+   "contest": 19,
+   "tree_diff": 7648
+  },
+  "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser": {
+   "port": 282,
+   "skip": 7350,
+   "contest": 19,
+   "tree_diff": 7651
+  },
+  "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration": {
+   "port": 275,
+   "skip": 7350,
+   "contest": 19,
+   "tree_diff": 7644
+  },
+  "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1": {
+   "port": 274,
+   "skip": 7350,
+   "contest": 19,
+   "tree_diff": 7643
+  },
+  "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1": {
+   "port": 264,
+   "skip": 7345,
+   "contest": 19,
+   "tree_diff": 7628
+  },
+  "refs/remotes/camelot-vps/cloudbrain-prod-hardening": {
+   "port": 294,
+   "skip": 7355,
+   "contest": 19,
+   "tree_diff": 7668
+  },
+  "refs/remotes/camelot-vps/main": {
+   "port": 256,
+   "skip": 7350,
+   "contest": 19,
+   "tree_diff": 7625
+  },
+  "refs/remotes/kickbox-audio/main": {
+   "port": 176,
+   "skip": 7389,
+   "contest": 63,
+   "tree_diff": 7628
+  },
+  "refs/remotes/origin/claude/camelot-mvp-velocity": {
+   "port": 16,
+   "skip": 5215,
+   "contest": 59,
+   "tree_diff": 5290
+  },
+  "refs/remotes/origin/claude/agency-blueprint": {
+   "port": 13,
+   "skip": 5214,
+   "contest": 50,
+   "tree_diff": 5277
+  },
+  "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi": {
+   "port": 3,
+   "skip": 5215,
+   "contest": 38,
+   "tree_diff": 5256
+  },
+  "refs/remotes/origin/main": {
+   "port": 232,
+   "skip": 608,
+   "contest": 49,
+   "tree_diff": 889
+  },
+  "refs/heads/perf/optimize-get-all-data-9582424866941690986": {
+   "port": 232,
+   "skip": 608,
+   "contest": 49,
+   "tree_diff": 889
+  },
+  "refs/heads/feat/android-edge-supervisor": {
+   "port": 0,
+   "skip": 1352,
+   "contest": 49,
+   "tree_diff": 1401
+  },
+  "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg": {
+   "port": 48,
+   "skip": 4404,
+   "contest": 195,
+   "tree_diff": 4647
+  },
+  "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519": {
+   "port": 157,
+   "skip": 3542,
+   "contest": 45,
+   "tree_diff": 3744
+  },
+  "refs/heads/cartridge/vps-hub-cartridge-v1": {
+   "port": 134,
+   "skip": 7345,
+   "contest": 19,
+   "tree_diff": 7498
+  },
+  "refs/heads/feature/reya-fabric": {
+   "port": 123,
+   "skip": 667,
+   "contest": 11,
+   "tree_diff": 801
+  },
+  "refs/remotes/origin/fix/ruff-530-manual": {
+   "port": 114,
+   "skip": 3524,
+   "contest": 57,
+   "tree_diff": 3695
+  },
+  "refs/heads/feat/unified-bootstrap-hud": {
+   "port": 0,
+   "skip": 2459,
+   "contest": 52,
+   "tree_diff": 2511
+  },
+  "refs/remotes/origin/fix/lint-format-pass": {
+   "port": 787,
+   "skip": 3496,
+   "contest": 96,
+   "tree_diff": 4379
+  },
+  "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598": {
+   "port": 1,
+   "skip": 5524,
+   "contest": 99,
+   "tree_diff": 5624
+  },
+  "refs/heads/perf/embedding-n-plus-1-optimization-15445770156298811611": {
+   "port": 0,
+   "skip": 675,
+   "contest": 3,
+   "tree_diff": 678
+  },
+  "refs/heads/perf/optimize-n-plus-1-queries-13777398068298918860": {
+   "port": 0,
+   "skip": 674,
+   "contest": 3,
+   "tree_diff": 677
+  },
+  "refs/remotes/origin/cloudbrain-prod-hardening": {
+   "port": 38,
+   "skip": 676,
+   "contest": 2,
+   "tree_diff": 716
+  }
+ },
+ "gate_recommendation": "PASS",
+ "reviewer": "SIR_BORIS"
+}

@@ -103,6 +103,45 @@
         "disk_quota_mb": { "type": "integer", "minimum": 0 },
         "ephemeral_fds_max": { "type": "integer", "minimum": 0 }
       }
+    },
+    "personality": {
+      "description": "Hybrid Myers-Briggs (MBTI) & Big-5 OCEAN personality vectors for cognitive calibration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "framework": { "type": "string" },
+        "mbti": { "type": "string", "pattern": "^[EI][SN][TF][JP]$" },
+        "mbti_profile": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "code": { "type": "string" },
+            "archetype": { "type": "string" },
+            "dimensions": { "type": "object" },
+            "dynamic_role": { "type": "string" }
+          }
+        },
+        "ocean_vector": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "O": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+            "C": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+            "E": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+            "A": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+            "N": { "type": "number", "minimum": 0.0, "maximum": 1.0 }
+          }
+        }
+      }
+    },
+    "languages": {
+      "description": "Programming languages and substrate execution targets supported by this persona.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "primary_language": {
+      "description": "Primary programming language / runtime for this persona.",
+      "type": "string"
     }
   }
 }

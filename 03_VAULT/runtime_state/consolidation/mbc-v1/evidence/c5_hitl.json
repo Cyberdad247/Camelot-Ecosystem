@@ -1,0 +1,27 @@
+{
+ "phase": "C5-T01-HITL",
+ "run": "mbc-v1",
+ "approved": true,
+ "timestamp": "2026-09-27T08:10:15+00:00",
+ "operator": "live session operator (CAMELOT dashboard owner)",
+ "approval_channel": "interactive HITL question — never auto-approved",
+ "decision": "Approve seal (local only: no push, no trunk merge)",
+ "seal_target": {
+  "branch": "feat/unified-v1000",
+  "commit": "9d30f239",
+  "worktree": "C:/Users/vizio/camelot-wt/unified",
+  "base": "ef7603b6"
+ },
+ "gate_evidence": {
+  "c4_gate": "PASS (7/7 steps guard=ok, rc classes == baseline, npm_test failed files strict subset of baseline, pytest error-set identical, 218 pass vs baseline 160)",
+  "z3_full_diff": "Z3_BLOCK mechanistic / 43 hits all adjudicated benign (see c4_gate.json z3_full_diff.adjudication)",
+  "c4_remediation": "5 entries (perf-absorb-record, orphan-test-module-fix, worktree-loss-incident, turbo-exe-repair, pwa-winner-mismatch)"
+ },
+ "scope_limits": [
+  "local commit only — feat/unified-v1000 never pushed",
+  "trunk merge requires a separate explicit operator directive (HUMAN_GATE)",
+  "worktree prune and evidence archive authorized by this approval"
+ ],
+ "evidence_class": "confirmed",
+ "reviewer": "ANYA_Ω"
+}

@@ -1,0 +1,32 @@
+{
+  "phase": "C3-T04",
+  "gate": "hardened_ghost_on_unified_worktree",
+  "scanner": {
+    "source": "squires/ghost.py hardened version (perf branch, main checkout)",
+    "invocation": "python -m squires.colony ghost .worktrees/consolidation/unified",
+    "path": ".worktrees/consolidation/unified"
+  },
+  "pre_remediation": {
+    "summary": {"total": 164, "critical": 2, "warnings": 21, "info": 141},
+    "criticals": [
+      {"file": "apps/pwa/src/lib/kernel/cartridgeResolver.ts", "line": 141, "detail": "generic_token: capabilityLeaseToken literal", "value_shape": "KBA_LEASE_RING1_WKS_0x99A3"},
+      {"file": "apps/pwa/src/lib/kernel/cartridgeResolver.ts", "line": 176, "detail": "generic_token: capabilityLeaseToken literal", "value_shape": "KBA_LEASE_RING0_MST_0x1122"}
+    ],
+    "classification": "FP-class synthetic demo data (kickbox ref originRepo: audit-kickbox-audio/*)",
+    "root_cause": "generic_token readable-constant heuristic (_is_readable_constant: every _-segment must contain a vowel or digit) rejects the vowel-less abbreviation segments WKS/MST; structurally identical siblings SEC/ENC (lines 73/108) pass as warnings",
+    "real_secret_evidence": [
+      "file is synthetic fixture: resolvedAt = new Date().toISOString(), sequential lease ids LEASE_*_00N, patterned fake merkleRoots (1234567890abcdef repeated, 9f8e7d6c... sequential)",
+      "grep of whole worktree: exact literals occur ONLY at these two lines (no test/fixture/tool references them)",
+      "cartridgeResolver.test.ts asserts only runtime-generated forms (KBA_LEASE_RING_0_SECURITY / RING_0_MASTER via line 314 template) and the literals RESTRICTED_CLEARANCE_DENIAL / INVALID_CAPABILITY_LEASE"
+    ],
+    "remediation": "expanded abbreviations to generator-consistent full words matching the static ringTier values and line-314 token template: line 141 -> KBA_LEASE_RING_1_WORKSPACE_0x99A3 (ringTier 'Ring 1 Workspace'), line 176 -> KBA_LEASE_RING_0_MASTER_0x1122 (ringTier 'Ring 0 Master'); no behavior change (display-only fixture strings), file re-staged"
+  },
+  "post_remediation": {
+    "summary": {"total": 164, "critical": 0, "warnings": 23, "info": 141},
+    "critical": 0,
+    "exit_code": 0,
+    "evidence_raw": "evidence/c3_ghost.txt"
+  },
+  "verdict": "PASS",
+  "notes": "23 warnings = 21 baseline + the 2 remediated literals now downgraded to token_constant warnings. 141 info = mock_secret/todo fixtures (pre-existing class, C0-classified)."
+}

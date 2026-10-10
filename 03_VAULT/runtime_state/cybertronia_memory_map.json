@@ -1,0 +1,125 @@
+{
+  "timestamp": "2026-10-04T19:35:38.931682+00:00",
+  "total_physical_mb": 7895.87,
+  "free_physical_mb": 1675.79,
+  "used_physical_mb": 6220.08,
+  "utilization_pct": 78.8,
+  "commit_total_mb": 13799.0,
+  "commit_limit_mb": 16087.87,
+  "categories": {
+    "WINDOWS_CORE_SYSTEM": 1092.47,
+    "SECURITY_AV": 186.12,
+    "OTHER_USER_APPS": 335.76,
+    "HARDWARE_OEM_UTILITIES": 151.57,
+    "CAMELOT_AGENTIC_SUITE": 80.32,
+    "BROWSERS_WEBVIEW": 11.57
+  },
+  "top_processes": [
+    {
+      "pid": 3664,
+      "name": "Memory Compression",
+      "working_set_mb": 421.51,
+      "private_mb": 3.66,
+      "category": "WINDOWS_CORE_SYSTEM"
+    },
+    {
+      "pid": 23260,
+      "name": "MsMpEng",
+      "working_set_mb": 170.38,
+      "private_mb": 436.52,
+      "category": "SECURITY_AV"
+    },
+    {
+      "pid": 45668,
+      "name": "powershell",
+      "working_set_mb": 71.86,
+      "private_mb": 61.0,
+      "category": "OTHER_USER_APPS"
+    },
+    {
+      "pid": 15692,
+      "name": "tailscaled",
+      "working_set_mb": 71.81,
+      "private_mb": 133.83,
+      "category": "HARDWARE_OEM_UTILITIES"
+    },
+    {
+      "pid": 1484,
+      "name": "svchost",
+      "working_set_mb": 55.37,
+      "private_mb": 55.11,
+      "category": "WINDOWS_CORE_SYSTEM"
+    },
+    {
+      "pid": 95192,
+      "name": "agy",
+      "working_set_mb": 54.69,
+      "private_mb": 436.45,
+      "category": "CAMELOT_AGENTIC_SUITE"
+    },
+    {
+      "pid": 4956,
+      "name": "svchost",
+      "working_set_mb": 48.91,
+      "private_mb": 51.23,
+      "category": "WINDOWS_CORE_SYSTEM"
+    },
+    {
+      "pid": 78716,
+      "name": "dwm",
+      "working_set_mb": 46.75,
+      "private_mb": 173.13,
+      "category": "WINDOWS_CORE_SYSTEM"
+    },
+    {
+      "pid": 117776,
+      "name": "warp-svc",
+      "working_set_mb": 46.16,
+      "private_mb": 102.27,
+      "category": "HARDWARE_OEM_UTILITIES"
+    },
+    {
+      "pid": 188,
+      "name": "Secure System",
+      "working_set_mb": 43.14,
+      "private_mb": 0.17,
+      "category": "WINDOWS_CORE_SYSTEM"
+    },
+    {
+      "pid": 110756,
+      "name": "python",
+      "working_set_mb": 25.63,
+      "private_mb": 14.51,
+      "category": "CAMELOT_AGENTIC_SUITE"
+    },
+    {
+      "pid": 16276,
+      "name": "svchost",
+      "working_set_mb": 23.21,
+      "private_mb": 48.35,
+      "category": "WINDOWS_CORE_SYSTEM"
+    },
+    {
+      "pid": 3656,
+      "name": "svchost",
+      "working_set_mb": 22.32,
+      "private_mb": 212.99,
+      "category": "WINDOWS_CORE_SYSTEM"
+    },
+    {
+      "pid": 120008,
+      "name": "audiodg",
+      "working_set_mb": 21.11,
+      "private_mb": 17.75,
+      "category": "WINDOWS_CORE_SYSTEM"
+    },
+    {
+      "pid": 9552,
+      "name": "svchost",
+      "working_set_mb": 18.32,
+      "private_mb": 7.52,
+      "category": "WINDOWS_CORE_SYSTEM"
+    }
+  ],
+  "trimmed_reclaimed_mb": 101.54
+}

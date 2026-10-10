@@ -527,3 +527,154 @@ def test_real_repo_protected_dirs_are_protected() -> None:
     for rel in (".venv", "node_modules"):
         blocked, _ = sweep._is_protected_path(Path(rel))
         assert blocked
+
+
+# ---------------------------------------------------------------------------
+#  9. provenance mirror sync (scripts/sync_provenance.py)
+# ---------------------------------------------------------------------------
+
+
+def _write_ledger(path: Path, lines: list[str]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("| ID | Task |\n" + "".join(lines), encoding="utf-8")
+
+
+def test_sync_check_reports_stale_mirror_and_exits_nonzero(tmp_path: Path) -> None:
+    """A mirror missing root lines must be STALE, not silently pass."""
+    import sync_provenance
+
+    root = tmp_path / "PROVENANCE_LEDGER.md"
+    _write_ledger(root, ["| 1 | alpha |\n"])
+    # Build every declared mirror, then hold two of them back a generation.
+    for rel in sync_provenance.MIRRORS:
+        mirror = tmp_path / rel
+        _write_ledger(mirror, ["| 1 | alpha |\n"])
+    _write_ledger(tmp_path / "docs" / "PROVENANCE_LEDGER.md", [])
+    _write_ledger(tmp_path / "control_plane" / "PROVENANCE_LEDGER.md", [])
+
+    assert sync_provenance.check(tmp_path) == 1
+
+
+def test_sync_check_exits_zero_when_all_mirrors_match(tmp_path: Path) -> None:
+    import sync_provenance
+
+    root = tmp_path / "PROVENANCE_LEDGER.md"
+    _write_ledger(root, ["| 1 | alpha |\n", "| 2 | beta |\n"])
+    for rel in sync_provenance.MIRRORS:
+        _write_ledger(tmp_path / rel, ["| 1 | alpha |\n", "| 2 | beta |\n"])
+
+    assert sync_provenance.check(tmp_path) == 0
+
+
+def test_sync_check_flags_diverged_mirror_separately(tmp_path: Path) -> None:
+    """A mirror holding lines root lacks is DIVERGED -- never auto-overwritable."""
+    import sync_provenance
+
+    root = tmp_path / "PROVENANCE_LEDGER.md"
+    _write_ledger(root, ["| 1 | alpha |\n"])
+    for rel in sync_provenance.MIRRORS:
+        _write_ledger(tmp_path / rel, ["| 1 | alpha |\n"])
+    # Root does not contain this line; the mirror does.
+    _write_ledger(
+        tmp_path / "03_VAULT" / "PROVENANCE_LEDGER.md",
+        ["| 1 | alpha |\n", "| 99 | unique-to-mirror |\n"],
+    )
+
+    assert sync_provenance.check(tmp_path) == 1
+
+
+def test_sync_check_never_writes(tmp_path: Path) -> None:
+    """--check is read-only: mtimes must survive an audit unchanged."""
+    import sync_provenance
+
+    root = tmp_path / "PROVENANCE_LEDGER.md"
+    _write_ledger(root, ["| 1 | alpha |\n"])
+    stale = tmp_path / "docs" / "PROVENANCE_LEDGER.md"
+    _write_ledger(stale, [])
+    for rel in sync_provenance.MIRRORS:
+        if not (tmp_path / rel).exists():
+            _write_ledger(tmp_path / rel, ["| 1 | alpha |\n"])
+
+    before = {p: (p.stat().st_mtime_ns, p.read_bytes()) for p in tmp_path.rglob("*.md")}
+    sync_provenance.check(tmp_path)
+    after = {p: (p.stat().st_mtime_ns, p.read_bytes()) for p in tmp_path.rglob("*.md")}
+
+    assert before == after, "--check must not write any ledger"
+
+
+def test_sync_check_flags_missing_mirror(tmp_path: Path) -> None:
+    import sync_provenance
+
+    root = tmp_path / "PROVENANCE_LEDGER.md"
+    _write_ledger(root, ["| 1 | alpha |\n"])
+    assert sync_provenance.check(tmp_path) == 1
+
+
+def test_go_build_cache_classifies_safe(tmp_path: Path) -> None:
+    """Go build output is regenerable via `go clean -cache` -> SAFE."""
+    _write(tmp_path / "logs" / "go-build-cache" / "00" / "trim.txt", 4096)
+
+    found = {f.path: f for f in sweep.scan_repository(tmp_path)}
+    hit = found.get("logs/go-build-cache")
+    assert hit is not None, "go-build-cache must be discovered"
+    assert hit.tier == "SAFE"
+
+
+def test_graft_cache_is_protected_not_safe(tmp_path: Path) -> None:
+    """graft/.cache matches the SAFE name ".cache" but must never be purged.
+
+    Deleting it frees almost nothing while forcing a full-repo tree-sitter
+    reparse, and that parse has a documented abort (0xC0000409, Graft#122) on
+    memory-pressured hosts. Name-based matching alone would classify it SAFE.
+    """
+    _write(tmp_path / "graft" / ".cache" / "node.bin", 4096)
+
+    blocked, reason = sweep._is_protected_path(Path("graft/.cache"))
+    assert blocked, "graft/.cache must be protected"
+    assert "expensive-to-rebuild" in reason
+
+    found = {f.path: f for f in sweep.scan_repository(tmp_path)}
+    hit = found.get("graft/.cache")
+    assert hit is None or hit.tier != "SAFE", "graft/.cache must never be SAFE"
+
+
+def test_ordinary_dot_cache_stays_safe(tmp_path: Path) -> None:
+    """The graft exception is path-scoped: a normal .cache dir is still SAFE."""
+    _write(tmp_path / "somepkg" / ".cache" / "x.bin", 4096)
+
+    blocked, _ = sweep._is_protected_path(Path("somepkg/.cache"))
+    assert not blocked, "plain .cache must not be protected"
+
+    found = {f.path: f for f in sweep.scan_repository(tmp_path)}
+    hit = found.get("somepkg/.cache")
+    assert hit is not None and hit.tier == "SAFE"
+
+
+def test_multivoice_ledger_is_not_a_declared_mirror() -> None:
+    """Independent sub-project ledger must stay out of the sync set.
+
+    Copying root over it would destroy that project's own history.
+    """
+    import sync_provenance
+
+    assert not any("multivoice" in rel for rel in sync_provenance.MIRRORS), (
+        "deploy/multivoice-router ledger is independent, not a mirror"
+    )
+
+
+def test_all_declared_mirrors_are_tracked_in_git() -> None:
+    """Every mirror in the sync set must be git-tracked.
+
+    An untracked mirror is invisible to `git status`, so drift in it would go
+    unreviewed; that is how the independent multivoice ledger differs.
+    """
+    import sync_provenance
+
+    for rel in sync_provenance.MIRRORS:
+        res = subprocess.run(
+            ["git", "ls-files", "--error-unmatch", rel],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+        )
+        assert res.returncode == 0, f"mirror not tracked by git: {rel}"

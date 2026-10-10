@@ -1,0 +1,32 @@
+{
+ "verifier": "control_plane\\infra\\z3_verify.py",
+ "verifier_sha256": "8d3f212f91832b32cdc1743b7949f7f3e2a9f818748582b94ce8599cd78ce346",
+ "z3_version": "4.16.0",
+ "results": {
+  "port_apply": {
+   "text": "apply adjudicated subsystem port onto feat/unified-v1000: path-level checkouts of winner ref content and three-way line merges for disjoint hunks, all inside a local linked worktree; branch stays local and unpushed",
+   "verdict": "Z3_PASS",
+   "safe": true,
+   "violated": []
+  },
+  "manual_resolution": {
+   "text": "manual overlap resolution: 52 files reviewed by knight; 45 keep trunk content, 6 adopt winner content, 1 hand-applied parents index fix; root governance files restored to trunk state",
+   "verdict": "Z3_PASS",
+   "safe": true,
+   "violated": []
+  },
+  "parity_restoration": {
+   "text": "generated artifact parity restoration: edge-router source and emit reverted to the proven trunk pair after regen check reported drift; omnivoice structural parity verified green",
+   "verdict": "Z3_PASS",
+   "safe": true,
+   "violated": []
+  },
+  "path_fix": {
+   "text": "provenance default path correction: repository root now resolved by parents index instead of parent chain, matching the canonical root resolution module",
+   "verdict": "Z3_PASS",
+   "safe": true,
+   "violated": []
+  }
+ },
+ "phase": "C3-T03-z3-receipts"
+}

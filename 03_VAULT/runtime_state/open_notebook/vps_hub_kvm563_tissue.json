@@ -18,7 +18,7 @@
     "deployed_branch": "main",
     "deployed_commit": "77c947e7535ac8681e5b13e6b275f077bc0c84e2",
     "deployed_commit_summary": "feat(cloudbrain): implement zero-login autonomous fallback and harvest 8 architectural jewels into main",
-    "deployed_commit_verified_at": "2026-09-23T23:28:57.754880+00:00",
+    "deployed_commit_verified_at": "2026-10-04T07:37:35.946180+00:00",
     "deployed_commit_verification": "live ssh git rev-parse probe",
     "last_delivery_id": "del_34aed52a",
     "services": {
@@ -66,6 +66,7 @@
         "selector": "vllm:deepseek-ai/DeepSeek-V4.1-Flash",
         "backend": "vllm",
         "model_tag": "deepseek-ai/DeepSeek-V4.1-Flash",
+        "inference_scope": "bifrost_hub",
         "manifest_alias": "deepseek-flash",
         "service": "vLLM",
         "local_base_url": "http://127.0.0.1:8000/v1",
@@ -92,7 +93,7 @@
       "port_3001": "OPEN",
       "port_8095": "OPEN",
       "port_9000": "OPEN",
-      "probe_timestamp": "2026-09-23T23:28:57.754880+00:00",
+      "probe_timestamp": "2026-10-04T07:37:35.946180+00:00",
       "worldtree_http_status": 200,
       "bifrost_health_status": 200
     },
@@ -102,12 +103,12 @@
       "summary": "all recorded services reachable"
     },
     "status": "MERGED_MAIN_UNIFIED",
-    "timestamp": "2026-09-23T23:28:53.657081+00:00",
-    "last_synced": "2026-09-25T11:03:03.142393+00:00",
+    "timestamp": "2026-10-04T07:37:31.722777+00:00",
+    "last_synced": "2026-10-07T13:07:05.057978+00:00",
     "active_cartridges": [
       "omarchy-vps-hermes-v1",
       "vps-hub-cartridge-v1"
     ],
-    "latest_assimilation_delivery": "asm_02b7180b4c"
+    "latest_assimilation_delivery": "asm_9185adb9ea"
   }
 ]

@@ -46,7 +46,7 @@ for knight_id, probe_intent in KNIGHT_PROBES.items():
 
     via_cliproxy = backend == cliproxy_url
     via_local    = "11434" in backend
-    is_local_engine = result.engine_cmd in ("ollama",)
+    is_local_engine = result.engine_cmd in ("ollama", "ouroboros")
 
     if via_cliproxy:
         status = "CLIPROXY :8080"

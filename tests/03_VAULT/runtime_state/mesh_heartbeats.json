@@ -1,0 +1,40 @@
+{
+  "timestamp": "2026-10-04T20:29:15.489167+00:00",
+  "host_tailscale_ip": "100.118.224.52",
+  "tailscale_service_running": true,
+  "cloudflare_warp_active": true,
+  "active_routing_path": "OUT_OF_BAND_WARP_GATE_RENDEZVOUS",
+  "paths": {
+    "wifi_direct": {
+      "name": "LOCAL_WIRELESS_FABRIC",
+      "target": "192.168.88.2:5555",
+      "reachable": false,
+      "latency_ms": null,
+      "protocol": "TCP/ADB",
+      "notes": "Direct local subnet; ultra low latency (<5ms)"
+    },
+    "tailscale_mesh": {
+      "name": "TAILSCALE_WIREGUARD_MESH",
+      "target": "100.106.246.126:5555",
+      "reachable": false,
+      "latency_ms": null,
+      "protocol": "WireGuard/Tailscale",
+      "notes": "Global encrypted mesh overlay (IPv4/IPv6)"
+    },
+    "vps_relay": {
+      "name": "VPS_HUB_RELAY",
+      "target": "100.110.180.18:8095",
+      "reachable": false,
+      "latency_ms": null,
+      "protocol": "mTLS/Bifrost",
+      "notes": "Hermes Prime cloud control plane & rendezvous"
+    }
+  },
+  "android_always_on_configured": false,
+  "overall_status": "DEGRADED_DISCONNECTED",
+  "recommendations": [
+    "Ensure target device is powered on and ADB listener is active.",
+    "Host Tailscale requires login session (run 'tailscale up' or check tray).",
+    "Cloudflare WARP detected; dual-stack routing prefers direct IPv4."
+  ]
+}

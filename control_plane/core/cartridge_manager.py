@@ -43,7 +43,7 @@ import time
 from dataclasses import asdict, dataclass, field
 from typing import Any, Literal, Optional
 
-CartridgeName = Literal["ANT", "BEAVER", "SPIDER", "EAGLE", "OCTOPUS", "BIO_SWARM", "DEFAULT"]
+CartridgeName = Literal["ANT", "BEAVER", "SPIDER", "EAGLE", "OCTOPUS", "BIO_SWARM", "INVISIONED_AGENCY", "DEFAULT"]
 
 CARTRIDGES: dict[str, dict[str, Any]] = {
     "ANT": {
@@ -88,6 +88,15 @@ CARTRIDGES: dict[str, dict[str, Any]] = {
         "co_lead": "sir_boris",
         "skills": ["cellular-isolation", "mitosis-scaling", "neural-pulse", "bio-swarm", "hive-orchestration"],
         "preferred_models": ["gemini-3.6-flash", "gpt-5.5-codex"],
+    },
+    "INVISIONED_AGENCY": {
+        "title": "Invisioned Marketing Agency",
+        "domain": "brand worldbuilding / autonomous AI systems / GEO search dominance / voice operations",
+        "lead_knight": "merlin_omega",
+        "co_lead": "anya_omega",
+        "skills": ["brand-strategy", "geo-optimization", "kinetic-web", "voice-receptionist", "airgap-security", "living-orbit"],
+        "preferred_models": ["gemini-3.1-pro-preview", "claude-haiku-4-5-20251001"],
+        "cloudbrain_id": "e6374819-50ce-41cf-b6b3-99924ca6ab90",
     },
     "DEFAULT": {
         "title": "Round Table Baseline",

@@ -1,0 +1,34 @@
+{
+  "cartridge_id": "dub-link-engine",
+  "vfs_uri": "vfs://worldtree/cartridges/dub-link-engine/",
+  "cloudbrain_notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+  "cloudbrain_title": "Camelot WorldTree Root & Operator Infrastructure",
+  "bound_knights": [
+    "SIR_LINK",
+    "SIR_HERMES",
+    "SIR_HELIOS"
+  ],
+  "risk_tier_cap": "T1",
+  "domain_tags": [
+    "link_management",
+    "url_shortener",
+    "bifrost_redirect",
+    "htmx_dashboard",
+    "attribution_engine",
+    "vfs_links"
+  ],
+  "entrypoints": [
+    "fetch",
+    "execute",
+    "audit"
+  ],
+  "physical_source_path": "cartridges/dub-link-engine",
+  "files": [
+    "manifest.json",
+    "signing_key.pub",
+    "system_instruction.md"
+  ],
+  "status": "ONLINE_ACTIVE",
+  "tether_type": "POSITION_ADDRESSED_VFS_CARTRIDGE",
+  "updated_at": "2026-10-07T13:15:00.000000+00:00"
+}

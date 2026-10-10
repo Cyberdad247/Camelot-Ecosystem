@@ -1,0 +1,24 @@
+{
+  "cartridge_id": "rea-forensics",
+  "vfs_coordinate": "vfs://worldtree/cartridges/rea-forensics/",
+  "manifest_path": "cartridges/rea-forensics/manifest.json",
+  "artifact_hash": "sha256:d7d36ca6a3e1070454a44b8257b054924cb81024c3c2f978ceb0050c83bc5afe",
+  "cloudbrain_tether": {
+    "notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "root_uuid": "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",
+    "domain_tags": ["reverse_engineering", "binary_analysis", "evidence_ledger", "mcp", "fastmcp", "decompiler", "disassembler", "antigravity"]
+  },
+  "assigned_knights": {
+    "lead_sentinel": "SIR_HELIOS",
+    "cognitive_planner": "MERLIN_Ω",
+    "formal_prover": "SIR_CODEX",
+    "offline_reasoner": "JEV_Ω"
+  },
+  "governance": {
+    "risk_tier": "T1",
+    "ram_ceiling_mb": 512,
+    "global_law_03_compliant": true,
+    "immutable_evidence": true
+  },
+  "status": "ONLINE_ACTIVE"
+}

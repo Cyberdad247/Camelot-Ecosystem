@@ -1,0 +1,2534 @@
+{
+ "phase": "C0-DISCOVERY",
+ "run": "mbc-v1",
+ "timestamp": "2026-09-27T00:18:54+00:00",
+ "main_sha": "ef7603b60b526fe836b27885b340ef29e85a4ad3",
+ "total_heads": 96,
+ "unique_candidate_tips": 39,
+ "alias_deduped": 2,
+ "merged_into_main": [
+  "refs/heads/backup-main-pre83",
+  "refs/heads/cybertronia",
+  "refs/heads/feat/cloudbrain-zero-login-autonomous",
+  "refs/heads/feat/enterprise-production-package-v2",
+  "refs/remotes/camelot-vps/feat/cloudbrain-zero-login-autonomous",
+  "refs/remotes/kickbox-audio/feat/kba-cartridge-v1000",
+  "refs/remotes/multivoice-remote/feat/multivoice-router",
+  "refs/remotes/origin/add-health-check-test-3638078625541374688",
+  "refs/remotes/origin/add-test-for-telemetry-status-1688314949788576684",
+  "refs/remotes/origin/chore/remove-tool-decorator-from-timestamp-1270892594346834274",
+  "refs/remotes/origin/chore/sync-local-main-130",
+  "refs/remotes/origin/cleanup-monitor-loop-5495780391155052802",
+  "refs/remotes/origin/dependabot/github_actions/actions/checkout-7",
+  "refs/remotes/origin/dependabot/github_actions/actions/setup-python-7",
+  "refs/remotes/origin/dependabot/github_actions/docker/build-push-action-7",
+  "refs/remotes/origin/dependabot/github_actions/docker/metadata-action-6",
+  "refs/remotes/origin/dependabot/github_actions/docker/setup-buildx-action-4",
+  "refs/remotes/origin/dependabot/npm_and_yarn/bitkyc08/opencodex-2.57.0",
+  "refs/remotes/origin/dependabot/npm_and_yarn/motion-13.4.0",
+  "refs/remotes/origin/dependabot/npm_and_yarn/react-three/drei-10.7.8",
+  "refs/remotes/origin/dependabot/npm_and_yarn/shadcn-4.21.0",
+  "refs/remotes/origin/dependabot/npm_and_yarn/types/node-26.6.1",
+  "refs/remotes/origin/dependabot/pip/appwrite-gte-2.0.0-and-lt-25.0.0",
+  "refs/remotes/origin/dependabot/pip/cffi-gte-2.1.1",
+  "refs/remotes/origin/dependabot/pip/optimum-gte-2.3.0",
+  "refs/remotes/origin/dependabot/pip/redis-gte-8.1.0",
+  "refs/remotes/origin/dependabot/pip/websockets-gte-17.1",
+  "refs/remotes/origin/feat/cloudbrain-zero-login-autonomous",
+  "refs/remotes/origin/feat/enterprise-production-package-v2",
+  "refs/remotes/origin/feat/integrate-camelot-os-assets",
+  "refs/remotes/origin/feat/multivoice-router",
+  "refs/remotes/origin/feat/optimize-graph-traversal-12496476832258857205",
+  "refs/remotes/origin/fix-go-module-template-11915086332059480524",
+  "refs/remotes/origin/fix/bifrost-path-traversal-12920532030833178479",
+  "refs/remotes/origin/fix/bifrost-secret-vulnerability-9692439515697370356",
+  "refs/remotes/origin/fix/chaos-engineer-ssh-exec-cmd-injection-11318835194895624429",
+  "refs/remotes/origin/fix/chat-session-message-count-6746660588984624685",
+  "refs/remotes/origin/fix/component-template-props-16493431646273032043",
+  "refs/remotes/origin/fix/connect-actual-llm-critique-3040656013081213332",
+  "refs/remotes/origin/fix/crawl4ai-dynamic-props-10308585361983874934",
+  "refs/remotes/origin/fix/n-plus-1-notes-11567502951563396669",
+  "refs/remotes/origin/fix/n-plus-1-transformations-4638488964349460669",
+  "refs/remotes/origin/fix/recursive-search-llm-critique-7243920979155881837",
+  "refs/remotes/origin/fix/remove-hardcoded-webhook-secret-11371801199461349342",
+  "refs/remotes/origin/fix/secure-ast-eval-6446032791505160235",
+  "refs/remotes/origin/fix/store-grounding-id-3477205575185918070",
+  "refs/remotes/origin/jules-16191481042690718775-e6912db9",
+  "refs/remotes/origin/jules-1696512268705221735-a245b292",
+  "refs/remotes/origin/perf/embedding-n-plus-1-optimization-15445770156298811611",
+  "refs/remotes/origin/perf/limit-ledger-queries-9360251954406859550",
+  "refs/remotes/origin/perf/optimize-n-plus-1-queries-13777398068298918860",
+  "refs/remotes/origin/perf/titan-ledger-get-all-data-10080314446502054566",
+  "refs/remotes/origin/pr/camelot-sync-20260922",
+  "refs/remotes/origin/security-strict-secrets-main-py-4297326714463841449"
+ ],
+ "candidates": [
+  {
+   "sha": "960c2c2bd0c8b2a96d91ba10b722083987d72512",
+   "refs": [
+    "refs/heads/cartridge/vps-hub-cartridge-v1"
+   ],
+   "ahead": 5,
+   "behind": 989,
+   "shortstat": "146 files changed, 18312 insertions(+), 2234 deletions(-)",
+   "file_count": 146,
+   "subsystems": [
+    "apps/other",
+    "crates",
+    "docs",
+    "other"
+   ],
+   "secret_flag": "CLEAN",
+   "merged_into_main": false
+  },
+  {
+   "sha": "aad7928d2f187e290654f1b131c932e0957bcbf1",
+   "refs": [
+    "refs/heads/feat/android-edge-supervisor"
+   ],
+   "ahead": 10,
+   "behind": 176,
+   "shortstat": "21 files changed, 1452 insertions(+), 22 deletions(-)",
+   "file_count": 21,
+   "subsystems": [
+    "03_VAULT",
+    "control_plane",
+    "docs",
+    "kinetic_edge",
+    "other",
+    "tests"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "1fa54bfe75e7d4862467a896ced20596ac2a7015",
+   "refs": [
+    "refs/heads/feat/unified-bootstrap-hud"
+   ],
+   "ahead": 2,
+   "behind": 242,
+   "shortstat": "4 files changed, 223 insertions(+), 18 deletions(-)",
+   "file_count": 4,
+   "subsystems": [
+    "control_plane",
+    "tests"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "7e09090b1a829c38f91fb395c4e5858390576e8d",
+   "refs": [
+    "refs/heads/feature/reya-fabric"
+   ],
+   "ahead": 4,
+   "behind": 142,
+   "shortstat": "132 files changed, 7212 insertions(+), 427 deletions(-)",
+   "file_count": 132,
+   "subsystems": [
+    "03_VAULT",
+    "control_plane",
+    "docs",
+    "other",
+    "scripts",
+    "tests"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "2ed2e010d9e7f0a8856a78cf35c7df3d89044667",
+   "refs": [
+    "refs/heads/perf/embedding-n-plus-1-optimization-15445770156298811611"
+   ],
+   "ahead": 1,
+   "behind": 142,
+   "shortstat": "1 file changed, 42 insertions(+), 4 deletions(-)",
+   "file_count": 1,
+   "subsystems": [
+    "01_KERNEL"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "dadcd5268ead466f1774b4d591eae9c99285d865",
+   "refs": [
+    "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+    "refs/remotes/origin/perf/optimize-get-all-data-9582424866941690986"
+   ],
+   "ahead": 15,
+   "behind": 141,
+   "shortstat": "279 files changed, 14166 insertions(+), 698 deletions(-)",
+   "file_count": 279,
+   "subsystems": [
+    "01_KERNEL",
+    "03_VAULT",
+    "04_KINETIC",
+    "apps/bifrost",
+    "apps/other",
+    "control_plane",
+    "docs",
+    "other",
+    "scripts",
+    "squires",
+    "tests",
+    "vfs"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "362414b5c0210bc5baa989e575b063bbac4675f8",
+   "refs": [
+    "refs/heads/perf/optimize-n-plus-1-queries-13777398068298918860"
+   ],
+   "ahead": 1,
+   "behind": 142,
+   "shortstat": "2 files changed, 47 insertions(+), 10 deletions(-)",
+   "file_count": 2,
+   "subsystems": [
+    "01_KERNEL"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "313472f66bad7ab7f63e676c95ed8b2b455b01d6",
+   "refs": [
+    "refs/remotes/camelot-os/cloudbrain-prod-hardening"
+   ],
+   "ahead": 41,
+   "behind": 991,
+   "shortstat": "",
+   "file_count": 0,
+   "subsystems": [],
+   "secret_flag": "CLEAN",
+   "merged_into_main": false
+  },
+  {
+   "sha": "931c56e1a4d468c95743476d38bc3b97718e28b3",
+   "refs": [
+    "refs/remotes/camelot-os/main"
+   ],
+   "ahead": 39,
+   "behind": 991,
+   "shortstat": "",
+   "file_count": 0,
+   "subsystems": [],
+   "secret_flag": "CLEAN",
+   "merged_into_main": false
+  },
+  {
+   "sha": "648e929db37719099a26cb4a1effceeb6d9e8072",
+   "refs": [
+    "refs/remotes/camelot-vps/cloudbrain-prod-hardening"
+   ],
+   "ahead": 306,
+   "behind": 989,
+   "shortstat": "308 files changed, 46905 insertions(+), 2246 deletions(-)",
+   "file_count": 308,
+   "subsystems": [
+    "apps/other",
+    "cartridges",
+    "crates",
+    "docs",
+    "other",
+    "scripts"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "643f8cdedd86df81bed2b154eaa3175ff0d32149",
+   "refs": [
+    "refs/remotes/camelot-vps/main"
+   ],
+   "ahead": 305,
+   "behind": 989,
+   "shortstat": "270 files changed, 38267 insertions(+), 2246 deletions(-)",
+   "file_count": 270,
+   "subsystems": [
+    "apps/other",
+    "cartridges",
+    "crates",
+    "docs",
+    "other",
+    "scripts"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "7871e24db25dd61870aace1f8bbafef63ff4c5dc",
+   "refs": [
+    "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock"
+   ],
+   "ahead": 361,
+   "behind": 989,
+   "shortstat": "293 files changed, 43045 insertions(+), 2246 deletions(-)",
+   "file_count": 293,
+   "subsystems": [
+    "apps/other",
+    "cartridges",
+    "crates",
+    "docs",
+    "other",
+    "scripts"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "191a6aae8c8129f79441dc14e106b8f1e6ac7a35",
+   "refs": [
+    "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+    "refs/remotes/camelot-vps/reforge/helios/vfs/canonical-promotion"
+   ],
+   "ahead": 357,
+   "behind": 989,
+   "shortstat": "289 files changed, 42771 insertions(+), 2246 deletions(-)",
+   "file_count": 289,
+   "subsystems": [
+    "apps/other",
+    "cartridges",
+    "crates",
+    "docs",
+    "other",
+    "scripts"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "b6b93f5f0e4ca646ef65c806b5ca7e8db72395d1",
+   "refs": [
+    "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser"
+   ],
+   "ahead": 359,
+   "behind": 989,
+   "shortstat": "296 files changed, 43486 insertions(+), 2246 deletions(-)",
+   "file_count": 296,
+   "subsystems": [
+    "apps/other",
+    "cartridges",
+    "crates",
+    "docs",
+    "other",
+    "scripts"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "2485d0c1eee06cf108fde0bd7acb70d9fe680437",
+   "refs": [
+    "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo"
+   ],
+   "ahead": 363,
+   "behind": 989,
+   "shortstat": "293 files changed, 43210 insertions(+), 2246 deletions(-)",
+   "file_count": 293,
+   "subsystems": [
+    "apps/other",
+    "cartridges",
+    "crates",
+    "docs",
+    "other",
+    "scripts"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "b24832ee999b079274bcdb106de731c4481e9cb4",
+   "refs": [
+    "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle"
+   ],
+   "ahead": 364,
+   "behind": 989,
+   "shortstat": "291 files changed, 43121 insertions(+), 2246 deletions(-)",
+   "file_count": 291,
+   "subsystems": [
+    "apps/other",
+    "cartridges",
+    "crates",
+    "docs",
+    "other",
+    "scripts"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "f83e4397bbb1142995004d2cc9b11b1e1e67d84f",
+   "refs": [
+    "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1"
+   ],
+   "ahead": 356,
+   "behind": 989,
+   "shortstat": "288 files changed, 42690 insertions(+), 2246 deletions(-)",
+   "file_count": 288,
+   "subsystems": [
+    "apps/other",
+    "cartridges",
+    "crates",
+    "docs",
+    "other",
+    "scripts"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "9333d26cfe76b6c3ebf3148a4f5764204321412d",
+   "refs": [
+    "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1"
+   ],
+   "ahead": 320,
+   "behind": 989,
+   "shortstat": "278 files changed, 40174 insertions(+), 2246 deletions(-)",
+   "file_count": 278,
+   "subsystems": [
+    "apps/other",
+    "cartridges",
+    "crates",
+    "docs",
+    "other",
+    "scripts"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "8be1c21115cb124c952fc3eb48e12205dce65b63",
+   "refs": [
+    "refs/remotes/excalibur-cmd-1/main"
+   ],
+   "ahead": 2,
+   "behind": 991,
+   "shortstat": "",
+   "file_count": 0,
+   "subsystems": [],
+   "secret_flag": "CLEAN",
+   "merged_into_main": false
+  },
+  {
+   "sha": "0ec2d85faced107e07a5d353f0916ddbf47203d1",
+   "refs": [
+    "refs/remotes/kba-services/main"
+   ],
+   "ahead": 5,
+   "behind": 991,
+   "shortstat": "",
+   "file_count": 0,
+   "subsystems": [],
+   "secret_flag": "CLEAN",
+   "merged_into_main": false
+  },
+  {
+   "sha": "3fd30ddeca79996ea3122eb73f1ff6e9f29e2538",
+   "refs": [
+    "refs/remotes/kba-v3/main"
+   ],
+   "ahead": 3,
+   "behind": 991,
+   "shortstat": "",
+   "file_count": 0,
+   "subsystems": [],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "6138cc4735bf4a60325f35848561de4b36d58f8f",
+   "refs": [
+    "refs/remotes/kickbox-audio/main"
+   ],
+   "ahead": 75,
+   "behind": 925,
+   "shortstat": "239 files changed, 48282 insertions(+), 990 deletions(-)",
+   "file_count": 239,
+   "subsystems": [
+    "apps/bifrost",
+    "apps/other",
+    "apps/pwa",
+    "docs",
+    "other",
+    "packages/db",
+    "scripts"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "27c830494018c20d7fd87da177f65f2a81554648",
+   "refs": [
+    "refs/remotes/multivoice-remote/claude/claude-md-docs-tw6ptq"
+   ],
+   "ahead": 140,
+   "behind": 991,
+   "shortstat": "",
+   "file_count": 0,
+   "subsystems": [],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "57c7c5030628b4630b1e5f0d4cc6ad3358eebe42",
+   "refs": [
+    "refs/remotes/multivoice-remote/feature/bifrost-bridge-implementation"
+   ],
+   "ahead": 137,
+   "behind": 991,
+   "shortstat": "",
+   "file_count": 0,
+   "subsystems": [],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "610e0bf85437aac487cc7d9f4d4235c30a4ae374",
+   "refs": [
+    "refs/remotes/multivoice-remote/main"
+   ],
+   "ahead": 147,
+   "behind": 991,
+   "shortstat": "",
+   "file_count": 0,
+   "subsystems": [],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "6553042ded6a69c69f8b402340473b274add4def",
+   "refs": [
+    "refs/remotes/origin/claude/agency-blueprint"
+   ],
+   "ahead": 27,
+   "behind": 649,
+   "shortstat": "118 files changed, 14554 insertions(+)",
+   "file_count": 118,
+   "subsystems": [
+    "docs",
+    "other"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "4a68aa0e6a3b6223eba6796a5f2a323d257153df",
+   "refs": [
+    "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi"
+   ],
+   "ahead": 21,
+   "behind": 649,
+   "shortstat": "107 files changed, 12142 insertions(+)",
+   "file_count": 107,
+   "subsystems": [
+    "docs",
+    "other"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "b2282757c9d4d3a09979fe38ba626929401b57e6",
+   "refs": [
+    "refs/remotes/origin/claude/camelot-mvp-velocity"
+   ],
+   "ahead": 28,
+   "behind": 649,
+   "shortstat": "120 files changed, 14818 insertions(+)",
+   "file_count": 120,
+   "subsystems": [
+    "docs",
+    "other"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "d7a34c7356c4314c04848d67f3f1abc42c82dda8",
+   "refs": [
+    "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg"
+   ],
+   "ahead": 7,
+   "behind": 535,
+   "shortstat": "226 files changed, 3345 insertions(+), 1399 deletions(-)",
+   "file_count": 226,
+   "subsystems": [
+    "01_KERNEL",
+    "02_FORGE",
+    "03_VAULT",
+    "control_plane",
+    "docs",
+    "other",
+    "scripts",
+    "tests"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "09ca4fe11154e31871cc23b39cd7012e4b5275d9",
+   "refs": [
+    "refs/remotes/origin/cloudbrain-prod-hardening"
+   ],
+   "ahead": 1,
+   "behind": 142,
+   "shortstat": "38 files changed, 8638 insertions(+)",
+   "file_count": 38,
+   "subsystems": [
+    "other"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "4ef9058dfc772bbd4f5dd38dad70c5a72e726102",
+   "refs": [
+    "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519"
+   ],
+   "ahead": 6,
+   "behind": 356,
+   "shortstat": "171 files changed, 1248 insertions(+), 1241 deletions(-)",
+   "file_count": 171,
+   "subsystems": [
+    "01_KERNEL",
+    "02_FORGE",
+    "03_VAULT",
+    "apps/bifrost",
+    "apps/pwa",
+    "blueprints",
+    "cartridges",
+    "other"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "0b77485cdc4158eddab25848a026bc6c6bfcab34",
+   "refs": [
+    "refs/remotes/origin/fix/lint-format-pass"
+   ],
+   "ahead": 2,
+   "behind": 360,
+   "shortstat": "886 files changed, 48947 insertions(+), 45987 deletions(-)",
+   "file_count": 886,
+   "subsystems": [
+    "01_KERNEL",
+    "02_FORGE",
+    "03_VAULT",
+    "apps/bifrost",
+    "apps/pwa",
+    "blueprints",
+    "cartridges",
+    "control_plane",
+    "docs",
+    "other",
+    "packages/db",
+    "packages/other",
+    "scripts",
+    "tests",
+    "vfs"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "9e07851144ebb2218aa85a9f52a38a7701180632",
+   "refs": [
+    "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598"
+   ],
+   "ahead": 2,
+   "behind": 650,
+   "shortstat": "83 files changed, 263 insertions(+), 78 deletions(-)",
+   "file_count": 83,
+   "subsystems": [
+    "01_KERNEL",
+    "02_FORGE",
+    "scripts",
+    "tests"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "b8c86c9ab6d199266b55229ae8bb39cdc0828868",
+   "refs": [
+    "refs/remotes/origin/fix/ruff-530-manual"
+   ],
+   "ahead": 3,
+   "behind": 358,
+   "shortstat": "148 files changed, 806 insertions(+), 740 deletions(-)",
+   "file_count": 148,
+   "subsystems": [
+    "01_KERNEL",
+    "other",
+    "scripts"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c",
+   "refs": [
+    "refs/remotes/origin/main"
+   ],
+   "ahead": 17,
+   "behind": 141,
+   "shortstat": "279 files changed, 14166 insertions(+), 698 deletions(-)",
+   "file_count": 279,
+   "subsystems": [
+    "01_KERNEL",
+    "03_VAULT",
+    "04_KINETIC",
+    "apps/bifrost",
+    "apps/other",
+    "control_plane",
+    "docs",
+    "other",
+    "scripts",
+    "squires",
+    "tests",
+    "vfs"
+   ],
+   "secret_flag": "RISK",
+   "merged_into_main": false
+  },
+  {
+   "sha": "cdf3b0e41ca8218ba2b0131574dffb60116ff139",
+   "refs": [
+    "refs/remotes/vuejs-pwa/development"
+   ],
+   "ahead": 77,
+   "behind": 991,
+   "shortstat": "",
+   "file_count": 0,
+   "subsystems": [],
+   "secret_flag": "CLEAN",
+   "merged_into_main": false
+  },
+  {
+   "sha": "d8641bbf2a126e3da66970a9f17806f0ac60c0ef",
+   "refs": [
+    "refs/remotes/vuejs-pwa/master"
+   ],
+   "ahead": 66,
+   "behind": 991,
+   "shortstat": "",
+   "file_count": 0,
+   "subsystems": [],
+   "secret_flag": "CLEAN",
+   "merged_into_main": false
+  },
+  {
+   "sha": "4e7fe334452f4c12b8c4c983697a53501101b83b",
+   "refs": [
+    "refs/remotes/vuejs-pwa/prototype"
+   ],
+   "ahead": 16,
+   "behind": 991,
+   "shortstat": "",
+   "file_count": 0,
+   "subsystems": [],
+   "secret_flag": "CLEAN",
+   "merged_into_main": false
+  },
+  {
+   "sha": "7a718ec091adc6bf64fdd0812167b99433ccf184",
+   "refs": [
+    "refs/remotes/vuejs-pwa/styles"
+   ],
+   "ahead": 14,
+   "behind": 991,
+   "shortstat": "",
+   "file_count": 0,
+   "subsystems": [],
+   "secret_flag": "CLEAN",
+   "merged_into_main": false
+  }
+ ],
+ "secret_risk_branches": [
+  "refs/heads/feat/android-edge-supervisor",
+  "refs/heads/feat/unified-bootstrap-hud",
+  "refs/heads/feature/reya-fabric",
+  "refs/heads/perf/embedding-n-plus-1-optimization-15445770156298811611",
+  "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+  "refs/heads/perf/optimize-n-plus-1-queries-13777398068298918860",
+  "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+  "refs/remotes/camelot-vps/main",
+  "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+  "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+  "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+  "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo",
+  "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle",
+  "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1",
+  "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1",
+  "refs/remotes/kba-v3/main",
+  "refs/remotes/kickbox-audio/main",
+  "refs/remotes/multivoice-remote/claude/claude-md-docs-tw6ptq",
+  "refs/remotes/multivoice-remote/feature/bifrost-bridge-implementation",
+  "refs/remotes/multivoice-remote/main",
+  "refs/remotes/origin/claude/agency-blueprint",
+  "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+  "refs/remotes/origin/claude/camelot-mvp-velocity",
+  "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "refs/remotes/origin/cloudbrain-prod-hardening",
+  "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+  "refs/remotes/origin/fix/lint-format-pass",
+  "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "refs/remotes/origin/fix/ruff-530-manual",
+  "refs/remotes/origin/main"
+ ],
+ "secret_findings": [
+  {
+   "ref": "refs/heads/feat/android-edge-supervisor",
+   "sha": "aad7928d2f187e290654f1b131c932e0957bcbf1",
+   "hits": [
+    "aad7928d2f187e290654f1b131c932e0957bcbf1:01_KERNEL/EXCALIBUR/config/saltare.toml:26:api_key = \"${MEILI_MASTER_KEY}\"",
+    "aad7928d2f187e290654f1b131c932e0957bcbf1:01_KERNEL/EXCALIBUR/config/saltare.toml:30:auth_token = \"${SALTARE_AUTH_TOKEN}\"",
+    "aad7928d2f187e290654f1b131c932e0957bcbf1:02_FORGE/cartridge/bifrost_bridge.py:168:    secret = \"bridge-demo-webhook\"",
+    "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/README.md:389:          \"private_key\": \"-----BEGIN PRIVATE KEY-----\\n...\\n-----END PRIVATE KEY-----\\n\"",
+    "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/config.example.json:27:          \"private_key\": \"-----BEGIN PRIVATE KEY-----\\\\nYOUR_PRIVATE_KEY\\\\n-----END PRIVATE KEY-----\\\\n\"",
+    "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/docs/en/security.md:189:| Format detectors | `-----BEGIN PRIVATE KEY-----` PEM blocks; credentials embedded in URLs (`scheme://user:pass@host/...`) |",
+    "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/docs/zh/security.md:115:| \u683c\u5f0f\u68c0\u6d4b\u5668 | `-----BEGIN PRIVATE KEY-----` PEM \u5757\uff1bURL \u4e2d\u5d4c\u5165\u7684\u51ed\u636e\uff08`scheme://user:pass@host/...`\uff09 |",
+    "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/audit/envelope.zig:544:    try std.testing.expectEqual(Charset.alnum, Charset.classify(\"AKIAIOSFODNN7EXAMPLE\"));",
+    "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/audit/envelope.zig:576:    try std.testing.expectEqual(TokenTypeFingerprint.aws_access_key_id, TokenTypeFingerprint.detect(\"AKIAIOSFODNN7EXAMPLE\"));",
+    "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/audit/envelope.zig:584:    try std.testing.expectEqual(TokenTypeFingerprint.pem_private_key, TokenTypeFingerprint.detect(\"-----BEGIN PRIVATE KEY-----\"));",
+    "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/audit/envelope.zig:679:    const secret = \"ghp_aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789\";",
+    "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/channel_manager.zig:769:        .{ .account_id = \"main\", .bot_token = \"tg-main-token\" },",
+    "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/channel_manager.zig:770:        .{ .account_id = \"backup\", .bot_token = \"tg-backup-token\" },",
+    "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/channel_manager.zig:780:        .{ .account_id = \"dc-main\", .token = \"discord-token\" },",
+    "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/channel_manager.zig:829:            .bot_token = \"max-token-poll\",",
+    "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/channel_manager.zig:834:            .bot_token = \"max-token-hook\",",
+    "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/channel_manager.zig:1253:            .auth_token = \"relay-token-0123456789\",",
+    "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/channels/dingtalk.zig:2199:        .client_secret = \"test-client-secret\",",
+    "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/channels/discord.zig:2146:        .token = \"test-bot-token\",",
+    "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/channels/lark.zig:3488:        .app_secret = \"test-app-secret\","
+   ]
+  },
+  {
+   "ref": "refs/heads/feat/unified-bootstrap-hud",
+   "sha": "1fa54bfe75e7d4862467a896ced20596ac2a7015",
+   "hits": [
+    "1fa54bfe75e7d4862467a896ced20596ac2a7015:01_KERNEL/EXCALIBUR/config/saltare.toml:26:api_key = \"${MEILI_MASTER_KEY}\"",
+    "1fa54bfe75e7d4862467a896ced20596ac2a7015:01_KERNEL/EXCALIBUR/config/saltare.toml:30:auth_token = \"${SALTARE_AUTH_TOKEN}\"",
+    "1fa54bfe75e7d4862467a896ced20596ac2a7015:02_FORGE/cartridge/bifrost_bridge.py:168:    secret = \"bridge-demo-webhook\"",
+    "1fa54bfe75e7d4862467a896ced20596ac2a7015:Nano-Knights/ASSIMILATIONREPORT_NeuralCompanion.md:15:  `addons/spotify_sense/smoke_spotify_sense.py` (`access_token=\"secret-access-token\"`,",
+    "1fa54bfe75e7d4862467a896ced20596ac2a7015:Nano-Knights/ASSIMILATIONREPORT_NeuralCompanion.md:16:  `refresh_token=\"secret-refresh-token\"`, `client_id=\"secret-client-id\"`) \u2014",
+    "1fa54bfe75e7d4862467a896ced20596ac2a7015:ansible/deploy_redis_sentinel.yml:6:    redis_password: \"MERLIN_SUPER_SECRET_REDIS_AUTH_9981\"",
+    "1fa54bfe75e7d4862467a896ced20596ac2a7015:bifrost-control-plane.patch:860:+  const bsecret = 'bifrost-mesh-secret';",
+    "1fa54bfe75e7d4862467a896ced20596ac2a7015:bifrost-upgrade.patch:404:+  const bsecret = 'bifrost-mesh-secret';",
+    "1fa54bfe75e7d4862467a896ced20596ac2a7015:camelot-omega-bifrost.patch:971:+  const bsecret = 'bifrost-mesh-secret';",
+    "1fa54bfe75e7d4862467a896ced20596ac2a7015:control_plane/test_drone_node.py:69:        r3 = dispatch_to_drone(url, KBA_CARTRIDGE_ID, \"kba.status\", {}, secret=\"wrong-secret\")",
+    "1fa54bfe75e7d4862467a896ced20596ac2a7015:docs/integration/adr-0002-opencodex-assimilation.md:227:api_key = \"proxy-admin-key\"  # local, no real key needed",
+    "1fa54bfe75e7d4862467a896ced20596ac2a7015:handover/payload/bifrost-smoke.test.ts:7:const secret = 'test-secret-that-is-long-enough';",
+    "1fa54bfe75e7d4862467a896ced20596ac2a7015:handover/payload/bifrost-smoke.test.ts:43:  const bsecret = 'bifrost-mesh-secret';",
+    "1fa54bfe75e7d4862467a896ced20596ac2a7015:handover/payload/multivoice-router.patch:971:+  const bsecret = 'bifrost-mesh-secret';",
+    "1fa54bfe75e7d4862467a896ced20596ac2a7015:integration/contracts/tests/barge-in.test.ts:20:  token: 'signed-opaque-token',",
+    "1fa54bfe75e7d4862467a896ced20596ac2a7015:packages/multivoice-router/firebase-applet-config.json:4:  \"apiKey\": \"AIzaSy_FIREBASE_API_KEY_PLACEHOLDER\",",
+    "1fa54bfe75e7d4862467a896ced20596ac2a7015:packages/policy-engine/schemas/approval-states.yaml:84:    requires_override_token: \"CAMELOT_DASHBOARD_OPERATOR_TOKEN\"",
+    "1fa54bfe75e7d4862467a896ced20596ac2a7015:tests/control_plane/test_viking_block_protocol.py:41:    return sign_block(block, secret=\"test-secret-32bytes-padding-12345\")",
+    "1fa54bfe75e7d4862467a896ced20596ac2a7015:tests/control_plane/test_viking_block_protocol.py:105:    assert verify_block(signed_block, secret=\"test-secret-32bytes-padding-12345\") is True",
+    "1fa54bfe75e7d4862467a896ced20596ac2a7015:tests/control_plane/test_viking_block_protocol.py:119:    secret = \"test-secret-32bytes-padding-12345\""
+   ]
+  },
+  {
+   "ref": "refs/heads/feature/reya-fabric",
+   "sha": "7e09090b1a829c38f91fb395c4e5858390576e8d",
+   "hits": [
+    "7e09090b1a829c38f91fb395c4e5858390576e8d:01_KERNEL/EXCALIBUR/config/saltare.toml:26:api_key = \"${MEILI_MASTER_KEY}\"",
+    "7e09090b1a829c38f91fb395c4e5858390576e8d:01_KERNEL/EXCALIBUR/config/saltare.toml:30:auth_token = \"${SALTARE_AUTH_TOKEN}\"",
+    "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/README.md:389:          \"private_key\": \"-----BEGIN PRIVATE KEY-----\\n...\\n-----END PRIVATE KEY-----\\n\"",
+    "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/config.example.json:27:          \"private_key\": \"-----BEGIN PRIVATE KEY-----\\\\nYOUR_PRIVATE_KEY\\\\n-----END PRIVATE KEY-----\\\\n\"",
+    "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/docs/en/security.md:189:| Format detectors | `-----BEGIN PRIVATE KEY-----` PEM blocks; credentials embedded in URLs (`scheme://user:pass@host/...`) |",
+    "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/docs/zh/security.md:115:| \u683c\u5f0f\u68c0\u6d4b\u5668 | `-----BEGIN PRIVATE KEY-----` PEM \u5757\uff1bURL \u4e2d\u5d4c\u5165\u7684\u51ed\u636e\uff08`scheme://user:pass@host/...`\uff09 |",
+    "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/audit/envelope.zig:544:    try std.testing.expectEqual(Charset.alnum, Charset.classify(\"AKIAIOSFODNN7EXAMPLE\"));",
+    "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/audit/envelope.zig:576:    try std.testing.expectEqual(TokenTypeFingerprint.aws_access_key_id, TokenTypeFingerprint.detect(\"AKIAIOSFODNN7EXAMPLE\"));",
+    "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/audit/envelope.zig:584:    try std.testing.expectEqual(TokenTypeFingerprint.pem_private_key, TokenTypeFingerprint.detect(\"-----BEGIN PRIVATE KEY-----\"));",
+    "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/audit/envelope.zig:679:    const secret = \"ghp_aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789\";",
+    "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/channel_manager.zig:769:        .{ .account_id = \"main\", .bot_token = \"tg-main-token\" },",
+    "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/channel_manager.zig:770:        .{ .account_id = \"backup\", .bot_token = \"tg-backup-token\" },",
+    "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/channel_manager.zig:780:        .{ .account_id = \"dc-main\", .token = \"discord-token\" },",
+    "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/channel_manager.zig:829:            .bot_token = \"max-token-poll\",",
+    "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/channel_manager.zig:834:            .bot_token = \"max-token-hook\",",
+    "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/channel_manager.zig:1253:            .auth_token = \"relay-token-0123456789\",",
+    "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/channels/dingtalk.zig:2199:        .client_secret = \"test-client-secret\",",
+    "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/channels/discord.zig:2146:        .token = \"test-bot-token\",",
+    "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/channels/lark.zig:3488:        .app_secret = \"test-app-secret\",",
+    "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/channels/lark.zig:3503:        .app_secret = \"test-app-secret\","
+   ]
+  },
+  {
+   "ref": "refs/heads/perf/embedding-n-plus-1-optimization-15445770156298811611",
+   "sha": "2ed2e010d9e7f0a8856a78cf35c7df3d89044667",
+   "hits": [
+    "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:01_KERNEL/EXCALIBUR/config/saltare.toml:26:api_key = \"${MEILI_MASTER_KEY}\"",
+    "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:01_KERNEL/EXCALIBUR/config/saltare.toml:30:auth_token = \"${SALTARE_AUTH_TOKEN}\"",
+    "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/README.md:389:          \"private_key\": \"-----BEGIN PRIVATE KEY-----\\n...\\n-----END PRIVATE KEY-----\\n\"",
+    "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/config.example.json:27:          \"private_key\": \"-----BEGIN PRIVATE KEY-----\\\\nYOUR_PRIVATE_KEY\\\\n-----END PRIVATE KEY-----\\\\n\"",
+    "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/docs/en/security.md:189:| Format detectors | `-----BEGIN PRIVATE KEY-----` PEM blocks; credentials embedded in URLs (`scheme://user:pass@host/...`) |",
+    "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/docs/zh/security.md:115:| \u683c\u5f0f\u68c0\u6d4b\u5668 | `-----BEGIN PRIVATE KEY-----` PEM \u5757\uff1bURL \u4e2d\u5d4c\u5165\u7684\u51ed\u636e\uff08`scheme://user:pass@host/...`\uff09 |",
+    "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/audit/envelope.zig:544:    try std.testing.expectEqual(Charset.alnum, Charset.classify(\"AKIAIOSFODNN7EXAMPLE\"));",
+    "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/audit/envelope.zig:576:    try std.testing.expectEqual(TokenTypeFingerprint.aws_access_key_id, TokenTypeFingerprint.detect(\"AKIAIOSFODNN7EXAMPLE\"));",
+    "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/audit/envelope.zig:584:    try std.testing.expectEqual(TokenTypeFingerprint.pem_private_key, TokenTypeFingerprint.detect(\"-----BEGIN PRIVATE KEY-----\"));",
+    "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/audit/envelope.zig:679:    const secret = \"ghp_aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789\";",
+    "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/channel_manager.zig:769:        .{ .account_id = \"main\", .bot_token = \"tg-main-token\" },",
+    "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/channel_manager.zig:770:        .{ .account_id = \"backup\", .bot_token = \"tg-backup-token\" },",
+    "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/channel_manager.zig:780:        .{ .account_id = \"dc-main\", .token = \"discord-token\" },",
+    "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/channel_manager.zig:829:            .bot_token = \"max-token-poll\",",
+    "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/channel_manager.zig:834:            .bot_token = \"max-token-hook\",",
+    "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/channel_manager.zig:1253:            .auth_token = \"relay-token-0123456789\",",
+    "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/channels/dingtalk.zig:2199:        .client_secret = \"test-client-secret\",",
+    "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/channels/discord.zig:2146:        .token = \"test-bot-token\",",
+    "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/channels/lark.zig:3488:        .app_secret = \"test-app-secret\",",
+    "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/channels/lark.zig:3503:        .app_secret = \"test-app-secret\","
+   ]
+  },
+  {
+   "ref": "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "sha": "dadcd5268ead466f1774b4d591eae9c99285d865",
+   "hits": [
+    "dadcd5268ead466f1774b4d591eae9c99285d865:01_KERNEL/EXCALIBUR/config/saltare.toml:26:api_key = \"${MEILI_MASTER_KEY}\"",
+    "dadcd5268ead466f1774b4d591eae9c99285d865:01_KERNEL/EXCALIBUR/config/saltare.toml:30:auth_token = \"${SALTARE_AUTH_TOKEN}\"",
+    "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/README.md:389:          \"private_key\": \"-----BEGIN PRIVATE KEY-----\\n...\\n-----END PRIVATE KEY-----\\n\"",
+    "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/config.example.json:27:          \"private_key\": \"-----BEGIN PRIVATE KEY-----\\\\nYOUR_PRIVATE_KEY\\\\n-----END PRIVATE KEY-----\\\\n\"",
+    "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/docs/en/security.md:189:| Format detectors | `-----BEGIN PRIVATE KEY-----` PEM blocks; credentials embedded in URLs (`scheme://user:pass@host/...`) |",
+    "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/docs/zh/security.md:115:| \u683c\u5f0f\u68c0\u6d4b\u5668 | `-----BEGIN PRIVATE KEY-----` PEM \u5757\uff1bURL \u4e2d\u5d4c\u5165\u7684\u51ed\u636e\uff08`scheme://user:pass@host/...`\uff09 |",
+    "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/audit/envelope.zig:544:    try std.testing.expectEqual(Charset.alnum, Charset.classify(\"AKIAIOSFODNN7EXAMPLE\"));",
+    "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/audit/envelope.zig:576:    try std.testing.expectEqual(TokenTypeFingerprint.aws_access_key_id, TokenTypeFingerprint.detect(\"AKIAIOSFODNN7EXAMPLE\"));",
+    "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/audit/envelope.zig:584:    try std.testing.expectEqual(TokenTypeFingerprint.pem_private_key, TokenTypeFingerprint.detect(\"-----BEGIN PRIVATE KEY-----\"));",
+    "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/audit/envelope.zig:679:    const secret = \"ghp_aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789\";",
+    "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/channel_manager.zig:769:        .{ .account_id = \"main\", .bot_token = \"tg-main-token\" },",
+    "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/channel_manager.zig:770:        .{ .account_id = \"backup\", .bot_token = \"tg-backup-token\" },",
+    "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/channel_manager.zig:780:        .{ .account_id = \"dc-main\", .token = \"discord-token\" },",
+    "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/channel_manager.zig:829:            .bot_token = \"max-token-poll\",",
+    "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/channel_manager.zig:834:            .bot_token = \"max-token-hook\",",
+    "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/channel_manager.zig:1253:            .auth_token = \"relay-token-0123456789\",",
+    "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/channels/dingtalk.zig:2199:        .client_secret = \"test-client-secret\",",
+    "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/channels/discord.zig:2146:        .token = \"test-bot-token\",",
+    "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/channels/lark.zig:3488:        .app_secret = \"test-app-secret\",",
+    "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/channels/lark.zig:3503:        .app_secret = \"test-app-secret\","
+   ]
+  },
+  {
+   "ref": "refs/heads/perf/optimize-n-plus-1-queries-13777398068298918860",
+   "sha": "362414b5c0210bc5baa989e575b063bbac4675f8",
+   "hits": [
+    "362414b5c0210bc5baa989e575b063bbac4675f8:01_KERNEL/EXCALIBUR/config/saltare.toml:26:api_key = \"${MEILI_MASTER_KEY}\"",
+    "362414b5c0210bc5baa989e575b063bbac4675f8:01_KERNEL/EXCALIBUR/config/saltare.toml:30:auth_token = \"${SALTARE_AUTH_TOKEN}\"",
+    "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/README.md:389:          \"private_key\": \"-----BEGIN PRIVATE KEY-----\\n...\\n-----END PRIVATE KEY-----\\n\"",
+    "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/config.example.json:27:          \"private_key\": \"-----BEGIN PRIVATE KEY-----\\\\nYOUR_PRIVATE_KEY\\\\n-----END PRIVATE KEY-----\\\\n\"",
+    "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/docs/en/security.md:189:| Format detectors | `-----BEGIN PRIVATE KEY-----` PEM blocks; credentials embedded in URLs (`scheme://user:pass@host/...`) |",
+    "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/docs/zh/security.md:115:| \u683c\u5f0f\u68c0\u6d4b\u5668 | `-----BEGIN PRIVATE KEY-----` PEM \u5757\uff1bURL \u4e2d\u5d4c\u5165\u7684\u51ed\u636e\uff08`scheme://user:pass@host/...`\uff09 |",
+    "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/audit/envelope.zig:544:    try std.testing.expectEqual(Charset.alnum, Charset.classify(\"AKIAIOSFODNN7EXAMPLE\"));",
+    "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/audit/envelope.zig:576:    try std.testing.expectEqual(TokenTypeFingerprint.aws_access_key_id, TokenTypeFingerprint.detect(\"AKIAIOSFODNN7EXAMPLE\"));",
+    "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/audit/envelope.zig:584:    try std.testing.expectEqual(TokenTypeFingerprint.pem_private_key, TokenTypeFingerprint.detect(\"-----BEGIN PRIVATE KEY-----\"));",
+    "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/audit/envelope.zig:679:    const secret = \"ghp_aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789\";",
+    "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/channel_manager.zig:769:        .{ .account_id = \"main\", .bot_token = \"tg-main-token\" },",
+    "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/channel_manager.zig:770:        .{ .account_id = \"backup\", .bot_token = \"tg-backup-token\" },",
+    "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/channel_manager.zig:780:        .{ .account_id = \"dc-main\", .token = \"discord-token\" },",
+    "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/channel_manager.zig:829:            .bot_token = \"max-token-poll\",",
+    "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/channel_manager.zig:834:            .bot_token = \"max-token-hook\",",
+    "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/channel_manager.zig:1253:            .auth_token = \"relay-token-0123456789\",",
+    "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/channels/dingtalk.zig:2199:        .client_secret = \"test-client-secret\",",
+    "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/channels/discord.zig:2146:        .token = \"test-bot-token\",",
+    "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/channels/lark.zig:3488:        .app_secret = \"test-app-secret\",",
+    "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/channels/lark.zig:3503:        .app_secret = \"test-app-secret\","
+   ]
+  },
+  {
+   "ref": "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "sha": "648e929db37719099a26cb4a1effceeb6d9e8072",
+   "hits": [
+    "648e929db37719099a26cb4a1effceeb6d9e8072:src/components/HermesDashboard.tsx:407:    api_key=\"your-hermes-bearer-token\"",
+    "648e929db37719099a26cb4a1effceeb6d9e8072:src/components/HermesDashboard.tsx:425:    api_key=\"your-hermes-bearer-token\""
+   ]
+  },
+  {
+   "ref": "refs/remotes/camelot-vps/main",
+   "sha": "643f8cdedd86df81bed2b154eaa3175ff0d32149",
+   "hits": [
+    "643f8cdedd86df81bed2b154eaa3175ff0d32149:src/components/HermesDashboard.tsx:407:    api_key=\"your-hermes-bearer-token\"",
+    "643f8cdedd86df81bed2b154eaa3175ff0d32149:src/components/HermesDashboard.tsx:425:    api_key=\"your-hermes-bearer-token\""
+   ]
+  },
+  {
+   "ref": "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+   "sha": "7871e24db25dd61870aace1f8bbafef63ff4c5dc",
+   "hits": [
+    "7871e24db25dd61870aace1f8bbafef63ff4c5dc:src/components/HermesDashboard.tsx:407:    api_key=\"your-hermes-bearer-token\"",
+    "7871e24db25dd61870aace1f8bbafef63ff4c5dc:src/components/HermesDashboard.tsx:425:    api_key=\"your-hermes-bearer-token\""
+   ]
+  },
+  {
+   "ref": "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+   "sha": "191a6aae8c8129f79441dc14e106b8f1e6ac7a35",
+   "hits": [
+    "191a6aae8c8129f79441dc14e106b8f1e6ac7a35:src/components/HermesDashboard.tsx:407:    api_key=\"your-hermes-bearer-token\"",
+    "191a6aae8c8129f79441dc14e106b8f1e6ac7a35:src/components/HermesDashboard.tsx:425:    api_key=\"your-hermes-bearer-token\""
+   ]
+  },
+  {
+   "ref": "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "sha": "b6b93f5f0e4ca646ef65c806b5ca7e8db72395d1",
+   "hits": [
+    "b6b93f5f0e4ca646ef65c806b5ca7e8db72395d1:src/components/HermesDashboard.tsx:407:    api_key=\"your-hermes-bearer-token\"",
+    "b6b93f5f0e4ca646ef65c806b5ca7e8db72395d1:src/components/HermesDashboard.tsx:425:    api_key=\"your-hermes-bearer-token\""
+   ]
+  },
+  {
+   "ref": "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo",
+   "sha": "2485d0c1eee06cf108fde0bd7acb70d9fe680437",
+   "hits": [
+    "2485d0c1eee06cf108fde0bd7acb70d9fe680437:src/components/HermesDashboard.tsx:407:    api_key=\"your-hermes-bearer-token\"",
+    "2485d0c1eee06cf108fde0bd7acb70d9fe680437:src/components/HermesDashboard.tsx:425:    api_key=\"your-hermes-bearer-token\""
+   ]
+  },
+  {
+   "ref": "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle",
+   "sha": "b24832ee999b079274bcdb106de731c4481e9cb4",
+   "hits": [
+    "b24832ee999b079274bcdb106de731c4481e9cb4:src/components/HermesDashboard.tsx:407:    api_key=\"your-hermes-bearer-token\"",
+    "b24832ee999b079274bcdb106de731c4481e9cb4:src/components/HermesDashboard.tsx:425:    api_key=\"your-hermes-bearer-token\""
+   ]
+  },
+  {
+   "ref": "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1",
+   "sha": "f83e4397bbb1142995004d2cc9b11b1e1e67d84f",
+   "hits": [
+    "f83e4397bbb1142995004d2cc9b11b1e1e67d84f:src/components/HermesDashboard.tsx:407:    api_key=\"your-hermes-bearer-token\"",
+    "f83e4397bbb1142995004d2cc9b11b1e1e67d84f:src/components/HermesDashboard.tsx:425:    api_key=\"your-hermes-bearer-token\""
+   ]
+  },
+  {
+   "ref": "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1",
+   "sha": "9333d26cfe76b6c3ebf3148a4f5764204321412d",
+   "hits": [
+    "9333d26cfe76b6c3ebf3148a4f5764204321412d:src/components/HermesDashboard.tsx:407:    api_key=\"your-hermes-bearer-token\"",
+    "9333d26cfe76b6c3ebf3148a4f5764204321412d:src/components/HermesDashboard.tsx:425:    api_key=\"your-hermes-bearer-token\""
+   ]
+  },
+  {
+   "ref": "refs/remotes/kba-v3/main",
+   "sha": "3fd30ddeca79996ea3122eb73f1ff6e9f29e2538",
+   "hits": [
+    "3fd30ddeca79996ea3122eb73f1ff6e9f29e2538:firebase-applet-config.json:4:  \"apiKey\": \"AIza...NM1g\","
+   ]
+  },
+  {
+   "ref": "refs/remotes/kickbox-audio/main",
+   "sha": "6138cc4735bf4a60325f35848561de4b36d58f8f",
+   "hits": [
+    "6138cc4735bf4a60325f35848561de4b36d58f8f:firebase-applet-config.json:4:  \"apiKey\": \"AIza...NM1g\","
+   ]
+  },
+  {
+   "ref": "refs/remotes/multivoice-remote/claude/claude-md-docs-tw6ptq",
+   "sha": "27c830494018c20d7fd87da177f65f2a81554648",
+   "hits": [
+    "27c830494018c20d7fd87da177f65f2a81554648:firebase-applet-config.json:4:  \"apiKey\": \"AIza...Zw4M\",",
+    "27c830494018c20d7fd87da177f65f2a81554648:src/tests/smoke.test.ts:7:const secret = 'test-secret-that-is-long-enough';"
+   ]
+  },
+  {
+   "ref": "refs/remotes/multivoice-remote/feature/bifrost-bridge-implementation",
+   "sha": "57c7c5030628b4630b1e5f0d4cc6ad3358eebe42",
+   "hits": [
+    "57c7c5030628b4630b1e5f0d4cc6ad3358eebe42:firebase-applet-config.json:4:  \"apiKey\": \"AIza...Zw4M\",",
+    "57c7c5030628b4630b1e5f0d4cc6ad3358eebe42:src/tests/smoke.test.ts:7:const secret = 'test-secret-that-is-long-enough';"
+   ]
+  },
+  {
+   "ref": "refs/remotes/multivoice-remote/main",
+   "sha": "610e0bf85437aac487cc7d9f4d4235c30a4ae374",
+   "hits": [
+    "610e0bf85437aac487cc7d9f4d4235c30a4ae374:firebase-applet-config.json:4:  \"apiKey\": \"AIza...Zw4M\","
+   ]
+  },
+  {
+   "ref": "refs/remotes/origin/claude/agency-blueprint",
+   "sha": "6553042ded6a69c69f8b402340473b274add4def",
+   "hits": [
+    "6553042ded6a69c69f8b402340473b274add4def:01_KERNEL/EXCALIBUR/config/saltare.toml:26:api_key = \"${MEILI_MASTER_KEY}\"",
+    "6553042ded6a69c69f8b402340473b274add4def:01_KERNEL/EXCALIBUR/config/saltare.toml:30:auth_token = \"${SALTARE_AUTH_TOKEN}\"",
+    "6553042ded6a69c69f8b402340473b274add4def:02_FORGE/cartridge/bifrost_bridge.py:168:    secret = \"bridge-demo-webhook\"",
+    "6553042ded6a69c69f8b402340473b274add4def:bifrost-control-plane.patch:860:+  const bsecret = 'bifrost-mesh-secret';",
+    "6553042ded6a69c69f8b402340473b274add4def:bifrost-upgrade.patch:404:+  const bsecret = 'bifrost-mesh-secret';",
+    "6553042ded6a69c69f8b402340473b274add4def:camelot-omega-bifrost.patch:971:+  const bsecret = 'bifrost-mesh-secret';",
+    "6553042ded6a69c69f8b402340473b274add4def:control_plane/test_drone_node.py:69:        r3 = dispatch_to_drone(url, KBA_CARTRIDGE_ID, \"kba.status\", {}, secret=\"wrong-secret\")",
+    "6553042ded6a69c69f8b402340473b274add4def:handover/payload/bifrost-smoke.test.ts:7:const secret = 'test-secret-that-is-long-enough';",
+    "6553042ded6a69c69f8b402340473b274add4def:handover/payload/bifrost-smoke.test.ts:43:  const bsecret = 'bifrost-mesh-secret';",
+    "6553042ded6a69c69f8b402340473b274add4def:handover/payload/multivoice-router.patch:971:+  const bsecret = 'bifrost-mesh-secret';",
+    "6553042ded6a69c69f8b402340473b274add4def:integration/contracts/tests/barge-in.test.ts:20:  token: 'signed-opaque-token',",
+    "6553042ded6a69c69f8b402340473b274add4def:integration/scripts/tests/lifecycle.test.ts:87:    const token = 'camelot-test-alive';",
+    "6553042ded6a69c69f8b402340473b274add4def:integration/scripts/tests/lifecycle.test.ts:141:    const token = 'camelot-test-teardown';",
+    "6553042ded6a69c69f8b402340473b274add4def:tests/control_plane/test_viking_block_protocol.py:40:    return sign_block(block, secret=\"test-secret-32bytes-padding-12345\")",
+    "6553042ded6a69c69f8b402340473b274add4def:tests/control_plane/test_viking_block_protocol.py:104:    assert verify_block(signed_block, secret=\"test-secret-32bytes-padding-12345\") is True",
+    "6553042ded6a69c69f8b402340473b274add4def:tests/control_plane/test_viking_block_protocol.py:118:    secret = \"test-secret-32bytes-padding-12345\"",
+    "6553042ded6a69c69f8b402340473b274add4def:tests/control_plane/test_viking_block_protocol.py:222:    assert verify_block(signed, secret=\"env-secret-12345\") is True",
+    "6553042ded6a69c69f8b402340473b274add4def:tests/control_plane/test_viking_block_protocol.py:223:    assert verify_block(signed, secret=\"wrong-secret\") is False",
+    "6553042ded6a69c69f8b402340473b274add4def:tests/test_excalibur_controller.py:35:    token = \"test-token-do-not-use-in-prod-deadbeef\"",
+    "6553042ded6a69c69f8b402340473b274add4def:tests/test_photo_viewer_api.py:267:    password = \"my-secret-password\""
+   ]
+  },
+  {
+   "ref": "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "sha": "4a68aa0e6a3b6223eba6796a5f2a323d257153df",
+   "hits": [
+    "4a68aa0e6a3b6223eba6796a5f2a323d257153df:01_KERNEL/EXCALIBUR/config/saltare.toml:26:api_key = \"${MEILI_MASTER_KEY}\"",
+    "4a68aa0e6a3b6223eba6796a5f2a323d257153df:01_KERNEL/EXCALIBUR/config/saltare.toml:30:auth_token = \"${SALTARE_AUTH_TOKEN}\"",
+    "4a68aa0e6a3b6223eba6796a5f2a323d257153df:02_FORGE/cartridge/bifrost_bridge.py:168:    secret = \"bridge-demo-webhook\"",
+    "4a68aa0e6a3b6223eba6796a5f2a323d257153df:bifrost-control-plane.patch:860:+  const bsecret = 'bifrost-mesh-secret';",
+    "4a68aa0e6a3b6223eba6796a5f2a323d257153df:bifrost-upgrade.patch:404:+  const bsecret = 'bifrost-mesh-secret';",
+    "4a68aa0e6a3b6223eba6796a5f2a323d257153df:camelot-omega-bifrost.patch:971:+  const bsecret = 'bifrost-mesh-secret';",
+    "4a68aa0e6a3b6223eba6796a5f2a323d257153df:control_plane/test_drone_node.py:69:        r3 = dispatch_to_drone(url, KBA_CARTRIDGE_ID, \"kba.status\", {}, secret=\"wrong-secret\")",
+    "4a68aa0e6a3b6223eba6796a5f2a323d257153df:handover/payload/bifrost-smoke.test.ts:7:const secret = 'test-secret-that-is-long-enough';",
+    "4a68aa0e6a3b6223eba6796a5f2a323d257153df:handover/payload/bifrost-smoke.test.ts:43:  const bsecret = 'bifrost-mesh-secret';",
+    "4a68aa0e6a3b6223eba6796a5f2a323d257153df:handover/payload/multivoice-router.patch:971:+  const bsecret = 'bifrost-mesh-secret';",
+    "4a68aa0e6a3b6223eba6796a5f2a323d257153df:integration/contracts/tests/barge-in.test.ts:20:  token: 'signed-opaque-token',",
+    "4a68aa0e6a3b6223eba6796a5f2a323d257153df:tests/control_plane/test_viking_block_protocol.py:40:    return sign_block(block, secret=\"test-secret-32bytes-padding-12345\")",
+    "4a68aa0e6a3b6223eba6796a5f2a323d257153df:tests/control_plane/test_viking_block_protocol.py:104:    assert verify_block(signed_block, secret=\"test-secret-32bytes-padding-12345\") is True",
+    "4a68aa0e6a3b6223eba6796a5f2a323d257153df:tests/control_plane/test_viking_block_protocol.py:118:    secret = \"test-secret-32bytes-padding-12345\"",
+    "4a68aa0e6a3b6223eba6796a5f2a323d257153df:tests/control_plane/test_viking_block_protocol.py:222:    assert verify_block(signed, secret=\"env-secret-12345\") is True",
+    "4a68aa0e6a3b6223eba6796a5f2a323d257153df:tests/control_plane/test_viking_block_protocol.py:223:    assert verify_block(signed, secret=\"wrong-secret\") is False",
+    "4a68aa0e6a3b6223eba6796a5f2a323d257153df:tests/test_excalibur_controller.py:35:    token = \"test-token-do-not-use-in-prod-deadbeef\"",
+    "4a68aa0e6a3b6223eba6796a5f2a323d257153df:tests/test_photo_viewer_api.py:267:    password = \"my-secret-password\"",
+    "4a68aa0e6a3b6223eba6796a5f2a323d257153df:tests/test_photo_viewer_api.py:377:    password = \"my-secret-password\"",
+    "4a68aa0e6a3b6223eba6796a5f2a323d257153df:tests/test_photo_viewer_api.py:385:        api_key=\"secret-api-key\","
+   ]
+  },
+  {
+   "ref": "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "sha": "b2282757c9d4d3a09979fe38ba626929401b57e6",
+   "hits": [
+    "b2282757c9d4d3a09979fe38ba626929401b57e6:01_KERNEL/EXCALIBUR/config/saltare.toml:26:api_key = \"${MEILI_MASTER_KEY}\"",
+    "b2282757c9d4d3a09979fe38ba626929401b57e6:01_KERNEL/EXCALIBUR/config/saltare.toml:30:auth_token = \"${SALTARE_AUTH_TOKEN}\"",
+    "b2282757c9d4d3a09979fe38ba626929401b57e6:02_FORGE/cartridge/bifrost_bridge.py:168:    secret = \"bridge-demo-webhook\"",
+    "b2282757c9d4d3a09979fe38ba626929401b57e6:bifrost-control-plane.patch:860:+  const bsecret = 'bifrost-mesh-secret';",
+    "b2282757c9d4d3a09979fe38ba626929401b57e6:bifrost-upgrade.patch:404:+  const bsecret = 'bifrost-mesh-secret';",
+    "b2282757c9d4d3a09979fe38ba626929401b57e6:camelot-omega-bifrost.patch:971:+  const bsecret = 'bifrost-mesh-secret';",
+    "b2282757c9d4d3a09979fe38ba626929401b57e6:control_plane/test_drone_node.py:69:        r3 = dispatch_to_drone(url, KBA_CARTRIDGE_ID, \"kba.status\", {}, secret=\"wrong-secret\")",
+    "b2282757c9d4d3a09979fe38ba626929401b57e6:handover/payload/bifrost-smoke.test.ts:7:const secret = 'test-secret-that-is-long-enough';",
+    "b2282757c9d4d3a09979fe38ba626929401b57e6:handover/payload/bifrost-smoke.test.ts:43:  const bsecret = 'bifrost-mesh-secret';",
+    "b2282757c9d4d3a09979fe38ba626929401b57e6:handover/payload/multivoice-router.patch:971:+  const bsecret = 'bifrost-mesh-secret';",
+    "b2282757c9d4d3a09979fe38ba626929401b57e6:integration/contracts/tests/barge-in.test.ts:20:  token: 'signed-opaque-token',",
+    "b2282757c9d4d3a09979fe38ba626929401b57e6:integration/scripts/tests/lifecycle.test.ts:87:    const token = 'camelot-test-alive';",
+    "b2282757c9d4d3a09979fe38ba626929401b57e6:integration/scripts/tests/lifecycle.test.ts:141:    const token = 'camelot-test-teardown';",
+    "b2282757c9d4d3a09979fe38ba626929401b57e6:tests/control_plane/test_viking_block_protocol.py:40:    return sign_block(block, secret=\"test-secret-32bytes-padding-12345\")",
+    "b2282757c9d4d3a09979fe38ba626929401b57e6:tests/control_plane/test_viking_block_protocol.py:104:    assert verify_block(signed_block, secret=\"test-secret-32bytes-padding-12345\") is True",
+    "b2282757c9d4d3a09979fe38ba626929401b57e6:tests/control_plane/test_viking_block_protocol.py:118:    secret = \"test-secret-32bytes-padding-12345\"",
+    "b2282757c9d4d3a09979fe38ba626929401b57e6:tests/control_plane/test_viking_block_protocol.py:222:    assert verify_block(signed, secret=\"env-secret-12345\") is True",
+    "b2282757c9d4d3a09979fe38ba626929401b57e6:tests/control_plane/test_viking_block_protocol.py:223:    assert verify_block(signed, secret=\"wrong-secret\") is False",
+    "b2282757c9d4d3a09979fe38ba626929401b57e6:tests/test_excalibur_controller.py:35:    token = \"test-token-do-not-use-in-prod-deadbeef\"",
+    "b2282757c9d4d3a09979fe38ba626929401b57e6:tests/test_photo_viewer_api.py:267:    password = \"my-secret-password\""
+   ]
+  },
+  {
+   "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "sha": "d7a34c7356c4314c04848d67f3f1abc42c82dda8",
+   "hits": [
+    "d7a34c7356c4314c04848d67f3f1abc42c82dda8:01_KERNEL/EXCALIBUR/config/saltare.toml:26:api_key = \"${MEILI_MASTER_KEY}\"",
+    "d7a34c7356c4314c04848d67f3f1abc42c82dda8:01_KERNEL/EXCALIBUR/config/saltare.toml:30:auth_token = \"${SALTARE_AUTH_TOKEN}\"",
+    "d7a34c7356c4314c04848d67f3f1abc42c82dda8:02_FORGE/cartridge/bifrost_bridge.py:168:    secret = \"bridge-demo-webhook\"",
+    "d7a34c7356c4314c04848d67f3f1abc42c82dda8:ansible/deploy_redis_sentinel.yml:6:    redis_password: \"MERLIN_SUPER_SECRET_REDIS_AUTH_9981\"",
+    "d7a34c7356c4314c04848d67f3f1abc42c82dda8:bifrost-control-plane.patch:860:+  const bsecret = 'bifrost-mesh-secret';",
+    "d7a34c7356c4314c04848d67f3f1abc42c82dda8:bifrost-upgrade.patch:404:+  const bsecret = 'bifrost-mesh-secret';",
+    "d7a34c7356c4314c04848d67f3f1abc42c82dda8:camelot-omega-bifrost.patch:971:+  const bsecret = 'bifrost-mesh-secret';",
+    "d7a34c7356c4314c04848d67f3f1abc42c82dda8:control_plane/test_drone_node.py:69:        r3 = dispatch_to_drone(url, KBA_CARTRIDGE_ID, \"kba.status\", {}, secret=\"wrong-secret\")",
+    "d7a34c7356c4314c04848d67f3f1abc42c82dda8:handover/payload/bifrost-smoke.test.ts:7:const secret = 'test-secret-that-is-long-enough';",
+    "d7a34c7356c4314c04848d67f3f1abc42c82dda8:handover/payload/bifrost-smoke.test.ts:43:  const bsecret = 'bifrost-mesh-secret';",
+    "d7a34c7356c4314c04848d67f3f1abc42c82dda8:handover/payload/multivoice-router.patch:971:+  const bsecret = 'bifrost-mesh-secret';",
+    "d7a34c7356c4314c04848d67f3f1abc42c82dda8:integration/contracts/tests/barge-in.test.ts:20:  token: 'signed-opaque-token',",
+    "d7a34c7356c4314c04848d67f3f1abc42c82dda8:tests/control_plane/test_viking_block_protocol.py:39:    return sign_block(block, secret=\"test-secret-32bytes-padding-12345\")",
+    "d7a34c7356c4314c04848d67f3f1abc42c82dda8:tests/control_plane/test_viking_block_protocol.py:103:    assert verify_block(signed_block, secret=\"test-secret-32bytes-padding-12345\") is True",
+    "d7a34c7356c4314c04848d67f3f1abc42c82dda8:tests/control_plane/test_viking_block_protocol.py:117:    secret = \"test-secret-32bytes-padding-12345\"",
+    "d7a34c7356c4314c04848d67f3f1abc42c82dda8:tests/control_plane/test_viking_block_protocol.py:221:    assert verify_block(signed, secret=\"env-secret-12345\") is True",
+    "d7a34c7356c4314c04848d67f3f1abc42c82dda8:tests/control_plane/test_viking_block_protocol.py:222:    assert verify_block(signed, secret=\"wrong-secret\") is False",
+    "d7a34c7356c4314c04848d67f3f1abc42c82dda8:tests/test_excalibur_controller.py:34:    token = \"test-token-do-not-use-in-prod-deadbeef\"",
+    "d7a34c7356c4314c04848d67f3f1abc42c82dda8:tests/test_photo_viewer_api.py:266:    password = \"my-secret-password\"",
+    "d7a34c7356c4314c04848d67f3f1abc42c82dda8:tests/test_photo_viewer_api.py:376:    password = \"my-secret-password\""
+   ]
+  },
+  {
+   "ref": "refs/remotes/origin/cloudbrain-prod-hardening",
+   "sha": "09ca4fe11154e31871cc23b39cd7012e4b5275d9",
+   "hits": [
+    "09ca4fe11154e31871cc23b39cd7012e4b5275d9:01_KERNEL/EXCALIBUR/config/saltare.toml:26:api_key = \"${MEILI_MASTER_KEY}\"",
+    "09ca4fe11154e31871cc23b39cd7012e4b5275d9:01_KERNEL/EXCALIBUR/config/saltare.toml:30:auth_token = \"${SALTARE_AUTH_TOKEN}\"",
+    "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/README.md:389:          \"private_key\": \"-----BEGIN PRIVATE KEY-----\\n...\\n-----END PRIVATE KEY-----\\n\"",
+    "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/config.example.json:27:          \"private_key\": \"-----BEGIN PRIVATE KEY-----\\\\nYOUR_PRIVATE_KEY\\\\n-----END PRIVATE KEY-----\\\\n\"",
+    "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/docs/en/security.md:189:| Format detectors | `-----BEGIN PRIVATE KEY-----` PEM blocks; credentials embedded in URLs (`scheme://user:pass@host/...`) |",
+    "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/docs/zh/security.md:115:| \u683c\u5f0f\u68c0\u6d4b\u5668 | `-----BEGIN PRIVATE KEY-----` PEM \u5757\uff1bURL \u4e2d\u5d4c\u5165\u7684\u51ed\u636e\uff08`scheme://user:pass@host/...`\uff09 |",
+    "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/audit/envelope.zig:544:    try std.testing.expectEqual(Charset.alnum, Charset.classify(\"AKIAIOSFODNN7EXAMPLE\"));",
+    "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/audit/envelope.zig:576:    try std.testing.expectEqual(TokenTypeFingerprint.aws_access_key_id, TokenTypeFingerprint.detect(\"AKIAIOSFODNN7EXAMPLE\"));",
+    "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/audit/envelope.zig:584:    try std.testing.expectEqual(TokenTypeFingerprint.pem_private_key, TokenTypeFingerprint.detect(\"-----BEGIN PRIVATE KEY-----\"));",
+    "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/audit/envelope.zig:679:    const secret = \"ghp_aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789\";",
+    "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/channel_manager.zig:769:        .{ .account_id = \"main\", .bot_token = \"tg-main-token\" },",
+    "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/channel_manager.zig:770:        .{ .account_id = \"backup\", .bot_token = \"tg-backup-token\" },",
+    "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/channel_manager.zig:780:        .{ .account_id = \"dc-main\", .token = \"discord-token\" },",
+    "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/channel_manager.zig:829:            .bot_token = \"max-token-poll\",",
+    "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/channel_manager.zig:834:            .bot_token = \"max-token-hook\",",
+    "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/channel_manager.zig:1253:            .auth_token = \"relay-token-0123456789\",",
+    "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/channels/dingtalk.zig:2199:        .client_secret = \"test-client-secret\",",
+    "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/channels/discord.zig:2146:        .token = \"test-bot-token\",",
+    "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/channels/lark.zig:3488:        .app_secret = \"test-app-secret\",",
+    "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/channels/lark.zig:3503:        .app_secret = \"test-app-secret\","
+   ]
+  },
+  {
+   "ref": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "sha": "4ef9058dfc772bbd4f5dd38dad70c5a72e726102",
+   "hits": [
+    "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:01_KERNEL/EXCALIBUR/config/saltare.toml:26:api_key = \"${MEILI_MASTER_KEY}\"",
+    "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:01_KERNEL/EXCALIBUR/config/saltare.toml:30:auth_token = \"${SALTARE_AUTH_TOKEN}\"",
+    "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:02_FORGE/cartridge/bifrost_bridge.py:168:    secret = \"bridge-demo-webhook\"",
+    "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:Nano-Knights/ASSIMILATIONREPORT_NeuralCompanion.md:15:  `addons/spotify_sense/smoke_spotify_sense.py` (`access_token=\"secret-access-token\"`,",
+    "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:Nano-Knights/ASSIMILATIONREPORT_NeuralCompanion.md:16:  `refresh_token=\"secret-refresh-token\"`, `client_id=\"secret-client-id\"`) \u2014",
+    "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:ansible/deploy_redis_sentinel.yml:6:    redis_password: \"MERLIN_SUPER_SECRET_REDIS_AUTH_9981\"",
+    "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:bifrost-control-plane.patch:860:+  const bsecret = 'bifrost-mesh-secret';",
+    "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:bifrost-upgrade.patch:404:+  const bsecret = 'bifrost-mesh-secret';",
+    "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:camelot-omega-bifrost.patch:971:+  const bsecret = 'bifrost-mesh-secret';",
+    "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:control_plane/test_drone_node.py:69:        r3 = dispatch_to_drone(url, KBA_CARTRIDGE_ID, \"kba.status\", {}, secret=\"wrong-secret\")",
+    "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:handover/payload/bifrost-smoke.test.ts:7:const secret = 'test-secret-that-is-long-enough';",
+    "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:handover/payload/bifrost-smoke.test.ts:43:  const bsecret = 'bifrost-mesh-secret';",
+    "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:handover/payload/multivoice-router.patch:971:+  const bsecret = 'bifrost-mesh-secret';",
+    "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:integration/contracts/tests/barge-in.test.ts:20:  token: 'signed-opaque-token',",
+    "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:kickbox-audio/drone_bundle/02_FORGE/cartridge/bifrost_bridge.py:169:    secret = \"bridge-demo-webhook\"",
+    "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:kickbox-audio/packages/policy-engine/schemas/approval-states.yaml:84:    requires_override_token: \"CAMELOT_DASHBOARD_OPERATOR_TOKEN\"",
+    "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:packages/policy-engine/schemas/approval-states.yaml:84:    requires_override_token: \"CAMELOT_DASHBOARD_OPERATOR_TOKEN\"",
+    "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:tests/control_plane/test_viking_block_protocol.py:41:    return sign_block(block, secret=\"test-secret-32bytes-padding-12345\")",
+    "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:tests/control_plane/test_viking_block_protocol.py:105:    assert verify_block(signed_block, secret=\"test-secret-32bytes-padding-12345\") is True",
+    "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:tests/control_plane/test_viking_block_protocol.py:119:    secret = \"test-secret-32bytes-padding-12345\""
+   ]
+  },
+  {
+   "ref": "refs/remotes/origin/fix/lint-format-pass",
+   "sha": "0b77485cdc4158eddab25848a026bc6c6bfcab34",
+   "hits": [
+    "0b77485cdc4158eddab25848a026bc6c6bfcab34:01_KERNEL/EXCALIBUR/config/saltare.toml:26:api_key = \"${MEILI_MASTER_KEY}\"",
+    "0b77485cdc4158eddab25848a026bc6c6bfcab34:01_KERNEL/EXCALIBUR/config/saltare.toml:30:auth_token = \"${SALTARE_AUTH_TOKEN}\"",
+    "0b77485cdc4158eddab25848a026bc6c6bfcab34:02_FORGE/cartridge/bifrost_bridge.py:168:    secret = \"bridge-demo-webhook\"",
+    "0b77485cdc4158eddab25848a026bc6c6bfcab34:Nano-Knights/ASSIMILATIONREPORT_NeuralCompanion.md:15:  `addons/spotify_sense/smoke_spotify_sense.py` (`access_token=\"secret-access-token\"`,",
+    "0b77485cdc4158eddab25848a026bc6c6bfcab34:Nano-Knights/ASSIMILATIONREPORT_NeuralCompanion.md:16:  `refresh_token=\"secret-refresh-token\"`, `client_id=\"secret-client-id\"`) \u2014",
+    "0b77485cdc4158eddab25848a026bc6c6bfcab34:ansible/deploy_redis_sentinel.yml:6:    redis_password: \"MERLIN_SUPER_SECRET_REDIS_AUTH_9981\"",
+    "0b77485cdc4158eddab25848a026bc6c6bfcab34:bifrost-control-plane.patch:860:+  const bsecret = 'bifrost-mesh-secret';",
+    "0b77485cdc4158eddab25848a026bc6c6bfcab34:bifrost-upgrade.patch:404:+  const bsecret = 'bifrost-mesh-secret';",
+    "0b77485cdc4158eddab25848a026bc6c6bfcab34:camelot-omega-bifrost.patch:971:+  const bsecret = 'bifrost-mesh-secret';",
+    "0b77485cdc4158eddab25848a026bc6c6bfcab34:control_plane/test_drone_node.py:69:        r3 = dispatch_to_drone(url, KBA_CARTRIDGE_ID, \"kba.status\", {}, secret=\"wrong-secret\")",
+    "0b77485cdc4158eddab25848a026bc6c6bfcab34:handover/payload/bifrost-smoke.test.ts:7:const secret = 'test-secret-that-is-long-enough';",
+    "0b77485cdc4158eddab25848a026bc6c6bfcab34:handover/payload/bifrost-smoke.test.ts:46:  const bsecret = 'bifrost-mesh-secret';",
+    "0b77485cdc4158eddab25848a026bc6c6bfcab34:handover/payload/multivoice-router.patch:971:+  const bsecret = 'bifrost-mesh-secret';",
+    "0b77485cdc4158eddab25848a026bc6c6bfcab34:integration/contracts/tests/barge-in.test.ts:17:  token: 'signed-opaque-token',",
+    "0b77485cdc4158eddab25848a026bc6c6bfcab34:kickbox-audio/drone_bundle/02_FORGE/cartridge/bifrost_bridge.py:169:    secret = \"bridge-demo-webhook\"",
+    "0b77485cdc4158eddab25848a026bc6c6bfcab34:kickbox-audio/packages/policy-engine/schemas/approval-states.yaml:84:    requires_override_token: \"CAMELOT_DASHBOARD_OPERATOR_TOKEN\"",
+    "0b77485cdc4158eddab25848a026bc6c6bfcab34:packages/policy-engine/schemas/approval-states.yaml:84:    requires_override_token: \"CAMELOT_DASHBOARD_OPERATOR_TOKEN\"",
+    "0b77485cdc4158eddab25848a026bc6c6bfcab34:tests/control_plane/test_viking_block_protocol.py:41:    return sign_block(block, secret=\"test-secret-32bytes-padding-12345\")",
+    "0b77485cdc4158eddab25848a026bc6c6bfcab34:tests/control_plane/test_viking_block_protocol.py:105:    assert verify_block(signed_block, secret=\"test-secret-32bytes-padding-12345\") is True",
+    "0b77485cdc4158eddab25848a026bc6c6bfcab34:tests/control_plane/test_viking_block_protocol.py:119:    secret = \"test-secret-32bytes-padding-12345\""
+   ]
+  },
+  {
+   "ref": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "sha": "9e07851144ebb2218aa85a9f52a38a7701180632",
+   "hits": [
+    "9e07851144ebb2218aa85a9f52a38a7701180632:01_KERNEL/EXCALIBUR/config/saltare.toml:26:api_key = \"${MEILI_MASTER_KEY}\"",
+    "9e07851144ebb2218aa85a9f52a38a7701180632:01_KERNEL/EXCALIBUR/config/saltare.toml:30:auth_token = \"${SALTARE_AUTH_TOKEN}\"",
+    "9e07851144ebb2218aa85a9f52a38a7701180632:control_plane/test_drone_node.py:69:        r3 = dispatch_to_drone(url, KBA_CARTRIDGE_ID, \"kba.status\", {}, secret=\"wrong-secret\")",
+    "9e07851144ebb2218aa85a9f52a38a7701180632:tests/control_plane/test_viking_block_protocol.py:40:    return sign_block(block, secret=\"test-secret-32bytes-padding-12345\")",
+    "9e07851144ebb2218aa85a9f52a38a7701180632:tests/control_plane/test_viking_block_protocol.py:104:    assert verify_block(signed_block, secret=\"test-secret-32bytes-padding-12345\") is True",
+    "9e07851144ebb2218aa85a9f52a38a7701180632:tests/control_plane/test_viking_block_protocol.py:118:    secret = \"test-secret-32bytes-padding-12345\"",
+    "9e07851144ebb2218aa85a9f52a38a7701180632:tests/control_plane/test_viking_block_protocol.py:222:    assert verify_block(signed, secret=\"env-secret-12345\") is True",
+    "9e07851144ebb2218aa85a9f52a38a7701180632:tests/control_plane/test_viking_block_protocol.py:223:    assert verify_block(signed, secret=\"wrong-secret\") is False",
+    "9e07851144ebb2218aa85a9f52a38a7701180632:tests/test_excalibur_controller.py:35:    token = \"test-token-do-not-use-in-prod-deadbeef\""
+   ]
+  },
+  {
+   "ref": "refs/remotes/origin/fix/ruff-530-manual",
+   "sha": "b8c86c9ab6d199266b55229ae8bb39cdc0828868",
+   "hits": [
+    "b8c86c9ab6d199266b55229ae8bb39cdc0828868:01_KERNEL/EXCALIBUR/config/saltare.toml:26:api_key = \"${MEILI_MASTER_KEY}\"",
+    "b8c86c9ab6d199266b55229ae8bb39cdc0828868:01_KERNEL/EXCALIBUR/config/saltare.toml:30:auth_token = \"${SALTARE_AUTH_TOKEN}\"",
+    "b8c86c9ab6d199266b55229ae8bb39cdc0828868:02_FORGE/cartridge/bifrost_bridge.py:168:    secret = \"bridge-demo-webhook\"",
+    "b8c86c9ab6d199266b55229ae8bb39cdc0828868:Nano-Knights/ASSIMILATIONREPORT_NeuralCompanion.md:15:  `addons/spotify_sense/smoke_spotify_sense.py` (`access_token=\"secret-access-token\"`,",
+    "b8c86c9ab6d199266b55229ae8bb39cdc0828868:Nano-Knights/ASSIMILATIONREPORT_NeuralCompanion.md:16:  `refresh_token=\"secret-refresh-token\"`, `client_id=\"secret-client-id\"`) \u2014",
+    "b8c86c9ab6d199266b55229ae8bb39cdc0828868:ansible/deploy_redis_sentinel.yml:6:    redis_password: \"MERLIN_SUPER_SECRET_REDIS_AUTH_9981\"",
+    "b8c86c9ab6d199266b55229ae8bb39cdc0828868:bifrost-control-plane.patch:860:+  const bsecret = 'bifrost-mesh-secret';",
+    "b8c86c9ab6d199266b55229ae8bb39cdc0828868:bifrost-upgrade.patch:404:+  const bsecret = 'bifrost-mesh-secret';",
+    "b8c86c9ab6d199266b55229ae8bb39cdc0828868:camelot-omega-bifrost.patch:971:+  const bsecret = 'bifrost-mesh-secret';",
+    "b8c86c9ab6d199266b55229ae8bb39cdc0828868:control_plane/test_drone_node.py:69:        r3 = dispatch_to_drone(url, KBA_CARTRIDGE_ID, \"kba.status\", {}, secret=\"wrong-secret\")",
+    "b8c86c9ab6d199266b55229ae8bb39cdc0828868:handover/payload/bifrost-smoke.test.ts:7:const secret = 'test-secret-that-is-long-enough';",
+    "b8c86c9ab6d199266b55229ae8bb39cdc0828868:handover/payload/bifrost-smoke.test.ts:43:  const bsecret = 'bifrost-mesh-secret';",
+    "b8c86c9ab6d199266b55229ae8bb39cdc0828868:handover/payload/multivoice-router.patch:971:+  const bsecret = 'bifrost-mesh-secret';",
+    "b8c86c9ab6d199266b55229ae8bb39cdc0828868:integration/contracts/tests/barge-in.test.ts:20:  token: 'signed-opaque-token',",
+    "b8c86c9ab6d199266b55229ae8bb39cdc0828868:kickbox-audio/drone_bundle/02_FORGE/cartridge/bifrost_bridge.py:169:    secret = \"bridge-demo-webhook\"",
+    "b8c86c9ab6d199266b55229ae8bb39cdc0828868:kickbox-audio/packages/policy-engine/schemas/approval-states.yaml:84:    requires_override_token: \"CAMELOT_DASHBOARD_OPERATOR_TOKEN\"",
+    "b8c86c9ab6d199266b55229ae8bb39cdc0828868:packages/policy-engine/schemas/approval-states.yaml:84:    requires_override_token: \"CAMELOT_DASHBOARD_OPERATOR_TOKEN\"",
+    "b8c86c9ab6d199266b55229ae8bb39cdc0828868:tests/control_plane/test_viking_block_protocol.py:41:    return sign_block(block, secret=\"test-secret-32bytes-padding-12345\")",
+    "b8c86c9ab6d199266b55229ae8bb39cdc0828868:tests/control_plane/test_viking_block_protocol.py:105:    assert verify_block(signed_block, secret=\"test-secret-32bytes-padding-12345\") is True",
+    "b8c86c9ab6d199266b55229ae8bb39cdc0828868:tests/control_plane/test_viking_block_protocol.py:119:    secret = \"test-secret-32bytes-padding-12345\""
+   ]
+  },
+  {
+   "ref": "refs/remotes/origin/main",
+   "sha": "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c",
+   "hits": [
+    "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:01_KERNEL/EXCALIBUR/config/saltare.toml:26:api_key = \"${MEILI_MASTER_KEY}\"",
+    "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:01_KERNEL/EXCALIBUR/config/saltare.toml:30:auth_token = \"${SALTARE_AUTH_TOKEN}\"",
+    "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/README.md:389:          \"private_key\": \"-----BEGIN PRIVATE KEY-----\\n...\\n-----END PRIVATE KEY-----\\n\"",
+    "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/config.example.json:27:          \"private_key\": \"-----BEGIN PRIVATE KEY-----\\\\nYOUR_PRIVATE_KEY\\\\n-----END PRIVATE KEY-----\\\\n\"",
+    "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/docs/en/security.md:189:| Format detectors | `-----BEGIN PRIVATE KEY-----` PEM blocks; credentials embedded in URLs (`scheme://user:pass@host/...`) |",
+    "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/docs/zh/security.md:115:| \u683c\u5f0f\u68c0\u6d4b\u5668 | `-----BEGIN PRIVATE KEY-----` PEM \u5757\uff1bURL \u4e2d\u5d4c\u5165\u7684\u51ed\u636e\uff08`scheme://user:pass@host/...`\uff09 |",
+    "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/audit/envelope.zig:544:    try std.testing.expectEqual(Charset.alnum, Charset.classify(\"AKIAIOSFODNN7EXAMPLE\"));",
+    "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/audit/envelope.zig:576:    try std.testing.expectEqual(TokenTypeFingerprint.aws_access_key_id, TokenTypeFingerprint.detect(\"AKIAIOSFODNN7EXAMPLE\"));",
+    "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/audit/envelope.zig:584:    try std.testing.expectEqual(TokenTypeFingerprint.pem_private_key, TokenTypeFingerprint.detect(\"-----BEGIN PRIVATE KEY-----\"));",
+    "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/audit/envelope.zig:679:    const secret = \"ghp_aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789\";",
+    "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/channel_manager.zig:769:        .{ .account_id = \"main\", .bot_token = \"tg-main-token\" },",
+    "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/channel_manager.zig:770:        .{ .account_id = \"backup\", .bot_token = \"tg-backup-token\" },",
+    "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/channel_manager.zig:780:        .{ .account_id = \"dc-main\", .token = \"discord-token\" },",
+    "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/channel_manager.zig:829:            .bot_token = \"max-token-poll\",",
+    "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/channel_manager.zig:834:            .bot_token = \"max-token-hook\",",
+    "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/channel_manager.zig:1253:            .auth_token = \"relay-token-0123456789\",",
+    "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/channels/dingtalk.zig:2199:        .client_secret = \"test-client-secret\",",
+    "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/channels/discord.zig:2146:        .token = \"test-bot-token\",",
+    "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/channels/lark.zig:3488:        .app_secret = \"test-app-secret\",",
+    "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/channels/lark.zig:3503:        .app_secret = \"test-app-secret\","
+   ]
+  }
+ ],
+ "elapsed_s": 25.6,
+ "gate_recommendation": "REVIEW",
+ "reviewer": "SIR_SENTINEL",
+ "c0_followup": {
+  "unrelated_history_tips": [
+   {
+    "ref": "refs/remotes/camelot-os/cloudbrain-prod-hardening",
+    "sha": "313472f66bad7ab7f63e676c95ed8b2b455b01d6",
+    "kind": "unrelated_history",
+    "treediff_shortstat": "7461 files changed, 10163 insertions(+), 1689148 deletions(-)",
+    "tree_file_count": 7461,
+    "top_dirs": [
+     "\"01_KERNEL/",
+     "\"02_FORGE/",
+     "\"03_VAULT/",
+     "\"docs/",
+     "\"vfs/",
+     ".agent/",
+     ".agents/",
+     ".archon/",
+     ".camelot-config.yaml.example/",
+     ".camelot-config.yaml/",
+     ".camelot/",
+     ".env.example/"
+    ]
+   },
+   {
+    "ref": "refs/remotes/camelot-os/main",
+    "sha": "931c56e1a4d468c95743476d38bc3b97718e28b3",
+    "kind": "unrelated_history",
+    "treediff_shortstat": "7419 files changed, 1268 insertions(+), 1689135 deletions(-)",
+    "tree_file_count": 7419,
+    "top_dirs": [
+     "\"01_KERNEL/",
+     "\"02_FORGE/",
+     "\"03_VAULT/",
+     "\"docs/",
+     "\"vfs/",
+     ".agent/",
+     ".agents/",
+     ".archon/",
+     ".camelot-config.yaml.example/",
+     ".camelot-config.yaml/",
+     ".camelot/",
+     ".env.example/"
+    ]
+   },
+   {
+    "ref": "refs/remotes/excalibur-cmd-1/main",
+    "sha": "8be1c21115cb124c952fc3eb48e12205dce65b63",
+    "kind": "unrelated_history",
+    "treediff_shortstat": "7498 files changed, 170 insertions(+), 1706692 deletions(-)",
+    "tree_file_count": 7498,
+    "top_dirs": [
+     "\"01_KERNEL/",
+     "\"02_FORGE/",
+     "\"03_VAULT/",
+     "\"docs/",
+     "\"vfs/",
+     ".agent/",
+     ".agents/",
+     ".archon/",
+     ".camelot-config.yaml.example/",
+     ".camelot-config.yaml/",
+     ".camelot/",
+     ".env.example/"
+    ]
+   },
+   {
+    "ref": "refs/remotes/kba-services/main",
+    "sha": "0ec2d85faced107e07a5d353f0916ddbf47203d1",
+    "kind": "unrelated_history",
+    "treediff_shortstat": "7570 files changed, 30884 insertions(+), 1703577 deletions(-)",
+    "tree_file_count": 7570,
+    "top_dirs": [
+     "\"01_KERNEL/",
+     "\"02_FORGE/",
+     "\"03_VAULT/",
+     "\"docs/",
+     "\"vfs/",
+     ".agent/",
+     ".agents/",
+     ".archon/",
+     ".camelot-config.yaml.example/",
+     ".camelot-config.yaml/",
+     ".camelot/",
+     ".env.example/"
+    ]
+   },
+   {
+    "ref": "refs/remotes/kba-v3/main",
+    "sha": "3fd30ddeca79996ea3122eb73f1ff6e9f29e2538",
+    "kind": "unrelated_history",
+    "treediff_shortstat": "7589 files changed, 39634 insertions(+), 1703587 deletions(-)",
+    "tree_file_count": 7589,
+    "top_dirs": [
+     "\"01_KERNEL/",
+     "\"02_FORGE/",
+     "\"03_VAULT/",
+     "\"docs/",
+     "\"vfs/",
+     ".agent/",
+     ".agents/",
+     ".archon/",
+     ".camelot-config.yaml.example/",
+     ".camelot-config.yaml/",
+     ".camelot/",
+     ".env.example/"
+    ]
+   },
+   {
+    "ref": "refs/remotes/multivoice-remote/claude/claude-md-docs-tw6ptq",
+    "sha": "27c830494018c20d7fd87da177f65f2a81554648",
+    "kind": "unrelated_history",
+    "treediff_shortstat": "7661 files changed, 23372 insertions(+), 1709021 deletions(-)",
+    "tree_file_count": 7661,
+    "top_dirs": [
+     "\"01_KERNEL/",
+     "\"02_FORGE/",
+     "\"03_VAULT/",
+     "\"docs/",
+     "\"vfs/",
+     ".agent/",
+     ".agents/",
+     ".archon/",
+     ".camelot-config.yaml.example/",
+     ".camelot-config.yaml/",
+     ".camelot/",
+     ".env.example/"
+    ]
+   },
+   {
+    "ref": "refs/remotes/multivoice-remote/feature/bifrost-bridge-implementation",
+    "sha": "57c7c5030628b4630b1e5f0d4cc6ad3358eebe42",
+    "kind": "unrelated_history",
+    "treediff_shortstat": "7609 files changed, 12518 insertions(+), 1708002 deletions(-)",
+    "tree_file_count": 7609,
+    "top_dirs": [
+     "\"01_KERNEL/",
+     "\"02_FORGE/",
+     "\"03_VAULT/",
+     "\"docs/",
+     "\"vfs/",
+     ".agent/",
+     ".agents/",
+     ".archon/",
+     ".camelot-config.yaml.example/",
+     ".camelot-config.yaml/",
+     ".camelot/",
+     ".env.example/"
+    ]
+   },
+   {
+    "ref": "refs/remotes/multivoice-remote/main",
+    "sha": "610e0bf85437aac487cc7d9f4d4235c30a4ae374",
+    "kind": "unrelated_history",
+    "treediff_shortstat": "7559 files changed, 21993 insertions(+), 1709679 deletions(-)",
+    "tree_file_count": 7559,
+    "top_dirs": [
+     "\"01_KERNEL/",
+     "\"02_FORGE/",
+     "\"03_VAULT/",
+     "\"docs/",
+     "\"vfs/",
+     ".agent/",
+     ".agents/",
+     ".archon/",
+     ".camelot-config.yaml.example/",
+     ".camelot-config.yaml/",
+     ".camelot/",
+     ".env.example/"
+    ]
+   },
+   {
+    "ref": "refs/remotes/vuejs-pwa/development",
+    "sha": "cdf3b0e41ca8218ba2b0131574dffb60116ff139",
+    "kind": "unrelated_history",
+    "treediff_shortstat": "7571 files changed, 2351 insertions(+), 1712659 deletions(-)",
+    "tree_file_count": 7571,
+    "top_dirs": [
+     "\"01_KERNEL/",
+     "\"02_FORGE/",
+     "\"03_VAULT/",
+     "\"docs/",
+     "\"vfs/",
+     ".agent/",
+     ".agents/",
+     ".archon/",
+     ".camelot-config.yaml.example/",
+     ".camelot-config.yaml/",
+     ".camelot/",
+     ".env.example/"
+    ]
+   },
+   {
+    "ref": "refs/remotes/vuejs-pwa/master",
+    "sha": "d8641bbf2a126e3da66970a9f17806f0ac60c0ef",
+    "kind": "unrelated_history",
+    "treediff_shortstat": "7570 files changed, 2316 insertions(+), 1712663 deletions(-)",
+    "tree_file_count": 7570,
+    "top_dirs": [
+     "\"01_KERNEL/",
+     "\"02_FORGE/",
+     "\"03_VAULT/",
+     "\"docs/",
+     "\"vfs/",
+     ".agent/",
+     ".agents/",
+     ".archon/",
+     ".camelot-config.yaml.example/",
+     ".camelot-config.yaml/",
+     ".camelot/",
+     ".env.example/"
+    ]
+   },
+   {
+    "ref": "refs/remotes/vuejs-pwa/prototype",
+    "sha": "4e7fe334452f4c12b8c4c983697a53501101b83b",
+    "kind": "unrelated_history",
+    "treediff_shortstat": "7565 files changed, 2115 insertions(+), 1712685 deletions(-)",
+    "tree_file_count": 7565,
+    "top_dirs": [
+     "\"01_KERNEL/",
+     "\"02_FORGE/",
+     "\"03_VAULT/",
+     "\"docs/",
+     "\"vfs/",
+     ".agent/",
+     ".agents/",
+     ".archon/",
+     ".camelot-config.yaml.example/",
+     ".camelot-config.yaml/",
+     ".camelot/",
+     ".env.example/"
+    ]
+   },
+   {
+    "ref": "refs/remotes/vuejs-pwa/styles",
+    "sha": "7a718ec091adc6bf64fdd0812167b99433ccf184",
+    "kind": "unrelated_history",
+    "treediff_shortstat": "7565 files changed, 2069 insertions(+), 1712685 deletions(-)",
+    "tree_file_count": 7565,
+    "top_dirs": [
+     "\"01_KERNEL/",
+     "\"02_FORGE/",
+     "\"03_VAULT/",
+     "\"docs/",
+     "\"vfs/",
+     ".agent/",
+     ".agents/",
+     ".archon/",
+     ".camelot-config.yaml.example/",
+     ".camelot-config.yaml/",
+     ".camelot/",
+     ".env.example/"
+    ]
+   }
+  ],
+  "secret_classification": {
+   "HARD": 12,
+   "SOFT": 229,
+   "PLACEHOLDER": 93,
+   "OTHER": 0
+  },
+  "hard_hits": [
+   {
+    "ref": "refs/heads/feat/android-edge-supervisor",
+    "line": "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/audit/envelope.zig:584:    try std.testing.expectEqual(TokenTypeFingerprint.pem_private_key, TokenTypeFingerprint.detect(\"-----BEGIN PRIVATE KEY-----\"));"
+   },
+   {
+    "ref": "refs/heads/feature/reya-fabric",
+    "line": "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/audit/envelope.zig:584:    try std.testing.expectEqual(TokenTypeFingerprint.pem_private_key, TokenTypeFingerprint.detect(\"-----BEGIN PRIVATE KEY-----\"));"
+   },
+   {
+    "ref": "refs/heads/perf/embedding-n-plus-1-optimization-15445770156298811611",
+    "line": "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/audit/envelope.zig:584:    try std.testing.expectEqual(TokenTypeFingerprint.pem_private_key, TokenTypeFingerprint.detect(\"-----BEGIN PRIVATE KEY-----\"));"
+   },
+   {
+    "ref": "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+    "line": "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/audit/envelope.zig:584:    try std.testing.expectEqual(TokenTypeFingerprint.pem_private_key, TokenTypeFingerprint.detect(\"-----BEGIN PRIVATE KEY-----\"));"
+   },
+   {
+    "ref": "refs/heads/perf/optimize-n-plus-1-queries-13777398068298918860",
+    "line": "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/audit/envelope.zig:584:    try std.testing.expectEqual(TokenTypeFingerprint.pem_private_key, TokenTypeFingerprint.detect(\"-----BEGIN PRIVATE KEY-----\"));"
+   },
+   {
+    "ref": "refs/remotes/kba-v3/main",
+    "line": "3fd30ddeca79996ea3122eb73f1ff6e9f29e2538:firebase-applet-config.json:4:  \"apiKey\": \"AIza...NM1g\","
+   },
+   {
+    "ref": "refs/remotes/kickbox-audio/main",
+    "line": "6138cc4735bf4a60325f35848561de4b36d58f8f:firebase-applet-config.json:4:  \"apiKey\": \"AIza...NM1g\","
+   },
+   {
+    "ref": "refs/remotes/multivoice-remote/claude/claude-md-docs-tw6ptq",
+    "line": "27c830494018c20d7fd87da177f65f2a81554648:firebase-applet-config.json:4:  \"apiKey\": \"AIza...Zw4M\","
+   },
+   {
+    "ref": "refs/remotes/multivoice-remote/feature/bifrost-bridge-implementation",
+    "line": "57c7c5030628b4630b1e5f0d4cc6ad3358eebe42:firebase-applet-config.json:4:  \"apiKey\": \"AIza...Zw4M\","
+   },
+   {
+    "ref": "refs/remotes/multivoice-remote/main",
+    "line": "610e0bf85437aac487cc7d9f4d4235c30a4ae374:firebase-applet-config.json:4:  \"apiKey\": \"AIza...Zw4M\","
+   },
+   {
+    "ref": "refs/remotes/origin/cloudbrain-prod-hardening",
+    "line": "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/audit/envelope.zig:584:    try std.testing.expectEqual(TokenTypeFingerprint.pem_private_key, TokenTypeFingerprint.detect(\"-----BEGIN PRIVATE KEY-----\"));"
+   },
+   {
+    "ref": "refs/remotes/origin/main",
+    "line": "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/audit/envelope.zig:584:    try std.testing.expectEqual(TokenTypeFingerprint.pem_private_key, TokenTypeFingerprint.detect(\"-----BEGIN PRIVATE KEY-----\"));"
+   }
+  ],
+  "soft_hits": [
+   {
+    "ref": "refs/heads/feat/android-edge-supervisor",
+    "line": "aad7928d2f187e290654f1b131c932e0957bcbf1:02_FORGE/cartridge/bifrost_bridge.py:168:    secret = \"bridge-demo-webhook\""
+   },
+   {
+    "ref": "refs/heads/feat/android-edge-supervisor",
+    "line": "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/audit/envelope.zig:679:    const secret = \"ghp_aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789\";"
+   },
+   {
+    "ref": "refs/heads/feat/android-edge-supervisor",
+    "line": "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/channel_manager.zig:769:        .{ .account_id = \"main\", .bot_token = \"tg-main-token\" },"
+   },
+   {
+    "ref": "refs/heads/feat/android-edge-supervisor",
+    "line": "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/channel_manager.zig:770:        .{ .account_id = \"backup\", .bot_token = \"tg-backup-token\" },"
+   },
+   {
+    "ref": "refs/heads/feat/android-edge-supervisor",
+    "line": "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/channel_manager.zig:780:        .{ .account_id = \"dc-main\", .token = \"discord-token\" },"
+   },
+   {
+    "ref": "refs/heads/feat/android-edge-supervisor",
+    "line": "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/channel_manager.zig:829:            .bot_token = \"max-token-poll\","
+   },
+   {
+    "ref": "refs/heads/feat/android-edge-supervisor",
+    "line": "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/channel_manager.zig:834:            .bot_token = \"max-token-hook\","
+   },
+   {
+    "ref": "refs/heads/feat/android-edge-supervisor",
+    "line": "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/channel_manager.zig:1253:            .auth_token = \"relay-token-0123456789\","
+   },
+   {
+    "ref": "refs/heads/feat/android-edge-supervisor",
+    "line": "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/channels/dingtalk.zig:2199:        .client_secret = \"test-client-secret\","
+   },
+   {
+    "ref": "refs/heads/feat/android-edge-supervisor",
+    "line": "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/channels/discord.zig:2146:        .token = \"test-bot-token\","
+   },
+   {
+    "ref": "refs/heads/feat/android-edge-supervisor",
+    "line": "aad7928d2f187e290654f1b131c932e0957bcbf1:04_KINETIC/nullclaw/src/channels/lark.zig:3488:        .app_secret = \"test-app-secret\","
+   },
+   {
+    "ref": "refs/heads/feat/unified-bootstrap-hud",
+    "line": "1fa54bfe75e7d4862467a896ced20596ac2a7015:02_FORGE/cartridge/bifrost_bridge.py:168:    secret = \"bridge-demo-webhook\""
+   },
+   {
+    "ref": "refs/heads/feat/unified-bootstrap-hud",
+    "line": "1fa54bfe75e7d4862467a896ced20596ac2a7015:Nano-Knights/ASSIMILATIONREPORT_NeuralCompanion.md:15:  `addons/spotify_sense/smoke_spotify_sense.py` (`access_token=\"secret-access-token\"`,"
+   },
+   {
+    "ref": "refs/heads/feat/unified-bootstrap-hud",
+    "line": "1fa54bfe75e7d4862467a896ced20596ac2a7015:Nano-Knights/ASSIMILATIONREPORT_NeuralCompanion.md:16:  `refresh_token=\"secret-refresh-token\"`, `client_id=\"secret-client-id\"`) \u2014"
+   },
+   {
+    "ref": "refs/heads/feat/unified-bootstrap-hud",
+    "line": "1fa54bfe75e7d4862467a896ced20596ac2a7015:ansible/deploy_redis_sentinel.yml:6:    redis_password: \"MERLIN_SUPER_SECRET_REDIS_AUTH_9981\""
+   },
+   {
+    "ref": "refs/heads/feat/unified-bootstrap-hud",
+    "line": "1fa54bfe75e7d4862467a896ced20596ac2a7015:bifrost-control-plane.patch:860:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/heads/feat/unified-bootstrap-hud",
+    "line": "1fa54bfe75e7d4862467a896ced20596ac2a7015:bifrost-upgrade.patch:404:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/heads/feat/unified-bootstrap-hud",
+    "line": "1fa54bfe75e7d4862467a896ced20596ac2a7015:camelot-omega-bifrost.patch:971:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/heads/feat/unified-bootstrap-hud",
+    "line": "1fa54bfe75e7d4862467a896ced20596ac2a7015:control_plane/test_drone_node.py:69:        r3 = dispatch_to_drone(url, KBA_CARTRIDGE_ID, \"kba.status\", {}, secret=\"wrong-secret\")"
+   },
+   {
+    "ref": "refs/heads/feat/unified-bootstrap-hud",
+    "line": "1fa54bfe75e7d4862467a896ced20596ac2a7015:docs/integration/adr-0002-opencodex-assimilation.md:227:api_key = \"proxy-admin-key\"  # local, no real key needed"
+   },
+   {
+    "ref": "refs/heads/feat/unified-bootstrap-hud",
+    "line": "1fa54bfe75e7d4862467a896ced20596ac2a7015:handover/payload/bifrost-smoke.test.ts:7:const secret = 'test-secret-that-is-long-enough';"
+   },
+   {
+    "ref": "refs/heads/feat/unified-bootstrap-hud",
+    "line": "1fa54bfe75e7d4862467a896ced20596ac2a7015:handover/payload/bifrost-smoke.test.ts:43:  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/heads/feat/unified-bootstrap-hud",
+    "line": "1fa54bfe75e7d4862467a896ced20596ac2a7015:handover/payload/multivoice-router.patch:971:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/heads/feat/unified-bootstrap-hud",
+    "line": "1fa54bfe75e7d4862467a896ced20596ac2a7015:integration/contracts/tests/barge-in.test.ts:20:  token: 'signed-opaque-token',"
+   },
+   {
+    "ref": "refs/heads/feat/unified-bootstrap-hud",
+    "line": "1fa54bfe75e7d4862467a896ced20596ac2a7015:packages/policy-engine/schemas/approval-states.yaml:84:    requires_override_token: \"CAMELOT_DASHBOARD_OPERATOR_TOKEN\""
+   },
+   {
+    "ref": "refs/heads/feat/unified-bootstrap-hud",
+    "line": "1fa54bfe75e7d4862467a896ced20596ac2a7015:tests/control_plane/test_viking_block_protocol.py:41:    return sign_block(block, secret=\"test-secret-32bytes-padding-12345\")"
+   },
+   {
+    "ref": "refs/heads/feat/unified-bootstrap-hud",
+    "line": "1fa54bfe75e7d4862467a896ced20596ac2a7015:tests/control_plane/test_viking_block_protocol.py:105:    assert verify_block(signed_block, secret=\"test-secret-32bytes-padding-12345\") is True"
+   },
+   {
+    "ref": "refs/heads/feat/unified-bootstrap-hud",
+    "line": "1fa54bfe75e7d4862467a896ced20596ac2a7015:tests/control_plane/test_viking_block_protocol.py:119:    secret = \"test-secret-32bytes-padding-12345\""
+   },
+   {
+    "ref": "refs/heads/feature/reya-fabric",
+    "line": "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/audit/envelope.zig:679:    const secret = \"ghp_aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789\";"
+   },
+   {
+    "ref": "refs/heads/feature/reya-fabric",
+    "line": "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/channel_manager.zig:769:        .{ .account_id = \"main\", .bot_token = \"tg-main-token\" },"
+   },
+   {
+    "ref": "refs/heads/feature/reya-fabric",
+    "line": "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/channel_manager.zig:770:        .{ .account_id = \"backup\", .bot_token = \"tg-backup-token\" },"
+   },
+   {
+    "ref": "refs/heads/feature/reya-fabric",
+    "line": "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/channel_manager.zig:780:        .{ .account_id = \"dc-main\", .token = \"discord-token\" },"
+   },
+   {
+    "ref": "refs/heads/feature/reya-fabric",
+    "line": "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/channel_manager.zig:829:            .bot_token = \"max-token-poll\","
+   },
+   {
+    "ref": "refs/heads/feature/reya-fabric",
+    "line": "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/channel_manager.zig:834:            .bot_token = \"max-token-hook\","
+   },
+   {
+    "ref": "refs/heads/feature/reya-fabric",
+    "line": "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/channel_manager.zig:1253:            .auth_token = \"relay-token-0123456789\","
+   },
+   {
+    "ref": "refs/heads/feature/reya-fabric",
+    "line": "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/channels/dingtalk.zig:2199:        .client_secret = \"test-client-secret\","
+   },
+   {
+    "ref": "refs/heads/feature/reya-fabric",
+    "line": "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/channels/discord.zig:2146:        .token = \"test-bot-token\","
+   },
+   {
+    "ref": "refs/heads/feature/reya-fabric",
+    "line": "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/channels/lark.zig:3488:        .app_secret = \"test-app-secret\","
+   },
+   {
+    "ref": "refs/heads/feature/reya-fabric",
+    "line": "7e09090b1a829c38f91fb395c4e5858390576e8d:04_KINETIC/nullclaw/src/channels/lark.zig:3503:        .app_secret = \"test-app-secret\","
+   },
+   {
+    "ref": "refs/heads/perf/embedding-n-plus-1-optimization-15445770156298811611",
+    "line": "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/audit/envelope.zig:679:    const secret = \"ghp_aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789\";"
+   },
+   {
+    "ref": "refs/heads/perf/embedding-n-plus-1-optimization-15445770156298811611",
+    "line": "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/channel_manager.zig:769:        .{ .account_id = \"main\", .bot_token = \"tg-main-token\" },"
+   },
+   {
+    "ref": "refs/heads/perf/embedding-n-plus-1-optimization-15445770156298811611",
+    "line": "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/channel_manager.zig:770:        .{ .account_id = \"backup\", .bot_token = \"tg-backup-token\" },"
+   },
+   {
+    "ref": "refs/heads/perf/embedding-n-plus-1-optimization-15445770156298811611",
+    "line": "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/channel_manager.zig:780:        .{ .account_id = \"dc-main\", .token = \"discord-token\" },"
+   },
+   {
+    "ref": "refs/heads/perf/embedding-n-plus-1-optimization-15445770156298811611",
+    "line": "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/channel_manager.zig:829:            .bot_token = \"max-token-poll\","
+   },
+   {
+    "ref": "refs/heads/perf/embedding-n-plus-1-optimization-15445770156298811611",
+    "line": "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/channel_manager.zig:834:            .bot_token = \"max-token-hook\","
+   },
+   {
+    "ref": "refs/heads/perf/embedding-n-plus-1-optimization-15445770156298811611",
+    "line": "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/channel_manager.zig:1253:            .auth_token = \"relay-token-0123456789\","
+   },
+   {
+    "ref": "refs/heads/perf/embedding-n-plus-1-optimization-15445770156298811611",
+    "line": "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/channels/dingtalk.zig:2199:        .client_secret = \"test-client-secret\","
+   },
+   {
+    "ref": "refs/heads/perf/embedding-n-plus-1-optimization-15445770156298811611",
+    "line": "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/channels/discord.zig:2146:        .token = \"test-bot-token\","
+   },
+   {
+    "ref": "refs/heads/perf/embedding-n-plus-1-optimization-15445770156298811611",
+    "line": "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/channels/lark.zig:3488:        .app_secret = \"test-app-secret\","
+   },
+   {
+    "ref": "refs/heads/perf/embedding-n-plus-1-optimization-15445770156298811611",
+    "line": "2ed2e010d9e7f0a8856a78cf35c7df3d89044667:04_KINETIC/nullclaw/src/channels/lark.zig:3503:        .app_secret = \"test-app-secret\","
+   },
+   {
+    "ref": "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+    "line": "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/audit/envelope.zig:679:    const secret = \"ghp_aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789\";"
+   },
+   {
+    "ref": "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+    "line": "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/channel_manager.zig:769:        .{ .account_id = \"main\", .bot_token = \"tg-main-token\" },"
+   },
+   {
+    "ref": "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+    "line": "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/channel_manager.zig:770:        .{ .account_id = \"backup\", .bot_token = \"tg-backup-token\" },"
+   },
+   {
+    "ref": "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+    "line": "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/channel_manager.zig:780:        .{ .account_id = \"dc-main\", .token = \"discord-token\" },"
+   },
+   {
+    "ref": "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+    "line": "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/channel_manager.zig:829:            .bot_token = \"max-token-poll\","
+   },
+   {
+    "ref": "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+    "line": "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/channel_manager.zig:834:            .bot_token = \"max-token-hook\","
+   },
+   {
+    "ref": "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+    "line": "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/channel_manager.zig:1253:            .auth_token = \"relay-token-0123456789\","
+   },
+   {
+    "ref": "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+    "line": "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/channels/dingtalk.zig:2199:        .client_secret = \"test-client-secret\","
+   },
+   {
+    "ref": "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+    "line": "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/channels/discord.zig:2146:        .token = \"test-bot-token\","
+   },
+   {
+    "ref": "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+    "line": "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/channels/lark.zig:3488:        .app_secret = \"test-app-secret\","
+   },
+   {
+    "ref": "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+    "line": "dadcd5268ead466f1774b4d591eae9c99285d865:04_KINETIC/nullclaw/src/channels/lark.zig:3503:        .app_secret = \"test-app-secret\","
+   },
+   {
+    "ref": "refs/heads/perf/optimize-n-plus-1-queries-13777398068298918860",
+    "line": "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/audit/envelope.zig:679:    const secret = \"ghp_aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789\";"
+   },
+   {
+    "ref": "refs/heads/perf/optimize-n-plus-1-queries-13777398068298918860",
+    "line": "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/channel_manager.zig:769:        .{ .account_id = \"main\", .bot_token = \"tg-main-token\" },"
+   },
+   {
+    "ref": "refs/heads/perf/optimize-n-plus-1-queries-13777398068298918860",
+    "line": "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/channel_manager.zig:770:        .{ .account_id = \"backup\", .bot_token = \"tg-backup-token\" },"
+   },
+   {
+    "ref": "refs/heads/perf/optimize-n-plus-1-queries-13777398068298918860",
+    "line": "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/channel_manager.zig:780:        .{ .account_id = \"dc-main\", .token = \"discord-token\" },"
+   },
+   {
+    "ref": "refs/heads/perf/optimize-n-plus-1-queries-13777398068298918860",
+    "line": "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/channel_manager.zig:829:            .bot_token = \"max-token-poll\","
+   },
+   {
+    "ref": "refs/heads/perf/optimize-n-plus-1-queries-13777398068298918860",
+    "line": "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/channel_manager.zig:834:            .bot_token = \"max-token-hook\","
+   },
+   {
+    "ref": "refs/heads/perf/optimize-n-plus-1-queries-13777398068298918860",
+    "line": "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/channel_manager.zig:1253:            .auth_token = \"relay-token-0123456789\","
+   },
+   {
+    "ref": "refs/heads/perf/optimize-n-plus-1-queries-13777398068298918860",
+    "line": "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/channels/dingtalk.zig:2199:        .client_secret = \"test-client-secret\","
+   },
+   {
+    "ref": "refs/heads/perf/optimize-n-plus-1-queries-13777398068298918860",
+    "line": "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/channels/discord.zig:2146:        .token = \"test-bot-token\","
+   },
+   {
+    "ref": "refs/heads/perf/optimize-n-plus-1-queries-13777398068298918860",
+    "line": "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/channels/lark.zig:3488:        .app_secret = \"test-app-secret\","
+   },
+   {
+    "ref": "refs/heads/perf/optimize-n-plus-1-queries-13777398068298918860",
+    "line": "362414b5c0210bc5baa989e575b063bbac4675f8:04_KINETIC/nullclaw/src/channels/lark.zig:3503:        .app_secret = \"test-app-secret\","
+   },
+   {
+    "ref": "refs/remotes/multivoice-remote/claude/claude-md-docs-tw6ptq",
+    "line": "27c830494018c20d7fd87da177f65f2a81554648:src/tests/smoke.test.ts:7:const secret = 'test-secret-that-is-long-enough';"
+   },
+   {
+    "ref": "refs/remotes/multivoice-remote/feature/bifrost-bridge-implementation",
+    "line": "57c7c5030628b4630b1e5f0d4cc6ad3358eebe42:src/tests/smoke.test.ts:7:const secret = 'test-secret-that-is-long-enough';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/agency-blueprint",
+    "line": "6553042ded6a69c69f8b402340473b274add4def:02_FORGE/cartridge/bifrost_bridge.py:168:    secret = \"bridge-demo-webhook\""
+   },
+   {
+    "ref": "refs/remotes/origin/claude/agency-blueprint",
+    "line": "6553042ded6a69c69f8b402340473b274add4def:bifrost-control-plane.patch:860:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/agency-blueprint",
+    "line": "6553042ded6a69c69f8b402340473b274add4def:bifrost-upgrade.patch:404:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/agency-blueprint",
+    "line": "6553042ded6a69c69f8b402340473b274add4def:camelot-omega-bifrost.patch:971:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/agency-blueprint",
+    "line": "6553042ded6a69c69f8b402340473b274add4def:control_plane/test_drone_node.py:69:        r3 = dispatch_to_drone(url, KBA_CARTRIDGE_ID, \"kba.status\", {}, secret=\"wrong-secret\")"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/agency-blueprint",
+    "line": "6553042ded6a69c69f8b402340473b274add4def:handover/payload/bifrost-smoke.test.ts:7:const secret = 'test-secret-that-is-long-enough';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/agency-blueprint",
+    "line": "6553042ded6a69c69f8b402340473b274add4def:handover/payload/bifrost-smoke.test.ts:43:  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/agency-blueprint",
+    "line": "6553042ded6a69c69f8b402340473b274add4def:handover/payload/multivoice-router.patch:971:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/agency-blueprint",
+    "line": "6553042ded6a69c69f8b402340473b274add4def:integration/contracts/tests/barge-in.test.ts:20:  token: 'signed-opaque-token',"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/agency-blueprint",
+    "line": "6553042ded6a69c69f8b402340473b274add4def:integration/scripts/tests/lifecycle.test.ts:87:    const token = 'camelot-test-alive';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/agency-blueprint",
+    "line": "6553042ded6a69c69f8b402340473b274add4def:integration/scripts/tests/lifecycle.test.ts:141:    const token = 'camelot-test-teardown';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/agency-blueprint",
+    "line": "6553042ded6a69c69f8b402340473b274add4def:tests/control_plane/test_viking_block_protocol.py:40:    return sign_block(block, secret=\"test-secret-32bytes-padding-12345\")"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/agency-blueprint",
+    "line": "6553042ded6a69c69f8b402340473b274add4def:tests/control_plane/test_viking_block_protocol.py:104:    assert verify_block(signed_block, secret=\"test-secret-32bytes-padding-12345\") is True"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/agency-blueprint",
+    "line": "6553042ded6a69c69f8b402340473b274add4def:tests/control_plane/test_viking_block_protocol.py:118:    secret = \"test-secret-32bytes-padding-12345\""
+   },
+   {
+    "ref": "refs/remotes/origin/claude/agency-blueprint",
+    "line": "6553042ded6a69c69f8b402340473b274add4def:tests/control_plane/test_viking_block_protocol.py:222:    assert verify_block(signed, secret=\"env-secret-12345\") is True"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/agency-blueprint",
+    "line": "6553042ded6a69c69f8b402340473b274add4def:tests/control_plane/test_viking_block_protocol.py:223:    assert verify_block(signed, secret=\"wrong-secret\") is False"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/agency-blueprint",
+    "line": "6553042ded6a69c69f8b402340473b274add4def:tests/test_excalibur_controller.py:35:    token = \"test-token-do-not-use-in-prod-deadbeef\""
+   },
+   {
+    "ref": "refs/remotes/origin/claude/agency-blueprint",
+    "line": "6553042ded6a69c69f8b402340473b274add4def:tests/test_photo_viewer_api.py:267:    password = \"my-secret-password\""
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+    "line": "4a68aa0e6a3b6223eba6796a5f2a323d257153df:02_FORGE/cartridge/bifrost_bridge.py:168:    secret = \"bridge-demo-webhook\""
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+    "line": "4a68aa0e6a3b6223eba6796a5f2a323d257153df:bifrost-control-plane.patch:860:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+    "line": "4a68aa0e6a3b6223eba6796a5f2a323d257153df:bifrost-upgrade.patch:404:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+    "line": "4a68aa0e6a3b6223eba6796a5f2a323d257153df:camelot-omega-bifrost.patch:971:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+    "line": "4a68aa0e6a3b6223eba6796a5f2a323d257153df:control_plane/test_drone_node.py:69:        r3 = dispatch_to_drone(url, KBA_CARTRIDGE_ID, \"kba.status\", {}, secret=\"wrong-secret\")"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+    "line": "4a68aa0e6a3b6223eba6796a5f2a323d257153df:handover/payload/bifrost-smoke.test.ts:7:const secret = 'test-secret-that-is-long-enough';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+    "line": "4a68aa0e6a3b6223eba6796a5f2a323d257153df:handover/payload/bifrost-smoke.test.ts:43:  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+    "line": "4a68aa0e6a3b6223eba6796a5f2a323d257153df:handover/payload/multivoice-router.patch:971:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+    "line": "4a68aa0e6a3b6223eba6796a5f2a323d257153df:integration/contracts/tests/barge-in.test.ts:20:  token: 'signed-opaque-token',"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+    "line": "4a68aa0e6a3b6223eba6796a5f2a323d257153df:tests/control_plane/test_viking_block_protocol.py:40:    return sign_block(block, secret=\"test-secret-32bytes-padding-12345\")"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+    "line": "4a68aa0e6a3b6223eba6796a5f2a323d257153df:tests/control_plane/test_viking_block_protocol.py:104:    assert verify_block(signed_block, secret=\"test-secret-32bytes-padding-12345\") is True"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+    "line": "4a68aa0e6a3b6223eba6796a5f2a323d257153df:tests/control_plane/test_viking_block_protocol.py:118:    secret = \"test-secret-32bytes-padding-12345\""
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+    "line": "4a68aa0e6a3b6223eba6796a5f2a323d257153df:tests/control_plane/test_viking_block_protocol.py:222:    assert verify_block(signed, secret=\"env-secret-12345\") is True"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+    "line": "4a68aa0e6a3b6223eba6796a5f2a323d257153df:tests/control_plane/test_viking_block_protocol.py:223:    assert verify_block(signed, secret=\"wrong-secret\") is False"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+    "line": "4a68aa0e6a3b6223eba6796a5f2a323d257153df:tests/test_excalibur_controller.py:35:    token = \"test-token-do-not-use-in-prod-deadbeef\""
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+    "line": "4a68aa0e6a3b6223eba6796a5f2a323d257153df:tests/test_photo_viewer_api.py:267:    password = \"my-secret-password\""
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+    "line": "4a68aa0e6a3b6223eba6796a5f2a323d257153df:tests/test_photo_viewer_api.py:377:    password = \"my-secret-password\""
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+    "line": "4a68aa0e6a3b6223eba6796a5f2a323d257153df:tests/test_photo_viewer_api.py:385:        api_key=\"secret-api-key\","
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-mvp-velocity",
+    "line": "b2282757c9d4d3a09979fe38ba626929401b57e6:02_FORGE/cartridge/bifrost_bridge.py:168:    secret = \"bridge-demo-webhook\""
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-mvp-velocity",
+    "line": "b2282757c9d4d3a09979fe38ba626929401b57e6:bifrost-control-plane.patch:860:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-mvp-velocity",
+    "line": "b2282757c9d4d3a09979fe38ba626929401b57e6:bifrost-upgrade.patch:404:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-mvp-velocity",
+    "line": "b2282757c9d4d3a09979fe38ba626929401b57e6:camelot-omega-bifrost.patch:971:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-mvp-velocity",
+    "line": "b2282757c9d4d3a09979fe38ba626929401b57e6:control_plane/test_drone_node.py:69:        r3 = dispatch_to_drone(url, KBA_CARTRIDGE_ID, \"kba.status\", {}, secret=\"wrong-secret\")"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-mvp-velocity",
+    "line": "b2282757c9d4d3a09979fe38ba626929401b57e6:handover/payload/bifrost-smoke.test.ts:7:const secret = 'test-secret-that-is-long-enough';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-mvp-velocity",
+    "line": "b2282757c9d4d3a09979fe38ba626929401b57e6:handover/payload/bifrost-smoke.test.ts:43:  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-mvp-velocity",
+    "line": "b2282757c9d4d3a09979fe38ba626929401b57e6:handover/payload/multivoice-router.patch:971:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-mvp-velocity",
+    "line": "b2282757c9d4d3a09979fe38ba626929401b57e6:integration/contracts/tests/barge-in.test.ts:20:  token: 'signed-opaque-token',"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-mvp-velocity",
+    "line": "b2282757c9d4d3a09979fe38ba626929401b57e6:integration/scripts/tests/lifecycle.test.ts:87:    const token = 'camelot-test-alive';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-mvp-velocity",
+    "line": "b2282757c9d4d3a09979fe38ba626929401b57e6:integration/scripts/tests/lifecycle.test.ts:141:    const token = 'camelot-test-teardown';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-mvp-velocity",
+    "line": "b2282757c9d4d3a09979fe38ba626929401b57e6:tests/control_plane/test_viking_block_protocol.py:40:    return sign_block(block, secret=\"test-secret-32bytes-padding-12345\")"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-mvp-velocity",
+    "line": "b2282757c9d4d3a09979fe38ba626929401b57e6:tests/control_plane/test_viking_block_protocol.py:104:    assert verify_block(signed_block, secret=\"test-secret-32bytes-padding-12345\") is True"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-mvp-velocity",
+    "line": "b2282757c9d4d3a09979fe38ba626929401b57e6:tests/control_plane/test_viking_block_protocol.py:118:    secret = \"test-secret-32bytes-padding-12345\""
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-mvp-velocity",
+    "line": "b2282757c9d4d3a09979fe38ba626929401b57e6:tests/control_plane/test_viking_block_protocol.py:222:    assert verify_block(signed, secret=\"env-secret-12345\") is True"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-mvp-velocity",
+    "line": "b2282757c9d4d3a09979fe38ba626929401b57e6:tests/control_plane/test_viking_block_protocol.py:223:    assert verify_block(signed, secret=\"wrong-secret\") is False"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-mvp-velocity",
+    "line": "b2282757c9d4d3a09979fe38ba626929401b57e6:tests/test_excalibur_controller.py:35:    token = \"test-token-do-not-use-in-prod-deadbeef\""
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-mvp-velocity",
+    "line": "b2282757c9d4d3a09979fe38ba626929401b57e6:tests/test_photo_viewer_api.py:267:    password = \"my-secret-password\""
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+    "line": "d7a34c7356c4314c04848d67f3f1abc42c82dda8:02_FORGE/cartridge/bifrost_bridge.py:168:    secret = \"bridge-demo-webhook\""
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+    "line": "d7a34c7356c4314c04848d67f3f1abc42c82dda8:ansible/deploy_redis_sentinel.yml:6:    redis_password: \"MERLIN_SUPER_SECRET_REDIS_AUTH_9981\""
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+    "line": "d7a34c7356c4314c04848d67f3f1abc42c82dda8:bifrost-control-plane.patch:860:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+    "line": "d7a34c7356c4314c04848d67f3f1abc42c82dda8:bifrost-upgrade.patch:404:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+    "line": "d7a34c7356c4314c04848d67f3f1abc42c82dda8:camelot-omega-bifrost.patch:971:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+    "line": "d7a34c7356c4314c04848d67f3f1abc42c82dda8:control_plane/test_drone_node.py:69:        r3 = dispatch_to_drone(url, KBA_CARTRIDGE_ID, \"kba.status\", {}, secret=\"wrong-secret\")"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+    "line": "d7a34c7356c4314c04848d67f3f1abc42c82dda8:handover/payload/bifrost-smoke.test.ts:7:const secret = 'test-secret-that-is-long-enough';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+    "line": "d7a34c7356c4314c04848d67f3f1abc42c82dda8:handover/payload/bifrost-smoke.test.ts:43:  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+    "line": "d7a34c7356c4314c04848d67f3f1abc42c82dda8:handover/payload/multivoice-router.patch:971:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+    "line": "d7a34c7356c4314c04848d67f3f1abc42c82dda8:integration/contracts/tests/barge-in.test.ts:20:  token: 'signed-opaque-token',"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+    "line": "d7a34c7356c4314c04848d67f3f1abc42c82dda8:tests/control_plane/test_viking_block_protocol.py:39:    return sign_block(block, secret=\"test-secret-32bytes-padding-12345\")"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+    "line": "d7a34c7356c4314c04848d67f3f1abc42c82dda8:tests/control_plane/test_viking_block_protocol.py:103:    assert verify_block(signed_block, secret=\"test-secret-32bytes-padding-12345\") is True"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+    "line": "d7a34c7356c4314c04848d67f3f1abc42c82dda8:tests/control_plane/test_viking_block_protocol.py:117:    secret = \"test-secret-32bytes-padding-12345\""
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+    "line": "d7a34c7356c4314c04848d67f3f1abc42c82dda8:tests/control_plane/test_viking_block_protocol.py:221:    assert verify_block(signed, secret=\"env-secret-12345\") is True"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+    "line": "d7a34c7356c4314c04848d67f3f1abc42c82dda8:tests/control_plane/test_viking_block_protocol.py:222:    assert verify_block(signed, secret=\"wrong-secret\") is False"
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+    "line": "d7a34c7356c4314c04848d67f3f1abc42c82dda8:tests/test_excalibur_controller.py:34:    token = \"test-token-do-not-use-in-prod-deadbeef\""
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+    "line": "d7a34c7356c4314c04848d67f3f1abc42c82dda8:tests/test_photo_viewer_api.py:266:    password = \"my-secret-password\""
+   },
+   {
+    "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+    "line": "d7a34c7356c4314c04848d67f3f1abc42c82dda8:tests/test_photo_viewer_api.py:376:    password = \"my-secret-password\""
+   },
+   {
+    "ref": "refs/remotes/origin/cloudbrain-prod-hardening",
+    "line": "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/audit/envelope.zig:679:    const secret = \"ghp_aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789\";"
+   },
+   {
+    "ref": "refs/remotes/origin/cloudbrain-prod-hardening",
+    "line": "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/channel_manager.zig:769:        .{ .account_id = \"main\", .bot_token = \"tg-main-token\" },"
+   },
+   {
+    "ref": "refs/remotes/origin/cloudbrain-prod-hardening",
+    "line": "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/channel_manager.zig:770:        .{ .account_id = \"backup\", .bot_token = \"tg-backup-token\" },"
+   },
+   {
+    "ref": "refs/remotes/origin/cloudbrain-prod-hardening",
+    "line": "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/channel_manager.zig:780:        .{ .account_id = \"dc-main\", .token = \"discord-token\" },"
+   },
+   {
+    "ref": "refs/remotes/origin/cloudbrain-prod-hardening",
+    "line": "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/channel_manager.zig:829:            .bot_token = \"max-token-poll\","
+   },
+   {
+    "ref": "refs/remotes/origin/cloudbrain-prod-hardening",
+    "line": "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/channel_manager.zig:834:            .bot_token = \"max-token-hook\","
+   },
+   {
+    "ref": "refs/remotes/origin/cloudbrain-prod-hardening",
+    "line": "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/channel_manager.zig:1253:            .auth_token = \"relay-token-0123456789\","
+   },
+   {
+    "ref": "refs/remotes/origin/cloudbrain-prod-hardening",
+    "line": "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/channels/dingtalk.zig:2199:        .client_secret = \"test-client-secret\","
+   },
+   {
+    "ref": "refs/remotes/origin/cloudbrain-prod-hardening",
+    "line": "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/channels/discord.zig:2146:        .token = \"test-bot-token\","
+   },
+   {
+    "ref": "refs/remotes/origin/cloudbrain-prod-hardening",
+    "line": "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/channels/lark.zig:3488:        .app_secret = \"test-app-secret\","
+   },
+   {
+    "ref": "refs/remotes/origin/cloudbrain-prod-hardening",
+    "line": "09ca4fe11154e31871cc23b39cd7012e4b5275d9:04_KINETIC/nullclaw/src/channels/lark.zig:3503:        .app_secret = \"test-app-secret\","
+   },
+   {
+    "ref": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+    "line": "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:02_FORGE/cartridge/bifrost_bridge.py:168:    secret = \"bridge-demo-webhook\""
+   },
+   {
+    "ref": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+    "line": "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:Nano-Knights/ASSIMILATIONREPORT_NeuralCompanion.md:15:  `addons/spotify_sense/smoke_spotify_sense.py` (`access_token=\"secret-access-token\"`,"
+   },
+   {
+    "ref": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+    "line": "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:Nano-Knights/ASSIMILATIONREPORT_NeuralCompanion.md:16:  `refresh_token=\"secret-refresh-token\"`, `client_id=\"secret-client-id\"`) \u2014"
+   },
+   {
+    "ref": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+    "line": "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:ansible/deploy_redis_sentinel.yml:6:    redis_password: \"MERLIN_SUPER_SECRET_REDIS_AUTH_9981\""
+   },
+   {
+    "ref": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+    "line": "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:bifrost-control-plane.patch:860:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+    "line": "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:bifrost-upgrade.patch:404:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+    "line": "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:camelot-omega-bifrost.patch:971:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+    "line": "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:control_plane/test_drone_node.py:69:        r3 = dispatch_to_drone(url, KBA_CARTRIDGE_ID, \"kba.status\", {}, secret=\"wrong-secret\")"
+   },
+   {
+    "ref": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+    "line": "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:handover/payload/bifrost-smoke.test.ts:7:const secret = 'test-secret-that-is-long-enough';"
+   },
+   {
+    "ref": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+    "line": "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:handover/payload/bifrost-smoke.test.ts:43:  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+    "line": "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:handover/payload/multivoice-router.patch:971:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+    "line": "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:integration/contracts/tests/barge-in.test.ts:20:  token: 'signed-opaque-token',"
+   },
+   {
+    "ref": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+    "line": "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:kickbox-audio/drone_bundle/02_FORGE/cartridge/bifrost_bridge.py:169:    secret = \"bridge-demo-webhook\""
+   },
+   {
+    "ref": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+    "line": "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:kickbox-audio/packages/policy-engine/schemas/approval-states.yaml:84:    requires_override_token: \"CAMELOT_DASHBOARD_OPERATOR_TOKEN\""
+   },
+   {
+    "ref": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+    "line": "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:packages/policy-engine/schemas/approval-states.yaml:84:    requires_override_token: \"CAMELOT_DASHBOARD_OPERATOR_TOKEN\""
+   },
+   {
+    "ref": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+    "line": "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:tests/control_plane/test_viking_block_protocol.py:41:    return sign_block(block, secret=\"test-secret-32bytes-padding-12345\")"
+   },
+   {
+    "ref": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+    "line": "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:tests/control_plane/test_viking_block_protocol.py:105:    assert verify_block(signed_block, secret=\"test-secret-32bytes-padding-12345\") is True"
+   },
+   {
+    "ref": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+    "line": "4ef9058dfc772bbd4f5dd38dad70c5a72e726102:tests/control_plane/test_viking_block_protocol.py:119:    secret = \"test-secret-32bytes-padding-12345\""
+   },
+   {
+    "ref": "refs/remotes/origin/fix/lint-format-pass",
+    "line": "0b77485cdc4158eddab25848a026bc6c6bfcab34:02_FORGE/cartridge/bifrost_bridge.py:168:    secret = \"bridge-demo-webhook\""
+   },
+   {
+    "ref": "refs/remotes/origin/fix/lint-format-pass",
+    "line": "0b77485cdc4158eddab25848a026bc6c6bfcab34:Nano-Knights/ASSIMILATIONREPORT_NeuralCompanion.md:15:  `addons/spotify_sense/smoke_spotify_sense.py` (`access_token=\"secret-access-token\"`,"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/lint-format-pass",
+    "line": "0b77485cdc4158eddab25848a026bc6c6bfcab34:Nano-Knights/ASSIMILATIONREPORT_NeuralCompanion.md:16:  `refresh_token=\"secret-refresh-token\"`, `client_id=\"secret-client-id\"`) \u2014"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/lint-format-pass",
+    "line": "0b77485cdc4158eddab25848a026bc6c6bfcab34:ansible/deploy_redis_sentinel.yml:6:    redis_password: \"MERLIN_SUPER_SECRET_REDIS_AUTH_9981\""
+   },
+   {
+    "ref": "refs/remotes/origin/fix/lint-format-pass",
+    "line": "0b77485cdc4158eddab25848a026bc6c6bfcab34:bifrost-control-plane.patch:860:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/lint-format-pass",
+    "line": "0b77485cdc4158eddab25848a026bc6c6bfcab34:bifrost-upgrade.patch:404:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/lint-format-pass",
+    "line": "0b77485cdc4158eddab25848a026bc6c6bfcab34:camelot-omega-bifrost.patch:971:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/lint-format-pass",
+    "line": "0b77485cdc4158eddab25848a026bc6c6bfcab34:control_plane/test_drone_node.py:69:        r3 = dispatch_to_drone(url, KBA_CARTRIDGE_ID, \"kba.status\", {}, secret=\"wrong-secret\")"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/lint-format-pass",
+    "line": "0b77485cdc4158eddab25848a026bc6c6bfcab34:handover/payload/bifrost-smoke.test.ts:7:const secret = 'test-secret-that-is-long-enough';"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/lint-format-pass",
+    "line": "0b77485cdc4158eddab25848a026bc6c6bfcab34:handover/payload/bifrost-smoke.test.ts:46:  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/lint-format-pass",
+    "line": "0b77485cdc4158eddab25848a026bc6c6bfcab34:handover/payload/multivoice-router.patch:971:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/lint-format-pass",
+    "line": "0b77485cdc4158eddab25848a026bc6c6bfcab34:integration/contracts/tests/barge-in.test.ts:17:  token: 'signed-opaque-token',"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/lint-format-pass",
+    "line": "0b77485cdc4158eddab25848a026bc6c6bfcab34:kickbox-audio/drone_bundle/02_FORGE/cartridge/bifrost_bridge.py:169:    secret = \"bridge-demo-webhook\""
+   },
+   {
+    "ref": "refs/remotes/origin/fix/lint-format-pass",
+    "line": "0b77485cdc4158eddab25848a026bc6c6bfcab34:kickbox-audio/packages/policy-engine/schemas/approval-states.yaml:84:    requires_override_token: \"CAMELOT_DASHBOARD_OPERATOR_TOKEN\""
+   },
+   {
+    "ref": "refs/remotes/origin/fix/lint-format-pass",
+    "line": "0b77485cdc4158eddab25848a026bc6c6bfcab34:packages/policy-engine/schemas/approval-states.yaml:84:    requires_override_token: \"CAMELOT_DASHBOARD_OPERATOR_TOKEN\""
+   },
+   {
+    "ref": "refs/remotes/origin/fix/lint-format-pass",
+    "line": "0b77485cdc4158eddab25848a026bc6c6bfcab34:tests/control_plane/test_viking_block_protocol.py:41:    return sign_block(block, secret=\"test-secret-32bytes-padding-12345\")"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/lint-format-pass",
+    "line": "0b77485cdc4158eddab25848a026bc6c6bfcab34:tests/control_plane/test_viking_block_protocol.py:105:    assert verify_block(signed_block, secret=\"test-secret-32bytes-padding-12345\") is True"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/lint-format-pass",
+    "line": "0b77485cdc4158eddab25848a026bc6c6bfcab34:tests/control_plane/test_viking_block_protocol.py:119:    secret = \"test-secret-32bytes-padding-12345\""
+   },
+   {
+    "ref": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+    "line": "9e07851144ebb2218aa85a9f52a38a7701180632:control_plane/test_drone_node.py:69:        r3 = dispatch_to_drone(url, KBA_CARTRIDGE_ID, \"kba.status\", {}, secret=\"wrong-secret\")"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+    "line": "9e07851144ebb2218aa85a9f52a38a7701180632:tests/control_plane/test_viking_block_protocol.py:40:    return sign_block(block, secret=\"test-secret-32bytes-padding-12345\")"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+    "line": "9e07851144ebb2218aa85a9f52a38a7701180632:tests/control_plane/test_viking_block_protocol.py:104:    assert verify_block(signed_block, secret=\"test-secret-32bytes-padding-12345\") is True"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+    "line": "9e07851144ebb2218aa85a9f52a38a7701180632:tests/control_plane/test_viking_block_protocol.py:118:    secret = \"test-secret-32bytes-padding-12345\""
+   },
+   {
+    "ref": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+    "line": "9e07851144ebb2218aa85a9f52a38a7701180632:tests/control_plane/test_viking_block_protocol.py:222:    assert verify_block(signed, secret=\"env-secret-12345\") is True"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+    "line": "9e07851144ebb2218aa85a9f52a38a7701180632:tests/control_plane/test_viking_block_protocol.py:223:    assert verify_block(signed, secret=\"wrong-secret\") is False"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+    "line": "9e07851144ebb2218aa85a9f52a38a7701180632:tests/test_excalibur_controller.py:35:    token = \"test-token-do-not-use-in-prod-deadbeef\""
+   },
+   {
+    "ref": "refs/remotes/origin/fix/ruff-530-manual",
+    "line": "b8c86c9ab6d199266b55229ae8bb39cdc0828868:02_FORGE/cartridge/bifrost_bridge.py:168:    secret = \"bridge-demo-webhook\""
+   },
+   {
+    "ref": "refs/remotes/origin/fix/ruff-530-manual",
+    "line": "b8c86c9ab6d199266b55229ae8bb39cdc0828868:Nano-Knights/ASSIMILATIONREPORT_NeuralCompanion.md:15:  `addons/spotify_sense/smoke_spotify_sense.py` (`access_token=\"secret-access-token\"`,"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/ruff-530-manual",
+    "line": "b8c86c9ab6d199266b55229ae8bb39cdc0828868:Nano-Knights/ASSIMILATIONREPORT_NeuralCompanion.md:16:  `refresh_token=\"secret-refresh-token\"`, `client_id=\"secret-client-id\"`) \u2014"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/ruff-530-manual",
+    "line": "b8c86c9ab6d199266b55229ae8bb39cdc0828868:ansible/deploy_redis_sentinel.yml:6:    redis_password: \"MERLIN_SUPER_SECRET_REDIS_AUTH_9981\""
+   },
+   {
+    "ref": "refs/remotes/origin/fix/ruff-530-manual",
+    "line": "b8c86c9ab6d199266b55229ae8bb39cdc0828868:bifrost-control-plane.patch:860:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/ruff-530-manual",
+    "line": "b8c86c9ab6d199266b55229ae8bb39cdc0828868:bifrost-upgrade.patch:404:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/ruff-530-manual",
+    "line": "b8c86c9ab6d199266b55229ae8bb39cdc0828868:camelot-omega-bifrost.patch:971:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/ruff-530-manual",
+    "line": "b8c86c9ab6d199266b55229ae8bb39cdc0828868:control_plane/test_drone_node.py:69:        r3 = dispatch_to_drone(url, KBA_CARTRIDGE_ID, \"kba.status\", {}, secret=\"wrong-secret\")"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/ruff-530-manual",
+    "line": "b8c86c9ab6d199266b55229ae8bb39cdc0828868:handover/payload/bifrost-smoke.test.ts:7:const secret = 'test-secret-that-is-long-enough';"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/ruff-530-manual",
+    "line": "b8c86c9ab6d199266b55229ae8bb39cdc0828868:handover/payload/bifrost-smoke.test.ts:43:  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/ruff-530-manual",
+    "line": "b8c86c9ab6d199266b55229ae8bb39cdc0828868:handover/payload/multivoice-router.patch:971:+  const bsecret = 'bifrost-mesh-secret';"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/ruff-530-manual",
+    "line": "b8c86c9ab6d199266b55229ae8bb39cdc0828868:integration/contracts/tests/barge-in.test.ts:20:  token: 'signed-opaque-token',"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/ruff-530-manual",
+    "line": "b8c86c9ab6d199266b55229ae8bb39cdc0828868:kickbox-audio/drone_bundle/02_FORGE/cartridge/bifrost_bridge.py:169:    secret = \"bridge-demo-webhook\""
+   },
+   {
+    "ref": "refs/remotes/origin/fix/ruff-530-manual",
+    "line": "b8c86c9ab6d199266b55229ae8bb39cdc0828868:kickbox-audio/packages/policy-engine/schemas/approval-states.yaml:84:    requires_override_token: \"CAMELOT_DASHBOARD_OPERATOR_TOKEN\""
+   },
+   {
+    "ref": "refs/remotes/origin/fix/ruff-530-manual",
+    "line": "b8c86c9ab6d199266b55229ae8bb39cdc0828868:packages/policy-engine/schemas/approval-states.yaml:84:    requires_override_token: \"CAMELOT_DASHBOARD_OPERATOR_TOKEN\""
+   },
+   {
+    "ref": "refs/remotes/origin/fix/ruff-530-manual",
+    "line": "b8c86c9ab6d199266b55229ae8bb39cdc0828868:tests/control_plane/test_viking_block_protocol.py:41:    return sign_block(block, secret=\"test-secret-32bytes-padding-12345\")"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/ruff-530-manual",
+    "line": "b8c86c9ab6d199266b55229ae8bb39cdc0828868:tests/control_plane/test_viking_block_protocol.py:105:    assert verify_block(signed_block, secret=\"test-secret-32bytes-padding-12345\") is True"
+   },
+   {
+    "ref": "refs/remotes/origin/fix/ruff-530-manual",
+    "line": "b8c86c9ab6d199266b55229ae8bb39cdc0828868:tests/control_plane/test_viking_block_protocol.py:119:    secret = \"test-secret-32bytes-padding-12345\""
+   },
+   {
+    "ref": "refs/remotes/origin/main",
+    "line": "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/audit/envelope.zig:679:    const secret = \"ghp_aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789\";"
+   },
+   {
+    "ref": "refs/remotes/origin/main",
+    "line": "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/channel_manager.zig:769:        .{ .account_id = \"main\", .bot_token = \"tg-main-token\" },"
+   },
+   {
+    "ref": "refs/remotes/origin/main",
+    "line": "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/channel_manager.zig:770:        .{ .account_id = \"backup\", .bot_token = \"tg-backup-token\" },"
+   },
+   {
+    "ref": "refs/remotes/origin/main",
+    "line": "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/channel_manager.zig:780:        .{ .account_id = \"dc-main\", .token = \"discord-token\" },"
+   },
+   {
+    "ref": "refs/remotes/origin/main",
+    "line": "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/channel_manager.zig:829:            .bot_token = \"max-token-poll\","
+   },
+   {
+    "ref": "refs/remotes/origin/main",
+    "line": "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/channel_manager.zig:834:            .bot_token = \"max-token-hook\","
+   },
+   {
+    "ref": "refs/remotes/origin/main",
+    "line": "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/channel_manager.zig:1253:            .auth_token = \"relay-token-0123456789\","
+   },
+   {
+    "ref": "refs/remotes/origin/main",
+    "line": "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/channels/dingtalk.zig:2199:        .client_secret = \"test-client-secret\","
+   },
+   {
+    "ref": "refs/remotes/origin/main",
+    "line": "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/channels/discord.zig:2146:        .token = \"test-bot-token\","
+   },
+   {
+    "ref": "refs/remotes/origin/main",
+    "line": "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/channels/lark.zig:3488:        .app_secret = \"test-app-secret\","
+   },
+   {
+    "ref": "refs/remotes/origin/main",
+    "line": "b3f846cc00a1cd6aaa5387c0a1dc3a077500646c:04_KINETIC/nullclaw/src/channels/lark.zig:3503:        .app_secret = \"test-app-secret\","
+   }
+  ]
+ }
+}

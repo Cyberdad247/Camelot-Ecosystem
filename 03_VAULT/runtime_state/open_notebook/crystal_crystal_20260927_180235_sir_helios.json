@@ -1,0 +1,51 @@
+{
+  "crystal_id": "CRYSTAL_20260927_180235_SIR_HELIOS",
+  "category": "AI_MULTIAGENT_RESEARCH",
+  "target_knight": "SIR_HELIOS",
+  "target_notebook_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+  "l0_flash_summary": "# Master Compendium: ANTIGRAVITY / SIR_HELIOS Sovereign Workspace\nNode ID: ab8aa359-2b3b-4bc1-b41f-34979cdc184e\nTitle: Synergizing NotebookLM and Anti-Gravity for AI Automation Systems\nRole: NotebookLM + AntiGravity CLI Synergy, FastMCP Bridge & Telemetry Sentinel\nKnights: ANTIGRAVITY / SIR_HELIOS\nW",
+  "l1_semantic_outline": [
+    "Master Compendium: ANTIGRAVITY / SIR_HELIOS Sovereign Workspace",
+    "Dual-Engine Synergy Architecture (NotebookLM \u2194 AntiGravity)",
+    "FastMCP Capability & Tool Registry (camelot-cloudbrain)",
+    "list_cloudbrains, route_by_manifest, query_cloudbrain",
+    "push_cloudbrain_note, push_cloudbrain_source",
+    "crystallize_infinite_context, memcastle_store, memcastle_search",
+    "graphiti_add_fact, graphiti_query, cloudbrain_status",
+    "Network Stability & Keep-Alive Invariants",
+    "WARP Split-Tunnel Exclusion: googleapis.com, generativelanguage.googleapis.com, 1e100.net",
+    "Adapter Power Governance: Wi-Fi No SMPS, Ethernet EEE=0",
+    "Prefix Policy: Windows RFC 3484 IPv4 precedence (45) over IPv6 (40)",
+    "Kinetic ADB Watchdog: Automated reverse-tunnel resurrection (tcp:27183) via 04_KINETIC/qtscrcpy/qtscrcpy_kinetic_bridge.py"
+  ],
+  "l2_knowledge_triplets": [
+    {
+      "head": "Title",
+      "relation": "synergizing",
+      "tail": "NotebookLM and Anti-Gravity for AI Automation Systems"
+    },
+    {
+      "head": "Context",
+      "relation": "grounding",
+      "tail": "Query Phase Anti-Gravity queries NotebookLM via FastMCP to retrieve verbatim architectural constraints suppressing hallucinatory drift"
+    },
+    {
+      "head": "Kinetic Execution Action Phase Anti-Gravity tools run_command replace_file_content subagent swarms",
+      "relation": "execute",
+      "tail": "code AST plan verification and unit tests"
+    },
+    {
+      "head": "- Adapter",
+      "relation": "power",
+      "tail": "Governance Wi-Fi No SMPS Ethernet EEE=0"
+    },
+    {
+      "head": "- Kinetic ADB Watchdog",
+      "relation": "automated",
+      "tail": "reverse-tunnel resurrection tcp:27183 via 04_KINETIC/qtscrcpy/qtscrcpy_kinetic_bridge.py"
+    }
+  ],
+  "full_markdown_source": "# \ud83d\udd2e Synergizing NotebookLM and Anti-Gravity for AI Automation Systems \u2014 Master Compendium v1.2.0\n**Crystal ID:** `CRYSTAL_20260927_180235_SIR_HELIOS`  \n**Category:** `AI_MULTIAGENT_RESEARCH` | **Anchor Knight:** `SIR_HELIOS`  \n**Target CloudBrain Node:** `a0a4bfb9-e847-4c38-be39-7aee398f0795`  \n**Timestamp:** `2026-09-27T22:02:35.596911+00:00`  \n\n---\n\n### \ud83d\udcdc Sovereign Constitution & Living System Axioms\n> # CAMELOT-OS \u2014 Agent Instructions\n> Sovereign agent OS. Polyglot monorepo: Python 3.13 control plane, Next.js 14 PWA, Node Bifrost gateway, Rust workspace, Prisma/Postgres. Windows host, PowerShell 5.1 shell.\n> ## Shell (Windows \u2014 agents get this wrong)\n> - Chain dependent commands with `; if ($?) { ... }`, never `&&` or `head`/`ls -la`.\n> - Quote paths with spaces; pass `workdir` instead of `cd`. Never use `bash` for file reads/edits \u2014 use dedicated file tools.\n> - Python lives at `.venv\\Scripts\\python.exe` (requires-python `>=3.13`). Node `>=20`, `npm@11.11.0`.\n> ## Commands\n> ```powershell\n> # Boot / dispatch (control_plane is the cognitive apex)\n> python bin/awaken.py --status --json [--snapshot] [--skip symbiotic,titan]\n> python -m control_plane.runes.runic_router --rune FORGE --task \"<task>\"\n> python -m control_plane.runes.runic_router --list\n> python -m control_plane.<module> --test   # per-module self-test (anya_gate, factory_lane, soul_oversight, colmad, firnflow, cartridge_manager, knight_agent, inspira_metrics)\n> # Squire colony scan (HITL pauses if risk >= 50 or secrets found; CI: add --auto-approve)\n> python -m squires.colony triage [path]\n> python -m squires.colony ghost [path]     # secret/privacy scan\n> # Python tests \u2014 ONLY these paths are canonical (pyproject testpaths)\n> .Venv\\Scripts\\python.exe -m pytest tests/<file>.py -x -q\n> .Venv\\Scripts\\python.exe -m pytest tests 03_VAULT/training/configs/tests\n> # CI env (verify_os.yml): $env:CAMELOT_NON_INTERACTIVE=\"true\"; $env:MEMPALACE_SECRET=\"c0da...34b\"\n> # Do NOT sweep the repo root: 464 stray test_*.py in vendored trees cause basename collisions. 01_KERNEL tests need uninstalled optional deps \u2014 run explicitly only.\n> # Node \u2014 npm workspaces (apps/*, packages/*), Turbo tasks: build, typecheck, dev\n> npm run lint            # Biome 1.9.4 (single/double-quote rules per biome.json), NOT eslint\n> npm run typecheck       # turbo\n> npm run test            # vitest (root config excludes .camelot/.agent/03_VAULT/99_ARCHIVE/data/.venv \u2014 only apps/*/src and packages/*/src hold first-party tests)\n\n---\n\n### \u26a1 L0 Flash Compression\n# Master Compendium: ANTIGRAVITY / SIR_HELIOS Sovereign Workspace\nNode ID: ab8aa359-2b3b-4bc1-b41f-34979cdc184e\nTitle: Synergizing NotebookLM and Anti-Gravity for AI Automation Systems\nRole: NotebookLM + AntiGravity CLI Synergy, FastMCP Bridge & Telemetry Sentinel\nKnights: ANTIGRAVITY / SIR_HELIOS\nW\n\n### \ud83d\udccb L1 Semantic Outline\n- Master Compendium: ANTIGRAVITY / SIR_HELIOS Sovereign Workspace\n- Dual-Engine Synergy Architecture (NotebookLM \u2194 AntiGravity)\n- FastMCP Capability & Tool Registry (camelot-cloudbrain)\n- list_cloudbrains, route_by_manifest, query_cloudbrain\n- push_cloudbrain_note, push_cloudbrain_source\n- crystallize_infinite_context, memcastle_store, memcastle_search\n- graphiti_add_fact, graphiti_query, cloudbrain_status\n- Network Stability & Keep-Alive Invariants\n- WARP Split-Tunnel Exclusion: googleapis.com, generativelanguage.googleapis.com, 1e100.net\n- Adapter Power Governance: Wi-Fi No SMPS, Ethernet EEE=0\n- Prefix Policy: Windows RFC 3484 IPv4 precedence (45) over IPv6 (40)\n- Kinetic ADB Watchdog: Automated reverse-tunnel resurrection (tcp:27183) via 04_KINETIC/qtscrcpy/qtscrcpy_kinetic_bridge.py\n\n### \ud83d\udd78\ufe0f L2 Knowledge Graph Triplets\n| Subject | Predicate | Object |\n| :--- | :---: | :--- |\n| Title | synergizing | NotebookLM and Anti-Gravity for AI Automation Systems |\n| Context | grounding | Query Phase Anti-Gravity queries NotebookLM via FastMCP to retrieve verbatim architectural constraints suppressing hallucinatory drift |\n| Kinetic Execution Action Phase Anti-Gravity tools run_command replace_file_content subagent swarms | execute | code AST plan verification and unit tests |\n| - Adapter | power | Governance Wi-Fi No SMPS Ethernet EEE=0 |\n| - Kinetic ADB Watchdog | automated | reverse-tunnel resurrection tcp:27183 via 04_KINETIC/qtscrcpy/qtscrcpy_kinetic_bridge.py |\n\n---\n\n### \ud83d\udcd6 Full Grounded Document\n# Master Compendium: ANTIGRAVITY / SIR_HELIOS Sovereign Workspace\nNode ID: ab8aa359-2b3b-4bc1-b41f-34979cdc184e\nTitle: Synergizing NotebookLM and Anti-Gravity for AI Automation Systems\nRole: NotebookLM + AntiGravity CLI Synergy, FastMCP Bridge & Telemetry Sentinel\nKnights: ANTIGRAVITY / SIR_HELIOS\nWorldTree Root: a0a4bfb9-e847-4c38-be39-7aee398f0795\nGovernance: 1_SOURCE_MUTATE_LAW // 8GB_SCARCITY_PROTOCOL // ANYA_LAST_LAW\nUpdated: 2026-09-27T18:02:00-04:00\n\n## Dual-Engine Synergy Architecture (NotebookLM \u2194 AntiGravity)\n1. Context Grounding (Query Phase): Anti-Gravity queries NotebookLM via FastMCP to retrieve verbatim architectural constraints, suppressing hallucinatory drift.\n2. Kinetic Execution (Action Phase): Anti-Gravity tools (run_command, replace_file_content, subagent swarms) execute code, AST plan verification, and unit tests.\n3. Receipt Crystallization (Ingestion Phase): Verification receipts, test hashes, and operational learnings mutate back into Master_Compendium.md via crystallize_infinite_context and push_cloudbrain_note.\n\n## FastMCP Capability & Tool Registry (camelot-cloudbrain)\n- list_cloudbrains, route_by_manifest, query_cloudbrain\n- push_cloudbrain_note, push_cloudbrain_source\n- crystallize_infinite_context, memcastle_store, memcastle_search\n- graphiti_add_fact, graphiti_query, cloudbrain_status\n\n## Network Stability & Keep-Alive Invariants\n- WARP Split-Tunnel Exclusion: googleapis.com, generativelanguage.googleapis.com, 1e100.net\n- Adapter Power Governance: Wi-Fi No SMPS, Ethernet EEE=0\n- Prefix Policy: Windows RFC 3484 IPv4 precedence (45) over IPv6 (40)\n- Kinetic ADB Watchdog: Automated reverse-tunnel resurrection (tcp:27183) via 04_KINETIC/qtscrcpy/qtscrcpy_kinetic_bridge.py\n",
+  "created_at": "2026-09-27T22:02:35.596911+00:00",
+  "system_constitution_hash": "SHA256_CONSTITUTION_ACTIVE"
+}

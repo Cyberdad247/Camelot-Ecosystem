@@ -1,0 +1,61 @@
+{
+  "schema_version": "camelot-cartridge/1",
+  "cartridge_id": "openmuse-agent-computer",
+  "version": "0.1.0",
+  "signer": "camelot-community",
+  "signer_trust_band": "camelot-community",
+  "entrypoints": [
+    "fetch",
+    "execute",
+    "test",
+    "audit"
+  ],
+  "supported_node_profiles": [
+    "hub",
+    "experience",
+    "engineering"
+  ],
+  "requested_capabilities": [
+    "network.scoped",
+    "vfs.read",
+    "vfs.worktree_write",
+    "process.allowlisted"
+  ],
+  "denied_capabilities": [
+    "lease.issue",
+    "policy.admin",
+    "secret.export",
+    "unrestricted.network",
+    "direct_main_branch_write",
+    "auto_merge",
+    "auto_deploy",
+    "promotion.issue",
+    "epoch.increment"
+  ],
+  "resource_profile": {
+    "memory_mb": 512,
+    "timeout_s": 120,
+    "max_workers": 2
+  },
+  "verification": [
+    "contract_test",
+    "Gideon_verdict",
+    "receipt_issued"
+  ],
+  "risk_tier_invariant_cap": "T1",
+  "rollback": {
+    "strategy": "destroy_ephemeral_worktree"
+  },
+  "compat": {
+    "supported_knight_classes": [
+      "kinetic_actuator",
+      "gatekeeper",
+      "cognitive_planner",
+      "offline_reasoner"
+    ]
+  },
+  "hash_algorithm": "sha256",
+  "signature_algorithm": "ed25519",
+  "artifact_hash": "sha256:46e5461920eb0274b8ee27839d1862b01a03d47f50ad0ca94374791bd7b60f7a",
+  "signature": "ed25519:Ydu9ZAm1PSrMwXZQgdB_RGmIkRgbu4noL2h3JzVdw54r0Fey9AVNJjUWMTVKBzxw3JwQfvymP_hiv9UXDai2AQ"
+}

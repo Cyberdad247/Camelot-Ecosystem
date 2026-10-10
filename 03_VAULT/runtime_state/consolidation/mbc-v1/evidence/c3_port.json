@@ -1,0 +1,513 @@
+{
+  "phase": "C3-T01-PORT",
+  "run": "mbc-v1",
+  "timestamp": "2026-09-27T05:03:22+00:00",
+  "base": "feat/unified-v1000 @ ef7603b60b526fe836b27885b340ef29e85a4ad3",
+  "per_subsystem": {
+    "(root)": {
+      "winner": "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+      "planned": 29,
+      "add": 23,
+      "port": 4,
+      "merge": 0,
+      "overlap": 2,
+      "skip_del": 0,
+      "noop": 0
+    },
+    ".agent/": {
+      "winner": "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+      "planned": 5,
+      "add": 4,
+      "port": 1,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    ".agents/": {
+      "winner": "refs/remotes/origin/fix/lint-format-pass",
+      "planned": 0,
+      "add": 0,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 1
+    },
+    ".camelot/": {
+      "winner": "refs/remotes/origin/fix/lint-format-pass",
+      "planned": 1,
+      "add": 0,
+      "port": 1,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 6
+    },
+    ".cargo/": {
+      "winner": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+      "planned": 1,
+      "add": 1,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    ".freebuff/": {
+      "winner": "refs/remotes/origin/main",
+      "planned": 1,
+      "add": 1,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    ".github/": {
+      "winner": "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+      "planned": 9,
+      "add": 9,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    ".grok/": {
+      "winner": "refs/remotes/origin/main",
+      "planned": 1,
+      "add": 1,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    ".helios/": {
+      "winner": "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+      "planned": 3,
+      "add": 3,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    ".kiro/": {
+      "winner": "refs/remotes/origin/main",
+      "planned": 2,
+      "add": 2,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    ".windsurf/": {
+      "winner": "refs/remotes/origin/main",
+      "planned": 1,
+      "add": 1,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "01_KERNEL/": {
+      "winner": "refs/remotes/origin/fix/ruff-530-manual",
+      "planned": 122,
+      "add": 0,
+      "port": 112,
+      "merge": 9,
+      "overlap": 1,
+      "skip_del": 0,
+      "noop": 5
+    },
+    "02_FORGE/": {
+      "winner": "refs/remotes/origin/fix/lint-format-pass",
+      "planned": 310,
+      "add": 0,
+      "port": 306,
+      "merge": 0,
+      "overlap": 3,
+      "skip_del": 0,
+      "noop": 9
+    },
+    "03_VAULT/": {
+      "winner": "refs/remotes/origin/fix/lint-format-pass",
+      "planned": 235,
+      "add": 0,
+      "port": 219,
+      "merge": 14,
+      "overlap": 2,
+      "skip_del": 0,
+      "noop": 1
+    },
+    "04_KINETIC/": {
+      "winner": "refs/remotes/origin/main",
+      "planned": 4,
+      "add": 0,
+      "port": 4,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "99_ARCHIVE/": {
+      "winner": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+      "planned": 2,
+      "add": 2,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "_tmp/": {
+      "winner": "refs/remotes/origin/fix/lint-format-pass",
+      "planned": 1,
+      "add": 1,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "adapters/": {
+      "winner": "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+      "planned": 3,
+      "add": 3,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "apps/": {
+      "winner": "refs/remotes/kickbox-audio/main",
+      "planned": 176,
+      "add": 136,
+      "port": 2,
+      "merge": 30,
+      "overlap": 7,
+      "skip_del": 13,
+      "noop": 0
+    },
+    "bin/": {
+      "winner": "refs/remotes/origin/main",
+      "planned": 11,
+      "add": 0,
+      "port": 11,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "blueprints/": {
+      "winner": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+      "planned": 1,
+      "add": 0,
+      "port": 1,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "cartridges/": {
+      "winner": "refs/remotes/origin/fix/lint-format-pass",
+      "planned": 21,
+      "add": 0,
+      "port": 21,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "cloudbrain/": {
+      "winner": "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+      "planned": 38,
+      "add": 38,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "config/": {
+      "winner": "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+      "planned": 1,
+      "add": 1,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "contracts/": {
+      "winner": "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+      "planned": 29,
+      "add": 29,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "control_plane/": {
+      "winner": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+      "planned": 96,
+      "add": 1,
+      "port": 13,
+      "merge": 58,
+      "overlap": 15,
+      "skip_del": 0,
+      "noop": 2
+    },
+    "core/": {
+      "winner": "refs/remotes/kickbox-audio/main",
+      "planned": 16,
+      "add": 6,
+      "port": 10,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "crates/": {
+      "winner": "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+      "planned": 17,
+      "add": 17,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "crystal/": {
+      "winner": "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+      "planned": 1,
+      "add": 1,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "data/": {
+      "winner": "refs/remotes/origin/fix/lint-format-pass",
+      "planned": 2,
+      "add": 0,
+      "port": 2,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "docs/": {
+      "winner": "refs/remotes/origin/fix/lint-format-pass",
+      "planned": 33,
+      "add": 0,
+      "port": 33,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "extensions/": {
+      "winner": "refs/remotes/origin/fix/lint-format-pass",
+      "planned": 1,
+      "add": 0,
+      "port": 1,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 1
+    },
+    "grafana/": {
+      "winner": "refs/remotes/origin/fix/lint-format-pass",
+      "planned": 1,
+      "add": 0,
+      "port": 1,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "handover/": {
+      "winner": "refs/remotes/origin/fix/lint-format-pass",
+      "planned": 9,
+      "add": 0,
+      "port": 9,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "infra/": {
+      "winner": "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+      "planned": 28,
+      "add": 27,
+      "port": 1,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "integration/": {
+      "winner": "refs/remotes/origin/claude/camelot-mvp-velocity",
+      "planned": 36,
+      "add": 12,
+      "port": 24,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 75
+    },
+    "kickbox-audio/": {
+      "winner": "refs/remotes/origin/fix/lint-format-pass",
+      "planned": 10,
+      "add": 10,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "kinetic_edge/": {
+      "winner": "refs/heads/feat/android-edge-supervisor",
+      "planned": 0,
+      "add": 0,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 11
+    },
+    "opendesign/": {
+      "winner": "refs/remotes/origin/fix/lint-format-pass",
+      "planned": 1,
+      "add": 0,
+      "port": 1,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "packages/": {
+      "winner": "refs/remotes/kickbox-audio/main",
+      "planned": 2,
+      "add": 0,
+      "port": 0,
+      "merge": 1,
+      "overlap": 1,
+      "skip_del": 1,
+      "noop": 0
+    },
+    "prototypes/": {
+      "winner": "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+      "planned": 3,
+      "add": 3,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "public/": {
+      "winner": "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+      "planned": 2,
+      "add": 2,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "scripts/": {
+      "winner": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+      "planned": 39,
+      "add": 1,
+      "port": 0,
+      "merge": 0,
+      "overlap": 6,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "squires/": {
+      "winner": "refs/remotes/origin/main",
+      "planned": 1,
+      "add": 0,
+      "port": 1,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "src/": {
+      "winner": "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+      "planned": 77,
+      "add": 77,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "tests/": {
+      "winner": "refs/remotes/origin/main",
+      "planned": 63,
+      "add": 9,
+      "port": 53,
+      "merge": 1,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "tools/": {
+      "winner": "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+      "planned": 1,
+      "add": 1,
+      "port": 0,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 0
+    },
+    "tower-r3f/": {
+      "winner": "refs/remotes/origin/fix/lint-format-pass",
+      "planned": 8,
+      "add": 0,
+      "port": 8,
+      "merge": 0,
+      "overlap": 0,
+      "skip_del": 0,
+      "noop": 1
+    },
+    "vfs/": {
+      "winner": "refs/remotes/origin/fix/lint-format-pass",
+      "planned": 2,
+      "add": 0,
+      "port": 0,
+      "merge": 1,
+      "overlap": 1,
+      "skip_del": 0,
+      "noop": 4
+    }
+  },
+  "totals": {
+    "ADD": 422,
+    "NOOP": 116,
+    "PORT": 839,
+    "FORMAT": 40,
+    "DOCS": 3,
+    "MERGE": 114,
+    "OVERLAP": 38,
+    "SKIP_DEL": 14,
+    "UNMAPPED": 0,
+    "SKIP_IGNORED": 3
+  },
+  "elapsed_s": 335.5,
+  "free_ram_gb": 0.67,
+  "evidence_class": "confirmed"
+}

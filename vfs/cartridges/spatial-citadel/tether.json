@@ -1,0 +1,36 @@
+{
+  "cartridge_id": "spatial-citadel",
+  "vfs_uri": "vfs://worldtree/cartridges/spatial-citadel/",
+  "cloudbrain_notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+  "cloudbrain_title": "Camelot WorldTree Root & Operator Infrastructure",
+  "bound_knights": [
+    "SIR_BORIS",
+    "SIR_STITCH",
+    "SIR_HELIOS",
+    "MERLIN_OMEGA"
+  ],
+  "risk_tier_cap": "T1",
+  "domain_tags": [
+    "spatial_interface",
+    "3d_cockpit",
+    "r3f_webgl",
+    "rotational_damping",
+    "stage_navigation",
+    "gpu_acceleration"
+  ],
+  "entrypoints": [
+    "fetch",
+    "execute",
+    "audit",
+    "plan"
+  ],
+  "physical_source_path": "cartridges/spatial-citadel",
+  "files": [
+    "manifest.json",
+    "signing_key.pub",
+    "system_instruction.md"
+  ],
+  "status": "ONLINE_ACTIVE",
+  "tether_type": "POSITION_ADDRESSED_VFS_CARTRIDGE",
+  "updated_at": "2026-10-08T22:30:00.000000+00:00"
+}

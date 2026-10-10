@@ -1,0 +1,15 @@
+{
+  "delivery_id": "asm_9185adb9ea",
+  "cartridge_id": "vps-hub-cartridge-v1",
+  "target_repo": "https://github.com/Cyberdad247/my-freellmapi-proxy.git",
+  "branch": "cartridge/vps-hub-cartridge-v1",
+  "base_branch": "main",
+  "aspects_count": 5,
+  "payload_hash": "sha256:e764a8287abe812bfe63e1c025694cee696e72d2db34c367cba7b68e80477a88",
+  "anya_first_gate": "PASSED",
+  "merlin_crucible": "CERTIFIED",
+  "anya_last_gate": "SEALED",
+  "merge_status": "STAGED_FOR_MAIN",
+  "timestamp": "2026-10-07T13:07:05.040208+00:00",
+  "receipt_signature": "ed25519_sig_7402fc6e6930955d092355e51af7258e"
+}

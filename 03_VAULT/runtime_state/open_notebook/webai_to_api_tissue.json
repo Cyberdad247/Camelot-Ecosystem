@@ -1,0 +1,37 @@
+[
+  {
+    "node_id": "WEBAI_TO_API_MODULAR_LLM_ACCESS",
+    "cloudbrain_uuid": "4b7c6c48-92cf-407f-b8be-2afa4a654c2a",
+    "title": "WebAI-to-API: Modular LLM Access Without API Keys",
+    "category": "CODEBASES_DEV_TOOLING",
+    "spark_id": "0x4B7C6C4892CF407FB8BE2AFA4A654C2A",
+    "role": "Browser-Native Free Frontier Proxy, Web-to-API Bridge & Session Orchestration",
+    "model": "Playwright / WebAPI (Gemini 3 Flash, Gemini 3 Pro, Extended Thinking)",
+    "summoning_rune": "Omega_WebAI",
+    "service_url": "http://127.0.0.1:6969/v1",
+    "staging_path": ".camelot/staging/repos/WebAI-to-API",
+    "vfs_mount": "vfs/notebooks/4b7c6c48-92cf-407f-b8be-2afa4a654c2a/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "capabilities": [
+      "browser_native_llm_runtime",
+      "playwright_tab_leasing",
+      "openai_compatible_streaming_sse",
+      "cookie_session_management",
+      "zero_cost_frontier_access",
+      "omniroute_upstream_federation",
+      "cloudflare_error_1010_armor",
+      "cloudflare_turnstile_dom_solving",
+      "cloudflare_warp_split_tunnel_governance",
+      "cloudflare_workers_ai_fallback"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "status": "ASSIMILATED_ACTIVE",
+    "updated_at": "2026-09-27T20:32:00-04:00"
+  }
+]

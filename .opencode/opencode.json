@@ -1,0 +1,40 @@
+{
+  "$schema": "https://opencode.ai/config.schema.json",
+  "version": "1.0.0",
+  "authority": "SIR_HELIOS = Omega_Anti_Gravity_2.0",
+  "default_provider": "chatanywhere",
+  "providers": {
+    "chatanywhere": {
+      "name": "ChatAnywhere Gateway",
+      "type": "openai",
+      "base_url": "https://api.chatanywhere.org/v1",
+      "api_key": "sk-a76oLgZdMNOVTRfPWJzim1j4HO6XNJHFyHMUr7lDqWx7gbq2",
+      "models": {
+        "chat": "gpt-4o",
+        "fast": "gpt-4o-mini",
+        "legacy": "gpt-3.5-turbo"
+      }
+    },
+    "nine_router": {
+      "name": "9Router RTK Scheduler",
+      "type": "openai-compatible",
+      "base_url": "http://127.0.0.1:8079/v1",
+      "cache_enabled": true
+    },
+    "opencodex": {
+      "name": "OpenCodex Bridge",
+      "type": "custom",
+      "base_url": "http://127.0.0.1:10100"
+    },
+    "bitrouter": {
+      "name": "BitRouter 1.58b SSM Core",
+      "type": "custom",
+      "base_url": "http://127.0.0.1:8077/api/infer"
+    }
+  },
+  "mesh_rules": {
+    "zero_downtime_failover": true,
+    "fallback_chain": ["chatanywhere", "nine_router", "opencodex", "bitrouter"],
+    "cooldown_seconds": 60
+  }
+}

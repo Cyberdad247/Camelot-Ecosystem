@@ -1,0 +1,39 @@
+{
+  "cartridge_id": "octop-agent-council",
+  "vfs_uri": "vfs://worldtree/cartridges/octop-agent-council/",
+  "cloudbrain_notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+  "cloudbrain_title": "Camelot WorldTree Root & Operator Infrastructure",
+  "bound_knights": [
+    "MERLIN_OMEGA",
+    "ANYA_OMEGA",
+    "LUKAS_OMEGA",
+    "JEV_OMEGA",
+    "SIR_BORIS",
+    "SIR_CODEX",
+    "SIR_HELIOS"
+  ],
+  "risk_tier_cap": "T1",
+  "domain_tags": [
+    "agent_council",
+    "dynamic_teams",
+    "mbti_dynamics",
+    "async_dispatch",
+    "strike_teams",
+    "gateway_routing"
+  ],
+  "entrypoints": [
+    "fetch",
+    "execute",
+    "audit",
+    "plan"
+  ],
+  "physical_source_path": "cartridges/octop-agent-council",
+  "files": [
+    "manifest.json",
+    "signing_key.pub",
+    "system_instruction.md"
+  ],
+  "status": "ONLINE_ACTIVE",
+  "tether_type": "POSITION_ADDRESSED_VFS_CARTRIDGE",
+  "updated_at": "2026-10-07T17:30:00.000000+00:00"
+}

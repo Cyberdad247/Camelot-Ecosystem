@@ -342,6 +342,38 @@ class KIVICacheCompressor:
         n = int(np.prod(target_shape))
         return stacked[:n].reshape(target_shape)
 
+    @classmethod
+    def serialize_lmcache_bytes(cls, keys: np.ndarray, values: np.ndarray) -> bytes:
+        """Serialize KV tensors into a compact binary format for LMCache storage backends."""
+        import io
+        comp = cls.compress_kv(keys, values)
+        bio = io.BytesIO()
+        np.savez_compressed(
+            bio,
+            k_packed=comp.k_packed,
+            k_scales=comp.k_scales,
+            k_zeros=comp.k_zeros,
+            v_packed=comp.v_packed,
+            v_scales=comp.v_scales,
+            v_zeros=comp.v_zeros,
+            key_shape=np.array(comp.key_shape),
+            val_shape=np.array(comp.val_shape),
+        )
+        return bio.getvalue()
+
+    @classmethod
+    def deserialize_lmcache_bytes(cls, payload: bytes) -> Tuple[np.ndarray, np.ndarray]:
+        """Deserialize a compact binary payload from LMCache into reconstructed (keys, values)."""
+        import io
+        bio = io.BytesIO(payload)
+        data = np.load(bio)
+        key_shape = tuple(data["key_shape"])
+        val_shape = tuple(data["val_shape"])
+        recon_k = cls.dequantize_keys(data["k_packed"], data["k_scales"], data["k_zeros"], key_shape)
+        recon_v = cls.dequantize_values(data["v_packed"], data["v_scales"], data["v_zeros"], val_shape)
+        return recon_k, recon_v
+
+
 
 # ==============================================================================
 # 4. SnapKV / StreamingLLM Dynamic Attention Governor

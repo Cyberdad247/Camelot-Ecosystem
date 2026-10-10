@@ -1,0 +1,86 @@
+{
+  "node_id": "NODE_6FD09912",
+  "title": "Unlimited AI Access via AntiGravity and OmniRoute",
+  "daemon_name": "omniroute_swarm_daemon",
+  "authority": [
+    "SIR_HELIOS",
+    "SIR_CODEX"
+  ],
+  "policy": "FREE_FRONTIER_FIRST",
+  "status": "RUNNING_24_7",
+  "active_lane": "google_ai_studio:gemini-2.5-flash",
+  "uptime_cycles": 343,
+  "total_route_dispatches": 343,
+  "failover_count": 0,
+  "last_failover_ts": null,
+  "provider_health": {
+    "vps_omniroute": {
+      "online": false,
+      "latency_ms": null,
+      "detail": "<urlopen error timed out>",
+      "timestamp": "2026-09-28T04:44:25.110252+00:00"
+    },
+    "local_omniroute": {
+      "online": false,
+      "latency_ms": null,
+      "detail": "<urlopen error timed out>",
+      "timestamp": "2026-09-28T04:44:26.622690+00:00"
+    },
+    "nine_router": {
+      "online": false,
+      "latency_ms": null,
+      "detail": "<urlopen error timed out>",
+      "timestamp": "2026-09-28T04:44:28.133005+00:00"
+    },
+    "cliproxy": {
+      "online": true,
+      "latency_ms": 10.14,
+      "detail": "HTTP 200",
+      "timestamp": "2026-09-28T04:44:28.143485+00:00"
+    },
+    "local_ollama": {
+      "online": false,
+      "latency_ms": null,
+      "detail": "<urlopen error timed out>",
+      "timestamp": "2026-09-28T04:44:29.657721+00:00"
+    },
+    "bifrost_gateway": {
+      "online": false,
+      "latency_ms": null,
+      "detail": "<urlopen error timed out>",
+      "timestamp": "2026-09-28T04:44:31.170309+00:00"
+    },
+    "chatanywhere": {
+      "online": true,
+      "latency_ms": 1294.32,
+      "detail": "HTTP 200",
+      "timestamp": "2026-09-28T04:44:32.465006+00:00"
+    },
+    "bitrouter": {
+      "online": false,
+      "latency_ms": null,
+      "detail": "<urlopen error timed out>",
+      "timestamp": "2026-09-28T04:44:33.974843+00:00"
+    },
+    "opencodex": {
+      "online": false,
+      "latency_ms": null,
+      "detail": "<urlopen error timed out>",
+      "timestamp": "2026-09-28T04:44:35.483118+00:00"
+    },
+    "opencode": {
+      "online": false,
+      "latency_ms": null,
+      "detail": "<urlopen error timed out>",
+      "timestamp": "2026-09-28T04:44:36.994649+00:00"
+    },
+    "webai_to_api": {
+      "online": false,
+      "latency_ms": null,
+      "detail": "<urlopen error timed out>",
+      "timestamp": "2026-09-28T04:44:38.505306+00:00"
+    }
+  },
+  "circuit_breakers": {},
+  "updated_at": "2026-09-28T04:44:38.505377+00:00"
+}

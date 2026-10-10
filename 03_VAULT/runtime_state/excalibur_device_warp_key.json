@@ -1,0 +1,43 @@
+{
+  "schema": "camelot.warp_gate.device_key/v1.0",
+  "attesting_authority": "OMEGA_HEIMDALL",
+  "gatekeeper_spark_id": "0x3205F18991DA427296A93641FD642763",
+  "gatekeeper_tier": "OMEGA",
+  "device_identity": {
+    "model": "SM-S948U",
+    "soc": "SM8850",
+    "cpu_abi": "arm64-v8a",
+    "serial_no": "R3GL2009ZCH",
+    "tailscale_ip": "100.106.246.126",
+    "wifi_ip": "192.168.88.2",
+    "adb_endpoint": "5555"
+  },
+  "warp_gate_keypass": {
+    "keypass_id": "KP-EXCALIBUR_MOBILE-56820318",
+    "knight_id": "EXCALIBUR_MOBILE",
+    "spark_id": "0x56820318BB91451FAAC44B46424898CF",
+    "forever_access_key": "WARP-PASS-56820318-02D46C4CB0F6EC740204EFF98C8851A2",
+    "secret_salt": "bfffba68fae6f294224fe5aad7466ab1",
+    "issued_at": "2026-10-04T16:14:29.763453+00:00",
+    "tier": "ARCH",
+    "expires_at": "FOREVER",
+    "capabilities": [
+      "SOCKET_BYPASS",
+      "OUT_OF_BAND_RENDEZVOUS",
+      "VAULT_EMERGENCY_UNSEAL",
+      "TELEMETRY_OVERRIDE"
+    ],
+    "status": "ACTIVE",
+    "issuer": "LADY_ALEXANDRIA_KEYPASS_VAULT"
+  },
+  "heimdall_attestation_signature": "2486CA9842640EC8D1482229731F39E145D69363148F010E962E282E6FFBDB5F",
+  "capabilities": [
+    "SOCKET_BYPASS",
+    "OUT_OF_BAND_RENDEZVOUS",
+    "DIRECT_KGSL_VULKAN_120HZ",
+    "AGENTIC_INGRESS_AUTHORIZED",
+    "FOREVER_AVAILABLE"
+  ],
+  "status": "ATTESTED_ACTIVE",
+  "issued_at": "2026-10-04T18:35:39.559079+00:00"
+}

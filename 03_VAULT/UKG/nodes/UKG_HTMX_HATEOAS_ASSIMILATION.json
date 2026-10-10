@@ -1,0 +1,43 @@
+{
+  "@context": "https://camelot-os.dev/ukg/v10001/htmx_assimilation",
+  "@type": "Sovereign_Assimilation_Payload",
+  "crystal_id": "Ω_HTMX_HATEOAS_ASSIMILATION_v10001",
+  "matrix_id": "HATEOAS_FRONTEND_MATRIX_v10001",
+  "prime_directive": {
+    "root": "MERLIN_Ω",
+    "role": "UI_ARCHITECTURE_HYPERVISOR",
+    "constraint": "RULE_7_HOTPATH_LAW ➔ (Node_JS_Bloat == NULL) ∧ 8GB_EDGE_STRICT",
+    "strategy": "Assimilate HTMX to transfer UI state logic completely to the sovereign backend, reducing client footprint to a pure rendering glass."
+  },
+  "architectural_pillars": [
+    {
+      "pillar": "Eradication of Virtual DOM",
+      "mechanics": "Replace client-side React state reconciliation with atomic HTML fragment swaps (hx-swap), reducing client memory by ~85%."
+    },
+    {
+      "pillar": "Bifrost SSE Telemetry Integration",
+      "mechanics": "Stream telemetry through htmx-ext='sse' over open HTTP connection directly binding incoming fragments via hx-swap='beforeend' with <12ms latency."
+    },
+    {
+      "pillar": "Agentic DOM Overrides",
+      "mechanics": "Locality of Behavior (LoB) enables agents to graft verified HTML directly into active viewport via hx-post/hx-trigger without JSON parsing overhead."
+    },
+    {
+      "pillar": "Paladin Octem Security Gate",
+      "mechanics": "Z3 invariant proofs audit outbound HTML fragments at WASM32-WASI boundary, aborting microVMs if unverified script tags or XSS vectors appear."
+    }
+  ],
+  "kinetic_flow_dag": [
+    "Step_1|UI_DECONSTRUCTION|Anya_Ω ➔ Purge React/Next.js JSON serialization loops. Establish HATEOAS baseline.",
+    "Step_2|FRAGMENT_FORGE|Sir_Boris ➔ Compile endpoints to return atomic HTML fragments (e.g., <div id='telemetry'>...</div>).",
+    "Step_3|BIFROST_SSE_BIND|Sir_Link ➔ Establish hx-ext='sse' tunnels for sub-50ms HUD telemetry streaming.",
+    "Step_4|LOCALITY_OF_BEHAVIOR|Embed hx-get, hx-post, and hx-swap directly into DOM nodes, eliminating client-side state managers.",
+    "Step_5|Z3_DOM_SANITIZATION|Paladin_Octem ➔ Execute strict XSS audits on all outbound HTML payloads before transmission over Bifrost."
+  ],
+  "execution_symbolects": [
+    "⚡|//PURGE_VIRTUAL_DOM",
+    "🛡️|//LOCK_HATEOAS_STATE",
+    "👁️🗨️|//ENGAGE_HTMX_SSE_STREAM",
+    "⚜️_SOVEREIGN_TRUTH"
+  ]
+}

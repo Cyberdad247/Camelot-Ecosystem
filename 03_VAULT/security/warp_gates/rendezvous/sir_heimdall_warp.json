@@ -1,0 +1,13 @@
+{
+  "warp_gate_version": "1.0",
+  "transport": "warp_gate_out_of_band_rendezvous",
+  "knight_id": "SIR_HEIMDALL",
+  "spark_id": "0x3205F18991DA427296A93641FD642763",
+  "keypass_id": "KP-SIR_HEIMDALL-3205F189",
+  "timestamp": "2026-10-04T18:25:49.531720+00:00",
+  "payload": {
+    "target": "127.0.0.1:59199",
+    "error": "timed out",
+    "state": "FALLBACK_ACTIVE"
+  }
+}

@@ -1,0 +1,66 @@
+{
+ "phase": "C1-T04-BASELINE",
+ "run": "mbc-v1",
+ "timestamp": "2026-09-27T00:39:13+00:00",
+ "state": "feat/unified-v1000 @ ef7603b6 (== main, pre-port)",
+ "steps": [
+  {
+   "id": "npm_install",
+   "command": "C:\\Windows\\System32\\cmd.exe /c npm install --no-audit --no-fund",
+   "rc": 1,
+   "duration_s": 8.6,
+   "tail": "",
+   "status": "fail"
+  },
+  {
+   "id": "npm_lint",
+   "command": "C:\\Windows\\System32\\cmd.exe /c npm run lint",
+   "rc": 1,
+   "duration_s": 12.8,
+   "tail": "Found 5984 errors.",
+   "status": "fail"
+  },
+  {
+   "id": "npm_typecheck",
+   "command": "C:\\Windows\\System32\\cmd.exe /c npm run typecheck",
+   "rc": 134,
+   "duration_s": 10.0,
+   "tail": "Failed:    pwa#typecheck",
+   "status": "fail"
+  },
+  {
+   "id": "npm_test",
+   "command": "C:\\Windows\\System32\\cmd.exe /c npm run test -- --run",
+   "rc": 1,
+   "duration_s": 60.2,
+   "tail": "\u001b[2m   Duration \u001b[22m 54.45s\u001b[2m (transform 1.67s, setup 0ms, collect 22.31s, tests 3.91s, environment 42.26s, prepare 17.31s)\u001b[22m",
+   "status": "fail"
+  },
+  {
+   "id": "pytest_canonical",
+   "command": "C:\\Users\\vizio\\CAMELOT_OS\\.venv\\Scripts\\python.exe -m pytest tests 03_VAULT/training/configs/tests -q",
+   "rc": 2,
+   "duration_s": 41.3,
+   "tail": "2 errors in 33.51s",
+   "status": "fail"
+  },
+  {
+   "id": "cargo_check",
+   "command": "cargo check --quiet",
+   "rc": 101,
+   "duration_s": 22.6,
+   "tail": "",
+   "status": "fail"
+  },
+  {
+   "id": "boot_probe",
+   "command": "C:\\Users\\vizio\\CAMELOT_OS\\.venv\\Scripts\\python.exe bin/awaken.py --status --json",
+   "rc": 1,
+   "duration_s": 74.3,
+   "tail": "}",
+   "status": "fail"
+  }
+ ],
+ "evidence_class": "confirmed",
+ "reviewer": "SIR_FORGE"
+}

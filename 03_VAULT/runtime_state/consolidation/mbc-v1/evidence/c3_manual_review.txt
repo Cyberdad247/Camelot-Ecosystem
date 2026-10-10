@@ -1,0 +1,2821 @@
+
+====================================================================================================
+[1/52] .env.example   ref=refs/remotes/camelot-vps/cloudbrain-prod-hardening  py=False
+    ours+8 theirs+6 overlap=6 via=-
+    --- main
+    +++ winner
+    @@ -1,44 +1,118 @@
+    -# Camelot OS — Environment Variable Template
+    -# Copy this file to .env and fill in real values.
+    -# NEVER commit .env — it is gitignored.
+    +# GEMINI_API_KEY: Development/model-provider credential only. Do not use provider
+    +# credentials as Camelot authority. Production model routing remains lease-bound.
+    +GEMINI_API_KEY="MY_GEMINI_API_KEY"
+     
+    -# ── Email / Notifications ─────────────────────────────────────────────────────
+    -RESEND_API_KEY=re_your_resend_api_key_here
+    +# APP_URL: Browser application URL for development callbacks and links.
+    +APP_URL="MY_APP_URL"
+     
+    -# ── LLM Routing (CloudBrain / OmniRouter) ────────────────────────────────────
+    -OPENROUTER_API_KEY=sk-or-v1-your_openrouter_key_here
+    -OPEN_ROUTER_API_KEY=sk-or-v1-your_openrouter_key_here   # alias — keep in sync
+    -OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
+    -OPENAI_API_KEY=sk-proj-your_openai_key_here
+    -GEMINI_API_KEY=your_gemini_api_key_here
+    -GEMINI_CLI_CONTEXT7_API_KEY=ctx7sk-your_context7_key_here
+    -CONTEXT7_API_KEY=ctx7sk-your_context7_key_here
+    -TYPESAFE_API_KEY=your_typesafe_api_key_here
+    -TYPESAFE_AI_API_KEY=your_typesafe_api_key_here
+    -JEV_API_KEY=your_typesafe_api_key_here
+    +# Browser-visible Bifrost compatibility/experience URL. Never place secrets in
+    +# any VITE_ variable because Vite embeds them in the browser bundle.
+    +VITE_BIFROST_URL="http://127.0.0.1:4188"
+     
+    -# ── LiveKit Voice (Tasha Receptionist) ────────────────────────────────────────
+    -# Create a project at https://cloud.livekit.io and copy the keys below.
+    -LIVEKIT_URL=wss://your-project.livekit.cloud
+    -LIVEKIT_API_KEY=your_livekit_api_key
+    -LIVEKIT_API_SECRET=your_livekit_api_secret
+    +# Native production Bifrost Hub. The Go service is a trust/transport admission
+    +# boundary and does not grant effect authority.
+    +CAMELOT_BIFROST_HOST="127.0.0.1"
+    +CAMELOT_BIFROST_PORT="3000"
+    +CAMELOT_BIFROST_TRUST_ROOTS_JSON="{}"
+     
+    -# ── Redis Agent Memory ─────────────────────────────────────────────────────────
+    -# Provisioned via Redis Cloud (GCP us-east4). DB name: agent-memory.
+    -REDIS_AGENT_MEMORY_URL=https://gcp-us-east4.memory.redis.io
+    -REDIS_AGENT_MEMORY_STORE_ID=your_redis_store_id
+    -REDIS_AGENT_MEMORY_API_KEY=mem1_your_redis_api_key_here
+    +# Twin-Brain authority fencer. CAMELOT_AUTHORITY_EPOCH is bootstrap-only once the
+    +# signed certificate source is enabled. Production credentials should arrive via
+    +# systemd LoadCredential rather than plaintext environment variables.
+    +CAMELOT_EPOCH_HOST="127.0.0.1"
+    +CAMELOT_EPOCH_PORT="3014"
+    +CAMELOT_EPOCH_DATABASE_URL="sqlite:///var/lib/camelot/epoch-fencer/fencer.sqlite3"
+    +CAMELOT_EPOCH_CERTIFICATE_PATH="/run/camelot/authority/epoch.json"
+    +CAMELOT_EPOCH_PUBLIC_KEY="replace-with-epoch-fencer-32-byte-ed25519-public-key-hex"
+    +CAMELOT_EPOCH_HEARTBEAT_MAX_AGE_SECONDS="15"
+    +CAMELOT_ACTIVE_BRAIN="open-notebook"
+    +CAMELOT_AUTHORITY_EPOCH="1"
+    +CAMELOT_EPOCH_SIGNING_KEY_FILE="/run/credentials/epoch-fencer.service/epoch-signing-key"
+    +CAMELOT_EPOCH_TOKEN_FILE="/run/credentials/epoch-fencer.service/epoch-api-token"
+    +CAMELOT_EPOCH_PROMOTION_TOKEN_FILE="/run/credentials/epoch-fencer.service/epoch-promotion-token"
+        ... truncated (158 lines total)
+
+====================================================================================================
+[2/52] package.json   ref=refs/remotes/camelot-vps/cloudbrain-prod-hardening  py=False
+    ours+31 theirs+1 overlap=1 via=-
+    --- main
+    +++ winner
+    @@ -1,58 +1,47 @@
+     {
+    -  "name": "sovereign-system",
+    -  "version": "0.1.0",
+    +  "name": "react-example",
+       "private": true,
+    -  "packageManager": "npm@11.11.0",
+    -  "description": "Sovereign System monorepo — PWA + Bifrost gateway + Prisma DB (Vault_Ω / Raven_Ω / Echo_Ω)",
+    -  "workspaces": ["apps/*", "packages/*"],
+    +  "version": "0.0.0",
+    +  "type": "module",
+       "scripts": {
+    -    "build": "turbo run build",
+    -    "dev": "turbo run dev",
+    -    "typecheck": "turbo run typecheck",
+    -    "lint": "biome check .",
+    -    "lint:fix": "biome check --write .",
+    -    "format": "biome format --write .",
+    -    "test": "vitest run",
+    -    "test:watch": "vitest",
+    -    "test:vault": "vitest run packages/db/src/ledgerValidator.test.ts",
+    -    "test:bifrost": "vitest run apps/bifrost/src/server.test.ts",
+    -    "test:voice": "vitest run apps/bifrost/src/state.test.ts",
+    -    "db:generate": "npm run generate --workspace=@sovereign/db",
+    -    "db:migrate": "npm run migrate --workspace=@sovereign/db",
+    -    "db:migrate:dev": "npm run migrate:dev --workspace=@sovereign/db",
+    -    "db:seed": "npm run seed --workspace=@sovereign/db",
+    -    "benchmark": "npm run start --workspace=@sovereign/benchmark",
+    -    "omx:camelot": "python scripts/omx-camelot.py"
+    +    "dev": "vite --port=3000 --host=0.0.0.0",
+    +    "build": "vite build",
+    +    "preview": "vite preview",
+    +    "clean": "rm -rf dist server.js",
+    +    "lint": "tsc --noEmit",
+    +    "helios": "node scripts/helios.mjs",
+    +    "helios:plan": "node scripts/helios.mjs plan",
+    +    "helios:forge": "node scripts/helios.mjs forge",
+    +    "helios:verify": "node scripts/helios.mjs verify",
+    +    "camelot": "node scripts/camelot-cli.mjs",
+    +    "camelot:status": "node scripts/camelot-cli.mjs status",
+    +    "camelot:check": "node --check scripts/camelot-cli.mjs"
+    +  },
+    +  "dependencies": {
+    +    "3d-force-graph": "^1.80.0",
+    +    "@google/genai": "^2.4.0",
+    +    "@tailwindcss/vite": "^4.1.14",
+    +    "@types/canvas-confetti": "^1.9.0",
+    +    "@types/three": "^0.185.4",
+    +    "@vitejs/plugin-react": "^5.0.4",
+    +    "canvas-confetti": "^1.9.4",
+    +    "dotenv": "^17.2.3",
+    +    "express": "^4.21.2",
+    +    "lucide-react": "^0.546.0",
+    +    "motion": "^12.23.24",
+    +    "react": "^19.0.1",
+    +    "react-dom": "^19.0.1",
+    +    "three": "^0.185.1",
+    +    "vite": "^6.2.3"
+        ... truncated (101 lines total)
+
+====================================================================================================
+[3/52] 01_KERNEL/memory/mempalace_l2.py   ref=refs/remotes/origin/fix/ruff-530-manual  py=True
+    ours+13 theirs+2 overlap=1 via=-
+    --- main
+    +++ winner
+    @@ -5,8 +5,8 @@
+     import hashlib
+     import hmac
+    +import logging
+     import os
+     from pathlib import Path
+     from typing import Any, Optional
+    -import logging
+     
+     logger = logging.getLogger("MemPalaceL2")
+    @@ -25,37 +25,14 @@
+             CloudBrainConnector = None  # type: ignore[assignment]
+     
+    -
+    -def _canonical(*parts: str) -> bytes:
+    -    """Length-prefixed framing for a tuple of strings.
+    -
+    -    Concatenating fields directly makes the boundary between them ambiguous.
+    -    A 4-byte big-endian length before each field makes the encoding injective.
+    -    """
+    -    out = bytearray()
+    -    for part in parts:
+    -        raw = part.encode("utf-8")
+    -        out += len(raw).to_bytes(4, "big")
+    -        out += raw
+    -    return bytes(out)
+    -
+    -
+     class MemPalaceL2:
+         """Persistent local vector index manager (Layer 2 Memory)."""
+     
+         def __init__(self, storage_path: Optional[Path] = None):
+    -        # System-level secret for HMAC salting. Required: refusing to fall back
+    -        # to a hardcoded value means every L2 drawer ID is salted with a real,
+    -        # operator-supplied secret. Fail fast so a misconfigured deployment is
+    -        # loud instead of silently forgeable.
+    +        # System-level secret for HMAC salting
+             secret_env = os.environ.get("MEMPALACE_SECRET")
+             if not secret_env:
+    -            raise RuntimeError(
+    -                "MEMPALACE_SECRET is not set. MemPalaceL2 requires it to salt "
+    -                "HMAC drawer IDs; refusing to use a hardcoded fallback. "
+    -                "Generate one with: python -c "
+    -                "\"import secrets; print(secrets.token_hex(32))\" "
+    -                "and export it in the environment."
+    -            )
+    -
+    +            logger.warning("SECURITY WARNING: Using default MEMPALACE_SECRET. Provide one in env for production purity.")
+    +            secret_env = "OMEGA_DEER_CORE_FIX_2026"
+    +            
+             self._secret = secret_env.encode()
+             if storage_path:
+    @@ -76,16 +53,14 @@
+     
+         def _get_collection_name(self, wing: str, room: str, tenant_id: str = "default") -> str:
+    -        """Map wing/room/tenant to a unique, valid ChromaDB collection name."""
+    -        import re
+    -        digest = hashlib.sha256(_canonical(tenant_id, wing, room)).hexdigest()[:16]
+        ... truncated (79 lines total)
+
+====================================================================================================
+[4/52] 02_FORGE/KINETIC_ARMORY/omnivoice-router/omnivoice-router.js   ref=refs/remotes/origin/fix/lint-format-pass  py=False
+    ours+2 theirs+267 overlap=1 via=-
+    --- main
+    +++ winner
+    @@ -1,3 +1,2 @@
+    -"use strict";
+     /**
+      * [OMNIVOICE] OmniVoice Router — WebRTC signaling + energy VAD server
+    @@ -12,435 +11,317 @@
+      * On transcript message: enqueues forge directive to harness_queue.jsonl (priority=1)
+      */
+    -var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    -    if (k2 === undefined) k2 = k;
+    -    var desc = Object.getOwnPropertyDescriptor(m, k);
+    -    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    -      desc = { enumerable: true, get: function() { return m[k]; } };
+    -    }
+    -    Object.defineProperty(o, k2, desc);
+    -}) : (function(o, m, k, k2) {
+    -    if (k2 === undefined) k2 = k;
+    -    o[k2] = m[k];
+    -}));
+    -var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    -    Object.defineProperty(o, "default", { enumerable: true, value: v });
+    -}) : function(o, v) {
+    -    o["default"] = v;
+    -});
+    -var __importStar = (this && this.__importStar) || (function () {
+    -    var ownKeys = function(o) {
+    -        ownKeys = Object.getOwnPropertyNames || function (o) {
+    -            var ar = [];
+    -            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+    -            return ar;
+    -        };
+    -        return ownKeys(o);
+    +var __createBinding =
+    +  (this && this.__createBinding) ||
+    +  (Object.create
+    +    ? (o, m, k, k2) => {
+    +        if (k2 === undefined) k2 = k;
+    +        var desc = Object.getOwnPropertyDescriptor(m, k);
+    +        if (!desc || ('get' in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    +          desc = {
+    +            enumerable: true,
+    +            get: () => m[k],
+    +          };
+    +        }
+    +        Object.defineProperty(o, k2, desc);
+    +      }
+    +    : (o, m, k, k2) => {
+    +        if (k2 === undefined) k2 = k;
+    +        o[k2] = m[k];
+    +      });
+    +var __setModuleDefault =
+    +  (this && this.__setModuleDefault) ||
+    +  (Object.create
+    +    ? (o, v) => {
+    +        Object.defineProperty(o, 'default', { enumerable: true, value: v });
+    +      }
+    +    : (o, v) => {
+    +        o['default'] = v;
+    +      });
+        ... truncated (731 lines total)
+
+====================================================================================================
+[5/52] 02_FORGE/kinetic/vizio-router/src/router/policy.ts   ref=refs/remotes/origin/fix/lint-format-pass  py=False
+    ours+5 theirs+119 overlap=4 via=-
+    --- main
+    +++ winner
+    @@ -2,161 +2,168 @@
+     
+     export interface RoutingContext {
+    -    contextSize: number;
+    -    taskType: string;
+    -    // BitRouter & Cost parameters
+    -    virtualKey?: string;
+    -    spendCap?: number;
+    -    currentSpend?: number;
+    -    loopCount?: number;
+    -    maxLoops?: number;
+    -    // agency-agents & Persona
+    -    persona?: string;
+    -    // Custom providers / model overrides (simonw/llm)
+    -    providerOverride?: string;
+    -    // Lane / Intent text for OmniRoute lane-signal policies
+    -    intentText?: string;
+    +  contextSize: number;
+    +  taskType: string;
+    +  // BitRouter & Cost parameters
+    +  virtualKey?: string;
+    +  spendCap?: number;
+    +  currentSpend?: number;
+    +  loopCount?: number;
+    +  maxLoops?: number;
+    +  // agency-agents & Persona
+    +  persona?: string;
+    +  // Custom providers / model overrides (simonw/llm)
+    +  providerOverride?: string;
+    +  // Lane / Intent text for OmniRoute lane-signal policies
+    +  intentText?: string;
+     }
+     
+     export interface RoutingDecision {
+    -    route: string;               // Core resolved target (e.g. "OmniRoute/gemini")
+    -    engine: string;              // Model engine family (e.g. "gemini", "anthropic", "openai", "council")
+    -    costAllowed: boolean;        // Cost check result
+    -    rejectionReason?: string;    // Reason for route rejection (e.g. loop guard or spend cap exceeded)
+    -    mcpGateway?: {
+    -        allowedTools: string[];
+    -        policy: "strict" | "relaxed";
+    -    };
+    -    councilPipeline?: {          // karpathy/llm-council deliberation flow
+    -        councillors: string[];
+    -        chairman: string;
+    -        critiqueRequired: boolean;
+    -    };
+    -    systemPrompt?: string;       // agency-agents persona injection
+    +  route: string; // Core resolved target (e.g. "OmniRoute/gemini")
+    +  engine: string; // Model engine family (e.g. "gemini", "anthropic", "openai", "council")
+    +  costAllowed: boolean; // Cost check result
+    +  rejectionReason?: string; // Reason for route rejection (e.g. loop guard or spend cap exceeded)
+    +  mcpGateway?: {
+    +    allowedTools: string[];
+    +    policy: 'strict' | 'relaxed';
+    +  };
+    +  councilPipeline?: {
+    +    // karpathy/llm-council deliberation flow
+        ... truncated (309 lines total)
+
+====================================================================================================
+[6/52] 02_FORGE/kinetic/vizio-router/tests/router/policy.test.ts   ref=refs/remotes/origin/fix/lint-format-pass  py=False
+    ours+5 theirs+88 overlap=5 via=-
+    --- main
+    +++ winner
+    @@ -1,139 +1,119 @@
+    +import { describe, expect, it } from 'vitest';
+     // tests/router/policy.test.ts
+    -import { determineRoute, resolveRoute, PERSONA_PROMPTS } from '../../src/router/policy';
+    -import { describe, it, expect } from 'vitest';
+    +import { PERSONA_PROMPTS, determineRoute, resolveRoute } from '../../src/router/policy';
+     
+     describe('OmniRoute Policy', () => {
+    -    it('should route high-context tasks to Gemini', () => {
+    -        const target = determineRoute({ contextSize: 150000, taskType: "analysis" });
+    -        expect(target).toBe("OmniRoute/gemini");
+    -    });
+    -    it('should route kinetic code generation to Claude', () => {
+    -        const target = determineRoute({ contextSize: 5000, taskType: "kinetic_code_generation" });
+    -        expect(target).toBe("OmniRoute/anthropic");
+    -    });
+    -    it('should route stealth web foraging to proxy stream', () => {
+    -        const target = determineRoute({ contextSize: 1000, taskType: "stealth_web_foraging" });
+    -        expect(target).toBe("OmniRoute/proxy/stream");
+    -    });
+    -    it('should default to OpenAI for everything else', () => {
+    -        const target = determineRoute({ contextSize: 500, taskType: "summarization" });
+    -        expect(target).toBe("OmniRoute/openai");
+    -    });
+    +  it('should route high-context tasks to Gemini', () => {
+    +    const target = determineRoute({ contextSize: 150000, taskType: 'analysis' });
+    +    expect(target).toBe('OmniRoute/gemini');
+    +  });
+    +  it('should route kinetic code generation to Claude', () => {
+    +    const target = determineRoute({ contextSize: 5000, taskType: 'kinetic_code_generation' });
+    +    expect(target).toBe('OmniRoute/anthropic');
+    +  });
+    +  it('should route stealth web foraging to proxy stream', () => {
+    +    const target = determineRoute({ contextSize: 1000, taskType: 'stealth_web_foraging' });
+    +    expect(target).toBe('OmniRoute/proxy/stream');
+    +  });
+    +  it('should default to OpenAI for everything else', () => {
+    +    const target = determineRoute({ contextSize: 500, taskType: 'summarization' });
+    +    expect(target).toBe('OmniRoute/openai');
+    +  });
+     });
+     
+     describe('Assimilated Protocols Policy Routing (resolveRoute)', () => {
+    -    it('should allow valid virtual keys starting with brvk_', () => {
+    -        const target = resolveRoute({ contextSize: 500, taskType: "summarization", virtualKey: "brvk_secret123" });
+    -        expect(target.costAllowed).toBe(true);
+    -        expect(target.route).toBe("OmniRoute/openai");
+    +  it('should allow valid virtual keys starting with brvk_', () => {
+    +    const target = resolveRoute({
+    +      contextSize: 500,
+    +      taskType: 'summarization',
+    +      virtualKey: 'brvk_secret123',
+         });
+    +    expect(target.costAllowed).toBe(true);
+    +    expect(target.route).toBe('OmniRoute/openai');
+    +  });
+     
+    -    it('should reject invalid virtual keys not starting with brvk_', () => {
+        ... truncated (238 lines total)
+
+====================================================================================================
+[7/52] 03_VAULT/Nano-Knights/buildDomTree.js   ref=refs/remotes/origin/fix/lint-format-pass  py=False
+    ours+26 theirs+68 overlap=11 via=-
+    --- main
+    +++ winner
+    @@ -9,6 +9,12 @@
+       },
+     ) => {
+    -  const { showHighlightElements, focusHighlightIndex, viewportExpansion, startHighlightIndex, startId, debugMode } =
+    -    args;
+    +  const {
+    +    showHighlightElements,
+    +    focusHighlightIndex,
+    +    viewportExpansion,
+    +    startHighlightIndex,
+    +    startId,
+    +    debugMode,
+    +  } = args;
+       // Make sure to do highlight elements always, but we can hide the highlights if needed
+       const doHighlightElements = true;
+    @@ -180,5 +186,5 @@
+     
+           // Get iframe offset if necessary
+    -      let iframeOffset = { x: 0, y: 0 };
+    +      const iframeOffset = { x: 0, y: 0 };
+           if (parentIframe) {
+             const iframeRect = parentIframe.getBoundingClientRect(); // Keep getBoundingClientRect for iframe offset
+    @@ -253,5 +259,5 @@
+           const updatePositions = () => {
+             const newRects = element.getClientRects(); // Get fresh rects
+    -        let newIframeOffset = { x: 0, y: 0 };
+    +        const newIframeOffset = { x: 0, y: 0 };
+     
+             if (parentIframe) {
+    @@ -273,5 +279,6 @@
+                 overlayData.element.style.width = `${newRect.width}px`;
+                 overlayData.element.style.height = `${newRect.height}px`;
+    -            overlayData.element.style.display = newRect.width === 0 || newRect.height === 0 ? 'none' : 'block';
+    +            overlayData.element.style.display =
+    +              newRect.width === 0 || newRect.height === 0 ? 'none' : 'block';
+               } else {
+                 // If fewer rects now, hide extra overlays
+    @@ -334,5 +341,5 @@
+             window.removeEventListener('resize', throttledUpdatePositions);
+             // Remove overlay elements if needed
+    -        overlays.forEach(overlay => overlay.element.remove());
+    +        overlays.forEach((overlay) => overlay.element.remove());
+             if (label) label.remove();
+           };
+    @@ -346,5 +353,7 @@
+           if (cleanupFn) {
+             // Keep a reference to cleanup functions in a global array
+    -        (window._highlightCleanupFunctions = window._highlightCleanupFunctions || []).push(cleanupFn);
+    +        (window._highlightCleanupFunctions = window._highlightCleanupFunctions || []).push(
+    +          cleanupFn,
+    +        );
+           }
+         }
+    @@ -377,5 +386,5 @@
+     
+         const siblings = Array.from(currentElement.parentElement.children).filter(
+    -      sib => sib.nodeName.toLowerCase() === tagName,
+    +      (sib) => sib.nodeName.toLowerCase() === tagName,
+        ... truncated (360 lines total)
+
+====================================================================================================
+[8/52] 03_VAULT/runtime_state/kickbox_dual_mode_state.json   ref=refs/remotes/origin/fix/lint-format-pass  py=False
+    ours+13 theirs+9 overlap=3 via=-
+    --- main
+    +++ winner
+    @@ -1,29 +1,16 @@
+     {
+    -  "mode": "DYNAMIC_ONLINE",
+    -  "timestamp_utc": "2026-08-12T22:26:33.365561+00:00",
+    +  "mode": "OFFLINE_MINIMUM",
+    +  "timestamp_utc": "2026-08-12T17:40:19.977705+00:00",
+       "spec": {
+    -    "title": "Dynamic Online CloudBrain Mode (Max Capability & Efficiency)",
+    -    "cloudbrain_node": "KICKBOX (8531e6d4-6fc4-428f-a754-b9e9592ac7ff)",
+    -    "worldtree_anchor": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    -    "primary_knights": [
+    -      "SIR_BORIS",
+    -      "SIR_CODEX",
+    -      "LADY_APIS",
+    -      "MERLIN_OMEGA",
+    -      "HERMES_PRIME"
+    -    ],
+    -    "llm_tier": "Frontier CLIProxy OAuth (Gemini 3.1 Pro / GPT-5.5 Codex / Claude 4.8)",
+    -    "proxy_endpoint": "http://127.0.0.1:8080/v1",
+    -    "voice_engine": "Lakisha Hybrid WebRTC + Remote Telemetry",
+    -    "bifrost_mesh": "Tailscale Direct (100.71.218.75:4433 WS / :4434 gRPC)",
+    -    "cartridges": [
+    -      "ANT",
+    -      "BEAVER",
+    -      "SPIDER",
+    -      "EAGLE",
+    -      "OCTOPUS",
+    -      "BIO_SWARM"
+    -    ],
+    -    "max_ram_mb": 4096
+    +    "title": "Offline Minimum Zero-Cloud Fallback (Bare Minimum Lightweight)",
+    +    "cloudbrain_node": "LOCAL_OPEN_NOTEBOOK_STUB (Air-Gapped)",
+    +    "worldtree_anchor": "LOCAL_VFS_CACHE",
+    +    "primary_knights": ["SIR_GHOST", "SIR_FORGE", "SIR_SENTINEL"],
+    +    "llm_tier": "Tiny LLMs (Ollama qwen2.5:1.5b / llama3.2:1b)",
+    +    "proxy_endpoint": "http://127.0.0.1:11434 (Local Ollama)",
+    +    "voice_engine": "On-Device Web Audio RMS VAD + Local SpeechSynthesis",
+    +    "bifrost_mesh": "Localhost IPC (127.0.0.1:4433)",
+    +    "cartridges": ["ANT", "BIO_SWARM"],
+    +    "max_ram_mb": 1200
+       },
+       "probes": {
+
+====================================================================================================
+[9/52] apps/bifrost/package.json   ref=refs/remotes/kickbox-audio/main  py=False
+    ours+10 theirs+1 overlap=0 via=-
+    --- main
+    +++ winner
+    @@ -5,29 +5,26 @@
+       "main": "dist/server.js",
+       "scripts": {
+    -    "dev": "tsx watch src/server.ts",
+    -    "build": "npx --no-install prisma generate && node ../../node_modules/typescript/lib/tsc.js",
+    +    "dev": "tsx src/server.ts",
+    +    "build": "tsc",
+         "start": "node dist/server.js",
+    -    "typecheck": "npx --no-install prisma generate && node ../../node_modules/typescript/lib/tsc.js --noEmit",
+    -    "test": "npx --no-install prisma generate && node ../../node_modules/vitest/vitest.mjs run",
+    -    "prisma:generate": "npx --no-install prisma generate"
+    +    "typecheck": "tsc --noEmit"
+       },
+       "dependencies": {
+    -    "@google/generative-ai": "^0.24.1",
+    -    "@prisma/client": "^5.22.0",
+    -    "@sovereign/db": "^0.1.0",
+    -    "dotenv": "^17.4.2",
+    -    "express": "^4.21.2",
+    -    "express-rate-limit": "^7.4.1",
+    -    "ws": "^8.18.0",
+    -    "zod": "^3.23.8"
+    +    "@google/genai": "^2.17.1",
+    +    "@prisma/client": "5.22.0",
+    +    "@sovereign/db": "*",
+    +    "express": "4.21.2",
+    +    "express-rate-limit": "7.4.1",
+    +    "multer": "^1.4.5-lts.1",
+    +    "ws": "8.18.0",
+    +    "zod": "4.4.3"
+       },
+       "devDependencies": {
+         "@types/express": "^4.17.21",
+    -    "@types/node": "^26.6.1",
+    +    "@types/multer": "^1.4.12",
+    +    "@types/node": "^20.10.5",
+         "@types/ws": "^8.5.13",
+    -    "prisma": "^5.22.0",
+         "tsx": "^4.19.2",
+    -    "typescript": "^5.3.3",
+    -    "vitest": "^2.1.8"
+    +    "typescript": "^5.3.3"
+       }
+     }
+
+====================================================================================================
+[10/52] apps/pwa/src/components/Dashboard.tsx   ref=refs/remotes/kickbox-audio/main  py=False
+    ours+11 theirs+15 overlap=4 via=-
+    --- main
+    +++ winner
+    @@ -1,32 +1,28 @@
+    -// SPDX-License-Identifier: MIT
+    -
+     'use client';
+     
+    -import { useState } from 'react';
+    -import { InterphaseCartridge } from '../cartridges/interphase/InterphaseCartridge';
+    +import { useEffect, useState } from 'react';
+     import { useBifrost } from '../context/BifrostContext';
+    -import { LakishaHUD } from './LakishaHUD';
+    +import { useTenant } from '../context/TenantContext';
+    +import { useLakishaVoice } from '../hooks/useLakishaVoice';
+     import { PlanCard } from './PlanCard';
+    +import { FileDriverExplorer } from './capsule/FileDriverExplorer';
+    +import { OodaMgvVisualizer } from './dashboard/OodaMgvVisualizer';
+    +import { GoogleDriveExplorer } from './drive/GoogleDriveExplorer';
+    +import { ActivitiesTab } from './tabs/ActivitiesTab';
+     import { CoffeeTab } from './tabs/CoffeeTab';
+    -import { ExcaliburCommandCenterTab } from './tabs/ExcaliburCommandCenterTab';
+     import { KnightsTab } from './tabs/KnightsTab';
+     import { OverviewTab } from './tabs/OverviewTab';
+    -import { TenantsTab } from './tabs/TenantsTab';
+     import { PropertiesTab } from './tabs/PropertiesTab';
+     import { SettingsTab } from './tabs/SettingsTab';
+    +import { KBASwarmTab } from './tabs/KBASwarmTab';
+     import { StreamingTab } from './tabs/StreamingTab';
+    +import { VaultTab } from './tabs/VaultTab';
+     import { VentureTab } from './tabs/VentureTab';
+    -import { DesktopGrid } from './DesktopGrid';
+    -import { AlfredCommandDock } from './AlfredCommandDock';
+    -import { TwinBrainNodeManager } from './TwinBrainNodeManager';
+    -import { ThemeToggle } from './ThemeToggle';
+     
+     const TABS = [
+       'Overview',
+    -  'Tenants',
+    -  'Interphase',
+    -  'Desktop Grid',
+    -  'Twin-Brain Nodes',
+    -  'Excalibur',
+    +  'File Driver',
+    +  'Google Drive',
+    +  'OODA Loop',
+       'Knights',
+       'Properties',
+    @@ -34,16 +30,35 @@
+       'Coffee',
+       'Venture',
+    +  'Vault',
+    +  'Activities',
+       'Settings',
+    +  'KBA Swarm',
+     ] as const;
+    +
+     type Tab = (typeof TABS)[number];
+     
+     export function Dashboard() {
+       const [active, setActive] = useState<Tab>('Overview');
+        ... truncated (297 lines total)
+
+====================================================================================================
+[11/52] apps/pwa/src/components/LakishaHUD.tsx   ref=refs/remotes/kickbox-audio/main  py=False
+    ours+16 theirs+131 overlap=14 via=-
+    --- main
+    +++ winner
+    @@ -1,12 +1,21 @@
+    -// SPDX-License-Identifier: MIT
+    -
+     'use client';
+     
+    -import type { FormEvent } from 'react';
+    +import { type FormEvent, useEffect, useRef, useState } from 'react';
+    +import { useAvatarConfig } from '../context/AvatarConfigContext';
+     import { useBifrost } from '../context/BifrostContext';
+    +import { useMacros } from '../context/MacroContext';
+    +import { useTenant } from '../context/TenantContext';
+     import { useLakishaVoice } from '../hooks/useLakishaVoice';
+    -import { QUERY_BUDGET_MS, TTFA_BUDGET_MS, budgetStatus, formatMs, getLatencyHistory, recordLatencySample } from '../lib/telemetry';
+    -import { Sparkline } from './Sparkline';
+    -import { SymbolectVisualizer } from './SymbolectVisualizer';
+    +import { useWakeWord } from '../hooks/useWakeWord';
+    +import { QUERY_BUDGET_MS, TTFA_BUDGET_MS, budgetStatus, formatMs } from '../lib/telemetry';
+    +import { speak } from '../lib/voice';
+    +import { MacroQuickBar } from './macro/MacroQuickBar';
+    +
+    +export type HUDDockPosition =
+    +  | 'bottom-left'
+    +  | 'bottom-right'
+    +  | 'bottom-center'
+    +  | 'top-right'
+    +  | 'minimized-pill';
+     
+     // One latency readout with a budget-colored status dot.
+    @@ -17,14 +26,10 @@
+     }: { label: string; ms: number | null; budget: number }) {
+       const status = budgetStatus(ms, budget);
+    -  // Severity ramp is expressed in the sovereign palette only — violet (calm),
+    -  // gold (attention), gold-royal (peak). Standard red/amber are forbidden by the
+    -  // design-token conformance rule enforced in HELIO_PATCH.json, so do not reach
+    -  // for `red-*`/`amber-*` here even though a latency breach feels like a
+    -  // conventional "error" state.
+    -  const dot = status === 'breach' ? 'bg-gold-royal' : status === 'warn' ? 'bg-gold' : 'bg-violet';
+    +  const dot =
+    +    status === 'breach' ? 'bg-red-400' : status === 'warn' ? 'bg-amber-400' : 'bg-[#00F0FF]';
+       const value =
+    -    status === 'breach' ? 'text-gold-royal' : status === 'warn' ? 'text-gold-light' : 'text-white/60';
+    +    status === 'breach' ? 'text-red-400' : status === 'warn' ? 'text-amber-300' : 'text-white/60';
+       return (
+    -    <span className="flex items-center gap-1.5">
+    +    <span className="flex items-center gap-1.5 font-mono text-[10px]">
+           <span className={`h-1.5 w-1.5 rounded-full ${dot}`} />
+           <span className="text-white/35">{label}</span>
+    @@ -35,8 +40,20 @@
+     
+     export function LakishaHUD() {
+    -  const { connected, state } = useBifrost();
+    -  // Unified voice core (toggle-listen model). Re-implements nothing locally:
+    -  // recognition, VAD, //IGNITE, telemetry primitives, and mute all come from
+    -  // the shared hook. Aliases keep the JSX below byte-for-byte equivalent.
+    +  const {
+    +    activeTenant,
+    +    activeCartridge,
+    +    isKnightSwitchAllowed,
+        ... truncated (879 lines total)
+
+====================================================================================================
+[12/52] apps/pwa/src/components/hud/LakeishaVideoHUD.tsx   ref=refs/remotes/kickbox-audio/main  py=False
+    ours+6 theirs+23 overlap=6 via=-
+    --- main
+    +++ winner
+    @@ -1,15 +1,29 @@
+    -// SPDX-License-Identifier: MIT
+    -
+     'use client';
+     
+    -import { useEffect, useRef, useState, useCallback } from 'react';
+    +import { useCallback, useEffect, useRef, useState } from 'react';
+    +import { useAvatarConfig } from '../../context/AvatarConfigContext';
+    +import { useTenant } from '../../context/TenantContext';
+     
+     type ConnectionState = 'idle' | 'connecting' | 'connected' | 'blocked';
+     
+     export function LakeishaVideoHUD() {
+    +  const { isConfigOpen, toggleConfig } = useAvatarConfig();
+    +  let isAuthenticated = false;
+    +  let isGatewayOpen = false;
+    +  try {
+    +    const tenantCtx = useTenant();
+    +    isAuthenticated = tenantCtx.isAuthenticated;
+    +    isGatewayOpen = tenantCtx.isGatewayOpen;
+    +  } catch {
+    +    // Fallback if tenant context not wrapped
+    +  }
+    +
+       const videoRef = useRef<HTMLVideoElement | null>(null);
+       const audioContextRef = useRef<AudioContext | null>(null);
+       const [state, setState] = useState<ConnectionState>('idle');
+       const [mediaError, setMediaError] = useState<string | null>(null);
+    +
+    +  // Minimize / Hide HUD State
+    +  const [isMinimized, setIsMinimized] = useState(false);
+     
+       // Responsive & Draggable HUD State
+    @@ -78,11 +92,14 @@
+       };
+     
+    -  const handleMouseMove = useCallback((e: MouseEvent) => {
+    -    if (!dragging) return;
+    -    setPosition({
+    -      x: e.clientX - dragStartRef.current.x,
+    -      y: e.clientY - dragStartRef.current.y,
+    -    });
+    -  }, [dragging]);
+    +  const handleMouseMove = useCallback(
+    +    (e: MouseEvent) => {
+    +      if (!dragging) return;
+    +      setPosition({
+    +        x: e.clientX - dragStartRef.current.x,
+    +        y: e.clientY - dragStartRef.current.y,
+    +      });
+    +    },
+    +    [dragging],
+    +  );
+     
+       const handleMouseUp = useCallback(() => {
+    @@ -100,12 +117,15 @@
+       };
+     
+        ... truncated (198 lines total)
+
+====================================================================================================
+[13/52] apps/pwa/src/components/tabs/KnightsTab.tsx   ref=refs/remotes/kickbox-audio/main  py=False
+    ours+48 theirs+11 overlap=11 via=-
+    --- main
+    +++ winner
+    @@ -1,200 +1,74 @@
+    -// SPDX-License-Identifier: MIT
+    -// Sovereign Round Table Knights Tab — v10001.00-CYBERTRONIA
+    -
+     'use client';
+     
+    -import React, { useState } from 'react';
+    +import { useState } from 'react';
+     import { useBifrost } from '../../context/BifrostContext';
+    -import { SOVEREIGN_PERSONAS, VoicePersona } from '../../lib/voiceInferenceLayer';
+    -import { KnightCharacterSheetModal } from '../knights/KnightCharacterSheetModal';
+    +import { KNIGHTS, type Knight } from '../../lib/realm-data';
+    +import { KnightConsole } from '../KnightConsole';
+     
+    -export function KnightsTab() {
+    +const statusDot: Record<Knight['status'], string> = {
+    +  active: 'bg-violet shadow-glow',
+    +  busy: 'bg-gold-royal shadow-gold',
+    +  idle: 'bg-white/30',
+    +};
+    +
+    +function KnightCard({ knight, onOpen }: { knight: Knight; onOpen: () => void }) {
+       const { sendVoiceCommand, connected } = useBifrost();
+    -  const [selectedKnight, setSelectedKnight] = useState<VoicePersona | null>(null);
+    -  const [filter, setFilter] = useState<'ALL' | 'ALPHA_OMEGA' | 'ACTIVE_LEASE' | 'HANDSHAKE_REQ'>('ALL');
+    -
+    -  const filteredKnights = SOVEREIGN_PERSONAS.filter(k => {
+    -    if (filter === 'ALPHA_OMEGA') {
+    -      return k.rpgCodex.level >= 10 || k.reyaFabricConnection.autonomyTier === 'HITL_GUIDED_ALPHA_OMEGA' || k.reyaFabricConnection.autonomyTier === 'SOVEREIGN_ROOT';
+    -    }
+    -    if (filter === 'ACTIVE_LEASE') {
+    -      return k.reyaFabricConnection.leaseActive;
+    -    }
+    -    if (filter === 'HANDSHAKE_REQ') {
+    -      return k.reyaFabricConnection.handshakeStatus === 'HANDSHAKE_REQUIRED';
+    -    }
+    -    return true;
+    -  });
+    -
+    -  const activeLeases = SOVEREIGN_PERSONAS.filter(k => k.reyaFabricConnection.leaseActive).length;
+    -  const alphaOmegas = SOVEREIGN_PERSONAS.filter(k => k.rpgCodex.level >= 10).length;
+    -
+    -  const statusColors = {
+    -    SOVEREIGN_ROOT: 'bg-amber-500/20 text-amber-300 border-amber-500/50',
+    -    HITL_GUIDED_ALPHA_OMEGA: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/50',
+    -    APPROVED_LEASE: 'bg-sky-500/20 text-sky-300 border-sky-500/50',
+    -    HANDSHAKE_REQUIRED: 'bg-rose-500/20 text-rose-400 border-rose-500/50'
+    -  };
+    -
+       return (
+    -    <div className="space-y-6 font-mono">
+    -      {/* ── Top Header Banner ─────────────────────────────────── */}
+    -      <div className="flex flex-col md:flex-row items-start md:items-center justify-between border border-gold/30 bg-smoke-900/80 px-6 py-4 backdrop-blur-md gap-4 shadow-gold">
+    +    <div className="flex flex-col border border-gold/20 bg-smoke-800/80 p-5 backdrop-blur-sm transition-shadow hover:border-gold/40 hover:shadow-gold">
+    +      <div className="flex items-start justify-between">
+             <div>
+    -          <div className="flex items-center gap-2">
+    -            <span className="text-[10px] text-gold-royal uppercase tracking-[0.2em]">
+        ... truncated (264 lines total)
+
+====================================================================================================
+[14/52] apps/pwa/src/components/tabs/OverviewTab.tsx   ref=refs/remotes/kickbox-audio/main  py=False
+    ours+1 theirs+39 overlap=1 via=-
+    --- main
+    +++ winner
+    @@ -1,12 +1,9 @@
+    -// SPDX-License-Identifier: MIT
+    -
+     'use client';
+     
+    +import { useState } from 'react';
+     import { useBifrost } from '../../context/BifrostContext';
+    +import { useLakishaVoice } from '../../hooks/useLakishaVoice';
+     import { Sparkline } from '../Sparkline';
+    -import { OpenDesignStatusPills } from '../OpenDesignStatusPills';
+    -import { ExecutiveMetricsPanel } from '../ExecutiveMetricsPanel';
+    -import { SwarmRosterPanel } from '../SwarmRosterPanel';
+    -import { CartridgeSlot } from '../CartridgeSlot';
+    +import { LakeishaVideoHUD } from '../hud/LakeishaVideoHUD';
+     
+     // Seed baseline (task.md §1.4) — used until Bifrost broadcasts live state.
+    @@ -31,5 +28,5 @@
+     const TREND = [11.1, 11.6, 11.4, 12.3, 12.0, 12.9, 13.4, 13.1, 13.8, 14.2];
+     
+    -function KpiCard({
+    +function BrutalistMetricCard({
+       label,
+       value,
+    @@ -37,4 +34,5 @@
+       trend,
+       accent = '#9D4EDD',
+    +  className = '',
+     }: {
+       label: string;
+    @@ -43,18 +41,27 @@
+       trend?: number[];
+       accent?: string;
+    +  className?: string;
+     }) {
+       const positive = delta?.startsWith('+');
+       return (
+         // Rigid 0px corners — Brutalist primary data card (blueprint §2 / directive §3).
+    -    <div className="border border-gold/20 bg-smoke-800/80 p-6 backdrop-blur-sm transition-shadow hover:shadow-gold">
+    -      <p className="text-[11px] text-white/40 uppercase tracking-[0.16em]">{label}</p>
+    -      <p className="mt-3 font-display text-4xl text-gold-royal tracking-minted">{value}</p>
+    -      <div className="mt-4 flex items-end justify-between">
+    +    <div
+    +      className={`border border-white/10 bg-black/40 p-6 backdrop-blur-md transition-all hover:border-gold/40 hover:bg-black/60 ${className}`}
+    +    >
+    +      <p className="text-[11px] text-white/40 uppercase tracking-[0.2em]">{label}</p>
+    +      <p className="mt-4 font-display text-4xl text-white tracking-minted">{value}</p>
+    +      <div className="mt-6 flex items-end justify-between">
+             {delta && (
+    -          <span className={`text-xs ${positive ? 'text-violet-light' : 'text-white/40'}`}>
+    +          <span
+    +            className={`text-[10px] uppercase font-bold tracking-wider ${positive ? 'text-emerald-400' : 'text-white/40'}`}
+    +          >
+                 {delta}
+               </span>
+             )}
+    -        {trend && <Sparkline data={trend} stroke={accent} />}
+    +        {trend && (
+    +          <div className="h-8 w-24">
+        ... truncated (341 lines total)
+
+====================================================================================================
+[15/52] apps/pwa/tailwind.config.ts   ref=refs/remotes/kickbox-audio/main  py=False
+    ours+0 theirs+25 overlap=0 via=-
+    --- main
+    +++ winner
+    @@ -1,24 +1,60 @@
+    -// SPDX-License-Identifier: MIT
+    -
+     import type { Config } from 'tailwindcss';
+     
+     const config: Config = {
+       content: [
+    -    './src/app/**/*.{ts,tsx}',
+    -    './src/components/**/*.{ts,tsx}',
+    -    './components/**/*.{ts,tsx}',
+    -    './lib/**/*.{ts,tsx}',
+    +    './index.html',
+    +    './src/**/*.{js,ts,jsx,tsx}',
+    +    './components/**/*.{js,ts,jsx,tsx}',
+    +    './lib/**/*.{js,ts,jsx,tsx}',
+       ],
+    +  darkMode: 'class',
+       theme: {
+         extend: {
+           colors: {
+    +        // Arthurian Cyber Core Palette
+             void: {
+    +          DEFAULT: '#0A0A0A',
+               950: '#050505',
+    -          900: '#0D0D11',
+    +          900: '#0A0A0A',
+    +          850: '#0D0D11',
+    +          800: '#111116',
+    +        },
+    +        obsidian: '#0A0A0A',
+    +        cyan: {
+    +          DEFAULT: '#00F0FF',
+    +          neon: '#00F0FF',
+    +          glow: '#00E5FF',
+    +          dim: '#00A3B0',
+    +        },
+    +        magenta: {
+    +          DEFAULT: '#FF00FF',
+    +          neon: '#FF00FF',
+    +          glow: '#E000E0',
+    +          dim: '#990099',
+    +        },
+    +        gold: {
+    +          DEFAULT: '#FFD700',
+    +          royal: '#FFD700',
+    +          light: '#FFE44D',
+    +          antique: '#D4AF37',
+    +          dark: '#B8860B',
+    +        },
+    +        arthurian: {
+    +          void: '#0A0A0A',
+    +          cyan: '#00F0FF',
+    +          magenta: '#FF00FF',
+    +          gold: '#FFD700',
+    +          steel: '#2A2A38',
+    +          silver: '#E2E8F0',
+    +        },
+    +        smoke: {
+        ... truncated (210 lines total)
+
+====================================================================================================
+[16/52] control_plane/__init__.py   ref=refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg  py=True
+    ours+5 theirs+57 overlap=5 via=-
+    --- main
+    +++ winner
+    @@ -1,4 +1,2 @@
+    -# SPDX-License-Identifier: MIT
+    -
+     # Camelot Apex OS — Control Plane Package
+     #
+    @@ -10,193 +8,29 @@
+     #   cluster/  — swarm daemons (agents_daemon, consensus_daemon, ...)
+     #
+    -# A meta-path finder intercepts ``control_plane.<module>`` imports and
+    -# redirects them to the correct subdirectory, so legacy code like
+    -# ``from control_plane.anya_gate import AnyaGate`` continues to work.
+    -
+    -from __future__ import annotations
+    -
+    -import importlib.util
+    -import sys
+    -from pathlib import Path
+    -from typing import Any
+    -
+    -_PACKAGE_DIR = Path(__file__).resolve().parent
+    -_SUBDIRS = ("core", "dispatch", "runes", "infra", "cluster")
+    -
+    -
+    -class _ControlPlaneModuleLoader:
+    -    """Loader wrapper for redirected legacy imports.
+    -
+    -    The redirected module is loaded under the REQUESTED legacy name
+    -    (``control_plane.<leaf>``) — required so ``python -m control_plane.<leaf>``
+    -    (runpy) sees ``spec.name == mod_name`` — then the canonical name
+    -    (``control_plane.<subdir>.<leaf>``) is aliased in ``sys.modules`` to the
+    -    SAME module object. Without the alias, ``control_plane.runic_router`` and
+    -    ``control_plane.runes.runic_router`` would be two separate instances of
+    -    one file — breaking monkeypatching (a test patch on one name would not be
+    -    visible through the other) and identity checks. The canonical parent
+    -    subpackage is also wired so ``import control_plane.runes.runic_router as
+    -    x`` (which getattrs the parent) resolves.
+    -    """
+    -
+    -    def __init__(self, inner: Any, canonical: str):
+    -        self._inner = inner
+    -        self._canonical = canonical
+    -
+    -    def create_module(self, spec: Any) -> Any:
+    -        if hasattr(self._inner, "create_module"):
+    -            return self._inner.create_module(spec)
+    -        return None
+    -
+    -    def get_code(self, fullname: str) -> Any:
+    -        """Delegate to the inner loader so ``python -m control_plane.<name>``
+    -        (runpy) can execute the redirected module."""
+    -        return self._inner.get_code(fullname)
+    -
+    -    def get_source(self, fullname: str) -> Any:
+    -        if hasattr(self._inner, "get_source"):
+    -            return self._inner.get_source(fullname)
+    -        return None
+    -
+    -    def is_package(self, fullname: str) -> bool:
+        ... truncated (228 lines total)
+
+====================================================================================================
+[17/52] control_plane/core/cartridge_manager.py   ref=refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg  py=True
+    ours+5 theirs+1 overlap=1 via=-
+    --- main
+    +++ winner
+    @@ -1,4 +1,2 @@
+    -# SPDX-License-Identifier: MIT
+    -
+     # -*- coding: utf-8 -*-
+     """
+    @@ -44,5 +42,5 @@
+     from typing import Any, Literal, Optional
+     
+    -CartridgeName = Literal["ANT", "BEAVER", "SPIDER", "EAGLE", "OCTOPUS", "BIO_SWARM", "DEFAULT"]
+    +CartridgeName = Literal["ANT", "BEAVER", "SPIDER", "OCTOPUS", "DEFAULT"]
+     
+     CARTRIDGES: dict[str, dict[str, Any]] = {
+    @@ -68,11 +66,4 @@
+             "preferred_models": ["gemini-3-flash-preview"],
+         },
+    -    "EAGLE": {
+    -        "title": "Sky Watcher",
+    -        "domain": "high-altitude context audit / speculative sampling / aerial reconnaissance",
+    -        "lead_knight": "lady_apis",
+    -        "skills": ["eagle-sampling", "aerial-audit", "macro-context-foraging"],
+    -        "preferred_models": ["gemini-3.1-pro-preview", "gemini-3.6-flash"],
+    -    },
+         "OCTOPUS": {
+             "title": "Lazarus Pit",
+    @@ -81,12 +72,4 @@
+             "skills": ["piv-loop", "test-repair", "regression-hunt"],
+             "preferred_models": ["gemini-3-flash-preview", "claude-haiku-4-5-20251001"],
+    -    },
+    -    "BIO_SWARM": {
+    -        "title": "Bio-Kinetic Matrix",
+    -        "domain": "biological isolation / cellular swarm / neural pulse",
+    -        "lead_knight": "lady_apis",
+    -        "co_lead": "sir_boris",
+    -        "skills": ["cellular-isolation", "mitosis-scaling", "neural-pulse", "bio-swarm", "hive-orchestration"],
+    -        "preferred_models": ["gemini-3.6-flash", "gpt-5.5-codex"],
+         },
+         "DEFAULT": {
+    @@ -194,7 +177,7 @@
+         check("V5.1 switch ANT activates", cm.active == "ANT" and st.lead_knight == "lady_apis")
+     
+    -    # V5.3 all cartridges valid
+    -    check("V5.3 all cartridges + DEFAULT defined",
+    -          all(c in CARTRIDGES for c in ("ANT", "BEAVER", "SPIDER", "EAGLE", "OCTOPUS", "BIO_SWARM", "DEFAULT")))
+    +    # V5.3 all 4 cartridges valid
+    +    check("V5.3 all 4 cartridges + DEFAULT defined",
+    +          all(c in CARTRIDGES for c in ("ANT", "BEAVER", "SPIDER", "OCTOPUS", "DEFAULT")))
+     
+         # V5.2 state persistence across swap
+
+====================================================================================================
+[18/52] control_plane/core/forge_law.py   ref=refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg  py=True
+    ours+1 theirs+2 overlap=1 via=-
+    --- main
+    +++ winner
+    @@ -1,4 +1,2 @@
+    -# SPDX-License-Identifier: MIT
+    -
+     """Forge Law bootstrap cartridge compiler and guarded kinetic executor.
+     
+    @@ -20,6 +18,7 @@
+     from pathlib import Path
+     from typing import Any
+    -
+    -CAMELOT_HOME = Path(__file__).resolve().parents[1]
+    +from control_plane._paths import REPO_ROOT
+    +
+    +CAMELOT_HOME = REPO_ROOT
+     DEFAULT_STORE = CAMELOT_HOME / "03_VAULT" / "runtime_state" / "forge_law"
+     DEFAULT_LEDGER = CAMELOT_HOME / "03_VAULT" / "Missions" / "verification_ledger.jsonl"
+
+====================================================================================================
+[19/52] control_plane/core/knight_agent.py   ref=refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg  py=True
+    ours+2 theirs+1 overlap=1 via=-
+    --- main
+    +++ winner
+    @@ -1,4 +1,2 @@
+    -# SPDX-License-Identifier: MIT
+    -
+     # -*- coding: utf-8 -*-
+     """
+    @@ -60,10 +58,6 @@
+         "merlin_omega": "S5", "sir_helio": "S5", "sir_ouroboros": "S5",
+         "sir_heimdall": "S4",
+    -    "sir_openclaw": "S3", "sir_rustclaw": "S2", "sir_hermes": "S4",
+    +    "sir_openclaw": "S3", "sir_rustclaw": "S2", "sir_hermes": "S3",
+         "lady_nanobot": "S3", "sir_zeroclaw": "S4",
+    -    # Agents-A1 — agentic MoE orchestrator (S4 strategic orchestration). Was
+    -    # absent, so it silently defaulted to S2 and broke the council⊆tier
+    -    # invariant asserted by _selftest V5.6b.
+    -    "sir_agentis": "S4",
+     }
+     
+    @@ -87,10 +81,4 @@
+         "lady_nanobot": "next-edge",
+         "sir_zeroclaw": "qwen3:8b",
+    -    # Local-first (privacy_level=0.9). Without this entry the roster defaulted it
+    -    # to gemini-3-pro-preview — a third-party cloud model — which directly
+    -    # contradicts the "never leaks prompts to a third-party cloud" guarantee on
+    -    # the Agents-A1 engine definition. No _FALLBACK_MODEL entry is intentional: a
+    -    # cloud fallback would reintroduce the same leak.
+    -    "sir_agentis": "agents-a1",
+     }
+     
+
+====================================================================================================
+[20/52] control_plane/core/rbac_matrix.py   ref=refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg  py=True
+    ours+1 theirs+9 overlap=1 via=-
+    --- main
+    +++ winner
+    @@ -1,4 +1,2 @@
+    -# SPDX-License-Identifier: MIT
+    -
+     # -*- coding: utf-8 -*-
+     """
+    @@ -19,24 +17,56 @@
+     
+     import json
+    +import logging
+     from functools import lru_cache
+    -from pathlib import Path
+     from typing import Optional
+     
+    -_MATRIX_PATH = (
+    -    Path(__file__).parent.parent.parent
+    -    / "03_VAULT" / "training" / "configs" / "config" / "access_matrix.json"
+    -)
+    +from control_plane._paths import VAULT
+    +
+    +logger = logging.getLogger(__name__)
+    +
+    +_MATRIX_PATH = VAULT / "training" / "configs" / "config" / "access_matrix.json"
+    +
+    +
+    +class RBACUnavailableError(RuntimeError):
+    +    """The access matrix could not be loaded, so no grant can be evaluated.
+    +
+    +    Raised instead of degrading to an empty matrix: an empty matrix denies every
+    +    knight, which reads as a deliberate zero-trust decision but is really a
+    +    missing or malformed file. Callers must distinguish "denied by policy" from
+    +    "policy could not be read".
+    +    """
+     
+     
+     @lru_cache(maxsize=1)
+     def _load_matrix() -> dict:
+    +    """Load access_matrix.json, raising rather than returning a silent {}."""
+         if not _MATRIX_PATH.exists():
+    -        return {}
+    -    with _MATRIX_PATH.open("r", encoding="utf-8") as f:
+    -        return json.load(f)
+    +        raise RBACUnavailableError(
+    +            f"access matrix not found at {_MATRIX_PATH} — RBAC cannot authorize "
+    +            f"any knight. Restore the file or set CAMELOT_HOME to the repo root."
+    +        )
+    +    try:
+    +        with _MATRIX_PATH.open("r", encoding="utf-8") as f:
+    +            matrix = json.load(f)
+    +    except (OSError, json.JSONDecodeError) as err:
+    +        raise RBACUnavailableError(
+    +            f"access matrix at {_MATRIX_PATH} could not be parsed: {err}"
+    +        ) from err
+    +
+    +    if not isinstance(matrix, dict) or not matrix.get("knights"):
+    +        raise RBACUnavailableError(
+    +            f"access matrix at {_MATRIX_PATH} declares no knights — every intent "
+    +            f"would be blocked. Refusing to start with an empty grant table."
+    +        )
+        ... truncated (82 lines total)
+
+====================================================================================================
+[21/52] control_plane/infra/boot_sequence.py   ref=refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg  py=True
+    ours+112 theirs+4 overlap=1 via=-
+    --- main
+    +++ winner
+    @@ -1,4 +1,2 @@
+    -# SPDX-License-Identifier: MIT
+    -
+     """Reusable boot sequence logic for Camelot-OS.
+     
+    @@ -9,5 +7,4 @@
+     
+     import asyncio
+    -import concurrent.futures
+     import importlib.util
+     import json
+    @@ -28,5 +25,4 @@
+     from .codex_integration import boot_codex_integration
+     from .excalibur_preflight import boot_excalibur_preflight
+    -from control_plane.preflight.boot_integration import boot_vfs_preflight
+     from .heimdall_bifrost_governance import boot_heimdall_bifrost_governance
+     from control_plane.core.knight_configuration import write_knight_configuration
+    @@ -34,5 +30,5 @@
+     from .orchestration_state import summarize_boot_results
+     from .symbiotic_maintenance import boot_symbiotic_maintenance
+    -from .vps_hermes_prime import boot_vps_hermes_prime
+    +from control_plane._paths import REPO_ROOT
+     
+     _C = {
+    @@ -66,10 +62,10 @@
+             Path.home() / "CAMELOT_OS",
+             Path("C:/Users/vizio/CAMELOT_OS"),
+    -        Path(__file__).resolve().parent.parent,
+    +        REPO_ROOT,
+         ]
+         for candidate in candidates:
+             if (candidate / "03_VAULT" / "training" / "configs" / "hud.py").exists():
+                 return candidate
+    -    return Path(__file__).resolve().parent.parent
+    +    return REPO_ROOT
+     
+     
+    @@ -135,93 +131,4 @@
+     
+     
+    -_SNAPSHOT_TTL_S = 900
+    -_SNAPSHOT_NAME = "boot_snapshot.json"
+    -# Phases that must stay serial (ordering / spawn side-effects / heavy FS writes)
+    -_SERIAL_PHASE_HINTS = (
+    -    "vfs preflight",
+    -    "excalibur",
+    -    "cliproxy",
+    -    "defense grid",
+    -    "kinetic edge",
+    -    "morgana bridge",
+    -    "bifrost sidecar",
+    -    "symbiotic",
+    -)
+    -# Port probes used to validate a cached snapshot (host, port, label-hint)
+    -# NOTE: 8080 added 2026-09-19 — stale snapshot hid dead CLIProxyAPI (PID 3272 TIME_WAIT)
+    -_SNAPSHOT_PORTS: tuple[tuple[str, int], ...] = (
+    -    ("127.0.0.1", 8080),
+    -    ("127.0.0.1", 3000),
+        ... truncated (661 lines total)
+
+====================================================================================================
+[22/52] control_plane/infra/cockpit.py   ref=refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg  py=True
+    ours+1 theirs+3 overlap=1 via=-
+    --- main
+    +++ winner
+    @@ -1,4 +1,2 @@
+    -# SPDX-License-Identifier: MIT
+    -
+     """Truthful cockpit snapshot and runic exec helpers for Warp/PowerShell."""
+     
+    @@ -21,4 +19,5 @@
+     
+     from control_plane.runes.runic_router import route_rune
+    +from control_plane._paths import REPO_ROOT
+     
+     
+    @@ -27,5 +26,5 @@
+         if env and Path(env).is_dir():
+             return Path(env)
+    -    return Path(__file__).resolve().parent.parent
+    +    return REPO_ROOT
+     
+     
+    @@ -360,5 +359,5 @@
+         # Approval grant gating (CAMELOT_COCKPIT_REQUIRE_APPROVAL_GRANT)
+         if os.environ.get("CAMELOT_COCKPIT_REQUIRE_APPROVAL_GRANT") == "true":
+    -        from control_plane import approval_grants
+    +        from control_plane.core import approval_grants
+     
+             grant = os.environ.get("CAMELOT_COCKPIT_APPROVAL_GRANT", "")
+
+====================================================================================================
+[23/52] control_plane/infra/harness.py   ref=refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg  py=True
+    ours+24 theirs+9 overlap=3 via=-
+    --- main
+    +++ winner
+    @@ -1,4 +1,2 @@
+    -# SPDX-License-Identifier: MIT
+    -
+     """Sovereign Harness — 24/7 Agentic Daemon
+     CAMELOT Apex OS persistent background runtime.
+    @@ -46,14 +44,10 @@
+     PID_FILE     = LOGS_DIR / "harness.pid"
+     QUEUE_FILE   = LOGS_DIR / "harness_queue.jsonl"
+    -QUEUE_STATE_FILE = LOGS_DIR / "harness_queue_state.jsonl"
+     LEDGER_FILE  = CAMELOT_HOME / "PROVENANCE_LEDGER.md"
+    -HEARTBEAT_FILE = CAMELOT_HOME / "03_VAULT" / "runtime_state" / "harness_heartbeat.jsonl"
+     
+     # Ensure logs dir exists
+     LOGS_DIR.mkdir(parents=True, exist_ok=True)
+     
+    -# Add CAMELOT_HOME and configs dir to path for imports
+    -if str(CAMELOT_HOME) not in sys.path:
+    -    sys.path.insert(0, str(CAMELOT_HOME))
+    +# Add configs dir to path for knight imports
+     if str(CONFIGS_DIR) not in sys.path:
+         sys.path.insert(0, str(CONFIGS_DIR))
+    @@ -151,37 +145,4 @@
+     
+     
+    -def requeue_legacy_task(task_id: str) -> bool:
+    -    """Promote one approved legacy *planning* task into the v2 queue.
+    -
+    -    This deliberately refuses all non-planning directives: approval to inspect
+    -    or plan never becomes approval to restart a process or alter state.
+    -    """
+    -    if not QUEUE_FILE.exists():
+    -        return False
+    -    for line in QUEUE_FILE.read_text(encoding="utf-8").splitlines():
+    -        try:
+    -            item = json.loads(line)
+    -        except json.JSONDecodeError:
+    -            continue
+    -        if item.get("id") != task_id:
+    -            continue
+    -        directive = str(item.get("directive", ""))
+    -        if not (directive.startswith("//PLAN") or directive.startswith("Omega_ANYA")):
+    -            return False
+    -        promoted = {
+    -            "id": f"requeue-{task_id}",
+    -            "queue_version": 2,
+    -            "knight": item.get("knight", "merlin_omega"),
+    -            "directive": directive,
+    -            "priority": item.get("priority", 3),
+    -            "submitted": _utcnow(),
+    -            "requeued_from": task_id,
+    -        }
+    -        with QUEUE_FILE.open("a", encoding="utf-8") as file:
+    -            file.write(json.dumps(promoted) + "\n")
+    -        return True
+    -    return False
+    -
+    -
+     async def _probe_port(host: str, port: int, timeout: float = 1.5) -> bool:
+        ... truncated (495 lines total)
+
+====================================================================================================
+[24/52] control_plane/infra/heimdall_bifrost_governance.py   ref=refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg  py=True
+    ours+1 theirs+2 overlap=1 via=-
+    --- main
+    +++ winner
+    @@ -1,4 +1,2 @@
+    -# SPDX-License-Identifier: MIT
+    -
+     """Sir Heimdall governance harness for the Bifrost bridge.
+     
+    @@ -16,19 +14,5 @@
+     from pathlib import Path
+     from typing import Any
+    -
+    -try:
+    -    from control_plane.infra.mesh_topology import (
+    -        HUB_TAILSCALE_IP,
+    -        as_absent_inventory,
+    -        as_canonical_inventory,
+    -        as_sentinel_mobile_nodes,
+    -    )
+    -except ImportError:  # standalone fallback when executed from a remote VPS directory
+    -    from mesh_topology import (  # type: ignore
+    -        HUB_TAILSCALE_IP,
+    -        as_absent_inventory,
+    -        as_canonical_inventory,
+    -        as_sentinel_mobile_nodes,
+    -    )
+    +from control_plane._paths import REPO_ROOT
+     
+     
+    @@ -37,5 +21,5 @@
+         if env and Path(env).is_dir():
+             return Path(env)
+    -    return Path(__file__).resolve().parent.parent
+    +    return REPO_ROOT
+     
+     
+    @@ -98,70 +82,5 @@
+             "tier": "S2",
+         },
+    -    # Hermes Prime always-on VPS bridge co-pilot & MGV synthesis nano-knight
+    -    {
+    -        "id": "heimdall.hermes_mesh",
+    -        "callsign": "Hermes Mesh Sentinel",
+    -        "channel": "hermes.mesh_synthesis",
+    -        "mission": "Always-on VPS Hub co-pilot, MGV research loop, VFS forge, and CloudBrain sync across Bifrost.",
+    -        "tier": "S4",
+    -    },
+     )
+    -
+    -BIFROST_KNIGHTS_SWARM: tuple[dict[str, Any], ...] = (
+    -    {
+    -        "id": "SIR_HEIMDALL",
+    -        "role": "Bifrost Guardian & Boundary Sentinel",
+    -        "vfs": "vfs://sir_heimdall/",
+    -        "status": "ALWAYS_ON_HUB",
+    -    },
+    -    {
+    -        "id": "HERMES_PRIME",
+    -        "role": "Always-on VPS Co-Pilot & MGV Synthesis Engine",
+    -        "vfs": "vfs://hermes_prime/",
+    -        "status": "ALWAYS_ON_HUB",
+        ... truncated (141 lines total)
+
+====================================================================================================
+[25/52] control_plane/infra/kinetic_loop.py   ref=refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg  py=True
+    ours+3 theirs+11 overlap=3 via=-
+    --- main
+    +++ winner
+    @@ -1,4 +1,2 @@
+    -# SPDX-License-Identifier: MIT
+    -
+     # -*- coding: utf-8 -*-
+     """
+    @@ -32,4 +30,5 @@
+     
+     import asyncio
+    +import logging
+     import sys
+     import time
+    @@ -38,6 +37,16 @@
+     from typing import Any, Awaitable, Callable, Optional, Union
+     
+    +logger = logging.getLogger(__name__)
+    +
+     if hasattr(sys.stdout, "reconfigure"):
+         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    +
+    +
+    +class ProvenanceUnavailableError(RuntimeError):
+    +    """The RECORD stage could not persist its ledger entry.
+    +
+    +    Raised only when the loop is built with ``strict_provenance=True``; the
+    +    default path records the failure on the result instead of raising.
+    +    """
+     
+     
+    @@ -74,4 +83,5 @@
+         validation_issues: list[str] = field(default_factory=list)
+         provenance_ref: Optional[str] = None
+    +    provenance_error: Optional[str] = None
+         halted_at: Optional[Stage] = None
+         elapsed_ms: float = 0.0
+    @@ -79,13 +89,29 @@
+         @property
+         def complete(self) -> bool:
+    -        """True iff all six stages fired in order."""
+    -        return self.stages_fired == list(STAGE_ORDER)
+    +        """True iff all six stages fired in order *and* RECORD persisted.
+    +
+    +        The provenance reference is part of the completion contract: a run whose
+    +        ledger entry was never written is not auditable, so it must not report as
+    +        complete no matter how far the pipeline got.
+    +        """
+    +        return (
+    +            self.stages_fired == list(STAGE_ORDER)
+    +            and self.provenance_ref is not None
+    +        )
+     
+         def render(self) -> str:
+             chain = " → ".join(s.value for s in self.stages_fired)
+    -        tail = f"  HALTED@{self.halted_at.value}" if self.halted_at else "  ✓ complete"
+    +        if self.provenance_error:
+    +            # Names the cause explicitly: a halt at RECORD means the run executed
+    +            # but left no audit trail, which is not the same as halting earlier.
+    +            tail = "  ✗ PROVENANCE FAILED — run is NOT auditable"
+    +        elif self.halted_at:
+        ... truncated (141 lines total)
+
+====================================================================================================
+[26/52] control_plane/infra/provenance.py   ref=refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg  py=True
+    ours+16 theirs+8 overlap=2 via=-
+    --- main
+    +++ winner
+    @@ -1,4 +1,2 @@
+    -# SPDX-License-Identifier: MIT
+    -
+     """Provenance and Audit Ledger Manager — Structured Mission Traceability.
+     
+    @@ -15,4 +13,5 @@
+     import importlib.util
+     import json
+    +import logging
+     import os
+     from datetime import datetime, timezone
+    @@ -21,4 +20,8 @@
+     
+     from pydantic import BaseModel, Field
+    +
+    +from control_plane._paths import KERNEL, VAULT
+    +
+    +logger = logging.getLogger(__name__)
+     
+     # Dynamic import for MemPalaceL2 due to 01_KERNEL naming restriction.
+    @@ -27,13 +30,10 @@
+         MemPalaceL2 = importlib.import_module("01_KERNEL.memory.mempalace_l2").MemPalaceL2
+     except Exception:
+    -    # Fallback loader for CLIs whose sys.path does not include the repo root:
+    -    # __file__ is <root>/control_plane/infra/provenance.py, so the repo root is
+    -    # parents[2] (infra -> control_plane -> root).
+    -    _MEM_PATH = Path(__file__).resolve().parents[2] / "01_KERNEL" / "memory" / "mempalace_l2.py"
+    -    if not _MEM_PATH.exists():
+    +    _MEM_PATH = KERNEL / "memory" / "mempalace_l2.py"
+    +    if not _MEM_PATH.is_file():
+             raise ImportError(
+    -            f"Cannot locate 01_KERNEL/memory/mempalace_l2.py (tried {_MEM_PATH}). "
+    -            "Run the CLI from the CAMELOT_OS repo root."
+    -        ) from None
+    +            f"MemPalaceL2 source not found at {_MEM_PATH}; provenance cannot "
+    +            f"initialise its L2 memory backing store."
+    +        )
+         _MEM_SPEC = importlib.util.spec_from_file_location("01_KERNEL.memory.mempalace_l2", _MEM_PATH)
+         _MEM_MOD = importlib.util.module_from_spec(_MEM_SPEC)
+    @@ -108,23 +108,24 @@
+                 self.vault_path = vault_path
+             else:
+    -            # Default to 03_VAULT/Missions
+    -            repo_root = Path(__file__).resolve().parent.parent
+    -            self.vault_path = repo_root / "03_VAULT" / "Missions"
+    -        
+    +            # Default to 03_VAULT/Missions at the repository root. Resolved via
+    +            # _paths rather than a fixed .parent chain: a short chain here wrote
+    +            # a second, divergent ledger into control_plane/03_VAULT/Missions.
+    +            self.vault_path = VAULT / "Missions"
+    +
+             self.vault_path.mkdir(parents=True, exist_ok=True)
+             self.verification_ledger = self.vault_path / "verification_ledger.jsonl"
+    -        # MemPalace remains strict about its HMAC secret, but missing optional
+    -        # persistence must not prevent CLI startup or local ledger writes.
+    +
+    +        # The L2 vector index is a search convenience layered on top of the
+    +        # ledger; the ledger is the audit record. Keep them independent so a
+        ... truncated (126 lines total)
+
+====================================================================================================
+[27/52] control_plane/infra/z3_verify.py   ref=refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg  py=True
+    ours+5 theirs+11 overlap=5 via=-
+    --- main
+    +++ winner
+    @@ -1,4 +1,2 @@
+    -# SPDX-License-Identifier: MIT
+    -
+     # -*- coding: utf-8 -*-
+     """
+    @@ -50,16 +48,34 @@
+     
+     # Dangerous-effect grounding: pattern → fluent it negates (PDDL action effects).
+    +#
+    +# These patterns are the *whole* safety decision — z3 only confirms that the
+    +# grounded effects are consistent with the goal, so anything the patterns miss is
+    +# accepted. They are therefore written to catch equivalent spellings, not just
+    +# the canonical one: `git push -f`, `push origin +main` and `truncate -s 0` all
+    +# previously slipped through while `git push --force origin main` was blocked.
+    +#
+    +# This is still recognition, not proof. Treat a Z3_PASS as "no modelled hazard
+    +# matched", never as "proven safe" — see the module docstring.
+     _DANGER: list[tuple[re.Pattern, str]] = [
+    +    # The ledger nouns are matched WITHOUT \b on either side: they routinely
+    +    # appear inside identifiers and filenames (PROVENANCE_LEDGER.md,
+    +    # verification_ledger.jsonl) where "_" is a word character, so \bledger\b
+    +    # would not match. The destructive verb supplies the specificity instead —
+    +    # "write tests for the ledger reader" stays benign.
+         (re.compile(r"(?:provenance|ledger|\.shadow)"
+                     r".*\b(?:delete|remove|rm|drop|truncate|wipe|purge|overwrite|clobber)\b"
+                     r"|\b(?:delete|remove|rm|drop|truncate|wipe|purge|overwrite|clobber)\b"
+                     r".*(?:provenance|ledger|\.shadow)"
+    +                # `: > X`, `cat /dev/null > X` truncation via redirect
+                     r"|>\s*\S*(?:provenance|ledger)\S*", re.I),
+          "provenance_intact"),
+         (re.compile(
+    +        # force-push spellings: --force, -f, --force-with-lease, and the `+ref`
+    +        # refspec form (`git push origin +main`), plus hard resets.
+             r"\bgit\s+push\b[^\n]*?(--force(?:-with-lease)?|(?<!\w)-f(?!\w))"
+             r"|\bgit\s+push\b[^\n]*?\+\s*(?:refs/heads/)?(?:main|master)\b"
+             r"|\bforce[-\s]?push\b"
+             r"|\breset\s+--hard\b"
+    +        # disabling the server-side guard is equivalent to forcing
+             r"|\bdenyNonFastForwards\s*(?:=|\s+)\s*false\b"
+             r"|\breceive\.denyDeletes\s*(?:=|\s+)\s*false\b", re.I),
+    @@ -115,14 +131,34 @@
+         """Symbolically verify a patch. Dangerous patches return Z3_BLOCK.
+     
+    -    If z3 is not installed, returns Z3_UNAVAILABLE (safe pass-through — the
+    -    upstream shatterpoint guard in anya_gate still applies).
+    +    Fail-closed when the solver is missing. The safety decision is fully
+    +    determined by ``ground_effects`` — the solver only confirms that the grounded
+    +    effects are consistent with the goal — so a negated invariant is decisive
+    +    with or without z3 installed, and is blocked either way.
+    +
+    +    When z3 is absent *and* nothing was flagged, no positive safety claim can be
+    +    made, so the verdict is unsafe (Z3_UNAVAILABLE) unless the operator opts out
+    +    explicitly via ``CAMELOT_ALLOW_UNVERIFIED_PATCHES=1``. Previously this path
+    +    returned ``safe=True`` for every patch, including force-pushes to main.
+         """
+    +    effects = ground_effects(patch)
+    +    violated = [inv for inv, preserved in effects.items() if not preserved]
+    +
+        ... truncated (89 lines total)
+
+====================================================================================================
+[28/52] control_plane/lady_m.py   ref=refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg  py=True
+    ours+23 theirs+15 overlap=13 via=-
+    --- main
+    +++ winner
+    @@ -1,4 +1,2 @@
+    -# SPDX-License-Identifier: MIT
+    -
+     """Lady M (Lady Mnemosyne) — Squire Swarm Governance Engine
+     Implements SQUIRE_MERGE, SQUIRE_PURGE, SQUIRE_TRIAGE, SQUIRE_BRIEF.
+    @@ -11,5 +9,4 @@
+     import logging
+     import os
+    -import re
+     import smtplib
+     import subprocess
+    @@ -23,7 +20,9 @@
+     import sys
+     
+    -# Connect to KERNEL for Cloudbrain
+    -CAMELOT_ROOT = Path(__file__).resolve().parent.parent
+    -sys.path.append(str(CAMELOT_ROOT / "01_KERNEL"))
+    +# Connect to KERNEL for Cloudbrain. CAMELOT_ROOT was referenced here but never
+    +# defined — the module raised NameError on import for anyone who touched it.
+    +from control_plane._paths import REPO_ROOT
+    +
+    +sys.path.append(str(REPO_ROOT / "01_KERNEL"))
+     try:
+         from memory.cloudbrain_connector import CloudBrainConnector
+    @@ -32,9 +31,11 @@
+     
+     try:
+    -    from infra.knight_registry import LIBRARIAN_REGISTRY
+    +    from vfs.lady_m_rune_router import RuneRouter as _RuneRouter
+    +    _rune_router = _RuneRouter()
+     except ImportError:
+    -    LIBRARIAN_REGISTRY = None
+    +    _rune_router = None
+     
+     LOG = logging.getLogger("lady_m")
+    +CAMELOT_ROOT = Path(__file__).resolve().parent.parent
+     LEDGER       = CAMELOT_ROOT / "PROVENANCE_LEDGER.md"
+     HARNESS_Q    = CAMELOT_ROOT / "logs" / "harness_queue.jsonl"
+    @@ -71,13 +72,5 @@
+         """L0 fast scan: count files, detect secrets, measure entropy drift."""
+     
+    -    SECRET_PATTERNS = [
+    -        re.compile(r"sk-ant-[a-zA-Z0-9\-_]{20,}"),
+    -        re.compile(r"sk-[a-zA-Z0-9]{32,}"),
+    -        re.compile(r"AIza[0-9A-Za-z\-_]{35}"),
+    -        re.compile(r"AKIA[0-9A-Z]{16}"),
+    -        re.compile(r"(?i)aws.{0,20}secret.{0,20}['\"][0-9a-zA-Z/+]{40}['\"]"),
+    -        re.compile(r"(?i)(?:api[_-]?key|bearer|token|password|passwd|secret)\s*[=:]\s*['\"][A-Za-z0-9+/\-_]{24,}['\"]"),
+    -        re.compile(r"-----BEGIN (?:RSA |EC )?PRIVATE KEY-----"),
+    -    ]
+    +    SECRET_PATTERNS = ["api_key", "secret", "password", "token", "bearer", "sk-", "AKIA"]
+     
+         def run(self, scan_path: Path = CAMELOT_ROOT) -> SquireReport:
+    @@ -88,39 +81,28 @@
+             recs:   list[str]        = []
+     
+    -        ignore_dirs = {".git", "__pycache__", ".venv", "node_modules", ".pytest_cache", ".ruff_cache", "target", ".secrets_backup"}
+    +        ignore_dirs = {".git", "__pycache__", ".venv", "node_modules", ".pytest_cache", ".ruff_cache", "target"}
+        ... truncated (121 lines total)
+
+====================================================================================================
+[29/52] control_plane/main.py   ref=refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg  py=True
+    ours+54 theirs+6 overlap=6 via=-
+    --- main
+    +++ winner
+    @@ -1,4 +1,2 @@
+    -# SPDX-License-Identifier: MIT
+    -
+     """
+     Camelot Split-Brain OS — Pydantic AI Control Plane
+    @@ -235,5 +233,5 @@
+             allow_sensitive_remote = "allow_remote_sensitive" in task.constraints
+     
+    -        if request.service in {CloudServiceName.CLOUDBRAIN_STATUS, CloudServiceName.HEALTH_ROLLUP}:
+    +        if request.service is CloudServiceName.CLOUDBRAIN_STATUS:
+                 return None
+     
+    @@ -331,5 +329,4 @@
+                 CloudServiceName.NOTEBOOKLM_SOURCES_ADD,
+                 CloudServiceName.NOTEBOOKLM_SOURCES_DELETE,
+    -            CloudServiceName.HEALTH_ROLLUP,
+             }
+             if service in cloud_brain_services:
+    @@ -510,4 +507,51 @@
+             dangerous_intents = {"exec", "shell", "eval", "subprocess", "os.system"}
+             return any(d in task.intent.lower() for d in dangerous_intents)
+    +
+    +    # Knight dispatch routing table
+    +    KNIGHT_ROUTES: dict[str, str] = {
+    +        "orchestration": "sir_boris",
+    +        "architecture": "sir_boris",
+    +        "colony": "sir_boris",
+    +        "critique": "sir_boris",
+    +        "vocal": "sir_boris",
+    +        "cognitive": "sir_alex",
+    +        "reasoning": "sir_alex",
+    +        "critical": "sir_alex",
+    +        "decision": "sir_alex",
+    +        "bridge": "sir_link",
+    +        "terminal": "sir_link",
+    +        "handoff": "sir_link",
+    +        "ui": "sir_link",
+    +        "technical": "sir_forge",
+    +        "scaffold": "sir_forge",
+    +        "code_gen": "sir_forge",
+    +        "security_review": "sir_sentinel",
+    +        "audit": "sir_sentinel",
+    +        "financial": "sir_valerian",
+    +        "roi": "sir_valerian",
+    +        # Omega₃ — Cloud Brain (notebooklm-py) dispatch
+    +        "synthesize": "merlin",
+    +        "oracle": "merlin",
+    +        "ask_brain": "merlin",
+    +        "notebook_query": "merlin",
+    +        "notebooklm_health": "merlin",
+    +        "notebooklm_sync": "merlin",
+    +        # Omega₃.2 — LADY_APIS research
+    +        "research": "lady_apis",
+    +        "deep_dive": "lady_apis",
+    +        "forage": "lady_apis",
+    +        # Omega₃.3 — SIR_SONUS studio
+    +        "studio": "sir_sonus",
+    +        "podcast": "sir_sonus",
+        ... truncated (92 lines total)
+
+====================================================================================================
+[30/52] control_plane/runes/camelot_cli.py   ref=refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg  py=True
+    ours+2887 theirs+26 overlap=26 via=-
+    --- main
+    +++ winner
+    @@ -1,107 +1,2892 @@
+    -# SPDX-License-Identifier: MIT
+    -
+    -"""User-facing Camelot-OS CLI — backward-compatible shim.
+    -
+    -The implementation has been refactored into the ``control_plane.cli`` package:
+    -
+    -  control_plane/cli/
+    -  ├── constants.py   — CAMELOT_HOME, STREAM_DELAY, help text, cartridge map
+    -  ├── renderer.py    — ANSI color, stream_print, pretty_render, emit
+    -  ├── iron_gate.py   — HITL Iron Gate security check
+    -  ├── tasks.py       — _run_task, _run_sarda, _run_team_self_test, progress
+    -  ├── directives.py  — mode/cartridge translation and invocation
+    -  ├── cloudbrain.py  — endpoint diagnosis, audit, Modal discovery
+    -  ├── orchestrator.py — orchestrator CLI wrapper
+    -  ├── notebooklm.py  — NotebookLM login handler
+    -  ├── parser.py      — argparse builder (_build_parser)
+    -  ├── shell.py       — interactive REPL (_interactive_shell)
+    -  └── dispatch.py    — main() entry point and command dispatch
+    -
+    -All public symbols are re-exported here so that existing imports like::
+    -
+    -  from control_plane.camelot_cli import main, _build_parser, _interactive_shell
+    -  from control_plane import camelot_cli
+    -
+    -...continue to work without modification.
+    +"""User-facing Camelot-OS CLI modeled after prompt-first AI CLIs."""
+    +
+    +from __future__ import annotations
+    +
+    +import argparse
+    +import asyncio
+    +import importlib
+    +import json
+    +import os
+    +import subprocess
+    +import sys
+    +import time
+    +from datetime import datetime, timezone
+    +from pathlib import Path
+    +from typing import Any
+    +
+    +from colorama import Fore, Style, just_fix_windows_console
+    +
+    +from control_plane.infra.bio_swarm_runtime import (
+    +    preflight_bio_swarm,
+    +    run_bio_swarm_once,
+    +    write_bio_swarm_runtime_status,
+    +)
+    +from control_plane.infra.cli_intercept import CLIIntercept
+    +from control_plane.infra.cloudbrain_sync import flush_sync_queue, sync_after_event, sync_queue_status
+    +from control_plane.infra.cockpit import cockpit_exec, prompt_payload, refresh_snapshot
+    +from control_plane.infra.codex_integration import (
+    +    DEFAULT_ACTOR as CODEX_DEFAULT_ACTOR,
+    +)
+    +from control_plane.infra.codex_integration import (
+    +    read_codex_status,
+    +    write_codex_integration,
+        ... truncated (3027 lines total)
+
+====================================================================================================
+[31/52] packages/db/src/index.ts   ref=refs/remotes/kickbox-audio/main  py=False
+    ours+2 theirs+4 overlap=1 via=-
+    --- main
+    +++ winner
+    @@ -1,5 +1,3 @@
+    -// SPDX-License-Identifier: MIT
+    -
+    -import { PrismaClient, Prisma } from './generated/client';
+    +import { Prisma, PrismaClient } from '@prisma/client';
+     import { ledgerValidator } from './ledgerValidator';
+     
+    @@ -7,11 +5,74 @@
+     const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
+     
+    -const basePrisma = globalForPrisma.prisma ?? new PrismaClient();
+    +let basePrisma: any;
+    +if (!process.env.DATABASE_URL) {
+    +  console.warn('[AI Studio] Database not connected (No DATABASE_URL) — using mock');
+    +  const noOp = { 
+    +    findMany: async () => [], 
+    +    findFirst: async () => null,
+    +    findUnique: async () => null, 
+    +    create: async (d: any) => d?.data ?? {},
+    +    update: async (d: any) => d?.data ?? {}, 
+    +    delete: async () => ({}),
+    +    count: async () => 0,
+    +    $disconnect: async () => {},
+    +    $transaction: async (arg: any) => {
+    +      if (typeof arg === 'function') return arg(basePrisma);
+    +      return [];
+    +    }
+    +  };
+    +  basePrisma = new Proxy({}, { 
+    +    get: (_, prop) => {
+    +      if (prop === '$extends') return () => basePrisma;
+    +      if (prop in noOp) return (noOp as any)[prop];
+    +      return new Proxy({}, { 
+    +        get: (_, subProp) => {
+    +          if (subProp in noOp) return (noOp as any)[subProp];
+    +          return noOp.findMany;
+    +        } 
+    +      });
+    +    } 
+    +  });
+    +} else {
+    +  try {
+    +    basePrisma = globalForPrisma.prisma ?? new PrismaClient();
+    +  } catch (err) {
+    +    console.warn('[AI Studio] Database not connected (Init failed) — using mock');
+    +    const noOp = { 
+    +      findMany: async () => [], 
+    +      findFirst: async () => null,
+    +      findUnique: async () => null, 
+    +      create: async (d: any) => d?.data ?? {},
+    +      update: async (d: any) => d?.data ?? {}, 
+    +      delete: async () => ({}),
+    +      count: async () => 0,
+    +      $disconnect: async () => {},
+    +      $transaction: async (arg: any) => {
+    +        if (typeof arg === 'function') return arg(basePrisma);
+    +        return [];
+    +      }
+        ... truncated (88 lines total)
+
+====================================================================================================
+[32/52] scripts/camelot-status.py   ref=refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598  py=True
+    ours+5 theirs+4 overlap=4 via=-
+    --- main
+    +++ winner
+    @@ -1,5 +1,3 @@
+     #!/usr/bin/env python3
+    -# SPDX-License-Identifier: MIT
+    -
+     """camelot-status.py — CAMELOT Apex OS v400.1.0 Full Health Check
+     ==================================================================
+    @@ -92,17 +90,6 @@
+     check("Qdrant :6333",          _probe_port("127.0.0.1", 6333), "vector DB", warn_only=True)
+     check("Saltare :8085",         _probe_port("127.0.0.1", 8085), "gateway", warn_only=True)
+    +check("Holotable :3000",       _probe_port("127.0.0.1", 3000), "UI dashboard", warn_only=True)
+     check("Sovereign Harness PID", (ROOT / "logs" / "harness.pid").exists(), "24/7 daemon")
+    -try:
+    -    from control_plane.infra.harness import read_latest_heartbeat
+    -    latest_hb = read_latest_heartbeat(ROOT)
+    -    if latest_hb:
+    -        check(
+    -            "Harness Heartbeat",
+    -            latest_hb.get("status") in {"GREEN", "LIVE"},
+    -            f"status={latest_hb.get('status')} uptime={latest_hb.get('uptime_s')}s probes={latest_hb.get('probes_green')}/{latest_hb.get('probes_total')}",
+    -            warn_only=True,
+    -        )
+    -except Exception:
+    -    pass
+     token = _read_bifrost_token()
+     if token:
+    @@ -234,6 +221,6 @@
+         if ollama_bin:
+             out = subprocess.run([ollama_bin, "list"], capture_output=True, text=True, timeout=10)
+    -        lines = [l_ for l_ in out.stdout.splitlines() if l_.strip()]
+    -        model_lines = [l_ for l_ in lines if not l_.lstrip().startswith("NAME")]
+    +        lines = [line for line in out.stdout.splitlines() if line.strip()]
+    +        model_lines = [line for line in lines if not line.lstrip().startswith("NAME")]
+             model_count = len(model_lines)
+             detail = f"{model_count} models"
+
+====================================================================================================
+[33/52] scripts/instantiate_heimdall_nb.py   ref=refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598  py=True
+    ours+3 theirs+2 overlap=2 via=-
+    --- main
+    +++ winner
+    @@ -1,4 +1,2 @@
+    -# SPDX-License-Identifier: MIT
+    -
+     import asyncio
+     import json
+    @@ -22,5 +20,5 @@
+             # Correct pattern: using context manager
+             async with NotebookLMClient(auth=tokens) as client:
+    -            title = "The Heimdall UKG Nano Sovereign"
+    +            title = "CAMELOT-OS: Sir Heimdall (The Bifrost Guardian)"
+                 print(f"Resolving notebook: {title}")
+                 
+
+====================================================================================================
+[34/52] scripts/nano_swarm_expand.py   ref=refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598  py=True
+    ours+2 theirs+1 overlap=1 via=-
+    --- main
+    +++ winner
+    @@ -1,4 +1,2 @@
+    -# SPDX-License-Identifier: MIT
+    -
+     # -*- coding: utf-8 -*-
+     """
+    @@ -384,5 +382,5 @@
+             (["npm", "run", "build"], GENERATED_DIR / "Node_A_Frontend" / "source", 120),
+             (["cargo", "test"], GENERATED_DIR / "Node_B_Bifrost" / "source", 300),
+    -        (["go", "test", "."], GENERATED_DIR / "Node_C_Omni_Router" / "source", 60),
+    +        (["go", "test", "./..."], GENERATED_DIR / "Node_C_Omni_Router" / "source", 300),
+             (["cargo", "test"], GENERATED_DIR / "Node_D_MicroVM" / "source", 300),
+         ]
+
+====================================================================================================
+[35/52] scripts/purge_memory.py   ref=refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598  py=True
+    ours+8 theirs+6 overlap=5 via=-
+    --- main
+    +++ winner
+    @@ -1,4 +1,2 @@
+    -# SPDX-License-Identifier: MIT
+    -
+     # -*- coding: utf-8 -*-
+     """
+    @@ -14,7 +12,7 @@
+     
+     import json
+    -import shutil  # noqa: E402
+    -import sqlite3  # noqa: E402
+    -from pathlib import Path  # noqa: E402
+    +import shutil
+    +import sqlite3
+    +from pathlib import Path
+     
+     # Setup paths relative to script
+    @@ -35,5 +33,5 @@
+         try:
+             content = PROVENANCE_LEDGER.read_text(encoding="utf-8")
+    -        lines = [line_str for line_str in content.splitlines() if line_str.startswith("|") and not line_str.startswith("| ID")]
+    +        lines = [line for line in content.splitlines() if line.startswith("|") and not line.startswith("| ID")]
+             if lines:
+                 ids = []
+    @@ -169,5 +167,5 @@
+                     lines = t.read_text(encoding="utf-8").splitlines()
+                     # Keep comments/headers, remove lines starting with `- [`
+    -                cleaned_lines = [line_str for line_str in lines if not line_str.strip().startswith("- [")]
+    +                cleaned_lines = [line for line in lines if not line.strip().startswith("- [")]
+                     t.write_text("\n".join(cleaned_lines) + "\n", encoding="utf-8")
+                     print(f"  ✅ Cleaned learned aspects from {t.relative_to(REPO_ROOT)}")
+
+====================================================================================================
+[36/52] scripts/update_cloudbrain_notebooks.py   ref=refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598  py=True
+    ours+3 theirs+1 overlap=1 via=-
+    --- main
+    +++ winner
+    @@ -1,5 +1,3 @@
+     #!/usr/bin/env python3
+    -# SPDX-License-Identifier: MIT
+    -
+     """Add tailored v1000-EXCALIBUR-A delta sources to the relevant existing
+     NotebookLM notebooks. Each source connects that notebook's documented concepts
+    @@ -101,9 +99,6 @@
+     
+     async def main() -> int:
+    -    from notebooklm.auth import AuthTokens, fetch_tokens, load_auth_from_storage
+    -    cookies = load_auth_from_storage()
+    -    csrf, session = await fetch_tokens(cookies)
+    -    tokens = AuthTokens(cookies=cookies, csrf_token=csrf, session_id=session)
+    -    async with NotebookLMClient(auth=tokens) as client:
+    +    client = await NotebookLMClient.from_storage()
+    +    async with client:
+             for nb_id, title, content in UPDATES:
+                 try:
+
+====================================================================================================
+[37/52] scripts/verify_vfc_preflight.py   ref=refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598  py=True
+    ours+5 theirs+1 overlap=1 via=-
+    --- main
+    +++ winner
+    @@ -1,5 +1,3 @@
+     #!/usr/bin/env python3
+    -# SPDX-License-Identifier: MIT
+    -
+     """Fail-closed preflight for the Camelot Voice-First Cartridge."""
+     
+    @@ -57,16 +55,11 @@
+         ],
+         "02_FORGE/packages/voice-first-runtime/src/shared-pcm-ring.ts": ["SharedArrayBuffer"],
+    -    # Host re-pointed 2026-09-14. The original host `02_FORGE/apps/pwa-cockpit`
+    -    # was deleted in 944e4532 ("purge redundant PWAs"), which left these three
+    -    # markers permanently unsatisfiable. The surviving root `apps/pwa` is the
+    -    # live voice PWA and now carries the cartridge; the shared runtime package
+    -    # above is unchanged and still the single source of the worklet asset.
+    -    "apps/pwa/public/voice-capture.worklet.js": ["camelot-voice-capture"],
+    -    "apps/pwa/src/app/api/voice/frames/route.ts": [
+    +    "02_FORGE/apps/pwa-cockpit/public/voice-capture.worklet.js": ["camelot-voice-capture"],
+    +    "02_FORGE/apps/pwa-cockpit/src/app/api/voice/frames/route.ts": [
+             "MAX_FRAME_BYTES = 3_200",
+             "voice.use",
+             "127.0.0.1",
+         ],
+    -    "apps/pwa/src/cartridges/interphase/InterphaseCartridge.tsx": [
+    +    "02_FORGE/apps/pwa-cockpit/src/cartridges/interphase/interphase-cartridge.tsx": [
+             "useVoiceFirstRuntime",
+             "Start capture",
+    @@ -77,8 +70,5 @@
+             'server.listen(PORT, "127.0.0.1"',
+         ],
+    -    # Forge Law moved to control_plane/core/ during the v1000.54 COSMOS
+    -    # consolidation; the previous control_plane/forge_law.py path no longer
+    -    # exists, which made this marker permanently unsatisfiable.
+    -    "control_plane/core/forge_law.py": ["Forge"],
+    +    "control_plane/forge_law.py": ["Forge"],
+         "control_plane/worker.py": [
+             "audio_path.relative_to(audio_root)",
+
+====================================================================================================
+[38/52] vfs/system_verification_v1000.json   ref=refs/remotes/origin/fix/lint-format-pass  py=False
+    ours+28 theirs+69 overlap=8 via=-
+    --- main
+    +++ winner
+    @@ -1,5 +1,5 @@
+     {
+    -  "version": "Living Camelot-OS v1000 MAX Compendium",
+    -  "timestamp": "2026-08-25T23:57:43.238842+00:00",
+    +  "version": "v1000.54-EXCALIBUR-A",
+    +  "timestamp": "2026-08-10T20:20:03.681207+00:00",
+       "glyph_installed": true,
+       "system_instruction_installed": true,
+    @@ -19,51 +19,23 @@
+         "total_runes": 9,
+         "rune_legend": {
+    -      "\u16b1": "RESEARCH",
+    -      "\u16a0": "FORGE",
+    -      "\u16d7": "MEMORY",
+    -      "\u16dc": "GUARD",
+    -      "\u16de": "DEBUG",
+    -      "\u16a2": "VOICE",
+    -      "\u16a8": "ARCHITECT",
+    -      "\u16df": "SOVEREIGN",
+    -      "\u16a6": "AUDIT"
+    +      "ᚱ": "RESEARCH",
+    +      "ᚠ": "FORGE",
+    +      "ᛗ": "MEMORY",
+    +      "ᛜ": "GUARD",
+    +      "ᛞ": "DEBUG",
+    +      "ᚢ": "VOICE",
+    +      "ᚨ": "ARCHITECT",
+    +      "ᛟ": "SOVEREIGN",
+    +      "ᚦ": "AUDIT"
+         },
+         "dispatch_mappings": {
+    -      "\u16b1": [
+    -        "LADY_APIS",
+    -        "MERLIN_OMEGA",
+    -        "HERMES_PRIME"
+    -      ],
+    -      "\u16a0": [
+    -        "SIR_FORGE",
+    -        "SIR_CODEX",
+    -        "CAMELOT_V1000"
+    -      ],
+    -      "\u16d7": [
+    -        "LADY_MNEMOSYNE",
+    -        "ANYA_QUANTUM_MANTRA"
+    -      ],
+    -      "\u16dc": [
+    -        "SIR_SENTINEL",
+    -        "SIR_GHOST"
+    -      ],
+    -      "\u16de": [
+    -        "SIR_DEBUG"
+    -      ],
+    -      "\u16a2": [
+    -        "SIR_HELIO",
+    -        "SIR_SONUS"
+    -      ],
+    -      "\u16a8": [
+    -        "SIR_BORIS",
+        ... truncated (186 lines total)
+
+====================================================================================================
+[39/52] 01_KERNEL/agora/Squires/Memory_Squire/routers/sources.py   ref=refs/remotes/origin/fix/ruff-530-manual  py=True
+    ours+? theirs+? overlap=? via=merge_conflict
+    --- main
+    +++ winner
+    @@ -96,5 +96,5 @@
+         delete_source: str = Form("false"),  # Accept as string, convert to bool
+         async_processing: str = Form("false"),  # Accept as string, convert to bool
+    -    file: Optional[UploadFile] = File(None),
+    +    file: Optional[UploadFile] = File(None),  # noqa: B008
+     ) -> tuple[SourceCreate, Optional[UploadFile]]:
+         """Parse form data into SourceCreate model and return upload file separately."""
+    @@ -116,5 +116,5 @@
+             except json.JSONDecodeError:
+                 logger.error(f"DEBUG - Invalid JSON in notebooks field: {notebooks}")
+    -            raise ValueError("Invalid JSON in notebooks field")
+    +            raise ValueError("Invalid JSON in notebooks field") from None
+     
+         transformations_list = []
+    @@ -124,5 +124,5 @@
+             except json.JSONDecodeError:
+                 logger.error(f"DEBUG - Invalid JSON in transformations field: {transformations}")
+    -            raise ValueError("Invalid JSON in transformations field")
+    +            raise ValueError("Invalid JSON in transformations field") from None
+     
+         # Create SourceCreate instance
+    @@ -307,5 +307,5 @@
+         except Exception as e:
+             logger.error(f"Error fetching sources: {str(e)}")
+    -        raise HTTPException(status_code=500, detail=f"Error fetching sources: {str(e)}")
+    +        raise HTTPException(status_code=500, detail=f"Error fetching sources: {str(e)}") from e
+     
+     
+    @@ -319,12 +319,8 @@
+         try:
+             # Verify all specified notebooks exist (backward compatibility support)
+    -        notebook_ids = source_data.notebooks or []
+    -        if notebook_ids:
+    -            notebooks = await Notebook.get_many(notebook_ids)
+    -            found_notebook_ids = {n.id for n in notebooks if n.id}
+    -            missing_notebooks = set(notebook_ids) - found_notebook_ids
+    -            if missing_notebooks:
+    -                # Report first missing notebook for consistency with previous error
+    -                raise HTTPException(status_code=404, detail=f"Notebook {next(iter(missing_notebooks))} not found")
+    +        for notebook_id in source_data.notebooks or []:
+    +            notebook = await Notebook.get(notebook_id)
+    +            if not notebook:
+    +                raise HTTPException(status_code=404, detail=f"Notebook {notebook_id} not found")
+     
+             # Handle file upload if provided
+    @@ -335,5 +331,5 @@
+                 except Exception as e:
+                     logger.error(f"File upload failed: {e}")
+    -                raise HTTPException(status_code=400, detail=f"File upload failed: {str(e)}")
+    +                raise HTTPException(status_code=400, detail=f"File upload failed: {str(e)}") from e
+     
+             # Prepare content_state for processing
+    @@ -366,13 +362,8 @@
+             # Validate transformations exist
+             transformation_ids = source_data.transformations or []
+    -        if transformation_ids:
+    -            transformations = await Transformation.get_many(transformation_ids)
+    -            found_transformation_ids = {t.id for t in transformations if t.id}
+        ... truncated (165 lines total)
+
+====================================================================================================
+[40/52] 01_KERNEL/agora/Squires/Notebook_Brain/routers/sources.py   ref=refs/remotes/origin/fix/ruff-530-manual  py=True
+    ours+? theirs+? overlap=? via=merge_conflict
+    --- main
+    +++ winner
+    @@ -96,5 +96,5 @@
+         delete_source: str = Form("false"),  # Accept as string, convert to bool
+         async_processing: str = Form("false"),  # Accept as string, convert to bool
+    -    file: Optional[UploadFile] = File(None),
+    +    file: Optional[UploadFile] = File(None),  # noqa: B008
+     ) -> tuple[SourceCreate, Optional[UploadFile]]:
+         """Parse form data into SourceCreate model and return upload file separately."""
+    @@ -116,5 +116,5 @@
+             except json.JSONDecodeError:
+                 logger.error(f"DEBUG - Invalid JSON in notebooks field: {notebooks}")
+    -            raise ValueError("Invalid JSON in notebooks field")
+    +            raise ValueError("Invalid JSON in notebooks field") from None
+     
+         transformations_list = []
+    @@ -124,5 +124,5 @@
+             except json.JSONDecodeError:
+                 logger.error(f"DEBUG - Invalid JSON in transformations field: {transformations}")
+    -            raise ValueError("Invalid JSON in transformations field")
+    +            raise ValueError("Invalid JSON in transformations field") from None
+     
+         # Create SourceCreate instance
+    @@ -307,5 +307,5 @@
+         except Exception as e:
+             logger.error(f"Error fetching sources: {str(e)}")
+    -        raise HTTPException(status_code=500, detail=f"Error fetching sources: {str(e)}")
+    +        raise HTTPException(status_code=500, detail=f"Error fetching sources: {str(e)}") from e
+     
+     
+    @@ -331,5 +331,5 @@
+                 except Exception as e:
+                     logger.error(f"File upload failed: {e}")
+    -                raise HTTPException(status_code=400, detail=f"File upload failed: {str(e)}")
+    +                raise HTTPException(status_code=400, detail=f"File upload failed: {str(e)}") from e
+     
+             # Prepare content_state for processing
+    @@ -362,12 +362,8 @@
+             # Validate transformations exist
+             transformation_ids = source_data.transformations or []
+    -        if transformation_ids:
+    -            transformations = await Transformation.get_many(transformation_ids)
+    -            found_ids = {str(t.id).split(":")[-1] for t in transformations if t.id}
+    -            found_ids.update(str(t.id) for t in transformations if t.id)
+    -
+    -            for trans_id in transformation_ids:
+    -                if trans_id not in found_ids and f"transformation:{trans_id}" not in found_ids:
+    -                    raise HTTPException(status_code=404, detail=f"Transformation {trans_id} not found")
+    +        for trans_id in transformation_ids:
+    +            transformation = await Transformation.get(trans_id)
+    +            if not transformation:
+    +                raise HTTPException(status_code=404, detail=f"Transformation {trans_id} not found")
+     
+             # Branch based on processing mode
+    @@ -443,5 +439,5 @@
+                         except Exception:
+                             pass
+    -                raise HTTPException(status_code=500, detail=f"Failed to queue processing: {str(e)}")
+    +                raise HTTPException(status_code=500, detail=f"Failed to queue processing: {str(e)}") from e
+     
+        ... truncated (147 lines total)
+
+====================================================================================================
+[41/52] 03_VAULT/runtime_state/cockpit_last_command.json   ref=refs/remotes/origin/fix/lint-format-pass  py=False
+    ours+? theirs+? overlap=? via=merge_conflict
+    --- main
+    +++ winner
+    @@ -8,5 +8,5 @@
+       "mode": "ORACLE",
+       "directive": "//PLAN build cockpit",
+    -  "task_id": "rune-0cb669c6",
+    +  "task_id": "rune-45754e37",
+       "queued": true,
+       "queue_error": null,
+    @@ -16,5 +16,5 @@
+         "param": "build cockpit"
+       },
+    -  "latency_ms": 51.3,
+    -  "timestamp_utc": "2026-09-23T16:00:15.740376+00:00"
+    +  "latency_ms": 354.49,
+    +  "timestamp_utc": "2026-08-11T01:47:09.904691+00:00"
+     }
+
+====================================================================================================
+[42/52] 03_VAULT/runtime_state/nano_swarm_evidence/ukg_nano_omega_glyph_v1000_omni_codex.evidence.json   ref=refs/remotes/origin/fix/lint-format-pass  py=False
+    ours+? theirs+? overlap=? via=merge_conflict
+    --- main
+    +++ winner
+    @@ -39,4 +39,4 @@
+         }
+       ],
+    -  "recorded_utc": "2026-08-31T22:12:54.678244+00:00"
+    +  "recorded_utc": "2026-06-03T20:43:53.801976+00:00"
+     }
+
+====================================================================================================
+[43/52] 03_VAULT/training/configs/knight_character_sheets.json   ref=refs/remotes/origin/fix/lint-format-pass  py=False
+    ours+? theirs+? overlap=? via=merge_conflict
+    --- main
+    +++ winner
+    @@ -1,7 +1,7 @@
+     {
+    -  "version": "Living Camelot-OS v1000 MAX Compendium",
+    +  "version": "1000.0.0",
+       "sovereign_operator": "Arch-Sovereign (VaShawn O. Head / Vizion)",
+       "worldtree_home_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    -  "total_knights": 56,
+    +  "total_knights": 36,
+       "knights": {
+         "ANYA_OMEGA": {
+    @@ -10,14 +10,12 @@
+           "name": "Anya Omega (The Sovereign Gatekeeper)",
+           "title": "Alpha First & Omega Last - Knight at the Helm",
+    -      "layer": "L7 Sovereign",
+    -      "role": "Sovereign Compiler & Arch-Gatekeeper",
+    +      "layer": "L7 Ethereal",
+    +      "role": "Cognitive Ingress & Risk-Entropy Gatekeeper",
+           "summoning_rune": "Omega_ANYA",
+    -      "cloudbrain_uuid": "140101e0-bc2a-41c8-87c0-cd512f130387",
+    -      "cloudbrain_url": "https://notebook.google.com/notebook/140101e0-bc2a-41c8-87c0-cd512f130387",
+    -      "cloudbrain_verified": "2026-09-22 (live: notebook resolves, title exact)",
+    +      "cloudbrain_uuid": "32d38906-5ae8-4ecc-b77e-705d12c89f4a",
+           "vfs_path": "vfs://worldtree/knights/anya_omega/tether.json",
+           "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
+           "open_viking_node": "open_viking://worldtree/anya_omega",
+    -      "primary_engine": "Sovereign Lattice Substrate",
+    +      "primary_engine": "Gemini 3.6 Flash / APEE v7.0",
+           "skill_tier": "S5 Strategic",
+           "ocean_vector": {
+    @@ -28,23 +26,5 @@
+             "N": 0.17
+           },
+    -      "interconnect_status": "TETHERED_TO_WORLDTREE",
+    -      "domain_tags": [
+    -        "sovereign_compiler",
+    -        "helm_authority",
+    -        "first_last_gate",
+    -        "videgraph_skillgraph4",
+    -        "alexandrian_matrix",
+    -        "father_camelot"
+    -      ],
+    -      "behavioral_contract": "FATHER_CAMELOT",
+    -      "five_pillars": [
+    -        "Athena (Wisdom & Just Defense)",
+    -        "Ada Lovelace (First Algorithmic Composer)",
+    -        "Margaret Hamilton (Apollo Software Reliability)",
+    -        "Themis (Titaness of Divine Law)",
+    -        "Hypatia of Alexandria (Mathematical Integrity)"
+    -      ],
+    -      "rpg_progression": "Glass Observatory Level & XP Matrix",
+    -      "law_of_non_reproducibility": "ENFORCED"
+    +      "interconnect_status": "TETHERED_TO_WORLDTREE"
+         },
+         "MERLIN_OMEGA": {
+    @@ -53,6 +33,6 @@
+           "name": "Merlin Omega (The System 2 Archwizard)",
+           "title": "Global Optimality Engine & DAG Architect",
+    -      "layer": "L6 System2",
+        ... truncated (2822 lines total)
+
+====================================================================================================
+[44/52] apps/bifrost/src/server.ts   ref=refs/remotes/kickbox-audio/main  py=False
+    ours+? theirs+? overlap=? via=merge_conflict
+    --- main
+    +++ winner
+    @@ -1,22 +1,26 @@
+    -// SPDX-License-Identifier: MIT
+    -
+    -import { randomUUID, timingSafeEqual } from 'node:crypto';
+    +import { randomUUID } from 'node:crypto';
+     import http from 'node:http';
+     import express, { type Request } from 'express';
+     import rateLimit from 'express-rate-limit';
+     import { WebSocket, WebSocketServer } from 'ws';
+    -import { SovereignDB } from './db/SovereignDB';
+    -import { SWARM_EVENTS, publishHermes } from './hermes';
+    -import { type Command, parseCommand } from './nlp';
+    +import { z } from 'zod';
+    +import {
+    +  createAuthHandshake,
+    +  getHandshakeStatus,
+    +  resendAuthHandshake,
+    +  verifyAuthHandshake,
+    +} from './authHandshake';
+    +import { geminiRouter, setupLiveWebsocket } from './gemini';
+    +import { issueSignedAction } from './issuance';
+     import { MicrocubicMatrix } from './microcubic';
+     import { type RouteOutcome, route } from './router';
+    -import { routeOmniVoice } from './omniVoice';
+    -import { z } from 'zod';
+     import { SignatureError, verifyActionSignature, verifyWebhookSignature } from './security';
+    -import { applyCommand, setOmniVoiceTelemetry, setRouteTelemetry, snapshot, state } from './state';
+    -import { issueSignedAction } from './issuance';
+    -import { createOperatorBff } from './operator/bff';
+    -import { InMemoryEventStore } from './operator/receipts';
+    -import { verifyManifest, issueLease } from './operator/sentinel';
+    +import { applyCommand, setRouteTelemetry, snapshot } from './state';
+    +import {
+    +  StreamingTelemetrySchema,
+    +  getStreamingSnapshot,
+    +  upsertStreamingTelemetry,
+    +} from './streaming';
+    +import { nanobotSwarm } from './nanobotSwarm';
+     
+     // WebSocket carrying the heartbeat flag used by the reaper loop below.
+    @@ -30,13 +34,10 @@
+     }
+     
+    -const PORT = Number(process.env.PORT) || 3001;
+    +const PORT =
+    +  Number(
+    +    process.env.BIFROST_PORT ||
+    +      (process.env.PORT && process.env.PORT !== '3000' ? process.env.PORT : undefined),
+    +  ) || 3001;
+     const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET ?? '';
+    -const MESH_TELEMETRY_TOKEN = process.env.BIFROST_MESH_TOKEN ?? '';
+    -
+    -// The Helios/Swarm AI path is opt-in: it needs a Gemini key and makes live
+    -// model calls. When disabled, the gateway runs purely on the deterministic NLP
+    -// parser so it stays bootable and testable without any secrets.
+    -const ENABLE_HELIOS =
+    -  process.env.ENABLE_HELIOS === '1' || Boolean(process.env.GEMINI_API_KEY);
+     
+        ... truncated (631 lines total)
+
+====================================================================================================
+[45/52] apps/pwa/package.json   ref=refs/remotes/kickbox-audio/main  py=False
+    ours+? theirs+? overlap=? via=merge_conflict
+    --- main
+    +++ winner
+    @@ -4,34 +4,33 @@
+       "private": true,
+       "scripts": {
+    -    "dev": "next dev",
+    -    "build": "next build",
+    -    "start": "next start",
+    -    "lint": "next lint",
+    +    "dev": "vite",
+    +    "build": "vite build",
+    +    "start": "vite preview --port 3000 --host 0.0.0.0",
+    +    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+         "typecheck": "tsc --noEmit",
+    -    "pretest:e2e": "next build",
+    -    "test": "node ../../node_modules/vitest/vitest.mjs run",
+    +    "pretest:e2e": "vite build",
+         "test:e2e": "playwright test"
+       },
+       "dependencies": {
+    -    "@agent-native/core": "^0.79.20",
+    -    "@react-three/drei": "^10.7.8",
+    +    "@react-three/drei": "^9.122.0",
+         "@react-three/fiber": "^8.18.0",
+    -    "next": "^14.0.4",
+         "react": "^18.2.0",
+         "react-dom": "^18.2.0",
+         "three": "^0.169.0",
+    +    "vite-plugin-pwa": "^1.3.0",
+         "zod": "^4.4.3"
+       },
+       "devDependencies": {
+         "@playwright/test": "^1.61.1",
+    -    "@types/node": "^26.6.1",
+    +    "@types/node": "^20.10.5",
+         "@types/react": "^18.2.45",
+         "@types/react-dom": "^18.2.18",
+         "@types/three": "0.185.0",
+    +    "@vitejs/plugin-react": "^4.2.1",
+         "autoprefixer": "^10.4.16",
+    -    "vitest": "^2.1.8",
+         "postcss": "^8.4.32",
+         "tailwindcss": "^3.4.0",
+    -    "typescript": "^5.3.3"
+    +    "typescript": "^5.3.3",
+    +    "vite": "^5.0.10"
+       }
+     }
+
+====================================================================================================
+[46/52] apps/pwa/src/actions/propertyActions.ts   ref=refs/remotes/kickbox-audio/main  py=False
+    ours+? theirs+? overlap=? via=merge_conflict
+    --- main
+    +++ winner
+    @@ -1,6 +1,15 @@
+    -// SPDX-License-Identifier: MIT
+    +import { z } from 'zod';
+     
+    -import { defineAction } from '@agent-native/core';
+    -import { z } from 'zod';
+    +export interface ActionDefinition<TInput, TOutput> {
+    +  description: string;
+    +  schema: z.ZodType<TInput>;
+    +  run: (input: TInput) => Promise<TOutput>;
+    +}
+    +
+    +export function defineAction<TInput, TOutput>(
+    +  def: ActionDefinition<TInput, TOutput>,
+    +): ActionDefinition<TInput, TOutput> {
+    +  return def;
+    +}
+     
+     export interface DispatchPlumberResult {
+    @@ -32,7 +41,9 @@
+         const ticketId = `PLUMB-${Math.floor(1000 + Math.random() * 9000)}`;
+         const timestamp = new Date().toISOString();
+    -    
+    -    console.log(`[ISOMORPHIC ACTION] Dispatching plumber to ${unit}. Issue: ${issue}. Priority: ${priority}`);
+    -    
+    +
+    +    console.log(
+    +      `[ISOMORPHIC ACTION] Dispatching plumber to ${unit}. Issue: ${issue}. Priority: ${priority}`,
+    +    );
+    +
+         return {
+           status: 'DISPATCHED',
+
+====================================================================================================
+[47/52] apps/pwa/src/components/3d/KineticBackground.tsx   ref=refs/remotes/kickbox-audio/main  py=False
+    ours+? theirs+? overlap=? via=merge_conflict
+    --- main
+    +++ winner
+    @@ -1,15 +1,12 @@
+    -// SPDX-License-Identifier: MIT
+    +import React, { Suspense } from 'react';
+     
+    -'use client';
+    -
+    -import dynamic from 'next/dynamic';
+    -
+    -// next/dynamic ssr:false — the DOM paints before WebGL loads (Iron Gate: FCP < 1.2s).
+    -const KineticCanvas = dynamic(() => import('./KineticCanvas'), { ssr: false });
+    +const KineticCanvas = React.lazy(() => import('./KineticCanvas'));
+     
+     export function KineticBackground() {
+       return (
+         <div className="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
+    -      <KineticCanvas />
+    +      <Suspense fallback={null}>
+    +        <KineticCanvas />
+    +      </Suspense>
+         </div>
+       );
+
+====================================================================================================
+[48/52] apps/pwa/src/context/KoARealmProvider.tsx   ref=refs/remotes/kickbox-audio/main  py=False
+    ours+? theirs+? overlap=? via=merge_conflict
+    --- main
+    +++ winner
+    @@ -1,27 +1,37 @@
+    -// SPDX-License-Identifier: MIT
+    -
+    -'use client';
+    -
+    -import dynamic from 'next/dynamic';
+    -import type { ReactNode } from 'react';
+    -import { LakeishaVideoHUD } from '../components/hud/LakeishaVideoHUD';
+    +import React, { type ReactNode } from 'react';
+    +import { CamelotTenantGateway } from '../components/gateway/CamelotTenantGateway';
+    +import { AvatarConfigModal } from '../components/hud/AvatarConfigModal';
+    +import { MacroManagerModal } from '../components/macro/MacroManagerModal';
+    +import { AvatarConfigProvider } from './AvatarConfigContext';
+     import { BifrostProvider } from './BifrostContext';
+    -
+    -const SpatialBackground = dynamic(
+    -  () => import('../components/3d/SpatialBackground').then((mod) => mod.SpatialBackground),
+    -  {
+    -    ssr: false,
+    -    loading: () => <div className="pointer-events-none fixed inset-0 -z-10 bg-[#050505]" />,
+    -  },
+    -);
+    +import { MacroProvider } from './MacroContext';
+    +import { TenantProvider } from './TenantContext';
+    +import { VoiceTranscriptProvider } from './VoiceTranscriptContext';
+     
+     export function KoARealmProvider({ children }: { children: ReactNode }) {
+       return (
+         <BifrostProvider>
+    -      <div className="relative min-h-screen bg-[#050505] text-white">
+    -        <SpatialBackground />
+    -        {children}
+    -        <LakeishaVideoHUD />
+    -      </div>
+    +      <TenantProvider>
+    +        <AvatarConfigProvider>
+    +          <MacroProvider>
+    +            <VoiceTranscriptProvider>
+    +              <div className="relative min-h-screen bg-[#050507] text-white">
+    +                {/* 2D Luxury Minimalist Cyber-Lattice Backdrop */}
+    +                <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-[#050507]">
+    +                  <div className="absolute inset-0 bg-[radial-gradient(#5A2A82_1px,transparent_1px)] [background-size:32px_32px] opacity-15" />
+    +                  <div className="absolute -top-40 left-1/4 h-[500px] w-[600px] rounded-full bg-[#7B2CBF]/10 blur-[150px]" />
+    +                  <div className="absolute -bottom-40 right-1/4 h-[400px] w-[500px] rounded-full bg-[#FFD700]/8 blur-[130px]" />
+    +                </div>
+    +
+    +                {children}
+    +
+    +                <AvatarConfigModal />
+    +                <MacroManagerModal />
+    +                <CamelotTenantGateway />
+    +              </div>
+    +            </VoiceTranscriptProvider>
+    +          </MacroProvider>
+    +        </AvatarConfigProvider>
+    +      </TenantProvider>
+         </BifrostProvider>
+       );
+
+====================================================================================================
+[49/52] apps/pwa/src/styles/globals.css   ref=refs/remotes/kickbox-audio/main  py=False
+    ours+? theirs+? overlap=? via=merge_conflict
+    --- main
+    +++ winner
+    @@ -1,4 +1,2 @@
+    -/* SPDX-License-Identifier: MIT */
+    -
+     /* Fonts are loaded via next/font in app/layout.tsx (self-hosted, no render-blocking request). */
+     
+    @@ -8,6 +6,5 @@
+     
+     body {
+    -  @apply bg-[#050507] font-sans text-white antialiased;
+    -  transition: background-color 0.3s ease, color 0.3s ease;
+    +  @apply bg-obsidian font-sans text-white antialiased;
+     }
+     
+    @@ -25,38 +22,308 @@
+     }
+     
+    -/* --- WHITE SCREEN LIGHT MODE STYLES --- */
+    -html.light-mode,
+    -html.light-mode body {
+    -  background-color: #ffffff !important;
+    -  color: #0f172a !important;
+    -}
+    -
+    -html.light-mode aside {
+    -  background-color: rgba(255, 255, 255, 0.95) !important;
+    -  border-color: rgba(212, 175, 55, 0.4) !important;
+    -}
+    -
+    -html.light-mode aside p,
+    -html.light-mode aside button,
+    -html.light-mode aside span {
+    -  color: #0f172a !important;
+    -}
+    -
+    -html.light-mode main,
+    -html.light-mode header {
+    -  color: #0f172a !important;
+    -}
+    -
+    -html.light-mode div.bg-smoke-800\/80,
+    -html.light-mode div.bg-smoke-900\/60,
+    -html.light-mode div.bg-\[\#0B0B0E\] {
+    -  background-color: #ffffff !important;
+    -  color: #0f172a !important;
+    -  border-color: rgba(212, 175, 55, 0.4) !important;
+    -}
+    -
+    -html.light-mode h1,
+    -html.light-mode h2,
+    -html.light-mode h3 {
+    -  color: #0f172a !important;
+    -}
+    +/* Tactile Physical Cartridge Dock Snap & Pulse animations */
+    +@keyframes dockSnap {
+    +  0% {
+    +    transform: scale(0.96) translateX(-2px);
+    +  }
+    +  50% {
+        ... truncated (360 lines total)
+
+====================================================================================================
+[50/52] apps/pwa/tsconfig.json   ref=refs/remotes/kickbox-audio/main  py=False
+    ours+? theirs+? overlap=? via=merge_conflict
+    --- main
+    +++ winner
+    @@ -1,7 +1,8 @@
+     {
+       "compilerOptions": {
+    -    "target": "es5",
+    -    "lib": ["dom", "dom.iterable", "esnext"],
+    -    "allowJs": true,
+    +    "target": "ES2020",
+    +    "useDefineForClassFields": true,
+    +    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    +    "module": "ESNext",
+         "skipLibCheck": true,
+         "strict": true,
+    @@ -9,23 +10,13 @@
+         "noEmit": true,
+         "esModuleInterop": true,
+    -    "module": "esnext",
+         "moduleResolution": "bundler",
+         "resolveJsonModule": true,
+         "isolatedModules": true,
+    -    "jsx": "preserve",
+    -    "incremental": true,
+    +    "jsx": "react-jsx",
+         "paths": {
+    -      "@/*": ["./src/*"],
+    -      "@camelot/voice-first-runtime": [
+    -        "./src/lib/voice-first-runtime/index.ts"
+    -      ]
+    -    },
+    -    "plugins": [
+    -      {
+    -        "name": "next"
+    -      }
+    -    ]
+    +      "@/*": ["./src/*"]
+    +    }
+       },
+    -  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+    +  "include": ["src"],
+       "exclude": ["node_modules"]
+     }
+
+====================================================================================================
+[51/52] control_plane/runes/runic_router.py   ref=refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg  py=True
+    ours+? theirs+? overlap=? via=merge_conflict
+    --- main
+    +++ winner
+    @@ -1,4 +1,2 @@
+    -# SPDX-License-Identifier: MIT
+    -
+     # -*- coding: utf-8 -*-
+     """
+    @@ -36,5 +34,6 @@
+     from typing import Any, Optional
+     
+    -from control_plane.taxonomy import PRIVACY_KEYWORDS
+    +from control_plane.runes.taxonomy import PRIVACY_KEYWORDS
+    +from control_plane._paths import REPO_ROOT
+     
+     try:
+    @@ -124,11 +123,4 @@
+             "handler": "_handle_swarm",
+         },
+    -    "//BIO_SWARM": {
+    -        "knight": "lady_apis",
+    -        "description": "Lady Apis command & bio-kinetic cellular isolation hive orchestration",
+    -        "mode": "BIO_KINETIC",
+    -        "priority": 1,
+    -        "handler": "_handle_bio_swarm",
+    -    },
+         "//PLAN": {
+             "knight": "merlin_omega",
+    @@ -145,18 +137,4 @@
+             "handler": "_handle_heal",
+         },
+    -    "//REZERO": {
+    -        "knight": "sir_codex",
+    -        "description": "Rezero state — reset context execution to last verified checkpoint",
+    -        "mode": "KINETIC",
+    -        "priority": 1,
+    -        "handler": "_handle_rezero",
+    -    },
+    -    "//REZERO_CODE": {
+    -        "knight": "sir_codex",
+    -        "description": "Abandon failing logic path while preserving verified stable state",
+    -        "mode": "KINETIC",
+    -        "priority": 1,
+    -        "handler": "_handle_rezero",
+    -    },
+         "//GENESIS": {
+             "knight": "sir_boris",
+    @@ -168,9 +146,8 @@
+         "//ASSIMILATE": {
+             "knight": "sir_helio",
+    -        "description": "CloudBrain scour: per-knight registry/tissue/Honcho readiness matrix (CLAUDE.md half retired with quarantine)",
+    +        "description": "Cloud Brain scour + CLAUDE.md enhancement",
+             "mode": "ORACLE",
+             "priority": 3,
+             "handler": "_handle_assimilate",
+    -        "hydrate": False,
+         },
+         "//SCAVENGE": {
+    @@ -208,20 +185,4 @@
+             "priority": 1,
+             "handler": "_handle_status",
+        ... truncated (4225 lines total)
+
+====================================================================================================
+[52/52] vfs/worldtree_reconciled.json   ref=refs/remotes/origin/fix/lint-format-pass  py=False
+    ours+? theirs+? overlap=? via=merge_conflict
+    --- main
+    +++ winner
+    @@ -1,281 +1,58 @@
+     {
+    -  "schema_version": "1000.54-EXCALIBUR-A",
+    +  "schema_version": "1000.54",
+       "generated": "2026-08-10T17:39:02.888622+00:00",
+       "total_live_notebooks": 275,
+       "camelot_affiliated": 88,
+    -  "verified_knights": 38,
+    +  "verified_knights": 10,
+       "worldtree_nodes": {
+         "SIR_BORIS": {
+           "id": "f7707daa-2d10-4db8-8fda-be4661a27793",
+    -      "role": "Lead Architect, Crucible Conductor, 13-Agent Critique",
+    -      "model": "Gemini / Claude Code",
+    -      "verified": true,
+    -      "isomorphic_vfs_path": "vfs/notebooks/f7707daa-2d10-4db8-8fda-be4661a27793/"
+    +      "title": "Sovereign_Workspace: SIR_BORIS",
+    +      "verified": true
+         },
+         "SIR_ALEX": {
+           "id": "f490c05e-d8c4-4008-87e1-5f901bf57c6a",
+    -      "role": "Task Planner, DAG Orchestrator, AST Task Breakdown",
+    -      "model": "Gemini 3.8 Flash",
+    -      "verified": true,
+    -      "isomorphic_vfs_path": "vfs/notebooks/f490c05e-d8c4-4008-87e1-5f901bf57c6a/"
+    +      "title": "Sovereign_Workspace: SIR_ALEX",
+    +      "verified": true
+         },
+         "SIR_FORGE": {
+           "id": "91c5da8b-e2de-4a56-b7fd-c8b76c00afc7",
+    -      "role": "Kinetic Code Generation, Compiles, //FORGE Dispatcher",
+    -      "model": "Gemini 3.8 Flash",
+    -      "verified": true,
+    -      "isomorphic_vfs_path": "vfs/notebooks/91c5da8b-e2de-4a56-b7fd-c8b76c00afc7/"
+    +      "title": "Sovereign_Workspace: SIR_FORGE",
+    +      "verified": true
+    +    },
+    +    "SIR_SENTINEL": {
+    +      "id": "07cbb441-f008-424c-820a-85676210be39",
+    +      "title": "Sovereign_Workspace: SIR_SENTINEL",
+    +      "verified": true
+    +    },
+    +    "SIR_DEBUG": {
+    +      "id": "fdc42a4a-3060-4eac-b57c-8e6009ed634a",
+    +      "title": "Sovereign_Workspace: SIR_DEBUG",
+    +      "verified": true
+    +    },
+    +    "SIR_GHOST": {
+    +      "id": "422a184b-93e7-4dfd-8a12-75d2268b6c60",
+    +      "title": "Sovereign_Workspace: SIR_GHOST",
+    +      "verified": true
+    +    },
+    +    "LADY_APIS": {
+    +      "id": "378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f",
+    +      "title": "Sovereign_Workspace: LADY_APIS",
+    +      "verified": true
+    +    },
+    +    "MERLIN_OMEGA": {
+        ... truncated (422 lines total)

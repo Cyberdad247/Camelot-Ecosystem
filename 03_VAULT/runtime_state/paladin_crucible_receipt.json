@@ -1,6 +1,6 @@
 {
-  "verdict_id": "crucible_e666e4fa",
-  "timestamp": 1790333759.6452396,
+  "verdict_id": "crucible_ebd64fa3",
+  "timestamp": 1791099214.2799287,
   "target": "tools/arthurian-omni-forge",
   "status": "Z3_PASS",
   "all_obligations_satisfied": true,

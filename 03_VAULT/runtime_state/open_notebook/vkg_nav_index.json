@@ -31,7 +31,241 @@
       "category": "WORLDTREE_NAV",
       "vfs_coord": "vfs://worldtree/knights/sir_octavian/domain_nodes/47c03ab7ad51d20d",
       "added_at": "2026-09-19T12:35:12.731501+00:00"
+    },
+    {
+      "crystal_id": "VKG_F6E4B5C4B19AB714",
+      "knight": "SIR_HELIOS",
+      "title": "Multi-Tier Hybrid Brain Memory Architecture",
+      "category": "CAMELOT_SYSTEMS_ARCHITECTURE",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_f6e4b5c4b19ab714.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Multi-Tier|Hybrid|Brain|Memory|Architecture|Helios|routes|flash|telemetry|Redis|zero|token|cost|Qdrant|stores|semantic|vector|embeddings|OpenNotebook|maintains|local|living|knight|tissues|Cybertronia|NotebookLM|WorldTree|governs|deep|reasoning|across|nodes|Anya|Gate|validates|sovereign|transitions\u27e9",
+      "added_at": "2026-10-06T02:11:04.220489+00:00"
+    },
+    {
+      "crystal_id": "VKG_205C8BC117FE98FE",
+      "knight": "SIR_HELIOS",
+      "title": "Stress Test Crystal 0",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_205c8bc117fe98fe.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Stress|Test|Crystal|Iteration|Helios|validates|memory|footprint|Redis|handles|flash|state|Qdrant|manages|vectors|OpenNotebook|stores|crystals\u27e9",
+      "added_at": "2026-10-06T15:09:40.688376+00:00"
+    },
+    {
+      "crystal_id": "VKG_BA5314CD8F25273D",
+      "knight": "SIR_HELIOS",
+      "title": "Stress Test Crystal 1",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_ba5314cd8f25273d.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Stress|Test|Crystal|Iteration|Helios|validates|memory|footprint|Redis|handles|flash|state|Qdrant|manages|vectors|OpenNotebook|stores|crystals\u27e9",
+      "added_at": "2026-10-06T15:09:40.921395+00:00"
+    },
+    {
+      "crystal_id": "VKG_68E2B6B04D632C0F",
+      "knight": "SIR_HELIOS",
+      "title": "Stress Test Crystal 2",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_68e2b6b04d632c0f.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Stress|Test|Crystal|Iteration|Helios|validates|memory|footprint|Redis|handles|flash|state|Qdrant|manages|vectors|OpenNotebook|stores|crystals\u27e9",
+      "added_at": "2026-10-06T15:09:40.949566+00:00"
+    },
+    {
+      "crystal_id": "VKG_F537E88196B553A6",
+      "knight": "SIR_HELIOS",
+      "title": "Stress Test Crystal 3",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_f537e88196b553a6.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Stress|Test|Crystal|Iteration|Helios|validates|memory|footprint|Redis|handles|flash|state|Qdrant|manages|vectors|OpenNotebook|stores|crystals\u27e9",
+      "added_at": "2026-10-06T15:09:40.966398+00:00"
+    },
+    {
+      "crystal_id": "VKG_5BDA6AF9CEAE19E5",
+      "knight": "SIR_HELIOS",
+      "title": "Stress Test Crystal 4",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_5bda6af9ceae19e5.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Stress|Test|Crystal|Iteration|Helios|validates|memory|footprint|Redis|handles|flash|state|Qdrant|manages|vectors|OpenNotebook|stores|crystals\u27e9",
+      "added_at": "2026-10-06T15:09:40.988250+00:00"
+    },
+    {
+      "crystal_id": "VKG_49D083D20F58844B",
+      "knight": "SIR_HELIOS",
+      "title": "Stress Test Crystal 5",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_49d083d20f58844b.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Stress|Test|Crystal|Iteration|Helios|validates|memory|footprint|Redis|handles|flash|state|Qdrant|manages|vectors|OpenNotebook|stores|crystals\u27e9",
+      "added_at": "2026-10-06T15:09:41.005126+00:00"
+    },
+    {
+      "crystal_id": "VKG_16FDCB58C063372A",
+      "knight": "SIR_HELIOS",
+      "title": "Stress Test Crystal 6",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_16fdcb58c063372a.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Stress|Test|Crystal|Iteration|Helios|validates|memory|footprint|Redis|handles|flash|state|Qdrant|manages|vectors|OpenNotebook|stores|crystals\u27e9",
+      "added_at": "2026-10-06T15:09:41.024734+00:00"
+    },
+    {
+      "crystal_id": "VKG_A3E6B56A5F7B0E12",
+      "knight": "SIR_HELIOS",
+      "title": "Stress Test Crystal 7",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_a3e6b56a5f7b0e12.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Stress|Test|Crystal|Iteration|Helios|validates|memory|footprint|Redis|handles|flash|state|Qdrant|manages|vectors|OpenNotebook|stores|crystals\u27e9",
+      "added_at": "2026-10-06T15:09:41.042232+00:00"
+    },
+    {
+      "crystal_id": "VKG_33C70CF003D66F81",
+      "knight": "SIR_HELIOS",
+      "title": "Stress Test Crystal 8",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_33c70cf003d66f81.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Stress|Test|Crystal|Iteration|Helios|validates|memory|footprint|Redis|handles|flash|state|Qdrant|manages|vectors|OpenNotebook|stores|crystals\u27e9",
+      "added_at": "2026-10-06T15:09:41.063918+00:00"
+    },
+    {
+      "crystal_id": "VKG_5F8638617C1A1984",
+      "knight": "SIR_HELIOS",
+      "title": "Stress Test Crystal 9",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_5f8638617c1a1984.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Stress|Test|Crystal|Iteration|Helios|validates|memory|footprint|Redis|handles|flash|state|Qdrant|manages|vectors|OpenNotebook|stores|crystals\u27e9",
+      "added_at": "2026-10-06T15:09:41.086402+00:00"
+    },
+    {
+      "crystal_id": "VKG_30BB0938F9EA26A6",
+      "knight": "SIR_HELIOS",
+      "title": "Memory Stability Benchmark Node 0",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_30bb0938f9ea26a6.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Memory|Stability|Benchmark|Node|Benchmark|payload|Helios|routes|telemetry|Anya|Gate|validates|execution\u27e9",
+      "added_at": "2026-10-06T15:10:10.918579+00:00"
+    },
+    {
+      "crystal_id": "VKG_62BC6E2BB0BCE6C6",
+      "knight": "SIR_HELIOS",
+      "title": "Memory Stability Benchmark Node 1",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_62bc6e2bb0bce6c6.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Memory|Stability|Benchmark|Node|Benchmark|payload|Helios|routes|telemetry|Anya|Gate|validates|execution\u27e9",
+      "added_at": "2026-10-06T15:10:10.941552+00:00"
+    },
+    {
+      "crystal_id": "VKG_3382D78310B55A4C",
+      "knight": "SIR_HELIOS",
+      "title": "Memory Stability Benchmark Node 2",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_3382d78310b55a4c.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Memory|Stability|Benchmark|Node|Benchmark|payload|Helios|routes|telemetry|Anya|Gate|validates|execution\u27e9",
+      "added_at": "2026-10-06T15:10:10.957042+00:00"
+    },
+    {
+      "crystal_id": "VKG_AFA2C26EA5520B9C",
+      "knight": "SIR_HELIOS",
+      "title": "Memory Stability Benchmark Node 3",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_afa2c26ea5520b9c.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Memory|Stability|Benchmark|Node|Benchmark|payload|Helios|routes|telemetry|Anya|Gate|validates|execution\u27e9",
+      "added_at": "2026-10-06T15:10:10.971763+00:00"
+    },
+    {
+      "crystal_id": "VKG_EC2E03679EFB0385",
+      "knight": "SIR_HELIOS",
+      "title": "Memory Stability Benchmark Node 4",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_ec2e03679efb0385.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Memory|Stability|Benchmark|Node|Benchmark|payload|Helios|routes|telemetry|Anya|Gate|validates|execution\u27e9",
+      "added_at": "2026-10-06T15:10:10.997606+00:00"
+    },
+    {
+      "crystal_id": "VKG_2EE4FA41CE71B8B2",
+      "knight": "SIR_HELIOS",
+      "title": "Memory Stability Benchmark Node 5",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_2ee4fa41ce71b8b2.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Memory|Stability|Benchmark|Node|Benchmark|payload|Helios|routes|telemetry|Anya|Gate|validates|execution\u27e9",
+      "added_at": "2026-10-06T15:10:11.016433+00:00"
+    },
+    {
+      "crystal_id": "VKG_0570EBA75869DCAF",
+      "knight": "SIR_HELIOS",
+      "title": "Memory Stability Benchmark Node 6",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_0570eba75869dcaf.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Memory|Stability|Benchmark|Node|Benchmark|payload|Helios|routes|telemetry|Anya|Gate|validates|execution\u27e9",
+      "added_at": "2026-10-06T15:10:11.041224+00:00"
+    },
+    {
+      "crystal_id": "VKG_3192CB87ED649774",
+      "knight": "SIR_HELIOS",
+      "title": "Memory Stability Benchmark Node 7",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_3192cb87ed649774.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Memory|Stability|Benchmark|Node|Benchmark|payload|Helios|routes|telemetry|Anya|Gate|validates|execution\u27e9",
+      "added_at": "2026-10-06T15:10:11.067719+00:00"
+    },
+    {
+      "crystal_id": "VKG_EE4217E9AA8A5CA3",
+      "knight": "SIR_HELIOS",
+      "title": "Memory Stability Benchmark Node 8",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_ee4217e9aa8a5ca3.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Memory|Stability|Benchmark|Node|Benchmark|payload|Helios|routes|telemetry|Anya|Gate|validates|execution\u27e9",
+      "added_at": "2026-10-06T15:10:11.083489+00:00"
+    },
+    {
+      "crystal_id": "VKG_46AEEC8E6EE3EA31",
+      "knight": "SIR_HELIOS",
+      "title": "Memory Stability Benchmark Node 9",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_46aeec8e6ee3ea31.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Memory|Stability|Benchmark|Node|Benchmark|payload|Helios|routes|telemetry|Anya|Gate|validates|execution\u27e9",
+      "added_at": "2026-10-06T15:10:11.108469+00:00"
+    },
+    {
+      "crystal_id": "VKG_23A0E713B2A448AA",
+      "knight": "SIR_HELIOS",
+      "title": "Memory Stability Benchmark Node 10",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_23a0e713b2a448aa.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Memory|Stability|Benchmark|Node|Benchmark|payload|Helios|routes|telemetry|Anya|Gate|validates|execution\u27e9",
+      "added_at": "2026-10-06T15:10:11.126966+00:00"
+    },
+    {
+      "crystal_id": "VKG_2549CA18D92A3CAD",
+      "knight": "SIR_HELIOS",
+      "title": "Memory Stability Benchmark Node 11",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_2549ca18d92a3cad.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Memory|Stability|Benchmark|Node|Benchmark|payload|Helios|routes|telemetry|Anya|Gate|validates|execution\u27e9",
+      "added_at": "2026-10-06T15:10:11.144075+00:00"
+    },
+    {
+      "crystal_id": "VKG_FEEECEBA15F6BD85",
+      "knight": "SIR_HELIOS",
+      "title": "Memory Stability Benchmark Node 12",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_feeeceba15f6bd85.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Memory|Stability|Benchmark|Node|Benchmark|payload|Helios|routes|telemetry|Anya|Gate|validates|execution\u27e9",
+      "added_at": "2026-10-06T15:10:11.161900+00:00"
+    },
+    {
+      "crystal_id": "VKG_0B10E7903D379ADB",
+      "knight": "SIR_HELIOS",
+      "title": "Memory Stability Benchmark Node 13",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_0b10e7903d379adb.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Memory|Stability|Benchmark|Node|Benchmark|payload|Helios|routes|telemetry|Anya|Gate|validates|execution\u27e9",
+      "added_at": "2026-10-06T15:10:11.187663+00:00"
+    },
+    {
+      "crystal_id": "VKG_FF12C98F167309DE",
+      "knight": "SIR_HELIOS",
+      "title": "Memory Stability Benchmark Node 14",
+      "category": "BENCHMARK",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_ff12c98f167309de.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Memory|Stability|Benchmark|Node|Benchmark|payload|Helios|routes|telemetry|Anya|Gate|validates|execution\u27e9",
+      "added_at": "2026-10-06T15:10:11.208329+00:00"
     }
   ],
-  "updated_at": "2026-09-19T12:35:12.733842+00:00"
+  "updated_at": "2026-10-06T15:10:11.224479+00:00"
 }

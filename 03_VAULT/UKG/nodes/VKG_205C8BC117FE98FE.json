@@ -1,0 +1,57 @@
+{
+  "crystal_id": "VKG_205C8BC117FE98FE",
+  "schema_version": "v1000-VKG-SINGULARITY",
+  "anya_seal": "ANYA_IS_THE_GATE",
+  "category": "BENCHMARK",
+  "knight": "SIR_HELIOS",
+  "title": "Stress Test Crystal 0",
+  "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Stress|Test|Crystal|Iteration|Helios|validates|memory|footprint|Redis|handles|flash|state|Qdrant|manages|vectors|OpenNotebook|stores|crystals\u27e9",
+  "anchor_tokens": [
+    "Stress",
+    "Test",
+    "Crystal",
+    "Iteration",
+    "Helios",
+    "validates",
+    "memory",
+    "footprint",
+    "Redis",
+    "handles",
+    "flash",
+    "state",
+    "Qdrant",
+    "manages",
+    "vectors",
+    "OpenNotebook",
+    "stores",
+    "crystals"
+  ],
+  "sources_count": 1,
+  "manifest_sha256": "be15341cf09dc7c83a1d86afee48d82833f08d2e6aaad3e190eec89fb8488b8a",
+  "triplets": [
+    {
+      "head": "Iteration 0 Sir Helios",
+      "relation": "validate",
+      "tail": "memory footprint"
+    },
+    {
+      "head": "Redis",
+      "relation": "handle",
+      "tail": "flash state"
+    },
+    {
+      "head": "Qdrant",
+      "relation": "manage",
+      "tail": "vectors"
+    },
+    {
+      "head": "OpenNotebook",
+      "relation": "store",
+      "tail": "crystals"
+    }
+  ],
+  "triplet_count": 4,
+  "vfs_coordinate": "vfs://worldtree/crystals/vkg_205c8bc117fe98fe.vkg",
+  "created_at": "2026-10-06T15:09:40.688376+00:00",
+  "finalized_content": "Iteration 0: Sir Helios validates memory footprint. Redis handles flash state. Qdrant manages vectors. OpenNotebook stores crystals."
+}
