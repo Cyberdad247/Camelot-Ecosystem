@@ -1037,7 +1037,7 @@ def boot_omnivoice_router(home: Path) -> tuple[bool, str]:
         return False, "omnivoice-router.ts not found"
 
     if compiled_js.exists():
-        cmd = ["node", str(compiled_js)]
+        cmd = ["node", "--max-old-space-size=256", str(compiled_js)]
     else:
         npx = shutil.which("npx")
         ts_node = shutil.which("ts-node")
@@ -1284,7 +1284,7 @@ def boot_opencodex(home: Path) -> tuple[bool, str]:
 
     try:
         if ocx_cli is not None:
-            launch_cmd = [node_bin or "node", str(ocx_cli), "start", "--port", str(ocx_port)]
+            launch_cmd = [node_bin or "node", "--max-old-space-size=256", str(ocx_cli), "start", "--port", str(ocx_port)]
         else:
             launch_cmd = [npx_bin, "ocx", "start", "--port", str(ocx_port)]
 

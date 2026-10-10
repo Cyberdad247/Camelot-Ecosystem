@@ -1,0 +1,18 @@
+id: VS-004
+slug: VS-004-sentinel-authority
+title: Sentinel Authority & Capability Leases
+tier: P0
+status: ACTIVE
+owner: sir_sentinel
+summary: Time-bound, attenuated capability leases governing agent permissions and
+  tool calls.
+contracts:
+- CONTRACT-CAPABILITY-LEASE-001
+code_paths:
+- control_plane/security/
+- 01_KERNEL/core/aegis_shield/
+tests:
+- tests/test_agent_slab_sync.py
+exit_criteria:
+- Strict lease expiry enforcement
+- Attenuation inheritance verification

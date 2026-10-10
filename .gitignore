@@ -43,6 +43,15 @@ data/.pytest_temp/
 03_VAULT/runtime_state/harness_heartbeat.jsonl
 03_VAULT/runtime_state/boot_snapshot.json
 03_VAULT/runtime_state/*_snapshot.json
+03_VAULT/runtime_state/evaluation/
+03_VAULT/runtime_state/finance_ledger/
+03_VAULT/runtime_state/crm_sync/
+03_VAULT/runtime_state/snapshots/
+03_VAULT/runtime_state/inference_receipts/
+03_VAULT/runtime_state/ravenry_mail/
+03_VAULT/runtime_state/*.pid
+03_VAULT/firnflow/
+*.pid
 
 # 4. Python / Node Runtime
 __pycache__/

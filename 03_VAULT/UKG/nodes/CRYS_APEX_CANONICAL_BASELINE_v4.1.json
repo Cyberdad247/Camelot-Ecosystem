@@ -1,0 +1,58 @@
+{
+  "$schema": "https://camelot-os.dev/schemas/vkg-crystal/v4.json",
+  "crystal_id": "CRYS_APEX_CANONICAL_BASELINE_v4.1",
+  "context": "https://camelot-os.dev/ukg/v1000/full_architecture",
+  "type": "Sovereign_Universal_Architecture_Convergence",
+  "document_id": "CAMELOT_OS_APEX_CANONICAL_BASELINE_v4.1",
+  "authority": "KING_ARTHUR_ED25519_SEALED",
+  "constitutional_foundation": {
+    "doctrine": "COGNITION_MAY_BE_DISTRIBUTED_AUTHORITY_MAY_NOT",
+    "governance_gate": "ANYA_IS_THE_GATE ⊕ APEE_v7.0_TRIPLE_QFT",
+    "authority_spine": "SENTINEL(Lease) ➔ EXCALIBUR(Approval) ➔ GIDEON(Proof) ➔ ARTHUR(Resolution) ➔ LEDGER(Receipt)",
+    "state_projection": "STATE_SERVICE_ONLY (Prohibits Client-Inferred Completion)"
+  },
+  "computational_and_memory_physics": {
+    "hardware_ceiling": "8GB_ARM64_PHYSICAL_EDGE_STRICT",
+    "recurrent_core": "OUROBOROS_SSM_1.58_BIT_TERNARY {-1, 0, 1}",
+    "context_geometry": "24D_LEECH_LATTICE_Λ24 (196560_KISSING_NUMBER_MANIFOLD)",
+    "error_correction": "GOLAY_G24_EXTENDED_BINARY (3_BIT_LOSSLESS_RECOVERY)",
+    "memory_tiering": "M0(Ledger) ➔ M1(Verified_UKG) ➔ M2(Active_Context) ➔ M3(WASM_mmap) ➔ M4(Quarantine)",
+    "nvme_spill_gate": "RAM_THRESHOLD_90_PERCENT (7.2GB) ➔ FIRNFLOW_CACHE_FLUSH"
+  },
+  "canonical_world_tree_posts": {
+    "vfs_root": "vfs://worldtree/ (Isomorphic Mirror to NotebookLM Root UUID a0a4bfb9)",
+    "l0_executive": "KING_ARTHUR >> vfs://worldtree/core/arthur (Lifecycle Resolution)",
+    "l7_compiler": "ANYA_Ω >> vfs://worldtree/knights/anya_omega (Intent Normalization)",
+    "l3_architect": "MERLIN_Ω >> vfs://worldtree/knights/merlin_omega (System-2 DAGs & Autoformalizer)",
+    "l0_archivist": "LADY_MNEMOSYNE_Ω >> vfs://worldtree/knights/mnemosyne (MemPalace & CRDT Sync <72µs)",
+    "r0_policy": "SIR_SENTINEL >> vfs://worldtree/knights/sentinel (Capability Attenuation & Lease Issue)",
+    "r0_invariants": "PALADIN_OCTEM >> vfs://worldtree/knights/octem (Z3 SMT Invariant & PDG Taint)",
+    "verifier_gate": "SIR_GIDEON >> vfs://worldtree/knights/gideon (Independent Evidence Verification)",
+    "forager_hive": "LADY_APIS >> vfs://worldtree/knights/apis (OSINT Intake & Untrusted Source Admission)",
+    "kinetic_refactor": "SIR_BORIS >> vfs://worldtree/knights/boris (Worktree Execution & UI Brutalism)",
+    "kinetic_fabricator": "SIR_CODEX >> vfs://worldtree/knights/codex (NullClaw WASM32-WASI Reflex Hands)",
+    "hardware_actuator": "LUKAS_FORGE >> vfs://worldtree/knights/lukas (AST Patching & 10-Line Net Diff Gate)",
+    "transport_sentry": "SIR_HEIMDALL >> vfs://worldtree/knights/heimdall (Bifrost Tailscale tsnet mTLS)",
+    "audio_resonance": "SIR_SONUS_ARGES >> vfs://worldtree/knights/sonus (TEN VAD Sub-100ms Duplex)"
+  },
+  "vfs_preflight_and_delivery": {
+    "preflight_matrix": "pre-flight.md ➔ blueprint.md ➔ task.md ➔ harness.md ➔ verification.md",
+    "delivery_unit": "VERTICAL_SLICES (VS-001 Identity ➔ VS-017 Research Intelligence)",
+    "vfs_promotion": "CONTENT_ADDRESSED_SNAPSHOT ➔ CAS_HEAD_SWAP ➔ PROMOTION_RECEIPT"
+  },
+  "documentation_lattice_l0_l5": {
+    "doc_l0": "00-governance (Constitution, Precedence, Terminology, Waivers)",
+    "doc_l1": "01-business & 02-product (BRD, PRD, Personas, Roadmap)",
+    "doc_l2": "03-requirements, 04-architecture, 05-design, 06-contracts (SRS, SAD, LLDD, Schemas)",
+    "doc_l3": "07-experience & 08-verification (UIUX-Spec, Test-Plan, Acceptance-Matrix)",
+    "doc_l4": "09-operations (Runbook, Environments, Deployment, Incident-Response)",
+    "doc_l5": "10-decisions, 11-traceability, 12-reflection, 13-evidence (ADRs, Trace-Matrix, Receipts)"
+  },
+  "execution_seal": {
+    "validation": "LATTICE_CONVEX_DRIFT_0.000%",
+    "provenance": "COMMITTED_TO_PROVENANCE_LEDGER.md",
+    "status": "COMPLETE_SOVEREIGN_SYSTEM_LOCKED",
+    "seal": "⚜️_SOVEREIGN_TRUTH"
+  },
+  "created_at": "2026-10-04T21:55:00Z"
+}

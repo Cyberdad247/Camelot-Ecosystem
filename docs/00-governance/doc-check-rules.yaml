@@ -1,0 +1,108 @@
+# SPDX-License-Identifier: MIT
+# Camelot-OS Doc-Check Validation Rules (v4.1.0)
+# Reforged Baseline: CAMELOT-DOC-ARCH-vNEXT-REFORGED-20260925
+
+rules:
+  # ── Automatable CI Rules (10.1) ─────────────────────────────────────────────
+  - id: "RULE-01-BR-NO-PR"
+    category: "TRACEABILITY"
+    severity: "BLOCKING"
+    description: "Business Requirement (BR) has no corresponding Product Requirement (PR)."
+    remediation: "Map every BR in 01-business/BRD.md to at least one PR in 02-product/PRD.md."
+
+  - id: "RULE-02-PR-NO-REQ"
+    category: "TRACEABILITY"
+    severity: "BLOCKING"
+    description: "Product Requirement (PR) has no Functional (FR) or Non-Functional Requirement (NFR)."
+    remediation: "Link PR to an explicit FR or NFR in 03-requirements/."
+
+  - id: "RULE-03-FR-NO-AC"
+    category: "TRACEABILITY"
+    severity: "BLOCKING"
+    description: "Functional Requirement (FR) lacks measurable Acceptance Criteria (AC)."
+    remediation: "Define verifiable, boolean acceptance criteria for the requirement."
+
+  - id: "RULE-04-AC-NO-TEST"
+    category: "VERIFICATION"
+    severity: "BLOCKING"
+    description: "Acceptance Criteria (AC) has no linking automated test identifier (TEST)."
+    remediation: "Bind AC to a test function or suite in tests/."
+
+  - id: "RULE-05-TEST-NO-EVD"
+    category: "VERIFICATION"
+    severity: "BLOCKING"
+    description: "Test marked as release-blocking lacks cryptographic evidence artifact (EVD)."
+    remediation: "Record test execution receipt in 13-evidence/ or verification ledger."
+
+  - id: "RULE-06-EFFECT-NO-POLICY"
+    category: "AUTHORITY"
+    severity: "BLOCKING"
+    description: "Effectful API or kinetic mutation has no capability lease or policy reference."
+    remediation: "Declare Sentinel capability lease in 06-contracts/capabilities/."
+
+  - id: "RULE-07-PERSIST-NO-RETENTION"
+    category: "DATA_GOVERNANCE"
+    severity: "BLOCKING"
+    description: "Persistence entity lacks tenant, data class, or retention class definition."
+    remediation: "Assign one of R-STD (1yr), R-AUD (7yr), R-PERM (Permanent), or R-EPHEM (30d)."
+
+  - id: "RULE-08-SERVICE-NO-OWNER"
+    category: "GOVERNANCE"
+    severity: "BLOCKING"
+    description: "Service or subsystem has no designated governing Knight or discipline owner."
+    remediation: "Add valid 'owner' attribute to metadata front matter."
+
+  - id: "RULE-09-SERVICE-NO-RUNBOOK"
+    category: "OPERATIONS"
+    severity: "BLOCKING"
+    description: "Deployable service has no runbook in 09-operations/."
+    remediation: "Author an operational runbook detailing startup, health check, and failure procedures."
+
+  - id: "RULE-10-SCHEMA-NO-COMPAT"
+    category: "CONTRACTS"
+    severity: "BLOCKING"
+    description: "Schema with consumers lacks backward compatibility policy."
+    remediation: "Specify compatibility policy (e.g., BACKWARD_STRICT, FORWARD_PERMISSIVE)."
+
+  - id: "RULE-11-ADR-SUPERSEDED"
+    category: "DECISIONS"
+    severity: "BLOCKING"
+    description: "ADR references superseded architecture without migration disposition."
+    remediation: "Explicitly document migration path in 10-decisions/."
+
+  - id: "RULE-12-SLICE-DUPLICATES"
+    category: "CANONICAL_HOME"
+    severity: "BLOCKING"
+    description: "Vertical slice duplicates global constitutional or governance text."
+    remediation: "Remove duplicate text; reference 00-governance/ canonically."
+
+  - id: "RULE-13-PROD-NO-REL"
+    category: "RELEASE"
+    severity: "BLOCKING"
+    description: "PRODUCTION_CLEARED status declared without verified release proof bundle (REL)."
+    remediation: "Include release-proof.yaml in 13-evidence/releases/<release-id>/."
+
+  - id: "RULE-14-EPOCH-BACKWARD"
+    category: "AUTHORITY"
+    severity: "BLOCKING"
+    description: "Authority epoch decrements or moves backward (must be monotonic)."
+    remediation: "Ensure authority epoch strictly increases monotonically across receipts."
+
+  # ── Review-Gated Rules (10.2) ───────────────────────────────────────────────
+  - id: "RULE-15-SIMULATED-STATE-CONFUSION"
+    category: "INTEGRITY"
+    severity: "REVIEW_GATED"
+    description: "Simulated/demo state can be confused with verified runtime state."
+    remediation: "Explicitly watermark simulated data; fail closed on ambiguous UI projections."
+
+  - id: "RULE-16-UI-UNVERIFIED-COMPLETION"
+    category: "INTEGRITY"
+    severity: "REVIEW_GATED"
+    description: "User-visible completion state has no verified receipt source from State Service."
+    remediation: "Enforce state projection exclusively downstream of admitted Ledger receipts."
+
+  - id: "RULE-17-CONNECTIVITY-AS-PERMISSION"
+    category: "SECURITY"
+    severity: "REVIEW_GATED"
+    description: "Capability transport contract implies authority by network possession alone."
+    remediation: "Require Sentinel capability lease and Excalibur approval digest regardless of transport."

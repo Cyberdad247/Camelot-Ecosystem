@@ -26,8 +26,8 @@ $daemons = @(
   @{ Name = "go_router";       Port = 8077; Exe = "$root\control_plane\go_router\go_router.exe";              Args = @("serve", ":8077") },
   @{ Name = "bifrost_sidecar"; Port = 8011; Exe = "$root\01_KERNEL\senses\bifrost_go_sidecar\bifrost_sidecar.exe"; Args = @() },
   @{ Name = "cognitive_service"; Port = 8092; Exe = "python"; Args = @("$root\control_plane\cognitive_service.py") },
-  @{ Name = "opencodex";       Port = 10100; Exe = "node"; Args = @("$root\node_modules\@bitkyc08\opencodex\bin\ocx.mjs", "start", "--port", "10100") },
-  @{ Name = "omnivoice";       Port = 3002; Exe = "node"; Args = @("$root\02_FORGE\KINETIC_ARMORY\omnivoice-router\dist\omnivoice-router.js") }
+  @{ Name = "opencodex";       Port = 10100; Exe = "node"; Args = @("--max-old-space-size=256", "$root\node_modules\@bitkyc08\opencodex\bin\ocx.mjs", "start", "--port", "10100") },
+  @{ Name = "omnivoice";       Port = 3002; Exe = "node"; Args = @("--max-old-space-size=256", "$root\02_FORGE\KINETIC_ARMORY\omnivoice-router\dist\omnivoice-router.js") }
 )
 
 function Test-PortListening {

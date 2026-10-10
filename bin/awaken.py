@@ -136,6 +136,16 @@ def main():
     color = _C["g"] if green == total else _C["y"]
     print(f"  {color}{_C['B']}{green}/{total} phases green in {results['_total_ms']}ms{_C['x']}")
 
+    # Post-Boot Working Set Trimming (Global Law 03: 4GB Node Ceiling)
+    try:
+        from squires.pagekeeper import SquirePageKeeper
+        pk = SquirePageKeeper(pressure_threshold_pct=50.0)
+        gov_status = pk.govern(force_trim=True)
+        if gov_status.reclaimed_mb > 0 and not args.quick and not args.json:
+            print(f"{_C['g']}[PAGEKEEPER] Post-boot memory trim: reclaimed +{gov_status.reclaimed_mb} MB (util: {gov_status.utilization_pct}%){_C['x']}")
+    except Exception:
+        pass
+
     if args.status:
         sys.exit(0 if green == total else 1)
 

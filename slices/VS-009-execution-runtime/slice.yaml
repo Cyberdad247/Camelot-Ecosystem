@@ -1,0 +1,20 @@
+id: VS-009
+slug: VS-009-execution-runtime
+title: Bare-Metal Kinetic Execution Runtime
+tier: P0
+status: ACTIVE
+owner: lukas_omega
+summary: Native Linux/Windows process control, CoW microVMs, WASM32 sandboxing, and
+  4GB RAM limits.
+contracts:
+- CONTRACT-EXEC-RUNTIME-001
+code_paths:
+- 04_KINETIC/
+- 02_FORGE/kinetic/
+- control_plane/rtk/
+tests:
+- tests/test_reya_assimilation.py
+- tests/test_reya_handshake_protocol.py
+exit_criteria:
+- Node working set strictly <= 4096MB
+- 0% Python on kinetic hotpath

@@ -1,0 +1,18 @@
+id: VS-016
+slug: VS-016-observability-heimdall
+title: Heimdall Telemetry & System Oversight
+tier: P1
+status: ACTIVE
+owner: sir_lucas
+summary: Visual and TCP socket anomaly detection, host health telemetry, and Grafana/SSE
+  feeds.
+contracts:
+- CONTRACT-OBSERVABILITY-001
+code_paths:
+- 01_KERNEL/monitoring/
+- control_plane/inspira_metrics.py
+tests:
+- tests/test_htmx_webgpu_and_jev.py
+exit_criteria:
+- Continuous socket anomaly detection
+- Zero-drop telemetry ingestion

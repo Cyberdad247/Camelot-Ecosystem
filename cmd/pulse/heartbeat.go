@@ -104,7 +104,7 @@ func main() {
 			fmt.Println("\n[🛡️  DEFENSE GRID] Shutdown signal received. Farewell.")
 			os.Exit(0)
 		case <-ticker.C:
-			checkResources()
+			checkResources(home)
 		}
 	}
 }
@@ -154,6 +154,18 @@ func spawnDetached(command string, args []string, dir string) (int, error) {
 	
 	setupDetached(cmd)
 	
+	if os.Getenv("CAMELOT_VISIBLE_CHILDREN") != "1" {
+		baseName := filepath.Base(command)
+		baseName = strings.TrimSuffix(baseName, filepath.Ext(baseName))
+		logDir := filepath.Join(dir, "logs", "daemons")
+		_ = os.MkdirAll(logDir, 0755)
+		logPath := filepath.Join(logDir, fmt.Sprintf("%s.log", baseName))
+		if logFile, err := os.OpenFile(logPath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644); err == nil {
+			cmd.Stdout = logFile
+			cmd.Stderr = logFile
+		}
+	}
+	
 	err := cmd.Start()
 	if err != nil {
 		return 0, err
@@ -202,6 +214,28 @@ func runBoot(home string, quiet bool) BootStatus {
 				return false, fmt.Sprintf("failed: %v", err)
 			}
 			return true, fmt.Sprintf("online (PID %d, port 3001)", pid)
+		}},
+		{"Kinetic ADB Link   ", func() (bool, string) {
+			pyBin := filepath.Join(home, ".venv", "Scripts", "python.exe")
+			if _, err := os.Stat(pyBin); err != nil {
+				pyBin = "python"
+			}
+			script := filepath.Join(home, "04_KINETIC", "qtscrcpy", "qtscrcpy_kinetic_bridge.py")
+			cmd := exec.Command(pyBin, script, "watchdog", "--json")
+			cmd.Dir = home
+			out, err := cmd.Output()
+			if err != nil {
+				return true, "ADB watchdog probe skipped (no adb bridge)"
+			}
+			var rep struct {
+				ADBAvailable bool   `json:"adb_available"`
+				Status       string `json:"status"`
+				DevicesFound int    `json:"devices_found"`
+			}
+			if err := json.Unmarshal(out, &rep); err != nil {
+				return true, "ADB watchdog online (unparsed)"
+			}
+			return true, fmt.Sprintf("ADB online (status=%s, devices=%d)", rep.Status, rep.DevicesFound)
 		}},
 		{"Cloud Brain   (RPC)", func() (bool, string) {
 			// This typically probes a health endpoint in the Python version.
@@ -287,7 +321,29 @@ func fms(pid int, status string) string {
 	return fmt.Sprintf("PID %d — %s", pid, status)
 }
 
-func checkResources() {
+func checkAdbWatchdog(home string) {
+	pyBin := filepath.Join(home, ".venv", "Scripts", "python.exe")
+	if _, err := os.Stat(pyBin); err != nil {
+		pyBin = "python"
+	}
+	script := filepath.Join(home, "04_KINETIC", "qtscrcpy", "qtscrcpy_kinetic_bridge.py")
+	cmd := exec.Command(pyBin, script, "watchdog", "--json")
+	cmd.Dir = home
+	out, err := cmd.Output()
+	if err == nil {
+		var rep struct {
+			ADBAvailable bool   `json:"adb_available"`
+			Status       string `json:"status"`
+			DevicesFound int    `json:"devices_found"`
+		}
+		if json.Unmarshal(out, &rep) == nil && rep.DevicesFound > 0 {
+			ts := time.Now().Format("15:04:05")
+			fmt.Printf("[%s] [📱 KINETIC ADB] Resurrected reverse tunnel for %d device(s)\n", ts, rep.DevicesFound)
+		}
+	}
+}
+
+func checkResources(home string) {
 	var m runtime.MemStats
 	runtime.ReadMemStats(&m)
 	sysMB := m.Sys / 1024 / 1024
@@ -297,4 +353,6 @@ func checkResources() {
 		fmt.Printf("[🛑 ALERT %s] RAM %d MB exceeds %d MB ceiling! Throttle agents.\n",
 			ts, sysMB, ramCeilingMB)
 	}
+
+	checkAdbWatchdog(home)
 }
