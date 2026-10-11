@@ -1,0 +1,58 @@
+{
+  "schema_version": "camelot-cartridge/1",
+  "cartridge_id": "microsandbox-microvm",
+  "version": "0.1.0",
+  "signer": "camelot-community",
+  "signer_trust_band": "camelot-community",
+  "entrypoints": [
+    "execute",
+    "forge",
+    "test"
+  ],
+  "supported_node_profiles": [
+    "hub",
+    "engineering",
+    "experience"
+  ],
+  "requested_capabilities": [
+    "process.allowlisted",
+    "network.scoped",
+    "vfs.read",
+    "vfs.worktree_write"
+  ],
+  "denied_capabilities": [
+    "lease.issue",
+    "policy.admin",
+    "secret.export",
+    "unrestricted.network",
+    "direct_main_branch_write",
+    "auto_merge",
+    "auto_deploy",
+    "promotion.issue",
+    "epoch.increment"
+  ],
+  "resource_profile": {
+    "memory_mb": 512,
+    "timeout_s": 300,
+    "max_workers": 1
+  },
+  "verification": [
+    "contract_test",
+    "Gideon_verdict",
+    "receipt_issued"
+  ],
+  "risk_tier_invariant_cap": "T1",
+  "rollback": {
+    "strategy": "destroy_ephemeral_worktree"
+  },
+  "compat": {
+    "supported_knight_classes": [
+      "engineering_builder",
+      "inference_worker"
+    ]
+  },
+  "hash_algorithm": "sha256",
+  "signature_algorithm": "ed25519",
+  "artifact_hash": "sha256:9bc6be319f35918190f727a46bdbb5f4af238731cad4346ef91e47a746c2d519",
+  "signature": "ed25519:myw_auwNfB6W0BAe1qmgRLkLj0VOhIF4pYKHmvfxA5QKeHlNpgIu2IOEtmNELD1unI2HLVCOnrA3AnG-ldsXBA"
+}

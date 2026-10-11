@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/arthur-resolution.schema.json",
+  "title": "Camelot Arthur Resolution",
+  "description": "Sovereign King Arthur resolution and ethical compass override directive (§1.1, §6.2). Binds final user authority over conflicting Knight consensus or emergency rezero states.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "resolution_id",
+    "directive_type",
+    "target_scope",
+    "rationale",
+    "authority_vector",
+    "timestamp",
+    "sovereign_seal"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-arthur-resolution/1"
+    },
+    "resolution_id": {
+      "type": "string",
+      "pattern": "^res_[A-Za-z0-9_-]+$"
+    },
+    "directive_type": {
+      "type": "string",
+      "enum": [
+        "SOVEREIGN_OVERRIDE",
+        "EMERGENCY_REZERO",
+        "ETHICAL_COMPASS_VETO",
+        "CONSENSUS_RATIFICATION",
+        "PROMOTION_AUTHORIZATION"
+      ]
+    },
+    "target_scope": {
+      "type": "string"
+    },
+    "rationale": {
+      "type": "string"
+    },
+    "authority_vector": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sovereign_seal": {
+      "type": "object",
+      "required": ["king_id", "seal_type", "ed25519_signature"],
+      "additionalProperties": false,
+      "properties": {
+        "king_id": {
+          "type": "string",
+          "const": "ARTHUR_OMEGA"
+        },
+        "seal_type": {
+          "type": "string",
+          "enum": ["SOVEREIGN_GOLDEN_SEAL", "EMERGENCY_HALT_SEAL"]
+        },
+        "ed25519_signature": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

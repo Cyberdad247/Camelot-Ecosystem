@@ -53,7 +53,7 @@ SIR_ALEX (Cognitive) and SIR_BORIS (Orchestration) review weekly for persona evo
 | merlin_omega | Archwizard | OMEGA | 10000 | A |
 | lukas_omega | Kinetic Edge | OMEGA | 10000 | A |
 | anya_omega | Sovereign Gate | OMEGA | 10100 | A |
-| sir_forge | Engineer | HIGH_KNIGHT | 5400 | A |
+| sir_forge | Engineer | HIGH_KNIGHT | 5600 | A |
 | sir_sentinel | Security | HIGH_KNIGHT | 5300 | A |
 | sir_alex | Cognitive | HIGH_KNIGHT | 5150 | A |
 | sir_link | ATC Bridge | HIGH_KNIGHT | 5200 | A |
@@ -86,6 +86,8 @@ SIR_ALEX (Cognitive) and SIR_BORIS (Orchestration) review weekly for persona evo
 ### XP Ledger
 | Knight | Grade | XP | Reason |
 |---|---|---|---|
+| sir_forge | A | +100 | Conform automated zero-loss deduplication (2026-10-04 14:20 UTC) |
+| sir_forge | A | +100 | Conform automated zero-loss deduplication (2026-10-04 14:20 UTC) |
 | sir_boris | A | +100 | //FORGE P0 complete — 8 artifacts, 0 failures |
 | lady_apis | A | +100 | Oracle-Debate 8-query audit — BriefingScript delivered |
 | sir_mnemo | B | +50 | Memory routing operational — 133 notebooks live |

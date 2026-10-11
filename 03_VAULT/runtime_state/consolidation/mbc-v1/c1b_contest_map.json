@@ -1,0 +1,1446 @@
+{
+ "multi": {
+  "src/components/ScarcityProtocol.tsx": [
+   "refs/heads/cartridge/vps-hub-cartridge-v1",
+   "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "refs/remotes/camelot-vps/main",
+   "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+   "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+   "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo",
+   "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle",
+   "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1",
+   "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1"
+  ],
+  "src/types.ts": [
+   "refs/heads/cartridge/vps-hub-cartridge-v1",
+   "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "refs/remotes/camelot-vps/main",
+   "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+   "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+   "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo",
+   "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle",
+   "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1",
+   "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1"
+  ],
+  ".agent/governance.yaml": [
+   "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "refs/remotes/camelot-vps/main",
+   "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+   "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+   "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo",
+   "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle",
+   "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1",
+   "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1"
+  ],
+  "CHANGELOG.md": [
+   "refs/heads/cartridge/vps-hub-cartridge-v1",
+   "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "refs/remotes/camelot-vps/main",
+   "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+   "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+   "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo",
+   "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle",
+   "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1",
+   "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1"
+  ],
+  "src/components/SovereignLaws.tsx": [
+   "refs/heads/cartridge/vps-hub-cartridge-v1",
+   "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "refs/remotes/camelot-vps/main",
+   "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+   "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+   "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo",
+   "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle",
+   "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1",
+   "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1"
+  ],
+  "Makefile": [
+   "refs/heads/cartridge/vps-hub-cartridge-v1",
+   "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "refs/remotes/camelot-vps/main",
+   "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+   "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+   "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo",
+   "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle",
+   "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1",
+   "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1"
+  ],
+  "src/index.css": [
+   "refs/heads/cartridge/vps-hub-cartridge-v1",
+   "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "refs/remotes/camelot-vps/main",
+   "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+   "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+   "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo",
+   "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle",
+   "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1",
+   "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1"
+  ],
+  "src/components/MasterWorldTreeDeck.tsx": [
+   "refs/heads/cartridge/vps-hub-cartridge-v1",
+   "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "refs/remotes/camelot-vps/main",
+   "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+   "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+   "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo",
+   "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle",
+   "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1",
+   "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1"
+  ],
+  "src/components/TwinBrainsModal.tsx": [
+   "refs/heads/cartridge/vps-hub-cartridge-v1",
+   "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "refs/remotes/camelot-vps/main",
+   "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+   "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+   "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo",
+   "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle",
+   "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1",
+   "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1"
+  ],
+  "metadata.json": [
+   "refs/heads/cartridge/vps-hub-cartridge-v1",
+   "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "refs/remotes/camelot-vps/main",
+   "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+   "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+   "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo",
+   "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle",
+   "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1",
+   "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1"
+  ],
+  "src/components/MemcastleModal.tsx": [
+   "refs/heads/cartridge/vps-hub-cartridge-v1",
+   "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "refs/remotes/camelot-vps/main",
+   "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+   "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+   "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo",
+   "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle",
+   "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1",
+   "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1"
+  ],
+  "AGENTS.md": [
+   "refs/heads/cartridge/vps-hub-cartridge-v1",
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "refs/remotes/camelot-vps/main",
+   "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+   "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+   "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo",
+   "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle",
+   "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1",
+   "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1",
+   "refs/remotes/origin/main"
+  ],
+  "Cargo.toml": [
+   "refs/heads/cartridge/vps-hub-cartridge-v1",
+   "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "refs/remotes/camelot-vps/main",
+   "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+   "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+   "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo",
+   "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle",
+   "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1",
+   "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519"
+  ],
+  "src/components/MasterBootstrapScript.tsx": [
+   "refs/heads/cartridge/vps-hub-cartridge-v1",
+   "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "refs/remotes/camelot-vps/main",
+   "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+   "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+   "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo",
+   "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle",
+   "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1",
+   "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1"
+  ],
+  ".env.example": [
+   "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "refs/remotes/camelot-vps/main",
+   "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+   "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+   "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo",
+   "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle",
+   "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1",
+   "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1",
+   "refs/remotes/kickbox-audio/main"
+  ],
+  "package.json": [
+   "refs/heads/cartridge/vps-hub-cartridge-v1",
+   "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "refs/remotes/camelot-vps/main",
+   "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+   "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+   "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo",
+   "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle",
+   "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1",
+   "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1",
+   "refs/remotes/kickbox-audio/main",
+   "refs/remotes/origin/fix/lint-format-pass"
+  ],
+  "src/components/VikingRefractionsModal.tsx": [
+   "refs/heads/cartridge/vps-hub-cartridge-v1",
+   "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "refs/remotes/camelot-vps/main",
+   "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+   "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+   "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo",
+   "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle",
+   "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1",
+   "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1"
+  ],
+  "infra/systemd/camelot-workers.slice": [
+   "refs/heads/cartridge/vps-hub-cartridge-v1",
+   "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "refs/remotes/camelot-vps/main",
+   "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+   "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+   "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo",
+   "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle",
+   "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1",
+   "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1"
+  ],
+  "assets/.aistudio/.gitignore": [
+   "refs/heads/cartridge/vps-hub-cartridge-v1",
+   "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "refs/remotes/camelot-vps/main",
+   "refs/remotes/camelot-vps/reforge/helios/contracts/registry-lock",
+   "refs/remotes/camelot-vps/reforge/helios/enterprise-production-integration",
+   "refs/remotes/camelot-vps/reforge/helios/knowledge/nukg-parser",
+   "refs/remotes/camelot-vps/reforge/helios/ops/telemetry-slo",
+   "refs/remotes/camelot-vps/reforge/helios/security/key-lifecycle",
+   "refs/remotes/camelot-vps/reforge/runtime-authority-handoff-v1",
+   "refs/remotes/camelot-vps/reforge/runtime-knight-registry-v1"
+  ],
+  "scripts/ops/protect-branch.json": [
+   "refs/remotes/kickbox-audio/main",
+   "refs/remotes/origin/fix/lint-format-pass"
+  ],
+  "apps/pwa/src/app/globals.css": [
+   "refs/remotes/kickbox-audio/main",
+   "refs/remotes/origin/fix/lint-format-pass"
+  ],
+  "apps/bifrost/src/server.ts": [
+   "refs/remotes/kickbox-audio/main",
+   "refs/remotes/origin/fix/lint-format-pass"
+  ],
+  "apps/pwa/next.config.js": [
+   "refs/remotes/kickbox-audio/main",
+   "refs/remotes/origin/fix/lint-format-pass"
+  ],
+  "PROVENANCE_LEDGER.md": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/kickbox-audio/main",
+   "refs/remotes/origin/main"
+  ],
+  "apps/pwa/src/components/hud/LakeishaVideoHUD.tsx": [
+   "refs/remotes/kickbox-audio/main",
+   "refs/remotes/origin/fix/lint-format-pass"
+  ],
+  "apps/pwa/src/components/Dashboard.tsx": [
+   "refs/remotes/kickbox-audio/main",
+   "refs/remotes/origin/fix/lint-format-pass"
+  ],
+  ".github/workflows/ci.yml": [
+   "refs/remotes/kickbox-audio/main",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519"
+  ],
+  "bifrost-tower-r3f.zip": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "integration/vitest.config.ts": [
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-mvp-velocity"
+  ],
+  "integration/gateway/hermes.go": [
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-mvp-velocity"
+  ],
+  "gradio_page.png": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "integration/gateway/broker_test.go": [
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-mvp-velocity"
+  ],
+  "docs/integration/camelot-kickbox.md": [
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity"
+  ],
+  "test_phase_g_week1.py": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "02_FORGE/apps/pwa-cockpit/public/voice-capture.worklet.js": [
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598"
+  ],
+  "integration/kickbox/src/app.ts": [
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-mvp-velocity"
+  ],
+  "test_distance_travel.py": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "test_hardening.py": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "test_phase_g_validation.py": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "bifrost-control-plane.patch": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "gradio_page.html": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "Cargo.lock": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg"
+  ],
+  "test_phase_g_resilience.py": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "01_KERNEL/agora/Squires/data/sqlite-db/checkpoints.sqlite": [
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "test_qr_pill.py": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "integration/contracts/src/fixtures.ts": [
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-mvp-velocity"
+  ],
+  "integration/gateway/server.go": [
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-mvp-velocity"
+  ],
+  "bifrost-trust-plane.zip": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "integration/gateway/bargein_test.go": [
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-mvp-velocity"
+  ],
+  "integration/gateway/go.mod": [
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity"
+  ],
+  "camelot-omega-bifrost.zip": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "data/qdrant/storage/collections/hive_dispatches/0/wal/.wal": [
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg"
+  ],
+  "test_validation.py": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "test_phase_f.py": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "gradio_debug.html": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "test_browser_upload_failure.png": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "test_knight_memory.py": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "camelot-console-preview.html": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "bifrost-control-plane.zip": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "test_distance_travel_simple.py": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "default_state.png": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "test_cloudbrain.py": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "camelot-console-pwa.zip": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "integration/Makefile": [
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-mvp-velocity"
+  ],
+  "onboarding.html": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "camelot-ecosystem-upgrade.zip": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "integration/scripts/lib.sh": [
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-mvp-velocity"
+  ],
+  "integration/package.json": [
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity"
+  ],
+  "live_state.png": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "integration/gateway/skills.go": [
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-mvp-velocity"
+  ],
+  "integration/gateway/tools.go": [
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-mvp-velocity"
+  ],
+  "integration/kickbox/index.html": [
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-mvp-velocity"
+  ],
+  "bifrost-upgrade.patch": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "integration/scripts/smoke.sh": [
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-mvp-velocity"
+  ],
+  "camelot-omega-bifrost.patch": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "test_phase_g_week2.py": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi",
+   "refs/remotes/origin/claude/camelot-mvp-velocity",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "docs/adr/001-kickbox-camelot-boundaries.md": [
+   "refs/remotes/origin/claude/agency-blueprint",
+   "refs/remotes/origin/claude/camelot-kickbox-voice-slice-tdohyi"
+  ],
+  "03_VAULT/training/configs/PROVENANCE_LEDGER.md": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "docs/PROVENANCE_LEDGER.md": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/Missions/verification_ledger.jsonl": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/inference_receipts/inference_ledger.jsonl": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/honcho_memory_cache.json": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/training/configs/hud.py": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/open_notebook/sir_ghost_tissue.json": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/excalibur_gate/active_sessions.json": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/open_notebook/vps_hub_kvm563_tissue.json": [
+   "refs/heads/feature/reya-fabric",
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260913_144034.json": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feature/reya-fabric",
+   "refs/heads/perf/embedding-n-plus-1-optimization-15445770156298811611",
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/heads/perf/optimize-n-plus-1-queries-13777398068298918860",
+   "refs/remotes/origin/cloudbrain-prod-hardening",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/open_notebook/sir_codex_tissue.json": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/main"
+  ],
+  "control_plane/mcp/cloudbrain_mcp_server.py": [
+   "refs/heads/feature/reya-fabric",
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/open_notebook/excalibur_autonomous_daemon_tissue.json": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/open_notebook/sir_boris_tissue.json": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/excalibur_loop_schedule.json": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  ".gitignore": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/main"
+  ],
+  "control_plane/runes/runic_router.py": [
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/heads/feature/reya-fabric",
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/snapshots/latest_excalibur_snapshot.json": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "docs/architecture/EXCALIBUR_ENTIREMAP.md": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/open_notebook/sir_forge_tissue.json": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/main"
+  ],
+  "control_plane/PROVENANCE_LEDGER.md": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/open_notebook/anya_omega_tissue.json": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260913_144418.json": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feature/reya-fabric",
+   "refs/heads/perf/embedding-n-plus-1-optimization-15445770156298811611",
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/heads/perf/optimize-n-plus-1-queries-13777398068298918860",
+   "refs/remotes/origin/cloudbrain-prod-hardening",
+   "refs/remotes/origin/main"
+  ],
+  "tests/control_plane/test_camelot_vps_hub_deployment.py": [
+   "refs/heads/feature/reya-fabric",
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "control_plane/infra/boot_sequence.py": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/main"
+  ],
+  "control_plane/infra/honcho_bridge.py": [
+   "refs/heads/feature/reya-fabric",
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "docs/architecture/PROVENANCE_LEDGER.md": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/finance_ledger/general_ledger.jsonl": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/knowledge_vault/PROVENANCE_LEDGER.md": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/excalibur_telemetry.json": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/excalibur_cicd_log.md": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/open_notebook/sir_heimdall_tissue.json": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "opencode.json": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/forensic_checks.jsonl": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/cockpit_last_command.json": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/helios_session_keepalive.json": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/open_notebook/sir_gideon_tissue.json": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/bio_kinetic_swarm_state.json": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "docs/SEPTEM_REGNA/L7_ETHEREAL/EXCALIBUR_ENTIREMAP.md": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "control_plane/03_VAULT/Missions/verification_ledger.jsonl": [
+   "refs/heads/feature/reya-fabric",
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "control_plane/03_VAULT/Knights/learnings.md": [
+   "refs/heads/feature/reya-fabric",
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/open_notebook/lady_mnemosyne_tissue.json": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/PROVENANCE_LEDGER.md": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/open_notebook/sir_alex_tissue.json": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "03_VAULT/runtime_state/open_notebook/king_arthur_vizion_tissue.json": [
+   "refs/heads/feature/reya-fabric",
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "main.py": [
+   "refs/heads/feature/reya-fabric",
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "docs/architecture/EXCALIBUR_CICD_LOG.md": [
+   "refs/heads/perf/optimize-get-all-data-9582424866941690986",
+   "refs/remotes/origin/main"
+  ],
+  "kinetic_edge/rotel/src/main.rs": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260828_202248.json": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud"
+  ],
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260828_202236.json": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud"
+  ],
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260831_212719.json": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud"
+  ],
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260828_011215.json": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud"
+  ],
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260828_011205.json": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud"
+  ],
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260831_212729.json": [
+   "refs/heads/feat/android-edge-supervisor",
+   "refs/heads/feat/unified-bootstrap-hud"
+  ],
+  "01_KERNEL/senses/audio/audio_session.py": [
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598"
+  ],
+  "scripts/camelot-status.py": [
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "scripts/governance/debug_hash.py": [
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598"
+  ],
+  "scripts/verify_omniroute.py": [
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "scripts/sprint8_enrichment.py": [
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "scripts/sprint7_enrichment.py": [
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "scripts/evolve_and_forge.py": [
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "scripts/governance/backfill_ledger_hashes.py": [
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598"
+  ],
+  "control_plane/infra/harness.py": [
+   "refs/heads/feat/unified-bootstrap-hud",
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg"
+  ],
+  "scripts/serve_anya_dashboard.py": [
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598"
+  ],
+  "scripts/governance/debug_actual_hash.py": [
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598"
+  ],
+  "scripts/start_northstar.py": [
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598"
+  ],
+  "scripts/sprint5_enrichment.py": [
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "01_KERNEL/memory/mempalace_l2.py": [
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "scripts/verify_gcmn_stub_runtime.py": [
+   "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598"
+  ],
+  "kickbox-audio/apps/bifrost/src/swarm/MicrocubicSwarm.ts": [
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass"
+  ],
+  "kickbox-audio/apps/bifrost/tests/telemetry.test.ts": [
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass"
+  ],
+  "apps/bifrost/src/state.ts": [
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass"
+  ],
+  "kickbox-audio/apps/bifrost/src/types/state.ts": [
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "kickbox-audio/apps/bifrost/src/ai/HeliosHarness.ts": [
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass"
+  ],
+  "03_VAULT/Nano-Knights/buildDomTree.js": [
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass"
+  ],
+  "02_FORGE/kinetic/vizio-router/tests/router/policy.test.ts": [
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass"
+  ],
+  "kickbox-audio/apps/bifrost/tests/ledger.test.ts": [
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass"
+  ],
+  "02_FORGE/kinetic/vizio-router/src/router/policy.ts": [
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass"
+  ],
+  "kickbox-audio/apps/bifrost/src/db/SovereignDB.ts": [
+   "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+   "refs/remotes/origin/fix/lint-format-pass"
+  ],
+  "scripts/sign_cartridge.py": [
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "scripts/warmup_tiny_llms.py": [
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "scripts/install_portable.py": [
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "01_KERNEL/memory/cloudbrain_connector.py": [
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "scripts/governance/ingest_sweep_03.py": [
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "scripts/sync_lattice_strike.py": [
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "01_KERNEL/agora/Squires/open_notebook/domain/base.py": [
+   "refs/heads/perf/optimize-n-plus-1-queries-13777398068298918860",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "scripts/kickbox_dual_mode_orchestrator.py": [
+   "refs/remotes/origin/fix/lint-format-pass",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ],
+  "scripts/purge_memory.py": [
+   "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "refs/remotes/origin/fix/ruff-530-manual"
+  ]
+ },
+ "single": {
+  "apps/bifrost/src/security.test.ts": "refs/remotes/kickbox-audio/main",
+  "package-lock.json": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/hooks/useLakishaVoice.ts": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/components/hud/LakishaEnclave.tsx": "refs/remotes/kickbox-audio/main",
+  "apps/bifrost/.env.example": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/tailwind.config.ts": "refs/remotes/kickbox-audio/main",
+  "scripts/sync-memory-md.mjs": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/actions/coreRegistry.ts": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/styles/globals.css": "refs/remotes/kickbox-audio/main",
+  "apps/bifrost/package.json": "refs/remotes/kickbox-audio/main",
+  "apps/bifrost/src/security.ts": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/components/tabs/KnightsTab.tsx": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/components/dashboard/HomeTab.tsx": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/lib/portalBridge.ts": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/app/manifest.ts": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/components/tabs/StreamingTab.tsx": "refs/remotes/kickbox-audio/main",
+  "packages/db/src/index.ts": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/package.json": "refs/remotes/kickbox-audio/main",
+  "docs/blueprint.md": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/components/tabs/SettingsTab.tsx": "refs/remotes/kickbox-audio/main",
+  "apps/mcp-query/package.json": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/app/kba/page.tsx": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/tailwind.config.js": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/components/kba/KBASwarmCommand.tsx": "refs/remotes/kickbox-audio/main",
+  "apps/mcp-query/src/server.ts": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/components/LearnWithMe.tsx": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/app/layout.tsx": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/context/KoARealmProvider.tsx": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/components/dashboard/LakeishaBriefing.tsx": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/hooks/useVad.ts": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/components/dashboard/MemoryVault.tsx": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/tsconfig.json": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/components/3d/KineticBackground.tsx": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/app/page.tsx": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/components/3d/SpatialBackground.tsx": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/context/BifrostContext.tsx": "refs/remotes/kickbox-audio/main",
+  "scripts/ops/fixture-hitl.mjs": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/hooks/usePiPAndBadging.ts": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/components/LakishaHUD.tsx": "refs/remotes/kickbox-audio/main",
+  "scripts/ops/secrets-audit.mjs": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/app/api/memory/route.ts": "refs/remotes/kickbox-audio/main",
+  "scripts/regen-helio-patch.mjs": "refs/remotes/kickbox-audio/main",
+  "packages/db/src/ledgerValidator.ts": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/lib/empty.js": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/components/tabs/OverviewTab.tsx": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/components/dashboard/KnightSwarmCommand.tsx": "refs/remotes/kickbox-audio/main",
+  "apps/bifrost/src/issuance.test.ts": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/app/icon.svg": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/app/api/weather/route.ts": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/actions/propertyActions.ts": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/components/3d/KineticCanvas.tsx": "refs/remotes/kickbox-audio/main",
+  "apps/pwa/src/lib/voice.ts": "refs/remotes/kickbox-audio/main",
+  "scripts/ops/live-anya-probe.mjs": "refs/remotes/kickbox-audio/main",
+  "integration/.gitignore": "refs/remotes/origin/claude/camelot-mvp-velocity",
+  "integration/scripts/status.sh": "refs/remotes/origin/claude/camelot-mvp-velocity",
+  "integration/scripts/mesh-gate-probes.sh": "refs/remotes/origin/claude/camelot-mvp-velocity",
+  "integration/scripts/benchmark.sh": "refs/remotes/origin/claude/camelot-mvp-velocity",
+  "integration/scripts/dev-up.sh": "refs/remotes/origin/claude/camelot-mvp-velocity",
+  "integration/contracts/src/client.ts": "refs/remotes/origin/claude/camelot-mvp-velocity",
+  "integration/gateway/main.go": "refs/remotes/origin/claude/camelot-mvp-velocity",
+  "integration/scripts/verify-local-only.sh": "refs/remotes/origin/claude/camelot-mvp-velocity",
+  "integration/node-agent/src/mesh.rs": "refs/remotes/origin/claude/camelot-mvp-velocity",
+  "packages/contracts/workspace-event.schema.json": "refs/heads/feat/android-edge-supervisor",
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260913_044649.json": "refs/heads/feat/android-edge-supervisor",
+  "packages/contracts/arthur-resolution.schema.json": "refs/heads/feat/android-edge-supervisor",
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260913_072852.json": "refs/heads/feat/android-edge-supervisor",
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260913_044658.json": "refs/heads/feat/android-edge-supervisor",
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260913_045132.json": "refs/heads/feat/android-edge-supervisor",
+  "packages/contracts/approval-certificate.schema.json": "refs/heads/feat/android-edge-supervisor",
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260913_045857.json": "refs/heads/feat/android-edge-supervisor",
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260913_051401.json": "refs/heads/feat/android-edge-supervisor",
+  "03_VAULT/runtime_state/sovereign_mesh_topology.json": "refs/heads/feat/android-edge-supervisor",
+  "control_plane/infra/microcubed.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/memcastle_sync.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/cli_intercept.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/core/rbac_matrix.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/cluster/metrics_daemon.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "pyproject.toml": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_camelot_portable_subcommands.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/dispatch/bifrost_gateway.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "scripts/check_bifrost_audit.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/dispatch/intent_router.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_provenance_mempalace.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/core/approval_grants.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/cluster/sync_daemon.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/config_manager.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "03_VAULT/training/configs/llm_router.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_soul_oversight.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/test_phase_h_week1_final.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "requirements.txt": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/hive_boot.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/control_plane/test_viking_block_protocol.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_system_triage.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_nano_swarm_runtime.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/agent_memory.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/dispatch/agent_gateway.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  ".github/workflows/forge-ci.yml": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/conftest.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/main.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/inspira_metrics.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "bin/mirror_notebooklm_graphify.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/control_plane/test_critical_thinking.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_phase45_edge.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/qr_pill_mobile.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/test_phase_h_day2_integration.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/worker.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_cybertronia_compile.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "01_KERNEL/EXCALIBUR/core/excalibur.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "bin/camelot_portable.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_bifrost_token_reduction.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_z3_verification.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/pqcrypto_bridge.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/control_plane/test_purge_stubs.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/notebooklm_graphify_manifest.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/kinetic_loop.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/dispatch/bifrost_integration.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/dispatch/bifrost_triage_swarm.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/cluster/agents_daemon.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "scripts/cybertronia_cyber_probes.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/control_plane/test_notebooklm_graphify_bridge.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/runes/camelot_cli.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/core/knight_knowledgebase.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_cli_intercept.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/cloudbrain_synthesis.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_toon_encoder.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/event_bridge.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/memory_sync.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/core/forge_law.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/hive_stream_tui.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/cockpit.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_colony_nexus.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/lady_m.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/test_phase_h_pattern_learner.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/runes/symbolect_protocol.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/control_plane/test_understand_anything_assimilation.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_kinetic_loop.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_slo_escape.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_heimdall_bifrost_governance.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/__main__.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/__init__.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "03_VAULT/training/configs/config/access_matrix.json": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_toon_manifest.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/qr_pill.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "02_FORGE/kinetic/actor/src/lib.rs": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/control_plane/test_starship_assimilation.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/control_plane/test_runic_router_gcmn_stubs.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/core/cartridge_manager.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_bio_swarm_runtime.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_cybertron_dawning.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/control_plane/test_portkey_assimilation.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/mnemosyne_chimera.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/pydantic_ai_knight.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/cybertronia_audit.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "03_VAULT/training/configs/knights/coder.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "bin/openclaw.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/heimdall_bifrost_governance.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "03_VAULT/training/configs/tests/test_boot_sequence.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "bin/camelot.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_firnflow.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/core/knight_agent.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/runes/system_triage.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/bifrost_triage_swarm.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "bin/knight_session.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_forge_law.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/core/soul_router.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/control_plane/test_bifrost_appwrite_dispatch.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/control_plane/test_ascension_mode.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/z3_verify.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/dispatch/bifrost_appwrite_dispatch.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/mcp_conductor.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/cluster/consensus_daemon.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/dispatch/frontier_nodes.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/heimdall_knight.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "bin/understand_anything_assimilate.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_phase3_brain.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "bin/ascension_mode.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/understand_anything_assimilation.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/dispatch/distance_travel.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "README.md": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/runes/ascension_mode.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/cybertronia_compile.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_boot_omniroute.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_ledger_governance.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/dispatch/kinetic_swarm.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/control_plane/test_cloudbrain_mnemosyne_audit.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_retention_hints.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/generate_sample_load.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/dispatch/switchboard.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/test_phase_h_day4_hardening.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_affinity_routing.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "02_FORGE/kinetic/actor/Cargo.toml": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "bin/starship_camelot_module.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/provenance.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_provenance_crypto.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/core/anya_gate.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_omniroute_policies.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/dispatch/sovereign_inference.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/dispatch/consensus_layer.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "scripts/repair_verification_ledger_chain.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/control_plane/test_enterprise_ignition.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "bin/boot_debug.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "bin/awaken.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/memcastle.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/test_phase_h_week2_integration.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/starship_assimilation.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/control_plane/test_appwrite_client.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/dispatch/bifrost.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_claw_suite.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_ledger_audit.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_colmad_wiring.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/core/knight_self_enhancer.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/excalibur_preflight.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/enterprise_ignition.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_mempalace_security.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/cluster/node_daemon.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_nano_swarm_expand.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "scripts/generate_cloudbrain_v701.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/openclaw.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/dispatch/bifrost_server.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/lord_archivist.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "bin/test_oracle.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_anya_gate.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/control_plane/test_versioning.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/test_approval_grants.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/infra/bio_swarm_runtime.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "tests/control_plane/test_mnemosyne_chimera.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "control_plane/test_phase_h_optimizer.py": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+  "01_KERNEL/EXCALIBUR/config/mcp_registry.json": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+  "01_KERNEL/EXCALIBUR/BRIDGE/GENKIT/run_flow.ts": "refs/remotes/origin/fix-crawl4ai-async-logger-formatting-14070211445203291519",
+  "src/main.tsx": "refs/heads/cartridge/vps-hub-cartridge-v1",
+  "vite.config.ts": "refs/heads/cartridge/vps-hub-cartridge-v1",
+  "01_KERNEL/agora/Squires/Memory_Squire/routers/sources.py": "refs/remotes/origin/fix/ruff-530-manual",
+  "01_KERNEL/agora/Squires/Memory_Squire/routers/chat.py": "refs/remotes/origin/fix/ruff-530-manual",
+  "scripts/kickbox_stability_test_suite.py": "refs/remotes/origin/fix/ruff-530-manual",
+  "01_KERNEL/merlin/Engines/crawl4ai/model_loader.py": "refs/remotes/origin/fix/ruff-530-manual",
+  "01_KERNEL/agora/Squires/Notebook_Brain/routers/sources.py": "refs/remotes/origin/fix/ruff-530-manual",
+  "01_KERNEL/agora/Squires/Memory_Squire/routers/source_chat.py": "refs/remotes/origin/fix/ruff-530-manual",
+  "01_KERNEL/merlin/Engines/crawl4ai/extraction_strategy.py": "refs/remotes/origin/fix/ruff-530-manual",
+  "01_KERNEL/merlin/Engines/crawl4ai/async_configs.py": "refs/remotes/origin/fix/ruff-530-manual",
+  ".github/workflows/verify_os.yml": "refs/remotes/origin/fix/ruff-530-manual",
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260827_214532.json": "refs/heads/feat/unified-bootstrap-hud",
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260827_221605.json": "refs/heads/feat/unified-bootstrap-hud",
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260826_111714.json": "refs/heads/feat/unified-bootstrap-hud",
+  "tests/test_bootstrap_resilience.py": "refs/heads/feat/unified-bootstrap-hud",
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260827_231956.json": "refs/heads/feat/unified-bootstrap-hud",
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260827_231728.json": "refs/heads/feat/unified-bootstrap-hud",
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260826_000600.json": "refs/heads/feat/unified-bootstrap-hud",
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260826_000256.json": "refs/heads/feat/unified-bootstrap-hud",
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260827_221511.json": "refs/heads/feat/unified-bootstrap-hud",
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260827_214456.json": "refs/heads/feat/unified-bootstrap-hud",
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260827_231920.json": "refs/heads/feat/unified-bootstrap-hud",
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260826_000546.json": "refs/heads/feat/unified-bootstrap-hud",
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260826_111715.json": "refs/heads/feat/unified-bootstrap-hud",
+  "03_VAULT/runtime_state/snapshots/excalibur_cicd_20260826_000249.json": "refs/heads/feat/unified-bootstrap-hud",
+  "02_FORGE/kinetic/vizio-router/tsconfig.json": "refs/remotes/origin/fix/lint-format-pass",
+  "_tmp/runic_router_rename_audit.json": "refs/remotes/origin/fix/lint-format-pass",
+  "03_VAULT/training/configs/knight_character_sheets.json": "refs/remotes/origin/fix/lint-format-pass",
+  "apps/pwa/src/components/operator_console/OperatorConsole.tsx": "refs/remotes/origin/fix/lint-format-pass",
+  "01_KERNEL/memory/tissue/nano_swarm_crdt.json": "refs/remotes/origin/fix/lint-format-pass",
+  "01_KERNEL/merlin/context/ouroboros_seed.json": "refs/remotes/origin/fix/lint-format-pass",
+  "03_VAULT/runtime_state/open_notebook/lady_apis_tissue.json": "refs/remotes/origin/fix/lint-format-pass",
+  "apps/bifrost/src/operator/bff.test.ts": "refs/remotes/origin/fix/lint-format-pass",
+  "apps/bifrost/src/operator/fixtures.ts": "refs/remotes/origin/fix/lint-format-pass",
+  "kickbox-audio/apps/bifrost/prisma.config.ts": "refs/remotes/origin/fix/lint-format-pass",
+  "apps/bifrost/src/operator/contracts.ts": "refs/remotes/origin/fix/lint-format-pass",
+  "kickbox-audio/apps/bifrost/tests/swarm.test.ts": "refs/remotes/origin/fix/lint-format-pass",
+  "apps/bifrost/src/operator/bff.ts": "refs/remotes/origin/fix/lint-format-pass",
+  "03_VAULT/runtime_state/kickbox_stability_test_report.json": "refs/remotes/origin/fix/lint-format-pass",
+  "kickbox-audio/drone_bundle/02_FORGE/cartridge/packages/KBA_CORE/manifest.json": "refs/remotes/origin/fix/lint-format-pass",
+  "03_VAULT/runtime_state/open_notebook/sir_mnemo_tissue.json": "refs/remotes/origin/fix/lint-format-pass",
+  "03_VAULT/runtime_state/kickbox_dual_mode_state.json": "refs/remotes/origin/fix/lint-format-pass",
+  "kickbox-audio/apps/bifrost/src/server.ts": "refs/remotes/origin/fix/lint-format-pass",
+  "apps/pwa/src/lib/operator_console/operator-events.ts": "refs/remotes/origin/fix/lint-format-pass",
+  "03_VAULT/runtime_state/external_skill_sources_manifest.json": "refs/remotes/origin/fix/lint-format-pass",
+  "vfs/worldtree_reconciled.json": "refs/remotes/origin/fix/lint-format-pass",
+  "apps/pwa/src/components/operator_console/ApprovalPanel.tsx": "refs/remotes/origin/fix/lint-format-pass",
+  "vfs/system_verification_v1000.json": "refs/remotes/origin/fix/lint-format-pass",
+  "apps/bifrost/src/operator/sentinel.test.ts": "refs/remotes/origin/fix/lint-format-pass",
+  "apps/pwa/src/lib/operator_console/schemas.test.ts": "refs/remotes/origin/fix/lint-format-pass",
+  "apps/pwa/src/components/operator_console/DiffStreamPanel.tsx": "refs/remotes/origin/fix/lint-format-pass",
+  "Plan.json": "refs/remotes/origin/fix/lint-format-pass",
+  "apps/pwa/src/components/operator_console/TestsPanel.tsx": "refs/remotes/origin/fix/lint-format-pass",
+  "01_KERNEL/EXCALIBUR/config/llm_routing.json": "refs/remotes/origin/fix/lint-format-pass",
+  "03_VAULT/knowledge/persona_library/registry_index.json": "refs/remotes/origin/fix/lint-format-pass",
+  "kickbox-audio/packages/policy-engine/src/index.ts": "refs/remotes/origin/fix/lint-format-pass",
+  "01_KERNEL/security/aegis_redact_map.json": "refs/remotes/origin/fix/lint-format-pass",
+  "03_VAULT/runtime_state/bifrost_router_mesh_manifest.json": "refs/remotes/origin/fix/lint-format-pass",
+  "03_VAULT/runtime_state/open_notebook/sir_huggingface_tissue.json": "refs/remotes/origin/fix/lint-format-pass",
+  "03_VAULT/runtime_state/nano_swarm_evidence/ukg_nano_omega_glyph_v1000_omni_codex.evidence.json": "refs/remotes/origin/fix/lint-format-pass",
+  "apps/bifrost/src/operator/contracts.test.ts": "refs/remotes/origin/fix/lint-format-pass",
+  "02_FORGE/KINETIC_ARMORY/omnivoice-router/omnivoice-router.js": "refs/remotes/origin/fix/lint-format-pass",
+  "apps/pwa/src/lib/operator_console/schemas.ts": "refs/remotes/origin/fix/lint-format-pass",
+  "01_KERNEL/memory/local_store.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/patch_router.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/merlin/deep_dive_auditor.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/run_sentinel_audit.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/verify_vfc_preflight.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/verify_architecture_docs.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/nano_swarm_expand.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/reasoning/__init__.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/build_portable.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "tests/tmp_l2_integration/1616f845-43d6-489e-a41c-eba7fa3e00c4/link_lists.bin": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "02_FORGE/pocket_squire/postcss.config.mjs": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "tests/tmp_mempalace_integrity/72d0834c-27b5-47dc-a89f-6470e115cc4e/link_lists.bin": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/iron_gate/security/scan_secrets.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/save_nlm_session.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/sir_codex_directory_purge.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/memory/chunk_kv.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/deploy_binaries.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/iron_gate/security/audit_wrapper.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/titan/storage/code_migrator.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/agora/cloud_orchestrator_shim/long_term_cloudbrain.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/update_cloudbrain_notebooks.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/senses/integrations/ollama_client.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/agora/cloud_orchestrator_shim/modal_services.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/upload_excalibur_to_cloudbrain.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "02_FORGE/PORTAL_CORE/Modal/morgana/morgana_core.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/swarm/graph_orchestrator.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/ledger_purify.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/senses/audio/kitten_service.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/merlin/repo_analyzer.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/senses/train/fine_tune_unsloth.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/iron_gate/judge/__init__.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/memory/test_hydration.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/security/__init__.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/reasoning/ouroboros_bridge.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/check_switchboard.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/iron_gate/test_forensics.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/senses/audio/vad_interrupt.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/memory/agent_memory.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/iron_gate/forensic_engine.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/senses/audio/silero_vad.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/EXCALIBUR/excalibur_autopilot.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/security/zenith_scanner.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/compress_large_files.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/memory/__init__.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/tests/test_ouroboros_bridge.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/find_ledger.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/cybertronia_lockbox_ci.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/sprint9_enrichment.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/memory/test_mnemosyne.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/swarm/test_graph.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/instantiate_heimdall_nb.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/reasoning/core.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/ml_persona_engineer/quantization.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/sync_provenance.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/check_filter_parity.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/senses/audio/sir_sonus.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/senses/integrations/test_ollama.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/update_ledger_v702.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/iron_gate/judge/governance_audit.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/system/SYNC_PROTOCOL.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/update_omnivox_ledger.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/memory/hydration_manager.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "scripts/finalize_codex.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/forge/update_map.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/forge/rename_project.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/iron_gate/__init__.py": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+  "01_KERNEL/agora/Squires/commands/embedding_commands.py": "refs/heads/perf/embedding-n-plus-1-optimization-15445770156298811611"
+ }
+}

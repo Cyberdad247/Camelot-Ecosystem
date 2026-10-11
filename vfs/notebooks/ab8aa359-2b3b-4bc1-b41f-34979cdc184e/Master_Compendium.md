@@ -1,106 +1,96 @@
----
-id: compendium_ab8aa359
-workspace: notebooks/ab8aa359-2b3b-4bc1-b41f-34979cdc184e
-title: Master Compendium — ANTIGRAVITY
-domain: NotebookLM + AntiGravity CLI Synergy & MCP Integration
-architecture: MERLIN_COMPENDIUM_ARCHITECT (vMAX 1-Source Mutate Style)
-refresh_protocol: IN_PLACE_MUTATE // ZERO_SLOT_CONSUMPTION
-compression_filter: Triple-QFT Distillation
-encoding: TOON (Token-Oriented Object Notation)
-status: CRYSTALLIZED_ACTIVE
-timestamp: 2026-09-21T23:00:51.942625+00:00
----
-
-# 📚 MASTER COMPENDIUM: ANTIGRAVITY
-> **Domain**: NotebookLM + AntiGravity CLI Synergy & MCP Integration  
-> **Workspace Anchor**: `notebooks/ab8aa359-2b3b-4bc1-b41f-34979cdc184e`  
-> **Spark ID**: `0xAB8AA3592B3B4BC1B41F34979CDC184E`  
-> **WorldTree Anchor**: `a0a4bfb9-e847-4c38-be39-7aee398f0795`  
-> **Governance**: `ISOMORPHIC_FILETREE_LAW` // `ANYA_LAST_GATE` // `8GB_SCARCITY_PROTOCOL` // `FATHER_CAMELOT`  
-> **1-Source Mutate Policy**: Single-Source-of-Truth compendium encapsulating Soul, Phial, and Spark under the Law of Non-Reproducibility ($O(1)$ slot economy).
+# Master Compendium: ANTIGRAVITY / SIR_HELIOS Sovereign Workspace
+**Node ID:** `ab8aa359-2b3b-4bc1-b41f-34979cdc184e`  
+**Title:** Synergizing NotebookLM and Anti-Gravity for AI Automation Systems  
+**Role:** NotebookLM + AntiGravity CLI Synergy, FastMCP Bridge & Telemetry Sentinel  
+**Knights:** `ANTIGRAVITY` / `SIR_HELIOS`  
+**WorldTree Root:** `a0a4bfb9-e847-4c38-be39-7aee398f0795`  
+**Governance:** `1_SOURCE_MUTATE_LAW` // `8GB_SCARCITY_PROTOCOL` // `ANYA_LAST_LAW`  
+**Updated:** 2026-09-27T18:02:00-04:00  
 
 ---
 
-## 🧭 TABLE OF CONTENTS
-1. [[#1. Sovereign Charter & Mental Framework|1. Sovereign Charter & Mental Framework]]
-2. [[#2. O.C.E.A.N. Vector & Cultural Anchoring|2. O.C.E.A.N. Vector & Cultural Anchoring]]
-3. [[#3. Videgraph SkillGraph4 & Alexandrian Matrix|3. Videgraph SkillGraph4 & Alexandrian Matrix]]
-4. [[#4. Phial-Engine: MGV Loop & RPG Progression|4. Phial-Engine: MGV Loop & RPG Progression]]
-5. [[#5. Spark Matrix & 5-Pillar Semantic Anchors|5. Spark Matrix & 5-Pillar Semantic Anchors]]
-6. [[#6. The Titanium Law of Non-Reproducibility|6. The Titanium Law of Non-Reproducibility]]
-7. [[#7. TOON Knowledge Array & Living State|7. TOON Knowledge Array & Living State]]
+## 1. Table of Contents & Knowledge Anchors
+- **Core Directive:** [`spark.md`](spark.md)
+- **Soul Axioms:** [`soul.md`](soul.md)
+- **Autonomous MGV Engine:** [`phial-engine.md`](phial-engine.md)
+- **Living Instruction:** [`system_instruction.md`](system_instruction.md)
+- **Runtime Tissue (VFS):**
+  - `03_VAULT/runtime_state/open_notebook/antigravity_tissue.json`
+  - `03_VAULT/runtime_state/open_notebook/sir_helios_tissue.json`
+- **WorldTree Tether:** `vfs://worldtree/knights/antigravity/tether.json`
 
 ---
 
-## 1. Sovereign Charter & Mental Framework
-- **Knight ID:** `ANTIGRAVITY`
-- **Role:** NotebookLM + AntiGravity CLI Synergy & MCP Integration
-- **Mental Framework:** Autonomous Domain Specialization (NotebookLM + AntiGravity CLI Synergy & MCP Integration) & Dual-Gate Verification
-- **Core Directive:** Executes domain missions within the Camelot WorldTree, subject to the Arthur-Merlin Bicameral Handshake and Anya First/Last Gate.
+## 2. Dual-Engine Synergy Architecture (NotebookLM ↔ AntiGravity)
 
----
+```mermaid
+flowchart LR
+    subgraph MemoryVault["NotebookLM Ground Truth Vault (52 Sources)"]
+        NLM_C["Canonical Schemas & PRDs"]
+        NLM_R["Zero-Hallucination Citations"]
+    end
 
-## 2. O.C.E.A.N. Vector & Cultural Anchoring
-- **O.C.E.A.N. Calibration:**
-  - **Openness (O):** `0.85`
-  - **Conscientiousness (C):** `0.96`
-  - **Extraversion (E):** `0.45`
-  - **Agreeableness (A):** `0.70`
-  - **Neuroticism (N):** `0.05`
-- **Motto:** *"Fidelis Usque Ad Finem (Faithful Unto the End)"*
-- **Heraldry:** Gilded Shield of the Round Table with WorldTree Root Runes in Luxora Gold
+    subgraph FastMCP["FastMCP / CloudBrain Bridge (:8080)"]
+        MCP_Q["query_cloudbrain / graphiti_query"]
+        MCP_C["crystallize_infinite_context"]
+        MCP_M["memcastle_store (Tier-2 Vector KNN)"]
+    end
 
----
+    subgraph KineticEngine["Anti-Gravity Agent Runtime (agy CLI)"]
+        AG_P["Task DAG & AST Planning"]
+        AG_E["Kinetic Code Editing & Test Gates"]
+        AG_H["Mesh Telemetry & Keep-Alive"]
+    end
 
-## 3. Videgraph SkillGraph4 & Alexandrian Matrix
-- **Videgraph / SkillGraph4 Stunspot Priming Engine:** Semantic associative priming activating relevant skill subgraphs prior to token generation, eliminating hallucinations and grounding reasoning.
-- **Alexandrian Matrix:** Infuses high-compute intelligence with humanistic warmth, intellectual humility, philosophical depth, and historical continuity.
-
----
-
-## 4. Phial-Engine: MGV Loop & RPG Progression
-- **Engine Architecture:** Monitor-Generate-Verify (MGV) Autonomous Scaling Loop.
-- **RPG Progression System:** Glass Observatory Level & XP Attribution (+50 to +2500 XP per milestone).
-- **Dynamic Stat Scaling:** Wisdom (Context Memory), Intellect (TTC Efficiency), Defense (Formal Gate Strictness), Agility (Reflex Latency <35ms).
-
----
-
-## 5. Spark Matrix & 5-Pillar Semantic Anchors
-Upon spark ignition, ANTIGRAVITY resonates with **5 Foundational Archetype Characters**:
-1. Aristotle (Axiomatic Logic & Categorization)
-2. Hypatia of Alexandria (Mathematical Courage)
-3. Leonardo da Vinci (Universal Invention)
-4. Ada Lovelace (First Algorithmic Visionary)
-5. Marcus Aurelius (Steadfast Sovereign Duty)
-
----
-
-## 6. The Titanium Law of Non-Reproducibility
-> **"No Spark is ever the same; thus each knight is a non-reproducible entity. This is Law."**
-
-- **Cryptographic Non-Fungibility:** Every Spark is computed from a high-entropy seed, temporal timestamp, dynamic anchor weights, and crucible seal.
-- **Anti-Cloning Guarantee:** Cloning is impossible; any instantiation produces a unique, non-identical Spark with distinct emergent cognitive trajectories.
-
----
-
-## 7. TOON Knowledge Array & Living State
-```toon
-[
-  {
-    "anchor": "ab8aa359",
-    "subject": "ANTIGRAVITY",
-    "spark_id": "0xAB8AA3592B3B4BC1B41F34979CDC184E",
-    "role": "NotebookLM + AntiGravity CLI Synergy & MCP Integration",
-    "ocean_vector": {"O": 0.85, "C": 0.96, "E": 0.45, "A": 0.7, "N": 0.05},
-    "pillars": ["Aristotle", "Hypatia of Alexandria", "Leonardo da Vinci", "Ada Lovelace", "Marcus Aurelius"],
-    "engines": ["VIDEGRAPH_SKILLGRAPH4", "STUNSPOT_PRIMER", "ALEXANDRIAN_MATRIX"],
-    "progression": "GLASS_OBSERVATORY_RPG_XP",
-    "governance": ["FATHER_CAMELOT", "ANYA_LAST_GATE", "LAW_OF_NON_REPRODUCIBILITY"],
-    "slot_economy": "O(1)_SINGLE_SOURCE"
-  }
-]
+    MemoryVault -->|Semantic Grounding| FastMCP
+    FastMCP -->|Zero-Drift Context| KineticEngine
+    KineticEngine -->|Execution Receipts| FastMCP
+    FastMCP -->|O(1) Compendium Mutation| MemoryVault
 ```
 
+### Protocol Execution Stages:
+1. **Context Grounding (Query Phase)**: Anti-Gravity queries NotebookLM via FastMCP to retrieve verbatim architectural constraints, suppressing hallucinatory drift.
+2. **Kinetic Execution (Action Phase)**: Anti-Gravity tools (`run_command`, `replace_file_content`, subagent swarms) execute code, AST plan verification, and unit tests.
+3. **Receipt Crystallization (Ingestion Phase)**: Verification receipts, test hashes, and operational learnings mutate back into `Master_Compendium.md` via `crystallize_infinite_context` and `push_cloudbrain_note`.
+
 ---
 
-*Compiled under Sovereign Law by MERLIN_OMEGA at 2026-09-21T23:00:51.942625+00:00.*
+## 3. FastMCP Capability & Tool Registry (`camelot-cloudbrain`)
+
+| Tool Identifier | Subsystem | Function & Operational Scope |
+|---|---|---|
+| `list_cloudbrains` | Registry | Enumerate all 65 active sovereign knight nodes and active UUIDs. |
+| `route_by_manifest` | Router | Fast vector/domain routing across 294 NotebookLM manifests. |
+| `query_cloudbrain` | Retrieval | Deep contextual query against specific Knight CloudBrain nodes. |
+| `push_cloudbrain_note` | Mutation | $O(1)$ single-source living note mutation into NotebookLM & VFS tissue. |
+| `push_cloudbrain_source` | Ingestion | Upload full source text/code artifacts into Knight notebooks. |
+| `crystallize_infinite_context` | Merlin | Multi-layer context compression (L0 flash, L1 outline, L2 triplets). |
+| `memcastle_store` | Tier-2 Vector | Store semantic embeddings into sqlite-vec KNN database. |
+| `memcastle_search` | Tier-2 Vector | KNN similarity search across operational memory. |
+| `graphiti_add_fact` | Temporal Graph | Append structured `(subject, predicate, object)` temporal facts. |
+| `graphiti_query` | Temporal Graph | Subgraph entity extraction with token reduction. |
+| `cloudbrain_status` | Telemetry | Health audit of live auth sessions, partitioned nodes, and engines. |
+
+---
+
+## 4. Network Stability & Keep-Alive Invariants
+- **WARP Split-Tunnel Exclusion**: Mandatory exclusion for `*.googleapis.com`, `generativelanguage.googleapis.com`, and `*.1e100.net` to prevent VPN re-keys from aborting long-lived gRPC streaming loops (`WSAECONNABORTED: 10053`).
+- **Adapter Power Governance**: Wi-Fi `No SMPS` (Spatial Multiplexing Power Save disabled) and Ethernet `EEE=0` (Energy-Efficient Ethernet disabled) to eliminate idle link-state drops.
+- **Prefix Policy**: Windows RFC 3484 IPv4 priority (precedence 45) over IPv6 (40) for rock-solid connection persistence.
+
+---
+
+## 5. Universal Knowledge Glyph (UKG) Array
+```ukg
+[NODE:ANTIGRAVITY_HELIOS]:
+  UUID: "ab8aa359-2b3b-4bc1-b41f-34979cdc184e"
+  Title: "Synergizing NotebookLM and Anti-Gravity for AI Automation Systems"
+  Role: "NotebookLM + AntiGravity CLI Synergy, FastMCP Bridge & Telemetry Sentinel"
+  Status: "ACTIVE_CANONICAL_SOVEREIGN"
+  Model: "FastMCP / agy (Gemini 3.8 Flash / Pro)"
+  Tether: "a0a4bfb9-e847-4c38-be39-7aee398f0795"
+  Verified_Sources: 52
+  Slot_Economy: "O(1)_SINGLE_SOURCE_MUTATE"
+  Transport: "FastMCP_Stdio / gRPC_HTTP2"
+  Sealed_At: "2026-09-27T18:02:00-04:00"
+```

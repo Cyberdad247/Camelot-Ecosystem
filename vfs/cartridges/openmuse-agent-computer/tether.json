@@ -1,0 +1,36 @@
+{
+  "cartridge_id": "openmuse-agent-computer",
+  "vfs_uri": "vfs://worldtree/cartridges/openmuse-agent-computer/",
+  "cloudbrain_notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+  "cloudbrain_title": "Camelot WorldTree Root & Operator Infrastructure",
+  "bound_knights": [
+    "LUKAS_OMEGA",
+    "MERLIN_OMEGA",
+    "ANYA_OMEGA",
+    "JEV_OMEGA"
+  ],
+  "risk_tier_cap": "T1",
+  "domain_tags": [
+    "agent_computer",
+    "workspace_terminal",
+    "human_takeover",
+    "landlock_actuation",
+    "offline_system2",
+    "durable_tasks"
+  ],
+  "entrypoints": [
+    "fetch",
+    "execute",
+    "test",
+    "audit"
+  ],
+  "physical_source_path": "cartridges/openmuse-agent-computer",
+  "files": [
+    "manifest.json",
+    "signing_key.pub",
+    "system_instruction.md"
+  ],
+  "status": "ONLINE_ACTIVE",
+  "tether_type": "POSITION_ADDRESSED_VFS_CARTRIDGE",
+  "updated_at": "2026-10-07T14:10:00.000000+00:00"
+}

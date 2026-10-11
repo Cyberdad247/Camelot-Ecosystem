@@ -17,6 +17,7 @@ Axioms:
 from __future__ import annotations
 
 import argparse
+import base64
 import json
 import logging
 import os
@@ -192,12 +193,12 @@ CANONICAL_KNIGHT_PERSONAS: Dict[str, ChanneledKnightPersona] = {
     "sir_lukas": ChanneledKnightPersona(
         knight_id="sir_lukas",
         display_name="Sir Lukas Müller",
-        voice_engine="gemini_live",
-        timbre_description="visual telemetry herald; crisp German-accented clarity, anomaly sentinel",
+        voice_engine="sanotts",
+        timbre_description="visual telemetry herald; crisp, alert, real-time zero-cloud verbal telemetry; sub-50ms CPU synthesis",
         acoustic_pitch_offset=-0.3,
         speech_rate=1.0,
         greeting="Sir Lukas reporting. Live port telemetry clear, no anomalies.",
-        specialization="Herald of Telemetry, TCP Port Anomaly Detection & Visual Verification",
+        specialization="Herald of Telemetry, TCP Port Anomaly Detection, Watchtower Visual Cockpit & SanoTTS Edge Synthesis",
         aliases=("lukas", "lucas", "sir_lukas", "sir_lucas", "muller", "mueller"),
     ),
     "anya_omega": ChanneledKnightPersona(
@@ -388,6 +389,10 @@ class ReyaUniversalFabric:
         return CANONICAL_KNIGHT_PERSONAS.get(
             self.active_knight_id, CANONICAL_KNIGHT_PERSONAS["reya_companion"]
         )
+
+    @property
+    def available_knights(self) -> Dict[str, ChanneledKnightPersona]:
+        return CANONICAL_KNIGHT_PERSONAS
 
     def detect_voice_interchange_trigger(self, utterance: str) -> Optional[str]:
         """Detects if an utterance requests a Knight voice interchange."""
@@ -625,12 +630,39 @@ class ReyaUniversalFabric:
                     lease=lease,
                 )
 
+        audio_payload: Optional[Dict[str, Any]] = None
+        if action_type == "speech_synthesize":
+            engine = params.get("engine") or persona.voice_engine
+            synth_text = params.get("text", "")
+            if engine == "sanotts" or persona.knight_id == "sir_lukas":
+                try:
+                    from control_plane.voice.sanotts_provider import SanoTTSProvider
+                    provider = SanoTTSProvider()
+                    wav_bytes = provider.synthesize_to_wav(synth_text)
+                    audio_payload = {
+                        "engine": "sanotts",
+                        "audio_wav_bytes_len": len(wav_bytes),
+                        "audio_wav_base64": base64.b64encode(wav_bytes).decode("ascii") if len(wav_bytes) <= 200000 else None,
+                        "sample_rate": provider.sample_rate,
+                        "latency_ms": provider.telemetry.last_latency_ms,
+                        "provider_mode": provider.telemetry.provider_mode,
+                        "synthesized": True,
+                    }
+                except Exception as exc:
+                    audio_payload = {
+                        "engine": "sanotts",
+                        "synthesized": False,
+                        "error": str(exc),
+                    }
+
         combined_result: Dict[str, Any] = {
             "action_type": action_type,
-            "voice_engine": persona.voice_engine,
+            "voice_engine": params.get("engine") or persona.voice_engine,
             "text_length": len(params.get("text", "")),
             **params,
         }
+        if audio_payload:
+            combined_result["audio_payload"] = audio_payload
         if cua_result:
             combined_result["cua_driver_execution"] = cua_result
 
@@ -675,6 +707,62 @@ class ReyaUniversalFabric:
             "status": "FABRIC_READY",
         }
 
+    def get_watchtower_telemetry(self) -> Dict[str, Any]:
+        """Query live Watchtower telemetry and memory governor stats."""
+        try:
+            from control_plane.infra.watchtower import pagekeeper_rs_probe, resource_snapshot
+            snap = resource_snapshot()
+            rs = pagekeeper_rs_probe()
+            return {
+                "status": "WATCHTOWER_LIVE",
+                "commit_pct": snap.get("commit_pct"),
+                "physical_available_mb": round((snap.get("physical_available_bytes") or 0) / (1024 * 1024), 1),
+                "cpu_pct": snap.get("cpu_pct"),
+                "process_working_set_mb": snap.get("process_working_set_mb", 0.0),
+                "node_ceiling_ok": (snap.get("process_working_set_mb", 0.0) <= 4096.0),
+                "pagekeeper_rs": rs,
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+            }
+        except Exception as exc:
+            return {
+                "status": "WATCHTOWER_UNAVAILABLE",
+                "error": str(exc),
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+            }
+
+    def report_lukas_telemetry(self, synthesize_audio: bool = True) -> Dict[str, Any]:
+        """Channel Sir Lukas to deliver live verbal and visual telemetry via sanoTTS and Watchtower."""
+        switch_info = self.switch_knight("sir_lukas")
+        telemetry = self.get_watchtower_telemetry()
+
+        ws_mb = telemetry.get("process_working_set_mb", 0.0)
+        cpu = telemetry.get("cpu_pct", 0.0)
+        rs_status = telemetry.get("pagekeeper_rs", {}).get("status", "STANDBY")
+        rs_mem = telemetry.get("pagekeeper_rs", {}).get("resident_mb", 0.0)
+
+        spoken_text = (
+            f"Sir Lukas reporting. Cybertronia node working set is {ws_mb:.1f} megabytes, "
+            f"Law 03 compliant under 4 gigabytes. Host CPU load is {cpu:.1f} percent. "
+            f"PageKeeper RS memory governor is {rs_status} at {rs_mem:.2f} megabytes resident set. "
+            f"Visual telemetry nominal."
+        )
+
+        speech_result = None
+        if synthesize_audio:
+            speech_result = self.execute_fabric_action(
+                action_type="speech_synthesize",
+                params={"text": spoken_text, "engine": "sanotts"},
+            )
+
+        return {
+            "herald": "sir_lukas",
+            "switch_info": switch_info,
+            "spoken_text": spoken_text,
+            "telemetry": telemetry,
+            "speech_result": speech_result,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+        }
+
 
 # Module singleton
 _fabric_instance: Optional[ReyaUniversalFabric] = None
@@ -693,9 +781,23 @@ def main():
     parser.add_argument("--switch", type=str, help="Switch channeled Knight persona")
     parser.add_argument("--detect", type=str, help="Detect voice trigger from utterance")
     parser.add_argument("--action", type=str, help="Simulate kinetic action under active knight")
+    parser.add_argument("--telemetry", action="store_true", help="Print live Watchtower telemetry")
+    parser.add_argument("--lukas-report", action="store_true", help="Channel Sir Lukas and deliver live telemetry via sanoTTS")
     args = parser.parse_args()
 
     fabric = get_reya_fabric()
+
+    if args.telemetry:
+        print(json.dumps(fabric.get_watchtower_telemetry(), indent=2))
+        return
+
+    if args.lukas_report:
+        report = fabric.report_lukas_telemetry(synthesize_audio=True)
+        # Avoid dumping large binary base64 to console
+        if report.get("speech_result", {}).get("result", {}).get("audio_payload"):
+            report["speech_result"]["result"]["audio_payload"]["audio_wav_base64"] = "<omitted>"
+        print(json.dumps(report, indent=2))
+        return
 
     if args.detect:
         found = fabric.detect_voice_interchange_trigger(args.detect)

@@ -1,5 +1,5 @@
 # CLARITY_CORE Colony Report
-**Generated:** 2026-09-23 21:27 UTC
+**Generated:** 2026-09-27 02:53 UTC
 **Root:** `C:\Users\vizio\CAMELOT_OS`
 
 ---
@@ -8,21 +8,21 @@
 
 | Metric | Value |
 |--------|-------|
-| Files scanned | 10,863 |
-| Total lines | 2,444,760 |
-| Symbols indexed | 30,451 |
+| Files scanned | 11,954 |
+| Total lines | 2,501,327 |
+| Symbols indexed | 30,631 |
 | Risk Score | 100.0 / 100 |
 | Risk Label | **CRITICAL** |
 | HITL Required | Yes ⚠️ |
 
 ## Findings
 
-- 20 potential secret(s) detected — CRITICAL
-- 28 large file(s) (>500 KB) found
-- 216 TODO/FIXME markers — technical debt accumulation
-- 2215 duplicate file(s) detected
-- 80 unused imports (dead code)
-- Large codebase: 2,444,760 lines — context management critical
+- 19 potential secret(s) detected — CRITICAL
+- 29 large file(s) (>500 KB) found
+- 221 TODO/FIXME markers — technical debt accumulation
+- 2274 duplicate file(s) detected
+- 38 unused imports (dead code)
+- Large codebase: 2,501,327 lines — context management critical
 
 ## Recommendations
 
@@ -37,53 +37,52 @@
 
 | Category | Count |
 |----------|-------|
-| Secrets (critical) | 20 |
-| Warnings | 28 |
-| Info | 371 |
+| Secrets (critical) | 19 |
+| Warnings | 102 |
+| Info | 490 |
 
 ### Critical Flags
 
 - `02_FORGE/apps/lux11/firebase-applet-config.json:4` — secret: google_api_key: AIza...Zw4M
 - `02_FORGE/PORTAL_CORE/Modal/morgana/local_modal.toml:3` — secret: generic_token: secr...iL3'
-- `02_FORGE/tools/pi-mono/packages/coding-agent/examples/extensions/custom-provider-anthropic/index.ts:571` — secret: generic_token: apiK...KEY"
 - `03_VAULT/credentials/identity_mirror/claude.json:1` — secret: anthropic_key: sk-a...5wAA
 - `03_VAULT/credentials/identity_mirror/claude.json:1` — secret: anthropic_key: sk-a...cgAA
-- `03_VAULT/Nano-Knights/background.iife.js:842` — secret: generic_token: ApiK...KEY"
-- `03_VAULT/Nano-Knights/background.iife.js:870` — secret: generic_token: ApiK...KEY"
-- `03_VAULT/Nano-Knights/background.iife.js:870` — secret: generic_token: apiK...KEY"
-- `03_VAULT/Nano-Knights/background.iife.js:1093` — secret: generic_token: apiK...KEY"
-- `03_VAULT/Nano-Knights/background.iife.js:1093` — secret: generic_token: apiK...KEY"
-- `03_VAULT/Nano-Knights/background.iife.js:1096` — secret: generic_token: apiK...KEY"
-- `04_KINETIC/nullclaw/config.example.json:27` — secret: private_key: ----...----
-- `apps/excalibur-cmd-1/src/state/useEcosystemStore.ts:233` — secret: generic_token: Toke...ION'
+- `03_VAULT/runtime_state/consolidation/mbc-v1/evidence/c0_discovery.json:795` — secret: private_key: ----...----
+- `03_VAULT/runtime_state/consolidation/mbc-v1/evidence/c0_discovery.json:796` — secret: private_key: ----...----
+- `03_VAULT/runtime_state/consolidation/mbc-v1/evidence/c0_discovery.json:846` — secret: private_key: ----...----
+- `03_VAULT/runtime_state/consolidation/mbc-v1/evidence/c0_discovery.json:847` — secret: private_key: ----...----
+- `03_VAULT/runtime_state/consolidation/mbc-v1/evidence/c0_discovery.json:872` — secret: private_key: ----...----
+- `03_VAULT/runtime_state/consolidation/mbc-v1/evidence/c0_discovery.json:873` — secret: private_key: ----...----
+- `03_VAULT/runtime_state/consolidation/mbc-v1/evidence/c0_discovery.json:898` — secret: private_key: ----...----
+- `03_VAULT/runtime_state/consolidation/mbc-v1/evidence/c0_discovery.json:899` — secret: private_key: ----...----
+- `03_VAULT/runtime_state/consolidation/mbc-v1/evidence/c0_discovery.json:924` — secret: private_key: ----...----
+- `03_VAULT/runtime_state/consolidation/mbc-v1/evidence/c0_discovery.json:925` — secret: private_key: ----...----
+- `03_VAULT/runtime_state/consolidation/mbc-v1/evidence/c0_discovery.json:1163` — secret: private_key: ----...----
+- `03_VAULT/runtime_state/consolidation/mbc-v1/evidence/c0_discovery.json:1164` — secret: private_key: ----...----
+- `03_VAULT/runtime_state/consolidation/mbc-v1/evidence/c0_discovery.json:1282` — secret: private_key: ----...----
+- `03_VAULT/runtime_state/consolidation/mbc-v1/evidence/c0_discovery.json:1283` — secret: private_key: ----...----
 - `deploy/multivoice-router/firebase-applet-config.json:4` — secret: google_api_key: AIza...Zw4M
-- `harness/contracts/verify_operator_request.py:59` — secret: generic_token: TOKE...ied"
-- `kinetic_edge/camelot_edge/src/protocol.rs:39` — secret: private_key: ----...----
-- `kinetic_edge/saltare/internal/gateway/http/middleware.go:133` — secret: generic_token: Toke...ken"
-- `packages/policy-engine/schemas/approval-states.yaml:84` — secret: generic_token: toke...KEN"
-- `scripts/verify_frozen_bundle.py:41` — secret: generic_token: TOKE...R-A"
-- `tools/notebooklm-py/scripts/_live_auth_scenarios/rest_recovery.py:39` — secret: generic_token: TOKE...ken"
 
 ## SWEEP Report
 
 | Category | Count |
 |----------|-------|
-| Duplicate Content | 2215 |
-| Unused Import | 80 |
-| Unreferenced File | 426 |
+| Duplicate Content | 2274 |
+| Unused Import | 38 |
+| Unreferenced File | 311 |
 
 ## Language Breakdown
 
 | Extension | Files |
 |-----------|-------|
-| `.json` | 3118 |
-| `.py` | 2897 |
-| `.md` | 2020 |
+| `.json` | 3246 |
+| `.md` | 2964 |
+| `.py` | 2915 |
 | `.ts` | 1098 |
 | `.tsx` | 425 |
 | `.yaml` | 220 |
 | `.js` | 210 |
-| `.sh` | 178 |
+| `.sh` | 179 |
 | `.rs` | 152 |
 | `.go` | 143 |
 | `.c` | 88 |
@@ -127,7 +126,7 @@
 | `stream_avatar_faculty` | function | `excalibur_controller.py` | 739 |
 | `health` | function | `excalibur_controller.py` | 750 |
 
-*...and 30421 more symbols in full index.*
+*...and 30601 more symbols in full index.*
 
 ---
 

@@ -1,0 +1,13 @@
+{
+ "manual_resolution": {
+  "queue": 52,
+  "ours": 45,
+  "theirs": 6,
+  "hand": 1,
+  "extra_reverts": 6
+ },
+ "staged_after_resolution": {
+  "count": 1402,
+  "shortstat": "1402 files changed, 132021 insertions(+), 33661 deletions(-)"
+ }
+}

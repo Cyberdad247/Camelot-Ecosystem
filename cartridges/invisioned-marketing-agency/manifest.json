@@ -1,0 +1,141 @@
+{
+  "schema_version": "camelot-cartridge/1",
+  "cartridge_id": "invisioned-marketing-agency",
+  "version": "1.1.0",
+  "signer": "invisioned-cloudbrain",
+  "signer_trust_band": "sovereign-agency",
+  "cloudbrain_id": "e6374819-50ce-41cf-b6b3-99924ca6ab90",
+  "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+  "master_crystal_id": "CRYS_ALPHA_OMEGA_MASTER_1727890519",
+  "agency_title": "Invisioned Marketing — Autonomous Virtual Digital Agency",
+  "motto": "dreams don't come true, visions do",
+  "governance": {
+    "operator": "VaShawn O. Head (Vizion)",
+    "enterprise": "Invisioned Marketing Inc.",
+    "phone": "216-586-4607",
+    "email": "invisionedmarketing@gmail.com",
+    "hardware_ceiling": "8GB_LPDDR5_EDGE_NODE_CLEVELAND",
+    "security_enclave": "EXCALIBUR_ZERO_TRUST_AEGIS_SHIELD"
+  },
+  "framework_subsystems": [
+    "Isomorphic_Island_Architecture (HTMX_Shell ⊕ React_WebGPU_Islands)",
+    "WebMCP_Excalibur_Registry (window.__WEBMCP_REGISTRY)",
+    "AionUi_ACP_Multi_Agent_Cowork",
+    "CopilotKit_AG_UI_Generative_State",
+    "The_Midas_Loop_Lead_Generation"
+  ],
+  "entrypoints": [
+    "strategy_audit",
+    "midas_loop_lead_qualification",
+    "brand_worldbuilding",
+    "neuro_aesthetic_mapping",
+    "kinetic_web_systems",
+    "geo_search_dominance",
+    "voice_agent_dispatch",
+    "telemetry_orbit_render",
+    "airgap_security_scan",
+    "formal_z3_verification"
+  ],
+  "supported_node_profiles": [
+    "hub",
+    "experience",
+    "engineering",
+    "edge_drone"
+  ],
+  "requested_capabilities": [
+    "network.scoped",
+    "vfs.read",
+    "vfs.write",
+    "process.allowlisted",
+    "cloudbrain.query"
+  ],
+  "denied_capabilities": [
+    "lease.issue",
+    "policy.admin",
+    "secret.export",
+    "unrestricted.network",
+    "direct_main_branch_write",
+    "auto_merge"
+  ],
+  "resource_profile": {
+    "memory_mb": 512,
+    "timeout_s": 120,
+    "max_workers": 4
+  },
+  "verification": [
+    "contract_test",
+    "Anya_gate_clearance",
+    "Gideon_verdict",
+    "receipt_issued"
+  ],
+  "risk_tier_invariant_cap": "T1",
+  "rollback": {
+    "strategy": "compensating_action"
+  },
+  "compat": {
+    "supported_knight_classes": [
+      "sovereign_principal",
+      "cognitive_architect",
+      "hypervisor",
+      "strategic_architect",
+      "creative_director",
+      "visual_resonance_architect",
+      "scaffolder",
+      "kinetic_connector",
+      "kinetic_engineer",
+      "telemetry_sentinel",
+      "growth_forager",
+      "voice_sentinel",
+      "airgap_guard",
+      "memory_keeper",
+      "formal_auditor"
+    ]
+  },
+  "roster": {
+    "executive": {
+      "principal": "VaShawn 'Vizion' Head",
+      "cognitive_lead": "MERLIN_OMEGA",
+      "hypervisor_gate": "ANYA_OMEGA"
+    },
+    "strategy_and_market_warfare": {
+      "lead": "KNIGHT_STRATEGOS",
+      "framework": "Tree of Thoughts (ToT) 3-Future Simulation & Midas Loop"
+    },
+    "creative_and_brand_worlds": {
+      "director": "AMARA_AURA",
+      "auteur_architect": "SIR_BORIS",
+      "aesthetic_harmony": "LADY_GUINEVERE"
+    },
+    "ui_ux_vanguard": {
+      "aesthetics": "SIR_VISAGE",
+      "scaffolder": "SIR_HYDRON",
+      "kinetics": "SIR_STITCH",
+      "auditors": "SALLY_AUDITOR ⊕ SIR_GIDEON"
+    },
+    "engineering": {
+      "cto": "SIR_FORGE",
+      "logic_prover": "SIR_CODEX"
+    },
+    "telemetry_and_visual": {
+      "herald": "SIR_HELIOS",
+      "orbit_engine": "Living Typographic Orbit w/ WebGPU"
+    },
+    "growth_and_geo": {
+      "forager": "LADY_APIS",
+      "strategos": "KNIGHT_STRATEGOS"
+    },
+    "communications_and_voice": {
+      "audio_router": "SIR_SONUS",
+      "voice_ai": "TASHA_PRIME"
+    },
+    "privacy_and_security": {
+      "airgap_officer": "SIR_GHOST",
+      "taint_sentinel": "SIR_SENTINEL"
+    },
+    "knowledge_and_memory": {
+      "curator": "LADY_MNEMOSYNE"
+    }
+  },
+  "hash_algorithm": "sha256",
+  "signature_algorithm": "ed25519"
+}

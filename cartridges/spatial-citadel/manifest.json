@@ -1,0 +1,59 @@
+{
+  "schema_version": "camelot-cartridge/1",
+  "cartridge_id": "spatial-citadel",
+  "version": "0.1.0",
+  "signer": "camelot-community",
+  "signer_trust_band": "camelot-community",
+  "entrypoints": [
+    "fetch",
+    "execute",
+    "audit",
+    "plan"
+  ],
+  "supported_node_profiles": [
+    "hub",
+    "experience",
+    "engineering"
+  ],
+  "requested_capabilities": [
+    "network.scoped",
+    "vfs.read",
+    "process.allowlisted"
+  ],
+  "denied_capabilities": [
+    "lease.issue",
+    "policy.admin",
+    "secret.export",
+    "unrestricted.network",
+    "direct_main_branch_write",
+    "auto_merge",
+    "auto_deploy",
+    "promotion.issue",
+    "epoch.increment"
+  ],
+  "resource_profile": {
+    "memory_mb": 512,
+    "timeout_s": 120,
+    "max_workers": 2
+  },
+  "verification": [
+    "contract_test",
+    "Gideon_verdict",
+    "receipt_issued"
+  ],
+  "risk_tier_invariant_cap": "T1",
+  "rollback": {
+    "strategy": "destroy_ephemeral_worktree"
+  },
+  "compat": {
+    "supported_knight_classes": [
+      "kinetic_actuator",
+      "gatekeeper",
+      "cognitive_planner"
+    ]
+  },
+  "hash_algorithm": "sha256",
+  "signature_algorithm": "ed25519",
+  "artifact_hash": "sha256:34f737a4c416cca9525900970a33d975ab0940394b7de9045627a9a6cab4962b",
+  "signature": "ed25519:QZW8bXkrrLi1p97sCmDtLm5MRYPXCA2eHC_Q95qXO5mBRIIbABIv0Sv9G6bsU_Fjt7N9jK2lizhl479DPoVFCw"
+}

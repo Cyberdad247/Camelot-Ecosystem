@@ -11,6 +11,9 @@
 
 | Timestamp (UTC) | Cadence | Active Version | Snapshot ID | Tethered Knights | Duration | Status |
 |---|---|---|---|---|---|---|
+| `2026-10-04T07:26:20Z` | `DAILY` | `Living Camelot-OS v1000 MAX Compendium` | `excalibur_cicd_20261004_072617` | 65 / 36 | 3.09s | `SUCCESS` |
+| `2026-10-04T07:16:25Z` | `DAILY` | `Living Camelot-OS v1000 MAX Compendium` | `excalibur_cicd_20261004_071622` | 65 / 36 | 3.57s | `SUCCESS` |
+| `2026-10-04T02:51:52Z` | `DAILY` | `Living Camelot-OS v1000 MAX Compendium` | `excalibur_cicd_20261004_025149` | 65 / 36 | 3.52s | `SUCCESS` |
 | `2026-09-25T10:59:50Z` | `DAILY` | `Living Camelot-OS v1000 MAX Compendium` | `excalibur_cicd_20260925_105946` | 65 / 36 | 4.34s | `SUCCESS` |
 | `2026-09-19T23:10:07Z` | `DAILY` | `Living Camelot-OS v1000 MAX Compendium` | `excalibur_cicd_20260919_231004` | 65 / 36 | 2.37s | `SUCCESS` |
 | `2026-09-19T20:48:23Z` | `DAILY` | `Living Camelot-OS v1000 MAX Compendium` | `excalibur_cicd_20260919_204822` | 65 / 36 | 1.32s | `SUCCESS` |
@@ -337,5 +340,26 @@
 * **Timestamp:** `2026-09-25T10:59:50Z`
 * **Trigger:** Autonomous CI/CD Loop (DAILY)
 * **Snapshot SHA-256:** `826ac0ed0ff08cf74b36e1dffa140dcc5d93a37e3d9833edb73b5014c305c820`
+* **WorldTree Tethers:** 65 Active Nodes Verified
+* **Status:** `NOMINAL_SUCCESS`
+
+### 🔹 Run `excalibur_cicd_20261004_025149` (DAILY)
+* **Timestamp:** `2026-10-04T02:51:52Z`
+* **Trigger:** Autonomous CI/CD Loop (DAILY)
+* **Snapshot SHA-256:** `a5ff41d492187b66f215e44ea22262b49c2afd41e3e3c7263d02856852f70eff`
+* **WorldTree Tethers:** 65 Active Nodes Verified
+* **Status:** `NOMINAL_SUCCESS`
+
+### 🔹 Run `excalibur_cicd_20261004_071622` (DAILY)
+* **Timestamp:** `2026-10-04T07:16:25Z`
+* **Trigger:** Autonomous CI/CD Loop (DAILY)
+* **Snapshot SHA-256:** `38992b65c9d542388c8ea62dbeb6d35808980f33463a548fc3e8155e29030557`
+* **WorldTree Tethers:** 65 Active Nodes Verified
+* **Status:** `NOMINAL_SUCCESS`
+
+### 🔹 Run `excalibur_cicd_20261004_072617` (DAILY)
+* **Timestamp:** `2026-10-04T07:26:20Z`
+* **Trigger:** Autonomous CI/CD Loop (DAILY)
+* **Snapshot SHA-256:** `d4083972afff9047fbb774964af029ba715c6fb978617f70e5164e63b8047ba7`
 * **WorldTree Tethers:** 65 Active Nodes Verified
 * **Status:** `NOMINAL_SUCCESS`

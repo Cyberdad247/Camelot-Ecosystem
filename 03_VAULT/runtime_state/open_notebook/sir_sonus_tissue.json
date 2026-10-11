@@ -2,112 +2,68 @@
   {
     "knight_id": "SIR_SONUS",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for SIR_SONUS",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_sonus\",\n  \"session_id\": \"sess_knight_sir_sonus\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//channel channel Sir Lukas now",
+    "content": "Alias for //REYA_CHANNEL voice persona interchange",
     "vfs_path": "vfs://worldtree/knights/sir_sonus/tether.json",
     "mempalace_wing": "WING_WORLDTREE_SIR_SONUS",
     "open_viking_tether": "open_viking://worldtree/sir_sonus",
-    "updated_at": "2026-09-23T16:02:57.151020+00:00"
+    "updated_at": "2026-10-04T23:49:45.585093+00:00"
   },
   {
     "knight_id": "SIR_SONUS",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for SIR_SONUS",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_sonus\",\n  \"session_id\": \"sess_knight_sir_sonus\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//channel channel Sir Lukas now",
+    "content": "Alias for //REYA_CHANNEL voice persona interchange",
     "vfs_path": "vfs://worldtree/knights/sir_sonus/tether.json",
     "mempalace_wing": "WING_WORLDTREE_SIR_SONUS",
     "open_viking_tether": "open_viking://worldtree/sir_sonus",
-    "updated_at": "2026-09-23T16:02:56.477264+00:00"
+    "updated_at": "2026-10-04T23:49:28.369820+00:00"
   },
   {
     "knight_id": "SIR_SONUS",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for SIR_SONUS",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_sonus\",\n  \"session_id\": \"sess_knight_sir_sonus\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//channel channel Sir Lukas now",
+    "content": "Alias for //REYA_CHANNEL voice persona interchange",
     "vfs_path": "vfs://worldtree/knights/sir_sonus/tether.json",
     "mempalace_wing": "WING_WORLDTREE_SIR_SONUS",
     "open_viking_tether": "open_viking://worldtree/sir_sonus",
-    "updated_at": "2026-09-22T14:39:41.674476+00:00"
+    "updated_at": "2026-10-04T23:49:06.044912+00:00"
   },
   {
     "knight_id": "SIR_SONUS",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for SIR_SONUS",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_sonus\",\n  \"session_id\": \"sess_knight_sir_sonus\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//REYA_CHANNEL switch to Sir Boris please",
+    "content": "Dynamic voice persona interchange across Round Table Knights via Reya Universal Fabric",
     "vfs_path": "vfs://worldtree/knights/sir_sonus/tether.json",
     "mempalace_wing": "WING_WORLDTREE_SIR_SONUS",
     "open_viking_tether": "open_viking://worldtree/sir_sonus",
-    "updated_at": "2026-09-22T14:39:40.092254+00:00"
+    "updated_at": "2026-10-04T23:48:43.062431+00:00"
   },
   {
     "knight_id": "SIR_SONUS",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for SIR_SONUS",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_sonus\",\n  \"session_id\": \"sess_knight_sir_sonus\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//REYA_CHANNEL switch to Sir Boris please",
+    "content": "Dynamic voice persona interchange across Round Table Knights via Reya Universal Fabric",
     "vfs_path": "vfs://worldtree/knights/sir_sonus/tether.json",
     "mempalace_wing": "WING_WORLDTREE_SIR_SONUS",
     "open_viking_tether": "open_viking://worldtree/sir_sonus",
-    "updated_at": "2026-09-22T14:38:42.950740+00:00"
+    "updated_at": "2026-10-04T23:48:32.313112+00:00"
   },
   {
     "knight_id": "SIR_SONUS",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for SIR_SONUS",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_sonus\",\n  \"session_id\": \"sess_knight_sir_sonus\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//REYA_CHANNEL switch to Sir Boris please",
+    "content": "Dynamic voice persona interchange across Round Table Knights via Reya Universal Fabric",
     "vfs_path": "vfs://worldtree/knights/sir_sonus/tether.json",
     "mempalace_wing": "WING_WORLDTREE_SIR_SONUS",
     "open_viking_tether": "open_viking://worldtree/sir_sonus",
-    "updated_at": "2026-09-22T14:38:41.383932+00:00"
-  },
-  {
-    "knight_id": "SIR_SONUS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for SIR_SONUS",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_sonus\",\n  \"session_id\": \"sess_knight_sir_sonus\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
-    "vfs_path": "vfs://worldtree/knights/sir_sonus/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_SONUS",
-    "open_viking_tether": "open_viking://worldtree/sir_sonus",
-    "updated_at": "2026-09-22T14:37:01.904395+00:00"
-  },
-  {
-    "knight_id": "SIR_SONUS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for SIR_SONUS",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_sonus\",\n  \"session_id\": \"sess_knight_sir_sonus\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
-    "vfs_path": "vfs://worldtree/knights/sir_sonus/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_SONUS",
-    "open_viking_tether": "open_viking://worldtree/sir_sonus",
-    "updated_at": "2026-09-22T14:37:00.263597+00:00"
-  },
-  {
-    "knight_id": "SIR_SONUS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for SIR_SONUS",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_sonus\",\n  \"session_id\": \"sess_knight_sir_sonus\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
-    "vfs_path": "vfs://worldtree/knights/sir_sonus/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_SONUS",
-    "open_viking_tether": "open_viking://worldtree/sir_sonus",
-    "updated_at": "2026-09-22T14:35:53.732398+00:00"
-  },
-  {
-    "knight_id": "SIR_SONUS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for SIR_SONUS",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_sonus\",\n  \"session_id\": \"sess_knight_sir_sonus\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
-    "vfs_path": "vfs://worldtree/knights/sir_sonus/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_SONUS",
-    "open_viking_tether": "open_viking://worldtree/sir_sonus",
-    "updated_at": "2026-09-22T14:35:51.619015+00:00"
+    "updated_at": "2026-10-04T23:48:06.355624+00:00"
   },
   {
     "knight_id": "SIR_SONUS",
@@ -124,15 +80,6 @@
       "Master_Compendium.md",
       "system_instruction.md"
     ],
-    "five_pillars": [
-      "Apollo (God of Harmony)",
-      "Pyotr Tchaikovsky (Orchestral Sweep)",
-      "Robert Moog (Synthesizer Architect)",
-      "Hermann von Helmholtz (Acoustic Science)",
-      "Claude Debussy (Timbre Shifter)"
-    ],
-    "law_of_non_reproducibility": "ENFORCED",
-    "rpg_progression": "Glass Observatory Level & XP Matrix",
     "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "mesh_nodes": [
       "cybertronia",
@@ -141,6 +88,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-21T23:00:51.689974+00:00"
+    "updated_at": "2026-09-20T00:29:47.551119+00:00"
   }
 ]

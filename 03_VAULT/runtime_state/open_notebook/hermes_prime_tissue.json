@@ -2,179 +2,13 @@
   {
     "knight_id": "HERMES_PRIME",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for HERMES_PRIME",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_prime\",\n  \"session_id\": \"sess_knight_hermes_prime\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//BITROUTER status",
+    "content": "{\"detail\": \"VFS state realigned with PhialEngine\", \"action\": \"sync_vfs_workspace\", \"files\": [{\"name\": \"harness.md\", \"bytes\": 999, \"mtime\": \"2026-09-25T14:51:33.749804+00:00\"}, {\"name\": \"merlin_notebook_blend.md\", \"bytes\": 2221, \"mtime\": \"2026-09-25T14:51:33.749804+00:00\"}, {\"name\": \"skills.md\", \"bytes\": 863, \"mtime\": \"2026-09-25T14:51:33.749804+00:00\"}, {\"name\": \"soul.md\", \"bytes\": 2886, \"mtime\": \"2026-09-25T14:51:33.749804+00:00\"}, {\"name\": \"spark.md\", \"bytes\": 1259, \"mtime\": \"2026-09-25T14:51:33.761964+00:00\"}], \"scaffold_present\": [\"soul.md\", \"spark.md\", \"harness.md\", \"skills.md\", \"merlin_notebook_blend.md\"], \"missing\": [], \"status\": \"SYNCED\"}",
     "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
     "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
     "open_viking_tether": "open_viking://worldtree/hermes_prime",
-    "updated_at": "2026-09-23T16:02:57.362882+00:00"
-  },
-  {
-    "knight_id": "HERMES_PRIME",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for HERMES_PRIME",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_prime\",\n  \"session_id\": \"sess_knight_hermes_prime\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
-    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
-    "open_viking_tether": "open_viking://worldtree/hermes_prime",
-    "updated_at": "2026-09-23T16:02:56.563674+00:00"
-  },
-  {
-    "knight_id": "HERMES_PRIME",
-    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "multivoice_router_engine",
-    "title": "Multivoice-Router Telemetry, Realtime Voice & RAG Engine",
-    "content": "{\"status\": \"INTEGRATED\", \"subsystem\": \"Multivoice-Router\", \"guardian\": \"SIR_HEIMDALL\", \"hypervisor\": \"HERMES_PRIME\", \"port\": 7680, \"upstream_repo\": \"https://github.com/Cyberdad247/Multivoice-router.git\", \"api_local\": \"http://127.0.0.1:7680\", \"api_mesh_vps\": \"http://100.71.218.75:7680\", \"features\": [\"gemini_3_1_flash_tts\", \"lmcache_affinity\", \"colibri_moe\", \"omniroute_compression\", \"tailscale_mesh\", \"superpowers_skills\", \"cloudbrain_notebook_sync\"]}",
-    "vfs_path": "vfs://worldtree/knights/hermes_prime/multivoice_router.json",
-    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
-    "open_viking_tether": "open_viking://worldtree/hermes_prime/multivoice",
-    "created_at": "2026-09-14T20:10:00.000000+00:00",
-    "updated_at": "2026-09-14T20:10:00.000000+00:00"
-  },
-  {
-    "knight_id": "HERMES_PRIME",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for HERMES_PRIME",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_prime\",\n  \"session_id\": \"sess_knight_hermes_prime\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
-    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
-    "open_viking_tether": "open_viking://worldtree/hermes_prime",
-    "updated_at": "2026-09-23T16:02:56.374981+00:00"
-  },
-  {
-    "knight_id": "HERMES_PRIME",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for HERMES_PRIME",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_prime\",\n  \"session_id\": \"sess_knight_hermes_prime\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
-    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
-    "open_viking_tether": "open_viking://worldtree/hermes_prime",
-    "updated_at": "2026-09-22T14:39:41.926559+00:00"
-  },
-  {
-    "knight_id": "HERMES_PRIME",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for HERMES_PRIME",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_prime\",\n  \"session_id\": \"sess_knight_hermes_prime\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
-    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
-    "open_viking_tether": "open_viking://worldtree/hermes_prime",
-    "updated_at": "2026-09-22T14:39:40.322163+00:00"
-  },
-  {
-    "knight_id": "HERMES_PRIME",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for HERMES_PRIME",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_prime\",\n  \"session_id\": \"sess_knight_hermes_prime\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
-    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
-    "open_viking_tether": "open_viking://worldtree/hermes_prime",
-    "updated_at": "2026-09-22T14:39:39.834937+00:00"
-  },
-  {
-    "knight_id": "HERMES_PRIME",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for HERMES_PRIME",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_prime\",\n  \"session_id\": \"sess_knight_hermes_prime\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
-    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
-    "open_viking_tether": "open_viking://worldtree/hermes_prime",
-    "updated_at": "2026-09-22T14:38:43.206703+00:00"
-  },
-  {
-    "knight_id": "HERMES_PRIME",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for HERMES_PRIME",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_prime\",\n  \"session_id\": \"sess_knight_hermes_prime\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
-    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
-    "open_viking_tether": "open_viking://worldtree/hermes_prime",
-    "updated_at": "2026-09-22T14:38:41.622987+00:00"
-  },
-  {
-    "knight_id": "HERMES_PRIME",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for HERMES_PRIME",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_prime\",\n  \"session_id\": \"sess_knight_hermes_prime\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
-    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
-    "open_viking_tether": "open_viking://worldtree/hermes_prime",
-    "updated_at": "2026-09-22T14:38:41.140465+00:00"
-  },
-  {
-    "knight_id": "HERMES_PRIME",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for HERMES_PRIME",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_prime\",\n  \"session_id\": \"sess_knight_hermes_prime\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
-    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
-    "open_viking_tether": "open_viking://worldtree/hermes_prime",
-    "updated_at": "2026-09-22T14:37:02.167060+00:00"
-  },
-  {
-    "knight_id": "HERMES_PRIME",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for HERMES_PRIME",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_prime\",\n  \"session_id\": \"sess_knight_hermes_prime\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
-    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
-    "open_viking_tether": "open_viking://worldtree/hermes_prime",
-    "updated_at": "2026-09-22T14:37:00.506962+00:00"
-  },
-  {
-    "knight_id": "HERMES_PRIME",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for HERMES_PRIME",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_prime\",\n  \"session_id\": \"sess_knight_hermes_prime\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
-    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
-    "open_viking_tether": "open_viking://worldtree/hermes_prime",
-    "updated_at": "2026-09-22T14:37:00.008065+00:00"
-  },
-  {
-    "knight_id": "HERMES_PRIME",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for HERMES_PRIME",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_prime\",\n  \"session_id\": \"sess_knight_hermes_prime\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
-    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
-    "open_viking_tether": "open_viking://worldtree/hermes_prime",
-    "updated_at": "2026-09-22T14:35:53.853052+00:00"
-  },
-  {
-    "knight_id": "HERMES_PRIME",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for HERMES_PRIME",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_prime\",\n  \"session_id\": \"sess_knight_hermes_prime\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
-    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
-    "open_viking_tether": "open_viking://worldtree/hermes_prime",
-    "updated_at": "2026-09-22T14:35:52.039795+00:00"
-  },
-  {
-    "knight_id": "HERMES_PRIME",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho L4 embedding for HERMES_PRIME",
-    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_prime\",\n  \"session_id\": \"sess_knight_hermes_prime\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
-    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
-    "open_viking_tether": "open_viking://worldtree/hermes_prime",
-    "updated_at": "2026-09-22T14:35:51.123817+00:00"
+    "updated_at": "2026-10-06T16:57:51.755128+00:00"
   },
   {
     "knight_id": "HERMES_PRIME",
@@ -191,15 +25,6 @@
       "Master_Compendium.md",
       "system_instruction.md"
     ],
-    "five_pillars": [
-      "Hermes (Messenger of Olympus)",
-      "Benjamin Franklin (Practical Synthesizer)",
-      "Eratosthenes (Global Mapping)",
-      "Norbert Wiener (Cybernetics)",
-      "Blaise Pascal (Calculating Genius)"
-    ],
-    "law_of_non_reproducibility": "ENFORCED",
-    "rpg_progression": "Glass Observatory Level & XP Matrix",
     "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "mesh_nodes": [
       "cybertronia",
@@ -208,6 +33,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-21T23:00:51.689974+00:00"
+    "updated_at": "2026-09-20T00:29:47.551119+00:00"
   }
 ]

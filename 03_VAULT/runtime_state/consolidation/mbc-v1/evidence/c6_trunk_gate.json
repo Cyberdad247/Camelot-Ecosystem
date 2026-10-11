@@ -1,0 +1,298 @@
+{
+ "phase": "C6-TRUNK-MERGE-VERIFY",
+ "run": "mbc-v1",
+ "version": "v2-guarded",
+ "timestamp": "2026-09-27T12:16:54-0400",
+ "state": "main @ 98fc51ea (mbc-v1 port 9d30f239 + origin/main b3f846cc reconciled)",
+ "baseline": "evidence/c1_baseline.json (ef7603b6 pre-port, unified worktree)",
+ "criterion": "zero new failures vs baseline (rc-class AND pytest/npm_test error-set); guards abort on file loss",
+ "node_modules_junctions": [
+  "root: ok",
+  "apps/bifrost: ok",
+  "apps/camelot-vps-hub: ok",
+  "apps/excalibur-cmd-1: ok",
+  "apps/pwa: ok",
+  "packages/db: ok",
+  "packages/multivoice-router: ok"
+ ],
+ "steps": [
+  {
+   "id": "npm_install",
+   "command": "C:\\Windows\\System32\\cmd.exe /c npm install --no-audit --no-fund",
+   "rc": 1,
+   "duration_s": 17.4,
+   "tail": "npm error For a full report see: | npm error C:\\Users\\vizio\\AppData\\Local\\npm-cache\\_logs\\2026-09-27T16_13_05_293Z-eresolve-report.txt | npm error A complete log of this run can be found in: C:\\Users\\vizio\\AppData\\Local\\npm-cache\\_logs\\2026-09-27T16_13_05_293Z-debug-0.log",
+   "status": "fail",
+   "log": "logs/c6_npm_install.log",
+   "guard": "ok",
+   "signature": {
+    "eresolve_peers": [],
+    "eresolve": true
+   }
+  },
+  {
+   "id": "npm_lint",
+   "command": "C:\\Windows\\System32\\cmd.exe /c npm run lint",
+   "rc": 1,
+   "duration_s": 11.0,
+   "tail": "\u00d7 Some errors were emitted while running checks.",
+   "status": "fail",
+   "log": "logs/c6_npm_lint.log",
+   "guard": "ok",
+   "signature": {
+    "error_count": 6329
+   }
+  },
+  {
+   "id": "npm_typecheck",
+   "command": "C:\\Windows\\System32\\cmd.exe /c npm run typecheck",
+   "rc": 134,
+   "duration_s": 5.1,
+   "tail": "WARNING  Unable to calculate transitive closures: Workspace 'apps/spatial-hud' not found in lockfile. | mcp-query#typecheck:  ERROR  command (C:\\Users\\vizio\\camelot-wt\\trunk\\apps\\mcp-query) C:\\Program Files\\nodejs\\node.exe C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js run typecheck exited (134) | ERROR  run failed: command  exited (134)",
+   "status": "fail",
+   "log": "logs/c6_npm_typecheck.log",
+   "guard": "ok",
+   "signature": {
+    "errors": [],
+    "failing_packages": [
+     "mcp-query"
+    ]
+   }
+  },
+  {
+   "id": "npm_test",
+   "command": "C:\\Windows\\System32\\cmd.exe /c npm run test -- --run --minWorkers=1 --maxWorkers=2",
+   "rc": 1,
+   "duration_s": 75.4,
+   "tail": "\u001b[31m\u001b[2m\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af[3/3]\u23af\u001b[22m\u001b[39m",
+   "status": "fail",
+   "log": "logs/c6_npm_test.log",
+   "guard": "ok",
+   "signature": {
+    "tests_summary": "218 passed | 18 skipped (236)",
+    "load_errors": 2,
+    "failed_test_files": [
+     "apps/bifrost/src/server.test.ts",
+     "packages/db/src/ledgerValidator.test.ts"
+    ]
+   }
+  },
+  {
+   "id": "pytest_canonical",
+   "command": "C:\\Users\\vizio\\CAMELOT_OS\\.venv\\Scripts\\python.exe -m pytest tests 03_VAULT/training/configs/tests -q",
+   "rc": 2,
+   "duration_s": 20.0,
+   "tail": "1 error in 14.77s | --- stderr ---",
+   "status": "fail",
+   "log": "logs/c6_pytest_canonical.log",
+   "guard": "ok",
+   "signature": {
+    "collection_errors": [
+     "tests/test_health_check.py"
+    ]
+   }
+  },
+  {
+   "id": "cargo_check",
+   "command": "cargo check --quiet",
+   "rc": 101,
+   "duration_s": 17.2,
+   "tail": "Some errors have detailed explanations: E0405, E0412, E0425, E0463, E0531, E0786. | For more information about an error, try `rustc --explain E0405`. | error: could not compile `bitflags` (lib) due to 76 previous errors",
+   "status": "fail",
+   "log": "logs/c6_cargo_check.log",
+   "guard": "ok",
+   "signature": {
+    "errors": [
+     "error: could not compile `windows-targets` (lib)",
+     "error: could not compile `slab` (lib)",
+     "error[E0786]: found invalid metadata files for crate `alloc` which `std` depends on"
+    ]
+   }
+  },
+  {
+   "id": "boot_probe",
+   "command": "C:\\Users\\vizio\\CAMELOT_OS\\.venv\\Scripts\\python.exe bin/awaken.py --status --json",
+   "rc": 1,
+   "duration_s": 82.1,
+   "tail": "--- stderr --- | [KERNEL] Antigravity Safe I/O Active.",
+   "status": "fail",
+   "log": "logs/c6_boot_probe.log",
+   "guard": "ok",
+   "signature": {
+    "failed_probes": [
+     "CLIProxyAPI   :8080"
+    ]
+   }
+  }
+ ],
+ "comparison": [
+  {
+   "id": "npm_install",
+   "baseline_rc": 1,
+   "baseline_status": "fail",
+   "c6_rc": 1,
+   "c6_status": "fail",
+   "verdict": "same-class fail as baseline",
+   "baseline_signature": {
+    "eresolve_peers": [],
+    "eresolve": true
+   },
+   "c6_signature": {
+    "eresolve_peers": [],
+    "eresolve": true
+   },
+   "signature_regression": null,
+   "baseline_tail": "",
+   "c6_tail": "npm error For a full report see: | npm error C:\\Users\\vizio\\AppData\\Local\\npm-cache\\_logs\\2026-09-27T16_13_05_293Z-eresolve-report.txt | npm error A complete log of this run can be found in: C:\\Users\\"
+  },
+  {
+   "id": "npm_lint",
+   "baseline_rc": 1,
+   "baseline_status": "fail",
+   "c6_rc": 1,
+   "c6_status": "fail",
+   "verdict": "same-class fail as baseline",
+   "baseline_signature": {
+    "error_count": 5984
+   },
+   "c6_signature": {
+    "error_count": 6329
+   },
+   "signature_regression": null,
+   "baseline_tail": "Found 5984 errors.",
+   "c6_tail": "\u00d7 Some errors were emitted while running checks."
+  },
+  {
+   "id": "npm_typecheck",
+   "baseline_rc": 134,
+   "baseline_status": "fail",
+   "c6_rc": 134,
+   "c6_status": "fail",
+   "verdict": "same-class fail as baseline",
+   "baseline_signature": {
+    "errors": [],
+    "failing_packages": [
+     "pwa"
+    ]
+   },
+   "c6_signature": {
+    "errors": [],
+    "failing_packages": [
+     "mcp-query"
+    ]
+   },
+   "signature_regression": null,
+   "baseline_tail": "Failed:    pwa#typecheck",
+   "c6_tail": "WARNING  Unable to calculate transitive closures: Workspace 'apps/spatial-hud' not found in lockfile. | mcp-query#typecheck:  ERROR  command (C:\\Users\\vizio\\camelot-wt\\trunk\\apps\\mcp-query) C:\\Program"
+  },
+  {
+   "id": "npm_test",
+   "baseline_rc": 1,
+   "baseline_status": "fail",
+   "c6_rc": 1,
+   "c6_status": "fail",
+   "verdict": "same-class fail as baseline",
+   "baseline_signature": {
+    "tests_summary": "160 passed | 17 skipped (177)",
+    "load_errors": 3,
+    "failed_test_files": [
+     "apps/bifrost/src/server.test.ts",
+     "apps/pwa/src/lib/voice/frames-route.test.ts",
+     "packages/db/src/ledgerValidator.test.ts"
+    ]
+   },
+   "c6_signature": {
+    "tests_summary": "218 passed | 18 skipped (236)",
+    "load_errors": 2,
+    "failed_test_files": [
+     "apps/bifrost/src/server.test.ts",
+     "packages/db/src/ledgerValidator.test.ts"
+    ]
+   },
+   "signature_regression": null,
+   "baseline_tail": "\u001b[2m   Duration \u001b[22m 54.45s\u001b[2m (transform 1.67s, setup 0ms, collect 22.31s, tests 3.91s, environment 42.26s, prepare 17.31s)\u001b[22m",
+   "c6_tail": "\u001b[31m\u001b[2m\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af[3/3]\u23af\u001b[22m\u001b[39m"
+  },
+  {
+   "id": "pytest_canonical",
+   "baseline_rc": 2,
+   "baseline_status": "fail",
+   "c6_rc": 2,
+   "c6_status": "fail",
+   "verdict": "same-class fail as baseline",
+   "baseline_signature": {
+    "collection_errors": [
+     "tests/test_health_check.py",
+     "tests/test_hermes_prime_freshness.py"
+    ]
+   },
+   "c6_signature": {
+    "collection_errors": [
+     "tests/test_health_check.py"
+    ]
+   },
+   "signature_regression": null,
+   "baseline_tail": "2 errors in 33.51s",
+   "c6_tail": "1 error in 14.77s | --- stderr ---"
+  },
+  {
+   "id": "cargo_check",
+   "baseline_rc": 101,
+   "baseline_status": "fail",
+   "c6_rc": 101,
+   "c6_status": "fail",
+   "verdict": "same-class fail as baseline",
+   "baseline_signature": {
+    "errors": [
+     "error[E0786]: found invalid metadata files for crate `alloc` which `std` depends on\r",
+     "error[E0786]: found invalid metadata files for crate `hashbrown` which `std` depends on\r",
+     "error[E0463]: can't find crate for `std`\r"
+    ]
+   },
+   "c6_signature": {
+    "errors": [
+     "error: could not compile `windows-targets` (lib)",
+     "error: could not compile `slab` (lib)",
+     "error[E0786]: found invalid metadata files for crate `alloc` which `std` depends on"
+    ]
+   },
+   "signature_regression": null,
+   "baseline_tail": "",
+   "c6_tail": "Some errors have detailed explanations: E0405, E0412, E0425, E0463, E0531, E0786. | For more information about an error, try `rustc --explain E0405`. | error: could not compile `bitflags` (lib) due to"
+  },
+  {
+   "id": "boot_probe",
+   "baseline_rc": 1,
+   "baseline_status": "fail",
+   "c6_rc": 1,
+   "c6_status": "fail",
+   "verdict": "same-class fail as baseline",
+   "baseline_signature": {
+    "failed_probes": [
+     "CLIProxyAPI   :8080",
+     "EXCALIBUR Pre-Flight",
+     "Heimdall Bifrost Governance",
+     "Hermes OmniRoute",
+     "Knight Config Sync",
+     "Local LT Memory:8200",
+     "Local Qdrant Engine",
+     "OpenCodex    :10100"
+    ]
+   },
+   "c6_signature": {
+    "failed_probes": [
+     "CLIProxyAPI   :8080"
+    ]
+   },
+   "signature_regression": null,
+   "baseline_tail": "}",
+   "c6_tail": "--- stderr --- | [KERNEL] Antigravity Safe I/O Active."
+  }
+ ],
+ "new_failures": [],
+ "gate": "PASS",
+ "aborted_after": null,
+ "free_ram_gb": 1.35,
+ "evidence_class": "confirmed",
+ "reviewer": "SIR_FORGE"
+}

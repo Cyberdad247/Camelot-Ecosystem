@@ -1,4 +1,4 @@
-export type VoiceEngine = 'vibevoice_realtime' | 'kokoro_onnx' | 'piper' | 'gemini_live' | 'suno' | 'udio' | 'notebooklm_audio' | 'stub';
+export type VoiceEngine = 'sanotts' | 'vibevoice_realtime' | 'kokoro_onnx' | 'piper' | 'gemini_live' | 'suno' | 'udio' | 'notebooklm_audio' | 'stub';
 export type VoiceMode = 'single' | 'council' | 'podcast' | 'automation';
 
 export interface VoiceCloningConfig {

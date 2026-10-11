@@ -1,0 +1,114 @@
+{
+ "phase": "C4-REMEDIATION",
+ "run": "mbc-v1",
+ "timestamp": "2026-09-27T02:55:00-0400",
+ "state": "feat/unified-v1000 @ 247e8bd7",
+ "entries": [
+  {
+   "id": "perf-absorb-record",
+   "scope": "C3-T05 gate essentials (operator-approved: 'Absorb gate essentials')",
+   "absorbed_from": "2ec1508a (perf/optimize-get-all-data-9582424866941690986)",
+   "files": [
+    "squires/ghost.py",
+    "squires/colony.py",
+    "scripts/check_bifrost_audit.py",
+    "scripts/check_graft_graph.py",
+    "tests/test_squires_ghost.py",
+    "tests/test_squires_colony_cli.py",
+    ".pre-commit-config.yaml",
+    "AGENTS.md (base + perf graft block a1078027, +52 lines, applied via patch)"
+   ],
+   "skipped": {
+    ".github/workflows/verify_os.yml": "perf copy stale — base received dependabot checkout@v7/setup-python@v7 bumps post-fork; perf never touched it post-fork; keep base",
+    "bin/awaken.py": "perf delta = base MINUS 45 lines; base has newer awaken fix 4c6545ab; keep base"
+   },
+   "validation": "bifrost-audit hook Passed; 22/22 squires tests passed; staged=1407; committed in 247e8bd7",
+   "evidence_class": "confirmed"
+  },
+  {
+   "id": "orphan-test-module-fix",
+   "scope": "C4 pytest: 4 new collection errors vs c1_baseline",
+   "cause": "cross-subsystem winner mismatch: tests/ winner = refs/remotes/origin/main (brings tests/control_plane/{test_bifrost_cli,test_webhook_deploy,test_webhook_receiver_server,test_cartridge_crucible}); control_plane/ winner = origin/claude/camelot-os-repo-audit-4crgsg (lacks their implementation modules)",
+   "source_ref": "refs/remotes/origin/main (tests/ winner — same documented pattern as perf-absorb)",
+   "files_added": [
+    "control_plane/cli/bifrost_cmd.py",
+    "control_plane/cli/contracts_cmd.py",
+    "control_plane/infra/cartridge_crucible.py",
+    "control_plane/infra/webhook_deploy.py",
+    "control_plane/infra/webhook_server.py"
+   ],
+   "files_modified_to_origin_main": [
+    "control_plane/cli/constants.py",
+    "control_plane/cli/dispatch.py",
+    "control_plane/cli/handlers.py",
+    "control_plane/cli/knight_hud.py",
+    "control_plane/cli/parser.py",
+    "control_plane/cli/pipeline_cmd.py",
+    "control_plane/infra/vps_github_webhook.py"
+   ],
+   "deps_verified_in_head": [
+    "control_plane/dispatch/bifrost_gateway.py",
+    "control_plane/dispatch/omniroute_policies.py",
+    "control_plane/infra/z3_verify.py (INVARIANTS, ground_effects)",
+    "control_plane/infra/__init__.py",
+    "control_plane/infra/codex_integration.py"
+   ],
+   "validation": "4 orphan test files: 45 passed, 1 skipped (3.47s); full canonical pytest: exactly the 2 baseline collection errors (test_health_check, test_hermes_prime_freshness), rc=2, 25.88s — zero new failures"
+  },
+  {
+   "id": "worktree-loss-incident",
+   "scope": "C4 first battery run (02:19:25–02:23:27)",
+   "damage": [
+    "worktree .git pointer file deleted",
+    ".git/worktrees/unified admin dir deleted (main gitdir)",
+    "6672 of 7919 tracked files deleted from disk (partial: docs/, apps/, control_plane/, bin/, .agent/, 01_KERNEL/, harness/, integration/, data/ fully removed; tests/, vfs/, scripts/, squires/ partially)"
+   ],
+   "timeline": {
+    "battery_window": "02:19:25 npm_install … 02:23:27 boot_probe end",
+    "wave_1": "02:22:58–02:22:59 children removed under tests/, vfs/, scripts/, squires/ (inside boot_probe window; python service spawns at 02:23:14–02:23:18)",
+    "wave_2": "≈02:39:58 root-level dir/.git removal (discovered during diagnostics)"
+   },
+   "suspects": [
+    "boot_probe window: awaken spawned service fleet (Kitten TTS PID 36128 etc. observed); symbiont logged purged=122 pruned_worktrees=0 — purge implementation in control_plane/infra/symbiotic_maintenance.py not yet audited",
+    "no git operations in main reflog during window (last reflog entry 2026-09-26 23:43:37)",
+    "no source caller of `git worktree remove|prune` found in bin/, scripts/, squires/, control_plane/, harness/, temp mbc scripts, .git/hooks"
+   ],
+   "recovery": [
+    "admin dir recreated manually (HEAD=ref:refs/heads/feat/unified-v1000, gitdir, commondir) + .git pointer file written",
+    "git worktree repair rc=0 (admin now: HEAD/gitdir/commondir/index/logs/ORIG_HEAD)",
+    "git restore --worktree --source=HEAD -- . rc=0",
+    "post-restore status = 0 entries — byte-exact to 247e8bd7",
+    "branch ref feat/unified-v1000 untouched throughout (commit 247e8bd7 safe)"
+   ],
+   "guard": "mbc_c4_battery.py v2 aborts after any step if: .git pointer missing, HEAD moved, or deletion (D) count > 0",
+   "evidence_class": "confirmed (damage/recovery); hypothesis (actor — boot_probe window correlation)",
+   "root_cause": {
+    "confirmed": "control_plane/infra/symbiotic_maintenance.py::_prune_git_worktrees (IDENTICAL to base ef7603b6, not port-introduced)",
+    "mechanism": "boot_probe -> symbiont maintenance runs git worktree remove --force on any worktree whose path contains /.worktrees, .claude/worktrees, or (phase AND -wt suffix); our planned worktree at .worktrees/consolidation/unified matched; remove destroys pointer+admin+content then returns NONZERO (in-use files) so pruned_worktrees logged 0; line 487 would ALSO git branch -D <branch> on a successful remove",
+    "second_occurrence": "C4 guarded battery run 2: boot_probe step guard caught missing .git pointer, D=0 during step, but admin+content were destroyed after guard evaluation (restored again, rc=0, porcelain=0)"
+   },
+   "fix": "git worktree move -> C:/Users/vizio/camelot-wt/unified (outside all transient predicates: no /.worktrees, no .claude/worktrees, no phase*-wt); pointer+admin cross-updated; status clean @ ec29d1eb; product code unchanged (transient reaping is intentional for agent junk worktrees)"
+  },
+  {
+   "id": "turbo-exe-repair",
+   "cause": "turbo.exe truncated at 31,717,402 bytes during failed npm install (C4 first run) → typecheck fail 'os error 193'",
+   "versions": "worktree turbo=2.11.4, main checkout=2.10.10 (copy from main would version-mismatch)",
+   "fix": "npm pack @turbo/windows-64@2.11.4 standalone → extracted bin/turbo.exe = 46,002,176 bytes copied into worktree node_modules/@turbo/windows-64/bin/turbo.exe"
+  },
+  {
+   "timestamp": "2026-09-27T07:56:44+00:00",
+   "id": "pwa-winner-mismatch",
+   "class": "winner-mismatch",
+   "finding": "vitest diagnosis (throttled --minWorkers=1 --maxWorkers=2) showed 3 failing test files beyond baseline: (a) apps/excalibur-cmd-1/App.test.ts = node_modules env damage (husk dirs for nested @testing-library/jest-dom/node_modules/dom-accessibility-api and entirely missing @testing-library/dom, @react-spring/*, react-router, prop-types et al — npm-crash leftovers; healed from main-checkout donor, 15+ packages); (b) cartridgeGovernance.test.ts + biometricCameraAuth.test.ts = cross-winner content mismatch: tests+referralBy+id use VASHON_ARCH but ported TenantContext handle said VASHAWN_ARCH (kickbox-audio rebrand), while kba-services/main & kba-v3/main are internally consistent at VASHON_ARCH; root metadata.json was camelot-vps's (requestFramePermissions: []) though apps/camelot-vps-hub/metadata.json already carries the same VPS-Hub content — tests-source (kba lineage) needs [camera, microphone].",
+   "fix": "TenantContext.tsx: handle VASHAWN_ARCH->VASHON_ARCH + customTokens TOKEN_VASHAWN_ARCH->TOKEN_VASHON_ARCH (display branding 'VaShawn...' intentionally untouched; LEGAL/docs VASHAWN O. HEAD = person name, untouched). metadata.json: restored kba-services/main version (camera+microphone). node_modules: donor-copied missing packages. Post-fix diagnosis: 2 failed files = exactly baseline's load-error pair (../generated/client, ./generated/client), 0 assertion failures, 218 passed.",
+   "evidence": [
+    "logs/c4_npm_test.log (post-fix diagnosis run)",
+    "git diff 247e8bd7..HEAD -- apps/pwa/src/context/TenantContext.tsx metadata.json",
+    "ref cross-check: refs/remotes/{kickbox-audio,kba-services,kba-v3}/main TenantContext handle + metadata.json"
+   ],
+   "deviation_note": "battery npm_test step now runs --minWorkers=1 --maxWorkers=2 (host free RAM fluctuates 0.4-1.9GB; unthrottled vitest flapped rc134 OOM vs real rc1 run). Failing-file signature comparable; rc class matches baseline rc=1."
+  }
+ ],
+ "evidence_class": "confirmed",
+ "reviewer": "SIR_FORGE"
+}

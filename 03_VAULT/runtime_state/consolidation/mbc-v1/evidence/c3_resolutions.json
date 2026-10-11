@@ -1,0 +1,373 @@
+{
+ "phase": "C3-T02-manual-resolution",
+ "queue_size": 52,
+ "sides": {
+  "ours": 45,
+  "theirs": 6,
+  "hand": 1
+ },
+ "extra_governance_reverts": {
+  "AGENTS.md": "winner rewrites agent contract to AI-Studio bootstrap (removes shell/commands/layout/hard-constraints); trunk contract authoritative",
+  "Cargo.toml": "winner workspace lists VPS-hub crates (apps/epoch-fencer etc. not ported) and drops lints/profiles; would break cargo for 24 trunk members",
+  "Makefile": "winner replaces local dev-up/status/smoke runbook with hub deployment build; AGENTS documented commands depend on trunk targets",
+  "CHANGELOG.md": "winner replaces 136-line trunk history with 19-line hub-only changelog; history must be preserved",
+  "02_FORGE/KINETIC_ARMORY/edge-router/edge-router.js": "generated emit: reformatted checkout verified DRIFT (parity rc=1); restore proven trunk pair",
+  "02_FORGE/KINETIC_ARMORY/edge-router/edge-router.ts": "generated-emit source half: reformat abandoned to keep regen parity (semantic-neutral)"
+ },
+ "resolutions": [
+  {
+   "path": ".env.example",
+   "ref": "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "side": "ours",
+   "rationale": "divergent env-template eras; trunk covers current monorepo surface"
+  },
+  {
+   "path": "package.json",
+   "ref": "refs/remotes/camelot-vps/cloudbrain-prod-hardening",
+   "side": "ours",
+   "rationale": "winner is react-example scaffold; trunk is sovereign-system workspace"
+  },
+  {
+   "path": "01_KERNEL/memory/mempalace_l2.py",
+   "ref": "refs/remotes/origin/fix/ruff-530-manual",
+   "side": "ours",
+   "rationale": "winner reintroduces hardcoded MEMPALACE_SECRET fallback + loses canonical framing; security regression"
+  },
+  {
+   "path": "02_FORGE/KINETIC_ARMORY/omnivoice-router/omnivoice-router.js",
+   "ref": "refs/remotes/origin/fix/lint-format-pass",
+   "side": "ours",
+   "rationale": "generated emit pair: structural parity verified PASS (rc=0) with trunk .js + staged .ts"
+  },
+  {
+   "path": "02_FORGE/kinetic/vizio-router/src/router/policy.ts",
+   "ref": "refs/remotes/origin/fix/lint-format-pass",
+   "side": "ours",
+   "rationale": "winner = format-only reflow; trunk 5-line delta retained; lint debt non-blocking"
+  },
+  {
+   "path": "02_FORGE/kinetic/vizio-router/tests/router/policy.test.ts",
+   "ref": "refs/remotes/origin/fix/lint-format-pass",
+   "side": "ours",
+   "rationale": "winner = format-only reflow; same tests; lint debt non-blocking"
+  },
+  {
+   "path": "03_VAULT/Nano-Knights/buildDomTree.js",
+   "ref": "refs/remotes/origin/fix/lint-format-pass",
+   "side": "ours",
+   "rationale": "trunk +26 substantive vs winner format churn"
+  },
+  {
+   "path": "03_VAULT/runtime_state/kickbox_dual_mode_state.json",
+   "ref": "refs/remotes/origin/fix/lint-format-pass",
+   "side": "ours",
+   "rationale": "runtime state: trunk timestamp newer (22:26 vs 17:40), DYNAMIC_ONLINE current mode"
+  },
+  {
+   "path": "apps/bifrost/package.json",
+   "ref": "refs/remotes/kickbox-audio/main",
+   "side": "ours",
+   "rationale": "trunk prisma-generate/vitest build scripts are operative"
+  },
+  {
+   "path": "apps/pwa/src/components/Dashboard.tsx",
+   "ref": "refs/remotes/kickbox-audio/main",
+   "side": "ours",
+   "rationale": "trunk tab set (Tenants/Interphase/Excalibur/TwinBrain) is current shell"
+  },
+  {
+   "path": "apps/pwa/src/components/LakishaHUD.tsx",
+   "ref": "refs/remotes/kickbox-audio/main",
+   "side": "ours",
+   "rationale": "winner uses red/amber (design-law violation per HELIO_PATCH conformance); trunk unified voice core kept"
+  },
+  {
+   "path": "apps/pwa/src/components/hud/LakeishaVideoHUD.tsx",
+   "ref": "refs/remotes/kickbox-audio/main",
+   "side": "ours",
+   "rationale": "winner adds useTenant inside try/catch (rules-of-hooks hazard); trunk kept"
+  },
+  {
+   "path": "apps/pwa/src/components/tabs/KnightsTab.tsx",
+   "ref": "refs/remotes/kickbox-audio/main",
+   "side": "ours",
+   "rationale": "trunk SOVEREIGN_PERSONAS filters/character-sheet richer than winner card grid"
+  },
+  {
+   "path": "apps/pwa/src/components/tabs/OverviewTab.tsx",
+   "ref": "refs/remotes/kickbox-audio/main",
+   "side": "ours",
+   "rationale": "trunk keeps ExecutiveMetrics/SwarmRoster/CartridgeSlot panels; winner redesign deferred"
+  },
+  {
+   "path": "apps/pwa/tailwind.config.ts",
+   "ref": "refs/remotes/kickbox-audio/main",
+   "side": "theirs",
+   "rationale": "trunk delta 0; adjudicated winner (kickbox) additive palette + darkMode + broader content globs"
+  },
+  {
+   "path": "control_plane/__init__.py",
+   "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "side": "ours",
+   "rationale": "trunk meta-path finder required for legacy control_plane.<leaf> imports; winner deletes it"
+  },
+  {
+   "path": "control_plane/core/cartridge_manager.py",
+   "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "side": "ours",
+   "rationale": "trunk 7-cartridge roster (EAGLE/BIO_SWARM) vs winner 4; roster is current"
+  },
+  {
+   "path": "control_plane/core/forge_law.py",
+   "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "side": "theirs",
+   "rationale": "winner fixes depth-constant phantom-vault path via _paths.REPO_ROOT; on-disk state lives at repo-root vault"
+  },
+  {
+   "path": "control_plane/core/knight_agent.py",
+   "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "side": "ours",
+   "rationale": "trunk adds sir_agentis S4 + local-first model entries with invariant comments; winner lacks them"
+  },
+  {
+   "path": "control_plane/core/rbac_matrix.py",
+   "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "side": "theirs",
+   "rationale": "winner fail-closed RBACUnavailableError (silent {} rejected) + _paths.VAULT; 24-line test asserts load path only"
+  },
+  {
+   "path": "control_plane/infra/boot_sequence.py",
+   "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "side": "ours",
+   "rationale": "trunk +112 (snapshot TTL/serial phases/port probes/vps-hermes) supersedes winner +4"
+  },
+  {
+   "path": "control_plane/infra/cockpit.py",
+   "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "side": "theirs",
+   "rationale": "trunk delta = SPDX only; winner REPO_ROOT fix + explicit core.approval_grants import (file lives in core/)"
+  },
+  {
+   "path": "control_plane/infra/harness.py",
+   "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "side": "ours",
+   "rationale": "trunk queue-state/heartbeat/requeue-legacy features absent from winner"
+  },
+  {
+   "path": "control_plane/infra/heimdall_bifrost_governance.py",
+   "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "side": "ours",
+   "rationale": "trunk Hermes mesh roster + mesh_topology fallback richer; winner deletes both"
+  },
+  {
+   "path": "control_plane/infra/kinetic_loop.py",
+   "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "side": "ours",
+   "rationale": "winner provenance-complete contract change deferred (test-compat risk); trunk kept"
+  },
+  {
+   "path": "control_plane/infra/provenance.py",
+   "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "side": "hand",
+   "rationale": "trunk kept + hand-fix: vault default used parent.parent (phantom control_plane/03_VAULT) -> parents[2]"
+  },
+  {
+   "path": "control_plane/infra/z3_verify.py",
+   "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "side": "theirs",
+   "rationale": "winner fail-closed verifier + expanded hazard patterns (force-push spellings, no-\\b ledger match); z3 4.16.0 installed; tests assert PASS/BLOCK only"
+  },
+  {
+   "path": "control_plane/lady_m.py",
+   "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "side": "ours",
+   "rationale": "winner weakens SECRET_PATTERNS to bare strings; trunk compiled regex set kept"
+  },
+  {
+   "path": "control_plane/main.py",
+   "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "side": "ours",
+   "rationale": "trunk +54 (HEALTH_ROLLUP/cloud routing) supersedes; winner KNIGHT_ROUTES table deferred (recorded)"
+  },
+  {
+   "path": "control_plane/runes/camelot_cli.py",
+   "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "side": "ours",
+   "rationale": "trunk = refactored cli/ package shim; winner = pre-refactor 2892-line monolith"
+  },
+  {
+   "path": "packages/db/src/index.ts",
+   "ref": "refs/remotes/kickbox-audio/main",
+   "side": "ours",
+   "rationale": "trunk ./generated/client import matches db:generate flow; winner AI-Studio no-op Proxy mock rejected"
+  },
+  {
+   "path": "scripts/camelot-status.py",
+   "ref": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "side": "ours",
+   "rationale": "trunk heartbeat check kept; winner Holotable probe deferred (recorded)"
+  },
+  {
+   "path": "scripts/instantiate_heimdall_nb.py",
+   "ref": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "side": "ours",
+   "rationale": "notebook title delta unverified against live notebook; trunk kept"
+  },
+  {
+   "path": "scripts/nano_swarm_expand.py",
+   "ref": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "side": "theirs",
+   "rationale": "winner standalone fix: go test ./... + 300s timeout (trunk . misses packages)"
+  },
+  {
+   "path": "scripts/purge_memory.py",
+   "ref": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "side": "ours",
+   "rationale": "winner rename-only churn; trunk noqa lint intent kept"
+  },
+  {
+   "path": "scripts/update_cloudbrain_notebooks.py",
+   "ref": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "side": "ours",
+   "rationale": "winner from_storage() API unverified in pinned notebooklm lib; trunk manual token fetch kept"
+  },
+  {
+   "path": "scripts/verify_vfc_preflight.py",
+   "ref": "refs/remotes/origin/fix/morgana-brain-v2-tests-8163938566824385598",
+   "side": "ours",
+   "rationale": "trunk markers use live apps/pwa paths post purge; winner points at deleted 02_FORGE/apps/pwa-cockpit"
+  },
+  {
+   "path": "vfs/system_verification_v1000.json",
+   "ref": "refs/remotes/origin/fix/lint-format-pass",
+   "side": "ours",
+   "rationale": "record data: trunk v1000 MAX Compendium newer (08-25 vs 08-10)"
+  },
+  {
+   "path": "01_KERNEL/agora/Squires/Memory_Squire/routers/sources.py",
+   "ref": "refs/remotes/origin/fix/ruff-530-manual",
+   "side": "ours",
+   "rationale": "winner = B008/B904 lint cosmetics; trunk batch get_many + 404-consistency logic kept"
+  },
+  {
+   "path": "01_KERNEL/agora/Squires/Notebook_Brain/routers/sources.py",
+   "ref": "refs/remotes/origin/fix/ruff-530-manual",
+   "side": "ours",
+   "rationale": "winner = B008/B904 lint cosmetics; trunk batch lookup logic kept"
+  },
+  {
+   "path": "03_VAULT/runtime_state/cockpit_last_command.json",
+   "ref": "refs/remotes/origin/fix/lint-format-pass",
+   "side": "ours",
+   "rationale": "runtime state: trunk timestamp newer (09-23 vs 08-11)"
+  },
+  {
+   "path": "03_VAULT/runtime_state/nano_swarm_evidence/ukg_nano_omega_glyph_v1000_omni_codex.evidence.json",
+   "ref": "refs/remotes/origin/fix/lint-format-pass",
+   "side": "ours",
+   "rationale": "record data: trunk recorded_utc newer (08-31 vs 06-03)"
+  },
+  {
+   "path": "03_VAULT/training/configs/knight_character_sheets.json",
+   "ref": "refs/remotes/origin/fix/lint-format-pass",
+   "side": "ours",
+   "rationale": "trunk 56 knights vs winner 36; superset current roster"
+  },
+  {
+   "path": "apps/bifrost/src/server.ts",
+   "ref": "refs/remotes/kickbox-audio/main",
+   "side": "ours",
+   "rationale": "trunk operator BFF/sentinel/hermes/ENABLE_HELIOS opt-in gating kept; winner audio-variant gateway deferred"
+  },
+  {
+   "path": "apps/pwa/package.json",
+   "ref": "refs/remotes/kickbox-audio/main",
+   "side": "ours",
+   "rationale": "trunk = Next.js 14 workspace scripts; winner = Vite migration (architecture choice, HITL)"
+  },
+  {
+   "path": "apps/pwa/src/actions/propertyActions.ts",
+   "ref": "refs/remotes/kickbox-audio/main",
+   "side": "ours",
+   "rationale": "trunk @agent-native/core defineAction matches installed dep; winner inline shim deferred"
+  },
+  {
+   "path": "apps/pwa/src/components/3d/KineticBackground.tsx",
+   "ref": "refs/remotes/kickbox-audio/main",
+   "side": "ours",
+   "rationale": "trunk next/dynamic ssr:false mandated by PWA quirk; winner React.lazy is Vite-era"
+  },
+  {
+   "path": "apps/pwa/src/context/KoARealmProvider.tsx",
+   "ref": "refs/remotes/kickbox-audio/main",
+   "side": "ours",
+   "rationale": "trunk provider tree (SpatialBackground/LakeishaHUD) current; winner Tenant/Macro providers deferred"
+  },
+  {
+   "path": "apps/pwa/src/styles/globals.css",
+   "ref": "refs/remotes/kickbox-audio/main",
+   "side": "ours",
+   "rationale": "trunk light-mode + next/font contract kept; winner dock animations deferred (recorded)"
+  },
+  {
+   "path": "apps/pwa/tsconfig.json",
+   "ref": "refs/remotes/kickbox-audio/main",
+   "side": "ours",
+   "rationale": "trunk jsx=preserve + next plugin required by Next build; winner react-jsx is Vite-era"
+  },
+  {
+   "path": "control_plane/runes/runic_router.py",
+   "ref": "refs/remotes/origin/claude/camelot-os-repo-audit-4crgsg",
+   "side": "ours",
+   "rationale": "trunk //BIO_SWARM//REZERO handlers + hydrate flags + taxonomy import kept; winner pre-dates them"
+  },
+  {
+   "path": "vfs/worldtree_reconciled.json",
+   "ref": "refs/remotes/origin/fix/lint-format-pass",
+   "side": "ours",
+   "rationale": "record data: trunk 38 verified knights vs winner 10"
+  },
+  {
+   "path": "AGENTS.md",
+   "ref": "main (revert)",
+   "side": "ours",
+   "rationale": "winner rewrites agent contract to AI-Studio bootstrap (removes shell/commands/layout/hard-constraints); trunk contract authoritative"
+  },
+  {
+   "path": "Cargo.toml",
+   "ref": "main (revert)",
+   "side": "ours",
+   "rationale": "winner workspace lists VPS-hub crates (apps/epoch-fencer etc. not ported) and drops lints/profiles; would break cargo for 24 trunk members"
+  },
+  {
+   "path": "Makefile",
+   "ref": "main (revert)",
+   "side": "ours",
+   "rationale": "winner replaces local dev-up/status/smoke runbook with hub deployment build; AGENTS documented commands depend on trunk targets"
+  },
+  {
+   "path": "CHANGELOG.md",
+   "ref": "main (revert)",
+   "side": "ours",
+   "rationale": "winner replaces 136-line trunk history with 19-line hub-only changelog; history must be preserved"
+  },
+  {
+   "path": "02_FORGE/KINETIC_ARMORY/edge-router/edge-router.js",
+   "ref": "main (revert)",
+   "side": "ours",
+   "rationale": "generated emit: reformatted checkout verified DRIFT (parity rc=1); restore proven trunk pair"
+  },
+  {
+   "path": "02_FORGE/KINETIC_ARMORY/edge-router/edge-router.ts",
+   "ref": "main (revert)",
+   "side": "ours",
+   "rationale": "generated-emit source half: reformat abandoned to keep regen parity (semantic-neutral)"
+  },
+  {
+   "path": "control_plane/infra/provenance.py",
+   "ref": "trunk + hand-edit",
+   "side": "hand",
+   "rationale": "parent.parent resolved to control_plane/ (phantom 03_VAULT); parents[2] = repo root, matches _paths docstring bug class"
+  }
+ ]
+}

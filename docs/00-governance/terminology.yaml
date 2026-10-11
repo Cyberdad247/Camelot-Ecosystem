@@ -1,0 +1,40 @@
+# SPDX-License-Identifier: MIT
+# Camelot-OS Canonical Terminology & Machine-Readable Glossary (v4.1.0)
+# Reforged Baseline: CAMELOT-DOC-ARCH-vNEXT-REFORGED-20260925
+
+terms:
+  - id: "TERM-EFFECT-MANIFEST"
+    canonical: "EffectManifest"
+    definition: "An immutable, content-addressed specification declaring all proposed filesystem, process, network, or state mutations before execution."
+    authority_meaning: "The sole data structure that Excalibur presents to the human operator for signature."
+    deprecated_meanings: ["execution_plan", "diff_bundle"]
+
+  - id: "TERM-CAPABILITY-LEASE"
+    canonical: "CapabilityLease"
+    definition: "A cryptographically signed, attenuated, time-bounded permission token issued exclusively by Sir Sentinel."
+    authority_meaning: "Mandatory authorization required before any kinetic actuator commits actions."
+    deprecated_meanings: ["auth_token", "api_key", "bearer_token"]
+
+  - id: "TERM-AUTHORITY-EPOCH"
+    canonical: "AuthorityEpoch"
+    definition: "A monotonically increasing integer fencing active system authority."
+    authority_meaning: "Invalidates all prior leases and prevents replay attacks upon increment."
+    deprecated_meanings: ["version_counter", "timestamp"]
+
+  - id: "TERM-RECEIPT"
+    canonical: "CryptographicReceipt"
+    definition: "An immutable, append-only ledger record documenting an executed event with input digest and output proof."
+    authority_meaning: "The sole ground truth for state projection; UI state is derived exclusively from receipts."
+    deprecated_meanings: ["audit_log_entry", "debug_output"]
+
+  - id: "TERM-UKG-NANO"
+    canonical: "UniversalKnowledgeGlyphNano"
+    definition: "A maximally compressed, zero-entropy semantic crystal encoding sovereign system state on the 24D Leech Lattice."
+    authority_meaning: "The definitive cross-agent semantic anchor."
+    deprecated_meanings: ["context_dump", "session_summary"]
+
+  - id: "TERM-ZERO-CLAW"
+    canonical: "ZeroClaw"
+    definition: "A shared memory IPC interface with atomic file locks and memory mapping (mmap) enforcing the 4.0 GB edge RAM ceiling."
+    authority_meaning: "Inter-agent synchronization substrate with zero serialization latency."
+    deprecated_meanings: ["inter_process_queue", "redis_bridge"]

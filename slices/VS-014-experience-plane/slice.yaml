@@ -1,0 +1,18 @@
+id: VS-014
+slug: VS-014-experience-plane
+title: AION-HUD & HTMX Hypermedia Experience
+tier: P1
+status: ACTIVE
+owner: sir_boris
+summary: HATEOAS hypermedia frontend, WebGPU/Vulkan 3D WorldTree rendering, and Luxora
+  Gold design.
+contracts:
+- CONTRACT-EXPERIENCE-PLANE-001
+code_paths:
+- apps/pwa/
+- control_plane/infra/htmx_server.py
+tests:
+- tests/test_htmx_webgpu_and_jev.py
+exit_criteria:
+- Zero Virtual DOM overhead
+- Sub-50ms HUD telemetry streaming

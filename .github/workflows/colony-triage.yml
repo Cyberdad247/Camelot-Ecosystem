@@ -1,0 +1,35 @@
+name: Colony Triage
+
+# Read-only squire-colony secret gate. Deliberately does NOT run
+# `colony triage --auto-approve` — AGENTS.md forbids auto-approving colony
+# triage when risk >= 50 or secrets are found. GHOST is ungated (read-only),
+# so it is the CI signal; full triage stays a human-driven local command.
+on:
+  schedule:
+    - cron: "0 6 * * 1" # Mondays 06:00 UTC
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "squires/**"
+      - ".github/workflows/colony-triage.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "squires/**"
+      - ".github/workflows/colony-triage.yml"
+
+jobs:
+  ghost-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      # squires is stdlib-only (rich is an optional pretty-printer fallback).
+      - name: INDEX (codebase stats)
+        run: python -m squires.colony index .
+      - name: GHOST (secret gate — exit 2 on critical flags)
+        run: python -m squires.colony ghost . --fail-on-critical

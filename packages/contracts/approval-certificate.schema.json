@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/approval-certificate.schema.json",
+  "title": "Camelot Approval Certificate",
+  "description": "v1.2 operator or multi-party approval certificate issued by Arthur Sovereign Authority or Excalibur Command Center for R >= R3 effects.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "certificate_id",
+    "task_id",
+    "manifest_hash",
+    "approver",
+    "device_id",
+    "authority_vector",
+    "decision",
+    "valid_until",
+    "signature"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-approval-certificate/1"
+    },
+    "certificate_id": {
+      "type": "string",
+      "pattern": "^cert_[A-Za-z0-9_-]+$"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^task_[A-Za-z0-9_-]+$"
+    },
+    "manifest_hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-fA-F]{64}$"
+    },
+    "approver": {
+      "type": "string"
+    },
+    "device_id": {
+      "type": "string"
+    },
+    "authority_vector": {
+      "description": "6-dimensional authority vector tuple at approval time.",
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "decision": {
+      "type": "string",
+      "enum": ["APPROVED", "REJECTED", "QUORUM_PARTIAL"]
+    },
+    "reason": {
+      "type": "string"
+    },
+    "valid_until": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "signature": {
+      "type": "object",
+      "required": ["algorithm", "public_key_id", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "enum": ["ed25519", "webauthn_p256"]
+        },
+        "public_key_id": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

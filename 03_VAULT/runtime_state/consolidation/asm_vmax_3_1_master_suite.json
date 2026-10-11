@@ -1,0 +1,92 @@
+{
+  "$schema": "vfs://worldtree/schemas/camelot-assimilation-1.json",
+  "schemaVersion": "camelot-assimilation/1",
+  "assimilationId": "asm_vmax_3_1_master_suite_20260914",
+  "baseline": {
+    "documentId": "CAMELOT-OS-MASTER-SUITE-vMAX-3.1-20260914",
+    "version": "3.1.0",
+    "digest": "sha256:e3c17f59ec0bd3a25036a9e344e627f02e9e330d02faf90a6afe7953930bc987",
+    "path": "docs/architecture/CAMELOT-OS-vMAX-3.1-SOVEREIGN-ASSIMILATION-MASTER-SUITE.md",
+    "authority": "SOVEREIGN_TRUTH"
+  },
+  "sources": [
+    {
+      "sourceId": "src_vmax_3_1_master_suite",
+      "path": "C:\\Users\\vizio\\Downloads\\CAMELOT-OS-vMAX-3.1-SOVEREIGN-ASSIMILATION-MASTER-SUITE.md",
+      "type": "DOCUMENT",
+      "digest": "sha256:e3c17f59ec0bd3a25036a9e344e627f02e9e330d02faf90a6afe7953930bc987",
+      "classification": "INTERNAL"
+    }
+  ],
+  "scope": [
+    "RP0_Sovereign_Infrastructure",
+    "RP1_Authority_and_Evidence",
+    "RP2_Governed_Connectivity",
+    "RP3_Routing_and_Orchestration",
+    "RP4_Cognition_Knowledge_Voice_Continuity",
+    "RP5_Experience_and_Command_Surfaces",
+    "RP6_Extensions_and_Embodiment",
+    "DL0_DL5_Documentation_OS"
+  ],
+  "claims": [
+    {
+      "claimId": "CLM-001",
+      "relation": "CLARIFIES",
+      "statement": "Separates Runtime Planes (RP0-RP6) from Documentation Layers (DL0-DL5) to eliminate naming collision."
+    },
+    {
+      "claimId": "CLM-002",
+      "relation": "STRENGTHENS",
+      "statement": "Establishes Single-Writer Truth Domains for Epoch Fencer, Sentinel, Excalibur, Gideon, Arthur, and Ledger."
+    },
+    {
+      "claimId": "CLM-003",
+      "relation": "NARROWS",
+      "statement": "Eliminates Bifrost RPC overhead on local same-host Court service communication; prefers Unix domain sockets/loopback with OS ACLs."
+    },
+    {
+      "claimId": "CLM-004",
+      "relation": "STRENGTHENS",
+      "statement": "Shadow Brain / offline state preserves cognition and provisional journals, but cannot mint sovereign L4/L5 authority."
+    },
+    {
+      "claimId": "CLM-005",
+      "relation": "IMPLEMENTS",
+      "statement": "Defines frozen v1 contract catalog (25 contracts) and contract lock requirements."
+    },
+    {
+      "claimId": "CLM-006",
+      "relation": "STRENGTHENS",
+      "statement": "Preserves Sovereign Core under 8GB RAM class via deterministic resource shedding order."
+    }
+  ],
+  "conflicts": [],
+  "acceptedDeltas": [
+    "Adopt RP0-RP6 and DL0-DL5 namespace disambiguation across codebase and documentation",
+    "Permit local same-host loopback/socket communication bypassing Bifrost admission",
+    "Adopt Assimilation Protocol v1 for architectural mutations",
+    "Formalize 8GB memory shedding order in control plane"
+  ],
+  "rejectedDeltas": [],
+  "quarantinedDeltas": [
+    "Firecracker Evaluation Chamber on non-KVM hosts (quarantined until remote evaluation node or fallback sandbox profile is defined)"
+  ],
+  "requiredMigrations": [
+    "Migrate existing documentation referring to L0-L6 to use either RP0-RP6 (runtime) or DL0-DL5 (documentation)",
+    "Generate and freeze CONTRACTS.lock for v1 schemas"
+  ],
+  "requiredTests": [
+    "US-GOLD-001 Read-Only Research Golden Mission end-to-end integration test",
+    "Cross-tenant isolation negative tests",
+    "Authority epoch rejection of stale leases test"
+  ],
+  "requiredApprovals": [
+    "SOVEREIGN_OPERATOR (Arthur/Vizion)"
+  ],
+  "rollbackPlan": {
+    "action": "Restore prior baseline documentation and revert CONTRACTS.lock",
+    "priorBaselineId": "CAMELOT-OS-MASTER-SUITE-vMAX-20260913"
+  },
+  "evidenceBundleDigest": "sha256:e3c17f59ec0bd3a25036a9e344e627f02e9e330d02faf90a6afe7953930bc987",
+  "status": "ASSIMILATED"
+}

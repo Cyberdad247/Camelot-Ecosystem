@@ -217,3 +217,55 @@ def test_multivoice_registry_typescript_parity():
     ]
     for token in expected_tokens:
         assert token in content, f"Missing token '{token}' in voice-profile-registry.ts"
+
+
+# ── 6. Sir Lukas & SanoTTS / Watchtower Integration Tests ─────────────────────
+
+def test_sir_lukas_persona_sanotts_binding():
+    """Verify Sir Lukas persona is configured for sanoTTS zero-cloud edge speech synthesis."""
+    fabric = ReyaUniversalFabric()
+    lukas_persona = fabric.available_knights["sir_lukas"]
+    assert lukas_persona.voice_engine == "sanotts"
+    assert "telemetry" in lukas_persona.specialization.lower()
+    assert "sanotts" in lukas_persona.specialization.lower()
+
+
+def test_speech_synthesize_action_sanotts():
+    """Verify execute_fabric_action synthesizes WAV audio with sanoTTS."""
+    fabric = ReyaUniversalFabric()
+    res = fabric.execute_fabric_action(
+        "speech_synthesize",
+        {"text": "Live telemetry port anomaly scan complete.", "engine": "sanotts"},
+    )
+    assert res["status"] == "SUCCESS"
+    assert res["action"] == "speech_synthesize"
+    audio = res["result"]["audio_payload"]
+    assert audio is not None
+    assert audio["synthesized"] is True
+    assert audio["engine"] == "sanotts"
+    assert audio["audio_wav_bytes_len"] > 0
+    assert audio["sample_rate"] == 24000
+
+
+def test_watchtower_telemetry_integration():
+    """Verify get_watchtower_telemetry returns compliant live host metrics (Law 03 <= 4GB)."""
+    fabric = ReyaUniversalFabric()
+    telem = fabric.get_watchtower_telemetry()
+    assert telem["status"] == "WATCHTOWER_LIVE"
+    assert telem["node_ceiling_ok"] is True
+    assert telem["process_working_set_mb"] <= 4096.0
+    assert "pagekeeper_rs" in telem
+    assert telem["pagekeeper_rs"]["daemon"] == "PAGEKEEPER_RS"
+
+
+def test_report_lukas_telemetry_flow():
+    """Verify full end-to-end report_lukas_telemetry flow channels Sir Lukas and synthesizes audio."""
+    fabric = ReyaUniversalFabric()
+    report = fabric.report_lukas_telemetry(synthesize_audio=True)
+    assert report["herald"] == "sir_lukas"
+    assert "Sir Lukas reporting." in report["spoken_text"]
+    assert "megabytes" in report["spoken_text"]
+    assert report["telemetry"]["status"] == "WATCHTOWER_LIVE"
+    assert report["speech_result"]["status"] == "SUCCESS"
+    assert report["speech_result"]["result"]["audio_payload"]["synthesized"] is True
+

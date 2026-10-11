@@ -1,0 +1,10 @@
+{
+  "knight_id": "JEV_OMEGA",
+  "vfs_uri": "vfs://worldtree/knights/jev_omega/tether.json",
+  "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+  "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+  "title": "Offline System-2 Orchestrator with Candy EQ",
+  "role": "SmolLM3 1.58-bit Ternary Core with Candy EQ",
+  "substrate": "SmolLM3-3B 1.58-bit Ternary Core",
+  "last_sync": "2026-10-07T13:45:00.000000+00:00"
+}

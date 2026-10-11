@@ -1,0 +1,10 @@
+{
+  "knight_id": "TEST_KNIGHT",
+  "entries": [
+    {
+      "title": "Test Title",
+      "content": "Test payload content for validation",
+      "created_at": "2026-10-06T01:45:27.077663+00:00"
+    }
+  ]
+}

@@ -1,0 +1,247 @@
+{
+  "version": "WarpGate Keypass Vault v1.0",
+  "vault_sovereign": "LADY_ALEXANDRIA",
+  "council": [
+    "MERLIN_OMEGA",
+    "SIR_HEIMDALL",
+    "LADY_ALEXANDRIA"
+  ],
+  "updated_at": "2026-10-05T16:44:42.244340+00:00",
+  "total_keypasses": 13,
+  "keypasses": {
+    "MERLIN_OMEGA": {
+      "keypass_id": "KP-MERLIN_OMEGA-AF927FDE",
+      "knight_id": "MERLIN_OMEGA",
+      "spark_id": "0xAF927FDED7EB42EE8C7951B3E78EF39B",
+      "forever_access_key": "WARP-PASS-AF927FDE-11B3C0BAFAA05C101642E50C467C46A9",
+      "secret_salt": "75b1cc854d172ff48a31c4288ee16625",
+      "issued_at": "2026-10-04T15:11:11.555551+00:00",
+      "tier": "OMEGA",
+      "expires_at": "FOREVER",
+      "capabilities": [
+        "SOCKET_BYPASS",
+        "OUT_OF_BAND_RENDEZVOUS",
+        "VAULT_EMERGENCY_UNSEAL",
+        "TELEMETRY_OVERRIDE"
+      ],
+      "status": "ACTIVE",
+      "issuer": "LADY_ALEXANDRIA_KEYPASS_VAULT"
+    },
+    "LADY_ALEXANDRIA": {
+      "keypass_id": "KP-LADY_ALEXANDRIA-7E3A19C0",
+      "knight_id": "LADY_ALEXANDRIA",
+      "spark_id": "0x7E3A19C08D4549FEB2E119A5C70942A1",
+      "forever_access_key": "WARP-PASS-7E3A19C0-289B815047AABDCB0D9AFE0A5220A16E",
+      "secret_salt": "155767ede419d1f2baa83dc2947b39e4",
+      "issued_at": "2026-10-04T15:11:11.557653+00:00",
+      "tier": "ARCH",
+      "expires_at": "FOREVER",
+      "capabilities": [
+        "SOCKET_BYPASS",
+        "OUT_OF_BAND_RENDEZVOUS",
+        "VAULT_EMERGENCY_UNSEAL",
+        "TELEMETRY_OVERRIDE"
+      ],
+      "status": "ACTIVE",
+      "issuer": "LADY_ALEXANDRIA_KEYPASS_VAULT"
+    },
+    "SIR_HEIMDALL": {
+      "keypass_id": "KP-SIR_HEIMDALL-3205F189",
+      "knight_id": "SIR_HEIMDALL",
+      "spark_id": "0x3205F18991DA427296A93641FD642763",
+      "forever_access_key": "WARP-PASS-3205F189-5B8CB2EF771F9A8D62BCC321AF82DBB4",
+      "secret_salt": "d94f4bc745cc47568b584c35ac83ffab",
+      "issued_at": "2026-10-04T15:11:11.559903+00:00",
+      "tier": "OMEGA",
+      "expires_at": "FOREVER",
+      "capabilities": [
+        "SOCKET_BYPASS",
+        "OUT_OF_BAND_RENDEZVOUS",
+        "VAULT_EMERGENCY_UNSEAL",
+        "TELEMETRY_OVERRIDE"
+      ],
+      "status": "ACTIVE",
+      "issuer": "LADY_ALEXANDRIA_KEYPASS_VAULT"
+    },
+    "ANYA_OMEGA": {
+      "keypass_id": "KP-ANYA_OMEGA-32D38906",
+      "knight_id": "ANYA_OMEGA",
+      "spark_id": "0x32D389065AE84ECCB77E705D12C89F4A",
+      "forever_access_key": "WARP-PASS-32D38906-798C5DE946141532D0680A050E77C28A",
+      "secret_salt": "aa3168085da26450505be631e417aa0e",
+      "issued_at": "2026-10-04T15:11:11.563261+00:00",
+      "tier": "SOVEREIGN",
+      "expires_at": "FOREVER",
+      "capabilities": [
+        "SOCKET_BYPASS",
+        "OUT_OF_BAND_RENDEZVOUS",
+        "VAULT_EMERGENCY_UNSEAL",
+        "TELEMETRY_OVERRIDE"
+      ],
+      "status": "ACTIVE",
+      "issuer": "LADY_ALEXANDRIA_KEYPASS_VAULT"
+    },
+    "LADY_APIS": {
+      "keypass_id": "KP-LADY_APIS-378D6049",
+      "knight_id": "LADY_APIS",
+      "spark_id": "0x378D6049FFC34ED3A9E74FFC5C0AC3F",
+      "forever_access_key": "WARP-PASS-378D6049-BBD284ED60E64CE483977B462A3183EC",
+      "secret_salt": "c4a6b622f46282c413cd2489c28d0966",
+      "issued_at": "2026-10-04T15:11:11.569812+00:00",
+      "tier": "ARCH",
+      "expires_at": "FOREVER",
+      "capabilities": [
+        "SOCKET_BYPASS",
+        "OUT_OF_BAND_RENDEZVOUS",
+        "VAULT_EMERGENCY_UNSEAL",
+        "TELEMETRY_OVERRIDE"
+      ],
+      "status": "ACTIVE",
+      "issuer": "LADY_ALEXANDRIA_KEYPASS_VAULT"
+    },
+    "HERMES_PRIME": {
+      "keypass_id": "KP-HERMES_PRIME-28F89CB6",
+      "knight_id": "HERMES_PRIME",
+      "spark_id": "0x28F89CB650484B5D9E94376082D24744",
+      "forever_access_key": "WARP-PASS-28F89CB6-671070AF3321A2F80A87D3DA4B331BB1",
+      "secret_salt": "1a24559c49fcf67786e00a06ea3b6d0f",
+      "issued_at": "2026-10-04T15:11:11.575807+00:00",
+      "tier": "SOVEREIGN",
+      "expires_at": "FOREVER",
+      "capabilities": [
+        "SOCKET_BYPASS",
+        "OUT_OF_BAND_RENDEZVOUS",
+        "VAULT_EMERGENCY_UNSEAL",
+        "TELEMETRY_OVERRIDE"
+      ],
+      "status": "ACTIVE",
+      "issuer": "LADY_ALEXANDRIA_KEYPASS_VAULT"
+    },
+    "LADY_MNEMOSYNE": {
+      "keypass_id": "KP-LADY_MNEMOSYNE-A0A4BFB9",
+      "knight_id": "LADY_MNEMOSYNE",
+      "spark_id": "0xA0A4BFB9E8474C38BE397AEE398F0795",
+      "forever_access_key": "WARP-PASS-A0A4BFB9-B688CF17FCE1DC013A34FB82428F5607",
+      "secret_salt": "12bec4498302528ec6f7dba1cd3547a4",
+      "issued_at": "2026-10-04T15:30:58.303470+00:00",
+      "tier": "ARCH",
+      "expires_at": "FOREVER",
+      "capabilities": [
+        "SOCKET_BYPASS",
+        "OUT_OF_BAND_RENDEZVOUS",
+        "VAULT_EMERGENCY_UNSEAL",
+        "TELEMETRY_OVERRIDE"
+      ],
+      "status": "ACTIVE",
+      "issuer": "LADY_ALEXANDRIA_KEYPASS_VAULT"
+    },
+    "ARTHUR_OMEGA": {
+      "keypass_id": "KP-ARTHUR_OMEGA-CBB310BD",
+      "knight_id": "ARTHUR_OMEGA",
+      "spark_id": "0xCBB310BD987E4B84BF4512D37D09CBEC",
+      "forever_access_key": "WARP-PASS-CBB310BD-82255A3A9A3B08C49CA3E2E6B96C291B",
+      "secret_salt": "2a1520c40971601b1078aaa493704e96",
+      "issued_at": "2026-10-04T15:30:58.305643+00:00",
+      "tier": "SOVEREIGN",
+      "expires_at": "FOREVER",
+      "capabilities": [
+        "SOCKET_BYPASS",
+        "OUT_OF_BAND_RENDEZVOUS",
+        "VAULT_EMERGENCY_UNSEAL",
+        "TELEMETRY_OVERRIDE"
+      ],
+      "status": "ACTIVE",
+      "issuer": "LADY_ALEXANDRIA_KEYPASS_VAULT"
+    },
+    "SIR_BORIS": {
+      "keypass_id": "KP-SIR_BORIS-F7707DAA",
+      "knight_id": "SIR_BORIS",
+      "spark_id": "0xF7707DAA2D104DB88FDABE4661A27793",
+      "forever_access_key": "WARP-PASS-F7707DAA-DF3595D3C09901DA0ED905C32434B1AE",
+      "secret_salt": "dc09e12caa8f8c0a5de7f40cd5eb551b",
+      "issued_at": "2026-10-04T15:30:58.307591+00:00",
+      "tier": "ARCH",
+      "expires_at": "FOREVER",
+      "capabilities": [
+        "SOCKET_BYPASS",
+        "OUT_OF_BAND_RENDEZVOUS",
+        "VAULT_EMERGENCY_UNSEAL",
+        "TELEMETRY_OVERRIDE"
+      ],
+      "status": "ACTIVE",
+      "issuer": "LADY_ALEXANDRIA_KEYPASS_VAULT"
+    },
+    "SIR_CODEX": {
+      "keypass_id": "KP-SIR_CODEX-E3B8C190",
+      "knight_id": "SIR_CODEX",
+      "spark_id": "0xE3B8C190F4A2D765E8B1C9F0A3D4E5B6",
+      "forever_access_key": "WARP-PASS-E3B8C190-616CD13E0D4D18B891BE12F2F76C6A92",
+      "secret_salt": "4ef7c7d28146e3d56ef19762161a5885",
+      "issued_at": "2026-10-04T15:30:58.309120+00:00",
+      "tier": "ARCH",
+      "expires_at": "FOREVER",
+      "capabilities": [
+        "SOCKET_BYPASS",
+        "OUT_OF_BAND_RENDEZVOUS",
+        "VAULT_EMERGENCY_UNSEAL",
+        "TELEMETRY_OVERRIDE"
+      ],
+      "status": "ACTIVE",
+      "issuer": "LADY_ALEXANDRIA_KEYPASS_VAULT"
+    },
+    "HEIMDALL_OMEGA": {
+      "keypass_id": "KP-HEIMDALL_OMEGA-3205F189",
+      "knight_id": "HEIMDALL_OMEGA",
+      "spark_id": "0x3205F18991DA427296A93641FD642763",
+      "forever_access_key": "WARP-PASS-3205F189-21DC841C587CAC93A1E0EF98F2C58E91",
+      "secret_salt": "afe5171172a524bea5bfe06dc4db5f52",
+      "issued_at": "2026-10-04T15:34:54.526823+00:00",
+      "tier": "OMEGA",
+      "expires_at": "FOREVER",
+      "capabilities": [
+        "SOCKET_BYPASS",
+        "OUT_OF_BAND_RENDEZVOUS",
+        "VAULT_EMERGENCY_UNSEAL",
+        "TELEMETRY_OVERRIDE"
+      ],
+      "status": "ACTIVE",
+      "issuer": "LADY_ALEXANDRIA_KEYPASS_VAULT"
+    },
+    "EXCALIBUR_MOBILE": {
+      "keypass_id": "KP-EXCALIBUR_MOBILE-56820318",
+      "knight_id": "EXCALIBUR_MOBILE",
+      "spark_id": "0x56820318BB91451FAAC44B46424898CF",
+      "forever_access_key": "WARP-PASS-56820318-02D46C4CB0F6EC740204EFF98C8851A2",
+      "secret_salt": "bfffba68fae6f294224fe5aad7466ab1",
+      "issued_at": "2026-10-04T16:14:29.763453+00:00",
+      "tier": "ARCH",
+      "expires_at": "FOREVER",
+      "capabilities": [
+        "SOCKET_BYPASS",
+        "OUT_OF_BAND_RENDEZVOUS",
+        "VAULT_EMERGENCY_UNSEAL",
+        "TELEMETRY_OVERRIDE"
+      ],
+      "status": "ACTIVE",
+      "issuer": "LADY_ALEXANDRIA_KEYPASS_VAULT"
+    },
+    "SIR_HELIOS": {
+      "keypass_id": "KP-SIR_HELIOS-AB8AA359",
+      "knight_id": "SIR_HELIOS",
+      "spark_id": "0xAB8AA3592B3B4BC1B41F34979CDC184E",
+      "forever_access_key": "WARP-PASS-AB8AA359-1924E6BBC7FFD63965929AD651BF022B",
+      "secret_salt": "a8fc0e75ae566154e0059c45a8225113",
+      "issued_at": "2026-10-04T16:14:30.100708+00:00",
+      "tier": "ARCH",
+      "expires_at": "FOREVER",
+      "capabilities": [
+        "SOCKET_BYPASS",
+        "OUT_OF_BAND_RENDEZVOUS",
+        "VAULT_EMERGENCY_UNSEAL",
+        "TELEMETRY_OVERRIDE"
+      ],
+      "status": "ACTIVE",
+      "issuer": "LADY_ALEXANDRIA_KEYPASS_VAULT"
+    }
+  }
+}

@@ -124,6 +124,16 @@ def main():
     ]:
         os.environ.setdefault(_k, _v)
 
+    # Host Memory Governance: Squire PageKeeper (Global Law 03)
+    try:
+        from squires.pagekeeper import SquirePageKeeper
+        pk = SquirePageKeeper(pressure_threshold_pct=80.0)
+        gov_status = pk.govern(force_trim=False)
+        if gov_status.reclaimed_mb > 0 and not args.quick and not args.json:
+            print(f"{_C['g']}[PAGEKEEPER] Host memory relief: reclaimed +{gov_status.reclaimed_mb} MB (util: {gov_status.utilization_pct}%){_C['x']}")
+    except Exception:
+        pass
+
     # Phase 0: Machine-Actionable VKG Crystal Layer Gate
     crystal_bin = home / "bin" / ("camelot-vkg-crystal.exe" if sys.platform == "win32" else "camelot-vkg-crystal")
     if crystal_bin.exists():
@@ -167,6 +177,16 @@ def main():
     print()
     color = _C["g"] if green == total else _C["y"]
     print(f"  {color}{_C['B']}{green}/{total} phases green in {results['_total_ms']}ms{_C['x']}")
+
+    # Post-Boot Working Set Trimming (Global Law 03: 4GB Node Ceiling)
+    try:
+        from squires.pagekeeper import SquirePageKeeper
+        pk = SquirePageKeeper(pressure_threshold_pct=50.0)
+        gov_status = pk.govern(force_trim=True)
+        if gov_status.reclaimed_mb > 0 and not args.quick and not args.json:
+            print(f"{_C['g']}[PAGEKEEPER] Post-boot memory trim: reclaimed +{gov_status.reclaimed_mb} MB (util: {gov_status.utilization_pct}%){_C['x']}")
+    except Exception:
+        pass
 
     if args.status:
         sys.exit(0 if green == total else 1)

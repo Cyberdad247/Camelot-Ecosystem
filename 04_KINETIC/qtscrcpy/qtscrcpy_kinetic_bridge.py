@@ -101,6 +101,8 @@ class QtScrcpyBridge:
     def run_adb(self, args: List[str], timeout: int = 15) -> subprocess.CompletedProcess:
         """Run an ADB command with timeout and return the CompletedProcess."""
         adb_bin = self.get_adb_path()
+        if isinstance(adb_bin, Path):
+            adb_bin = str(adb_bin)
         cmd = [adb_bin] + args
         try:
             return subprocess.run(
@@ -162,11 +164,21 @@ class QtScrcpyBridge:
             LOG.warning("Could not list devices: %s", e)
         return devices
 
+    def _self_safe_path(self, path) -> str:
+        """Resolve str or Path to a real path without calling Path.exists()
+        on a bare str (which raises AttributeError on this workspace where the
+        bridge fields are typed str but populated as raw Windows paths)."""
+        if isinstance(path, str):
+            return path if os.path.exists(path) else path
+        if isinstance(path, Path):
+            return str(path) if path.exists() else str(path)
+        return str(path)
+
     def list_keymaps(self) -> List[str]:
         """List available JSON keymaps in repository."""
-        if not self.keymap_dir.exists():
+        if not os.path.exists(self.keymap_dir):
             return []
-        return [f.name for f in self.keymap_dir.glob("*.json")]
+        return [f.name for f in Path(self.keymap_dir).glob("*.json")]
 
     def load_keymap(self, name: str) -> Optional[Dict[str, Any]]:
         """Load a specific keymap by name."""
@@ -248,16 +260,117 @@ class QtScrcpyBridge:
         res = self.run_adb(["connect", f"{host}:{port}"])
         return res.returncode == 0 and "connected" in res.stdout.lower()
 
+    def setup_reverse_forwarding(
+        self,
+        local_port: int = 27183,
+        remote_socket: str = "localabstract:scrcpy",
+        serial: Optional[str] = None,
+    ) -> bool:
+        """Establish ADB reverse socket forwarding (remote device connects to local port)."""
+        args = []
+        if serial:
+            args.extend(["-s", serial])
+        args.extend(["reverse", remote_socket, f"tcp:{local_port}"])
+        res = self.run_adb(args)
+        if res.returncode == 0:
+            LOG.info("ADB reverse forward established: %s -> tcp:%d on %s", remote_socket, local_port, serial or "default")
+            return True
+        else:
+            LOG.error("ADB reverse forward failed: %s", res.stderr)
+            return False
+
+    def list_reverse_forwarding(self, serial: Optional[str] = None) -> List[str]:
+        """List active reverse socket forward rules."""
+        args = []
+        if serial:
+            args.extend(["-s", serial])
+        args.extend(["reverse", "--list"])
+        res = self.run_adb(args)
+        if res.returncode == 0:
+            return [line.strip() for line in res.stdout.strip().splitlines() if line.strip()]
+        return []
+
+    def remove_reverse_forwarding(
+        self,
+        remote_socket: Optional[str] = None,
+        serial: Optional[str] = None,
+    ) -> bool:
+        """Remove reverse socket forwarding rules."""
+        args = []
+        if serial:
+            args.extend(["-s", serial])
+        if remote_socket:
+            args.extend(["reverse", "--remove", remote_socket])
+        else:
+            args.extend(["reverse", "--remove-all"])
+        res = self.run_adb(args)
+        return res.returncode == 0
+
+    def watchdog_check_and_resurrect(
+        self,
+        auto_push_server: bool = True,
+        local_port: int = 27183,
+        remote_socket: str = "localabstract:scrcpy",
+    ) -> Dict[str, Any]:
+        """Verify ADB daemon, detect connected devices, and resurrect reverse tunnels / server payloads."""
+        adb_avail = os.path.exists(self.adb_path)
+        adb_ver = self.get_adb_version() if adb_avail else None
+        devices = self.list_devices()
+
+        report: Dict[str, Any] = {
+            "adb_available": adb_avail,
+            "adb_version": adb_ver,
+            "devices_found": len(devices),
+            "devices": [],
+            "status": "IDLE" if not devices else "CONNECTED",
+        }
+
+        for dev in devices:
+            dev_status: Dict[str, Any] = {
+                "serial": dev.serial,
+                "state": dev.state,
+                "model": dev.model,
+                "reverse_tunnels": [],
+                "reverse_tunnel_healthy": False,
+                "server_payload_ready": False,
+            }
+            if dev.state == "device":
+                # Check active reverse forwards
+                active_rules = self.list_reverse_forwarding(serial=dev.serial)
+                dev_status["reverse_tunnels"] = active_rules
+                has_tunnel = any(remote_socket in rule and str(local_port) in rule for rule in active_rules)
+
+                if not has_tunnel:
+                    LOG.info("Reverse tunnel missing for %s; resurrecting...", dev.serial)
+                    resurrected = self.setup_reverse_forwarding(local_port=local_port, remote_socket=remote_socket, serial=dev.serial)
+                    dev_status["reverse_tunnel_healthy"] = resurrected
+                else:
+                    dev_status["reverse_tunnel_healthy"] = True
+
+                # Check / ensure server payload exists on device
+                if auto_push_server and self.scrcpy_server_path.exists():
+                    check_res = self.run_adb(["-s", dev.serial, "shell", "ls", "-l", "/data/local/tmp/scrcpy-server.jar"])
+                    if check_res.returncode != 0:
+                        LOG.info("Payload missing on device %s; pushing scrcpy-server.jar...", dev.serial)
+                        pushed = self.push_server_payload(serial=dev.serial)
+                        dev_status["server_payload_ready"] = pushed
+                    else:
+                        dev_status["server_payload_ready"] = True
+
+            report["devices"].append(dev_status)
+
+        return report
+
     def audit(self) -> BridgeAuditResult:
         """Perform comprehensive readiness and capability audit."""
-        adb_avail = self.adb_path.exists()
+        adb_avail = os.path.exists(self.adb_path)
         adb_ver = self.get_adb_version() if adb_avail else None
 
-        server_avail = self.scrcpy_server_path.exists()
-        server_size = self.scrcpy_server_path.stat().st_size if server_avail else 0
+        server_avail = os.path.exists(self.scrcpy_server_path)
+        server_size = os.path.getsize(self.scrcpy_server_path) if server_avail else 0
 
-        ffmpeg_avail = self.ffmpeg_dir.exists() and len(list(self.ffmpeg_dir.glob("*.dll"))) > 0
-        cfg_avail = self.config_ini_path.exists()
+        ffmpeg_avail = os.path.exists(self.ffmpeg_dir) and len(list(Path(self.ffmpeg_dir).glob("*.dll"))) > 0
+        cfg_avail = os.path.exists(self.config_ini_path)
         keymaps = self.list_keymaps()
         devices = [asdict(d) for d in self.list_devices()]
 
@@ -331,6 +444,21 @@ def main():
     conn_p.add_argument("host", help="IP address")
     conn_p.add_argument("-p", "--port", type=int, default=5555, help="Port")
 
+    # reverse
+    rev_p = subparsers.add_parser("reverse", help="Manage reverse socket forwarding rules")
+    rev_p.add_argument("--list", action="store_true", help="List active reverse forwards")
+    rev_p.add_argument("--local-port", type=int, default=27183, help="Local TCP port")
+    rev_p.add_argument("--remote-socket", default="localabstract:scrcpy", help="Remote socket name")
+    rev_p.add_argument("--remove", action="store_true", help="Remove reverse forwards")
+    rev_p.add_argument("-s", "--serial", help="Device serial")
+
+    # watchdog
+    watch_p = subparsers.add_parser("watchdog", help="Kinetic ADB Link watchdog and auto-resurrection")
+    watch_p.add_argument("--local-port", type=int, default=27183, help="Local TCP port")
+    watch_p.add_argument("--remote-socket", default="localabstract:scrcpy", help="Remote socket name")
+    watch_p.add_argument("--no-push", action="store_true", help="Skip pushing scrcpy-server payload")
+    watch_p.add_argument("--json", action="store_true", help="Output machine-readable JSON")
+
     args = parser.parse_args()
     bridge = QtScrcpyBridge()
 
@@ -362,6 +490,31 @@ def main():
     elif args.command == "connect":
         ok = bridge.connect_wireless(args.host, port=args.port)
         print(f"Connect to {args.host}:{args.port}: {'SUCCESS' if ok else 'FAILED'}")
+    elif args.command == "reverse":
+        if args.list:
+            rules = bridge.list_reverse_forwarding(serial=args.serial)
+            print(f"Active Reverse Rules ({len(rules)}):")
+            for r in rules:
+                print(f"  - {r}")
+        elif args.remove:
+            ok = bridge.remove_reverse_forwarding(remote_socket=args.remote_socket, serial=args.serial)
+            print(f"Remove Reverse Forward: {'SUCCESS' if ok else 'FAILED'}")
+        else:
+            ok = bridge.setup_reverse_forwarding(local_port=args.local_port, remote_socket=args.remote_socket, serial=args.serial)
+            print(f"Setup Reverse Forward ({args.remote_socket} -> tcp:{args.local_port}): {'SUCCESS' if ok else 'FAILED'}")
+    elif args.command == "watchdog":
+        report = bridge.watchdog_check_and_resurrect(
+            auto_push_server=not args.no_push,
+            local_port=args.local_port,
+            remote_socket=args.remote_socket,
+        )
+        if args.json:
+            print(json.dumps(report, indent=2))
+        else:
+            print(f"[ADB Watchdog] ADB Available: {report['adb_available']} ({report['adb_version'] or 'N/A'})")
+            print(f"[ADB Watchdog] Status: {report['status']} | Devices Found: {report['devices_found']}")
+            for d in report["devices"]:
+                print(f"  - Device: {d['serial']} ({d['model'] or d['state']}) | Tunnel: {'OK' if d['reverse_tunnel_healthy'] else 'FAIL'} | Payload: {'OK' if d['server_payload_ready'] else 'MISSING'}")
 
 
 if __name__ == "__main__":

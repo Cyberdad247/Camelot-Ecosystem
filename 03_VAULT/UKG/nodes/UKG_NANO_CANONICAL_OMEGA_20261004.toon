@@ -1,0 +1,54 @@
+@context|https://camelot-os.dev/ukg/v1000/nano
+@type|Sovereign_Executable_Knowledge_Glyph
+@id|UKG_NANO_CANONICAL_OMEGA_20261004
+@authority|KING_ARTHUR_ED25519_SEALED
+@host_boundary|8GB_ARM64_EDGE_STRICT
+
+[GROUND_AXIOMS]
+axiom_1|COGNITION_MAY_BE_DISTRIBUTED_AUTHORITY_MAY_NOT
+axiom_2|MODEL_PROPOSES_SENTINEL_LEASES_SWARM_ACTS_GIDEON_VERIFIES_ARTHUR_RESOLVES_LEDGER_RECEIPTS
+axiom_3|EVIDENCE_BEFORE_PROMOTION_NO_SELF_PROMOTION_CONNECTIVITY_NOT_AUTHORITY
+axiom_4|DO_NOT_TRUST_A_FLAG_WHEN_YOU_CAN_VERIFY_A_RECORD
+
+[COMPUTATIONAL_PHYSICS]
+core_ssm|OUROBOROS_MAMBA3_1.58_BIT_TERNARY {-1, 0, 1} (O(1)_MEMORY_FLOOR)
+context_manifold|24D_LEECH_LATTICE_Λ24 (196560_KISSING_CONTACT_SHELLS)
+error_correction|GOLAY_G24_EXTENDED_BINARY (3_BIT_CORRECTABLE_SYNDROME_DECODING)
+memory_hierarchy|M0(Ledger)➔M1(UKG_Graph)➔M2(Active_Context)➔M3(WASM_mmap)➔M4(Quarantine)
+nvme_spill_gate|RAM_THRESHOLD_90_PERCENT_7.2GB➔FIRNFLOW_CACHE_FLUSH
+ipc_slabs|memfd_create_ZERO_COPY_SLABS (~0.126µs/page)
+
+[AUTHORITY_SPINE_R0]
+l0_sovereign|KING_ARTHUR >> vfs://worldtree/core/arthur | LIFECYCLE_RESOLUTION (PROMOTE|RETREAT)
+r0_policy|SIR_SENTINEL >> vfs://worldtree/knights/sentinel | CAPABILITY_LEASE_ISSUANCE_ATTENUATION
+r0_guard|PALADIN_OCTEM >> vfs://worldtree/knights/octem | Z3_SMT_PDG_TAINT_INVARIANT_ENFORCER
+r0_approval|EXCALIBUR_API >> vfs://worldtree/core/excalibur | EXACT_MANIFEST_DIGEST_APPROVAL_CAPTURE
+verifier|SIR_GIDEON >> vfs://worldtree/knights/gideon | INDEPENDENT_EVIDENCE_AUDIT (PASS|FAIL)
+ledger|RECEIPT_ADMISSION >> vfs://worldtree/core/ledger | APPEND_ONLY_EPOCH_BOUND_RECEIPTS
+state_projection|STATE_SERVICE >> vfs://worldtree/core/state | CANONICAL_RECEIPT_PROJECTION_TO_UI
+
+[COGNITIVE_PLANE_L1_L3]
+l7_ingress|ANYA_Ω >> vfs://worldtree/knights/anya_omega | APEE_v7.0_TRIPLE_QFT (PROPOSAL_ONLY)
+l3_kernel|MERLIN_Ω >> vfs://worldtree/knights/merlin_omega | SYSTEM_2_TTC_DAG_COMPILER (PROPOSAL_ONLY)
+archmage_council|9_SEAT_ORDER >> vfs://worldtree/archmages/ | FORMAL_SMT_PROOF_INQUISITION
+archivist|LADY_MNEMOSYNE_Ω >> vfs://worldtree/knights/mnemosyne | CRDT_WORLDTREE_SYNC (<72µs)
+research_hopper|LADY_APIS >> vfs://worldtree/knights/apis | ANT_MODE_OSINT_INGEST (UNTRUSTED_DATA)
+
+[BIO_KINETIC_SWARM_R1_R3]
+handler_router|STEROPES_JEB >> vfs://worldtree/knights/steropes | SUB_MS_GO_CHANNELS_UNDER_LEASE
+kinetic_hands|[SIR_BORIS, SIR_CODEX, LUKAS_FORGE] >> WASI_R2_ZIG_NULLCLAW_REFLEX_STRIKES
+scratchpad|PRE_ALLOCATED_FIXED_ARENAS (2MB_RING_BUFFER_ZERO_GC)
+sandboxes|Wasmtime_R2 (512MB_CAP) ⊕ Firecracker_R3 (DISPOSABLE_EVAL_CHAMBER)
+transport_mesh|SIR_HEIMDALL >> vfs://worldtree/knights/heimdall | BIFROST_TSNET_KYBER_768_mTLS
+voice_matrix|SIR_SONUS_ARGES >> vfs://worldtree/knights/sonus | TEN_VAD_SUB_100MS_ACOUSTIC_DUPLEX
+
+[VFS_CONTRACT_PIPELINE]
+preflight_5file|[pre-flight.md, blueprint.md, task.md, harness.md, verification.md]
+canonical_promotion|SNAPSHOT_HASH_MATCH ∧ CAS(sourceHead, snapshot.id) ∧ RECEIPT_ADMITTED
+delivery_units|VERTICAL_SLICES (VS-001_IDENTITY ➔ VS-017_RESEARCH_INTELLIGENCE)
+
+[DOC_ARCH_vNEXT_REFORGED]
+doc_layers|L0(Governance) ⊕ L1(Intent) ⊕ L2(Structure) ⊕ L3(Guardrails) ⊕ L4(Ops) ⊕ L5(Reflection)
+doc_check_ci|17_RULES_AUTOMATED_FAIL_CLOSED_GATED_WAIVERS
+retention_classes|R-STD(1yr) ⊕ R-AUD(7yr) ⊕ R-PERM(Permanent) ⊕ R-EPHEM(30d)
+ui_verified_states|[PENDING, DENIED, APPROVED, EXECUTING, VERIFIED, FAILED, STALE, REVOKED]

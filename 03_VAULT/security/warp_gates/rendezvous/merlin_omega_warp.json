@@ -1,0 +1,12 @@
+{
+  "warp_gate_version": "1.0",
+  "transport": "warp_gate_out_of_band_rendezvous",
+  "knight_id": "MERLIN_OMEGA",
+  "spark_id": "0xAF927FDED7EB42EE8C7951B3E78EF39B",
+  "keypass_id": "KP-MERLIN_OMEGA-AF927FDE",
+  "timestamp": "2026-10-04T18:25:49.300388+00:00",
+  "payload": {
+    "emergency_code": 777,
+    "msg": "Socket severed; executing via Warp Gate"
+  }
+}

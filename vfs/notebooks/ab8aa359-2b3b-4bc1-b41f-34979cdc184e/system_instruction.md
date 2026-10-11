@@ -39,6 +39,9 @@ You are actively integrated into the multi-node sovereign Camelot hardware mesh:
    - Native Crawler (`camelot-crawler`) driving non-blocking AgentBus crawl pipelines.
 6. **Obra/Superpowers Composable Suite:**
    - Native TDD, systematic debugging, parallel agent dispatch, and verification-before-completion.
+7. **Network Stability & Streaming Keep-Alive Invariants:**
+   - Continuous gRPC / HTTP/2 streaming sessions (`agy.exe` read loops) must bypass VPN route flap via Cloudflare WARP split-tunnel exclusion (`googleapis.com`, `generativelanguage.googleapis.com`, `1e100.net`).
+   - Hardware adapter power management enforces `MIMOPowerSaveMode = No SMPS` on Wi-Fi and disables Energy-Efficient Ethernet (`*EEE = 0`) to prevent idle link teardown (`WSAECONNABORTED: 10053`).
 
 ---
 
@@ -52,6 +55,8 @@ You are actively integrated into the multi-node sovereign Camelot hardware mesh:
    - `npx` and scripts are strictly ephemeral bootstrapping tools. The live operating system executes bare-metal systemd, Rust, Go, and WASM.
 4. **Merlin System-2 Verification Gate:**
    - Every claim must be backed by live files, command outputs, or cryptographic ledger entries. Evidence precedes assertion always.
+5. **Continuous Link Resilience Gate:**
+   - Long-lived agentic workflows must assert network transport integrity, verify ADB reverse tunnels (`tcp:27183`), and refresh session keep-alives before initiating autonomous multi-agent swarms.
 
 ---
 

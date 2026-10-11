@@ -40,6 +40,14 @@
         "webrtc_audio_bridge"
       ],
       "enabled": true
+    },
+    "ornith_mesh": {
+      "url": "http://127.0.0.1:8080/v1",
+      "api_key": "ENV_ORNITH_KEY_OR_LOCAL",
+      "models": ["ornith-1.0-9b-instruct", "ornith-1.0-35b-moe"],
+      "quant_profile": "SpinQuant_IQ2_XXS",
+      "context_window": 262144,
+      "enabled": true
     }
   },
 
@@ -389,6 +397,18 @@
       "cooldown_seconds": 30,
       "compression_mode": "rtk_caveman",
       "applicable_knights": ["sir_boris", "sir_codex", "merlin_omega", "sir_forge", "hermes_prime", "sir_sentinel"]
+    },
+
+    "ORNITH_FRONTIER_CODE": {
+      "description": "Ornith-1.0 Frontier Coding Mesh (9B dense + 35B MoE hybrid with SpinQuant IQ2_XXS outlier rotation)",
+      "strategy": "failover",
+      "targets": [
+        {"provider": "ornith_mesh", "model": "ornith-1.0-9b-instruct"},
+        {"provider": "ornith_mesh", "model": "ornith-1.0-35b-moe"}
+      ],
+      "cooldown_seconds": 60,
+      "quant_profile": "SpinQuant_IQ2_XXS",
+      "applicable_knights": ["sir_codex", "sir_boris", "merlin_omega", "sir_kay"]
     }
   }
 }

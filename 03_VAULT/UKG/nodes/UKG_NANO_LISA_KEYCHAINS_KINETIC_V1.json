@@ -1,0 +1,105 @@
+{
+  "@context": "https://camelot.os/ukg",
+  "@type": "UKG_Nano_Artifact",
+  "theme_mode": "Retail_Light_Boutique",
+  "ukg_metadata": {
+    "artifact_id": "UKG_NANO_LISA_KEYCHAINS_KINETIC_V1",
+    "compiler": "Anya_Omega_L7",
+    "protocol": "Alpha_Omega_Distiller",
+    "target_repository": "Cyberdad247/LisaCustomKeychains.com",
+    "editor_layer": "https://lisa-custom-keychains-editor.vercel.app/",
+    "resource_ceiling": "8GB_Scarcity_Compliant",
+    "timestamp": "2026-10-02T11:11:39Z"
+  },
+  "visual_contract": {
+    "palette": {
+      "canvas_bg": "#FFFFFF",
+      "card_surface": "#FCFCFC",
+      "border_wire": "#E5E5E5",
+      "text_primary": "#1A1A1A",
+      "text_secondary": "#666666",
+      "accent_gold": "#D4AF37",
+      "accent_purple": "#6A0DAD"
+    },
+    "animation_physics": {
+      "compositor": "GPU_Hardware_Accelerated",
+      "properties": [
+        "translate3d",
+        "scale3d",
+        "opacity"
+      ],
+      "easing": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "target_fps": 60
+    }
+  },
+  "modules": [
+    {
+      "id": "MOD_01_SOCIAL_SLIDER",
+      "type": "Masonry_Mockup_Carousel",
+      "assets": [
+        "macrame_car_fob_ignition",
+        "macrame_canvas_tote_commuter",
+        "macrame_pastel_denim_seam",
+        "macrame_tactile_brass_ring"
+      ],
+      "layout": "Infinite_Horizontal_Track_will_change_transform"
+    },
+    {
+      "id": "MOD_02_RSVP_CALENDAR_INDEX",
+      "type": "Event_Feed_And_Sitemap",
+      "ical_spec": "RFC_5545_data_text_calendar",
+      "default_coordinates": {
+        "label": "Public Square, Cleveland, OH",
+        "lat": 41.4996,
+        "lng": -81.6944
+      },
+      "site_index_paths": [
+        "/collections/macrame-all",
+        "/pages/booth-finder"
+      ]
+    },
+    {
+      "id": "MOD_03_VERCEL_EDITOR_IFRAME",
+      "type": "Headless_Frame_App",
+      "geolocation_api": "HTML5_navigator_geolocation",
+      "endpoint": "https://lisa-custom-keychains-editor.vercel.app/",
+      "sandbox_policy": "allow-scripts allow-same-origin allow-forms",
+      "bridge": {
+        "protocol": "window.postMessage",
+        "target_origin": "https://lisa-custom-keychains-editor.vercel.app",
+        "payload_schema": [
+          "name",
+          "phone",
+          "email",
+          "originToken"
+        ]
+      }
+    },
+    {
+      "id": "MOD_04_GEOFENCE_CART_SYNC",
+      "type": "Local_Commerce_Engine",
+      "radius_threshold_km": 0.5,
+      "cart_endpoint": "/cart/add.js",
+      "line_item_properties": {
+        "Inscription": "string_max_15",
+        "Client_Name": "string",
+        "Client_Phone": "string_tel",
+        "Order_Tag": "Vercel-Booths-Pickup"
+      }
+    },
+    {
+      "id": "MOD_05_FULFILLMENT_SMS_DISPATCH",
+      "type": "Async_Notification_Hook",
+      "trigger_event": "orders/fulfilled",
+      "filter_tag": "Vercel-Booths-Pickup",
+      "relay_gateway": "Twilio_via_Shopify_Flow",
+      "sms_template": "Your custom creation is polished and ready at the main booth counter!"
+    }
+  ],
+  "verification_invariants": {
+    "inv_01_background_purity": "DOM backgroundColor strictly #FFFFFF / #FCFCFC",
+    "inv_02_memory_budget": "Runtime bundle <= 1.5MB transfer footprint",
+    "inv_03_cors_origin_restriction": "postMessage target != wildcard (*)",
+    "inv_04_idempotency": "Webhook deduplication on order_id strictly enforced"
+  }
+}
