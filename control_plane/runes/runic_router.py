@@ -21,6 +21,7 @@ from __future__ import annotations
 __version__ = "9000.14"  # CYBERTRONIA — set by P1-T01
 
 
+import hashlib
 import json
 import os
 import re
@@ -1026,6 +1027,14 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "mode": "ORACLE",
         "priority": 1,
         "handler": "_handle_reya_handshake",
+        "hydrate": False,
+    },
+    "//REA": {
+        "knight": "sir_helios",
+        "description": "REA reverse engineering forensics, binary/ASAR/bytecode deconstruction & Evidence Ledger",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_rea_forensics_dispatch",
         "hydrate": False,
     },
     "//MAGSAFE_INGEST": {
@@ -4395,6 +4404,52 @@ def _handle_reya_handshake(param: Any, context: dict) -> dict:
         }
 
 
+def _handle_rea_forensics_dispatch(param: Any, context: dict) -> dict:
+    """//REA - REA reverse engineering forensics, binary/ASAR/bytecode deconstruction & Evidence Ledger."""
+    target = str(param or "").strip()
+    if not target:
+        target = "status"
+
+    # Identify target classification
+    classification = "UNKNOWN"
+    lower_target = target.lower()
+    if lower_target.endswith(".asar"):
+        classification = "JAVASCRIPT_ELECTRON"
+    elif any(lower_target.endswith(ext) for ext in [".apk", ".ipa", ".aab"]):
+        classification = "MOBILE_PACKAGE"
+    elif any(lower_target.endswith(ext) for ext in [".exe", ".dll", ".so", ".dylib", ".bin"]):
+        classification = "NATIVE_BINARY"
+    elif lower_target.startswith("0x") or "evm" in lower_target:
+        classification = "EVM_BYTECODE"
+    elif "app" in lower_target:
+        classification = "JAVASCRIPT_ELECTRON"
+    elif lower_target in ("status", "doctor", "health"):
+        classification = "TELEMETRY_INSPECTION"
+
+    return {
+        "action": "rea_forensics_dispatch",
+        "cartridge": "rea-forensics",
+        "lead_knight": "SIR_HELIOS",
+        "dag_planner": "MERLIN_Ω",
+        "formal_prover": "SIR_CODEX",
+        "offline_reasoner": "JEV_Ω",
+        "target": target,
+        "classification": classification,
+        "evidence_ledger": {
+            "immutability": "VERIFIED_CANONICAL_HASH",
+            "residual_unknowns_gated": True,
+            "provenance_backplane": "PROVENANCE_LEDGER.md",
+        },
+        "sandbox_policy": {
+            "node_ram_ceiling_mb": 512,
+            "max_runtime_seconds": 120,
+            "global_law_03_compliant": True,
+        },
+        "vfs_coordinate": f"vfs://worldtree/forensics/rea/{hashlib.sha256(target.encode()).hexdigest()[:12]}/",
+        "status": "REA_FORENSICS_DISPATCH_ARMED",
+    }
+
+
 def _handle_magsafe_ingest(param: Any, context: dict) -> dict:
     """//MAGSAFE_INGEST — Ingest MagSafe voice recording, SecondBrain summarize & Glass Observatory tap."""
     param_str = str(param or "").strip()
@@ -4998,6 +5053,7 @@ def _handle_migration(param: Any, context: dict) -> dict:
 # Handler lookup table (Runic Commands)
 _HANDLERS = {
     "_handle_reya_handshake": _handle_reya_handshake,
+    "_handle_rea_forensics_dispatch": _handle_rea_forensics_dispatch,
     "_handle_cua_dispatch": _handle_cua_dispatch,
     "_handle_omni_s2s": _handle_omni_s2s,
     "_handle_humanistic_voice": _handle_humanistic_voice,

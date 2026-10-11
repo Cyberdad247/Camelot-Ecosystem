@@ -1,9 +1,17 @@
+import importlib.util
+import sys
+from pathlib import Path
 from unittest.mock import MagicMock
 
 from fastapi.testclient import TestClient
 
-import main
-from main import app
+_ROOT_MAIN = Path(__file__).resolve().parent.parent / "main.py"
+_spec = importlib.util.spec_from_file_location("camelot_root_main", _ROOT_MAIN)
+assert _spec and _spec.loader
+main = importlib.util.module_from_spec(_spec)
+sys.modules["camelot_root_main"] = main
+_spec.loader.exec_module(main)
+app = main.app
 
 client = TestClient(app)
 
