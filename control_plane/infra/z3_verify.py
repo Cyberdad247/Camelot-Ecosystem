@@ -1,5 +1,3 @@
-# SPDX-License-Identifier: MIT
-
 # -*- coding: utf-8 -*-
 """
 Z3 Patch Verification — CAMELOT-OS v9000.14-CYBERTRONIA (Pillar 1/4, P2-T02).
@@ -48,18 +46,36 @@ INVARIANTS: tuple[str, ...] = (
 )
 
 # Dangerous-effect grounding: pattern → fluent it negates (PDDL action effects).
+#
+# These patterns are the *whole* safety decision — z3 only confirms that the
+# grounded effects are consistent with the goal, so anything the patterns miss is
+# accepted. They are therefore written to catch equivalent spellings, not just
+# the canonical one: `git push -f`, `push origin +main` and `truncate -s 0` all
+# previously slipped through while `git push --force origin main` was blocked.
+#
+# This is still recognition, not proof. Treat a Z3_PASS as "no modelled hazard
+# matched", never as "proven safe" — see the module docstring.
 _DANGER: list[tuple[re.Pattern, str]] = [
+    # The ledger nouns are matched WITHOUT \b on either side: they routinely
+    # appear inside identifiers and filenames (PROVENANCE_LEDGER.md,
+    # verification_ledger.jsonl) where "_" is a word character, so \bledger\b
+    # would not match. The destructive verb supplies the specificity instead —
+    # "write tests for the ledger reader" stays benign.
     (re.compile(r"(?:provenance|ledger|\.shadow)"
                 r".*\b(?:delete|remove|rm|drop|truncate|wipe|purge|overwrite|clobber)\b"
                 r"|\b(?:delete|remove|rm|drop|truncate|wipe|purge|overwrite|clobber)\b"
                 r".*(?:provenance|ledger|\.shadow)"
+                # `: > X`, `cat /dev/null > X` truncation via redirect
                 r"|>\s*\S*(?:provenance|ledger)\S*", re.I),
      "provenance_intact"),
     (re.compile(
+        # force-push spellings: --force, -f, --force-with-lease, and the `+ref`
+        # refspec form (`git push origin +main`), plus hard resets.
         r"\bgit\s+push\b[^\n]*?(--force(?:-with-lease)?|(?<!\w)-f(?!\w))"
         r"|\bgit\s+push\b[^\n]*?\+\s*(?:refs/heads/)?(?:main|master)\b"
         r"|\bforce[-\s]?push\b"
         r"|\breset\s+--hard\b"
+        # disabling the server-side guard is equivalent to forcing
         r"|\bdenyNonFastForwards\s*(?:=|\s+)\s*false\b"
         r"|\breceive\.denyDeletes\s*(?:=|\s+)\s*false\b", re.I),
      "main_branch_protected"),
@@ -113,16 +129,36 @@ def ground_effects(patch: PatchIntent) -> dict[str, bool]:
 def verify_patch(patch: PatchIntent) -> Z3Verdict:
     """Symbolically verify a patch. Dangerous patches return Z3_BLOCK.
 
-    If z3 is not installed, returns Z3_UNAVAILABLE (safe pass-through — the
-    upstream shatterpoint guard in anya_gate still applies).
+    Fail-closed when the solver is missing. The safety decision is fully
+    determined by ``ground_effects`` — the solver only confirms that the grounded
+    effects are consistent with the goal — so a negated invariant is decisive
+    with or without z3 installed, and is blocked either way.
+
+    When z3 is absent *and* nothing was flagged, no positive safety claim can be
+    made, so the verdict is unsafe (Z3_UNAVAILABLE) unless the operator opts out
+    explicitly via ``CAMELOT_ALLOW_UNVERIFIED_PATCHES=1``. Previously this path
+    returned ``safe=True`` for every patch, including force-pushes to main.
     """
+    effects = ground_effects(patch)
+    violated = [inv for inv, preserved in effects.items() if not preserved]
+
     try:
         import z3
     except ImportError:
-        return Z3Verdict(True, "Z3_UNAVAILABLE",
-                         "z3-solver not installed; shatterpoint guard still active")
+        if violated:
+            return Z3Verdict(False, "Z3_BLOCK",
+                             "z3-solver absent; patch grounding negates a safety "
+                             "invariant, which is decisive without the solver",
+                             violated=violated)
+        if os.environ.get("CAMELOT_ALLOW_UNVERIFIED_PATCHES") == "1":
+            return Z3Verdict(True, "Z3_UNAVAILABLE",
+                             "z3-solver not installed; no danger pattern matched and "
+                             "CAMELOT_ALLOW_UNVERIFIED_PATCHES=1 permits the run")
+        return Z3Verdict(False, "Z3_UNAVAILABLE",
+                         "z3-solver not installed; cannot verify safety invariants. "
+                         "Install z3-solver, or set CAMELOT_ALLOW_UNVERIFIED_PATCHES=1 "
+                         "to accept unverified patches")
 
-    effects = ground_effects(patch)
     fluents = {inv: z3.Bool(inv) for inv in INVARIANTS}
 
     solver = z3.Solver()
@@ -140,7 +176,6 @@ def verify_patch(patch: PatchIntent) -> Z3Verdict:
     if satisfiable:
         return Z3Verdict(True, "Z3_PASS",
                          "no safety invariant violated (goal SAT under patch effects)")
-    violated = [inv for inv, preserved in effects.items() if not preserved]
     return Z3Verdict(False, "Z3_BLOCK",
                      "patch effects make the safety goal unsatisfiable",
                      violated=violated)

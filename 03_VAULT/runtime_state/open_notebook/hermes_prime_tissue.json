@@ -1,6 +1,17 @@
 [
   {
     "knight_id": "HERMES_PRIME",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//BITROUTER status",
+    "content": "{\"detail\": \"VFS state realigned with PhialEngine\", \"action\": \"sync_vfs_workspace\", \"files\": [{\"name\": \"harness.md\", \"bytes\": 999, \"mtime\": \"2026-09-25T14:51:33.749804+00:00\"}, {\"name\": \"merlin_notebook_blend.md\", \"bytes\": 2221, \"mtime\": \"2026-09-25T14:51:33.749804+00:00\"}, {\"name\": \"skills.md\", \"bytes\": 863, \"mtime\": \"2026-09-25T14:51:33.749804+00:00\"}, {\"name\": \"soul.md\", \"bytes\": 2886, \"mtime\": \"2026-09-25T14:51:33.749804+00:00\"}, {\"name\": \"spark.md\", \"bytes\": 1259, \"mtime\": \"2026-09-25T14:51:33.761964+00:00\"}], \"scaffold_present\": [\"soul.md\", \"spark.md\", \"harness.md\", \"skills.md\", \"merlin_notebook_blend.md\"], \"missing\": [], \"status\": \"SYNCED\"}",
+    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
+    "open_viking_tether": "open_viking://worldtree/hermes_prime",
+    "updated_at": "2026-10-06T16:57:51.755128+00:00"
+  },
+  {
+    "knight_id": "HERMES_PRIME",
     "cloudbrain_uuid": "28f89cb6-5048-4b5d-9e94-376082d24744",
     "spark_id": "0x28F89CB650484B5D9E94376082D24744",
     "role": "Always-on VPS Co-Pilot & Synthesis Engine",

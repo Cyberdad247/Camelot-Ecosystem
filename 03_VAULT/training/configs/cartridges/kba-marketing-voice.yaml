@@ -1,0 +1,52 @@
+name: KBA Marketing Voice & Offline Generation Cartridge
+version: "1000.1.0"
+domain: MARKETING_AUDIO
+knight: Lady Apis / Sir Sonus
+layer: L4_SEMANTIC_MEDIA
+mode: OFFLINE_WORKER
+
+description: >
+  Isolates VibeVoiceFusion's LoRA adaptation and high-throughput batching logic into the
+  Kickbox Audio (KBA) Marketing offline generation engine. Ensures zero competition with
+  the live sub-300ms duplex voice mesh.
+
+vibe_voice_fusion:
+  model_base: "microsoft/VibeVoice-Realtime-0.5B"
+  lora_adapters:
+    - id: "kba_spokesperson_v1"
+      rank: 16
+      alpha: 32
+      target_modules: ["q_proj", "v_proj", "diffusion_head.cross_attn"]
+      description: "Authoritative, rhythmic marketing tone for KBA promotional campaigns"
+    - id: "sonic_narrator_v2"
+      rank: 8
+      alpha: 16
+      target_modules: ["diffusion_head.temporal_attn"]
+      description: "Deep, resonant cinematic voiceover narration"
+
+batching_engine:
+  max_batch_size: 4
+  max_sequence_length_tokens: 4096
+  scheduler: "dpm_solver_multistep"
+  inference_steps: 4
+  acoustic_frame_rate_hz: 7.5
+  output_sample_rate: 24000
+  audio_watermarking:
+    enabled: true
+    algorithm: "sigma_sha256_lsb"
+
+isolation_policy:
+  live_mesh_interference: "STRICTLY_FORBIDDEN"
+  max_resident_ram_mb: 1800
+  allowed_windows:
+    - "OFFLINE_CAMPAIGN_BATCH"
+    - "SCHEDULED_NIGHTLY_INGEST"
+    - "EXPLICIT_HITL_GENERATION"
+  preemption:
+    behavior: "SUSPEND_ON_INCOMING_CALL"
+    grace_period_ms: 100
+
+anti_patterns:
+  - "Running offline batch diffusion during active WebRTC S2S call"
+  - "Allocating unquantized PyTorch FP32 models on the 8GB edge workstation"
+  - "Bypassing Lady Apis swarm conductor queue"

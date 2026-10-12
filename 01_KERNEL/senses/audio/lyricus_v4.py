@@ -70,7 +70,8 @@ except ImportError:
         "knight_voices",
         _os.path.join(_os.path.dirname(__file__), "knight_voices.py"),
     )
-    _mod = _ilu.module_from_spec(_kv); _kv.loader.exec_module(_mod)  # type: ignore
+    _mod = _ilu.module_from_spec(_kv)
+    _kv.loader.exec_module(_mod)  # type: ignore
     get_profile = _mod.get_profile
     KnightVocalProfile = _mod.KnightVocalProfile
 

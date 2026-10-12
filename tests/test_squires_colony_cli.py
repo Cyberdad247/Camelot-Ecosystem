@@ -76,3 +76,42 @@ def test_status_reports_graft_graph(monkeypatch, tmp_path, capsys):
     (tmp_path / "graft" / "manifest.json").write_text("{}", encoding="utf-8")
     colony.cmd_status(tmp_path, None)
     assert "✅" in capsys.readouterr().out
+
+
+def test_pagekeeper_cli(capsys, tmp_path):
+    colony.main(["pagekeeper", str(tmp_path), "--json"])
+    captured = capsys.readouterr().out
+    assert "node_ceiling_mb" in captured
+    assert "utilization_pct" in captured
+
+
+def test_tokenpress_cli(capsys, tmp_path):
+    import json
+    colony.main(["tokenpress", str(tmp_path), "--query", "ANYA_IS_THE_GATE on CYBERTRONIA", "--json"])
+    captured = capsys.readouterr().out
+    data = json.loads(captured)
+    assert "metrics" in data
+    assert "symbolect" in data
+    assert "⟐ANYA_GATE⟐" in data["symbolect"]
+
+
+def test_uma_cli(capsys, tmp_path):
+    import json
+    colony.main(["uma", str(tmp_path), "--json"])
+    captured = capsys.readouterr().out
+    data = json.loads(captured)
+    assert "cybertronia_total_mb" in data
+    assert "excalibur_free_mb" in data
+
+
+def test_coldvault_cli(capsys, tmp_path):
+    import json
+    # Setup dummy db inside tmp_path
+    (tmp_path / "03_VAULT" / "memory").mkdir(parents=True, exist_ok=True)
+    colony.main(["coldvault", str(tmp_path), "--json"])
+    captured = capsys.readouterr().out
+    data = json.loads(captured)
+    assert "total_databases_scanned" in data
+    assert "status" in data
+
+

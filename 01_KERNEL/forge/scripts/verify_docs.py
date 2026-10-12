@@ -17,7 +17,7 @@ def analyze_docs():
     # Map of file references to check (simplified)
     references = {"antigravity.py": False, "merlin_omega.py": False, "kernel.py": False, "PROVENANCE_LEDGER.md": False}
 
-    for root, _dirs, files in os.walk(r"C:\Users\vizio\CAMELOT_OS"):
+    for _root, _dirs, files in os.walk(r"C:\Users\vizio\CAMELOT_OS"):
         for file in files:
             if file in references:
                 references[file] = True
@@ -38,17 +38,17 @@ def analyze_docs():
     for src_dir in SRC_DIRS:
         if not os.path.exists(src_dir):
             continue
-        for root, _dirs, files in os.walk(src_dir):
+        for _root, _dirs, files in os.walk(src_dir):
             for file in files:
                 if file.endswith(".py"):
                     try:
-                        with open(os.path.join(root, file), "r", encoding="utf-8") as f:
+                        with open(os.path.join(_root, file), "r", encoding="utf-8") as f:
                             content = f.read()
                             for cmd in commands_to_check:
                                 # Look for string literal or comment
                                 if cmd in content:
                                     found_commands[cmd] = True
-                    except:
+                    except Exception:
                         pass
 
     for cmd, found in found_commands.items():

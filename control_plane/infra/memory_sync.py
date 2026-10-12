@@ -139,7 +139,7 @@ class MemorySyncer:
 
         # Try to synthesize via CloudBrain
         try:
-            from control_plane.cloudbrain_sync import query_cloud_brain
+            from control_plane.infra.cloudbrain_sync import query_cloud_brain
 
             query = f"""
 Consolidate these {category} synthesis insights into one coherent summary:

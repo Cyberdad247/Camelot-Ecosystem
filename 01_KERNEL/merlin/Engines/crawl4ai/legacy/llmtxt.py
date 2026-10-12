@@ -297,7 +297,7 @@ Wrap your response in <index>...</index> tags.
                 try:
                     with open(file, "r", encoding="utf-8") as f_obj:
                         content = f_obj.read().strip()
-                        lines = [l.strip() for l in content.split("\n") if l.strip()]
+                        lines = [ln.strip() for ln in content.split("\n") if ln.strip()]
 
                     for line in lines:
                         is_valid, error = self._validate_fact_line(line)

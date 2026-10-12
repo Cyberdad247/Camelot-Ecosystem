@@ -2,19 +2,29 @@
 
 import { Prisma } from './generated/client';
 
+export interface TransactionLineInput {
+  debit?: number;
+  credit?: number;
+  [key: string]: unknown;
+}
+
 // Pure validation helper — unit-testable without a Prisma context.
 // Splits Responsibility: Extension glue lives in `ledgerValidator` below;
 // invariant logic lives here so the test layer doesn't need to mock the
 // Prisma runtime.
-export function validateTransactionBatchBalance(args: any) {
-  if (args.data) {
-    const transactions = (Array.isArray(args.data) ? args.data : [args.data]) as Prisma.TransactionCreateManyInput[];
+export function validateTransactionBatchBalance(args: {
+  data?: TransactionLineInput | TransactionLineInput[] | unknown;
+}) {
+  if (args && typeof args === 'object' && 'data' in args && args.data) {
+    const transactions = (
+      Array.isArray(args.data) ? args.data : [args.data]
+    ) as TransactionLineInput[];
     let totalDebit = 0;
     let totalCredit = 0;
 
     for (const transaction of transactions) {
-      totalDebit += transaction.debit || 0;
-      totalCredit += transaction.credit || 0;
+      totalDebit += Number(transaction.debit) || 0;
+      totalCredit += Number(transaction.credit) || 0;
     }
 
     if (totalDebit !== totalCredit) {
@@ -31,7 +41,7 @@ export const ledgerValidator = Prisma.defineExtension({
   query: {
     transaction: {
       async createMany({ args, query }) {
-        validateTransactionBatchBalance(args);
+        validateTransactionBatchBalance(args as unknown as { data?: TransactionLineInput[] });
         return query(args);
       },
     },

@@ -290,9 +290,35 @@ async def rebuild_embeddings_command(
 
         # Process notes
         logger.info(f"\nProcessing {len(items['notes'])} notes...")
+
+        # Batch load all requested notes to avoid N+1 query issue
+        notes_cache = {}
+        if items["notes"]:
+            try:
+                batched_ids = [ensure_record_id(nid) for nid in items["notes"]]
+
+                # Chunk IDs to prevent database payload limits
+                CHUNK_SIZE = 500
+                for i in range(0, len(batched_ids), CHUNK_SIZE):
+                    chunk = batched_ids[i : i + CHUNK_SIZE]
+                    notes_data = await repo_query("SELECT * FROM note WHERE id IN $ids", {"ids": chunk})
+                    if notes_data:
+                        for n in notes_data:
+                            # SurrealDB returns IDs with the table prefix, we map them as strings
+                            n_id = str(n.get("id"))
+                            notes_cache[n_id] = Note(**n)
+            except Exception as e:
+                logger.error(f"Failed to batch load notes: {e}")
+
         for idx, note_id in enumerate(items["notes"], 1):
             try:
-                note = await Note.get(note_id)
+                # Try getting from cache, fallback to DB if not found or cache failed
+                formatted_id = str(ensure_record_id(note_id))
+                note = notes_cache.get(formatted_id) or notes_cache.get(note_id)
+
+                if not note:
+                    note = await Note.get(note_id)
+
                 if not note:
                     logger.warning(f"Note {note_id} not found, skipping")
                     failed_items += 1

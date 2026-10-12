@@ -1,0 +1,18 @@
+{
+  "model_type": "vibevoice_realtime",
+  "architectures": [
+    "VibeVoiceRealtimeForConditionalGeneration"
+  ],
+  "hidden_size": 896,
+  "num_hidden_layers": 24,
+  "num_attention_heads": 14,
+  "intermediate_size": 4864,
+  "acoustic_frame_rate_hz": 7.5,
+  "quantization": "I8_S + I2_S Heterogeneous GGML",
+  "diffusion_head": {
+    "in_channels": 64,
+    "latent_dim": 128,
+    "steps": 4,
+    "ttfa_target_ms": 250
+  }
+}

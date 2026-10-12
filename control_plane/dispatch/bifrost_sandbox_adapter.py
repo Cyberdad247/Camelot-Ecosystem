@@ -11,7 +11,7 @@ so we add it to sys.path the same way the rest of the repo bridges into 02_FORGE
 Use this from the bifrost gateway ingress instead of routing a governed command
 straight to a terminal:
 
-    from control_plane.bifrost_sandbox_adapter import get_bridge
+    from control_plane.dispatch.bifrost_sandbox_adapter import get_bridge
     result = get_bridge().handle_signed(raw_body, hmac_signature)
 
 Environment:
@@ -65,7 +65,7 @@ def build_bridge(
     pkg = packages_dir or os.getenv("CAMELOT_CARTRIDGE_PACKAGES") or str(_DEFAULT_PACKAGES)
     active_registry = registry or ToolRegistry(with_builtins=True)
     try:
-        from control_plane.bifrost_appwrite_dispatch import dispatch_to_appwrite
+        from control_plane.dispatch.bifrost_appwrite_dispatch import dispatch_to_appwrite
         if hasattr(active_registry, "register"):
             active_registry.register("appwrite_egress", dispatch_to_appwrite)
         elif hasattr(active_registry, "bind"):

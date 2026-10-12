@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Check, Loader2, Settings2, ShieldAlert } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { bifrostFetch } from '@/lib/bifrostClient';
 import { runtimeConfig } from '@/config/runtime';
+import { bifrostFetch } from '@/lib/bifrostClient';
+import { cn } from '@/lib/utils';
+import { Check, Loader2, Settings2, ShieldAlert } from 'lucide-react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 interface CognitiveConfig {
   sync_interval: number;
@@ -42,7 +42,9 @@ export default function ConfigPanel() {
     }
   }, []);
 
-  useEffect(() => { fetchConfig(); }, [fetchConfig]);
+  useEffect(() => {
+    fetchConfig();
+  }, [fetchConfig]);
 
   const save = useCallback(async () => {
     const parsed = Number(draftInterval);
@@ -69,10 +71,9 @@ export default function ConfigPanel() {
     }
   }, [draftInterval, draftQuery]);
 
-  const dirty = config !== null && (
-    draftInterval !== String(config.sync_interval) ||
-    draftQuery !== (config.sync_query ?? '')
-  );
+  const dirty =
+    config !== null &&
+    (draftInterval !== String(config.sync_interval) || draftQuery !== (config.sync_query ?? ''));
 
   return (
     <div className="rounded-xl border border-slate-800/60 bg-slate-900/60 p-4">
@@ -104,7 +105,10 @@ export default function ConfigPanel() {
               min={0}
               step="any"
               value={draftInterval}
-              onChange={(e) => { setDraftInterval(e.target.value); setSaveState('idle'); }}
+              onChange={(e) => {
+                setDraftInterval(e.target.value);
+                setSaveState('idle');
+              }}
               className="w-32 rounded-lg border border-slate-700 bg-slate-950/60 px-2.5 py-1.5 text-sm text-slate-200 font-mono focus:outline-none focus:border-fuchsia-500/60"
             />
           </label>
@@ -116,7 +120,10 @@ export default function ConfigPanel() {
             <input
               type="text"
               value={draftQuery}
-              onChange={(e) => { setDraftQuery(e.target.value); setSaveState('idle'); }}
+              onChange={(e) => {
+                setDraftQuery(e.target.value);
+                setSaveState('idle');
+              }}
               className="w-full rounded-lg border border-slate-700 bg-slate-950/60 px-2.5 py-1.5 text-sm text-slate-200 focus:outline-none focus:border-fuchsia-500/60"
             />
           </label>
@@ -138,7 +145,9 @@ export default function ConfigPanel() {
           </div>
 
           {saveState === 'error' && (
-            <p className="text-[10px] text-red-400">Failed to save — check the values and try again.</p>
+            <p className="text-[10px] text-red-400">
+              Failed to save — check the values and try again.
+            </p>
           )}
         </div>
       )}

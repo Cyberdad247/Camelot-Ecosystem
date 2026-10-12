@@ -44,7 +44,7 @@ dependencies = [
 
     # ── Cloud / Infra ──────────────────────────────────────────────────────
     "modal",
-    "appwrite>=2.0.0,<3.0.0",
+    "appwrite>=2.0.0,<25.0.0",
     "replicate",
     "cryptography>=41.0",
     "PyJWT[crypto]",

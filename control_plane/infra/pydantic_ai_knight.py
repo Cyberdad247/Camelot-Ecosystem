@@ -1,5 +1,3 @@
-# SPDX-License-Identifier: MIT
-
 # -*- coding: utf-8 -*-
 """
 Pydantic AI Knight — CAMELOT-OS Reactive Agent

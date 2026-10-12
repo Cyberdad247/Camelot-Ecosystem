@@ -32,8 +32,8 @@ class KnightVocalProfile(NamedTuple):
     formant_shift: float  # warmth dimension: -1.0 warm → +1.0 cool
     energy:        float  # synthesis intensity [0.0 → 1.0]
     prosody:       float  # expressiveness [0.0 → 1.0]
-    tts_engine:    str    # preferred engine: "kokoro"|"piper"|"silero"|"speecht5"
-    stt_engine:    str    # preferred STT: "faster_whisper"|"wav2vec2"|"silero_only"
+    tts_engine:    str    # preferred engine: "vibevoice_realtime"|"kokoro"|"piper"|"silero"|"speecht5"
+    stt_engine:    str    # preferred STT: "vibe_asr"|"faster_whisper"|"wav2vec2"|"silero_only"
     sigma:         str    # SHA256(knight_id)[:16] — audio watermark/encryption seed
 
 

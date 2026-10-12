@@ -15,7 +15,7 @@ try:
     from podcast_creator import configure, create_podcast
 except ImportError as e:
     logger.error(f"Failed to import podcast_creator: {e}")
-    raise ValueError("podcast_creator library not available")
+    raise ValueError("podcast_creator library not available") from e
 
 
 def full_model_dump(model):

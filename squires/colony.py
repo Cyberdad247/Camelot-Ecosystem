@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -140,6 +141,15 @@ def cmd_ghost(root: Path, args: argparse.Namespace) -> None:
             print(f"[{flag.severity.upper()}] {flag.kind} {flag.file}:{flag.line} - {flag.detail}")
         print(f"\nSummary: {summary}")
 
+    # CI mode: non-zero exit when critical flags exist (GHOST itself is
+    # read-only — no HITL gate involved, unlike triage's report write).
+    if getattr(args, "fail_on_critical", False) and report.critical:
+        _print(
+            f"❌ {len(report.critical)} critical flag(s) — failing (CI)",
+            "red",
+        )
+        sys.exit(2)
+
 
 def cmd_vector(root: Path, args: argparse.Namespace) -> None:
     from .scan import scan
@@ -271,6 +281,16 @@ def cmd_status(root: Path, args: argparse.Namespace) -> None:
             except Exception:
                 row("Index", "corrupted", "red")
 
+        try:
+            from .pagekeeper import SquirePageKeeper
+            pk = SquirePageKeeper()
+            audit = pk.audit()
+            status_color = "green" if audit.node_compliant else "red"
+            row("PageKeeper RAM", f"{audit.used_physical_mb:,.0f}/{audit.total_physical_mb:,.0f} MB ({audit.utilization_pct}%)", status_color)
+            row("Node Compliance", f"Ceiling {audit.node_ceiling_mb:.0f} MB — {'PASS' if audit.node_compliant else 'WARN'}", status_color)
+        except Exception:
+            pass
+
         console.print(table)
     else:
         print(f"Root:   {root}")
@@ -278,6 +298,13 @@ def cmd_status(root: Path, args: argparse.Namespace) -> None:
         print(f"Report: {'✅' if report_file.exists() else '—'} {report_file}")
         graft_manifest = base_dir / "graft" / "manifest.json"
         print(f"Graft:  {'✅' if graft_manifest.exists() else '—'} {graft_manifest}")
+        try:
+            from .pagekeeper import SquirePageKeeper
+            pk = SquirePageKeeper()
+            audit = pk.audit()
+            print(f"RAM:    {'✅' if audit.node_compliant else '⚠️'} {audit.used_physical_mb:,.0f}/{audit.total_physical_mb:,.0f} MB ({audit.utilization_pct}%) [Node Ceiling: {audit.node_ceiling_mb:.0f} MB]")
+        except Exception:
+            pass
 
 
 def cmd_graph(root: Path, args: argparse.Namespace) -> None:
@@ -295,6 +322,207 @@ def cmd_graph(root: Path, args: argparse.Namespace) -> None:
     rc = subprocess.run([graft, *argv], cwd=str(base)).returncode
     if rc:
         sys.exit(rc)
+
+
+def cmd_conform(root: Path, args: argparse.Namespace) -> None:
+    """Hardware-accelerated filesystem reconciliation & deduplication via conform.exe."""
+    conform_bin = Path(os.environ.get("CONFORM_BIN", Path.home() / "tools" / "conform" / "target" / "release" / "conform.exe"))
+    if not conform_bin.exists():
+        conform_bin = Path.home() / "tools" / "conform" / "target" / "debug" / "conform.exe"
+
+    if not conform_bin.exists():
+        _print(f"❌ conform.exe binary not found at {conform_bin} — run 'cargo build --release' in tools/conform", "red")
+        sys.exit(1)
+
+    subcmd = "dedupe" if getattr(args, "dedupe", False) else "scan"
+    cmd = [str(conform_bin), subcmd, str(root)]
+    if getattr(args, "dry_run", False) and subcmd == "dedupe":
+        cmd.append("--dry-run")
+    if getattr(args, "min_size", None) and subcmd == "dedupe":
+        cmd.extend(["--min-size", str(args.min_size)])
+
+    _print(f"⚡ Delegating to Conform engine: {' '.join(cmd)}", "dim")
+    rc = subprocess.run(cmd).returncode
+    if rc == 0 and getattr(args, "dedupe", False) and not getattr(args, "dry_run", False):
+        try:
+            from control_plane.infra.conform_xp_hook import award_xp_for_conform
+            award_xp_for_conform("sir_forge", "A", 100, f"Colony Conform deduplication on {root.name}", apply=True)
+        except Exception:
+            pass
+    if rc:
+        sys.exit(rc)
+
+
+def cmd_pagekeeper(root: Path, args: argparse.Namespace) -> None:
+    """Autonomous working set balancing and memory governance."""
+    from .pagekeeper import SquirePageKeeper
+    threshold = getattr(args, "threshold", 80.0) or 80.0
+    execute_trim = getattr(args, "trim", False)
+    keeper = SquirePageKeeper(pressure_threshold_pct=threshold)
+
+    audit = keeper.govern(force_trim=execute_trim) if execute_trim else keeper.audit()
+
+    if getattr(args, "json", False):
+        print(json.dumps(audit.to_dict(), indent=2))
+        return
+
+    if _RICH:
+        console = _console()
+        table = Table(title="Squire PageKeeper — Memory Governance", show_header=False, box=None)
+        table.add_column("Metric", style="bold", width=25)
+        table.add_column("Value")
+
+        def r(k, v, s=""):
+            table.add_row(k, f"[{s}]{v}[/{s}]" if s else str(v))
+
+        r("Physical Total", f"{audit.total_physical_mb:,.1f} MB")
+        r("Physical Free", f"{audit.free_physical_mb:,.1f} MB", "green")
+        r("Physical Used", f"{audit.used_physical_mb:,.1f} MB ({audit.utilization_pct}%)")
+        r("Current Process", f"{audit.process_working_set_mb:,.1f} MB")
+        r("Node Ceiling (4GB)", f"{audit.node_ceiling_mb:,.1f} MB", "green" if audit.node_compliant else "red")
+        r("Pressure Detected", f"{audit.pressure_detected}", "yellow" if audit.pressure_detected else "green")
+        r("Action Taken", audit.action_taken, "cyan")
+        if audit.reclaimed_mb > 0:
+            r("Reclaimed RAM", f"+{audit.reclaimed_mb:,.1f} MB", "bold green")
+        console.print(table)
+    else:
+        print(f"RAM Total:     {audit.total_physical_mb:,.1f} MB")
+        print(f"RAM Free:      {audit.free_physical_mb:,.1f} MB")
+        print(f"RAM Used:      {audit.used_physical_mb:,.1f} MB ({audit.utilization_pct}%)")
+        print(f"Process RAM:   {audit.process_working_set_mb:,.1f} MB")
+        print(f"Node Ceiling:  {audit.node_ceiling_mb:,.1f} MB ({'COMPLIANT' if audit.node_compliant else 'OVER_LIMIT'})")
+        print(f"Action:        {audit.action_taken}")
+        if audit.reclaimed_mb > 0:
+            print(f"Reclaimed:     +{audit.reclaimed_mb:,.1f} MB")
+
+
+def cmd_tokenpress(root: Path, args: argparse.Namespace) -> None:
+    """Inter-agent payload and Symbolect compression benchmark."""
+    from .tokenpress import SquireTokenPress
+    press = SquireTokenPress()
+
+    sample = (
+        "All commands must pass ANYA_IS_THE_GATE on CYBERTRONIA before writing to PROVENANCE_LEDGER.md. "
+        "MERLIN_OMEGA coordinates with SIR_HELIOS and SIR_LUCAS over TAILSCALE_MESH on Samsung Galaxy S26 Ultra."
+    )
+    if args.query:
+        sample = " ".join(args.query)
+
+    blob = press.compress_payload(sample)
+    metrics = press.get_metrics(sample, blob)
+    sym_compressed = press.compress_symbolect(sample)
+
+    if getattr(args, "json", False):
+        res = {
+            "metrics": metrics,
+            "symbolect": sym_compressed,
+            "sample_len": len(sample),
+            "blob_len": len(blob),
+        }
+        print(json.dumps(res, indent=2, ensure_ascii=False))
+        return
+
+    if _RICH:
+        console = _console()
+        table = Table(title="Squire TokenPress — Payload & Symbolect Compression", show_header=False, box=None)
+        table.add_column("Property", style="bold", width=22)
+        table.add_column("Value")
+        table.add_row("Algorithm", metrics["algorithm"])
+        table.add_row("Original Size", f"{metrics['original_bytes']} bytes")
+        table.add_row("Compressed Size", f"{metrics['compressed_bytes']} bytes", "green")
+        table.add_row("Compression Ratio", metrics["ratio"], "cyan")
+        table.add_row("RAM Savings", f"{metrics['savings_pct']}%", "bold green")
+        table.add_row("Symbolect Encoded", sym_compressed[:80] + "..." if len(sym_compressed) > 80 else sym_compressed, "magenta")
+        console.print(table)
+    else:
+        print(f"Algorithm:    {metrics['algorithm']}")
+        print(f"Original:     {metrics['original_bytes']} bytes")
+        print(f"Compressed:   {metrics['compressed_bytes']} bytes")
+        print(f"Ratio:        {metrics['ratio']}")
+        print(f"Savings:      {metrics['savings_pct']}%")
+        print(f"Symbolect:    {sym_compressed}")
+
+
+def cmd_uma(root: Path, args: argparse.Namespace) -> None:
+    """Unified Memory Architecture (UMA) fleet memory balancer & offloader."""
+    from .uma_sentry import SquireUMASentry
+    threshold = getattr(args, "threshold", 78.0) or 78.0
+    sentry = SquireUMASentry(home=root, pressure_threshold_pct=threshold)
+
+    balance = sentry.get_fleet_memory_balance()
+
+    if getattr(args, "offload_test", False):
+        res = sentry.dispatch_offload(
+            task_id=f"uma-test-{int(time.time())}",
+            action="heavy_ast_parse",
+            target_module="control_plane",
+            payload={"test": "sample_offload_payload", "timestamp": time.time()},
+            estimated_ram_mb=850.0,
+        )
+        if getattr(args, "json", False):
+            print(json.dumps(res, indent=2, ensure_ascii=False))
+            return
+        _print(f"⚡ UMA Offload Result: {res['status']} -> {res['execution_node']}", "bold green")
+        return
+
+    if getattr(args, "json", False):
+        print(json.dumps(balance.to_dict(), indent=2, ensure_ascii=False))
+        return
+
+    if _RICH:
+        console = _console()
+        table = Table(title="Squire UMA Sentry — Fleet Memory Balance", show_header=False, box=None)
+        table.add_column("Node", style="bold", width=22)
+        table.add_column("Memory Status")
+
+        def r(k, v, s=""):
+            table.add_row(k, f"[{s}]{v}[/{s}]" if s else str(v))
+
+        r("Cybertronia (Host)", f"{balance.cybertronia_used_mb:,.0f}/{balance.cybertronia_total_mb:,.0f} MB ({balance.cybertronia_util_pct}%)", "yellow" if balance.cybertronia_util_pct > 80 else "green")
+        r("Excalibur (S26 Ultra)", f"{balance.excalibur_free_mb:,.0f} MB Free / {balance.excalibur_total_mb:,.0f} MB LPDDR5X", "bold green")
+        r("VPS Sovereign Hub", f"{balance.vps_free_mb:,.0f} MB Free / {balance.vps_total_mb:,.0f} MB", "cyan")
+        r("Offload Recommended", str(balance.offload_recommended), "bold magenta" if balance.offload_recommended else "dim")
+        r("Sentry Rationale", balance.rationale, "italic")
+        console.print(table)
+    else:
+        print(f"Cybertronia:  {balance.cybertronia_used_mb:,.0f}/{balance.cybertronia_total_mb:,.0f} MB ({balance.cybertronia_util_pct}%)")
+        print(f"S26 Ultra:    {balance.excalibur_free_mb:,.0f} MB Free / {balance.excalibur_total_mb:,.0f} MB")
+        print(f"VPS Hub:      {balance.vps_free_mb:,.0f} MB Free / {balance.vps_total_mb:,.0f} MB")
+        print(f"Offload Rec:  {balance.offload_recommended}")
+        print(f"Rationale:    {balance.rationale}")
+
+
+def cmd_coldvault(root: Path, args: argparse.Namespace) -> None:
+    """Episodic memory compactor & SQLite-vec / Graphiti vacuuming."""
+    from .coldvault import SquireColdVault
+    vault = SquireColdVault(home=root)
+    do_vacuum = getattr(args, "vacuum", False)
+    max_dbs = getattr(args, "max_dbs", 50) or 50
+
+    report = vault.vacuum_vault(force_vacuum=do_vacuum, max_dbs=max_dbs)
+
+    if getattr(args, "json", False):
+        print(json.dumps(report.to_dict(), indent=2, ensure_ascii=False))
+        return
+
+    if _RICH:
+        console = _console()
+        table = Table(title="Squire ColdVault — Database Compaction Report", show_header=False, box=None)
+        table.add_column("Metric", style="bold", width=25)
+        table.add_column("Value")
+        table.add_row("Databases Scanned", str(report.total_databases_scanned))
+        table.add_row("Databases Compacted", str(report.total_databases_compacted), "green")
+        table.add_row("Disk Size Before", f"{report.bytes_before / (1024*1024):,.2f} MB")
+        table.add_row("Disk Size After", f"{report.bytes_after / (1024*1024):,.2f} MB")
+        table.add_row("Reclaimed Storage", f"+{report.reclaimed_mb} MB", "bold green")
+        table.add_row("Compaction Status", report.status, "cyan")
+        console.print(table)
+    else:
+        print(f"Databases Scanned:   {report.total_databases_scanned}")
+        print(f"Databases Compacted: {report.total_databases_compacted}")
+        print(f"Size Before:         {report.bytes_before / (1024*1024):,.2f} MB")
+        print(f"Size After:          {report.bytes_after / (1024*1024):,.2f} MB")
+        print(f"Reclaimed:           +{report.reclaimed_mb} MB")
 
 
 # ── Cron helpers ─────────────────────────────────────────────────────────────
@@ -372,7 +600,7 @@ def main(argv: list[str] | None = None) -> None:
     )
     parser.add_argument(
         "command",
-        choices=["scan", "index", "ghost", "vector", "triage", "status", "graph"],
+        choices=["scan", "index", "ghost", "vector", "triage", "status", "graph", "conform", "pagekeeper", "tokenpress", "uma", "coldvault"],
         help="Squire pipeline stage to run",
     )
     parser.add_argument(
@@ -381,11 +609,22 @@ def main(argv: list[str] | None = None) -> None:
         default=".",
         help="Root directory to analyze (default: current dir)",
     )
-    parser.add_argument("--query", nargs="+", help="Search query (vector: keywords; graph: graft ask)")
+    parser.add_argument("--query", nargs="+", help="Search query (vector: keywords; graph: graft ask; tokenpress: text to compress)")
     parser.add_argument("--top-k", type=int, default=10, help="Number of vector results (default: 10)")
     parser.add_argument("--auto-approve", action="store_true", help="Skip SENTINEL HITL gate (CI mode)")
+    parser.add_argument("--fail-on-critical", action="store_true",
+                        help="ghost: exit 2 when critical flags found (CI secret gate)")
     parser.add_argument("--schedule", metavar="INTERVAL", default="",
                         help="Cron mode for triage: repeat on interval e.g. '6h', '30m', '3600'")
+    parser.add_argument("--dedupe", action="store_true", help="conform: execute atomic hardlink deduplication")
+    parser.add_argument("--dry-run", action="store_true", help="conform: simulate deduplication without linking")
+    parser.add_argument("--min-size", type=int, default=1, help="conform: minimum file size in bytes for dedupe")
+    parser.add_argument("--trim", action="store_true", help="pagekeeper: execute working set trim")
+    parser.add_argument("--threshold", type=float, default=80.0, help="pagekeeper/uma: RAM utilization threshold pct")
+    parser.add_argument("--offload-test", action="store_true", help="uma: dispatch test offload payload to Excalibur")
+    parser.add_argument("--vacuum", action="store_true", help="coldvault: execute force database vacuuming")
+    parser.add_argument("--max-dbs", type=int, default=50, help="coldvault: max databases to vacuum in single run")
+    parser.add_argument("--json", action="store_true", help="output machine-readable JSON")
 
     args = parser.parse_args(argv)
     root = Path(args.path).resolve()
@@ -395,13 +634,18 @@ def main(argv: list[str] | None = None) -> None:
         sys.exit(1)
 
     dispatch = {
-        "scan":   cmd_scan,
-        "index":  cmd_index,
-        "ghost":  cmd_ghost,
-        "vector": cmd_vector,
-        "triage": cmd_triage,
-        "status": cmd_status,
-        "graph":  cmd_graph,
+        "scan":       cmd_scan,
+        "index":      cmd_index,
+        "ghost":      cmd_ghost,
+        "vector":     cmd_vector,
+        "triage":     cmd_triage,
+        "status":     cmd_status,
+        "graph":      cmd_graph,
+        "conform":    cmd_conform,
+        "pagekeeper": cmd_pagekeeper,
+        "tokenpress": cmd_tokenpress,
+        "uma":        cmd_uma,
+        "coldvault":  cmd_coldvault,
     }
 
     if args.schedule and args.command == "triage":

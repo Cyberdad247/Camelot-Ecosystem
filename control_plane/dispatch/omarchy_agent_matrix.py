@@ -60,6 +60,7 @@ _helios_cb = get_cloudbrain_node_for_knight("SIR_HELIOS")
 _hermes_cb = get_cloudbrain_node_for_knight("HERMES_PRIME")
 _codex_cb = get_cloudbrain_node_for_knight("SIR_CODEX")
 _boris_cb = get_cloudbrain_node_for_knight("SIR_BORIS")
+_forge_cb = get_cloudbrain_node_for_knight("SIR_FORGE")
 
 OMARCHY_KNIGHT_MATRIX: Dict[str, AgentMapping] = {
     "hermes": AgentMapping(
@@ -111,6 +112,16 @@ OMARCHY_KNIGHT_MATRIX: Dict[str, AgentMapping] = {
         proxy_target="local://camelot/sir_helios",
         cloudbrain_uuid=_helios_cb["uuid"],
         cloudbrain_tags=_helios_cb["tags"],
+    ),
+    "opencode": AgentMapping(
+        omarchy_cmd="opencode",
+        knight_id="SIR_FORGE",
+        engine="opencode (SST harness / Kinetic Code Generation)",
+        rune_alias="//FORGE",
+        role="Kinetic Code Generation & Industrial-Scale Refactoring",
+        proxy_target="local://camelot/sir_forge",
+        cloudbrain_uuid=_forge_cb["uuid"],
+        cloudbrain_tags=_forge_cb["tags"],
     ),
 }
 

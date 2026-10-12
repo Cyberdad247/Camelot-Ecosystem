@@ -24,6 +24,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useBifrost } from '../context/BifrostContext';
+import { useMacros } from '../context/MacroContext';
 import { cancelSpeech, speak, speakableResponse, speechSupported } from '../lib/voice';
 import { useVad } from './useVad';
 
@@ -49,6 +50,7 @@ export interface LakishaVoice {
   isSpeaking: boolean; // real mic energy (VAD), not a mock — alias: voiced
   voiced: boolean;
   level: number;
+  isWorkletActive: boolean;
   // Listening (toggle-listen model)
   listening: boolean;
   // Transcript / text input (aliased so either surface reads naturally)
@@ -60,6 +62,8 @@ export interface LakishaVoice {
   speaking: boolean; // SpeechSynthesis is actively speaking
   muted: boolean;
   toggleMute: () => void;
+  cameraEnabled: boolean;
+  toggleCamera: () => void;
   // Phase-3 telemetry primitives (measured client-side, ms)
   ttfaMs: number | null;
   queryMs: number | null;
@@ -75,7 +79,8 @@ export interface LakishaVoice {
 export function useLakishaVoice(options: UseLakishaVoiceOptions = {}): LakishaVoice {
   const { continuous = false } = options;
   const { sendVoiceCommand, state } = useBifrost();
-  const { start: vadStart, stop: vadStop, voiced, level } = useVad();
+  const { matchMacro, executeMacro } = useMacros();
+  const { start: vadStart, stop: vadStop, voiced, level, isWorkletActive } = useVad();
 
   const [connected, setConnected] = useState(false);
   const [mode, setMode] = useState<VoiceMode>('idle');
@@ -83,6 +88,7 @@ export function useLakishaVoice(options: UseLakishaVoiceOptions = {}): LakishaVo
   const [error, setError] = useState<string | null>(null);
   const [listening, setListening] = useState(false);
   const [muted, setMuted] = useState(false);
+  const [cameraEnabled, setCameraEnabled] = useState(false);
   const [speaking, setSpeaking] = useState(false);
   // vMAX telemetry — measured client-side latencies.
   const [ttfaMs, setTtfaMs] = useState<number | null>(null);
@@ -103,12 +109,33 @@ export function useLakishaVoice(options: UseLakishaVoiceOptions = {}): LakishaVo
     (raw: string) => {
       const cmd = raw.trim();
       if (!cmd) return;
+
+      // Check if command triggers a configured voice macro
+      const matched = matchMacro(cmd);
+      if (matched) {
+        setTranscript('');
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(
+            new CustomEvent('camelot:voice-transcript-entry', {
+              detail: {
+                speaker: 'macro',
+                speakerLabel: `Voice Macro: ${matched.name}`,
+                text: `⚡ Triggered macro [${matched.name}] → ${matched.payload || matched.actionType}`,
+                metadata: { macroName: matched.name, rawCommand: cmd },
+              },
+            }),
+          );
+        }
+        executeMacro(matched, 'voice');
+        return;
+      }
+
       awaitingRef.current = true; // //IGNITE on the resulting STATE_UPDATE
       dispatchAtRef.current = performance.now(); // start the query-latency clock
       sendVoiceCommand(cmd);
       setTranscript('');
     },
-    [sendVoiceCommand],
+    [sendVoiceCommand, matchMacro, executeMacro],
   );
 
   // Build a SpeechRecognition instance wired to dispatch + transcript. Returns
@@ -133,16 +160,56 @@ export function useLakishaVoice(options: UseLakishaVoiceOptions = {}): LakishaVo
         if (result.isFinal) final += text;
         else interim += text;
       }
-      if (final) dispatch(final);
-      else setTranscript(interim);
+      if (final) {
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(
+            new CustomEvent('camelot:voice-transcript-entry', {
+              detail: {
+                speaker: 'user',
+                speakerLabel: 'Sovereign (Voice)',
+                text: final,
+              },
+            }),
+          );
+          window.dispatchEvent(
+            new CustomEvent('camelot:lakisha-listening-state', {
+              detail: { interim: '' },
+            }),
+          );
+        }
+        dispatch(final);
+      } else {
+        setTranscript(interim);
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(
+            new CustomEvent('camelot:lakisha-listening-state', {
+              detail: { interim },
+            }),
+          );
+        }
+      }
     };
     if (continuous) {
       // Persistent model: any recognition error degrades to VAD-only (mic stays hot).
-      recognition.onerror = () => setMode('vad-only');
+      recognition.onerror = (event: any) => {
+        if (event.error === 'network') {
+          setError('OFFLINE: Speech Recognition unavailable');
+        } else if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+          setError('MIC DENIED');
+        }
+        setMode('vad-only');
+      };
     } else {
       // Toggle model: recognition auto-stops after a phrase; clear the listening flag.
       recognition.onend = () => setListening(false);
-      recognition.onerror = () => setListening(false);
+      recognition.onerror = (event: any) => {
+        if (event.error === 'network') {
+          setError('OFFLINE: Speech Recognition unavailable');
+        } else if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+          setError('MIC DENIED');
+        }
+        setListening(false);
+      };
     }
     return recognition;
   }, [continuous, dispatch]);
@@ -239,6 +306,10 @@ export function useLakishaVoice(options: UseLakishaVoiceOptions = {}): LakishaVo
     });
   }, []);
 
+  const toggleCamera = useCallback(() => {
+    setCameraEnabled((c) => !c);
+  }, []);
+
   // //IGNITE — speak the reply when our command's STATE_UPDATE returns.
   useEffect(() => {
     if (!state) return;
@@ -259,6 +330,22 @@ export function useLakishaVoice(options: UseLakishaVoiceOptions = {}): LakishaVo
     }
     // Prefer a remote MCP answer (//ROUTE) over the local confirmation.
     const line = state.lastResponse ?? speakableResponse(state);
+    if (line && typeof window !== 'undefined') {
+      window.dispatchEvent(
+        new CustomEvent('camelot:voice-transcript-entry', {
+          detail: {
+            speaker: 'assistant',
+            speakerLabel: 'Lakisha Voice OS',
+            text: line,
+            latencyMs: queryMs ?? undefined,
+            metadata: {
+              bifrostLane: state.lastLane ?? undefined,
+              rawCommand: state.lastCommand ?? undefined,
+            },
+          },
+        }),
+      );
+    }
     const speakAt = performance.now();
     speak(line, {
       onStart: () => {
@@ -288,6 +375,7 @@ export function useLakishaVoice(options: UseLakishaVoiceOptions = {}): LakishaVo
     isSpeaking: voiced,
     voiced,
     level,
+    isWorkletActive,
     listening,
     transcript,
     setTranscript,
@@ -296,6 +384,8 @@ export function useLakishaVoice(options: UseLakishaVoiceOptions = {}): LakishaVo
     speaking,
     muted,
     toggleMute,
+    cameraEnabled,
+    toggleCamera,
     ttfaMs,
     queryMs,
     connect,

@@ -1,6 +1,116 @@
 [
   {
     "knight_id": "KNIGHT_STRATEGOS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for KNIGHT_STRATEGOS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_knight_strategos\",\n  \"session_id\": \"sess_knight_knight_strategos\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/knight_strategos/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KNIGHT_STRATEGOS",
+    "open_viking_tether": "open_viking://worldtree/knight_strategos",
+    "updated_at": "2026-09-23T16:02:57.963342+00:00"
+  },
+  {
+    "knight_id": "KNIGHT_STRATEGOS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for KNIGHT_STRATEGOS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_knight_strategos\",\n  \"session_id\": \"sess_knight_knight_strategos\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/knight_strategos/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KNIGHT_STRATEGOS",
+    "open_viking_tether": "open_viking://worldtree/knight_strategos",
+    "updated_at": "2026-09-23T16:02:56.750543+00:00"
+  },
+  {
+    "knight_id": "KNIGHT_STRATEGOS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for KNIGHT_STRATEGOS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_knight_strategos\",\n  \"session_id\": \"sess_knight_knight_strategos\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/knight_strategos/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KNIGHT_STRATEGOS",
+    "open_viking_tether": "open_viking://worldtree/knight_strategos",
+    "updated_at": "2026-09-22T14:39:42.491889+00:00"
+  },
+  {
+    "knight_id": "KNIGHT_STRATEGOS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for KNIGHT_STRATEGOS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_knight_strategos\",\n  \"session_id\": \"sess_knight_knight_strategos\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/knight_strategos/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KNIGHT_STRATEGOS",
+    "open_viking_tether": "open_viking://worldtree/knight_strategos",
+    "updated_at": "2026-09-22T14:39:40.895943+00:00"
+  },
+  {
+    "knight_id": "KNIGHT_STRATEGOS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for KNIGHT_STRATEGOS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_knight_strategos\",\n  \"session_id\": \"sess_knight_knight_strategos\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/knight_strategos/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KNIGHT_STRATEGOS",
+    "open_viking_tether": "open_viking://worldtree/knight_strategos",
+    "updated_at": "2026-09-22T14:38:43.782218+00:00"
+  },
+  {
+    "knight_id": "KNIGHT_STRATEGOS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for KNIGHT_STRATEGOS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_knight_strategos\",\n  \"session_id\": \"sess_knight_knight_strategos\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/knight_strategos/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KNIGHT_STRATEGOS",
+    "open_viking_tether": "open_viking://worldtree/knight_strategos",
+    "updated_at": "2026-09-22T14:38:42.165560+00:00"
+  },
+  {
+    "knight_id": "KNIGHT_STRATEGOS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for KNIGHT_STRATEGOS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_knight_strategos\",\n  \"session_id\": \"sess_knight_knight_strategos\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/knight_strategos/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KNIGHT_STRATEGOS",
+    "open_viking_tether": "open_viking://worldtree/knight_strategos",
+    "updated_at": "2026-09-22T14:37:02.803283+00:00"
+  },
+  {
+    "knight_id": "KNIGHT_STRATEGOS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for KNIGHT_STRATEGOS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_knight_strategos\",\n  \"session_id\": \"sess_knight_knight_strategos\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/knight_strategos/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KNIGHT_STRATEGOS",
+    "open_viking_tether": "open_viking://worldtree/knight_strategos",
+    "updated_at": "2026-09-22T14:37:01.098847+00:00"
+  },
+  {
+    "knight_id": "KNIGHT_STRATEGOS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for KNIGHT_STRATEGOS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_knight_strategos\",\n  \"session_id\": \"sess_knight_knight_strategos\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/knight_strategos/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KNIGHT_STRATEGOS",
+    "open_viking_tether": "open_viking://worldtree/knight_strategos",
+    "updated_at": "2026-09-22T14:35:54.113785+00:00"
+  },
+  {
+    "knight_id": "KNIGHT_STRATEGOS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for KNIGHT_STRATEGOS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_knight_strategos\",\n  \"session_id\": \"sess_knight_knight_strategos\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/knight_strategos/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KNIGHT_STRATEGOS",
+    "open_viking_tether": "open_viking://worldtree/knight_strategos",
+    "updated_at": "2026-09-22T14:35:53.073097+00:00"
+  },
+  {
+    "knight_id": "KNIGHT_STRATEGOS",
     "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "spark_id": "0xA0A4BFB9E8474C38BE397AEE398F0795",
     "role": "Marketing Assimilation DAG, Videneptus SkillGraph4 & AEO/GEO",
@@ -14,6 +124,15 @@
       "Master_Compendium.md",
       "system_instruction.md"
     ],
+    "five_pillars": [
+      "Aristotle (Axiomatic Logic & Categorization)",
+      "Hypatia of Alexandria (Mathematical Courage)",
+      "Leonardo da Vinci (Universal Invention)",
+      "Ada Lovelace (First Algorithmic Visionary)",
+      "Marcus Aurelius (Steadfast Sovereign Duty)"
+    ],
+    "law_of_non_reproducibility": "ENFORCED",
+    "rpg_progression": "Glass Observatory Level & XP Matrix",
     "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "mesh_nodes": [
       "cybertronia",
@@ -22,6 +141,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-20T00:29:47.551119+00:00"
+    "updated_at": "2026-09-21T23:00:51.689974+00:00"
   }
 ]

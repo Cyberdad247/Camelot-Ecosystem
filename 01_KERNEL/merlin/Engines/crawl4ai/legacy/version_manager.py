@@ -19,7 +19,7 @@ class VersionManager:
             return None
         try:
             return version.parse(self.version_file.read_text().strip())
-        except:
+        except Exception:
             return None
 
     def update_version(self):

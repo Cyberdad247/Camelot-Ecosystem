@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Send, Loader2, Lightbulb, Shuffle, Layers } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Layers, Lightbulb, Loader2, Send, Shuffle } from 'lucide-react';
+import React, { useState } from 'react';
 import type { DeckProps } from '../CartridgeDeck';
 
 type IdeationMode = 'divergent' | 'convergent' | 'scamper' | 'triz' | 'auto';
@@ -30,16 +30,22 @@ export default function BrainstormDeck({ cartridge, onDispatch, dispatching }: D
 
   return (
     <div className="space-y-5">
-      <p className="text-xs text-slate-500">MERLIN_OMEGA â€” Divergent ideation, SCAMPER, TRIZ, cross-domain synthesis.</p>
+      <p className="text-xs text-slate-500">
+        MERLIN_OMEGA â€” Divergent ideation, SCAMPER, TRIZ, cross-domain synthesis.
+      </p>
 
       <div className="space-y-2">
-        <label className="text-xs font-semibold uppercase tracking-widest text-amber-400">Challenge / Prompt</label>
+        <label className="text-xs font-semibold uppercase tracking-widest text-amber-400">
+          Challenge / Prompt
+        </label>
         <textarea
           rows={4}
           placeholder="Describe the problem, opportunity, or prompt to brainstormâ€¦"
           value={intent}
           onChange={(e) => setIntent(e.target.value)}
-          onKeyDown={(e) => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) submit(); }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) submit();
+          }}
           className="w-full rounded-lg border border-slate-700 bg-slate-900/60 px-3 py-2.5 text-sm text-slate-100 placeholder-slate-600 outline-none focus:border-amber-500 resize-none"
         />
       </div>
@@ -79,16 +85,28 @@ export default function BrainstormDeck({ cartridge, onDispatch, dispatching }: D
           onChange={(e) => setIdeaCount(Number(e.target.value))}
           className="w-full accent-amber-500"
         />
-        <p className="mt-1 text-[11px] text-slate-500">Target concepts: <span className="text-amber-300 font-semibold">{ideaCount}</span></p>
+        <p className="mt-1 text-[11px] text-slate-500">
+          Target concepts: <span className="text-amber-300 font-semibold">{ideaCount}</span>
+        </p>
       </div>
 
       <div className="flex flex-wrap gap-4">
         <label className="flex items-center gap-2 cursor-pointer">
-          <input type="checkbox" checked={includeAnalysis} onChange={(e) => setIncludeAnalysis(e.target.checked)} className="accent-amber-500" />
+          <input
+            type="checkbox"
+            checked={includeAnalysis}
+            onChange={(e) => setIncludeAnalysis(e.target.checked)}
+            className="accent-amber-500"
+          />
           <span className="text-xs text-slate-400">Include feasibility analysis</span>
         </label>
         <label className="flex items-center gap-2 cursor-pointer">
-          <input type="checkbox" checked={crossDomain} onChange={(e) => setCrossDomain(e.target.checked)} className="accent-amber-500" />
+          <input
+            type="checkbox"
+            checked={crossDomain}
+            onChange={(e) => setCrossDomain(e.target.checked)}
+            className="accent-amber-500"
+          />
           <span className="text-xs text-slate-400">Cross-domain synthesis</span>
         </label>
       </div>
@@ -98,7 +116,11 @@ export default function BrainstormDeck({ cartridge, onDispatch, dispatching }: D
         disabled={dispatching || !intent.trim()}
         className="w-full flex items-center justify-center gap-2 rounded-xl bg-amber-700 hover:bg-amber-600 disabled:opacity-40 py-3 text-sm font-bold text-white transition-colors"
       >
-        {dispatching ? <Loader2 className="h-4 w-4 animate-spin" /> : <Lightbulb className="h-4 w-4" />}
+        {dispatching ? (
+          <Loader2 className="h-4 w-4 animate-spin" />
+        ) : (
+          <Lightbulb className="h-4 w-4" />
+        )}
         {dispatching ? 'Ideatingâ€¦' : 'Dispatch to MERLIN_OMEGA'}
       </button>
     </div>

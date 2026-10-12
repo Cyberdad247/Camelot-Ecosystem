@@ -9,7 +9,7 @@ export default defineConfig({
       '**/CAMELOT_OS/**',
       '**/CLIProxyAPI/**',
       '**/LisaCustomKeychains/**',
-      '**/Projects/**'
+      '**/Projects/**',
     ],
   },
 });

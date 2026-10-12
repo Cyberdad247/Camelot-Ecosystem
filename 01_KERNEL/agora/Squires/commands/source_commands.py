@@ -14,7 +14,7 @@ try:
     from open_notebook.graphs.source import source_graph
 except ImportError as e:
     logger.error(f"Failed to import source_graph: {e}")
-    raise ValueError("source_graph not available")
+    raise ValueError("source_graph not available") from e
 
 
 def full_model_dump(model):

@@ -8,16 +8,8 @@
   "engines": {
     "vscode": "^1.96.0"
   },
-  "categories": [
-    "Other"
-  ],
-  "keywords": [
-    "camelot",
-    "knights",
-    "omniroute",
-    "mcp",
-    "cartridge"
-  ],
+  "categories": ["Other"],
+  "keywords": ["camelot", "knights", "omniroute", "mcp", "cartridge"],
   "activationEvents": [
     "onCommand:camelot.omniroute",
     "onCommand:camelot.knight",
@@ -59,10 +51,7 @@
           "markdownDescription": "Python interpreter that runs `bin/camelot_portable.py` and `bin/camelot_ide_mcp.py`. Camelot requires Python 3.13+."
         },
         "camelot.defaultKnight": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "default": "sir_helio",
           "enum": [
             "sir_boris",

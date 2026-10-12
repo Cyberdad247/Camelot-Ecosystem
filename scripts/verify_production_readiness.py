@@ -138,24 +138,84 @@ class ProductionReadinessVerifier:
         }
 
     def verify_gate5_secret_scan(self) -> Dict[str, Any]:
-        """Gate 5: Secret & Privacy Zero-Leak Policy (Aegis Shield)."""
-        # Ensure config.json has boolean flags only
-        config_path = REPO_ROOT / "config.json"
+        """Gate 5: Secret & Privacy Zero-Leak Policy (Aegis Shield).
+
+        Enforces the full policy, not just a top-level string scan:
+          1. config.json `api_keys` subtree = booleans only (presence flags).
+          2. No key-shaped strings anywhere in the config tree (recursive).
+          3. `.env` (and non-example `.env.*`) never git-tracked.
+        """
+        import re
+
+        key_patterns = [re.compile(p) for p in (
+            r"sk-[A-Za-z0-9\-_]{16,}",            # OpenAI / Anthropic / DeepSeek
+            r"AIza[0-9A-Za-z\-_]{30,}",           # Google
+            r"gsk_[A-Za-z0-9]{16,}",              # Groq
+            r"AKIA[0-9A-Z]{16}",                  # AWS access key id
+            r"-----BEGIN [A-Z ]*PRIVATE KEY-----",
+        )]
+
+        def walk_strings(node: Any, path: str = "$"):
+            if isinstance(node, dict):
+                for k, v in node.items():
+                    yield from walk_strings(v, f"{path}.{k}")
+            elif isinstance(node, list):
+                for i, v in enumerate(node):
+                    yield from walk_strings(v, f"{path}[{i}]")
+            elif isinstance(node, str):
+                yield path, node
+
+        findings: list[str] = []
         config_clean = True
+        config_path = REPO_ROOT / "config.json"
+        cfg: Any = None
         if config_path.exists():
             try:
                 cfg = json.loads(config_path.read_text(encoding="utf-8"))
-                for k, v in cfg.items():
-                    if isinstance(v, str) and ("sk-" in v or "AIza" in v):
+            except Exception as exc:
+                findings.append(f"config.json unparseable: {exc}")
+                config_clean = False
+
+        if isinstance(cfg, dict):
+            # 1. api_keys must be boolean presence flags — never real values.
+            api_keys = cfg.get("api_keys")
+            if isinstance(api_keys, dict):
+                for k, v in api_keys.items():
+                    if not isinstance(v, bool):
+                        findings.append(
+                            f"api_keys.{k} is {type(v).__name__}, expected bool"
+                        )
                         config_clean = False
-            except Exception:
-                pass
+            # 2. Recursive key-shaped string scan.
+            for path_str, s in walk_strings(cfg):
+                for pat in key_patterns:
+                    if pat.search(s):
+                        findings.append(f"key-shaped string at {path_str}")
+                        config_clean = False
+                        break
+
+        # 3. Secret env files must not be committed (examples are fine).
+        try:
+            res = subprocess.run(
+                ["git", "ls-files", "--", ".env", ".env.*"],
+                cwd=str(REPO_ROOT), capture_output=True, text=True, timeout=15,
+            )
+            for f in res.stdout.splitlines():
+                low = f.lower()
+                if low == ".env" or not any(
+                    m in low for m in ("example", "template", "sample")
+                ):
+                    findings.append(f"secret env file git-tracked: {f}")
+                    config_clean = False
+        except Exception:
+            pass  # git unavailable (portable/offline mode) — skip
 
         return {
             "gate": "GATE_5_SECRET_PRIVACY_AEGIS_SHIELD",
             "status": "PASS" if config_clean else "FAIL",
             "config_clean": config_clean,
             "policy": "BOOLEAN_PRESENCE_FLAGS_ONLY",
+            "findings": findings,
         }
 
     def verify_gate6_ledger_alignment(self) -> Dict[str, Any]:

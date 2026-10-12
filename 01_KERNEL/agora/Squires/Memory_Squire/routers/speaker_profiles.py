@@ -39,7 +39,7 @@ async def list_speaker_profiles():
 
     except Exception as e:
         logger.error(f"Failed to fetch speaker profiles: {e}")
-        raise HTTPException(status_code=500, detail=f"Failed to fetch speaker profiles: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to fetch speaker profiles: {str(e)}") from e
 
 
 @router.get("/speaker-profiles/{profile_name}", response_model=SpeakerProfileResponse)
@@ -64,7 +64,7 @@ async def get_speaker_profile(profile_name: str):
         raise
     except Exception as e:
         logger.error(f"Failed to fetch speaker profile '{profile_name}': {e}")
-        raise HTTPException(status_code=500, detail=f"Failed to fetch speaker profile: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to fetch speaker profile: {str(e)}") from e
 
 
 class SpeakerProfileCreate(BaseModel):
@@ -100,7 +100,7 @@ async def create_speaker_profile(profile_data: SpeakerProfileCreate):
 
     except Exception as e:
         logger.error(f"Failed to create speaker profile: {e}")
-        raise HTTPException(status_code=500, detail=f"Failed to create speaker profile: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to create speaker profile: {str(e)}") from e
 
 
 @router.put("/speaker-profiles/{profile_id}", response_model=SpeakerProfileResponse)
@@ -134,7 +134,7 @@ async def update_speaker_profile(profile_id: str, profile_data: SpeakerProfileCr
         raise
     except Exception as e:
         logger.error(f"Failed to update speaker profile: {e}")
-        raise HTTPException(status_code=500, detail=f"Failed to update speaker profile: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to update speaker profile: {str(e)}") from e
 
 
 @router.delete("/speaker-profiles/{profile_id}")
@@ -154,7 +154,7 @@ async def delete_speaker_profile(profile_id: str):
         raise
     except Exception as e:
         logger.error(f"Failed to delete speaker profile: {e}")
-        raise HTTPException(status_code=500, detail=f"Failed to delete speaker profile: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to delete speaker profile: {str(e)}") from e
 
 
 @router.post("/speaker-profiles/{profile_id}/duplicate", response_model=SpeakerProfileResponse)
@@ -190,4 +190,4 @@ async def duplicate_speaker_profile(profile_id: str):
         raise
     except Exception as e:
         logger.error(f"Failed to duplicate speaker profile: {e}")
-        raise HTTPException(status_code=500, detail=f"Failed to duplicate speaker profile: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to duplicate speaker profile: {str(e)}") from e

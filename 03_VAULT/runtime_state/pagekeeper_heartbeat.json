@@ -1,0 +1,29 @@
+{
+  "daemon": "PAGEKEEPER_RS",
+  "pid": 128948,
+  "cycle": 170,
+  "timestamp": "1791158794.717Z",
+  "interval_secs": 60,
+  "threshold_pct": 80.0,
+  "memory": {
+    "total_phys_mb": 7895.9,
+    "avail_phys_mb": 558.8,
+    "used_phys_mb": 7337.1,
+    "utilization_pct": 92.0
+  },
+  "last_audit": {
+    "timestamp": "1791158794.717Z",
+    "total_phys_mb": 7895.9,
+    "avail_phys_mb": 558.9,
+    "used_phys_mb": 7337.0,
+    "utilization_pct": 92.0,
+    "node_ceiling_mb": 4096.0,
+    "node_compliant": true,
+    "pressure_detected": true,
+    "action_taken": "TRIM_EXECUTED (purged 1 processes, reclaimed ~1.8 MB)",
+    "reclaimed_mb": 1.8
+  },
+  "cumulative_trims": 97,
+  "cumulative_reclaimed_mb": 115.9,
+  "status": "HIGH_PRESSURE"
+}

@@ -2,14 +2,9 @@
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 from datetime import datetime
 
-from langchain.tools import tool
 
-
-# todo: turn this into a system prompt variable
-@tool
-def get_current_timestamp() -> str:
+def get_current_timestamp(format_string: str = "%Y%m%d%H%M%S") -> str:
     """
-    name: get_current_timestamp
-    Returns the current timestamp in the format YYYYMMDDHHmmss.
+    Returns the current timestamp in the given format.
     """
-    return datetime.now().strftime("%Y%m%d%H%M%S")
+    return datetime.now().strftime(format_string)

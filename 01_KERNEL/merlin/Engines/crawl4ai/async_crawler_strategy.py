@@ -251,9 +251,9 @@ class AsyncPlaywrightCrawlerStrategy(AsyncCrawlerStrategy):
                 await page.wait_for_selector(css_selector, timeout=timeout)
             except Error as e:
                 if "Timeout" in str(e):
-                    raise TimeoutError(f"Timeout after {timeout}ms waiting for selector '{css_selector}'")
+                    raise TimeoutError(f"Timeout after {timeout}ms waiting for selector '{css_selector}'") from e
                 else:
-                    raise ValueError(f"Invalid CSS selector: '{css_selector}'")
+                    raise ValueError(f"Invalid CSS selector: '{css_selector}'") from e
         else:
             # Auto-detect based on content
             if wait_for.startswith("()") or wait_for.startswith("function"):
@@ -265,7 +265,7 @@ class AsyncPlaywrightCrawlerStrategy(AsyncCrawlerStrategy):
                     await page.wait_for_selector(wait_for, timeout=timeout)
                 except Error as e:
                     if "Timeout" in str(e):
-                        raise TimeoutError(f"Timeout after {timeout}ms waiting for selector '{wait_for}'")
+                        raise TimeoutError(f"Timeout after {timeout}ms waiting for selector '{wait_for}'") from e
                     else:
                         # If it's not a timeout error, it might be an invalid selector
                         # Let's try to evaluate it as a JavaScript function as a fallback
@@ -276,7 +276,7 @@ class AsyncPlaywrightCrawlerStrategy(AsyncCrawlerStrategy):
                                 f"Invalid wait_for parameter: '{wait_for}'. "
                                 "It should be either a valid CSS selector, a JavaScript function, "
                                 "or explicitly prefixed with 'js:' or 'css:'."
-                            )
+                            ) from None
 
     async def csp_compliant_wait(self, page: Page, user_wait_function: str, timeout: float = 30000):
         """
@@ -318,7 +318,7 @@ class AsyncPlaywrightCrawlerStrategy(AsyncCrawlerStrategy):
             return result
         except Exception as e:
             if "Error evaluating condition" in str(e):
-                raise RuntimeError(f"Failed to evaluate wait condition: {str(e)}")
+                raise RuntimeError(f"Failed to evaluate wait condition: {str(e)}") from e
             # For timeout or other cases, just return False
             return False
 
@@ -638,13 +638,13 @@ class AsyncPlaywrightCrawlerStrategy(AsyncCrawlerStrategy):
                     message_type = "unknown"
                     try:
                         message_type = msg.type
-                    except:
+                    except Exception:
                         pass
 
                     message_text = "unknown"
                     try:
                         message_text = msg.text
-                    except:
+                    except Exception:
                         pass
 
                     # Basic console message with minimal content
@@ -665,13 +665,13 @@ class AsyncPlaywrightCrawlerStrategy(AsyncCrawlerStrategy):
                     error_message = "Unknown error"
                     try:
                         error_message = err.message
-                    except:
+                    except Exception:
                         pass
 
                     error_stack = ""
                     try:
                         error_stack = err.stack
-                    except:
+                    except Exception:
                         pass
 
                     captured_console.append(
@@ -736,7 +736,7 @@ class AsyncPlaywrightCrawlerStrategy(AsyncCrawlerStrategy):
                     response = await page.goto(url, wait_until=config.wait_until, timeout=config.page_timeout)
                     redirected_url = page.url
                 except Error as e:
-                    raise RuntimeError(f"Failed on navigating ACS-GOTO:\n{str(e)}")
+                    raise RuntimeError(f"Failed on navigating ACS-GOTO:\n{str(e)}") from e
 
                 await self.execute_hook("after_goto", page, context=context, url=url, response=response, config=config)
 
@@ -785,7 +785,7 @@ class AsyncPlaywrightCrawlerStrategy(AsyncCrawlerStrategy):
                     )
 
                 if not config.ignore_body_visibility:
-                    raise Error(f"Body element is hidden: {visibility_info}")
+                    raise Error(f"Body element is hidden: {visibility_info}") from None
 
             # try:
             #     await page.wait_for_selector("body", state="attached", timeout=30000)
@@ -928,7 +928,7 @@ class AsyncPlaywrightCrawlerStrategy(AsyncCrawlerStrategy):
                 try:
                     await self.smart_wait(page, config.wait_for, timeout=config.page_timeout)
                 except Exception as e:
-                    raise RuntimeError(f"Wait condition failed: {str(e)}")
+                    raise RuntimeError(f"Wait condition failed: {str(e)}") from e
 
             # Update image dimensions if needed
             if not self.browser_config.text_mode:
@@ -979,7 +979,7 @@ class AsyncPlaywrightCrawlerStrategy(AsyncCrawlerStrategy):
                     # Wrap in a div to create a valid HTML structure
                     html = "<div class='crawl4ai-result'>\n" + "\n".join(html_parts) + "\n</div>"
                 except Error as e:
-                    raise RuntimeError(f"Failed to extract HTML content: {str(e)}")
+                    raise RuntimeError(f"Failed to extract HTML content: {str(e)}") from e
             else:
                 html = await page.content()
 
@@ -1723,14 +1723,6 @@ class AsyncPlaywrightCrawlerStrategy(AsyncCrawlerStrategy):
             )
             return {"success": False, "error": str(e)}
 
-        except Exception as e:
-            self.logger.error(
-                message="Script execution failed: {error}",
-                tag="JS_EXEC",
-                params={"error": str(e)},
-            )
-            return {"success": False, "error": str(e)}
-
     async def check_visibility(self, page):
         """
         Checks if an element is visible on the page.
@@ -2060,23 +2052,23 @@ class AsyncHTTPCrawlerStrategy(AsyncCrawlerStrategy):
 
             except aiohttp.ServerTimeoutError as e:
                 await self.hooks["on_error"](e)
-                raise ConnectionTimeoutError(f"Request timed out: {str(e)}")
+                raise ConnectionTimeoutError(f"Request timed out: {str(e)}") from e
 
             except aiohttp.ClientConnectorError as e:
                 await self.hooks["on_error"](e)
-                raise ConnectionError(f"Connection failed: {str(e)}")
+                raise ConnectionError(f"Connection failed: {str(e)}") from e
 
             except aiohttp.ClientError as e:
                 await self.hooks["on_error"](e)
-                raise HTTPCrawlerError(f"HTTP client error: {str(e)}")
+                raise HTTPCrawlerError(f"HTTP client error: {str(e)}") from e
 
             except asyncio.exceptions.TimeoutError as e:
                 await self.hooks["on_error"](e)
-                raise ConnectionTimeoutError(f"Request timed out: {str(e)}")
+                raise ConnectionTimeoutError(f"Request timed out: {str(e)}") from e
 
             except Exception as e:
                 await self.hooks["on_error"](e)
-                raise HTTPCrawlerError(f"HTTP request failed: {str(e)}")
+                raise HTTPCrawlerError(f"HTTP request failed: {str(e)}") from e
 
     async def crawl(self, url: str, config: Optional[CrawlerRunConfig] = None, **kwargs) -> AsyncCrawlResponse:
         config = config or CrawlerRunConfig.from_kwargs(kwargs)

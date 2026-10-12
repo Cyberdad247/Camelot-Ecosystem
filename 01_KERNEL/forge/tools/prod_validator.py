@@ -32,7 +32,7 @@ def verify_code_quality():
         npm = "npm.cmd" if __import__("sys").platform == "win32" else "npm"
         lint_res = subprocess.run([npm, "run", "lint"], cwd=DASHBOARD_DIR, shell=False, capture_output=True, text=True)
         lint_status = "PASS" if lint_res.returncode == 0 else "WARN"
-    except:
+    except Exception:
         lint_status = "FAIL"
 
     # Security Audit
@@ -40,7 +40,7 @@ def verify_code_quality():
         npm = "npm.cmd" if __import__("sys").platform == "win32" else "npm"
         audit_res = subprocess.run([npm, "audit"], cwd=DASHBOARD_DIR, shell=False, capture_output=True, text=True)
         sec_status = "PASS" if "0 vulnerabilities" in audit_res.stdout else "WARN"
-    except:
+    except Exception:
         sec_status = "FAIL"
 
     return True, f"Lint: {lint_status} | Security: {sec_status}"

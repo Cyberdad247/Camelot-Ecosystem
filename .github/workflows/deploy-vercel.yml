@@ -25,7 +25,7 @@ jobs:
       anya: ${{ steps.filter.outputs.anya }}
       omni: ${{ steps.filter.outputs.omni }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: dorny/paths-filter@v3
         id: filter
@@ -48,7 +48,7 @@ jobs:
     env:
       VERCEL_PROJECT_ID: prj_56ZNRVkHUl3yKI9ipBXG1UjLxmj2
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: actions/setup-node@v4
         with:
@@ -92,7 +92,7 @@ jobs:
     env:
       VERCEL_PROJECT_ID: prj_v9oBWCl79010RidByXnRvunaXC5s
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: actions/setup-node@v4
         with:

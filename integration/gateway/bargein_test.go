@@ -85,10 +85,10 @@ func TestBargeInRevokesUnusedLease(t *testing.T) {
 	}
 
 	// A revoked lease can never execute.
-	broker := NewToolBroker(server.leases)
+	broker := NewToolBroker(server.leases, NewEffectStore(t.TempDir()))
 	restored := pending
 	restored.Token = "does-not-matter"
-	if _, _, err := broker.Execute("change_request.create", "turn-0011", &restored); err == nil {
+	if _, _, err := broker.Execute("change_request.create", "turn-0011", "", &restored); err == nil {
 		t.Fatal("revoked lease executed")
 	}
 }

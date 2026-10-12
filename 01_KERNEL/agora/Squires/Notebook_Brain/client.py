@@ -60,10 +60,10 @@ class APIClient:
                 return response.json()
         except httpx.RequestError as e:
             logger.error(f"Request error for {method} {url}: {str(e)}")
-            raise ConnectionError(f"Failed to connect to API: {str(e)}")
+            raise ConnectionError(f"Failed to connect to API: {str(e)}") from e
         except httpx.HTTPStatusError as e:
             logger.error(f"HTTP error {e.response.status_code} for {method} {url}: {e.response.text}")
-            raise RuntimeError(f"API request failed: {e.response.status_code} - {e.response.text}")
+            raise RuntimeError(f"API request failed: {e.response.status_code} - {e.response.text}") from e
         except Exception as e:
             logger.error(f"Unexpected error for {method} {url}: {str(e)}")
             raise

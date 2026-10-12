@@ -1,0 +1,34 @@
+[
+  {
+    "knight_id": "REYA_COMPANION",
+    "alias": "REYA",
+    "cloudbrain_uuid": "reya-companion-nexus-v10001",
+    "spark_id": "0xREYA000000000000FABRIC0000000001",
+    "role": "Universal Edge Action Layer, Sensory Ingress, Computer-Use & Mobile Sentinel",
+    "model": "Gemini Live / VibeVoice 0.5B / S1 CUA Reflex Engine",
+    "summoning_rune": "//REYA_CHANNEL",
+    "vfs_mount": "vfs://worldtree/knights/reya_companion/",
+    "memory_envelope": {
+      "shm_slab": "Local\\Camelot_Reya_Slab",
+      "shm_size_mb": 256,
+      "cgroups_memory_max_mb": 350.0,
+      "memcastle_tag": "REYA_COMPANION",
+      "graphiti_partition": "reya_companion_graphiti.db"
+    },
+    "files": [
+      "02_FORGE/assimilation/reya/reya_fabric_layer.py",
+      "02_FORGE/assimilation/reya/reya_nostr_bridge.py",
+      "02_FORGE/assimilation/cua/cua_driver_bridge.py",
+      "03_VAULT/runtime_state/observatory/LIVING_COMPENDIUM.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vashawns-s26-ultra",
+      "motorola-moto-g-power-5g---2024",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-21T02:30:00.000000+00:00"
+  }
+]

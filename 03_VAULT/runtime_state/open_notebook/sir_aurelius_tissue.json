@@ -1,8 +1,118 @@
 [
   {
     "knight_id": "SIR_AURELIUS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_AURELIUS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_aurelius\",\n  \"session_id\": \"sess_knight_sir_aurelius\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_aurelius/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_AURELIUS",
+    "open_viking_tether": "open_viking://worldtree/sir_aurelius",
+    "updated_at": "2026-09-23T16:02:58.322026+00:00"
+  },
+  {
+    "knight_id": "SIR_AURELIUS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_AURELIUS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_aurelius\",\n  \"session_id\": \"sess_knight_sir_aurelius\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_aurelius/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_AURELIUS",
+    "open_viking_tether": "open_viking://worldtree/sir_aurelius",
+    "updated_at": "2026-09-23T16:02:56.820482+00:00"
+  },
+  {
+    "knight_id": "SIR_AURELIUS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_AURELIUS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_aurelius\",\n  \"session_id\": \"sess_knight_sir_aurelius\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_aurelius/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_AURELIUS",
+    "open_viking_tether": "open_viking://worldtree/sir_aurelius",
+    "updated_at": "2026-09-22T14:39:42.793288+00:00"
+  },
+  {
+    "knight_id": "SIR_AURELIUS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_AURELIUS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_aurelius\",\n  \"session_id\": \"sess_knight_sir_aurelius\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_aurelius/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_AURELIUS",
+    "open_viking_tether": "open_viking://worldtree/sir_aurelius",
+    "updated_at": "2026-09-22T14:39:41.194188+00:00"
+  },
+  {
+    "knight_id": "SIR_AURELIUS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_AURELIUS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_aurelius\",\n  \"session_id\": \"sess_knight_sir_aurelius\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_aurelius/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_AURELIUS",
+    "open_viking_tether": "open_viking://worldtree/sir_aurelius",
+    "updated_at": "2026-09-22T14:38:44.112672+00:00"
+  },
+  {
+    "knight_id": "SIR_AURELIUS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_AURELIUS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_aurelius\",\n  \"session_id\": \"sess_knight_sir_aurelius\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_aurelius/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_AURELIUS",
+    "open_viking_tether": "open_viking://worldtree/sir_aurelius",
+    "updated_at": "2026-09-22T14:38:42.439216+00:00"
+  },
+  {
+    "knight_id": "SIR_AURELIUS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_AURELIUS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_aurelius\",\n  \"session_id\": \"sess_knight_sir_aurelius\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_aurelius/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_AURELIUS",
+    "open_viking_tether": "open_viking://worldtree/sir_aurelius",
+    "updated_at": "2026-09-22T14:37:03.125949+00:00"
+  },
+  {
+    "knight_id": "SIR_AURELIUS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_AURELIUS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_aurelius\",\n  \"session_id\": \"sess_knight_sir_aurelius\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_aurelius/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_AURELIUS",
+    "open_viking_tether": "open_viking://worldtree/sir_aurelius",
+    "updated_at": "2026-09-22T14:37:01.401643+00:00"
+  },
+  {
+    "knight_id": "SIR_AURELIUS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_AURELIUS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_aurelius\",\n  \"session_id\": \"sess_knight_sir_aurelius\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_aurelius/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_AURELIUS",
+    "open_viking_tether": "open_viking://worldtree/sir_aurelius",
+    "updated_at": "2026-09-22T14:35:54.228587+00:00"
+  },
+  {
+    "knight_id": "SIR_AURELIUS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_AURELIUS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_aurelius\",\n  \"session_id\": \"sess_knight_sir_aurelius\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_aurelius/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_AURELIUS",
+    "open_viking_tether": "open_viking://worldtree/sir_aurelius",
+    "updated_at": "2026-09-22T14:35:53.326978+00:00"
+  },
+  {
+    "knight_id": "SIR_AURELIUS",
     "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "spark_id": "0xA0A4BFB9E8474C38BE397AEE398F0795",
+    "spark_id": "0x01AURELIUS000000000000000000001",
     "role": "AP2 Agent Payment Protocol & ed25519 Signing",
     "model": "Rust / Crypto Signer",
     "summoning_rune": "Omega_SIR_AURELIUS",
@@ -14,6 +124,15 @@
       "Master_Compendium.md",
       "system_instruction.md"
     ],
+    "five_pillars": [
+      "Aristotle (Axiomatic Logic & Categorization)",
+      "Hypatia of Alexandria (Mathematical Courage)",
+      "Leonardo da Vinci (Universal Invention)",
+      "Ada Lovelace (First Algorithmic Visionary)",
+      "Marcus Aurelius (Steadfast Sovereign Duty)"
+    ],
+    "law_of_non_reproducibility": "ENFORCED",
+    "rpg_progression": "Glass Observatory Level & XP Matrix",
     "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "mesh_nodes": [
       "cybertronia",
@@ -22,6 +141,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-20T00:29:47.551119+00:00"
+    "updated_at": "2026-09-21T23:00:51.689974+00:00"
   }
 ]

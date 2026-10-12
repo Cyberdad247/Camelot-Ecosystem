@@ -1,6 +1,6 @@
+import { Activity, AlertCircle, CheckCircle, Package } from 'lucide-react-native';
 import React, { useState, useEffect } from 'react';
-import { YStack, XStack, Text, ScrollView, Card, Badge, Theme } from 'tamagui';
-import { Activity, Package, CheckCircle, AlertCircle } from 'lucide-react-native';
+import { Badge, Card, ScrollView, Text, Theme, XStack, YStack } from 'tamagui';
 import { TitanLinkClient } from '../api/titanlink_client';
 
 /**
@@ -15,17 +15,17 @@ export const JobsScreen = () => {
     client.connect();
     // Simulate fetching titan_ledger data via TitanLink
     client.send({ type: 'SYNC_DELTA', payload: { target: 'titan_ledger' } });
-    
+
     client.addListener((msg) => {
       if (msg.type === 'SYNC_DELTA' && msg.payload?.nodes) {
         // Map ledger nodes to job cards
-        const ledgerNode = msg.payload.nodes.find(n => n.type === 'UKGRoot');
+        const ledgerNode = msg.payload.nodes.find((n) => n.type === 'UKGRoot');
         if (ledgerNode) {
           // This is a mock placeholder for real ledger parsing
           setJobs([
             { id: '1', title: 'Repo Assimilation: clawdbot', status: 'COMPLETED', type: 'FORGE' },
             { id: '2', title: 'TitanLink Server Deploy', status: 'COMPLETED', type: 'KERNEL' },
-            { id: '3', title: 'Anya Lyte UI Scaffolding', status: 'IN_PROGRESS', type: 'MOBILE' }
+            { id: '3', title: 'Anya Lyte UI Scaffolding', status: 'IN_PROGRESS', type: 'MOBILE' },
           ]);
         }
       }
@@ -37,7 +37,9 @@ export const JobsScreen = () => {
       <YStack f={1} bg="$background" p="$4">
         <XStack ai="center" space="$2" mb="$4">
           <Activity size={24} color="$blue10" />
-          <Text fS={22} fOW="bold">Swarm Monitor</Text>
+          <Text fS={22} fOW="bold">
+            Swarm Monitor
+          </Text>
         </XStack>
 
         <ScrollView f={1} space="$3">
@@ -47,17 +49,23 @@ export const JobsScreen = () => {
                 <YStack space="$1">
                   <XStack ai="center" space="$2">
                     <Package size={16} color="$colorSecondary" />
-                    <Text fS={16} fOW="bold">{job.title}</Text>
+                    <Text fS={16} fOW="bold">
+                      {job.title}
+                    </Text>
                   </XStack>
-                  <Text col="$colorSecondary" fS={12}>Type: {job.type}</Text>
+                  <Text col="$colorSecondary" fS={12}>
+                    Type: {job.type}
+                  </Text>
                 </YStack>
-                <Badge 
+                <Badge
                   bc={job.status === 'COMPLETED' ? '$green10' : '$orange10'}
                   p="$1"
                   px="$2"
                   br="$10"
                 >
-                  <Text fS={10} fOW="bold" col="white">{job.status}</Text>
+                  <Text fS={10} fOW="bold" col="white">
+                    {job.status}
+                  </Text>
                 </Badge>
               </XStack>
             </Card>

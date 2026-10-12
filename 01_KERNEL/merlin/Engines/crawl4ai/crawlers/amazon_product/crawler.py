@@ -1,5 +1,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+import json
+
 from crawl4ai.hub import BaseCrawler
 
 __meta__ = {

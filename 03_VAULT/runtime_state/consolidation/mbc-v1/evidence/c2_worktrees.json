@@ -1,0 +1,20 @@
+{
+  "phase": "C2-ISOLATE",
+  "run": "mbc-v1",
+  "timestamp": "2026-09-27T04:57:47+00:00",
+  "worktrees": [
+    "C:/Users/vizio/CAMELOT_OS                                   2ec1508a [perf/optimize-get-all-data-9582424866941690986]",
+    "C:/Users/vizio/CAMELOT_OS/.worktrees/consolidation/unified  ef7603b6 [feat/unified-v1000]"
+  ],
+  "active_worktrees": 2,
+  "limit": 6,
+  "free_ram_gb": 0.57,
+  "ceiling_gb": 8,
+  "platform_note": "libkrun/WASM32 microVM isolation = planned (blocked win32, WSL2+KVM target; blueprints/v9000.14/tasks.md P5-T02); git worktree isolation confirmed path; forkd_runner.sh fallback. Never marked rejected.",
+  "base_branch": "feat/unified-v1000",
+  "base_sha": "ef7603b60b526fe836b27885b340ef29e85a4ad3",
+  "worktree_clean": true,
+  "gate_recommendation": "PASS",
+  "reviewer": "SIR_BORIS",
+  "evidence_class": "confirmed"
+}

@@ -19,18 +19,106 @@
     "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
     "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
     "open_viking_tether": "open_viking://worldtree/lady_mnemosyne",
-    "synced_at": "2026-09-20T11:57:58.379702+00:00"
+    "updated_at": "2026-09-23T16:02:57.510993+00:00"
   },
   {
     "knight_id": "LADY_MNEMOSYNE",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "knight_summoning",
-    "title": "Summoned Knight: ANYA",
-    "content": "{\n  \"action\": \"summon_knight\",\n  \"knight_id\": \"ANYA\",\n  \"interconnect\": {\n    \"knight_id\": \"ANYA\",\n    \"status\": \"UNMAPPED_FALLBACK\",\n    \"worldtree_home\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n    \"cloudbrain_uuid\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n    \"vfs_path\": \"vfs://worldtree/knights/anya/tether.json\",\n    \"mempalace_wing\": \"WING_WORLDTREE_ANYA\",\n    \"open_viking_node\": \"open_viking://worldtree/anya\"\n  },\n  \"timestamp\": \"2026-09-20T11:57:54.432047+00:00\"\n}",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for LADY_MNEMOSYNE",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_lady_mnemosyne\",\n  \"session_id\": \"sess_knight_lady_mnemosyne\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
     "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
     "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
     "open_viking_tether": "open_viking://worldtree/lady_mnemosyne",
-    "synced_at": "2026-09-20T11:57:54.432134+00:00"
+    "updated_at": "2026-09-23T16:02:56.621696+00:00"
+  },
+  {
+    "knight_id": "LADY_MNEMOSYNE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for LADY_MNEMOSYNE",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_lady_mnemosyne\",\n  \"session_id\": \"sess_knight_lady_mnemosyne\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
+    "open_viking_tether": "open_viking://worldtree/lady_mnemosyne",
+    "updated_at": "2026-09-22T14:39:42.088029+00:00"
+  },
+  {
+    "knight_id": "LADY_MNEMOSYNE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for LADY_MNEMOSYNE",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_lady_mnemosyne\",\n  \"session_id\": \"sess_knight_lady_mnemosyne\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
+    "open_viking_tether": "open_viking://worldtree/lady_mnemosyne",
+    "updated_at": "2026-09-22T14:39:40.470074+00:00"
+  },
+  {
+    "knight_id": "LADY_MNEMOSYNE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for LADY_MNEMOSYNE",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_lady_mnemosyne\",\n  \"session_id\": \"sess_knight_lady_mnemosyne\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
+    "open_viking_tether": "open_viking://worldtree/lady_mnemosyne",
+    "updated_at": "2026-09-22T14:38:43.393693+00:00"
+  },
+  {
+    "knight_id": "LADY_MNEMOSYNE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for LADY_MNEMOSYNE",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_lady_mnemosyne\",\n  \"session_id\": \"sess_knight_lady_mnemosyne\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
+    "open_viking_tether": "open_viking://worldtree/lady_mnemosyne",
+    "updated_at": "2026-09-22T14:38:41.772160+00:00"
+  },
+  {
+    "knight_id": "LADY_MNEMOSYNE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for LADY_MNEMOSYNE",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_lady_mnemosyne\",\n  \"session_id\": \"sess_knight_lady_mnemosyne\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
+    "open_viking_tether": "open_viking://worldtree/lady_mnemosyne",
+    "updated_at": "2026-09-22T14:37:02.336279+00:00"
+  },
+  {
+    "knight_id": "LADY_MNEMOSYNE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for LADY_MNEMOSYNE",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_lady_mnemosyne\",\n  \"session_id\": \"sess_knight_lady_mnemosyne\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
+    "open_viking_tether": "open_viking://worldtree/lady_mnemosyne",
+    "updated_at": "2026-09-22T14:37:00.660956+00:00"
+  },
+  {
+    "knight_id": "LADY_MNEMOSYNE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for LADY_MNEMOSYNE",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_lady_mnemosyne\",\n  \"session_id\": \"sess_knight_lady_mnemosyne\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
+    "open_viking_tether": "open_viking://worldtree/lady_mnemosyne",
+    "updated_at": "2026-09-22T14:35:53.938462+00:00"
+  },
+  {
+    "knight_id": "LADY_MNEMOSYNE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for LADY_MNEMOSYNE",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_lady_mnemosyne\",\n  \"session_id\": \"sess_knight_lady_mnemosyne\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
+    "open_viking_tether": "open_viking://worldtree/lady_mnemosyne",
+    "updated_at": "2026-09-22T14:35:52.349105+00:00"
   },
   {
     "knight_id": "LADY_MNEMOSYNE",
@@ -47,6 +135,15 @@
       "Master_Compendium.md",
       "system_instruction.md"
     ],
+    "five_pillars": [
+      "Mnemosyne (Titaness of Memory)",
+      "Simonides of Ceos (Memory Palace Method)",
+      "Jorge Luis Borges (Infinite Library)",
+      "Frances Yates (Art of Memory)",
+      "Mary Somerville (Universal Connection)"
+    ],
+    "law_of_non_reproducibility": "ENFORCED",
+    "rpg_progression": "Glass Observatory Level & XP Matrix",
     "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "mesh_nodes": [
       "cybertronia",
@@ -55,6 +152,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-20T00:29:47.551119+00:00"
+    "updated_at": "2026-09-21T23:00:51.689974+00:00"
   }
 ]

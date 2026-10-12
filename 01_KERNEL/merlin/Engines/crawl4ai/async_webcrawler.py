@@ -461,9 +461,9 @@ class AsyncWebCrawler:
                 raise ValueError(f"Process HTML, Failed to extract content from the website: {url}")
 
         except InvalidCSSSelectorError as e:
-            raise ValueError(str(e))
+            raise ValueError(str(e)) from e
         except Exception as e:
-            raise ValueError(f"Process HTML, Failed to extract content from the website: {url}, error: {str(e)}")
+            raise ValueError(f"Process HTML, Failed to extract content from the website: {url}, error: {str(e)}") from e
 
         # Extract results - handle both dict and ScrapingResult
         if isinstance(result, dict):

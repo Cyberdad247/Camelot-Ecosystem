@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
 import { runtimeConfig } from '@/config/runtime';
+import { useEffect, useRef, useState } from 'react';
 
 /**
  * Payload of an `active_knight` SSE event emitted by control_plane/go_router.

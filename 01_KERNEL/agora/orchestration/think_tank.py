@@ -9,14 +9,14 @@ kernel_path = Path(__file__).parent.parent
 if str(kernel_path) not in sys.path:
     sys.path.insert(0, str(kernel_path))
 
-import asyncio
-from typing import Any, Dict
+import asyncio  # noqa: E402
+from typing import Any, Dict  # noqa: E402
 
-from assimilation.core.verification import check_harmony
-from Engines.mcp_adapter import MCPAdapter
-from Engines.merlin_llm import MerlinLLM
-from Engines.ukg_runtime import UKGRuntime
-from swarm_controller import swarm
+from assimilation.core.verification import check_harmony  # noqa: E402
+from Engines.mcp_adapter import MCPAdapter  # noqa: E402
+from Engines.merlin_llm import MerlinLLM  # noqa: E402
+from Engines.ukg_runtime import UKGRuntime  # noqa: E402
+from swarm_controller import swarm  # noqa: E402
 
 
 class ThinkTankOrchestrator:

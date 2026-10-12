@@ -1,0 +1,11 @@
+{
+  "crystal_id": "VKG_OMEGA_MARK39_REYA_NEXUS",
+  "system_identity": "OMEGA_MARK39_REYA_NEXUS",
+  "category": "SOVEREIGN_ROUND_TABLE",
+  "knight": "LUKAS_OMEGA",
+  "prime_directive": {
+    "constraint": "8GB_EDGE_CEILING ➔ (Python_Bloat == PURGED)",
+    "description": "Mark-XXXIX Hybrid Nexus: Sub-100ms TTFA voice/vision engine with zero Python bloat on edge"
+  },
+  "created_at": "2026-10-04T12:00:00Z"
+}

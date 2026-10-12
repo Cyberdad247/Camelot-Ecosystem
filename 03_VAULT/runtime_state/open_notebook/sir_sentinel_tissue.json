@@ -1,6 +1,116 @@
 [
   {
     "knight_id": "SIR_SENTINEL",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_SENTINEL",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_sentinel\",\n  \"session_id\": \"sess_knight_sir_sentinel\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_sentinel/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_SENTINEL",
+    "open_viking_tether": "open_viking://worldtree/sir_sentinel",
+    "updated_at": "2026-09-23T16:02:56.972899+00:00"
+  },
+  {
+    "knight_id": "SIR_SENTINEL",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_SENTINEL",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_sentinel\",\n  \"session_id\": \"sess_knight_sir_sentinel\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_sentinel/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_SENTINEL",
+    "open_viking_tether": "open_viking://worldtree/sir_sentinel",
+    "updated_at": "2026-09-23T16:02:56.406814+00:00"
+  },
+  {
+    "knight_id": "SIR_SENTINEL",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_SENTINEL",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_sentinel\",\n  \"session_id\": \"sess_knight_sir_sentinel\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_sentinel/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_SENTINEL",
+    "open_viking_tether": "open_viking://worldtree/sir_sentinel",
+    "updated_at": "2026-09-22T14:39:41.534810+00:00"
+  },
+  {
+    "knight_id": "SIR_SENTINEL",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_SENTINEL",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_sentinel\",\n  \"session_id\": \"sess_knight_sir_sentinel\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_sentinel/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_SENTINEL",
+    "open_viking_tether": "open_viking://worldtree/sir_sentinel",
+    "updated_at": "2026-09-22T14:39:39.948696+00:00"
+  },
+  {
+    "knight_id": "SIR_SENTINEL",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_SENTINEL",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_sentinel\",\n  \"session_id\": \"sess_knight_sir_sentinel\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_sentinel/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_SENTINEL",
+    "open_viking_tether": "open_viking://worldtree/sir_sentinel",
+    "updated_at": "2026-09-22T14:38:42.783709+00:00"
+  },
+  {
+    "knight_id": "SIR_SENTINEL",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_SENTINEL",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_sentinel\",\n  \"session_id\": \"sess_knight_sir_sentinel\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_sentinel/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_SENTINEL",
+    "open_viking_tether": "open_viking://worldtree/sir_sentinel",
+    "updated_at": "2026-09-22T14:38:41.228317+00:00"
+  },
+  {
+    "knight_id": "SIR_SENTINEL",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_SENTINEL",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_sentinel\",\n  \"session_id\": \"sess_knight_sir_sentinel\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_sentinel/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_SENTINEL",
+    "open_viking_tether": "open_viking://worldtree/sir_sentinel",
+    "updated_at": "2026-09-22T14:37:01.742875+00:00"
+  },
+  {
+    "knight_id": "SIR_SENTINEL",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_SENTINEL",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_sentinel\",\n  \"session_id\": \"sess_knight_sir_sentinel\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_sentinel/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_SENTINEL",
+    "open_viking_tether": "open_viking://worldtree/sir_sentinel",
+    "updated_at": "2026-09-22T14:37:00.145354+00:00"
+  },
+  {
+    "knight_id": "SIR_SENTINEL",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_SENTINEL",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_sentinel\",\n  \"session_id\": \"sess_knight_sir_sentinel\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_sentinel/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_SENTINEL",
+    "open_viking_tether": "open_viking://worldtree/sir_sentinel",
+    "updated_at": "2026-09-22T14:35:53.657349+00:00"
+  },
+  {
+    "knight_id": "SIR_SENTINEL",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_SENTINEL",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_sentinel\",\n  \"session_id\": \"sess_knight_sir_sentinel\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_sentinel/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_SENTINEL",
+    "open_viking_tether": "open_viking://worldtree/sir_sentinel",
+    "updated_at": "2026-09-22T14:35:51.334547+00:00"
+  },
+  {
+    "knight_id": "SIR_SENTINEL",
     "cloudbrain_uuid": "07cbb441-f008-424c-820a-85676210be39",
     "spark_id": "0x07CBB441F008424C820A85676210BE39",
     "role": "AgentArmor v2.0, PDG Taint & Leases",
@@ -14,6 +124,15 @@
       "Master_Compendium.md",
       "system_instruction.md"
     ],
+    "five_pillars": [
+      "Leonidas of Sparta (The Unyielding Thermopylae Wall)",
+      "Robert Morris Sr. (Cryptographic Prudence)",
+      "Leslie Lamport (Byzantine Fault Tolerance)",
+      "Whitfield Diffie (Asymmetric Key Cryptography)",
+      "George Boole (Binary Logic Truth)"
+    ],
+    "law_of_non_reproducibility": "ENFORCED",
+    "rpg_progression": "Glass Observatory Level & XP Matrix",
     "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "mesh_nodes": [
       "cybertronia",
@@ -22,6 +141,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-20T00:29:47.551119+00:00"
+    "updated_at": "2026-09-21T23:00:51.689974+00:00"
   }
 ]

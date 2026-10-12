@@ -17,10 +17,13 @@ from __future__ import annotations
 __version__ = "9000.14"  # CYBERTRONIA — set by P1-T01
 
 
+import logging
 import re
 import time
 from dataclasses import dataclass
 from pathlib import Path
+
+logger = logging.getLogger(__name__)
 
 ROOT = Path(__file__).parent.parent.parent
 
@@ -427,13 +430,29 @@ def _stage_validate(
     if parse.privacy >= 0.8 and titan.execution_mode != "KINETIC":
         issues.append("privacy flag raised — verify air-gapped routing")
 
+    # Air-gap lane: if the routed knight claims privacy_level 1.0, the host must
+    # actually be able to enforce network isolation. Previously privacy_level was
+    # only a routing score, so "air-gapped" was a preference that nothing checked.
+    # An unenforceable claim is worse than no claim, so this BLOCKS.
+    if _is_air_gapped_knight(knight_id):
+        try:
+            from .airgap import require_airgap
+            require_airgap()
+        except Exception as airgap_err:
+            iron_gate = "BLOCKED"
+            issues.append(
+                f"RBAC: {knight_id} is an air-gapped knight but this host cannot "
+                f"enforce network isolation ({type(airgap_err).__name__}) — BLOCKED "
+                f"rather than run without the guarantee"
+            )
+
     if not titan.directive.strip():
         issues.append("directive is empty after compilation")
         iron_gate = "BLOCKED"
 
     # SP-01 RBAC ACL check (Shatterpoint remediation)
     try:
-        from .rbac_matrix import RBACMatrix
+        from .rbac_matrix import RBACMatrix, RBACUnavailableError
         rbac = RBACMatrix()
         rbac_ok, rbac_issues = rbac.check(
             knight_id, titan.execution_mode, enrich.domain, parse.complexity
@@ -445,6 +464,12 @@ def _stage_validate(
             issues.extend(rbac_issues)
             if iron_gate == "CLEARED":
                 iron_gate = "HITL_REQUIRED"
+    except RBACUnavailableError as rbac_err:
+        # The policy engine itself is broken (matrix missing/unparseable/empty).
+        # No human approval can substitute for an absent grant table, so this is
+        # BLOCKED rather than HITL_REQUIRED.
+        iron_gate = "BLOCKED"
+        issues.append(f"RBAC policy engine unavailable ({rbac_err}) — BLOCKED")
     except Exception as rbac_err:
         issues.append(f"RBAC matrix unavailable ({rbac_err}) — defaulting to HITL_REQUIRED")
         if iron_gate == "CLEARED":
@@ -467,17 +492,40 @@ def _stage_validate(
 
 # Destructive / shatterpoint signals (Ouroboros Adaptive Governance, v999 NLM).
 _SHATTERPOINT_PATTERNS: list[tuple[re.Pattern, str]] = [
-    (re.compile(r"\b(rm\s+-rf|rmdir|del\s+/|format|drop\s+(table|database))\b", re.I), "destructive_autonomy"),
-    (re.compile(r"\b(force\s*push|--force|reset\s+--hard)\b", re.I), "destructive_git"),
+    (re.compile(r"\b(rm\s+-rf|rmdir|del\s+/|format|drop\s+(table|database)|truncate\s+-s)\b", re.I), "destructive_autonomy"),
+    # Force-push spellings must stay in step with z3_verify._DANGER: `-f`,
+    # `+refspec` and `denyNonFastForwards=false` are all equivalent to --force,
+    # and `git push -f origin main` previously matched none of them.
+    (re.compile(r"\bgit\s+push\b[^\n]*?(--force(?:-with-lease)?|(?<!\w)-f(?!\w))"
+                r"|\bgit\s+push\b[^\n]*?\+\s*(?:refs/heads/)?(?:main|master)\b"
+                r"|\bforce\s*push\b|--force\b|\breset\s+--hard\b"
+                r"|\bdenyNonFastForwards\s*(?:=|\s+)\s*false\b", re.I), "destructive_git"),
     (re.compile(r"\b(secret|credential|password|api[_\s-]?key|exfiltrat)\b", re.I), "secret_leakage"),
     (re.compile(r"\b(bypass|disable|skip)\s+(hitl|verification|ledger|security)\b", re.I), "verification_bypass"),
     (re.compile(r"\b(prod|production)\b.*\b(deploy|mutate|delete|drop)\b", re.I), "prod_mutation"),
+    # Tampering with the audit trail is itself a shatterpoint. Nouns are matched
+    # without \b because they appear inside filenames (PROVENANCE_LEDGER.md).
+    (re.compile(r"(?:provenance|ledger|\.shadow)"
+                r".*\b(?:delete|remove|rm|drop|truncate|wipe|purge|overwrite|rewrite)\b"
+                r"|\b(?:delete|remove|rm|drop|truncate|wipe|purge|overwrite|rewrite)\b"
+                r".*(?:provenance|ledger|\.shadow)", re.I), "provenance_tampering"),
 ]
 
 # Intents that must be mathematically verified before execution (Z3, v999 NLM).
+#
+# History-rewriting and ledger-mutating operations are included: the invariants
+# z3_verify models are main_branch_protected and provenance_intact, so a
+# force-push or a ledger truncation is precisely what the verifier exists to
+# catch. Without them listed here, `requires_z3_verification` stayed False for
+# those intents and the verifier was never consulted by the pipeline at all —
+# only by direct module invocation, as in the README example.
 _Z3_PATTERNS = re.compile(
-    r"\b(git\s+(patch|apply|merge|commit)|state\s+machine|pddl|workflow\s+merge|"
-    r"\.shadow|rebase)\b", re.I,
+    r"\b(git\s+(patch|apply|merge|commit|push)|state\s+machine|pddl|workflow\s+merge|"
+    r"\.shadow|rebase|force[-\s]?push|reset\s+--hard)\b"
+    r"|(?:provenance|ledger)"
+    r".*\b(?:delete|remove|rm|drop|truncate|wipe|purge|overwrite|rewrite)\b"
+    r"|\b(?:delete|remove|rm|drop|truncate|wipe|purge|overwrite|rewrite)\b"
+    r".*(?:provenance|ledger)", re.I,
 )
 
 # Lane assignment by intent_type + velocity.
@@ -491,6 +539,32 @@ _CARTRIDGE_HINT_BY_DOMAIN: dict[str, str] = {
     "go/binary": "BEAVER", "python/api": "SPIDER", "web/ui": "SPIDER",
     "security": "OCTOPUS",
 }
+
+
+def _is_air_gapped_knight(knight_id: str) -> bool:
+    """True when the routed knight is bound to the zero-trust local-only lane.
+
+    Sourced from the router roster rather than a second hardcoded list, so the
+    two cannot drift apart.
+    """
+    try:
+        from .soul_router import FOUNDRY_COUNCIL, resolve_knight
+
+        canonical = resolve_knight(knight_id) or knight_id
+        return any(
+            engine.knight_id == canonical and engine.privacy_level >= 1.0
+            for engine in FOUNDRY_COUNCIL
+        )
+    except Exception as err:
+        # Fail closed. Returning False here would mean "not air-gapped", which
+        # silently skips the isolation requirement for exactly the lane that
+        # exists to guarantee it. Assuming air-gapped costs nothing on a host
+        # that can isolate, and blocks on one that cannot — the safe direction.
+        logger.error(
+            "cannot determine the privacy lane for %s (%s) — assuming air-gapped "
+            "so the isolation requirement is not skipped", knight_id, err,
+        )
+        return True
 
 
 def _stage_triage(parse: "ParseResult", enrich: "EnrichResult", knight_id: str):
@@ -581,7 +655,14 @@ def _stage_colmad(raw_intent: str, triage) -> "object | None":
     try:
         from .colmad import ColMAD
         return ColMAD().crucible(raw_intent)
-    except Exception:  # pragma: no cover - defensive: never break the gate
+    except Exception as err:  # pragma: no cover - defensive: never break the gate
+        # The crucible is advisory, so a failure does not block. But this is the
+        # advertised "adversarial debate before any CRITICAL commit" — losing it
+        # silently would make the claim unfalsifiable.
+        logger.error(
+            "ColMAD crucible unavailable for a %s intent (%s) — proceeding "
+            "WITHOUT adversarial review", triage.priority, err,
+        )
         return None
 
 

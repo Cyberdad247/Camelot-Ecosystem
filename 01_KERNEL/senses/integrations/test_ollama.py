@@ -14,7 +14,7 @@ from pathlib import Path
 vault_path = Path(__file__).parent.parent / "03_VAULT"
 sys.path.insert(0, str(vault_path))
 
-from ollama_client import OllamaClient
+from ollama_client import OllamaClient  # noqa: E402
 
 
 def main():

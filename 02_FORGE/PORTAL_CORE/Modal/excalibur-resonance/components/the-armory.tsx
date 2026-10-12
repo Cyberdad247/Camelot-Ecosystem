@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
 export function TheArmory() {
   const items = Array.from({ length: 8 }, (_, i) => ({
     title: `Asset ${i + 1}`,
-    detail: "Video preview placeholder",
+    detail: 'Video preview placeholder',
   }));
 
   return (

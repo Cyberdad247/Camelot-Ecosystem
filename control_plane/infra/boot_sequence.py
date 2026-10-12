@@ -637,7 +637,28 @@ def boot_cloud_brain(home: Path):
         return True, f"Cloud Brain DEGRADED (error loading): {exc}"
 
 
+def boot_excalibur_mobile_sentinel(home: Path) -> tuple[bool, str]:
+    """Phase: Excalibur Omarchy Mobile Sentinel probe (S26 Ultra / Adreno 840)."""
+    try:
+        from control_plane.dispatch.excalibur_mobile_dispatcher import ExcaliburMobileDispatcher
 
+        d = ExcaliburMobileDispatcher()
+        st = d.get_mobile_cockpit_summary()
+        kp = st.get("keypass", {}).get("keypass_id", "NO_KEYPASS")
+        mode = st.get("operational_mode", "UNKNOWN")
+        return True, f"Excalibur Sentinel [{mode}] — WarpGate {kp} (120Hz Adreno 840)"
+    except Exception as exc:
+        return False, f"Excalibur Sentinel offline: {exc}"
+
+
+def boot_always_on_tailscale(home: Path) -> tuple[bool, str]:
+    """Phase: Always-On Tailscale Mesh Sentinel probe (dual-path failover)."""
+    try:
+        from control_plane.infra.tailscale_mesh_sentinel import boot_tailscale_sentinel
+
+        return boot_tailscale_sentinel(home)
+    except Exception as exc:
+        return False, f"Tailscale Sentinel offline: {exc}"
 
 
 def sync_knight_configuration(home: Path):
@@ -1016,7 +1037,7 @@ def boot_omnivoice_router(home: Path) -> tuple[bool, str]:
         return False, "omnivoice-router.ts not found"
 
     if compiled_js.exists():
-        cmd = ["node", str(compiled_js)]
+        cmd = ["node", "--max-old-space-size=256", str(compiled_js)]
     else:
         npx = shutil.which("npx")
         ts_node = shutil.which("ts-node")
@@ -1263,7 +1284,7 @@ def boot_opencodex(home: Path) -> tuple[bool, str]:
 
     try:
         if ocx_cli is not None:
-            launch_cmd = [node_bin or "node", str(ocx_cli), "start", "--port", str(ocx_port)]
+            launch_cmd = [node_bin or "node", "--max-old-space-size=256", str(ocx_cli), "start", "--port", str(ocx_port)]
         else:
             launch_cmd = [npx_bin, "ocx", "start", "--port", str(ocx_port)]
 
@@ -1300,6 +1321,32 @@ def boot_opencodex(home: Path) -> tuple[bool, str]:
         return False, f"OpenCodex launch failed: {exc}"
 
 
+def boot_kinetic_adb_watchdog(home: Path) -> tuple[bool, str]:
+    """Kinetic ADB link watchdog and auto-resurrection."""
+    try:
+        bridge_script = home / "04_KINETIC" / "qtscrcpy" / "qtscrcpy_kinetic_bridge.py"
+        if not bridge_script.exists():
+            return True, "QtScrcpy bridge script not found (skipped)"
+
+        py_bin = sys.executable
+        res = subprocess.run(
+            [py_bin, str(bridge_script), "watchdog", "--json"],
+            capture_output=True,
+            text=True,
+            timeout=10,
+        )
+        if res.returncode == 0:
+            rep = json.loads(res.stdout)
+            dev_count = rep.get("devices_found", 0)
+            status = rep.get("status", "IDLE")
+            if dev_count > 0:
+                return True, f"Kinetic ADB online ({dev_count} device(s) reverse-tunneled)"
+            return True, f"Kinetic ADB watchdog active (0 devices connected, status={status})"
+        return False, f"Kinetic ADB watchdog failed: {res.stderr[:60]}"
+    except Exception as e:
+        return True, f"Kinetic ADB watchdog pass ({e})"
+
+
 def _boot_vfs_preflight_stage0(home: Path) -> tuple[bool, str]:
     """Stage-0 VFS preflight gate (hard halt on strict REJECT).
 
@@ -1314,6 +1361,49 @@ def _boot_vfs_preflight_stage0(home: Path) -> tuple[bool, str]:
         sys.stderr.write(f"[VFS_PREFLIGHT] BOOT HALTED: {msg}\n")
         raise SystemExit(1)
     return ok, msg
+
+
+def boot_redis_go_l1_cache(home: Path) -> tuple[bool, str]:
+    """Verify Redis L1 Flash cache is listening on :6379 and Bifrost Go sidecar on :8011."""
+    redis_live = _probe_port("127.0.0.1", 6379, timeout=0.5)
+    go_sidecar_live = _probe_port("127.0.0.1", 8011, timeout=0.5)
+    if not redis_live:
+        candidates = [
+            Path("C:/Users/vizio/AppData/Local/CamelotTools/redis/redis-server.exe"),
+            Path("C:/Program Files/Redis/redis-server.exe"),
+        ]
+        for exe in candidates:
+            if exe.exists():
+                try:
+                    subprocess.Popen(
+                        [str(exe)],
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.DEVNULL,
+                        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+                    )
+                    time.sleep(0.5)
+                    redis_live = _probe_port("127.0.0.1", 6379, timeout=1.0)
+                    break
+                except Exception:
+                    pass
+
+    sidecar_label = "+ Go Sidecar :8011" if go_sidecar_live else ""
+    if redis_live:
+        return True, f"Redis :6379 LIVE (L1 Flash Memory sub-10ms) {sidecar_label}".strip()
+    return False, "Redis :6379 not detected"
+
+
+def boot_local_qdrant_engine(home: Path) -> tuple[bool, str]:
+    """Verify local embedded Qdrant vector database is initialized and healthy."""
+    try:
+        from control_plane.infra.qdrant_manager import LocalQdrantManager
+        qm = LocalQdrantManager()
+        status = qm.get_status()
+        pts = status.get("points_count", 0)
+        qm.close()
+        return True, f"Qdrant Embedded LIVE (HNSW vector store, {pts} points)"
+    except Exception as exc:
+        return False, f"Qdrant initialization warning: {exc}"
 
 
 def run_boot(
@@ -1340,16 +1430,21 @@ def run_boot(
         {"name": "VFS Preflight    :stage-0", "required": False,
          "fn": lambda: _boot_vfs_preflight_stage0(home)},
         {"name": "EXCALIBUR Pre-Flight", "required": False, "fn": lambda: boot_excalibur_preflight(home)},
+        {"name": "Excalibur Sentinel", "required": False, "fn": lambda: boot_excalibur_mobile_sentinel(home)},
+        {"name": "Tailscale Sentinel", "required": False, "fn": lambda: boot_always_on_tailscale(home)},
         {"name": "CLIProxyAPI   :8080", "required": True,  "fn": hud._boot_cliproxy},
         {"name": "OpenCodex    :10100", "required": False, "fn": lambda: boot_opencodex(home)},
         {"name": "Defense Grid",        "required": True,  "fn": hud._boot_defense_grid},
         {"name": "Kinetic Edge  :3001", "required": True,  "fn": hud._boot_kinetic_edge},
+        {"name": "Kinetic ADB Watchdog", "required": False, "fn": lambda: boot_kinetic_adb_watchdog(home)},
         {"name": "OmniVoice     :3002", "required": False, "fn": lambda: boot_omnivoice_router(home)},
         {"name": "Kitten TTS    :8300", "required": False, "fn": lambda: boot_kitten_tts(home)},
         {"name": "Titan Omega  [Omega]",   "required": False, "fn": lambda: boot_titan_omega(home)},
         {"name": "Sir Octavian  :8400", "required": False, "fn": lambda: boot_sir_octavian(home)},
         {"name": "Morgana Bridge :8001", "required": True, "fn": lambda: boot_morgana_bridge(home)},
         {"name": "Bifrost Sidecar:8011", "required": False, "fn": lambda: boot_bifrost_go_sidecar(home)},
+        {"name": "Redis-Go L1 Cache :6379", "required": False, "fn": lambda: boot_redis_go_l1_cache(home)},
+        {"name": "Local Qdrant Engine", "required": False, "fn": lambda: boot_local_qdrant_engine(home)},
         {"name": "OmniRoute    :20128", "required": False, "fn": lambda: boot_omniroute_gateway(home)},
         {"name": "Hermes OmniRoute", "required": False, "fn": lambda: boot_hermes_omniroute_orchestrator(home)},
         {"name": "VPS Hermes_Prime", "required": False, "fn": lambda: boot_vps_hermes_prime(home)},

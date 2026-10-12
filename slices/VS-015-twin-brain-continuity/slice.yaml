@@ -1,0 +1,18 @@
+id: VS-015
+slug: VS-015-twin-brain-continuity
+title: Twin Brain VPS Sync & Continuity
+tier: P1
+status: ACTIVE
+owner: hermes_prime
+summary: Always-on VPS co-pilot trajectory loop, 768MB RAM ceiling, and state synchronization
+  across mesh.
+contracts:
+- CONTRACT-TWIN-BRAIN-001
+code_paths:
+- deploy/
+- control_plane/mesh/
+tests:
+- tests/test_reya_assimilation.py
+exit_criteria:
+- VPS memory strictly <= 768MB
+- Automatic failover on local disconnect

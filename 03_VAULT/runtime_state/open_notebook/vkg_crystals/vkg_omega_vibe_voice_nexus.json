@@ -1,0 +1,76 @@
+{
+  "schema_version": "camelot.omni-voice-dag/1",
+  "fingerprint": "νKG_CRYSTAL_OMEGA_VIBE_VOICE_NEXUS",
+  "system_identity": "OMEGA_VIBE_VOICE_NEXUS",
+  "hardware_ceiling_mb": 2048,
+  "provenance": {
+    "origin": "vibe_assimilation_forge",
+    "trust": "sovereign_compiler_bootstrap",
+    "governance": "AGENTS.md evidence classes — confirmed upon live reproduction",
+    "root_orchestrator": "MERLIN_Ω",
+    "hitl_required_for_process_launch": false
+  },
+  "prime_directive": {
+    "root": "MERLIN_Ω",
+    "role": "SYSTEM_2_ORCHESTRATOR",
+    "constraint": "8GB_EDGE_CEILING (Bypass Python STT; use ggml C++ inference exclusively)",
+    "strategy": "Assimilate VibeVoice architecture into Multivoice-Router to establish sub-300ms full-duplex conversational S2S mesh"
+  },
+  "structural_constraints": {
+    "quantization": "I8_S + I2_S Heterogeneous GGML",
+    "memory_overhead": "Strictly < 2.0GB for STT/TTS combined",
+    "transport": "Zero-copy /dev/shm POSIX ring buffers",
+    "stt_resident_ceiling_mb": 1580,
+    "tts_resident_ceiling_mb": 468,
+    "target_ttfa_ms": 300,
+    "acoustic_tokenizer_frame_rate_hz": 7.5
+  },
+  "kinetic_flow_dag": [
+    {
+      "step": 1,
+      "name": "SECURE_WEIGHTS",
+      "knight": "SIR_CODEX",
+      "action": "Clone community backup weights (VibeVoice-Realtime-0.5B) bypassing MSFT takedown",
+      "evidence_class": "confirmed",
+      "resolved_paths": [
+        "scripts/secure_vibevoice_weights.py"
+      ],
+      "status": "PROVISIONED"
+    },
+    {
+      "step": 2,
+      "name": "COMPILE_ASR",
+      "knight": "SIR_BORIS",
+      "action": "Execute cmake --build on VibeASR.cpp to forge the 1.58GB CPU-only binary",
+      "evidence_class": "confirmed",
+      "resolved_paths": [
+        "02_FORGE/KINETIC_ARMORY/VibeVoice/csrc/vibe_asr.cpp",
+        "02_FORGE/KINETIC_ARMORY/VibeVoice/csrc/CMakeLists.txt"
+      ],
+      "status": "FORGED"
+    },
+    {
+      "step": 3,
+      "name": "REPLACE_PIPER",
+      "knight": "LORD_VESPER",
+      "action": "Mount 0.5B Realtime diffusion head to Bifrost WebRTC outbound stream (TTFA < 300ms)",
+      "evidence_class": "confirmed",
+      "resolved_paths": [
+        "packages/multivoice-router/src/voice/omnivoice-router.ts",
+        "control_plane/dispatch/realtime_voice_bridge.py"
+      ],
+      "status": "MOUNTED"
+    },
+    {
+      "step": 4,
+      "name": "FACTORY_MOUNT",
+      "knight": "LADY_APIS",
+      "action": "Isolate VibeVoiceFusion LoRA/Batching logic into KBA Marketing offline generation cartridge",
+      "evidence_class": "confirmed",
+      "resolved_paths": [
+        "03_VAULT/training/configs/cartridges/kba-marketing-voice.yaml"
+      ],
+      "status": "ISOLATED"
+    }
+  ]
+}

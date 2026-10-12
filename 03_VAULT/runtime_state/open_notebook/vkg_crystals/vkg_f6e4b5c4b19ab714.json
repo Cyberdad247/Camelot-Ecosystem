@@ -1,0 +1,81 @@
+{
+  "crystal_id": "VKG_F6E4B5C4B19AB714",
+  "schema_version": "v1000-VKG-SINGULARITY",
+  "anya_seal": "ANYA_IS_THE_GATE",
+  "category": "CAMELOT_SYSTEMS_ARCHITECTURE",
+  "knight": "SIR_HELIOS",
+  "title": "Multi-Tier Hybrid Brain Memory Architecture",
+  "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Multi-Tier|Hybrid|Brain|Memory|Architecture|Helios|routes|flash|telemetry|Redis|zero|token|cost|Qdrant|stores|semantic|vector|embeddings|OpenNotebook|maintains|local|living|knight|tissues|Cybertronia|NotebookLM|WorldTree|governs|deep|reasoning|across|nodes|Anya|Gate|validates|sovereign|transitions\u27e9",
+  "anchor_tokens": [
+    "Multi-Tier",
+    "Hybrid",
+    "Brain",
+    "Memory",
+    "Architecture",
+    "Helios",
+    "routes",
+    "flash",
+    "telemetry",
+    "Redis",
+    "zero",
+    "token",
+    "cost",
+    "Qdrant",
+    "stores",
+    "semantic",
+    "vector",
+    "embeddings",
+    "OpenNotebook",
+    "maintains",
+    "local",
+    "living",
+    "knight",
+    "tissues",
+    "Cybertronia",
+    "NotebookLM",
+    "WorldTree",
+    "governs",
+    "deep",
+    "reasoning",
+    "across",
+    "nodes",
+    "Anya",
+    "Gate",
+    "validates",
+    "sovereign",
+    "transitions"
+  ],
+  "sources_count": 1,
+  "manifest_sha256": "91ce038ce961e97192119f0dd1c0dc5e30157ab378d7fb9df06b8765660f6400",
+  "triplets": [
+    {
+      "head": "Sir Helios",
+      "relation": "route",
+      "tail": "flash telemetry to Redis for zero token cost"
+    },
+    {
+      "head": "Qdrant",
+      "relation": "store",
+      "tail": "semantic vector embeddings"
+    },
+    {
+      "head": "OpenNotebook maintains local",
+      "relation": "living",
+      "tail": "knight tissues on Cybertronia"
+    },
+    {
+      "head": "NotebookLM WorldTree governs deep",
+      "relation": "reasoning",
+      "tail": "across 294 nodes"
+    },
+    {
+      "head": "Anya Gate",
+      "relation": "validate",
+      "tail": "all sovereign transitions"
+    }
+  ],
+  "triplet_count": 5,
+  "vfs_coordinate": "vfs://worldtree/crystals/vkg_f6e4b5c4b19ab714.vkg",
+  "created_at": "2026-10-06T02:11:04.220489+00:00",
+  "finalized_content": "Sir Helios routes flash telemetry to Redis for zero token cost. Qdrant stores semantic vector embeddings. OpenNotebook maintains local living knight tissues on Cybertronia. NotebookLM WorldTree governs deep reasoning across 294 nodes. Anya Gate validates all sovereign transitions."
+}

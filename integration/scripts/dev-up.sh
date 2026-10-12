@@ -43,7 +43,24 @@ start_gated() { # name token seconds -- command...
   fi
 }
 
-env_gateway=(env GATEWAY_ADDR=":$GATEWAY_PORT" GATEWAY_DB="$GATEWAY_DB"
+# Mint (or reuse) the API token before anything starts, so every caller in
+# this stack shares one credential.
+mkdir -p "$RUN_DIR"
+if [[ -n ${CAMELOT_API_TOKEN:-} ]]; then
+  API_TOKEN="$CAMELOT_API_TOKEN"
+else
+  API_TOKEN=$(head -c 32 /dev/urandom | od -An -tx1 | tr -d ' \n')
+fi
+printf '%s\n' "$API_TOKEN" >"$TOKEN_FILE"
+chmod 600 "$TOKEN_FILE"
+# The console is a static page served from a different origin, so it needs the
+# token from its OWN origin. Same-origin policy is what keeps a hostile page
+# from reading it; the gateway origin allow-list is what keeps one from using it.
+printf '%s\n' "$API_TOKEN" >"$CONSOLE_TOKEN_FILE"
+
+env_gateway=(env GATEWAY_ADDR="$GATEWAY_BIND:$GATEWAY_PORT"
+  CAMELOT_API_TOKEN="$API_TOKEN"
+  CAMELOT_ALLOWED_ORIGINS="http://localhost:$CONSOLE_PORT,http://127.0.0.1:$CONSOLE_PORT" GATEWAY_DB="$GATEWAY_DB"
   ENABLE_MODEL_PROVIDER="${ENABLE_MODEL_PROVIDER:-false}"
   MODEL_PROVIDER_ALLOW="${MODEL_PROVIDER_ALLOW:-deterministic}"
   MODEL_PROVIDER_NAME="${MODEL_PROVIDER_NAME:-configured}"
@@ -55,7 +72,7 @@ env_gateway=(env GATEWAY_ADDR=":$GATEWAY_PORT" GATEWAY_DB="$GATEWAY_DB"
   CAMELOT_NODE_LEASE_KEY="$LEASE_KEY")
 start_gated gateway "$BIN_DIR/gateway" 20 "${env_gateway[@]}" "$BIN_DIR/gateway"
 
-env_agent=(env CAMELOT_NODE_LEASE_KEY="$LEASE_KEY" NODE_AGENT_ADDR="0.0.0.0:$NODE_AGENT_PORT"
+env_agent=(env CAMELOT_NODE_LEASE_KEY="$LEASE_KEY" CAMELOT_API_TOKEN="$API_TOKEN" NODE_AGENT_ADDR="0.0.0.0:$NODE_AGENT_PORT"
   ENABLE_TAILSCALE_MESH="$ENABLE_TAILSCALE_MESH"
   CAMELOT_GATEWAY_URL="http://127.0.0.1:$GATEWAY_PORT"
   CAMELOT_NODE_ID="$CAMELOT_NODE_ID" CAMELOT_TENANT_ID="$CAMELOT_TENANT_ID"

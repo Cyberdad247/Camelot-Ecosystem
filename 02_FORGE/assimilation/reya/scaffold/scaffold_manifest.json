@@ -1,0 +1,30 @@
+{
+  "schema_version": "camelot.assimilation-scaffold/1",
+  "id": "REYA_SCAFFOLD_V1000",
+  "hypervisor": "ANYA_Ω",
+  "state": "AWAITING_REYA_UNCLOAKING",
+  "memory_envelope": {
+    "host_ceiling": "8GB_EDGE_CEILING",
+    "allocated_slab_mb": 256,
+    "shm_transport": "POSIX memfd / Win32 Named Shared Memory (Local\\Camelot_Reya_Slab)",
+    "babylonian_static": null
+  },
+  "ingress_gate": {
+    "max_atomic_lines": 10,
+    "parser": "Triple-QFT (Physics Renormalization + Pedagogy Gate + Engineering Quantization)",
+    "z3_verification": "Paladin_Octem",
+    "delegates": ["Sir_Codex", "Sir_Boris"]
+  },
+  "hybrid_routing": {
+    "voice_vision_engine": "Gemini_Live_API ➔ Lord_Vesper_WebAudio ➔ Sub-100ms TTFA",
+    "tool_execution_engine": "OpenRouter_FreeTier ➔ Sir_Octavian_Kinetic_Hand ➔ Background_Task"
+  },
+  "harmony_runes": {
+    "//FORGE_REYA_SCAFFOLD": "Execute scaffold preparation and memory boundary validation",
+    "//ACTIVATE_AGENT_ARMOR": "Lock down ingress gates and enable Z3/taint security proofing",
+    "//HITL_IRON_GATE_APPROVAL": "Audit changes exceeding 10 lines or 50MB",
+    "//EXTRACT_MARK_39_AUDIO_CORE": "Extract and route Gemini Audio/Vision core",
+    "//SANDBOX_PYTHON_DEPENDENCIES": "Execute RTK Scythe on PyAutoGUI/Playwright, replacing with bare-metal WASI",
+    "//AWAIT_REYA_UNCLOAKING": "Place hypervisor on standby awaiting raw AST/README paste"
+  }
+}

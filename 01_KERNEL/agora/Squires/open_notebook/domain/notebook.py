@@ -42,7 +42,7 @@ class Notebook(ObjectModel):
         except Exception as e:
             logger.error(f"Error fetching sources for notebook {self.id}: {str(e)}")
             logger.exception(e)
-            raise DatabaseOperationError(e)
+            raise DatabaseOperationError(e) from e
 
     async def get_notes(self) -> List["Note"]:
         try:
@@ -59,7 +59,7 @@ class Notebook(ObjectModel):
         except Exception as e:
             logger.error(f"Error fetching notes for notebook {self.id}: {str(e)}")
             logger.exception(e)
-            raise DatabaseOperationError(e)
+            raise DatabaseOperationError(e) from e
 
     async def get_chat_sessions(self) -> List["ChatSession"]:
         try:
@@ -80,7 +80,7 @@ class Notebook(ObjectModel):
         except Exception as e:
             logger.error(f"Error fetching chat sessions for notebook {self.id}: {str(e)}")
             logger.exception(e)
-            raise DatabaseOperationError(e)
+            raise DatabaseOperationError(e) from e
 
 
 class Asset(BaseModel):
@@ -104,7 +104,7 @@ class SourceEmbedding(ObjectModel):
         except Exception as e:
             logger.error(f"Error fetching source for embedding {self.id}: {str(e)}")
             logger.exception(e)
-            raise DatabaseOperationError(e)
+            raise DatabaseOperationError(e) from e
 
 
 class SourceInsight(ObjectModel):
@@ -124,7 +124,7 @@ class SourceInsight(ObjectModel):
         except Exception as e:
             logger.error(f"Error fetching source for insight {self.id}: {str(e)}")
             logger.exception(e)
-            raise DatabaseOperationError(e)
+            raise DatabaseOperationError(e) from e
 
     async def save_as_note(self, notebook_id: Optional[str] = None) -> Any:
         source = await self.get_source()
@@ -235,7 +235,7 @@ class Source(ObjectModel):
         except Exception as e:
             logger.error(f"Error fetching chunks count for source {self.id}: {str(e)}")
             logger.exception(e)
-            raise DatabaseOperationError(f"Failed to count chunks for source: {str(e)}")
+            raise DatabaseOperationError(f"Failed to count chunks for source: {str(e)}") from e
 
     async def get_insights(self) -> List[SourceInsight]:
         try:
@@ -249,7 +249,7 @@ class Source(ObjectModel):
         except Exception as e:
             logger.error(f"Error fetching insights for source {self.id}: {str(e)}")
             logger.exception(e)
-            raise DatabaseOperationError("Failed to fetch insights for source")
+            raise DatabaseOperationError("Failed to fetch insights for source") from e
 
     async def add_to_notebook(self, notebook_id: str) -> Any:
         if not notebook_id:
@@ -331,7 +331,7 @@ class Source(ObjectModel):
         except Exception as e:
             logger.error(f"Error vectorizing source {self.id}: {str(e)}")
             logger.exception(e)
-            raise DatabaseOperationError(e)
+            raise DatabaseOperationError(e) from e
 
     async def add_insight(self, insight_type: str, content: str) -> Any:
         EMBEDDING_MODEL = await model_manager.get_embedding_model()
@@ -438,7 +438,7 @@ async def text_search(keyword: str, results: int, source: bool = True, note: boo
     except Exception as e:
         logger.error(f"Error performing text search: {str(e)}")
         logger.exception(e)
-        raise DatabaseOperationError(e)
+        raise DatabaseOperationError(e) from e
 
 
 async def vector_search(
@@ -471,4 +471,4 @@ async def vector_search(
     except Exception as e:
         logger.error(f"Error performing vector search: {str(e)}")
         logger.exception(e)
-        raise DatabaseOperationError(e)
+        raise DatabaseOperationError(e) from e

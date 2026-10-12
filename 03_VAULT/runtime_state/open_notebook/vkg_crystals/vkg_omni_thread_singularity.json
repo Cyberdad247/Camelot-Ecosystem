@@ -1,0 +1,62 @@
+{
+  "crystal_id": "VKG_CAMELOT_OS_V1000_OMNI_THREAD_SINGULARITY",
+  "topic": "CAMELOT-OS_V1000_OMNI_THREAD_SINGULARITY",
+  "description": "Sovereign 8GB Edge OS; Bare-metal WASM32-WASI; Zero-Trust Voice-Mesh; 2D-to-3D Spatial HUD; Anti-Gravity Swarm.",
+  "knights": [
+    "Anya_Omega",
+    "Merlin_Omega",
+    "Sir_Codex",
+    "Sir_Boris",
+    "Lord_Vesper",
+    "Lady_Mnemosyne",
+    "Sir_Gideon"
+  ],
+  "roles": {
+    "Anya": "L7 Intent Ingress / Gatekeeper / Hypervisor",
+    "Merlin": "L6 DAG Orchestrator / MFOE Router",
+    "Boris": "L3/L7 Kinetic Frontend / 3D Spatial Scaffolding",
+    "Codex": "L3/L6 Bare-metal Backend / WASM32-WASI Pill Forge",
+    "Vesper": "L1/L3 Sub-100ms VAD / WebAudio Resonance",
+    "Mnemosyne": "L5 CRDT Sync / FAISS Vector Cache",
+    "Gideon": "L2 Z3 SMT-LIB Verification / AgentArmor PDG"
+  },
+  "sequence": "OODA-MGV -> B.L.A.S.T Protocol -> POSIX SHM Voice (TTFA<500ms) -> WebGPU/CSS 3D Render -> Z3 Verify -> HITL Merge",
+  "governance": {
+    "OCEAN": {
+      "O": 0.99,
+      "C": 0.99,
+      "E": 0.10,
+      "A": 0.01,
+      "N": 0.01
+    },
+    "throughput_topology": "Gateway(Voice/UI) -> Router(DAG) -> Swarm(CoW/WASM) -> Audit(Z3) -> NVMe_Disk"
+  },
+  "memory_model_hierarchy": [
+    "L7: Excalibur Command Center (HTMX/R3F/CSS3D)",
+    "L6: Council of Mages (TraitBlender/MFOE)",
+    "L5: MemCastle (SQLite WAL2 / FAISS ONNX)",
+    "L4: Ouroboros SSM (1.58-bit Ternary)",
+    "L3: WASM32-WASI / Native CFFI Audio Sink",
+    "L2: Heimdall AgentArmor (QR-Pill/mTLS Bifrost)",
+    "L1: /dev/shm Zero-Copy IPC / cgroups v2",
+    "L0: 8GB LPDDR5 Edge Bare-Metal Node"
+  ],
+  "execution_enforcements": [
+    "8GB_RAM_STRICT",
+    "<50MB_VRAM",
+    "NO_DOCKER",
+    "CoW_Delta_0.12MiB",
+    "Z3_PROVED_ONLY",
+    "ZERO_MARKDOWN_TTS"
+  ],
+  "telemetry_beacon": "[CPU:████100%][RAM:4.1/8.0GB][LATTICE:V1000_EXCALIBUR_ASCENDED]",
+  "runtime_verification": {
+    "voice_dag_module": "control_plane/dispatch/omni_voice_dag.py",
+    "voice_crystal_manifest": "03_VAULT/runtime_state/omni_voice_dag_vmax_crystal.json",
+    "wasm_audio_dsp": "wasm/camelot-audio-dsp/src/lib.rs",
+    "spatial_hud": "apps/pwa/src/components/LakishaHUD.tsx",
+    "hardware_ceiling_mb": 384,
+    "evidence_class": "confirmed",
+    "timestamp_utc": "2026-09-20T20:40:20+00:00"
+  }
+}

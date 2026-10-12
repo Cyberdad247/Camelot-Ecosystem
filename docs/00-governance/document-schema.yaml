@@ -1,0 +1,118 @@
+# SPDX-License-Identifier: MIT
+# Camelot-OS Documentation Metadata Schema (v4.1.0)
+# Reforged Baseline: CAMELOT-DOC-ARCH-vNEXT-REFORGED-20260925
+
+$schema: "http://json-schema.org/draft-07/schema#"
+title: "CamelotDocumentationMetadata"
+description: "Mandatory front-matter metadata specification for all canonical documentation."
+type: "object"
+required:
+  - "document_id"
+  - "artifact_type"
+  - "version"
+  - "status"
+  - "authority_layer"
+  - "owner"
+  - "applies_to"
+properties:
+  document_id:
+    type: "string"
+    pattern: "^[A-Z0-9_-]+$"
+    description: "Unique, immutable document identification token."
+  artifact_type:
+    type: "string"
+    enum:
+      - "GOVERNANCE_SPEC"
+      - "BRD"
+      - "PRD"
+      - "SRS"
+      - "SAD"
+      - "LLDD"
+      - "CONTRACT_SPEC"
+      - "UIUX_SPEC"
+      - "TEST_PLAN"
+      - "RUNBOOK"
+      - "ADR"
+      - "TRACEABILITY"
+      - "EVIDENCE"
+      - "SLICE_SPEC"
+  version:
+    type: "string"
+    pattern: "^\\d+\\.\\d+\\.\\d+$"
+    description: "Semantic version of the document (MAJOR.MINOR.PATCH)."
+  status:
+    type: "string"
+    enum:
+      - "PROPOSED"
+      - "DRAFT"
+      - "CANONICAL"
+      - "DEPRECATED"
+      - "SUPERSEDED"
+  authority_layer:
+    type: "string"
+    enum:
+      - "L0"  # Governance & Constitution
+      - "L1"  # Intent, Business, Product
+      - "L2"  # Macro-Architecture & Context
+      - "L3"  # Detailed Design & Logic
+      - "L4"  # Operations, Runbooks & Deployment
+      - "L5"  # Reflection & Telemetry
+  owner:
+    type: "string"
+    description: "Governing body, knight, or engineering discipline responsible for the file."
+  applies_to:
+    type: "array"
+    items:
+      type: "string"
+    description: "System components, nodes, or platforms this specification governs."
+  supersedes:
+    type: "array"
+    items:
+      type: "string"
+    default: []
+  related:
+    type: "array"
+    items:
+      type: "string"
+    default: []
+  implementation_state:
+    type: "string"
+    enum:
+      - "PLANNED"
+      - "PARTIAL"
+      - "COMPLETE"
+    default: "PARTIAL"
+  last_verified:
+    type: "string"
+    pattern: "^\\d{4}-\\d{2}-\\d{2}$"
+    description: "ISO date of the most recent formal verification pass."
+  traces:
+    type: "array"
+    items:
+      type: "string"
+    description: "Upstream business/product requirement identifiers (e.g., BR-001, PR-001)."
+    default: []
+  contracts:
+    type: "array"
+    items:
+      type: "string"
+    description: "Bound capability lease or message contract references."
+    default: []
+  code_paths:
+    type: "array"
+    items:
+      type: "string"
+    description: "Associated codebase implementations governed by this specification."
+    default: []
+  tests:
+    type: "array"
+    items:
+      type: "string"
+    description: "Automated test identifiers proving adherence to this specification."
+    default: []
+  evidence:
+    type: "array"
+    items:
+      type: "string"
+    description: "Attested cryptographic receipt or evidence bundle identifiers."
+    default: []

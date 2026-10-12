@@ -23,8 +23,12 @@ export const KNIGHTS_REGISTRY: KnightMetrics[] = [
     drive: "dreams don't come true visions do.",
     tier: 'S4_Strategic',
     tunnel: 'planned_mTLS_Tunnel_0x001',
-    responsibilities: ['daily KPI synthesis', 'priority triage', 'executive decision packet generation'],
-    escalation: 'Ambassador Lakisha'
+    responsibilities: [
+      'daily KPI synthesis',
+      'priority triage',
+      'executive decision packet generation',
+    ],
+    escalation: 'Ambassador Lakisha',
   },
   {
     id: 'CAL_002',
@@ -35,7 +39,7 @@ export const KNIGHTS_REGISTRY: KnightMetrics[] = [
     tier: 'S3_Contextual',
     tunnel: 'planned_mTLS_Tunnel_0x002',
     responsibilities: ['calendar deconfliction', 'booking automation', 'availability indexing'],
-    escalation: 'CEO Malik'
+    escalation: 'CEO Malik',
   },
   {
     id: 'MAIL_003',
@@ -46,7 +50,7 @@ export const KNIGHTS_REGISTRY: KnightMetrics[] = [
     tier: 'S2_Composite',
     tunnel: 'planned_mTLS_Tunnel_0x003',
     responsibilities: ['inbox filtering', 'draft composition', 'sequential dispatch routing'],
-    escalation: 'CEO Malik'
+    escalation: 'CEO Malik',
   },
   {
     id: 'PROP_004',
@@ -57,7 +61,7 @@ export const KNIGHTS_REGISTRY: KnightMetrics[] = [
     tier: 'S3_Contextual',
     tunnel: 'planned_mTLS_Tunnel_0x004',
     responsibilities: ['tenant onboarding', 'lease verification', 'property metadata cataloging'],
-    escalation: 'CEO Malik'
+    escalation: 'CEO Malik',
   },
   {
     id: 'MAINT_005',
@@ -68,7 +72,7 @@ export const KNIGHTS_REGISTRY: KnightMetrics[] = [
     tier: 'S2_Composite',
     tunnel: 'planned_mTLS_Tunnel_0x005',
     responsibilities: ['maintenance dispatch', 'vendor matching', 'invoice validation'],
-    escalation: 'Property Marcus'
+    escalation: 'Property Marcus',
   },
   {
     id: 'RENT_006',
@@ -78,8 +82,12 @@ export const KNIGHTS_REGISTRY: KnightMetrics[] = [
     drive: 'reconciliation is truth.',
     tier: 'S3_Contextual',
     tunnel: 'planned_mTLS_Tunnel_0x006',
-    responsibilities: ['rent collection tracking', 'late fee assessment', 'bank account reconciliation'],
-    escalation: 'CEO Malik'
+    responsibilities: [
+      'rent collection tracking',
+      'late fee assessment',
+      'bank account reconciliation',
+    ],
+    escalation: 'CEO Malik',
   },
   {
     id: 'STREAM_007',
@@ -90,7 +98,7 @@ export const KNIGHTS_REGISTRY: KnightMetrics[] = [
     tier: 'S4_Strategic',
     tunnel: 'planned_mTLS_Tunnel_0x007',
     responsibilities: ['stream quality scoring', 'bitrate optimization', 'decibel drift warnings'],
-    escalation: 'CEO Malik'
+    escalation: 'CEO Malik',
   },
   {
     id: 'BILL_008',
@@ -101,7 +109,7 @@ export const KNIGHTS_REGISTRY: KnightMetrics[] = [
     tier: 'S3_Contextual',
     tunnel: 'planned_mTLS_Tunnel_0x008',
     responsibilities: ['double entry audit', 'tax reserve estimation', 'vendor payment release'],
-    escalation: 'Rent Sophia'
+    escalation: 'Rent Sophia',
   },
   {
     id: 'COFFEE_009',
@@ -111,8 +119,12 @@ export const KNIGHTS_REGISTRY: KnightMetrics[] = [
     drive: 'caffeine is memory.',
     tier: 'S1_Atomic',
     tunnel: 'planned_mTLS_Tunnel_0x009',
-    responsibilities: ['chassis fuel state indexing', 'auto delivery trigger', 'roast profiles lookup'],
-    escalation: 'CEO Malik'
+    responsibilities: [
+      'chassis fuel state indexing',
+      'auto delivery trigger',
+      'roast profiles lookup',
+    ],
+    escalation: 'CEO Malik',
   },
   {
     id: 'GROWTH_010',
@@ -122,9 +134,13 @@ export const KNIGHTS_REGISTRY: KnightMetrics[] = [
     drive: 'yield is velocity.',
     tier: 'S4_Strategic',
     tunnel: 'planned_mTLS_Tunnel_0x010',
-    responsibilities: ['yield rate scraping', 'stake distribution planning', 'lending pool updates'],
-    escalation: 'CEO Malik'
-  }
+    responsibilities: [
+      'yield rate scraping',
+      'stake distribution planning',
+      'lending pool updates',
+    ],
+    escalation: 'CEO Malik',
+  },
 ];
 
 export async function fetchKnightsRegistry(): Promise<KnightMetrics[]> {

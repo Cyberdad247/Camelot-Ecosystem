@@ -1,0 +1,18 @@
+id: VS-012
+slug: VS-012-cloudbrain-context-memory
+title: Living CloudBrain, Graphiti & MemCastle Memory
+tier: P1
+status: ACTIVE
+owner: sir_helios
+summary: Temporal knowledge graph triplets via Graphiti, SQLite-vec KNN embeddings,
+  and NotebookLM CloudBrain.
+contracts:
+- CONTRACT-CLOUDBRAIN-001
+code_paths:
+- 03_VAULT/memory/graphiti/
+- 03_VAULT/runtime_state/open_notebook/
+tests:
+- tests/test_agent_slab_sync.py
+exit_criteria:
+- O(1) semantic retrieval
+- Zero context rot across multi-turn sessions

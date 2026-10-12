@@ -137,7 +137,7 @@ class ContextBuilder:
 
         except Exception as e:
             logger.error(f"Error building context: {str(e)}")
-            raise DatabaseOperationError(f"Failed to build context: {str(e)}")
+            raise DatabaseOperationError(f"Failed to build context: {str(e)}") from e
 
     async def _add_source_context(self, source_id: str, inclusion_level: str = "insights") -> None:
         """

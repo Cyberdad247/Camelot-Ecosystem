@@ -60,7 +60,7 @@ def get_version_from_github(repo_url: str, branch: str = "main") -> str:
             # Check project.version (standard style)
             version = pyproject_data["project"]["version"]
         except KeyError:
-            raise KeyError("Version not found in pyproject.toml")
+            raise KeyError("Version not found in pyproject.toml") from None
 
     return version
 
@@ -81,7 +81,7 @@ def get_installed_version(package_name: str) -> str:
     try:
         return version(package_name)
     except PackageNotFoundError:
-        raise PackageNotFoundError(f"Package '{package_name}' not found")
+        raise PackageNotFoundError(f"Package '{package_name}' not found") from None
 
 
 def compare_versions(version1: str, version2: str) -> int:

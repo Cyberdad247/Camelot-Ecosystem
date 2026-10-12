@@ -361,10 +361,14 @@ async def create_source(
 
         # Validate transformations exist
         transformation_ids = source_data.transformations or []
-        for trans_id in transformation_ids:
-            transformation = await Transformation.get(trans_id)
-            if not transformation:
-                raise HTTPException(status_code=404, detail=f"Transformation {trans_id} not found")
+        if transformation_ids:
+            transformations = await Transformation.get_many(transformation_ids)
+            found_ids = {str(t.id).split(":")[-1] for t in transformations if t.id}
+            found_ids.update(str(t.id) for t in transformations if t.id)
+
+            for trans_id in transformation_ids:
+                if trans_id not in found_ids and f"transformation:{trans_id}" not in found_ids:
+                    raise HTTPException(status_code=404, detail=f"Transformation {trans_id} not found")
 
         # Branch based on processing mode
         if source_data.async_processing:

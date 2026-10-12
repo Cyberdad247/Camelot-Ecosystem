@@ -86,8 +86,6 @@ cart-items {
   top: 2.5rem;
 }
 
-
-
 .cart__note label {
   display: flex;
   align-items: flex-end;
@@ -170,7 +168,7 @@ cart-items {
   margin: 0 auto;
 }
 
-.cart__dynamic-checkout-buttons div[role='button'] {
+.cart__dynamic-checkout-buttons div[role="button"] {
   border-radius: var(--buttons-radius-outset) !important;
 }
 

@@ -89,6 +89,10 @@ LANE_MAXIM_BIFROST_GATEWAY: str = "maxim_bifrost_gateway"
 """MaximHQ Bifrost AI Gateway & WebRTC/WSS Router lane (:3001). Selects ultra-low latency
 cross-mesh streaming telemetry, semantic caching, and resilient provider routing."""
 
+LANE_TYPESAFE_JEV_SYSTEM1: str = "typesafe_jev_system1"
+"""TypeSafe AI Jev System 1 lane. Selects ultra-fast (<50ms) non-autoregressive
+structured decision, parallel question evaluation, and reflexive routing engine."""
+
 LANE_DEFAULT: str = "default"
 """No lane preference.  Punts to ``factory_lane``'s default dispatch."""
 
@@ -103,11 +107,28 @@ VALID_LANES: frozenset = frozenset(
         LANE_XINFERENCE_MULTI_MODEL,
         LANE_OPENAI_OAUTH_PROXY,
         LANE_MAXIM_BIFROST_GATEWAY,
+        LANE_TYPESAFE_JEV_SYSTEM1,
         LANE_DEFAULT,
     }
 )
 
 # ── Keyword sets ────────────────────────────────────────────────────────────
+
+TYPESAFE_JEV_KEYWORDS: Tuple[str, ...] = (
+    "typesafe",
+    "typesafe_ai",
+    "typesafe.ai",
+    "jev",
+    "jev-latest",
+    "system1",
+    "system_1",
+    "system 1",
+    "s1_reflex",
+    "non_autoregressive",
+    "fast_triage",
+    "fast_decision",
+)
+"""Keywords that route to ``LANE_TYPESAFE_JEV_SYSTEM1``."""
 
 MAXIM_BIFROST_KEYWORDS: Tuple[str, ...] = (
     "maximhq",
@@ -252,21 +273,10 @@ class LaneSignal:
 
     def __post_init__(self) -> None:
         if self.lane not in VALID_LANES:
-            _expected = (
-                "cliproxy_heavy_reasoning",
-                "default",
-                "fcc_failover_matrix",
-                "maxim_bifrost_gateway",
-                "omni_route_codex",
-                "openai_oauth_proxy",
-                "ornith_uncensored_coding",
-                "rtk_filtered_fast_path",
-                "uncensored_local_offline",
-                "xinference_multi_model",
-            )
+            _expected = sorted(list(VALID_LANES))
             raise ValueError(
                 f"unknown lane {self.lane!r}; expected one of "
-                f"{list(_expected)}"
+                f"{_expected}"
             )
 
     @classmethod
@@ -308,6 +318,18 @@ def select_lane(intent_text: str) -> LaneSignal:
         return LaneSignal.default()
 
     needle = intent_text.lower()
+
+    # -1. TypeSafe AI Jev System 1 check (sub-50ms non-autoregressive decision model)
+    matched, kw = _match_first(needle, TYPESAFE_JEV_KEYWORDS)
+    if matched:
+        return LaneSignal(
+            lane=LANE_TYPESAFE_JEV_SYSTEM1,
+            rationale=(
+                f"TypeSafe Jev System 1 keyword {kw!r} matched -> TypeSafe AI Jev Client -> "
+                "ultra-fast (<50ms) non-autoregressive structured decision & routing model [TypeSafe Jev spec]"
+            ),
+            matched_keyword=kw,
+        )
 
     # 0. MaximHQ Bifrost Bridge AI Gateway check (:3001)
     matched, kw = _match_first(needle, MAXIM_BIFROST_KEYWORDS)
@@ -425,6 +447,8 @@ def select_lane(intent_text: str) -> LaneSignal:
 def resolve_fcc_failover_chain(tier_or_intent: str) -> list[str]:
     """Return ordered provider failover ranking for a given tier or intent string."""
     normalized = tier_or_intent.lower()
+    if "typesafe" in normalized or "jev" in normalized or "system1" in normalized or "system 1" in normalized:
+        return ["typesafe_jev", "groq", "cerebras", "google", "openai"]
     if "maxim" in normalized or "bifrost" in normalized:
         return ["maxim_bifrost_gateway", "omniroute_gateway", "google", "groq", "open_router", "anthropic", "openai"]
     if "omniroute" in normalized or "diegosouzapw" in normalized or "caveman" in normalized:
@@ -461,6 +485,7 @@ def get_fcc_provider_policy(intent_text: str) -> dict[str, Any]:
         "zero_downtime_enabled": signal.lane in (
             LANE_FCC_FAILOVER_MATRIX,
             LANE_MAXIM_BIFROST_GATEWAY,
+            LANE_TYPESAFE_JEV_SYSTEM1,
             LANE_DEFAULT,
             LANE_OMNI_ROUTE_CODEX,
             LANE_ORNITH_UNCENSORED_CODING,
@@ -480,6 +505,8 @@ def _run_self_test() -> int:
         0 on success, 1 on any failure.
     """
     cases = [
+        ("Run fast structured decision via typesafe jev-latest", LANE_TYPESAFE_JEV_SYSTEM1, "typesafe"),
+        ("Execute reflex routing through system1 model", LANE_TYPESAFE_JEV_SYSTEM1, "system1"),
         ("Run ChatGPT account-to-API proxy on port_10531", LANE_OPENAI_OAUTH_PROXY, "port_10531"),
         ("Execute openai-oauth chat completion with zero_api_key", LANE_OPENAI_OAUTH_PROXY, "openai-oauth"),
         ("Deploy model on xinference multi_model_cluster", LANE_XINFERENCE_MULTI_MODEL, "xinference"),

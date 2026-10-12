@@ -1,0 +1,17 @@
+id: VS-002
+slug: VS-002-mission-intent
+title: Mission Intent & Runic Dispatch
+tier: P0
+status: ACTIVE
+owner: merlin_omega
+summary: Anya First intent distillation, runic symbol parsing, and DAG pipeline assembly.
+contracts:
+- CONTRACT-RUNIC-DISPATCH-001
+code_paths:
+- control_plane/runes/runic_router.py
+- control_plane/runners/
+tests:
+- tests/test_htmx_webgpu_and_jev.py
+exit_criteria:
+- Monotonic intent ID tracking
+- All raw user requests route via Anya Gate

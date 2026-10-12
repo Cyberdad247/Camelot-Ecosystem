@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Send, Loader2, Code2, FileCode, Wrench } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Code2, FileCode, Loader2, Send, Wrench } from 'lucide-react';
+import React, { useState } from 'react';
 import type { DeckProps } from '../CartridgeDeck';
 
 type Language = 'rust' | 'go' | 'python' | 'typescript' | 'bash';
@@ -30,28 +30,41 @@ export default function EngineerDeck({ cartridge, onDispatch, dispatching }: Dec
   const [kineticPurity, setKineticPurity] = useState(true);
 
   const submit = () =>
-    onDispatch(intent, { language: lang, mode, file_path: filePath, kinetic_purity: kineticPurity });
+    onDispatch(intent, {
+      language: lang,
+      mode,
+      file_path: filePath,
+      kinetic_purity: kineticPurity,
+    });
 
   return (
     <div className="space-y-5">
-      <p className="text-xs text-slate-500">SIR_FORGE — Kinetic Purity enforced: Rust/Go preferred over Python.</p>
+      <p className="text-xs text-slate-500">
+        SIR_FORGE — Kinetic Purity enforced: Rust/Go preferred over Python.
+      </p>
 
       {/* Intent */}
       <div className="space-y-2">
-        <label className="text-xs font-semibold uppercase tracking-widest text-emerald-400">Task / Spec</label>
+        <label className="text-xs font-semibold uppercase tracking-widest text-emerald-400">
+          Task / Spec
+        </label>
         <textarea
           rows={4}
           placeholder="Describe what to build, debug, or review. Be precise: include function names, data types, constraints…"
           value={intent}
           onChange={(e) => setIntent(e.target.value)}
-          onKeyDown={(e) => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) submit(); }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) submit();
+          }}
           className="w-full rounded-lg border border-slate-700 bg-slate-900/60 px-3 py-2.5 text-sm text-slate-100 placeholder-slate-600 outline-none focus:border-emerald-500 resize-none font-mono"
         />
       </div>
 
       {/* Language */}
       <div>
-        <label className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2 block">Language</label>
+        <label className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2 block">
+          Language
+        </label>
         <div className="flex gap-2 flex-wrap">
           {(['rust', 'go', 'python', 'typescript', 'bash'] as Language[]).map((l) => (
             <button
@@ -63,7 +76,9 @@ export default function EngineerDeck({ cartridge, onDispatch, dispatching }: Dec
                   ? cn('bg-emerald-950/60', LANG_COLOR[l])
                   : 'border-slate-700 text-slate-500 hover:border-slate-600',
               )}
-            >{l}</button>
+            >
+              {l}
+            </button>
           ))}
         </div>
       </div>
@@ -84,7 +99,9 @@ export default function EngineerDeck({ cartridge, onDispatch, dispatching }: Dec
                   ? 'bg-emerald-900/50 border-emerald-500/50 text-emerald-200'
                   : 'border-slate-700 text-slate-500 hover:border-slate-600',
               )}
-            >{m}</button>
+            >
+              {m}
+            </button>
           ))}
         </div>
         <p className="mt-1 text-[11px] text-slate-600 italic">{MODE_DESC[mode]}</p>
@@ -104,8 +121,15 @@ export default function EngineerDeck({ cartridge, onDispatch, dispatching }: Dec
       </div>
 
       <label className="flex items-center gap-2 cursor-pointer">
-        <input type="checkbox" checked={kineticPurity} onChange={(e) => setKineticPurity(e.target.checked)} className="accent-emerald-500" />
-        <span className="text-xs text-slate-400">Kinetic Purity — prefer Rust/Go, reject Python for binary work</span>
+        <input
+          type="checkbox"
+          checked={kineticPurity}
+          onChange={(e) => setKineticPurity(e.target.checked)}
+          className="accent-emerald-500"
+        />
+        <span className="text-xs text-slate-400">
+          Kinetic Purity — prefer Rust/Go, reject Python for binary work
+        </span>
       </label>
 
       <button

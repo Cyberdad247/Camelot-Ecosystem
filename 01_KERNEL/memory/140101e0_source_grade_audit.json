@@ -1,24 +1,42 @@
 {
   "stats": {
-    "total_sources": 270,
-    "grade_a_count": 24,
-    "grade_a_pct": 8.9,
-    "grade_b_count": 70,
-    "grade_b_pct": 25.9,
-    "grade_c_count": 176,
-    "grade_c_pct": 65.2,
-    "grade_d_count": 0,
-    "grade_d_pct": 0.0,
-    "grade_f_count": 0,
-    "grade_f_pct": 0.0,
-    "duplicates_detected": 0,
-    "sub_requirement_deficit": 0
+    "total_sources": 300,
+    "grade_a_count": 37,
+    "grade_a_pct": 12.3,
+    "grade_b_count": 73,
+    "grade_b_pct": 24.3,
+    "grade_c_count": 182,
+    "grade_c_pct": 60.7,
+    "grade_d_count": 1,
+    "grade_d_pct": 0.3,
+    "grade_f_count": 7,
+    "grade_f_pct": 2.3,
+    "duplicates_detected": 7,
+    "sub_requirement_deficit": 8
   },
   "grade_a": [
+    {
+      "id": "06b9bad0-8116-4711-b2c8-69702d67bae6",
+      "title": "Alpha Omega Master Crystal",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
     {
       "id": "224a7810-05af-485a-9bd2-dd9f091786bb",
       "title": "Anya AI Persona: Dreamer to Prompt Architect",
       "kind": "pasted_text",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "fcfdc3df-fe9d-4621-921a-1c5924836888",
+      "title": "Anya Omega Architecture",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "63695549-b668-4617-b627-6ec8e984450a",
+      "title": "Anya Omega Sovereignty",
+      "kind": "markdown",
       "reason": "Core Sovereign Architecture & Governance"
     },
     {
@@ -100,6 +118,12 @@
       "reason": "Core Sovereign Architecture & Governance"
     },
     {
+      "id": "fcd28354-c7d6-400e-b416-fc2b550856b5",
+      "title": "The Anya Constitution",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
       "id": "2bc941c9-5806-4401-93a7-6590c5c2a4db",
       "title": "The Anya Soul Matrix: TOON Architecture and Sovereign Optimization",
       "kind": "markdown",
@@ -144,6 +168,60 @@
     {
       "id": "e72a18eb-dcf2-4f3f-8c7d-bce03fe1a245",
       "title": "[CPU: \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588 100%] [LATTICE: REVVTEN_TITAN_FO\u2026",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "6bed25d3-c0bd-4de7-b435-880855bb1a35",
+      "title": "[Camelot Ingest 2026-09-22] Alpha Omega Distiller",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "09eb89f2-457a-42e8-91a2-2cbedc94ab33",
+      "title": "[Camelot Ingest 2026-09-22] Heimdall Nano-Knight Swarm Zero-Trust Governance Architecture",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "9ca566a0-a17b-45ef-bdbb-7a4369166c57",
+      "title": "[Camelot Ingest 2026-09-22] \u2699\ufe0f [SKILLGRAPH5 & PHIAL ENGINE]_ Sovereign Capabilities & Scaling Architecture",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "56c2aeda-13be-437f-b73d-11eb52da7e5e",
+      "title": "[Camelot Ingest 2026-09-22] \ud83d\udc51 [APEX MASTER NORTHSTAR CONSTITUTION] Anya Omega_ Sovereign Compiler of Camelot-OS",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "47cd5671-94d1-4181-99dc-f86e66d22b43",
+      "title": "[Camelot Ingest 2026-09-22] \ud83d\udc51-[APEX-MASTER-NORTHSTAR-CONSTITUTION]-Anya-Omega-Sovereign-Compiler-of-Camelot",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "a8d16887-358a-4615-ae3d-71dc663d8a81",
+      "title": "[Camelot Ingest 2026-09-22] \ud83d\udc8e [\u03bdKG_CRYSTAL]_ \u03a9_ALPHA_OMEGA_DISTILLER_ANYA_OMEGA (TOON Spec v3.3-PRIME)",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "81e1456b-f5c0-479b-938c-013faab43ccb",
+      "title": "[Camelot Ingest 2026-09-22] \ud83d\udee1\ufe0f LIVING CAMELOT-OS MANIFEST_ ANYA_OMEGA",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "7f2d4b2b-9f70-4390-8fef-2842e8d4039c",
+      "title": "[Camelot Ingest 2026-09-22] \ud83d\udee1\ufe0f [MASTER SYSTEM INSTRUCTION] Living Anya Omega_ Sovereign Compiler SINGULARITY-OMEGA",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "0a7980e0-bf3a-4d4a-bc8b-5d52697a405c",
+      "title": "[Camelot Ingest 2026-09-22] \ud83d\udee1\ufe0f-[MASTER-SYSTEM-INSTRUCTION]-Living-Anya-Omega-Sovereign-Compiler-SINGULARITY",
       "kind": "markdown",
       "reason": "Core Sovereign Architecture & Governance"
     },
@@ -402,6 +480,12 @@
       "reason": "Technical Framework & Engineering Pattern"
     },
     {
+      "id": "7e6fae43-ca9f-454c-bf90-351622c7265b",
+      "title": "FORGET Loop Engineering. Agentic Engineering is about THIS",
+      "kind": "youtube",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
       "id": "c5028d9d-4f76-4615-9469-75e931985bc2",
       "title": "Fine-Tuning Large Language Models for Graph RAG-5 Indexing - Dataworkz",
       "kind": "markdown",
@@ -572,6 +656,18 @@
     {
       "id": "4d8fd2e0-d61a-4d94-9898-fc30beb2df51",
       "title": "The digital twin synchronization problem: Framework, formulations, and analysis - Re.Public@polimi.it",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "9a1009e7-1841-4e64-a6fd-7bdce9e30bc1",
+      "title": "[Camelot Ingest 2026-09-22] Triple-QFT-Research-Notebook-A-Unified-Protocol-for-Physics,-Engineering,-and-Pe",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "344415ec-1d6f-49bf-8e9e-475dd0597277",
+      "title": "[Camelot Ingest 2026-09-22] \ud83e\udde0 [PROMPT REPERTOIRE & STUNSPOT]_ Cognitive Frameworks & Generative Prompts",
       "kind": "markdown",
       "reason": "Technical Framework & Engineering Pattern"
     },
@@ -872,6 +968,18 @@
       "reason": "Supporting Documentation & Contextual Reference"
     },
     {
+      "id": "551dc1fa-49a9-425f-b32b-a68b9adeab20",
+      "title": "All notes 9/20/2026",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "67ab8471-15b3-4f69-bfdf-e671746b3382",
+      "title": "All notes 9/21/2026",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
       "id": "e747eb4d-6f90-40c4-9a13-aa4dcfd7e526",
       "title": "Applying Chain of Thought with Vertex AI Agent - Google Developer forums",
       "kind": "pasted_text",
@@ -1106,6 +1214,12 @@
       "reason": "Supporting Documentation & Contextual Reference"
     },
     {
+      "id": "af011a19-b142-41e6-90bd-1b8d1c11ca9d",
+      "title": "FIXING Opus 5: PROOF that Prompt Engineering IS NOT DEAD",
+      "kind": "youtube",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
       "id": "6637add5-c321-42a3-ad8c-b91c8b65154a",
       "title": "Fostering AI Literacy in Undergraduates: A ChatGPT Workshop Case Study - Digital Commons @ LMU",
       "kind": "markdown",
@@ -1169,6 +1283,12 @@
       "id": "0af1d658-5756-4797-ba7d-fa02b1bd692b",
       "title": "GitHub - asgeirtj/system_prompts_leaks: Extracted system prompts from Anthropic - Claude Fable 5, Opus 5, Claude Design, Claude Code. OpenAI - ChatGPT GPT-5.6-Sol, Codex. Google - Gemini 3.5 Flash, 3.1 Pro, Antigravity. xAI - Grok, Cursor, Copilot, VS Code, Perplexity, and more. Updated regularly. \u00b7 GitHub",
       "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "d6913e73-0677-48b1-b7c1-d84a9fb55cb2",
+      "title": "GitHub - ever-co/pezzo: Pezzo is an open-source AI development toolkit designed to streamline prompt design, version management, publishing, collaboration, troubleshooting, observability and more. \u00b7 GitHub",
+      "kind": "web_page",
       "reason": "Supporting Documentation & Contextual Reference"
     },
     {
@@ -1265,6 +1385,12 @@
       "id": "800d1c6f-5fcb-4e80-b7a3-424e01f52f66",
       "title": "How to improve AI outputs using advanced prompt techniques - Thoughtworks",
       "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "3d9c457a-c387-49d0-83eb-3166f2cda062",
+      "title": "I Built the Infinite Content Glitch with Ai (6,510 Video Ideas)",
+      "kind": "youtube",
       "reason": "Supporting Documentation & Contextual Reference"
     },
     {
@@ -1604,6 +1730,12 @@
       "reason": "Supporting Documentation & Contextual Reference"
     },
     {
+      "id": "1bed711d-6f7e-4000-b73f-53416a9562c1",
+      "title": "[Camelot Ingest 2026-09-22] The-Obsidian-Forge-Protocol",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
       "id": "100f7311-38a3-4231-9770-c5df9dabc92b",
       "title": "camelot-ui-generation-prompt.md",
       "kind": "markdown",
@@ -1640,8 +1772,94 @@
       "reason": "Supporting Documentation & Contextual Reference"
     }
   ],
-  "grade_d": [],
-  "grade_f": [],
-  "duplicates": [],
-  "audited_at": "2026-09-14T06:37:39.364659+00:00"
+  "grade_d": [
+    {
+      "id": "2816e824-f5b2-4f58-bfb8-788bee6dd5ca",
+      "title": "[Camelot Ingest 2026-09-22] Camelot-OS v1000 Excalibur System Architecture and Integration Matrix",
+      "kind": "markdown",
+      "reason": "Superseded legacy or prior iteration draft"
+    }
+  ],
+  "grade_f": [
+    {
+      "id": "0186b299-f1e6-436b-bd23-1cdd4a741d6d",
+      "title": "[Camelot Ingest 2026-09-22] Alpha-Omega-Distiller",
+      "kind": "markdown",
+      "reason": "Exact duplicate title"
+    },
+    {
+      "id": "e7f43610-2425-4e26-9b09-3dfbfc067aba",
+      "title": "[Camelot Ingest 2026-09-22] Camelot-OS-v1000-Excalibur-System-Architecture-and-Integration-Matrix",
+      "kind": "markdown",
+      "reason": "Exact duplicate title"
+    },
+    {
+      "id": "b1559e50-0a39-47fd-a528-ac9721fb9bd4",
+      "title": "[Camelot Ingest 2026-09-22] Heimdall-Nano-Knight-Swarm-Zero-Trust-Governance-Architecture",
+      "kind": "markdown",
+      "reason": "Exact duplicate title"
+    },
+    {
+      "id": "93f6fe8f-0794-4a31-a14b-70fdb155dcb4",
+      "title": "[Camelot Ingest 2026-09-22] \u2699\ufe0f-[SKILLGRAPH5-&-PHIAL-ENGINE]-Sovereign-Capabilities-&-Scaling-Architecture",
+      "kind": "markdown",
+      "reason": "Exact duplicate title"
+    },
+    {
+      "id": "1b2a7a7d-d369-4de5-97a1-9edbbac65810",
+      "title": "[Camelot Ingest 2026-09-22] \ud83d\udc8e-[\u03bdKG_CRYSTAL]-\u03a9_ALPHA_OMEGA_DISTILLER_ANYA_OMEGA-(TOON-Spec-v3.3-PRIME)",
+      "kind": "markdown",
+      "reason": "Exact duplicate title"
+    },
+    {
+      "id": "6929c65c-5a71-40c3-9119-2f321ee3cecb",
+      "title": "[Camelot Ingest 2026-09-22] \ud83d\udee1\ufe0f-LIVING-CAMELOT-OS-MANIFEST-ANYA_OMEGA",
+      "kind": "markdown",
+      "reason": "Exact duplicate title"
+    },
+    {
+      "id": "d2328c81-f4e7-45cb-955a-bca44a195b21",
+      "title": "[Camelot Ingest 2026-09-22] \ud83e\udde0-[PROMPT-REPERTOIRE-&-STUNSPOT]-Cognitive-Frameworks-&-Generative-Prompts",
+      "kind": "markdown",
+      "reason": "Exact duplicate title"
+    }
+  ],
+  "duplicates": [
+    {
+      "id": "0186b299-f1e6-436b-bd23-1cdd4a741d6d",
+      "title": "[Camelot Ingest 2026-09-22] Alpha-Omega-Distiller",
+      "duplicate_of": "6bed25d3-c0bd-4de7-b435-880855bb1a35"
+    },
+    {
+      "id": "e7f43610-2425-4e26-9b09-3dfbfc067aba",
+      "title": "[Camelot Ingest 2026-09-22] Camelot-OS-v1000-Excalibur-System-Architecture-and-Integration-Matrix",
+      "duplicate_of": "2816e824-f5b2-4f58-bfb8-788bee6dd5ca"
+    },
+    {
+      "id": "b1559e50-0a39-47fd-a528-ac9721fb9bd4",
+      "title": "[Camelot Ingest 2026-09-22] Heimdall-Nano-Knight-Swarm-Zero-Trust-Governance-Architecture",
+      "duplicate_of": "09eb89f2-457a-42e8-91a2-2cbedc94ab33"
+    },
+    {
+      "id": "93f6fe8f-0794-4a31-a14b-70fdb155dcb4",
+      "title": "[Camelot Ingest 2026-09-22] \u2699\ufe0f-[SKILLGRAPH5-&-PHIAL-ENGINE]-Sovereign-Capabilities-&-Scaling-Architecture",
+      "duplicate_of": "9ca566a0-a17b-45ef-bdbb-7a4369166c57"
+    },
+    {
+      "id": "1b2a7a7d-d369-4de5-97a1-9edbbac65810",
+      "title": "[Camelot Ingest 2026-09-22] \ud83d\udc8e-[\u03bdKG_CRYSTAL]-\u03a9_ALPHA_OMEGA_DISTILLER_ANYA_OMEGA-(TOON-Spec-v3.3-PRIME)",
+      "duplicate_of": "a8d16887-358a-4615-ae3d-71dc663d8a81"
+    },
+    {
+      "id": "6929c65c-5a71-40c3-9119-2f321ee3cecb",
+      "title": "[Camelot Ingest 2026-09-22] \ud83d\udee1\ufe0f-LIVING-CAMELOT-OS-MANIFEST-ANYA_OMEGA",
+      "duplicate_of": "81e1456b-f5c0-479b-938c-013faab43ccb"
+    },
+    {
+      "id": "d2328c81-f4e7-45cb-955a-bca44a195b21",
+      "title": "[Camelot Ingest 2026-09-22] \ud83e\udde0-[PROMPT-REPERTOIRE-&-STUNSPOT]-Cognitive-Frameworks-&-Generative-Prompts",
+      "duplicate_of": "344415ec-1d6f-49bf-8e9e-475dd0597277"
+    }
+  ],
+  "audited_at": "2026-09-22T04:06:20.206635+00:00"
 }

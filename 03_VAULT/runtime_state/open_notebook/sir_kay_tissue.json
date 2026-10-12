@@ -1,6 +1,116 @@
 [
   {
     "knight_id": "SIR_KAY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_KAY",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_kay\",\n  \"session_id\": \"sess_knight_sir_kay\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_kay/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_KAY",
+    "open_viking_tether": "open_viking://worldtree/sir_kay",
+    "updated_at": "2026-09-23T16:02:58.470014+00:00"
+  },
+  {
+    "knight_id": "SIR_KAY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_KAY",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_kay\",\n  \"session_id\": \"sess_knight_sir_kay\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_kay/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_KAY",
+    "open_viking_tether": "open_viking://worldtree/sir_kay",
+    "updated_at": "2026-09-23T16:02:56.848791+00:00"
+  },
+  {
+    "knight_id": "SIR_KAY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_KAY",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_kay\",\n  \"session_id\": \"sess_knight_sir_kay\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_kay/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_KAY",
+    "open_viking_tether": "open_viking://worldtree/sir_kay",
+    "updated_at": "2026-09-22T14:39:42.928243+00:00"
+  },
+  {
+    "knight_id": "SIR_KAY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_KAY",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_kay\",\n  \"session_id\": \"sess_knight_sir_kay\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_kay/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_KAY",
+    "open_viking_tether": "open_viking://worldtree/sir_kay",
+    "updated_at": "2026-09-22T14:39:41.326827+00:00"
+  },
+  {
+    "knight_id": "SIR_KAY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_KAY",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_kay\",\n  \"session_id\": \"sess_knight_sir_kay\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_kay/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_KAY",
+    "open_viking_tether": "open_viking://worldtree/sir_kay",
+    "updated_at": "2026-09-22T14:38:44.257612+00:00"
+  },
+  {
+    "knight_id": "SIR_KAY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_KAY",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_kay\",\n  \"session_id\": \"sess_knight_sir_kay\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_kay/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_KAY",
+    "open_viking_tether": "open_viking://worldtree/sir_kay",
+    "updated_at": "2026-09-22T14:38:42.578304+00:00"
+  },
+  {
+    "knight_id": "SIR_KAY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_KAY",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_kay\",\n  \"session_id\": \"sess_knight_sir_kay\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_kay/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_KAY",
+    "open_viking_tether": "open_viking://worldtree/sir_kay",
+    "updated_at": "2026-09-22T14:37:03.266480+00:00"
+  },
+  {
+    "knight_id": "SIR_KAY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_KAY",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_kay\",\n  \"session_id\": \"sess_knight_sir_kay\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_kay/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_KAY",
+    "open_viking_tether": "open_viking://worldtree/sir_kay",
+    "updated_at": "2026-09-22T14:37:01.544785+00:00"
+  },
+  {
+    "knight_id": "SIR_KAY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_KAY",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_kay\",\n  \"session_id\": \"sess_knight_sir_kay\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_kay/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_KAY",
+    "open_viking_tether": "open_viking://worldtree/sir_kay",
+    "updated_at": "2026-09-22T14:35:54.282928+00:00"
+  },
+  {
+    "knight_id": "SIR_KAY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_KAY",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_kay\",\n  \"session_id\": \"sess_knight_sir_kay\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_kay/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_KAY",
+    "open_viking_tether": "open_viking://worldtree/sir_kay",
+    "updated_at": "2026-09-22T14:35:53.519155+00:00"
+  },
+  {
+    "knight_id": "SIR_KAY",
     "cloudbrain_uuid": "7e4a8c12-f9b3-d650-e1a8-c7b2d3e4f5a6",
     "spark_id": "0x7E4A8C12F9B3D650E1A8C7B2D3E4F5A6",
     "role": "High Seneschal, Chief Engineering Director, Kinetic Department Lead",
@@ -14,6 +124,15 @@
       "Master_Compendium.md",
       "system_instruction.md"
     ],
+    "five_pillars": [
+      "Sir Kay (High Seneschal)",
+      "Archimedes (Mechanical Leverage)",
+      "Henry Bessemer (Steel Foundry Speed)",
+      "Charles Kettering (Practical Invention)",
+      "Robert Moses (Infrastructure Drive)"
+    ],
+    "law_of_non_reproducibility": "ENFORCED",
+    "rpg_progression": "Glass Observatory Level & XP Matrix",
     "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "mesh_nodes": [
       "cybertronia",
@@ -22,6 +141,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-20T00:29:47.551119+00:00"
+    "updated_at": "2026-09-21T23:00:51.689974+00:00"
   }
 ]

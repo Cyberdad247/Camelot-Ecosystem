@@ -1,5 +1,6 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+import os
 import subprocess
 import sys
 import time
@@ -34,11 +35,24 @@ def print_banner():
     print(f"\033[1;36m{banner}\033[0m")
 
 def _spawn_console(title: str, command: str) -> None:
-    """Open a new Windows console window without shell=True injection risk."""
-    subprocess.Popen(
-        ["cmd", "/k", f'title "{title}" && {command}'],
-        creationflags=subprocess.CREATE_NEW_CONSOLE,
-    )
+    """Open a new Windows console window if CAMELOT_VISIBLE_CHILDREN=1, else launch silently into log."""
+    if os.environ.get("CAMELOT_VISIBLE_CHILDREN") == "1":
+        subprocess.Popen(
+            ["cmd", "/k", f'title "{title}" && {command}'],
+            creationflags=subprocess.CREATE_NEW_CONSOLE,
+        )
+    else:
+        log_dir = REPO_ROOT / "logs" / "daemons"
+        log_dir.mkdir(parents=True, exist_ok=True)
+        log_file = log_dir / f"{title.lower()}.log"
+        f = open(log_file, "a", encoding="utf-8")
+        flags = getattr(subprocess, "CREATE_NO_WINDOW", 0x08000000)
+        subprocess.Popen(
+            ["cmd", "/c", command],
+            creationflags=flags,
+            stdout=f,
+            stderr=f,
+        )
 
 
 def boot_morgana():

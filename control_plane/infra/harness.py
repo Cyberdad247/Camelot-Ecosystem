@@ -235,6 +235,7 @@ class SovereignHarness:
         self._restart_ts: dict[str, float] = {}    # service → last restart epoch
         self._restart_count: dict[str, int] = {}  # consecutive failures per service
         self._prev_dark: set[str] = set()         # dark set from previous watchdog tick
+        self._watchtower_cycle = 0                # Watchtower sense scheduler (pressure + NUL integrity)
 
     def _task_states(self) -> dict[str, dict[str, Any]]:
         states: dict[str, dict[str, Any]] = {}
@@ -417,6 +418,17 @@ class SovereignHarness:
                 _log("[WATCHDOG] All probes green")
 
             self._prev_dark = dark
+
+            # Watchtower upgrade: RAM/CPU pressure + NUL integrity sense.
+            # Telemetry only -- a failure here must never stop service
+            # probes or restarts, so it is guarded separately.
+            try:
+                from control_plane.infra.watchtower import watchtower_tick
+                watchtower_tick(self._watchtower_cycle)
+                self._watchtower_cycle += 1
+            except Exception as e:
+                _log(f"[WATCHTOWER] tick skipped: {type(e).__name__}: {e}")
+
             await asyncio.sleep(WATCHDOG_INTERVAL_S)
 
     # ── Memory sync ───────────────────────────────────────────────────────────

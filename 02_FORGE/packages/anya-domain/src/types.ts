@@ -1,12 +1,12 @@
 // Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import { z } from "zod";
+import { z } from 'zod';
 
 /** UKG node + edge **/
 
 export const UKGNodeSchema = z.object({
   id: z.string(),
-  type: z.string(),           // e.g. "Agent", "Gateway", "Device", "Memory"
+  type: z.string(), // e.g. "Agent", "Gateway", "Device", "Memory"
   label: z.string(),
   props: z.record(z.any()),
   createdAt: z.string().datetime().optional(),
@@ -19,7 +19,7 @@ export const UKGEdgeSchema = z.object({
   id: z.string(),
   from: z.string(),
   to: z.string(),
-  rel: z.string(),            // e.g. "uses_as_gateway", "peer_node"
+  rel: z.string(), // e.g. "uses_as_gateway", "peer_node"
   props: z.record(z.any()).optional(),
 });
 

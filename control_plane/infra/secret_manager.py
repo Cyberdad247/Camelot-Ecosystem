@@ -14,7 +14,7 @@ in ~/.camelot/secret_audit.jsonl. If `cryptography` is unavailable the manager
 runs in env-only mode (get works from env; persistence raises).
 
 Usage:
-    from control_plane.secret_manager import get_secret_manager
+    from control_plane.infra.secret_manager import get_secret_manager
     sm = get_secret_manager()
     sm.set("WEBHOOK_SECRET", "…")
     token = sm.get("WEBHOOK_SECRET")     # env override > encrypted store

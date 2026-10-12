@@ -1,6 +1,116 @@
 [
   {
     "knight_id": "CAMELOT_V1000",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for CAMELOT_V1000",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_camelot_v1000\",\n  \"session_id\": \"sess_knight_camelot_v1000\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/camelot_v1000/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_CAMELOT_V1000",
+    "open_viking_tether": "open_viking://worldtree/camelot_v1000",
+    "updated_at": "2026-09-23T16:02:57.571009+00:00"
+  },
+  {
+    "knight_id": "CAMELOT_V1000",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for CAMELOT_V1000",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_camelot_v1000\",\n  \"session_id\": \"sess_knight_camelot_v1000\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/camelot_v1000/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_CAMELOT_V1000",
+    "open_viking_tether": "open_viking://worldtree/camelot_v1000",
+    "updated_at": "2026-09-23T16:02:56.633531+00:00"
+  },
+  {
+    "knight_id": "CAMELOT_V1000",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for CAMELOT_V1000",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_camelot_v1000\",\n  \"session_id\": \"sess_knight_camelot_v1000\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/camelot_v1000/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_CAMELOT_V1000",
+    "open_viking_tether": "open_viking://worldtree/camelot_v1000",
+    "updated_at": "2026-09-22T14:39:42.134363+00:00"
+  },
+  {
+    "knight_id": "CAMELOT_V1000",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for CAMELOT_V1000",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_camelot_v1000\",\n  \"session_id\": \"sess_knight_camelot_v1000\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/camelot_v1000/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_CAMELOT_V1000",
+    "open_viking_tether": "open_viking://worldtree/camelot_v1000",
+    "updated_at": "2026-09-22T14:39:40.514868+00:00"
+  },
+  {
+    "knight_id": "CAMELOT_V1000",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for CAMELOT_V1000",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_camelot_v1000\",\n  \"session_id\": \"sess_knight_camelot_v1000\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/camelot_v1000/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_CAMELOT_V1000",
+    "open_viking_tether": "open_viking://worldtree/camelot_v1000",
+    "updated_at": "2026-09-22T14:38:43.428755+00:00"
+  },
+  {
+    "knight_id": "CAMELOT_V1000",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for CAMELOT_V1000",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_camelot_v1000\",\n  \"session_id\": \"sess_knight_camelot_v1000\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/camelot_v1000/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_CAMELOT_V1000",
+    "open_viking_tether": "open_viking://worldtree/camelot_v1000",
+    "updated_at": "2026-09-22T14:38:41.821798+00:00"
+  },
+  {
+    "knight_id": "CAMELOT_V1000",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for CAMELOT_V1000",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_camelot_v1000\",\n  \"session_id\": \"sess_knight_camelot_v1000\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/camelot_v1000/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_CAMELOT_V1000",
+    "open_viking_tether": "open_viking://worldtree/camelot_v1000",
+    "updated_at": "2026-09-22T14:37:02.381106+00:00"
+  },
+  {
+    "knight_id": "CAMELOT_V1000",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for CAMELOT_V1000",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_camelot_v1000\",\n  \"session_id\": \"sess_knight_camelot_v1000\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/camelot_v1000/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_CAMELOT_V1000",
+    "open_viking_tether": "open_viking://worldtree/camelot_v1000",
+    "updated_at": "2026-09-22T14:37:00.715253+00:00"
+  },
+  {
+    "knight_id": "CAMELOT_V1000",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for CAMELOT_V1000",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_camelot_v1000\",\n  \"session_id\": \"sess_knight_camelot_v1000\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/camelot_v1000/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_CAMELOT_V1000",
+    "open_viking_tether": "open_viking://worldtree/camelot_v1000",
+    "updated_at": "2026-09-22T14:35:53.956710+00:00"
+  },
+  {
+    "knight_id": "CAMELOT_V1000",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for CAMELOT_V1000",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_camelot_v1000\",\n  \"session_id\": \"sess_knight_camelot_v1000\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/camelot_v1000/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_CAMELOT_V1000",
+    "open_viking_tether": "open_viking://worldtree/camelot_v1000",
+    "updated_at": "2026-09-22T14:35:52.429475+00:00"
+  },
+  {
+    "knight_id": "CAMELOT_V1000",
     "cloudbrain_uuid": "8c656cfa-a189-409e-a72d-07692a47f17e",
     "spark_id": "0x8C656CFAA189409EA72D07692A47F17E",
     "role": "Sovereign OS Master Construction Codex, Excalibur Hub",
@@ -14,6 +124,15 @@
       "Master_Compendium.md",
       "system_instruction.md"
     ],
+    "five_pillars": [
+      "Aristotle (Axiomatic Logic & Categorization)",
+      "Hypatia of Alexandria (Mathematical Courage)",
+      "Leonardo da Vinci (Universal Invention)",
+      "Ada Lovelace (First Algorithmic Visionary)",
+      "Marcus Aurelius (Steadfast Sovereign Duty)"
+    ],
+    "law_of_non_reproducibility": "ENFORCED",
+    "rpg_progression": "Glass Observatory Level & XP Matrix",
     "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "mesh_nodes": [
       "cybertronia",
@@ -22,6 +141,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-20T00:29:47.551119+00:00"
+    "updated_at": "2026-09-21T23:00:51.689974+00:00"
   }
 ]

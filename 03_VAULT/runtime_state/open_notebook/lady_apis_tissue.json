@@ -1,8 +1,118 @@
 [
   {
     "knight_id": "LADY_APIS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for LADY_APIS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_lady_apis\",\n  \"session_id\": \"sess_knight_lady_apis\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/lady_apis/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LADY_APIS",
+    "open_viking_tether": "open_viking://worldtree/lady_apis",
+    "updated_at": "2026-09-23T16:02:57.059682+00:00"
+  },
+  {
+    "knight_id": "LADY_APIS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for LADY_APIS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_lady_apis\",\n  \"session_id\": \"sess_knight_lady_apis\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/lady_apis/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LADY_APIS",
+    "open_viking_tether": "open_viking://worldtree/lady_apis",
+    "updated_at": "2026-09-23T16:02:56.425528+00:00"
+  },
+  {
+    "knight_id": "LADY_APIS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for LADY_APIS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_lady_apis\",\n  \"session_id\": \"sess_knight_lady_apis\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/lady_apis/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LADY_APIS",
+    "open_viking_tether": "open_viking://worldtree/lady_apis",
+    "updated_at": "2026-09-22T14:39:41.597955+00:00"
+  },
+  {
+    "knight_id": "LADY_APIS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for LADY_APIS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_lady_apis\",\n  \"session_id\": \"sess_knight_lady_apis\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/lady_apis/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LADY_APIS",
+    "open_viking_tether": "open_viking://worldtree/lady_apis",
+    "updated_at": "2026-09-22T14:39:40.039869+00:00"
+  },
+  {
+    "knight_id": "LADY_APIS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for LADY_APIS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_lady_apis\",\n  \"session_id\": \"sess_knight_lady_apis\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/lady_apis/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LADY_APIS",
+    "open_viking_tether": "open_viking://worldtree/lady_apis",
+    "updated_at": "2026-09-22T14:38:42.858954+00:00"
+  },
+  {
+    "knight_id": "LADY_APIS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for LADY_APIS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_lady_apis\",\n  \"session_id\": \"sess_knight_lady_apis\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/lady_apis/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LADY_APIS",
+    "open_viking_tether": "open_viking://worldtree/lady_apis",
+    "updated_at": "2026-09-22T14:38:41.312008+00:00"
+  },
+  {
+    "knight_id": "LADY_APIS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for LADY_APIS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_lady_apis\",\n  \"session_id\": \"sess_knight_lady_apis\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/lady_apis/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LADY_APIS",
+    "open_viking_tether": "open_viking://worldtree/lady_apis",
+    "updated_at": "2026-09-22T14:37:01.820209+00:00"
+  },
+  {
+    "knight_id": "LADY_APIS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for LADY_APIS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_lady_apis\",\n  \"session_id\": \"sess_knight_lady_apis\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/lady_apis/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LADY_APIS",
+    "open_viking_tether": "open_viking://worldtree/lady_apis",
+    "updated_at": "2026-09-22T14:37:00.217590+00:00"
+  },
+  {
+    "knight_id": "LADY_APIS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for LADY_APIS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_lady_apis\",\n  \"session_id\": \"sess_knight_lady_apis\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/lady_apis/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LADY_APIS",
+    "open_viking_tether": "open_viking://worldtree/lady_apis",
+    "updated_at": "2026-09-22T14:35:53.695180+00:00"
+  },
+  {
+    "knight_id": "LADY_APIS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for LADY_APIS",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_lady_apis\",\n  \"session_id\": \"sess_knight_lady_apis\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/lady_apis/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LADY_APIS",
+    "open_viking_tether": "open_viking://worldtree/lady_apis",
+    "updated_at": "2026-09-22T14:35:51.476699+00:00"
+  },
+  {
+    "knight_id": "LADY_APIS",
     "cloudbrain_uuid": "378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f",
-    "spark_id": "0x378D6049FFC34ED3A9E747FFC5C0AC3F",
+    "spark_id": "0x378D6049FFC34ED3A9E74FFC5C0AC3F",
     "role": "Bio-Kinetic Swarm/Horde Conductor & BASHR Forager",
     "model": "Gemini 3.8 Flash / NullClaw",
     "summoning_rune": "Omega_Apis",
@@ -14,6 +124,15 @@
       "Master_Compendium.md",
       "system_instruction.md"
     ],
+    "five_pillars": [
+      "Rachel Carson (Systems Ecology)",
+      "Karl von Frisch (Bee Dance Communication)",
+      "Barbara McClintock (Transposable Genetics)",
+      "Lynn Margulis (Symbiogenesis)",
+      "Jane Goodall (Ethological Swarm Observation)"
+    ],
+    "law_of_non_reproducibility": "ENFORCED",
+    "rpg_progression": "Glass Observatory Level & XP Matrix",
     "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "mesh_nodes": [
       "cybertronia",
@@ -22,6 +141,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-20T00:29:47.551119+00:00"
+    "updated_at": "2026-09-21T23:00:51.689974+00:00"
   }
 ]

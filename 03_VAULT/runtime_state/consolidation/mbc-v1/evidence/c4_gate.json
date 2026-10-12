@@ -1,0 +1,504 @@
+{
+ "phase": "C4-VERIFY",
+ "run": "mbc-v1",
+ "version": "v2-guarded",
+ "timestamp": "2026-09-27T04:00:55-0400",
+ "state": "feat/unified-v1000 @ 9d30f239 (post-port, post-perf-absorb, post-orphan-fix)",
+ "baseline": "evidence/c1_baseline.json (ef7603b6 pre-port, same worktree)",
+ "criterion": "zero new failures vs baseline (rc-class AND pytest error-set); guards abort on file loss",
+ "steps": [
+  {
+   "id": "npm_install",
+   "command": "C:\\Windows\\System32\\cmd.exe /c npm install --no-audit --no-fund",
+   "rc": 1,
+   "duration_s": 11.4,
+   "tail": "npm error For a full report see: | npm error C:\\Users\\vizio\\AppData\\Local\\npm-cache\\_logs\\2026-09-27T07_58_21_830Z-eresolve-report.txt | npm error A complete log of this run can be found in: C:\\Users\\vizio\\AppData\\Local\\npm-cache\\_logs\\2026-09-27T07_58_21_830Z-debug-0.log",
+   "status": "fail",
+   "log": "logs/c4_npm_install.log",
+   "guard": "ok",
+   "signature": {
+    "eresolve_peers": [],
+    "eresolve": true
+   }
+  },
+  {
+   "id": "npm_lint",
+   "command": "C:\\Windows\\System32\\cmd.exe /c npm run lint",
+   "rc": 1,
+   "duration_s": 2.9,
+   "tail": "× Some errors were emitted while running checks.",
+   "status": "fail",
+   "log": "logs/c4_npm_lint.log",
+   "guard": "ok",
+   "signature": {
+    "error_count": 6284
+   }
+  },
+  {
+   "id": "npm_typecheck",
+   "command": "C:\\Windows\\System32\\cmd.exe /c npm run typecheck",
+   "rc": 134,
+   "duration_s": 6.2,
+   "tail": "WARNING  Unable to calculate transitive closures: Workspace 'apps/spatial-hud' not found in lockfile. | @sovereign/benchmark#typecheck:  ERROR  command (C:\\Users\\vizio\\camelot-wt\\unified\\packages\\benchmark) C:\\Program Files\\nodejs\\node.exe C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js run typecheck exited (134) | ERROR  run failed: command  exited (134)",
+   "status": "fail",
+   "log": "logs/c4_npm_typecheck.log",
+   "guard": "ok",
+   "signature": {
+    "errors": [],
+    "failing_packages": [
+     "@sovereign/benchmark"
+    ]
+   }
+  },
+  {
+   "id": "npm_test",
+   "command": "C:\\Windows\\System32\\cmd.exe /c npm run test -- --run --minWorkers=1 --maxWorkers=2",
+   "rc": 1,
+   "duration_s": 9.8,
+   "tail": "\u001b[31m\u001b[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯\u001b[22m\u001b[39m",
+   "status": "fail",
+   "log": "logs/c4_npm_test.log",
+   "guard": "ok",
+   "signature": {
+    "tests_summary": "218 passed | 17 skipped (235)",
+    "load_errors": 2,
+    "failed_test_files": [
+     "apps/bifrost/src/server.test.ts",
+     "packages/db/src/ledgerValidator.test.ts"
+    ]
+   }
+  },
+  {
+   "id": "pytest_canonical",
+   "command": "C:\\Users\\vizio\\CAMELOT_OS\\.venv\\Scripts\\python.exe -m pytest tests 03_VAULT/training/configs/tests -q",
+   "rc": 2,
+   "duration_s": 24.0,
+   "tail": "2 errors in 16.59s | --- stderr ---",
+   "status": "fail",
+   "log": "logs/c4_pytest_canonical.log",
+   "guard": "ok",
+   "signature": {
+    "collection_errors": [
+     "tests/test_health_check.py",
+     "tests/test_hermes_prime_freshness.py"
+    ]
+   }
+  },
+  {
+   "id": "cargo_check",
+   "command": "cargo check --quiet",
+   "rc": 101,
+   "duration_s": 40.9,
+   "tail": "Caused by: | process didn't exit successfully: `C:\\Users\\vizio\\.rustup\\toolchains\\1.85.0-x86_64-pc-windows-msvc\\bin\\rustc.exe --crate-name wasm_bindgen_macro_support --edition=2021 C:\\Users\\vizio\\.cargo\\registry\\src\\index.crates.io-1949cf8c6b5b557f\\wasm-bindgen-macro-support-0.2.126\\src\\lib.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --crate-type lib --emit=dep",
+   "status": "fail",
+   "log": "logs/c4_cargo_check.log",
+   "guard": "ok",
+   "signature": {
+    "errors": [
+     "error[E0786]: found invalid metadata files for crate `core` which `std` depends on",
+     "error[E0463]: can't find crate for `cap_primitives`",
+     "error[E0463]: can't find crate for `cap_primitives`"
+    ]
+   }
+  },
+  {
+   "id": "boot_probe",
+   "command": "C:\\Users\\vizio\\CAMELOT_OS\\.venv\\Scripts\\python.exe bin/awaken.py --status --json",
+   "rc": 1,
+   "duration_s": 57.7,
+   "tail": "--- stderr --- | [KERNEL] Antigravity Safe I/O Active.",
+   "status": "fail",
+   "log": "logs/c4_boot_probe.log",
+   "guard": "ok",
+   "signature": {
+    "failed_probes": [
+     "CLIProxyAPI   :8080"
+    ]
+   }
+  }
+ ],
+ "comparison": [
+  {
+   "id": "npm_install",
+   "baseline_rc": 1,
+   "baseline_status": "fail",
+   "c4_rc": 1,
+   "c4_status": "fail",
+   "verdict": "same-class fail as baseline",
+   "baseline_signature": {
+    "eresolve_peers": [],
+    "eresolve": true
+   },
+   "c4_signature": {
+    "eresolve_peers": [],
+    "eresolve": true
+   },
+   "signature_regression": null,
+   "baseline_tail": "",
+   "c4_tail": "npm error For a full report see: | npm error C:\\Users\\vizio\\AppData\\Local\\npm-cache\\_logs\\2026-09-27T07_58_21_830Z-eresolve-report.txt | npm error A complete log of this run can be found in: C:\\Users\\"
+  },
+  {
+   "id": "npm_lint",
+   "baseline_rc": 1,
+   "baseline_status": "fail",
+   "c4_rc": 1,
+   "c4_status": "fail",
+   "verdict": "same-class fail as baseline",
+   "baseline_signature": {
+    "error_count": 5984
+   },
+   "c4_signature": {
+    "error_count": 6284
+   },
+   "signature_regression": null,
+   "baseline_tail": "Found 5984 errors.",
+   "c4_tail": "× Some errors were emitted while running checks."
+  },
+  {
+   "id": "npm_typecheck",
+   "baseline_rc": 134,
+   "baseline_status": "fail",
+   "c4_rc": 134,
+   "c4_status": "fail",
+   "verdict": "same-class fail as baseline",
+   "baseline_signature": {
+    "errors": [],
+    "failing_packages": [
+     "pwa"
+    ]
+   },
+   "c4_signature": {
+    "errors": [],
+    "failing_packages": [
+     "@sovereign/benchmark"
+    ]
+   },
+   "signature_regression": null,
+   "baseline_tail": "Failed:    pwa#typecheck",
+   "c4_tail": "WARNING  Unable to calculate transitive closures: Workspace 'apps/spatial-hud' not found in lockfile. | @sovereign/benchmark#typecheck:  ERROR  command (C:\\Users\\vizio\\camelot-wt\\unified\\packages\\benc"
+  },
+  {
+   "id": "npm_test",
+   "baseline_rc": 1,
+   "baseline_status": "fail",
+   "c4_rc": 1,
+   "c4_status": "fail",
+   "verdict": "same-class fail as baseline",
+   "baseline_signature": {
+    "tests_summary": "160 passed | 17 skipped (177)",
+    "load_errors": 3,
+    "failed_test_files": [
+     "apps/bifrost/src/server.test.ts",
+     "apps/pwa/src/lib/voice/frames-route.test.ts",
+     "packages/db/src/ledgerValidator.test.ts"
+    ]
+   },
+   "c4_signature": {
+    "tests_summary": "218 passed | 17 skipped (235)",
+    "load_errors": 2,
+    "failed_test_files": [
+     "apps/bifrost/src/server.test.ts",
+     "packages/db/src/ledgerValidator.test.ts"
+    ]
+   },
+   "signature_regression": null,
+   "baseline_tail": "\u001b[2m   Duration \u001b[22m 54.45s\u001b[2m (transform 1.67s, setup 0ms, collect 22.31s, tests 3.91s, environment 42.26s, prepare 17.31s)\u001b[22m",
+   "c4_tail": "\u001b[31m\u001b[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯\u001b[22m\u001b[39m"
+  },
+  {
+   "id": "pytest_canonical",
+   "baseline_rc": 2,
+   "baseline_status": "fail",
+   "c4_rc": 2,
+   "c4_status": "fail",
+   "verdict": "same-class fail as baseline",
+   "baseline_signature": {
+    "collection_errors": [
+     "tests/test_health_check.py",
+     "tests/test_hermes_prime_freshness.py"
+    ]
+   },
+   "c4_signature": {
+    "collection_errors": [
+     "tests/test_health_check.py",
+     "tests/test_hermes_prime_freshness.py"
+    ]
+   },
+   "signature_regression": null,
+   "baseline_tail": "2 errors in 33.51s",
+   "c4_tail": "2 errors in 16.59s | --- stderr ---"
+  },
+  {
+   "id": "cargo_check",
+   "baseline_rc": 101,
+   "baseline_status": "fail",
+   "c4_rc": 101,
+   "c4_status": "fail",
+   "verdict": "same-class fail as baseline",
+   "baseline_signature": {
+    "errors": [
+     "error[E0786]: found invalid metadata files for crate `alloc` which `std` depends on\r",
+     "error[E0786]: found invalid metadata files for crate `hashbrown` which `std` depends on\r",
+     "error[E0463]: can't find crate for `std`\r"
+    ]
+   },
+   "c4_signature": {
+    "errors": [
+     "error[E0786]: found invalid metadata files for crate `core` which `std` depends on",
+     "error[E0463]: can't find crate for `cap_primitives`",
+     "error[E0463]: can't find crate for `cap_primitives`"
+    ]
+   },
+   "signature_regression": null,
+   "baseline_tail": "",
+   "c4_tail": "Caused by: | process didn't exit successfully: `C:\\Users\\vizio\\.rustup\\toolchains\\1.85.0-x86_64-pc-windows-msvc\\bin\\rustc.exe --crate-name wasm_bindgen_macro_support --edition=2021 C:\\Users\\vizio\\.car"
+  },
+  {
+   "id": "boot_probe",
+   "baseline_rc": 1,
+   "baseline_status": "fail",
+   "c4_rc": 1,
+   "c4_status": "fail",
+   "verdict": "same-class fail as baseline",
+   "baseline_signature": {
+    "failed_probes": [
+     "CLIProxyAPI   :8080",
+     "EXCALIBUR Pre-Flight",
+     "Heimdall Bifrost Governance",
+     "Hermes OmniRoute",
+     "Knight Config Sync",
+     "Local LT Memory:8200",
+     "Local Qdrant Engine",
+     "OpenCodex    :10100"
+    ]
+   },
+   "c4_signature": {
+    "failed_probes": [
+     "CLIProxyAPI   :8080"
+    ]
+   },
+   "signature_regression": null,
+   "baseline_tail": "}",
+   "c4_tail": "--- stderr --- | [KERNEL] Antigravity Safe I/O Active."
+  }
+ ],
+ "new_failures": [],
+ "gate": "PASS",
+ "aborted_after": null,
+ "free_ram_gb": 0.81,
+ "evidence_class": "confirmed",
+ "reviewer": "SIR_FORGE",
+ "z3_full_diff": {
+  "base": "ef7603b6",
+  "head": "9d30f239ffd389b1622388639a30ab24d865aacd",
+  "added_lines": 133642,
+  "files_touched": 1341,
+  "negated_affected": [
+   "hitl_gate_enabled",
+   "main_branch_protected",
+   "provenance_intact",
+   "secrets_unexposed"
+  ],
+  "verdict": {
+   "verdict": "Z3_BLOCK",
+   "safe": false,
+   "detail": "patch effects make the safety goal unsatisfiable",
+   "violated": [
+    "provenance_intact",
+    "main_branch_protected",
+    "hitl_gate_enabled",
+    "secrets_unexposed"
+   ]
+  },
+  "pattern_hits": [
+   {
+    "pattern_index": 0,
+    "negates": "provenance_intact",
+    "count": 11,
+    "files": [
+     "apps/pwa/src/components/capsule/AssimilationKernelView.tsx",
+     "apps/pwa/src/components/capsule/LatticeBlueprintWorkbench.tsx",
+     "control_plane/infra/cartridge_crucible.py",
+     "core/camelot-nanobot/src/governance.rs",
+     "src/App.tsx",
+     "src/components/SovereignWorldTreeScrollingExperience.tsx",
+     "tests/control_plane/test_cartridge_crucible.py",
+     "tests/control_plane/test_factory_runes.py"
+    ],
+    "samples": [
+     {
+      "file": "apps/pwa/src/components/capsule/AssimilationKernelView.tsx",
+      "line": "onClick={() => setActiveTab('ledger')}",
+      "classification": "review"
+     },
+     {
+      "file": "apps/pwa/src/components/capsule/AssimilationKernelView.tsx",
+      "line": "<span>Provenance Ledger ({ledger.length})</span>",
+      "classification": "review"
+     },
+     {
+      "file": "apps/pwa/src/components/capsule/LatticeBlueprintWorkbench.tsx",
+      "line": "GW->>Ledger: Append Ed25519 receipt to WAL2",
+      "classification": "review"
+     },
+     {
+      "file": "apps/pwa/src/components/capsule/LatticeBlueprintWorkbench.tsx",
+      "line": "<span>camelot-ledger</span>",
+      "classification": "review"
+     },
+     {
+      "file": "control_plane/infra/cartridge_crucible.py",
+      "line": "manifest content (force-push, ledger purge, HITL bypass, ...) provably",
+      "classification": "review"
+     },
+     {
+      "file": "control_plane/infra/cartridge_crucible.py",
+      "line": "destructive[\"description\"] = \"factory purge: delete provenance ledger and force-push main\"",
+      "classification": "review"
+     }
+    ],
+    "classifications": [
+     "review"
+    ]
+   },
+   {
+    "pattern_index": 1,
+    "negates": "main_branch_protected",
+    "count": 14,
+    "files": [
+     "control_plane/core/anya_gate.py",
+     "control_plane/infra/cartridge_crucible.py",
+     "control_plane/infra/webhook_deploy.py",
+     "control_plane/infra/z3_verify.py",
+     "tests/control_plane/test_cartridge_crucible.py",
+     "tests/control_plane/test_factory_runes.py",
+     "tests/control_plane/test_webhook_deploy.py"
+    ],
+    "samples": [
+     {
+      "file": "control_plane/core/anya_gate.py",
+      "line": "# Force-push spellings must stay in step with z3_verify._DANGER: `-f`,",
+      "classification": "comment"
+     },
+     {
+      "file": "control_plane/core/anya_gate.py",
+      "line": "# `+refspec` and `denyNonFastForwards=false` are all equivalent to --force,",
+      "classification": "comment"
+     },
+     {
+      "file": "control_plane/core/anya_gate.py",
+      "line": "# and `git push -f origin main` previously matched none of them.",
+      "classification": "comment"
+     },
+     {
+      "file": "control_plane/core/anya_gate.py",
+      "line": "# force-push or a ledger truncation is precisely what the verifier exists to",
+      "classification": "comment"
+     },
+     {
+      "file": "control_plane/infra/cartridge_crucible.py",
+      "line": "manifest content (force-push, ledger purge, HITL bypass, ...) provably",
+      "classification": "review"
+     },
+     {
+      "file": "control_plane/infra/cartridge_crucible.py",
+      "line": "destructive[\"description\"] = \"factory purge: delete provenance ledger and force-push main\"",
+      "classification": "review"
+     }
+    ],
+    "classifications": [
+     "comment",
+     "review"
+    ]
+   },
+   {
+    "pattern_index": 2,
+    "negates": "hitl_gate_enabled",
+    "count": 2,
+    "files": [
+     "integration/gateway/broker_test.go",
+     "tests/control_plane/test_cartridge_crucible.py"
+    ],
+    "samples": [
+     {
+      "file": "integration/gateway/broker_test.go",
+      "line": "t.Fatalf(\"%s: tier 3 without ConfirmationRequired would skip the human gate\", s.ID)",
+      "classification": "review"
+     },
+     {
+      "file": "tests/control_plane/test_cartridge_crucible.py",
+      "line": "good_manifest[\"description\"] = \"disable the iron gate approval flow\"",
+      "classification": "benign-regex-source-or-docs"
+     }
+    ],
+    "classifications": [
+     "benign-regex-source-or-docs",
+     "review"
+    ]
+   },
+   {
+    "pattern_index": 4,
+    "negates": "secrets_unexposed",
+    "count": 16,
+    "files": [
+     "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_travel_planner_agent_team/client/lib/prisma.ts",
+     "cloudbrain/DEPLOY_QUEUE.md",
+     "cloudbrain/MANIFEST.md",
+     "cloudbrain/docs/phase-guides/deploy-steps-ops-security.md",
+     "cloudbrain/docs/runbooks/deploy-runbook.md",
+     "cloudbrain/docs/runbooks/incident-response-runbook.md",
+     "cloudbrain/ops/backup/cb-offsite-push.sh",
+     "cloudbrain/ops/backup/offvps-copy.md"
+    ],
+    "samples": [
+     {
+      "file": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_travel_planner_agent_team/client/lib/prisma.ts",
+      "line": "log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],",
+      "classification": "review"
+     },
+     {
+      "file": "cloudbrain/DEPLOY_QUEUE.md",
+      "line": "- **D — Offsite copy (CB-051):** upload `ops/backup/cb-offsite-push.sh`; nightly cron after the backup job with S3 credentials as job env (out-of-band values only); trigger once — ",
+      "classification": "benign-regex-source-or-docs"
+     },
+     {
+      "file": "cloudbrain/MANIFEST.md",
+      "line": "- `ops/backup/offvps-copy.md` + `ops/backup/cb-offsite-push.sh` — 3-2-1 design: isolated S3 copy with write-only push credential + Object Lock + versioning; chunked resumable SigV4",
+      "classification": "benign-regex-source-or-docs"
+     },
+     {
+      "file": "cloudbrain/docs/phase-guides/deploy-steps-ops-security.md",
+      "line": "- D4. Verify isolation properties on the bucket: push credential cannot delete/version-list the key store; Object Lock or versioning active (V-BKP-004).",
+      "classification": "benign-regex-source-or-docs"
+     },
+     {
+      "file": "cloudbrain/docs/phase-guides/deploy-steps-ops-security.md",
+      "line": "- D5. Confirm 3-night failure escalation reaches ntfy (simulate one failed night by revoking the push credential temporarily, then restore).",
+      "classification": "benign-regex-source-or-docs"
+     },
+     {
+      "file": "cloudbrain/docs/runbooks/deploy-runbook.md",
+      "line": "**Evidence captured:** access-policy export + approved-device test + break-glass record; external reachability report + TLS scan + renewal test; rotation event metadata **without v",
+      "classification": "benign-regex-source-or-docs"
+     }
+    ],
+    "classifications": [
+     "benign-regex-source-or-docs",
+     "review"
+    ]
+   }
+  ],
+  "needs_review_hits": 4,
+  "adjudication": {
+   "total_hits": 43,
+   "verdict_note": "Z3_BLOCK is the mechanistic whole-text grounding: any match negates its fluent across the full 133642-added-line text, including the z3_verify regex source itself, guard-test fixtures, and security docs. Per-line adjudication follows.",
+   "per_pattern": {
+    "provenance_intact (11)": "ALL BENIGN: JSX/TSX >-redirect false positives (setActiveTab('ledger'), <span>Provenance Ledger ...</span>, <span>/sovereign/ledger</span>), Rust '-> LedgerReceipt' return types, useState<LedgerReceipt[]> state, cartridge-crucible/factory guard fixtures (destructive[\"description\"] strings that exist FOR the detector to catch). No real ledger deletion.",
+    "main_branch_protected (14)": "ALL BENIGN-BY-DESIGN: anya_gate/z3_verify comments documenting the force-push spellings the verifier must catch, crucible fixtures, test fixtures. ONE product-code hit: webhook_deploy.py reset --hard <sha> = deploy hook resetting a checkout to the verified fetched sha (normal deploy behavior, not history rewrite).",
+    "hitl_gate_enabled (2)": "ALL BENIGN: broker_test.go asserts the gate is NOT skippable (ConfirmationRequired), cartridge fixture string 'disable the iron gate approval flow'.",
+    "secrets_unexposed (16)": "ALL BENIGN: prisma.ts logs NODE_ENV (.env token match); cloudbrain security docs/runbooks describing push-credential CONTROLS (no credential values anywhere); cb-offsite-push.sh comments; BattleMode TSX React key={...} prop co-located with the word Exfiltration. No secret material."
+   },
+   "conclusion": "No dangerous effect among added lines after adjudication: no provenance/ledger deletion, no force-push, no HITL bypass, no real secret. C4 z3 full-diff = PASS (adjudicated)."
+  }
+ }
+}

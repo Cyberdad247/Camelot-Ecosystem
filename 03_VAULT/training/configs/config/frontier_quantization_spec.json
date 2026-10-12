@@ -1,0 +1,68 @@
+{
+  "$schema": "https://camelot-os.dev/schemas/v10001/frontier_quantization.json",
+  "version": "v10001.00-CYBERTRONIA",
+  "engine": "TURBOQUANT_SPINQUANT_TRINITY",
+  "architects": ["MERLIN_Ω", "LADY_ALEXANDRIA"],
+  "global_law_compliance": {
+    "node_ceiling_mb": 4096,
+    "server_ceiling_mb": 8192,
+    "rule_7_zero_hotpath_bloat": true
+  },
+  "quantization_profiles": {
+    "tier_0_extreme_edge_ternary": {
+      "name": "BitNet b1.58 Ternary Core",
+      "target_substrate": ["cybertronia_local_worker", "drone_edge_runner"],
+      "weight_bitwidth": 1.58,
+      "alphabet": [-1, 0, 1],
+      "arithmetic": "ADD_SUB_INTEGER_ONLY",
+      "9B_model_footprint_mb": 1780,
+      "ram_ceiling_compliant": true,
+      "bandwidth_savings_multiplier": 8.2,
+      "inference_engine": "turboquant_native_rust"
+    },
+    "tier_1_ultra_low_bit_gguf": {
+      "name": "SpinQuant IQ2_XXS with Randomized Hadamard Rotation",
+      "target_substrate": ["excalibur_s26_ultra_snapdragon8_elite"],
+      "quant_type": "IQ2_XXS",
+      "bits_per_weight": 2.06,
+      "imatrix_calibration": "03_VAULT/training/configs/calibration/imatrix_coding_v1.dat",
+      "outlier_suppression": "RANDOMIZED_HADAMARD_TRANSFORM_ROTATION",
+      "9B_model_footprint_mb": 2320,
+      "uma_headroom_allocated_mb": 2500,
+      "target_device_free_headroom_mb": 6290,
+      "runtime": "llama.cpp_arm64_vulkan"
+    },
+    "tier_2_balanced_production_gguf": {
+      "name": "K-Quant IQ3_M with Channel Outlier Locking",
+      "target_substrate": ["vps_sovereign_hub_kvm563", "cybertronia_high_precision"],
+      "quant_type": "IQ3_M",
+      "bits_per_weight": 3.45,
+      "9B_model_footprint_mb": 3880,
+      "runtime": "vllm_sglang_fp8"
+    }
+  },
+  "kv_cache_compression": {
+    "engine": "KIVI_POLARQUANT_ASYMMETRIC",
+    "key_quantization": "2BIT_PER_CHANNEL",
+    "value_quantization": "2BIT_PER_TOKEN",
+    "compression_ratio": 8.0,
+    "256k_context_memory_uncompressed_mb": 24576,
+    "256k_context_memory_kivi_compressed_mb": 3072,
+    "dynamic_head_eviction": {
+      "protocol": "SnapKV_StreamingLLM_Hybrid",
+      "eviction_rate": 0.85,
+      "preserved_recent_tokens": 1024,
+      "preserved_semantic_anchors": 256,
+      "fixed_streaming_ram_budget_mb": 512
+    }
+  },
+  "speculative_decoding_cascade": {
+    "enabled": true,
+    "target_model": "Ornith-1.0-9B",
+    "draft_model": "Ornith-1.0-0.5B-Ternary158",
+    "draft_memory_footprint_mb": 280,
+    "speculative_batch_tokens": 6,
+    "acceptance_rate_target": 0.78,
+    "throughput_gain": "2.8x"
+  }
+}

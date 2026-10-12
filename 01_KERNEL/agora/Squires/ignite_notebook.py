@@ -31,7 +31,7 @@ sys.modules["api"] = api_module
 
 # 4. Integrate Morgana Logger
 sys.path.insert(0, str(KERNEL_ROOT / "tools"))
-from morgana_logger import MorganaLogger
+from morgana_logger import MorganaLogger  # noqa: E402
 
 m_logger = MorganaLogger(actor="Notebook_Brain_Igniter")
 

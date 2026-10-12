@@ -94,6 +94,8 @@ All Bifrost Bridge and VFS communications traverse the verified Tailscale mesh:
 | `//HELIOS_MACRO` | `//HELIOS_MACRO` | Perform full codebase immersion and shatterpoint audit |
 | `//CLOUDBRAIN` | `//CLOUDBRAIN <query>` | Query Sir Helios CloudBrain / Graphiti / MemCastle |
 | `//CLOUDBRAIN_SYNC` | `//CLOUDBRAIN_SYNC` | Dynamic bi-directional sync between local state and CloudBrain |
+| `//FINALIZE_CRYSTAL`| `//FINALIZE_CRYSTAL <title> <text>` | Extract Graphify triplets, compile Glyph, and forge VKG/UKG Crystal |
+| `//GRAPHIFY` | `//GRAPHIFY <text>` | Extract semantic (head, relation, tail) triplets via Graphify |
 | `//VFS_RESOLVE` | `//VFS_RESOLVE <vfs_path>` | Resolve coordinate across World Tree on Cybertronia |
 | `//BOOT` | `//BOOT` | Awaken Camelot-OS services (`python bin/awaken.py`) |
 | `//STATUS` | `//STATUS` | Live telemetry inspection across fleet sockets and mesh nodes |

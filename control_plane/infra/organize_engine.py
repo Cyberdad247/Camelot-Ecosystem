@@ -28,10 +28,11 @@ import time
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
+from control_plane._paths import REPO_ROOT
 
 log = logging.getLogger("ORGANIZE_ENGINE")
 
-_CAMELOT_ROOT = Path(__file__).resolve().parent.parent
+_CAMELOT_ROOT = REPO_ROOT
 
 # ── 7-Tier taxonomy definitions ───────────────────────────────────────────────
 
@@ -523,7 +524,7 @@ class OrganizeEngine:
         if not self._hermes_enabled:
             return
         try:
-            from control_plane.hermes_bridge import HermesBus
+            from control_plane.infra.hermes_bridge import HermesBus
             HermesBus().publish(channel, {"source": "ORGANIZE_ENGINE", **payload})
         except Exception as exc:
             log.debug("[ORGANIZE] hermes emit failed: %s", exc)

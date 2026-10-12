@@ -13,7 +13,7 @@ Build (requires cargo):
     # binary: target/release/camelot-pqcrypto.exe (Windows) or camelot-pqcrypto (Linux)
 
 Usage:
-    from control_plane.pqcrypto_bridge import PQCrypto
+    from control_plane.infra.pqcrypto_bridge import PQCrypto
     pq = PQCrypto()
     kem_kp = pq.kem_keygen()          # generate key pair
     enc    = pq.kem_encapsulate(peer_ek)
@@ -29,8 +29,9 @@ import json
 import subprocess
 from pathlib import Path
 from typing import Optional
+from control_plane._paths import REPO_ROOT
 
-CAMELOT_HOME = Path(__file__).parent.parent
+CAMELOT_HOME = REPO_ROOT
 _BINARY_CANDIDATES = [
     CAMELOT_HOME / "kinetic_edge" / "pqcrypto" / "target" / "release" / "camelot-pqcrypto.exe",
     CAMELOT_HOME / "kinetic_edge" / "pqcrypto" / "target" / "release" / "camelot-pqcrypto",

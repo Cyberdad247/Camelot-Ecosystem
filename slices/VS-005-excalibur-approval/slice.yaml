@@ -1,0 +1,18 @@
+id: VS-005
+slug: VS-005-excalibur-approval
+title: Excalibur Mobile HITL Approval Cockpit
+tier: P1
+status: ACTIVE
+owner: sir_helio
+summary: Mobile kinetic telemetry and HITL authorization stream over Tailscale for
+  high-risk mutations.
+contracts:
+- CONTRACT-EXCALIBUR-HITL-001
+code_paths:
+- control_plane/mesh/
+- apps/bifrost/
+tests:
+- tests/test_reya_multivoice_fabric.py
+exit_criteria:
+- Risk >= 50 suspends execution pending Arthur Omega approval
+- Sub-100ms notification push

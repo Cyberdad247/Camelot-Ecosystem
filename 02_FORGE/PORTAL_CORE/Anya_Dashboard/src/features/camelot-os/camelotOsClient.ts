@@ -16,7 +16,10 @@ export async function loadCamelotOsState(): Promise<CamelotOsState> {
   return response.json() as Promise<CamelotOsState>;
 }
 
-export async function activateSupportSession(reason: string, durationMinutes = 120): Promise<CamelotOsState> {
+export async function activateSupportSession(
+  reason: string,
+  durationMinutes = 120,
+): Promise<CamelotOsState> {
   const response = await fetch('/api/camelot-os/support/activate', {
     method: 'POST',
     headers: operatorHeaders(),

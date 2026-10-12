@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: MIT
-
 """Build the CAMELOT-OS portable single-file binary via PyInstaller.
 
 Usage:

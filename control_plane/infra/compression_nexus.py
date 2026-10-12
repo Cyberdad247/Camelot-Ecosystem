@@ -264,7 +264,7 @@ class CompressionNexus:
 
     def _emit_hermes(self, tier: str, payload: dict) -> None:
         try:
-            from control_plane.hermes_bridge import HermesBus
+            from control_plane.infra.hermes_bridge import HermesBus
             HermesBus().publish("compression.status", {"tier": tier, **payload})
         except Exception as exc:
             log.debug("[COMPRESSION_NEXUS] Hermes unavailable: %s", exc)

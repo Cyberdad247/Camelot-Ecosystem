@@ -1,6 +1,6 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import FleetPanel from '@/features/hub/FleetPanel';
+import { render, screen, waitFor } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const fleetFixture = {
   daemons: [
@@ -22,16 +22,19 @@ const fleetFixture = {
 
 describe('FleetPanel', () => {
   beforeEach(() => {
-    vi.stubGlobal('fetch', vi.fn(async (input: RequestInfo | URL) => {
-      const url = String(input);
-      if (url.includes('/cognitive/fleet')) {
-        return new Response(JSON.stringify(fleetFixture), {
-          status: 200,
-          headers: { 'Content-Type': 'application/json' },
-        });
-      }
-      return new Response('{}', { status: 404 });
-    }));
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (input: RequestInfo | URL) => {
+        const url = String(input);
+        if (url.includes('/cognitive/fleet')) {
+          return new Response(JSON.stringify(fleetFixture), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' },
+          });
+        }
+        return new Response('{}', { status: 404 });
+      }),
+    );
   });
 
   afterEach(() => {
@@ -54,14 +57,15 @@ describe('FleetPanel', () => {
   });
 
   it('shows an error state when the cognitive service is unreachable', async () => {
-    vi.stubGlobal('fetch', vi.fn(async () => {
-      throw new Error('network down');
-    }));
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () => {
+        throw new Error('network down');
+      }),
+    );
 
     render(<FleetPanel />);
 
-    expect(
-      await screen.findByText(/Cognitive Service unreachable/i),
-    ).toBeInTheDocument();
+    expect(await screen.findByText(/Cognitive Service unreachable/i)).toBeInTheDocument();
   });
 });

@@ -1,9 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": [
-    "tsconfig.base.json",
-    ".npmrc"
-  ],
+  "globalDependencies": ["tsconfig.base.json", ".npmrc"],
   "globalEnv": [
     "NODE_ENV",
     "NEXT_PUBLIC_*",
@@ -16,19 +13,8 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [
-        ".next/**",
-        "dist/**",
-        "build/**",
-        "!.next/cache/**"
-      ],
-      "inputs": [
-        "$TURBO_DEFAULT$",
-        "!*.test.*",
-        "!tests/**",
-        "!**/*.test.*",
-        "!**/*.spec.*"
-      ]
+      "outputs": [".next/**", "dist/**", "build/**", "!.next/cache/**"],
+      "inputs": ["$TURBO_DEFAULT$", "!*.test.*", "!tests/**", "!**/*.test.*", "!**/*.spec.*"]
     },
     "dev": {
       "cache": false,

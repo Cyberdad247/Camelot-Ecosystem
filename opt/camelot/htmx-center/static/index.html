@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camelot-OS Command Center (HTMX + Go)</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/htmx.min.js" defer></script>
+</head>
+<body>
+    <header class="header">
+        <div class="brand">
+            <h1>⚜️ Camelot-OS</h1>
+            <p>Omega Apex Singularity — Native Go + HTMX + SSE Command Deck</p>
+        </div>
+        <div class="anchor-tag">
+            <span>EDGE: Cleveland, OH</span>
+            <span>MEM_CAP: 256MB</span>
+        </div>
+    </header>
+
+    <main class="grid">
+        <div class="cell" hx-get="/fragments/status" hx-trigger="load, every 5s" hx-swap="innerHTML">
+            <!-- Status panel injected via HTMX fragment -->
+            <div id="status-panel" class="panel">
+                <h2>Throne Room</h2>
+                <p>System: <span class="status CONVERGED">CONVERGED</span></p>
+                <p>CPU: 42.5%</p>
+                <p>Memory: 3.2 GB</p>
+            </div>
+        </div>
+        <div class="cell" hx-get="/fragments/tasks" hx-trigger="load, every 5s" hx-swap="innerHTML">
+            <!-- Tasks panel -->
+            <div id="tasks-panel" class="panel">
+                <h2>Round Table</h2>
+                <ul>
+                    <li data-task-id="task_001">Draft response to Jane - <span class="risk">R4</span> [approved]</li>
+                    <li data-task-id="task_002">Create campaign plan - <span class="risk">R2</span> [running]</li>
+                    <li data-task-id="task_003">Review invoice - <span class="risk">R3</span> [pending]</li>
+                </ul>
+            </div>
+        </div>
+        <div class="cell" hx-get="/fragments/receipts" hx-trigger="load, every 5s" hx-swap="innerHTML">
+            <!-- Receipts panel -->
+            <div id="receipts-panel" class="panel">
+                <h2>Ledger</h2>
+                <table>
+                    <tr><th>ID</th><th>Action</th><th>Time</th></tr>
+                    <tr><td>0x9f4a</td><td>email.draft.created</td><td>10:23:11</td></tr>
+                    <tr><td>0x7c21</td><td>approval.granted</td><td>10:24:32</td></tr>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- SSE stream for live data -->
+    <script>
+        if (window.EventSource) {
+            const es = new EventSource('/stream');
+            es.addEventListener('status', (event) => {
+                const data = JSON.parse(event.data);
+                const panel = document.getElementById('status-panel');
+                if (panel) {
+                    panel.innerHTML = `<h2>Throne Room</h2>
+                        <p>System: <span class="status ${data.status || data.Status}">${data.status || data.Status}</span></p>
+                        <p>CPU: ${(data.cpu || data.CPU).toFixed(1)}%</p>
+                        <p>Memory: ${(data.memory || data.Memory).toFixed(1)} GB</p>`;
+                }
+            });
+        }
+    </script>
+</body>
+</html>

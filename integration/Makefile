@@ -5,7 +5,7 @@
 
 SHELL := /bin/bash
 
-.PHONY: build dev-up dev-down status logs smoke benchmark verify-local-only test test-ts test-go test-rust clean
+.PHONY: build dev-up dev-down status logs smoke benchmark verify-local-only generate check-generated test test-ts test-go test-rust clean
 
 build:
 	./scripts/build.sh
@@ -32,14 +32,25 @@ benchmark:
 verify-local-only:
 	./scripts/verify-local-only.sh
 
-## test: full slice test suite (TS + Go + Rust, both Rust feature sets)
-test: test-ts test-go test-rust
+## generate: regenerate the Go registry + TS catalog from skills.manifest.json
+generate:
+	node contracts/gen/generate.mjs
+
+## check-generated: fail if the committed generated files drifted from the manifest
+check-generated:
+	./scripts/check-generated.sh
+
+## test: full slice test suite (manifest drift + TS + Go + Rust, both Rust feature sets)
+test: check-generated test-ts test-go test-rust
 
 test-ts:
 	npx vitest run
 
 test-go:
-	cd gateway && gofmt -l . && go vet ./... && go test ./... -count=1
+	# gofmt -l prints offenders but exits 0 — the check has to be the emptiness
+	# of its output, or unformatted code sails through `make test`.
+	cd gateway && test -z "$$(gofmt -l .)" || { echo "gofmt: unformatted files:"; gofmt -l gateway; exit 1; }
+	cd gateway && go vet ./... && go test ./... -count=1
 
 test-rust:
 	cd .. && cargo test -p camelot-node-agent

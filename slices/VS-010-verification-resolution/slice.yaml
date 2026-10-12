@@ -1,0 +1,18 @@
+id: VS-010
+slug: VS-010-verification-resolution
+title: Dual-Gate Verification & Z3 Resolution
+tier: P0
+status: ACTIVE
+owner: sir_sentinel
+summary: Formal Z3 invariant verification, Anya Gate L7 entropy scythe, and automated
+  doc-checks.
+contracts:
+- CONTRACT-DUAL-GATE-001
+code_paths:
+- control_plane/anya_gate.py
+- scripts/doc_check.py
+tests:
+- tests/test_doc_check.py
+exit_criteria:
+- Zero bypass of Anya Gate
+- 100% doc-check CI compliance

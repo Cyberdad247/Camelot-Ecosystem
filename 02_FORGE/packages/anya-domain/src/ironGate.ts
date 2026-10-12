@@ -13,7 +13,7 @@ export const VoiceIntentSchema = z.enum([
   'CLOSE_SESSION',
   'RUN_TRIVY_SCAN',
   'TOGGLE_HUD',
-  'REQUEST_SYSTEM_STATUS'
+  'REQUEST_SYSTEM_STATUS',
 ]);
 export type VoiceIntent = z.infer<typeof VoiceIntentSchema>;
 
@@ -21,7 +21,7 @@ export const IronGateChallengeSchema = z.object({
   kind: z.literal('IRON_GATE_CHALLENGE'),
   reason: z.string(),
   timestamp: z.number(), // Unix timestamp [Arthur's Amendment]
-  nonce: z.string(),     // Anti-replay nonce [Arthur's Amendment]
+  nonce: z.string(), // Anti-replay nonce [Arthur's Amendment]
   riskLevel: IronGateRiskLevelSchema,
 });
 
@@ -59,43 +59,52 @@ export class MoltbotGateway {
     const mandatoryHighRisk = ['remote', 'root', 'sudo', 'login', 'session'];
     const query = intent.toLowerCase();
 
-    if (mandatoryHighRisk.some(kw => query.includes(kw))) {
+    if (mandatoryHighRisk.some((kw) => query.includes(kw))) {
       return 'HIGH';
     }
 
     const medRiskKeywords = ['delete', 'transfer', 'update'];
-    if (medRiskKeywords.some(kw => query.includes(kw))) {
+    if (medRiskKeywords.some((kw) => query.includes(kw))) {
       return 'MEDIUM';
     }
 
     return 'LOW';
   }
 
-  static async verifySignature(challenge: z.infer<typeof IronGateChallengeSchema>, response: z.infer<typeof IronGateResponseSchema>, publicKey: string): Promise<boolean> {
+  static async verifySignature(
+    challenge: z.infer<typeof IronGateChallengeSchema>,
+    response: z.infer<typeof IronGateResponseSchema>,
+    publicKey: string,
+  ): Promise<boolean> {
     // [Arthur's Amendment]: 30s TTL Verification
     const now = Date.now() / 1000;
     if (now - challenge.timestamp > 30) {
-      console.error("⛔ IRON GATE: Challenge STALE (>30s). Rejected.");
+      console.error('⛔ IRON GATE: Challenge STALE (>30s). Rejected.');
       return false;
     }
 
     // Nonce mismatch check
     if (challenge.nonce !== response.nonce) {
-      console.error("⛔ IRON GATE: Nonce mismatch. Replay detected.");
+      console.error('⛔ IRON GATE: Nonce mismatch. Replay detected.');
       return false;
     }
 
     // In production: Use WebCrypto API for real cryptographic verification
-    console.log("🛡️ MOLTBOT: Verifying Biometric Signature...");
+    console.log('🛡️ MOLTBOT: Verifying Biometric Signature...');
     return !!(response.signature && publicKey);
   }
 }
 
-export async function enforceBiometricGate(intent: string, titanLink: { send: (payload: unknown) => Promise<unknown> }) {
+export async function enforceBiometricGate(
+  intent: string,
+  titanLink: { send: (payload: unknown) => Promise<unknown> },
+) {
   const risk = MoltbotGateway.assessRisk(intent);
 
   if (risk === 'HIGH' || risk === 'CRITICAL') {
-    console.log(`🔒 IRON GATE: High Risk Intent Detected [${intent}]. Triggering Biometric Challenge...`);
+    console.log(
+      `🔒 IRON GATE: High Risk Intent Detected [${intent}]. Triggering Biometric Challenge...`,
+    );
 
     // Generate ephemeral challenge data
     const challengePayload = {
@@ -103,15 +112,19 @@ export async function enforceBiometricGate(intent: string, titanLink: { send: (p
       reason: `Remote Access Required for: ${intent}`,
       riskLevel: risk,
       timestamp: Math.floor(Date.now() / 1000),
-      nonce: Math.random().toString(36).substring(7)
+      nonce: Math.random().toString(36).substring(7),
     };
 
     const response = await titanLink.send(challengePayload);
 
-    const isVerified = await MoltbotGateway.verifySignature(challengePayload, response, "SOVEREIGN_PUB_KEY");
+    const isVerified = await MoltbotGateway.verifySignature(
+      challengePayload,
+      response,
+      'SOVEREIGN_PUB_KEY',
+    );
 
     if (!isVerified) {
-      throw new Error("⛔ IRON GATE: Biometrics Rejected. Unauthorized Access Blocked.");
+      throw new Error('⛔ IRON GATE: Biometrics Rejected. Unauthorized Access Blocked.');
     }
   }
   return true;

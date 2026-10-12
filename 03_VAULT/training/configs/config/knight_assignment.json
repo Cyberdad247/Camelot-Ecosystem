@@ -1,0 +1,22 @@
+{
+  "manual_assignments": [
+    {
+      "knight_persona": "Sir_Helios",
+      "harness_framework": "Anti-Gravity_v2.0",
+      "stead_engine": "gemini-3.8-flash-berium",
+      "router_node": "openrouter"
+    },
+    {
+      "knight_persona": "Merlin_Omega",
+      "harness_framework": "Claude_Code_CLI",
+      "stead_engine": "claude-3-5-sonnet-20240620",
+      "router_node": "anthropic"
+    },
+    {
+      "knight_persona": "Arch_Mage_Codex",
+      "harness_framework": "Open_Codex_Framework",
+      "stead_engine": "open-coder-8b-instruct",
+      "router_node": "local_open_coder"
+    }
+  ]
+}

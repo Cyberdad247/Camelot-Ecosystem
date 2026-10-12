@@ -17,10 +17,15 @@ Z3 symbolic verification gates any job that mutates git/state-machines.
 __version__ = "9000.14"  # CYBERTRONIA — set by P1-T01
 
 import json
+import logging
 import os
 import sys
 from pathlib import Path
 from typing import Any, Dict, Optional
+
+from control_plane._paths import REPO_ROOT
+
+logger = logging.getLogger(__name__)
 
 
 class SoulOversight:
@@ -89,13 +94,16 @@ def _z3_verify_patch(job: Any) -> tuple[bool, str]:
     Delegates to the real PDDL-style Z3 encoder in ``control_plane.z3_verify``:
     safety invariants are modelled as fluents, the patch is grounded into action
     effects, and a patch that makes the safety goal unsatisfiable is BLOCKED.
-    Degrades gracefully (pass-through) if the encoder/solver is unavailable —
-    the upstream shatterpoint guard still applies.
+
+    Fails closed if the encoder cannot be imported. This previously returned
+    ``True`` ("passed through"), which meant an import error anywhere in the
+    verifier silently disabled the safety gate for every patch.
     """
     try:
-        from .z3_verify import PatchIntent, verify_patch
+        from control_plane.infra.z3_verify import PatchIntent, verify_patch
     except Exception as exc:  # pragma: no cover - defensive import guard
-        return True, f"Z3 encoder unavailable ({exc}) — passed through"
+        return False, (f"Z3 encoder unavailable ({exc}) — cannot verify patch "
+                       f"safety; blocking. Install z3-solver or escalate to HITL.")
 
     intent = getattr(job, "intent", "") or ""
     reason = getattr(getattr(job, "triage", None), "risk_reason", "") or ""
@@ -114,9 +122,8 @@ def _load_colony_nexus():
     unavailable. Never raises — colony state must not crash the gate.
     """
     import importlib.util as _ilu
-    from pathlib import Path as _Path
 
-    path = (_Path(__file__).resolve().parents[1]
+    path = (REPO_ROOT
             / "01_KERNEL" / "iron_gate" / "DEFENSE_GRID" / "colony_nexus.py")
     if not path.exists():
         return None
@@ -149,8 +156,15 @@ def _colony_escalate(tier: str) -> str:
         state = ColonyNexus(hermes_enabled=False).scan()
         if getattr(state, "is_critical", False):
             return "HUMAN_GATE"
-    except Exception:
-        pass   # colony data unavailable — proceed with original tier
+    except Exception as err:
+        # Colony scanning only ever *raises* the tier, so a failure cannot grant
+        # anything beyond the baseline the caller already computed — it is safe
+        # to proceed. Logged rather than swallowed so a permanently broken scan
+        # does not quietly disable escalation forever.
+        logger.warning(
+            "colony risk scan failed (%s) — proceeding at tier %s without "
+            "colony escalation", err, tier,
+        )
     return tier
 
 

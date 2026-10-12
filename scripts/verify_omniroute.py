@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: MIT
-
 """Verify all knights route through CLIProxyAPI in OmniRoute."""
 import sys
 from pathlib import Path
@@ -8,8 +6,8 @@ from pathlib import Path
 repo = Path(__file__).parent.parent
 sys.path.insert(0, str(repo))
 
-from control_plane.cli_intercept import CLIIntercept
-from control_plane.soul_router import CLIPROXY_URL, SALTARE_URL
+from control_plane.cli_intercept import CLIIntercept  # noqa: E402
+from control_plane.soul_router import CLIPROXY_URL, SALTARE_URL  # noqa: E402
 
 intercept = CLIIntercept()
 cliproxy_url = "http://127.0.0.1:8080/v1"
@@ -46,7 +44,7 @@ for knight_id, probe_intent in KNIGHT_PROBES.items():
 
     via_cliproxy = backend == cliproxy_url
     via_local    = "11434" in backend
-    is_local_engine = result.engine_cmd in ("ollama",)
+    is_local_engine = result.engine_cmd in ("ollama", "ouroboros")
 
     if via_cliproxy:
         status = "CLIPROXY :8080"

@@ -2,7 +2,7 @@
   "lockfile_version": "1.0.0",
   "canonicalization_standard": "RFC_8785_JCS",
   "contract_count": 16,
-  "lock_hash": "3486328cfafa7ea07f37a5c013f5ed49bc8b99e000814a8e1d2eb0e35433a3fa",
+  "lock_hash": "775fc54c252ca4529e149b16c55da7b524c10aed88d837669ef6489f3c1339db",
   "shared_bindings": {
     "ts_sha256": "fce9857c40433d4522fbafb7ea339253548a2bb03f96a178048d35c9c4f09d49",
     "go_sha256": "e9c8fb1bab86221586297ef46ba225a85d1e1b17e92c3e3296c7235bb41b9a67",
@@ -60,8 +60,8 @@
     "vfs-attestation/2": {
       "schema_file": "vfs-attestation.schema.json",
       "schema_version": "camelot-vfs-attestation/1",
-      "schema_sha256": "3e69373c0764032b115f95a6a9ec50a9daa12ead996bef7910d10278449ff29b",
-      "canonical_bytes_len": 2367
+      "schema_sha256": "a2a3add47da402f04c90e410c33d7722ac33c3848e29c2d774a9e828216b36ad",
+      "canonical_bytes_len": 2338
     },
     "evidence-envelope/1": {
       "schema_file": "evidence-envelope.schema.json",
@@ -84,14 +84,14 @@
     "receipt/2": {
       "schema_file": "receipt.schema.json",
       "schema_version": "camelot-receipt/1",
-      "schema_sha256": "3c71056cb4a4e62eebf34e0b4c6aa7925344a0e4618e977ac1f0f65227c6592a",
-      "canonical_bytes_len": 5128
+      "schema_sha256": "6b51b855284b6e82712503ba91b219e17c273c719410e4a881e3a3501eadaed8",
+      "canonical_bytes_len": 4876
     },
     "authority-epoch/1": {
       "schema_file": "authority-epoch.schema.json",
       "schema_version": "camelot-authority-epoch/1",
-      "schema_sha256": "c2884005142d56598b2222a3606e2c290380e62fe7751018f8cc4b35b9899afc",
-      "canonical_bytes_len": 2016
+      "schema_sha256": "0e93b55eb16fffbba48739c577c8c8a22aba3a6ad6e2e9b2f78e72152d0ecb00",
+      "canonical_bytes_len": 2137
     },
     "promotion/1": {
       "schema_file": "promotion.schema.json",

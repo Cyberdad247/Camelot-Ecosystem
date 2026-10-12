@@ -75,14 +75,18 @@ export async function POST(request: NextRequest) {{
         },
         "component": {
             "path": "components/{name}.tsx",
-            "content": '''interface {name}Props {{
-  // TODO: Define props
+            "content": '''import React from "react";
+
+export interface {name}Props {{
+  className?: string;
+  children?: React.ReactNode;
 }}
 
-export function {name}({{ }}: {name}Props) {{
+export function {name}({{ className = "", children }}: {name}Props) {{
   return (
-    <div className="{name_lower}">
+    <div className={{`{name_lower} ${{className}}`.trim()}}>
       <h2>{name}</h2>
+      {{children}}
       {{/* TODO: Implement {name} component */}}
     </div>
   );

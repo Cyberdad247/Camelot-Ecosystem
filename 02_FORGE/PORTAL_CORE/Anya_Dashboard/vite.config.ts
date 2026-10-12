@@ -1,8 +1,8 @@
+import path from 'path';
+import react from '@vitejs/plugin-react';
 // Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import path from 'path'
+import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -27,4 +27,4 @@ export default defineConfig({
     // Rapier is an intentionally lazy-loaded physics engine chunk for the legacy 3D brain scene.
     chunkSizeWarningLimit: 2200,
   },
-})
+});

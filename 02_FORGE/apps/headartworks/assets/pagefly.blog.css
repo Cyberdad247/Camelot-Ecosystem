@@ -33,7 +33,8 @@
   display: block;
   margin-bottom: 10px;
 }
-.pf-comment__form input:not([type=submit]), .pf-comment__form textarea {
+.pf-comment__form input:not([type="submit"]),
+.pf-comment__form textarea {
   width: 100%;
 }
 

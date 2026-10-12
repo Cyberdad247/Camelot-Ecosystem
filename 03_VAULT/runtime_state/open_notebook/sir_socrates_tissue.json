@@ -1,0 +1,68 @@
+[
+  {
+    "knight_id": "SIR_SOCRATES",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_SOCRATES",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_socrates\",\n  \"session_id\": \"sess_knight_sir_socrates\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_socrates/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_SOCRATES",
+    "open_viking_tether": "open_viking://worldtree/sir_socrates",
+    "updated_at": "2026-09-22T14:39:42.446732+00:00"
+  },
+  {
+    "knight_id": "SIR_SOCRATES",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_SOCRATES",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_socrates\",\n  \"session_id\": \"sess_knight_sir_socrates\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_socrates/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_SOCRATES",
+    "open_viking_tether": "open_viking://worldtree/sir_socrates",
+    "updated_at": "2026-09-22T14:39:40.847591+00:00"
+  },
+  {
+    "knight_id": "SIR_SOCRATES",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_SOCRATES",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_socrates\",\n  \"session_id\": \"sess_knight_sir_socrates\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_socrates/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_SOCRATES",
+    "open_viking_tether": "open_viking://worldtree/sir_socrates",
+    "updated_at": "2026-09-22T14:37:02.758236+00:00"
+  },
+  {
+    "knight_id": "SIR_SOCRATES",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_SOCRATES",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_socrates\",\n  \"session_id\": \"sess_knight_sir_socrates\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_socrates/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_SOCRATES",
+    "open_viking_tether": "open_viking://worldtree/sir_socrates",
+    "updated_at": "2026-09-22T14:37:01.055630+00:00"
+  },
+  {
+    "knight_id": "SIR_SOCRATES",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_SOCRATES",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_socrates\",\n  \"session_id\": \"sess_knight_sir_socrates\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_socrates/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_SOCRATES",
+    "open_viking_tether": "open_viking://worldtree/sir_socrates",
+    "updated_at": "2026-09-22T14:35:54.095015+00:00"
+  },
+  {
+    "knight_id": "SIR_SOCRATES",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_SOCRATES",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_socrates\",\n  \"session_id\": \"sess_knight_sir_socrates\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_socrates/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_SOCRATES",
+    "open_viking_tether": "open_viking://worldtree/sir_socrates",
+    "updated_at": "2026-09-22T14:35:53.039559+00:00"
+  }
+]

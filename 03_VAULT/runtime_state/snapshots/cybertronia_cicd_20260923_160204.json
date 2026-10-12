@@ -1,0 +1,15 @@
+{
+  "snapshot_id": "cybertronia_cicd_20260923_160204",
+  "version_tag": "Living Camelot-OS v1000 MAX Compendium",
+  "timestamp_utc": "2026-09-23T16:02:04.060729+00:00Z",
+  "operator": "King_Arthur_Vizion",
+  "target_node": "cybertronia (100.118.224.52)",
+  "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+  "sha256": "1e539dc2f51c867bd6c86d6d5ec3c20af7dc5aa72ba5bd80deb8abc0dd343ea3",
+  "surfaces": [
+    "entiremap.md",
+    "docs/architecture/entiremap.md",
+    "docs/SEPTEM_REGNA/L7_ETHEREAL/entiremap.md"
+  ],
+  "status": "RATIFIED_IMMUTABLE"
+}

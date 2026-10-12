@@ -1342,8 +1342,6 @@ def get_content_of_website_optimized(
                         return None
                 except InvalidSchema:
                     return None
-                finally:
-                    return
 
             image_height = img.get("height")
             height_value, height_unit = parse_dimension(image_height)
@@ -2195,7 +2193,7 @@ def normalize_url_tmp(href, base_url):
         protocol = base_parts[0]
         domain = base_parts[2]
     except IndexError:
-        raise ValueError(f"Invalid base URL format: {base_url}")
+        raise ValueError(f"Invalid base URL format: {base_url}") from None
 
     # Handle special protocols
     special_protocols = {"mailto:", "tel:", "ftp:", "file:", "data:", "javascript:"}

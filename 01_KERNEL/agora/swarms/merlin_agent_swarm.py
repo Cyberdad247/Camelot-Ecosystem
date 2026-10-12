@@ -11,6 +11,7 @@ Phase 4: The Integrated Agentic Swarm.
 This is the Python implementation of the "Titan Protocol" before it moves to Go/Rust (Phase 5).
 """
 
+import argparse
 import asyncio
 import json
 import logging
@@ -32,9 +33,9 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 kernel_dir = os.path.dirname(current_dir)
 sys.path.append(kernel_dir)
 
-from Engines.merlin_llm import MerlinLLM
-from rag.recursive_search import ReflectionEngine
-from tools.swarm_tools_v2 import SwarmTools
+from Engines.merlin_llm import MerlinLLM  # noqa: E402
+from rag.recursive_search import ReflectionEngine  # noqa: E402
+from tools.swarm_tools_v2 import SwarmTools  # noqa: E402
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("MerlinSwarm")
@@ -139,9 +140,6 @@ class MerlinSwarmAgent:
             # Trigger Helix Loop
             healed = await coherence.helix_verify_loop(task, candidate)
             return healed
-
-# --- CLI for Testing ---
-import argparse
 
 # --- CLI for Testing ---
 if __name__ == "__main__":

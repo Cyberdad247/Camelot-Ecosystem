@@ -7,9 +7,12 @@ use std::io::{self, BufReader, Read};
 use std::path::{Path, PathBuf};
 use std::time::Instant;
 
+pub mod daemon;
+pub mod pagekeeper;
+
 #[derive(Parser)]
 #[command(name = "squires_rs")]
-#[command(about = "CLARITY_CORE v1.0.0 — Squire Colony CLI (Rust Port)", long_about = None)]
+#[command(about = "CLARITY_CORE v1.0.0 — Sovereign Squire Colony CLI & Daemon (Rust Native)", long_about = None)]
 struct Cli {
     #[command(subcommand)]
     command: Commands,
@@ -17,9 +20,37 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
+    /// Fast recursive directory scan with hashing and line counts
     Scan {
         #[arg(default_value = ".")]
         path: PathBuf,
+    },
+    /// Inspect or govern system memory and working sets (Squire PageKeeper)
+    Pagekeeper {
+        /// Force execution of working set trim regardless of threshold
+        #[arg(long)]
+        trim: bool,
+        /// Memory pressure threshold percentage (default: 80.0)
+        #[arg(long, default_value = "80.0")]
+        threshold: f64,
+        /// Emit results as structured JSON
+        #[arg(long)]
+        json: bool,
+    },
+    /// Run autonomous background memory governance daemon
+    Daemon {
+        /// Polling interval in seconds (default: 60)
+        #[arg(long, default_value = "60")]
+        interval: u64,
+        /// Memory pressure threshold percentage (default: 80.0)
+        #[arg(long, default_value = "80.0")]
+        threshold: f64,
+        /// Path to write atomic JSON heartbeat report
+        #[arg(long)]
+        heartbeat: Option<PathBuf>,
+        /// Maximum number of cycles before exiting (0 = run forever)
+        #[arg(long, default_value = "0")]
+        max_cycles: u64,
     },
 }
 
@@ -69,7 +100,6 @@ fn scan_directory(root: &Path) {
                 .unwrap_or("")
                 .to_string();
 
-            // Only analyze small text files for line count and hash to keep MVP fast
             let (lines, sha256) = if size < 10_000_000 {
                 let l = count_lines(&path).unwrap_or(0);
                 let s = hash_file(&path).unwrap_or_else(|_| String::new());
@@ -107,6 +137,40 @@ fn main() {
     match &cli.command {
         Commands::Scan { path } => {
             scan_directory(path);
+        }
+        Commands::Pagekeeper { trim, threshold, json } => {
+            let audit = if *trim {
+                pagekeeper::govern(*threshold, true)
+            } else {
+                pagekeeper::audit(*threshold)
+            };
+
+            if *json {
+                match serde_json::to_string_pretty(&audit) {
+                    Ok(out) => println!("{}", out),
+                    Err(e) => eprintln!("Error serializing audit: {}", e),
+                }
+            } else {
+                println!("🛡️  Squire PageKeeper (Rust Native FFI)");
+                println!("   Total Physical RAM: {:.1} MB", audit.total_phys_mb);
+                println!("   Used Physical RAM:  {:.1} MB ({:.1}%)", audit.used_phys_mb, audit.utilization_pct);
+                println!("   Available RAM:      {:.1} MB", audit.avail_phys_mb);
+                println!("   Global Law 03 Limit:{:.1} MB (Compliant: {})", audit.node_ceiling_mb, audit.node_compliant);
+                println!("   Pressure Detected:  {}", audit.pressure_detected);
+                println!("   Action Taken:       {}", audit.action_taken);
+                if audit.reclaimed_mb > 0.0 {
+                    println!("   Reclaimed Memory:   {:.1} MB", audit.reclaimed_mb);
+                }
+            }
+        }
+        Commands::Daemon { interval, threshold, heartbeat, max_cycles } => {
+            let config = daemon::DaemonConfig {
+                interval_secs: *interval,
+                threshold_pct: *threshold,
+                heartbeat_path: heartbeat.clone(),
+                max_cycles: *max_cycles,
+            };
+            daemon::run_daemon(config);
         }
     }
 }

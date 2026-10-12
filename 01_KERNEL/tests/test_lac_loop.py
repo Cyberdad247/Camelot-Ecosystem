@@ -3,7 +3,7 @@
 import os
 import sys
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 # Add KERNEL to path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -24,7 +24,6 @@ sys.modules['kernel.Engines.coherence_engine'] = MagicMock()
 # But 'from .node import AgentNode' requires the script to be part of a package.
 # We will create a robust test that mocks sys.modules for 'kernel.agora.node', etc.
 
-from unittest.mock import AsyncMock
 
 
 class TestVideneptusLaC(unittest.IsolatedAsyncioTestCase):

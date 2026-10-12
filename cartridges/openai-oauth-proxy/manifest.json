@@ -6,19 +6,9 @@
   "signer_trust_band": "customer-controlled",
   "hash_algorithm": "sha256",
   "signature_algorithm": "ed25519",
-  "entrypoints": [
-    "fetch",
-    "execute"
-  ],
-  "supported_node_profiles": [
-    "hub",
-    "experience"
-  ],
-  "requested_capabilities": [
-    "process.allowlisted",
-    "network.scoped",
-    "secret.handle_request"
-  ],
+  "entrypoints": ["fetch", "execute"],
+  "supported_node_profiles": ["hub", "experience"],
+  "requested_capabilities": ["process.allowlisted", "network.scoped", "secret.handle_request"],
   "denied_capabilities": [
     "lease.issue",
     "policy.admin",
@@ -35,21 +25,14 @@
     "timeout_s": 120,
     "max_workers": 1
   },
-  "verification": [
-    "contract_test",
-    "Gideon_verdict",
-    "Scribe_summary",
-    "receipt_issued"
-  ],
+  "verification": ["contract_test", "Gideon_verdict", "Scribe_summary", "receipt_issued"],
   "risk_tier_invariant_cap": "T1",
   "rollback": {
     "strategy": "compensating_action",
     "compensation_ref": "session_revoke"
   },
   "compat": {
-    "supported_knight_classes": [
-      "gateway_proxy"
-    ]
+    "supported_knight_classes": ["gateway_proxy"]
   },
   "artifact_hash": "sha256:4e158df0a8b5cf668f42b2b2dcd14b244bf1d06e5ffe158a349f5dde79487db6",
   "signature": "ed25519:iMKy5WjPpngOXl1VUB5w4mYbe47UC8Kog820jwuvjFqgyWYoGbW0OYSKapmE5Qij7FrbBQZQo1yXysVtGFbqCQ"

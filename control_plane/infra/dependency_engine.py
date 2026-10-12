@@ -307,7 +307,7 @@ class DependencyEngine:
 
     def _emit_hermes_updates(self, proposals: list[UpdateProposal]) -> None:
         try:
-            from control_plane.hermes_bridge import HermesBus
+            from control_plane.infra.hermes_bridge import HermesBus
             bus = HermesBus()
             bus.publish("dependency.updates", {
                 "count": len(proposals),

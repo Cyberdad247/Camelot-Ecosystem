@@ -18,7 +18,7 @@ os.environ["WEBHOOK_SECRET"] = "drone-test-webhook"
 os.environ["CAMELOT_CARTRIDGE_HMAC_KEY"] = "drone-test-cartridge"
 
 from control_plane.cluster.http_daemon import get_json
-from control_plane.drone_node import KBA_CARTRIDGE_ID, KbaDroneNode, dispatch_to_drone
+from control_plane.infra.drone_node import KBA_CARTRIDGE_ID, KbaDroneNode, dispatch_to_drone
 
 SECRET = os.environ["WEBHOOK_SECRET"]
 

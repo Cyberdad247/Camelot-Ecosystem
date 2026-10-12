@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Sandpack } from "@codesandbox/sandpack-react";
+import { Sandpack } from '@codesandbox/sandpack-react';
 
 export default function PreviewPane() {
   return (
@@ -9,7 +9,7 @@ export default function PreviewPane() {
         👁️ SANDPACK_PREVIEW // RUNTIME: WASM
       </div>
       <div className="flex-1 overflow-hidden">
-        <Sandpack 
+        <Sandpack
           template="react"
           theme="dark"
           options={{
@@ -17,7 +17,7 @@ export default function PreviewPane() {
             showLineNumbers: true,
             showInlineErrors: true,
             wrapContent: true,
-            editorHeight: "100%", 
+            editorHeight: '100%',
             editorWidthPercentage: 0, // Hide editor, just show preview
           }}
         />

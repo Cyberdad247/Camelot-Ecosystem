@@ -297,7 +297,7 @@ class FirnFlow:
     # ── Status ──────────────────────────────────────────────────────────────
 
     def status(self) -> dict[str, Any]:
-        return {
+        status_dict = {
             "l1_entries": len(self._l1),
             "l1_tokens": self._l1_tokens,
             "l1_budget": self.l1_budget,
@@ -305,6 +305,68 @@ class FirnFlow:
             "l2_entries": len(self._l2_load()),
             "l3_files": len(list(L3_DIR.glob("*.txt"))),
             "crystals": len(self._load_crystals_raw()),
+        }
+        return status_dict
+
+    # ── Apex Canonical 5-Tier Memory & NVMe Spill Gate (v4.1) ─────────────────
+    # M0(Ledger) ➔ M1(Verified_UKG) ➔ M2(Active_Context) ➔ M3(WASM_mmap) ➔ M4(Quarantine)
+    # RAM_THRESHOLD_90_PERCENT (7.2GB Server / 3.6GB Node) ➔ FIRNFLOW_CACHE_FLUSH
+
+    def firnflow_cache_flush(self) -> dict[str, Any]:
+        """Flushes active ephemeral context (M2/L1) down to NVMe cold storage (M0/L3)
+        and trims working set memory under the 90% Heaviside trigger."""
+        import gc
+        flushed_count = len(self._l1)
+        flushed_tokens = self._l1_tokens
+
+        # Persist all active L1 chunks to L3 cold disk
+        for key, chunk in list(self._l1.items()):
+            self._l3_anchor(f"spill_{key}", chunk.value)
+
+        self._l1.clear()
+        self._l1_tokens = 0
+        gc.collect()
+
+        if sys.platform == "win32":
+            try:
+                import ctypes
+                ctypes.windll.psapi.EmptyWorkingSet(ctypes.windll.kernel32.GetCurrentProcess())
+            except Exception:
+                pass
+
+        return {
+            "status": "FIRNFLOW_CACHE_FLUSH_COMPLETE",
+            "flushed_entries": flushed_count,
+            "flushed_tokens": flushed_tokens,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+        }
+
+    def evaluate_spill_gate(self, force: bool = False, is_server: bool = False) -> dict[str, Any]:
+        """Evaluates memory state against 90% threshold (7.2GB server / 3.6GB node)."""
+        limit_mb = 8192.0 if is_server else 4096.0
+        threshold_mb = limit_mb * 0.90
+
+        proc_rss_mb = 0.0
+        sys_percent = 0.0
+        try:
+            import psutil
+            proc = psutil.Process()
+            proc_rss_mb = proc.memory_info().rss / (1024 * 1024)
+            sys_percent = psutil.virtual_memory().percent
+        except Exception:
+            pass
+
+        triggered = force or (proc_rss_mb >= threshold_mb) or (sys_percent >= 90.0)
+        flush_res = {}
+        if triggered:
+            flush_res = self.firnflow_cache_flush()
+
+        return {
+            "spill_gate_triggered": triggered,
+            "threshold_mb": threshold_mb,
+            "process_rss_mb": round(proc_rss_mb, 2),
+            "system_percent": sys_percent,
+            "flush_result": flush_res,
         }
 
 

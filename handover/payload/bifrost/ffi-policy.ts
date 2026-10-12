@@ -1,4 +1,4 @@
-import { TrustBand } from './bifrost-envelope';
+import type { TrustBand } from './bifrost-envelope';
 
 /**
  * FFI timeout/failure policy — Bifrost spec.
@@ -20,12 +20,12 @@ export interface FfiPolicyOutcome {
 }
 
 export const FFI_POLICY: Record<FfiError, FfiPolicyOutcome> = {
-  ffi_timeout:          { retry: 'once', fallback: 'review' },
-  ffi_compute_failed:   { retry: 'none', fallback: 'review_or_block' },
+  ffi_timeout: { retry: 'once', fallback: 'review' },
+  ffi_compute_failed: { retry: 'none', fallback: 'review_or_block' },
   ffi_transport_failed: { retry: 'once', fallback: 'review' },
-  ffi_invalid_input:    { retry: 'none', fallback: 'reject' },
+  ffi_invalid_input: { retry: 'none', fallback: 'reject' },
   ffi_version_mismatch: { retry: 'none', fallback: 'fail_closed' },
-  ffi_batch_too_large:  { retry: 'split_and_requeue', fallback: 'requeue' }
+  ffi_batch_too_large: { retry: 'split_and_requeue', fallback: 'requeue' },
 };
 
 /**
@@ -35,7 +35,7 @@ export const FFI_POLICY: Record<FfiError, FfiPolicyOutcome> = {
 export function degradeTrustBand(current: TrustBand, error: FfiError, highRisk = false): TrustBand {
   if (current === 'block' || current === 'quarantine') return current;
   if (error === 'ffi_version_mismatch') return 'block'; // fail closed
-  if (error === 'ffi_invalid_input') return current;    // batch rejected, band untouched
+  if (error === 'ffi_invalid_input') return current; // batch rejected, band untouched
   if (error === 'ffi_compute_failed') return highRisk ? 'block' : 'review';
   // timeout / transport / oversize after retry exhaustion
   return 'review';
@@ -60,10 +60,11 @@ export interface SidecarAdvisory {
 }
 
 export function evaluateSidecar(status: SidecarStatus): SidecarAdvisory {
-  const scoring = status.health === 'ok' ? 'proceed' : status.health === 'degraded' ? 'review_only' : 'no_grant';
+  const scoring =
+    status.health === 'ok' ? 'proceed' : status.health === 'degraded' ? 'review_only' : 'no_grant';
   return {
     scoring,
     advertise: status.routeReady && status.health !== 'failed',
-    blockNewGrants: !status.routeReady || status.health === 'failed'
+    blockNewGrants: !status.routeReady || status.health === 'failed',
   };
 }

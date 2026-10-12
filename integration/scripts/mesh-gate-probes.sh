@@ -26,7 +26,7 @@ bad()  { fail_count=$((fail_count+1)); printf '   ✘ %s\n' "$1"; }
 step() { printf '── %s\n' "$1"; }
 json() { python3 -c "import json,sys; d=json.load(sys.stdin); print(d$1)" 2>/dev/null; }
 
-post() { curl -s -X POST "$1" -H 'content-type: application/json' -d "$2"; }
+post() { gw_curl -s -X POST "$1" -H 'content-type: application/json' -d "$2"; }
 
 job_body() { # tenant, nodeId, effectful
   printf '{"sessionId":"gate","turnId":"gate-1","tenantId":"%s","capability":"compute:audio.features","nodeId":"%s","effectful":%s,"payload":{"frames":[{"frameId":"f0","samples":[0.1,0.2,0.3,0.4]}],"frameSize":2}}' "$1" "$2" "$3"
@@ -119,7 +119,7 @@ else
 fi
 # The audit must say so in as many words.
 audit_id=$(echo "$r" | json "['auditId']")
-if curl -sf "$GATEWAY/v1/audit/$audit_id" | grep -q "lease revoked"; then
+if gw_curl -sf "$GATEWAY/v1/audit/$audit_id" | grep -q "lease revoked"; then
   ok "failed dispatch revoked its lease (audit $audit_id)"
 else
   ok "failure audited as $audit_id"
@@ -130,7 +130,7 @@ post "$GATEWAY/v1/nodes/$PROBE_NODE/revoke" '{"reason":"gate probe complete"}' >
 r=$(post "$GATEWAY/v1/nodes/jobs" "$(job_body "$TENANT" "$PROBE_NODE" false)")
 [[ -n $(echo "$r" | json ".get('failure','')") ]] \
   && ok "revoked node refused immediately" || bad "revoked node still served work"
-band=$(curl -sf "$GATEWAY/v1/nodes" | python3 -c "
+band=$(gw_curl -sf "$GATEWAY/v1/nodes" | python3 -c "
 import json,sys
 for n in json.load(sys.stdin)['nodes']:
     if n['nodeId'] == '$PROBE_NODE': print(n['trust'])" 2>/dev/null)

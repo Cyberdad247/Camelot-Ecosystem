@@ -1,0 +1,59 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
+# Forged by: SIR_CODEX (Kinetic Implementer & Bare-Metal Sandbox Prover)
+# System: CAMELOT-OS Edge Node Daemon Specification
+
+[Unit]
+Description=Camelot REYA Sovereign Companion Edge Daemon (Sir Codex Sandbox)
+Documentation=file:///C:/Users/vizio/CAMELOT_OS/02_FORGE/assimilation/reya/specs/HYBRID_ROUTING_MATRIX.md
+After=network-online.target camelot-bifrost.service
+Wants=network-online.target
+PartOf=camelot-workers.slice
+
+[Service]
+Type=simple
+Slice=camelot-workers.slice
+User=camelot
+Group=camelot
+WorkingDirectory=/opt/camelot/CAMELOT_OS
+Environment="PYTHONUNBUFFERED=1"
+Environment="CAMELOT_OS_HOME=/opt/camelot/CAMELOT_OS"
+Environment="REYA_EDGE_MODE=1"
+Environment="REYA_SHM_SLAB=/dev/shm/camelot_reya_slab"
+ExecStart=/opt/camelot/CAMELOT_OS/.venv/bin/python -m 02_FORGE.assimilation.reya.reya_nostr_bridge --daemon
+Restart=on-failure
+RestartSec=5s
+
+# ── cgroups v2 Scarcity & Isolation Boundaries (8GB Edge Ceiling) ──
+MemoryAccounting=yes
+MemoryHigh=300M
+MemoryMax=350M
+CPUAccounting=yes
+CPUQuota=60%
+TasksMax=64
+
+# ── Zero-Trust Linux Sandboxing ──
+ProtectSystem=strict
+ProtectHome=read-only
+PrivateTmp=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+NoNewPrivileges=true
+RestrictSUIDSGID=true
+RestrictRealtime=true
+RestrictNamespaces=yes
+LockPersonality=true
+MemoryDenyWriteExecute=true
+CapabilityBoundingSet=
+
+# ── Filesystem & Shared Memory Scoping ──
+ReadWritePaths=/dev/shm /run/camelot/reya /var/log/camelot
+ReadOnlyPaths=/opt/camelot/CAMELOT_OS
+
+# ── Network Containment (Tailscale + Localhost Only) ──
+IPAddressAllow=127.0.0.1/32 100.64.0.0/10
+IPAddressDeny=any
+
+[Install]
+WantedBy=multi-user.target

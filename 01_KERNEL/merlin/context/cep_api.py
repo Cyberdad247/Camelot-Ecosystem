@@ -128,9 +128,9 @@ async def expand_context(request: ContextExpansionRequest):
         )
     
     except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=400, detail=str(e)) from e
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Context expansion failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Context expansion failed: {str(e)}") from e
 
 
 @cep_router.post("/validate", response_model=ContextValidationResponse)
@@ -185,7 +185,7 @@ async def validate_context(request: ContextValidationRequest):
         return ContextValidationResponse(**validation)
     
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Validation failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Validation failed: {str(e)}") from e
 
 
 @cep_router.get("/cache/stats")

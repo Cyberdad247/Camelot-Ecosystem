@@ -11,7 +11,7 @@ project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..
 sys.path.append(project_root)
 sys.path.append(os.path.join(project_root, "01_KERNEL"))
 
-from security.vault_keeper import keeper
+from security.vault_keeper import keeper  # noqa: E402
 
 
 def update_sovereign_identity():

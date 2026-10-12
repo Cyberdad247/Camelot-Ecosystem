@@ -144,13 +144,26 @@ def load_mesh_topology() -> dict:
         }
     }
 
-def is_mesh_request_authorized(headers: dict) -> bool:
-    """Require the runtime-only mesh token for topology and telemetry reads."""
+def is_mesh_request_authorized(headers: dict, client_addr: str = "127.0.0.1") -> bool:
+    """Require runtime mesh token OR valid Warp Gate Forever Keypass (Lady Alexandria / Heimdall)."""
+    # 1. Warp Gate Forever Keypass check
+    warp_keypass = headers.get("x-camelot-warp-keypass", "").strip()
+    if warp_keypass:
+        try:
+            from control_plane.security.warp_gate import AlexandriaKeypassVault
+            v = AlexandriaKeypassVault()
+            kp = v.verify_keypass(warp_keypass)
+            if kp:
+                return True
+        except Exception:
+            pass
+
+    # 2. Legacy mesh token check
     expected = os.getenv("MESH_BRIDGE_TOKEN", "").strip()
     provided = headers.get("x-camelot-token", "").strip()
-    if not expected or not provided:
-        return False
-    return hmac.compare_digest(provided, expected)
+    if expected and provided and hmac.compare_digest(provided, expected):
+        return True
+    return False
 
 
 def is_tailnet_bind_host(host: str) -> bool:
@@ -316,7 +329,57 @@ class MeshBridgeHandler(BaseHTTPRequestHandler):
                         gov_data = json.load(f)
                 except Exception:
                     pass
-            self._send_json(gov_data or {"status": "GOVERNING", "owner": "sir_heimdall"})
+            self._send_json({"guardian": "SIR_HEIMDALL", "governance": gov_data})
+        elif self.path in ['/v1/warp/keypasses', '/api/warp/keypasses']:
+            from control_plane.security.warp_gate import AlexandriaKeypassVault
+            v = AlexandriaKeypassVault()
+            self._send_json({"warp_gate": "ONLINE", "keypasses": v.list_keypasses()})
+        elif self.path in ['/v1/warp/audit', '/api/warp/audit']:
+            from control_plane.security.warp_gate import _AUDIT_LOG_FILE
+            entries = []
+            if _AUDIT_LOG_FILE.exists():
+                lines = _AUDIT_LOG_FILE.read_text(encoding="utf-8").strip().splitlines()[-25:]
+                entries = [json.loads(line) for line in lines if line]
+            self._send_json({"warp_gate_audit": entries})
+        elif self.path in ['/watchtower/telemetry', '/api/watchtower', '/api/watchtower/telemetry']:
+            wt_state = {}
+            try:
+                from control_plane.infra.watchtower import resource_snapshot
+                snap = resource_snapshot(cpu_sample_s=0.1)
+                server_ram_mb = round((snap.get("commit_total_bytes") or 0) / (1024 * 1024), 1)
+                wt_state = {
+                    "status": "ONLINE",
+                    "commit_pct": snap.get("commit_pct"),
+                    "physical_available_bytes": snap.get("physical_available_bytes"),
+                    "cpu_pct": snap.get("cpu_pct"),
+                    "server_memory_limit_mb": 8192,
+                    "server_memory_used_mb": server_ram_mb,
+                    "server_ceiling_ok": server_ram_mb <= 8192,
+                    "governor": "ENFORCED",
+                }
+            except Exception as e:
+                wt_state = {"status": "DEGRADED", "error": str(e)}
+
+            hermes = hermes_prime_status()
+            self._send_json({
+                "node": "vps_hub_kvm563",
+                "role": "CAMELOT_HUB_CONTROL_PLANE",
+                "host": VPS_HOST,
+                "watchtower": wt_state,
+                "knights": {
+                    "co_governors": ["HERMES_PRIME", "SIR_HEIMDALL"],
+                    "hermes_prime": hermes,
+                    "bifrost_status": "ACTIVE_3001",
+                    "roster": [
+                        {"id": "SIR_HEIMDALL", "status": "ALWAYS_ON_HUB", "role": "Bifrost Guardian & Boundary Sentinel"},
+                        {"id": "HERMES_PRIME", "status": hermes.get("status", "ALWAYS_ON_HUB"), "role": "Always-on VPS Co-Pilot & MGV Synthesis"},
+                        {"id": "SIR_FORGE", "status": "ACTIVE_ESCORT", "role": "SSU Reconciler & Builder"},
+                        {"id": "SIR_SENTINEL", "status": "ACTIVE_ESCORT", "role": "Zero-Trust Armor & Integrity Gate"},
+                        {"id": "LADY_APIS", "status": "ACTIVE_ESCORT", "role": "Bio-Kinetic Swarm Mother & NullClaw Conductor"},
+                    ],
+                },
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+            })
         else:
             self.send_response(404)
             self.end_headers()

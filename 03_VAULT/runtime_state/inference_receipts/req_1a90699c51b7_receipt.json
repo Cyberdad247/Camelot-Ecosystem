@@ -1,0 +1,14 @@
+{
+  "request_id": "req_1a90699c51b7",
+  "route_id": "route_4ec8473e",
+  "provider_class": "native_bifrost_gateway",
+  "model_id": "qwen-local",
+  "fallback_depth": 0,
+  "usage_input_tokens": 9,
+  "usage_output_tokens": 150,
+  "estimated_cost_usd": 0.002,
+  "policy_decision_hash": "2bfbe6180f2f7d04936ecc8a810dc8e534c018fe683350053b8899caba47dc27",
+  "transcript_hash": "sha256:c386c47239b122dd1670de45712b50b592b723099d517f192034523a36915989",
+  "tool_calls": [],
+  "sealed_at": "2026-09-23T16:03:23.649864+00:00"
+}

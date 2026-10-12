@@ -15,6 +15,7 @@ export default defineConfig({
       'contracts/tests/**/*.test.ts',
       'kickbox/tests/**/*.test.ts',
       'hermes/tests/**/*.test.ts',
+      'scripts/tests/**/*.test.ts',
     ],
     exclude: ['**/node_modules/**', '**/dist/**'],
   },

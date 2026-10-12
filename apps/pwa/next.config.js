@@ -35,12 +35,12 @@ const nextConfig = {
     config.plugins.push(
       new webpack.IgnorePlugin({
         resourceRegExp: /^virtual:/,
-      })
+      }),
     );
 
     config.resolve.alias['@agent-native/core'] = path.resolve(
       __dirname,
-      'src/lib/agent-native-mock.ts'
+      'src/lib/agent-native-mock.ts',
     );
 
     config.resolve.alias['@camelot/voice-first-runtime'] = path.resolve(
@@ -64,11 +64,27 @@ const nextConfig = {
       config.resolve.alias = {
         ...config.resolve.alias,
         'better-sqlite3': false,
-        'bindings': false,
+        bindings: false,
       };
     }
 
     return config;
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/api/bifrost/:path*',
+        destination: 'http://localhost:3001/api/bifrost/:path*',
+      },
+      {
+        source: '/webhook/:path*',
+        destination: 'http://localhost:3001/webhook/:path*',
+      },
+      {
+        source: '/bifrost-ws',
+        destination: 'http://localhost:3001',
+      },
+    ];
   },
 };
 

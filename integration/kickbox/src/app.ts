@@ -43,9 +43,37 @@ const params = new URLSearchParams(location.search);
 const GATEWAY_URL = params.get('gateway') ?? `http://${location.hostname}:8788`;
 const HERMES_URL = params.get('hermes') ?? `http://${location.hostname}:8790`;
 
-const client = new CamelotClient({ baseUrl: GATEWAY_URL });
+// P1: the gateway refuses every route but /healthz without a bearer token.
+// dev-up writes kickbox/dev-token.js, served from the CONSOLE's origin — a
+// hostile page cannot read it (same-origin policy) and could not use it anyway
+// (the gateway's origin allow-list). Absent in a bare checkout: the console
+// then fails with a clean 401 rather than a confusing silence.
+// Fetched, not imported: the file is generated per stack and absent from a
+// bare checkout, so a static import would break the typecheck for everyone.
+async function readDevToken(): Promise<string> {
+  try {
+    const res = await fetch(new URL('dev-token.txt', document.baseURI));
+    return res.ok ? (await res.text()).trim() : '';
+  } catch {
+    return '';
+  }
+}
+
+const DEV_TOKEN = await readDevToken();
+if (!DEV_TOKEN) {
+  console.warn('[anya] no dev-token.txt — start the stack with scripts/dev-up.sh');
+}
+
+const client = new CamelotClient({ baseUrl: GATEWAY_URL, token: DEV_TOKEN });
 
 let view: SessionView = initialSessionView();
+// One session per page load. The fixture id is a stable DEMO label, not an
+// identity: sharing it across reloads and browser tabs made concurrent
+// consoles interleave in one server-side session, and made every reload
+// restart the turn counter at the same ids. Suffixing keeps the fixture
+// recognisable while making each console distinct.
+const SESSION_ID = `${FIXTURE_SESSION_ID}-${Math.random().toString(36).slice(2, 8)}`;
+
 let turnCounter = 0;
 let lastDecision: PolicyDecision | null = null;
 
@@ -143,7 +171,7 @@ async function submitUtterance(
 ): Promise<CamelotTurnResponse | null> {
   if (!text.trim()) return null;
   turnCounter += 1;
-  const base = fixtureTurn(text, turnCounter);
+  const base = fixtureTurn(text, turnCounter, SESSION_ID);
   const turn: VoiceTurn = meta
     ? { ...base, modality: 'voice', audioSha256: meta.audioSha256 }
     : base;
@@ -279,7 +307,7 @@ stopSpeakingBtn.onclick = () => void voiceSession.stopSpeaking();
 
 const spokenTurns = new Set<string>();
 
-client.connectEvents(FIXTURE_SESSION_ID, (event) => {
+client.connectEvents(SESSION_ID, (event) => {
   view = reduceSessionEvent(view, event);
   if (event.type === 'reply.chunk') {
     anyaBubbleFor(event.turnId).textContent = view.replies[event.turnId] ?? '';
@@ -316,6 +344,9 @@ for (const [id, text] of [
   ['quick-staging', FIXTURE_UTTERANCES.stagingRead],
   ['quick-review', FIXTURE_UTTERANCES.deploymentReview],
   ['quick-cr', FIXTURE_UTTERANCES.changeRequest],
+  // The only quick action with a real side effect: it writes a file under
+  // .run/artifacts/ through the same lease -> broker -> audit path.
+  ['quick-note', FIXTURE_UTTERANCES.localNote],
 ] as const) {
   $(id).onclick = () => void submitUtterance(text);
 }
@@ -341,7 +372,7 @@ async function resolveLease(approve: boolean): Promise<void> {
   if (!lease) return;
   try {
     const res = await client.confirm({
-      sessionId: FIXTURE_SESSION_ID,
+      sessionId: SESSION_ID,
       leaseId: lease.leaseId,
       approve,
     });

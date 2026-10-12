@@ -55,7 +55,7 @@ async def get_models(type: Optional[str] = Query(None, description="Filter by mo
         ]
     except Exception as e:
         logger.error(f"Error fetching models: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error fetching models: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error fetching models: {str(e)}") from e
 
 
 @router.post("/models", response_model=ModelResponse)
@@ -83,10 +83,10 @@ async def create_model(model_data: ModelCreate):
             updated=str(new_model.updated),
         )
     except InvalidInputError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=400, detail=str(e)) from e
     except Exception as e:
         logger.error(f"Error creating model: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error creating model: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error creating model: {str(e)}") from e
 
 
 @router.delete("/models/{model_id}")
@@ -104,7 +104,7 @@ async def delete_model(model_id: str):
         raise
     except Exception as e:
         logger.error(f"Error deleting model {model_id}: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error deleting model: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error deleting model: {str(e)}") from e
 
 
 @router.get("/models/defaults", response_model=DefaultModelsResponse)
@@ -124,7 +124,7 @@ async def get_default_models():
         )
     except Exception as e:
         logger.error(f"Error fetching default models: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error fetching default models: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error fetching default models: {str(e)}") from e
 
 
 @router.put("/models/defaults", response_model=DefaultModelsResponse)
@@ -169,7 +169,7 @@ async def update_default_models(defaults_data: DefaultModelsResponse):
         raise
     except Exception as e:
         logger.error(f"Error updating default models: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error updating default models: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error updating default models: {str(e)}") from e
 
 
 @router.get("/models/providers", response_model=ProviderAvailabilityResponse)
@@ -243,4 +243,4 @@ async def get_provider_availability():
         )
     except Exception as e:
         logger.error(f"Error checking provider availability: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error checking provider availability: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error checking provider availability: {str(e)}") from e

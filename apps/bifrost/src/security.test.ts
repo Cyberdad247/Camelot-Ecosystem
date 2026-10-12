@@ -62,15 +62,15 @@ describe('assertFresh (KBA freshness gate — symmetric past/future skew defense
   });
 
   it('rejects when timestamp is past the past-skew window', () => {
-    expect(() =>
-      assertFresh({ timestamp: NOW - DEFAULT_PAST_SKEW_MS - 1000, now: NOW }),
-    ).toThrow(SignatureError);
+    expect(() => assertFresh({ timestamp: NOW - DEFAULT_PAST_SKEW_MS - 1000, now: NOW })).toThrow(
+      SignatureError,
+    );
   });
 
   it('rejects when timestamp is further in the future than the future-skew window', () => {
-    expect(() =>
-      assertFresh({ timestamp: NOW + DEFAULT_FUTURE_SKEW_MS + 1000, now: NOW }),
-    ).toThrow(SignatureError);
+    expect(() => assertFresh({ timestamp: NOW + DEFAULT_FUTURE_SKEW_MS + 1000, now: NOW })).toThrow(
+      SignatureError,
+    );
   });
 
   it('rejects when expiresAt is past by more than the 1s hard-expiry grace', () => {

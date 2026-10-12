@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camelot-OS · Invisioned Agentic Systems</title>
+    
+    <!-- Google Fonts: Cinzel (Engraved Title) & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- N020: Include HTMX Library -->
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    
+    <!-- N023: Include Styles -->
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="layout">
+    
+    <!-- N021: Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="branding">
+            <div class="brand-eyebrow">Invisioned // Agentic Systems</div>
+            <h2>Camelot-OS</h2>
+            <div style="display: flex; gap: 0.4rem; align-items: center; margin-top: 0.25rem;">
+                <span id="cap-indicator" class="cap-badge cap-local-cloud">Local + Cloud</span>
+                <span class="badge">v3.4.1</span>
+            </div>
+        </div>
+        
+        <!-- Unified CloudBrain & Canonical Search Interface -->
+        <div class="search-container">
+            <div class="search-scope-bar">
+                <label class="scope-pill"><input type="radio" name="scope" value="all" checked hx-post="/api/cloudbrain/search" hx-include="#search-query, [name='scope']:checked" hx-target="#search-results"> All</label>
+                <label class="scope-pill"><input type="radio" name="scope" value="canonical" hx-post="/api/cloudbrain/search" hx-include="#search-query, [name='scope']:checked" hx-target="#search-results"> Docs</label>
+                <label class="scope-pill"><input type="radio" name="scope" value="cloudbrain" hx-post="/api/cloudbrain/search" hx-include="#search-query, [name='scope']:checked" hx-target="#search-results"> Brain</label>
+                <label class="scope-pill"><input type="radio" name="scope" value="memcastle" hx-post="/api/cloudbrain/search" hx-include="#search-query, [name='scope']:checked" hx-target="#search-results"> Vector</label>
+            </div>
+            <input type="search" 
+                   id="search-query"
+                   name="q"
+                   placeholder="Search Docs & CloudBrain..." 
+                   hx-post="/api/cloudbrain/search" 
+                   hx-include="[name='scope']:checked"
+                   hx-trigger="keyup changed delay:400ms" 
+                   hx-target="#search-results">
+            
+            <!-- N062: Results UI (A11Y Politeness added) -->
+            <ul id="search-results" aria-live="polite"></ul>
+        </div>
+
+        <nav class="doc-links">
+            <h3>Infrastructure</h3>
+            <ul>
+                <!-- HTMX declarative navigation. Notice there's no JS onclick handlers here. -->
+                <li>
+                    <a href="#" 
+                       hx-get="/docs/brand-integration" 
+                       hx-target="#content" 
+                       hx-push-url="true">Brand Architecture</a>
+                </li>
+                <li>
+                    <a href="#" 
+                       hx-get="/docs/getting-started" 
+                       hx-target="#content" 
+                       hx-push-url="true">Getting Started</a>
+                </li>
+                <li>
+                    <a href="#" 
+                       hx-get="/docs/architecture" 
+                       hx-target="#content" 
+                       hx-push-url="true">DAG Architecture</a>
+                </li>
+                <li>
+                    <a href="#" 
+                       hx-get="/docs/wave-0" 
+                       hx-target="#content" 
+                       hx-push-url="true">Wave 0 Interfaces</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- N022: Dynamic Content Area (A11Y Politeness added) -->
+    <main id="content" class="content-area" aria-live="polite">
+        <h1>Initialization Complete</h1>
+        <p>Backend Core and Frontend Shell are successfully linked.</p>
+        <p><em>Select a document from the sidebar. HTMX will fetch the HTML fragment from the Go server and swap it into this pane.</em></p>
+    </main>
+
+    <!-- Master UI/UX Cartridge: AI Native MCP Interface -->
+    <div id="mcp-hud" class="mcp-hud-container" aria-live="polite">
+        <div class="mcp-header">
+            <span>ANYA // I-O MIDDLEWARE</span>
+            <span class="pulse-indicator"></span>
+        </div>
+        <div id="mcp-stream" class="mcp-stream">
+            <p>System aligned. Living canonical documents active. Awaiting tensor execution...</p>
+        </div>
+        <input type="text" 
+               class="mcp-input" 
+               placeholder="Execute Runic Symbolect (e.g., //OPTIMIZE)..." 
+               name="cmd"
+               hx-post="/api/mcp" 
+               hx-target="#mcp-stream" 
+               hx-swap="innerHTML">
+    </div>
+
+    <!-- WP-G/WP-H/WP-I/Phase 4: Capabilities & WebGPU Compute Pipeline -->
+    <script>
+        // WGSL Shader for parallel vector dot-product / cosine similarity (Phase 4 Compute Offload)
+        const COSINE_SIMILARITY_WGSL = `
+            struct VectorBuffer {
+                data: array<f32>,
+            };
+
+            @group(0) @binding(0) var<storage, read> queryVector : VectorBuffer;
+            @group(0) @binding(1) var<storage, read> docVectors : VectorBuffer;
+            @group(0) @binding(2) var<storage, read_write> similarityScores : VectorBuffer;
+
+            @compute @workgroup_size(64)
+            fn main(@builtin(global_invocation_id) global_id : vec3<u32>) {
+                let docIndex = global_id.x;
+                let dims : u32 = 64u; // Vector embedding dimension
+                let baseOffset = docIndex * dims;
+
+                var dotProduct : f32 = 0.0;
+                var queryNorm : f32 = 0.0;
+                var docNorm : f32 = 0.0;
+
+                for (var i : u32 = 0u; i < dims; i = i + 1u) {
+                    let q = queryVector.data[i];
+                    let d = docVectors.data[baseOffset + i];
+                    dotProduct = dotProduct + (q * d);
+                    queryNorm = queryNorm + (q * q);
+                    docNorm = docNorm + (d * d);
+                }
+
+                let denominator = sqrt(queryNorm) * sqrt(docNorm);
+                if (denominator > 0.0) {
+                    similarityScores.data[docIndex] = dotProduct / denominator;
+                } else {
+                    similarityScores.data[docIndex] = 0.0;
+                }
+            }
+        `;
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            const stream = document.getElementById("mcp-stream");
+            function log(msg) {
+                const p = document.createElement("p");
+                p.innerHTML = msg;
+                stream.appendChild(p);
+                stream.scrollTop = stream.scrollHeight;
+            }
+
+            log("> [N210] Assimilating WebMCP Manifest...");
+            try {
+                const res = await fetch("/.well-known/mcp.json");
+                if (res.ok) log("> [N211] WebMCP Toolkit Registered.");
+            } catch(e) {
+                log("<span style='color: #ef4444'>[N211] WebMCP Sync Failed.</span>");
+            }
+
+            // N220: Device Detect (WebGPU) + Phase 4 Compute Offload
+            if ("gpu" in navigator) {
+                try {
+                    const adapter = await navigator.gpu.requestAdapter();
+                    if (adapter) {
+                        const device = await adapter.requestDevice();
+                        log("> <span style='color: #10b981'>[N220] WebGPU Compute Available. Profile A Active.</span>");
+                        
+                        // N222: Compile WGSL Compute Pipeline
+                        const shaderModule = device.createShaderModule({
+                            code: COSINE_SIMILARITY_WGSL
+                        });
+                        const computePipeline = device.createComputePipeline({
+                            layout: 'auto',
+                            compute: { module: shaderModule, entryPoint: 'main' }
+                        });
+                        
+                        window.CamelotGPU = { device, computePipeline };
+                        log("> <span style='color: #38bdf8'>[N222] WGSL Tensor Pipeline Compiled. Client VRAM vector offload ready.</span>");
+                    } else {
+                        log("> <span style='color: #f59e0b'>[N225] WebGPU Adapter restricted. CPU Fallback (Profile B).</span>");
+                    }
+                } catch(e) {
+                    log("> <span style='color: #f59e0b'>[N225] WebGPU Error. CPU Fallback Active: " + e.message + "</span>");
+                }
+            } else {
+                log("> <span style='color: #ef4444'>[N225] WebGPU Unsupported. Edge/Air-gapped (Profile C) active.</span>");
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "device_id": "vashawns_s26_ultra",
+  "tailscale_ip": "100.106.246.126",
+  "last_task_id": "TEST-WS-1",
+  "status": "SUCCESS",
+  "mode": "WORKSTATION",
+  "ram_usage_mb": 245.8,
+  "ram_limit_mb": 3584,
+  "ram_ceiling_ok": true,
+  "gpu_accelerated": true,
+  "keypass_id": "KP-EXCALIBUR_MOBILE-56820318",
+  "spark_id": "0x56820318BB91451FAAC44B46424898CF",
+  "updated_at": "2026-10-04T19:15:54.621114+00:00"
+}

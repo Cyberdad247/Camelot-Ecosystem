@@ -83,7 +83,7 @@ class PodcastService:
                 import commands.podcast_commands  # noqa: F401
             except ImportError as import_err:
                 logger.error(f"Failed to import podcast commands: {import_err}")
-                raise ValueError("Podcast commands not available")
+                raise ValueError("Podcast commands not available") from import_err
 
             # Submit command to surreal-commands
             job_id = submit_command("open_notebook", "generate_podcast", command_args)
@@ -100,7 +100,7 @@ class PodcastService:
             raise HTTPException(
                 status_code=500,
                 detail=f"Failed to submit podcast generation job: {str(e)}",
-            )
+            ) from e
 
     @staticmethod
     async def get_job_status(job_id: str) -> Dict[str, Any]:
@@ -118,7 +118,7 @@ class PodcastService:
             }
         except Exception as e:
             logger.error(f"Failed to get podcast job status: {e}")
-            raise HTTPException(status_code=500, detail=f"Failed to get job status: {str(e)}")
+            raise HTTPException(status_code=500, detail=f"Failed to get job status: {str(e)}") from e
 
     @staticmethod
     async def list_episodes() -> list:
@@ -128,7 +128,7 @@ class PodcastService:
             return episodes
         except Exception as e:
             logger.error(f"Failed to list podcast episodes: {e}")
-            raise HTTPException(status_code=500, detail=f"Failed to list episodes: {str(e)}")
+            raise HTTPException(status_code=500, detail=f"Failed to list episodes: {str(e)}") from e
 
     @staticmethod
     async def get_episode(episode_id: str) -> PodcastEpisode:
@@ -138,7 +138,7 @@ class PodcastService:
             return episode
         except Exception as e:
             logger.error(f"Failed to get podcast episode {episode_id}: {e}")
-            raise HTTPException(status_code=404, detail=f"Episode not found: {str(e)}")
+            raise HTTPException(status_code=404, detail=f"Episode not found: {str(e)}") from e
 
 
 class DefaultProfiles:

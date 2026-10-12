@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: MIT
-
 """CI sanity check: enforce pre-commit <-> dorny filter parity for the
 infra-purge-rollback gate.
 

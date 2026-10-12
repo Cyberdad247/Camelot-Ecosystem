@@ -7,12 +7,7 @@
   "phases": {
     "architecture": {
       "type": "Containerized App",
-      "stack": [
-        "Rust",
-        "Docker",
-        "Python",
-        "Node.js"
-      ]
+      "stack": ["Rust", "Docker", "Python", "Node.js"]
     },
     "quality": {
       "score": 70,
@@ -20,24 +15,16 @@
       "configs": []
     },
     "testing": {
-      "frameworks": [
-        "Pytest",
-        "Jest",
-        "Vitest"
-      ],
+      "frameworks": ["Pytest", "Jest", "Vitest"],
       "test_count": 25
     },
     "security": {
       "vulnerabilities": 1,
-      "critical_findings": [
-        "Potential secret in api-documentation-generator.json"
-      ]
+      "critical_findings": ["Potential secret in api-documentation-generator.json"]
     },
     "documentation": {
       "grade": "B",
-      "missing": [
-        "ARCHITECTURE.md"
-      ]
+      "missing": ["ARCHITECTURE.md"]
     }
   },
   "score": {

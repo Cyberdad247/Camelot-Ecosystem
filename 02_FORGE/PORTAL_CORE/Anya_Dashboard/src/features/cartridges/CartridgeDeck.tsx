@@ -1,13 +1,14 @@
-import React, { lazy, Suspense, useState } from 'react';
-import { useParams, Navigate } from 'react-router-dom';
-import { Send, Loader2, Copy, ArrowUpRight } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { CARTRIDGE_BY_SLUG } from './registry';
-import type { CartridgeMeta } from '@/types/camelot';
-import { bifrostFetch } from '@/lib/bifrostClient';
+import EventFeed from '@/components/ui/EventFeed';
 import { runtimeConfig } from '@/config/runtime';
 import { useAnyaSocket } from '@/features/brain/useAnyaSocket';
-import EventFeed from '@/components/ui/EventFeed';
+import { bifrostFetch } from '@/lib/bifrostClient';
+import { cn } from '@/lib/utils';
+import type { CartridgeMeta } from '@/types/camelot';
+import { ArrowUpRight, Copy, Loader2, Send } from 'lucide-react';
+import type React from 'react';
+import { Suspense, lazy, useState } from 'react';
+import { Navigate, useParams } from 'react-router-dom';
+import { CARTRIDGE_BY_SLUG } from './registry';
 
 const DECKS: Record<string, React.LazyExoticComponent<(props: DeckProps) => React.ReactElement>> = {
   cognitive: lazy(() => import('./decks/CognitiveDeck')),
@@ -32,7 +33,11 @@ export default function CartridgeDeck() {
   const cartridge = id ? CARTRIDGE_BY_SLUG[id] : null;
   const [dispatching, setDispatching] = useState(false);
   const [lastResult, setLastResult] = useState<string | null>(null);
-  const [lastMeta, setLastMeta] = useState<{ knight?: string; model?: string; latency_ms?: number } | null>(null);
+  const [lastMeta, setLastMeta] = useState<{
+    knight?: string;
+    model?: string;
+    latency_ms?: number;
+  } | null>(null);
   const { events, isConnected } = useAnyaSocket();
 
   if (!cartridge) return <Navigate to="/" replace />;
@@ -77,7 +82,9 @@ export default function CartridgeDeck() {
         setLastResult(`Error ${res.status}: ${res.statusText}`);
       }
     } catch {
-      setLastResult('Dispatch unreachable — ensure dashboard server and morgana_bridge are running');
+      setLastResult(
+        'Dispatch unreachable — ensure dashboard server and morgana_bridge are running',
+      );
     } finally {
       setDispatching(false);
     }
@@ -87,21 +94,36 @@ export default function CartridgeDeck() {
     <div className="min-h-full flex flex-col">
       {/* Cartridge header band */}
       <div
-        className={cn('border-b px-6 py-4 flex items-center gap-4', cartridge.borderClass, cartridge.bgClass)}
+        className={cn(
+          'border-b px-6 py-4 flex items-center gap-4',
+          cartridge.borderClass,
+          cartridge.bgClass,
+        )}
       >
         <div
           className="flex h-10 w-10 items-center justify-center rounded-xl border"
-          style={{ borderColor: cartridge.accentHex + '60', backgroundColor: cartridge.accentHex + '15' }}
+          style={{
+            borderColor: cartridge.accentHex + '60',
+            backgroundColor: cartridge.accentHex + '15',
+          }}
         >
           <Icon className={cn('h-5 w-5', cartridge.textClass)} />
         </div>
         <div>
-          <h1 className={cn('text-xl font-black', cartridge.textClass)}>{cartridge.label} Command Deck</h1>
-          <p className="text-xs text-slate-500">{cartridge.knight} · {cartridge.description}</p>
+          <h1 className={cn('text-xl font-black', cartridge.textClass)}>
+            {cartridge.label} Command Deck
+          </h1>
+          <p className="text-xs text-slate-500">
+            {cartridge.knight} · {cartridge.description}
+          </p>
         </div>
         <div className="ml-auto flex items-center gap-2">
           <span
-            className={cn('rounded-full border px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest', cartridge.textClass, cartridge.borderClass)}
+            className={cn(
+              'rounded-full border px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest',
+              cartridge.textClass,
+              cartridge.borderClass,
+            )}
           >
             {cartridge.id}
           </span>
@@ -112,11 +134,13 @@ export default function CartridgeDeck() {
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-0 overflow-hidden">
         {/* Left: Deck-specific controls */}
         <div className="lg:col-span-2 border-r border-slate-800/50 overflow-y-auto p-6">
-          <Suspense fallback={
-            <div className="flex items-center justify-center py-20">
-              <Loader2 className="h-6 w-6 animate-spin text-slate-600" />
-            </div>
-          }>
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center py-20">
+                <Loader2 className="h-6 w-6 animate-spin text-slate-600" />
+              </div>
+            }
+          >
             {Deck && (
               <Deck
                 cartridge={cartridge}
@@ -132,14 +156,28 @@ export default function CartridgeDeck() {
         <div className="flex flex-col overflow-hidden p-4 gap-4">
           {/* Result panel */}
           {(lastResult || dispatching) && (
-            <div className={cn('rounded-xl border p-4 space-y-2', cartridge.borderClass, cartridge.bgClass)}>
+            <div
+              className={cn(
+                'rounded-xl border p-4 space-y-2',
+                cartridge.borderClass,
+                cartridge.bgClass,
+              )}
+            >
               <div className="flex items-center gap-2">
-                {dispatching
-                  ? <Loader2 className={cn('h-4 w-4 animate-spin', cartridge.textClass)} />
-                  : <ArrowUpRight className={cn('h-4 w-4', cartridge.textClass)} />
-                }
-                <span className={cn('text-xs font-semibold uppercase tracking-widest', cartridge.textClass)}>
-                  {dispatching ? 'Dispatching…' : `${lastMeta?.knight ?? cartridge.knight} Response`}
+                {dispatching ? (
+                  <Loader2 className={cn('h-4 w-4 animate-spin', cartridge.textClass)} />
+                ) : (
+                  <ArrowUpRight className={cn('h-4 w-4', cartridge.textClass)} />
+                )}
+                <span
+                  className={cn(
+                    'text-xs font-semibold uppercase tracking-widest',
+                    cartridge.textClass,
+                  )}
+                >
+                  {dispatching
+                    ? 'Dispatching…'
+                    : `${lastMeta?.knight ?? cartridge.knight} Response`}
                 </span>
                 {lastResult && (
                   <button

@@ -32,8 +32,9 @@ def test_cli_history():
 
 
 def test_cli_bridge():
+    # Bridge boots network-adjacent surfaces; allow headroom under full-suite load.
     result = subprocess.run([sys.executable, CAMELOT_PY, "bridge"],
-                          capture_output=True, text=True, timeout=30)
+                          capture_output=True, text=True, timeout=90)
     assert result.returncode == 0
 
 

@@ -69,7 +69,7 @@ if __name__ == "__main__":
         raise SystemExit(
             "ERROR: pyyaml is required. Install via: pip install pyyaml\n"
             "Or run: uv sync --frozen"
-        )
+        ) from None
 
     runtime = ExcaliburRuntime()
     runtime.run_loop()

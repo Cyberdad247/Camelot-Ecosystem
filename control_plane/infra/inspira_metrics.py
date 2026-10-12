@@ -1,5 +1,3 @@
-# SPDX-License-Identifier: MIT
-
 # -*- coding: utf-8 -*-
 """
 Inspira Metrics — CAMELOT-OS HiveIDE Enterprise Telemetry

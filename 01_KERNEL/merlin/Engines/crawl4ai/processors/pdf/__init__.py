@@ -156,7 +156,7 @@ class PDFContentScrapingStrategy(ContentScrapingStrategy):
             except Exception as e:
                 # Clean up temp file if download fails
                 Path(temp_file.name).unlink(missing_ok=True)
-                raise RuntimeError(f"Failed to download PDF from {url}: {str(e)}")
+                raise RuntimeError(f"Failed to download PDF from {url}: {str(e)}") from e
 
         elif url.startswith("file://"):
             return url[7:]  # Strip file:// prefix

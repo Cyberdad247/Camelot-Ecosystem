@@ -1,5 +1,3 @@
-// SPDX-License-Identifier: MIT
-
 'use client';
 
 // Forward-compatibility bridge for the Lakisha portal stack.
@@ -39,8 +37,7 @@ export function capVertexCount<T extends { vertexCount?: number }>(
 
 export function shouldDownscaleOnMemoryPressure(): boolean {
   // `performance.memory` is Chrome-only. Treat absent as "no pressure".
-  const perfMem = (performance as unknown as { memory?: { usedJSHeapSize: number } })
-    .memory;
+  const perfMem = (performance as unknown as { memory?: { usedJSHeapSize: number } }).memory;
   if (!perfMem) return false;
   const usedMB = perfMem.usedJSHeapSize / (1024 * 1024);
   return usedMB >= KINETIC_HEAP_THRESHOLD_MB_CANDIDATE;

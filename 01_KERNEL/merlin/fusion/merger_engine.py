@@ -7,6 +7,7 @@ The high-level orchestrator for Project Chimera's fusion protocol.
 Links Capability Graph, Fusion Strategies, and LLM-as-a-Judge.
 """
 
+import json
 import os
 import sys
 import time

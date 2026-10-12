@@ -1,0 +1,16 @@
+{
+  "receipt": {
+    "proved": true,
+    "theorems_verified": 2,
+    "solver": "Z3 SMT Solver v4.13+",
+    "capacity": 1024,
+    "proof_hash": "b856f1b47b6999025cae965521925bec461eacf07d8ace3d82eb9f039dd89a32",
+    "timestamp_utc": "2026-09-23T16:02:48Z"
+  },
+  "theorems": {
+    "theorem_1_bitwise_mask_equivalence": "PROVED_UNSAT (No counterexamples across 2^64 domain)",
+    "theorem_2_slot_isolation_no_overflow": "PROVED_UNSAT (Zero slot collisions for 0 < head-tail < capacity)",
+    "capacity": "1024",
+    "bitwidth": "64-bit unsigned integers"
+  }
+}
