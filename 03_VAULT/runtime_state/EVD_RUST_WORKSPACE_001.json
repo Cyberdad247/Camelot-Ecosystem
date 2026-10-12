@@ -1,0 +1,60 @@
+{
+  "schema_version": "camelot-evidence/v1",
+  "evidence_id": "EVD-RUST-WORKSPACE-001",
+  "timestamp": "2026-10-12T13:59:15Z",
+  "task": "Wave 2 Rust Foundation Implementation, Week 3 Transport & Week 4 Runtime Deliverables",
+  "target_hardware": "Raspberry Pi 5 8GB | ARM64 & x86_64 Host",
+  "target_runtime": "Firecracker MicroVM + Sandlock Cage + Bifrost Duplex",
+  "cognitive_substrate": "BitNet b1.58 Ternary Core",
+  "crates": [
+    {
+      "name": "camelot-kernel",
+      "path": "crates/camelot-kernel",
+      "version": "10001.0.0",
+      "purpose": "L3 Sovereign Kernel (<16MB binary), SQLite Blake3 Ledger, 80ms Boot Threshold, Invariant Governor",
+      "tests_passed": 19,
+      "tests_failed": 0,
+      "genesis_boot_receipt_hash": "9a63d26970171bf2339dbae1f8607fbf6016822d3620fc99f4cee39204fd165c",
+      "boot_duration_ms": 14,
+      "boot_threshold_ms": 80
+    },
+    {
+      "name": "camelot-spawner",
+      "path": "crates/camelot-spawner",
+      "version": "10001.0.0",
+      "purpose": "L2 Kinetic Spawner & MicroVM Lifecycle Governor (Firecracker + Sandlock, Apoptosis Monitor)",
+      "tests_passed": 16,
+      "tests_failed": 0,
+      "genesis_spawner_receipt_hash": "409f553a33e55490ced6b998f5d8188202bd70de90665fb87d18cfb27f750bee",
+      "spawner_duration_ms": 14,
+      "spawner_threshold_ms": 50
+    },
+    {
+      "name": "camelot-transport",
+      "path": "crates/camelot-transport",
+      "version": "10001.0.0",
+      "purpose": "L2/L3 Bifrost Gateway Duplex Transport, Runic Message Router, SSE Telemetry & Pure HATEOAS Hypermedia Fragments",
+      "tests_passed": 6,
+      "tests_failed": 0,
+      "genesis_transport_receipt_hash": "ec2b0c0b9d3549db1556621ddf402f53ab6c789200759f76699539a06c27c156",
+      "transport_duration_ms": 0,
+      "transport_threshold_ms": 10
+    },
+    {
+      "name": "camelot-runtime",
+      "path": "crates/camelot-runtime",
+      "version": "10001.0.0",
+      "purpose": "L3 Sovereign Persona Loader, Scabbard Cartridge Admission, Triple-QFT Symbolect Serializer (|🧠⊗(⚡💬)⟩)",
+      "tests_passed": 5,
+      "tests_failed": 0,
+      "genesis_runtime_receipt_hash": "9735c560328ec04acfc925cfca9a9231bc39e9df07af353e02d8a8388d8857f4",
+      "runtime_duration_ms": 7,
+      "runtime_threshold_ms": 10
+    }
+  ],
+  "total_new_crates": 4,
+  "total_tests_passed": 46,
+  "total_tests_failed": 0,
+  "compilation_status": "CLEAN_PASS",
+  "verifier": "SIR_HELIOS / ANTIGRAVITY & LUKAS_OMEGA & SIR_CODEX & MERLIN_OMEGA"
+}

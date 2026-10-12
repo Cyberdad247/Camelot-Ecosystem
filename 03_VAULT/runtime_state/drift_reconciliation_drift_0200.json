@@ -1,0 +1,12 @@
+{
+  "schema_version": "camelot-governance/drift-record/v1",
+  "record_id": "RECON-DRIFT-0200-CLOSURE",
+  "timestamp": "2026-10-12T00:52:19.750849+00:00",
+  "drift_id": "DRIFT-0200",
+  "defect_class": "Unpublished Reference Runtime Defect",
+  "status": "CLOSED",
+  "remediation_summary": "Packaged v0.3 reference spawner runtime into tar.gz with deterministic SHA-256 hash, signed with Ed25519 key, and published EVD-SPAWNER-001 receipt.",
+  "evidence_link": "03_VAULT/runtime_state/EVD_SPAWNER_001.json",
+  "artifact_hash": "sha256:c99fa65f662b1d52dbb8d0a0a935028453777c28dad30df16df5b8a9a1739cfd",
+  "governance_verdict": "PRODUCTION_VERIFIED"
+}

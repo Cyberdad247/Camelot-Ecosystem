@@ -1,0 +1,20 @@
+[package]
+name = "camelot-spawner"
+version = "10001.0.0"
+edition = "2021"
+description = "L2 Kinetic Spawner for Firecracker MicroVMs"
+
+[dependencies]
+camelot-kernel = { path = "../camelot-kernel" }
+tokio = { version = "1", features = ["full", "rt-multi-thread"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+hyper = { version = "1", features = ["full"] }
+hyper-util = { version = "0.1", features = ["full"] }
+tokio-stream = "0.1"
+blake3 = "1.5"
+anyhow = "1"
+uuid = { version = "1", features = ["v4"] }
+chrono = { version = "0.4", features = ["serde"] }

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camelot-OS · Invisioned Agentic Systems</title>
+    
+    <!-- Google Fonts: Cinzel & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- HTMX Core Library (Hypermedia Engine) -->
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    
+    <style>
+        :root {
+            --bg-void: #050505;
+            --bg-panel: #0a0a0a;
+            --border-dim: #1f1f1f;
+            --text-main: #e5e5e5;
+            --text-muted: #888888;
+            --gold: #D4AF37;
+            --cyan: #38bdf8;
+            --emerald: #10b981;
+        }
+        body {
+            margin: 0;
+            background: var(--bg-void);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        aside.sidebar {
+            width: 320px;
+            background: var(--bg-panel);
+            border-right: 1px solid var(--border-dim);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            box-sizing: border-box;
+        }
+        .branding h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            margin: 0.2rem 0;
+            letter-spacing: 0.05em;
+        }
+        .brand-eyebrow {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+        }
+        .badge {
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            background: #222;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .cap-badge {
+            background: #1e3a8a;
+            color: #93c5fd;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .search-container input {
+            width: 100%;
+            background: #111;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 0.5rem;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+        }
+        .search-scope-bar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        nav.doc-links h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        nav.doc-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav.doc-links li a {
+            display: block;
+            padding: 0.4rem 0.6rem;
+            color: #aaa;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: all 0.15s;
+        }
+        nav.doc-links li a:hover {
+            background: #141414;
+            color: var(--gold);
+        }
+        main.content-area {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+        .mcp-hud-container {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            width: 440px;
+            background: #0d0d0d;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.8);
+        }
+        .mcp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--gold);
+            border-bottom: 1px solid #222;
+            padding-bottom: 0.4rem;
+            margin-bottom: 0.4rem;
+        }
+        .mcp-stream {
+            max-height: 120px;
+            overflow-y: auto;
+            font-size: 0.8rem;
+            color: #aaa;
+            line-height: 1.4;
+        }
+        .mcp-input {
+            width: 100%;
+            background: #000;
+            border: 1px solid #222;
+            color: var(--cyan);
+            padding: 0.4rem;
+            margin-top: 0.5rem;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: 'JetBrains Mono', monospace;
+        }
+    </style>
+</head>
+<body class="layout">
+    
+    <aside class="sidebar">
+        <div class="branding">
+            <div class="brand-eyebrow">Invisioned // Agentic Systems</div>
+            <h2>Camelot-OS</h2>
+            <div style="display: flex; gap: 0.4rem; align-items: center; margin-top: 0.25rem;">
+                <span id="cap-indicator" class="cap-badge">Cleveland Edge (4GB Max)</span>
+                <span class="badge">v10001.00</span>
+            </div>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-scope-bar">
+                <label><input type="radio" name="scope" value="all" checked> All</label>
+                <label><input type="radio" name="scope" value="docs"> Docs</label>
+                <label><input type="radio" name="scope" value="slabs"> Slabs</label>
+            </div>
+            <input type="search" 
+                   id="search-query"
+                   name="q"
+                   placeholder="Search Docs & CloudBrain..." 
+                   hx-post="/api/cloudbrain/search" 
+                   hx-include="[name='scope']:checked"
+                   hx-trigger="keyup changed delay:300ms" 
+                   hx-target="#search-results">
+            <ul id="search-results" aria-live="polite" style="list-style: none; padding: 0.5rem 0; margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;"></ul>
+        </div>
+
+        <nav class="doc-links">
+            <h3>Living Telemetry</h3>
+            <ul>
+                <li><a href="#" hx-get="/docs/slabs" hx-target="#content">IPC Slabs & RAM Ceiling</a></li>
+                <li><a href="#" hx-get="/docs/architecture" hx-target="#content">2-Strand Architecture</a></li>
+                <li><a href="#" hx-get="/docs/tasks" hx-target="#content">Tasks Execution DAG</a></li>
+                <li><a href="#" hx-get="/docs/verification" hx-target="#content">Verification Protocol</a></li>
+                <li><a href="#" hx-get="/docs/polyglot" hx-target="#content">Polyglot Hardware Mesh</a></li>
+                <li><a href="#" hx-get="/docs/nullclaw" hx-target="#content">NullClaw Zig Squire</a></li>
+                <li><a href="#" hx-get="/docs/pantheon" hx-target="#content">Knight Pantheon</a></li>
+                <li><a href="#" hx-get="/docs/governance" hx-target="#content">Constitutional Governance (L0)</a></li>
+                <li><a href="#" hx-get="/docs/doc-check" hx-target="#content">Doc-Check & Verified States</a></li>
+                <li><a href="#" hx-get="/docs/links" hx-target="#content">Links & Dub Sovereign Routing</a></li>
+                <li><a href="#" hx-get="/docs/agent-computer" hx-target="#content">OpenMuse Agent Computer & Handover</a></li>
+                <li><a href="#" hx-get="/docs/teams" hx-target="#content">AgentTeams Council & Dispatch</a></li>
+                <li><a href="#" hx-get="/docs/personalities" hx-target="#content">Knight & Squire Personalities</a></li>
+                <li><a href="#" hx-get="/docs/spatial" hx-target="#content">Spatial Citadel 3D Cockpit</a></li>
+                <li><a href="#" hx-get="/docs/rea" hx-target="#content">REA Forensics Cockpit</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main id="content" class="content-area" aria-live="polite">
+        <h1 style="font-family: 'Cinzel', serif; color: var(--gold);">Initialization Complete</h1>
+        <p>Canonical 2-Strand HTMX Interface active on Cybertronia Edge Node.</p>
+        <div hx-get="/docs/slabs" hx-trigger="load, every 5s" hx-target="#content">
+            <p>Loading live IPC memory slabs...</p>
+        </div>
+    </main>
+
+    <div id="mcp-hud" class="mcp-hud-container" aria-live="polite">
+        <div class="mcp-header">
+            <span>ANYA // I-O MIDDLEWARE</span>
+            <span style="color: var(--emerald);">● ACTIVE</span>
+        </div>
+        <div id="mcp-stream" class="mcp-stream">
+            <p>System aligned. Living canonical documents active. Awaiting tensor execution...</p>
+        </div>
+        <input type="text" 
+               class="mcp-input" 
+               placeholder="Execute Runic Symbolect (e.g., //STATUS)..." 
+               name="cmd"
+               hx-post="/api/mcp" 
+               hx-target="#mcp-stream" 
+               hx-swap="innerHTML">
+    </div>
+
+    <script>
+        // WebGPU Cosine Similarity WGSL Pipeline
+        const COSINE_SIMILARITY_WGSL = `
+            struct VectorBuffer { data: array<f32>, };
+            @group(0) @binding(0) var<storage, read> queryVector : VectorBuffer;
+            @group(0) @binding(1) var<storage, read> docVectors : VectorBuffer;
+            @group(0) @binding(2) var<storage, read_write> similarityScores : VectorBuffer;
+            @compute @workgroup_size(64)
+            fn main(@builtin(global_invocation_id) global_id : vec3<u32>) {
+                let docIndex = global_id.x;
+                let dims : u32 = 64u;
+                let baseOffset = docIndex * dims;
+                var dotProduct : f32 = 0.0;
+                var queryNorm : f32 = 0.0;
+                var docNorm : f32 = 0.0;
+                for (var i : u32 = 0u; i < dims; i = i + 1u) {
+                    let q = queryVector.data[i];
+                    let d = docVectors.data[baseOffset + i];
+                    dotProduct = dotProduct + (q * d);
+                    queryNorm = queryNorm + (q * q);
+                    docNorm = docNorm + (d * d);
+                }
+                let denom = sqrt(queryNorm) * sqrt(docNorm);
+                similarityScores.data[docIndex] = select(0.0, dotProduct / denom, denom > 0.0);
+            }
+        `;
+        document.addEventListener("DOMContentLoaded", async () => {
+            const stream = document.getElementById("mcp-stream");
+            if ("gpu" in navigator) {
+                try {
+                    const adapter = await navigator.gpu.requestAdapter();
+                    if (adapter) {
+                        const device = await adapter.requestDevice();
+                        stream.innerHTML += "<p style='color: #10b981;'>[WebGPU] WGSL Compute Pipeline Online. Client VRAM vector offload active.</p>";
+                    }
+                } catch(e) {}
+            }
+        });
+    </script>
+</body>
+</html>

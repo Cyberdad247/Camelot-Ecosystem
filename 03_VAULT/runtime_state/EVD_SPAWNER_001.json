@@ -1,0 +1,25 @@
+{
+  "schema_version": "camelot-evidence/v1",
+  "evidence_id": "EVD-SPAWNER-001",
+  "timestamp": "2026-10-12T00:52:19.750849+00:00",
+  "artifact": {
+    "name": "camelot-spawner-v0.3.0.tar.gz",
+    "path": "dist/camelot-spawner-v0.3.0.tar.gz",
+    "size_bytes": 12655,
+    "sha256": "c99fa65f662b1d52dbb8d0a0a935028453777c28dad30df16df5b8a9a1739cfd",
+    "ed25519_public_key": "16387b89ac5aed2c39633c9ee11bbd0f3414a68429109f0f8c464d38336c1782",
+    "ed25519_signature": "07c8e760d265cb5612d90236bbd15c4cdf890eab9b3cf04722b6cfbdf00c69782b1f9589fc13c7f579ebbf54973da54cfdacacd884718f4ea4dff7f5bcf3f30d"
+  },
+  "verified_invariants": [
+    "INV-001 (Zero-trust unprivileged execution)",
+    "INV-003 (Process-level isolation & apoptosis)",
+    "INV-015 (Sub-50ms process lifecycle turnaround)"
+  ],
+  "test_evidence": {
+    "suite": "kinetic_edge/swarm_spawner test harness",
+    "total_tests": 18,
+    "status": "PASS",
+    "process_kill_resilience": "VERIFIED_PASS"
+  },
+  "verifier": "SIR_HELIOS / ANTIGRAVITY"
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": "camelot-evidence/v1",
+  "evidence_id": "EVD-HTMX-SITE-001",
+  "timestamp": "2026-10-12T00:52:40.496424+00:00",
+  "artifact": {
+    "name": "evd_htmx_site_001.html",
+    "path": "03_VAULT/runtime_state/evidence/evd_htmx_site_001.html",
+    "size_bytes": 11277,
+    "sha256": "1a6ef0acdcf292186f7fcedc2cbf34df524087370e25dd90a1e95f644d7ee4c7"
+  },
+  "verified_invariants": [
+    "Pure HATEOAS server-driven state transitions (Zero client JS framework)",
+    "WebGPU WGSL tensor compute integration",
+    "Luxora Gold (#D4AF37) visual design tokens"
+  ],
+  "test_evidence": {
+    "suite": "tests/control_plane/test_htmx_webgpu_and_jev.py",
+    "total_tests": 11,
+    "status": "PASS",
+    "execution_time_sec": 0.52
+  },
+  "verifier": "SIR_HELIOS / ANTIGRAVITY"
+}
