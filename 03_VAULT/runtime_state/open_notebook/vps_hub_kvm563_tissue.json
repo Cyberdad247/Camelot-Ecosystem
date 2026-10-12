@@ -25,7 +25,8 @@
       "nginx_worldtree_gateway": 80,
       "bifrost_gateway": 3001,
       "vps_mobile_mesh_bridge": 8095,
-      "webhook_receiver": 9000
+      "webhook_receiver": 9000,
+      "multivoice_router": 7680
     },
     "inference_links": {
       "cliproxy_sie": {
