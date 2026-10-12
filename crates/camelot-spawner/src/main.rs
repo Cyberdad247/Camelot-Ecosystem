@@ -6,6 +6,7 @@ mod firecracker;
 mod instance;
 mod lease;
 mod lifecycle;
+mod output_trap;
 mod pool;
 mod sandlock;
 

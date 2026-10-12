@@ -19,6 +19,7 @@ pub enum KillReason {
     MemoryExceeded,
     ApoptosisFailure,
     HostDirective,
+    OutputLimitExceeded,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
