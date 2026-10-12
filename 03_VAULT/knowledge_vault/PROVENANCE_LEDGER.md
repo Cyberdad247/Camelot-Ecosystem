@@ -8209,3 +8209,13 @@ line 2] | HYDRATED |
 | 2026-10-12T14:22:32.144445+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //CHAMBER candidate_alpha_v2] | HYDRATED |
 | 2026-10-12T14:22:33.927387+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //CHAMBER candidate_alpha_v2, Complexity: 9] | HYDRATED |
 | 2026-10-12T14:22:33.928108+00:00 | HYDRATION_MGR | HYDRATE [Intent: //CHAMBER candidate_alpha_v2, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD] | HYDRATED |
+| 2026-10-12T14:28:09.932047+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-12T14:28:10.423245+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-12T14:28:10.915431+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-12T14:28:11.402694+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-12T14:28:11.924129+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-12T14:28:12.421171+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-12T14:28:15.128157+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//CHAMBER candidate_alpha_v2' to Cloud Brain] | HYDRATED |
+| 2026-10-12T14:28:15.129108+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //CHAMBER candidate_alpha_v2] | HYDRATED |
+| 2026-10-12T14:28:16.809837+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //CHAMBER candidate_alpha_v2, Complexity: 9] | HYDRATED |
+| 2026-10-12T14:28:16.810644+00:00 | HYDRATION_MGR | HYDRATE [Intent: //CHAMBER candidate_alpha_v2, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD] | HYDRATED |
