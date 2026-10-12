@@ -168,5 +168,76 @@ describe('Bifrost HATEOAS / HTMX Router', () => {
     expect(res.text).toContain('COMPILER_EXPLORER_QUANTIZED');
     expect(res.text).toContain('Z3_FORMAL_SAT');
   });
+
+  it('concretizes an abstract cartridge spec via /htmx/cartridges/concretize', async () => {
+    const res = await new Promise<{ status: number; text: string }>((resolve) => {
+      const server = app.listen(0, async () => {
+        const addr = server.address();
+        const port = typeof addr === 'object' && addr ? addr.port : 0;
+        const resp = await fetch(`http://127.0.0.1:${port}/htmx/cartridges/concretize`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            spec: 'invisioned-marketing-agency@1.1.0 +scoped_net +vfs_write ~auto_deploy arch=aarch64 mem=512',
+          }),
+        });
+        const text = await resp.text();
+        server.close(() => resolve({ status: resp.status, text }));
+      });
+    });
+
+    expect(res.status).toBe(200);
+    expect(res.text).toContain('CONCRETIZED & LAW 03 VERIFIED');
+    expect(res.text).toContain('invisioned-marketing-agency@1.1.0');
+    expect(res.text).toContain('aarch64');
+    expect(res.text).toContain('512 MB');
+    expect(res.text).toContain('vfs://worldtree/cartridges/');
+    expect(res.text).toContain('sandlock_cage');
+  });
+
+  it('rejects cartridge spec violating Global Law 03 ceiling', async () => {
+    const res = await new Promise<{ status: number; text: string }>((resolve) => {
+      const server = app.listen(0, async () => {
+        const addr = server.address();
+        const port = typeof addr === 'object' && addr ? addr.port : 0;
+        const resp = await fetch(`http://127.0.0.1:${port}/htmx/cartridges/concretize`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            spec: 'bloated-cartridge@1.0.0 mem=6000',
+          }),
+        });
+        const text = await resp.text();
+        server.close(() => resolve({ status: resp.status, text }));
+      });
+    });
+
+    expect(res.status).toBe(400);
+    expect(res.text).toContain('Global Law 03 Violation');
+    expect(res.text).toContain('exceeds 4096 MB node ceiling');
+  });
+
+  it('rejects cartridge spec with denied security variant', async () => {
+    const res = await new Promise<{ status: number; text: string }>((resolve) => {
+      const server = app.listen(0, async () => {
+        const addr = server.address();
+        const port = typeof addr === 'object' && addr ? addr.port : 0;
+        const resp = await fetch(`http://127.0.0.1:${port}/htmx/cartridges/concretize`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            spec: 'agency@1.0.0 +auto_deploy',
+          }),
+        });
+        const text = await resp.text();
+        server.close(() => resolve({ status: resp.status, text }));
+      });
+    });
+
+    expect(res.status).toBe(400);
+    expect(res.text).toContain('Security conflict');
+    expect(res.text).toContain('strictly denied');
+  });
 });
+
 

@@ -37,6 +37,24 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     CartridgeAdmission::validate(&manifest).map_err(|e| anyhow::anyhow!(e))?;
     info!("Cartridge admitted: id={} max_memory={}MB (Law 03 Compliant)", manifest.cartridge_id, manifest.max_memory_mb);
 
+    // 2b. Concretize Abstract Cartridge Spec (Spack-assimilated)
+    use camelot_runtime::{AbstractCartridgeSpec, CartridgeConcretizer, HostContext};
+    let spec = AbstractCartridgeSpec::parse(
+        "invisioned-marketing-agency@1.1.0 +scoped_net +vfs_write ~auto_deploy arch=x86_64 mem=512",
+    ).map_err(|e| anyhow::anyhow!(e))?;
+    let concretizer = CartridgeConcretizer::new();
+    let host = HostContext::default();
+    let concrete_dag = concretizer
+        .concretize(
+            &spec,
+            &host,
+            manifest.max_memory_mb,
+            &["scoped_net".into(), "vfs_write".into()],
+            &manifest.capabilities_denied,
+        )
+        .map_err(|e| anyhow::anyhow!(e))?;
+    info!("Concretized Cartridge DAG: Blake3={} VFS={}", concrete_dag.blake3_dag_hash, concrete_dag.vfs_prefix_uri);
+
     // 3. Encode Symbolect Dialogue Packet
     let packet = SymbolectPacket {
         source_knight: "SIR_HELIOS".to_string(),

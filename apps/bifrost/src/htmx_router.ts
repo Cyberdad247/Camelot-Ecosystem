@@ -453,4 +453,107 @@ router.post('/explorer/inspect', (req, res) => {
   res.send(renderDisassemblyCard(target, result));
 });
 
+// ── SPACK ASSIMILATION: Combinatorial Cartridge Concretizer Endpoints ───────
+
+interface ConcretizedCartridgeResult {
+  cartridgeId: string;
+  version: string;
+  arch: string;
+  activeVariants: string[];
+  deniedVariants: string[];
+  boundProviders: Record<string, string>;
+  allocatedRamMb: number;
+  dagHash: string;
+  vfsUri: string;
+}
+
+function parseAndConcretizeSpec(rawSpec: string): ConcretizedCartridgeResult {
+  const tokens = rawSpec.trim().split(/\s+/);
+  if (!tokens[0]) throw new Error('Empty cartridge spec string');
+
+  const [name, versionPart] = tokens[0].split('@');
+  const version = versionPart || '1.0.0';
+
+  const activeVariants: string[] = [];
+  const disabledVariants: string[] = [];
+  let arch = 'x86_64';
+  let ramMb = 512;
+
+  for (const t of tokens.slice(1)) {
+    if (t.startsWith('+')) activeVariants.push(t.slice(1));
+    else if (t.startsWith('~') || t.startsWith('-')) disabledVariants.push(t.slice(1));
+    else if (t.startsWith('arch=')) arch = t.slice(5);
+    else if (t.startsWith('mem=')) ramMb = Number(t.slice(4)) || 512;
+  }
+
+  // Global Law 03 enforcement
+  if (ramMb > 4096) {
+    throw new Error(`Global Law 03 Violation: requested ${ramMb} MB exceeds 4096 MB node ceiling`);
+  }
+
+  // Security barrier: denied capabilities
+  const strictlyDenied = ['auto_deploy', 'direct_main_branch_write', 'secret.export'];
+  for (const v of activeVariants) {
+    if (strictlyDenied.includes(v)) {
+      throw new Error(`Security conflict: variant '+${v}' is strictly denied for cartridge '${name}'`);
+    }
+  }
+
+  // Provider binding (Spack virtual provider assimilation)
+  const boundProviders: Record<string, string> = {
+    microvm_spawner: arch === 'aarch64' ? 'sandlock_cage' : 'firecracker_uds',
+    vector_memory: 'memcastle_sqlite_vec',
+    authority_gate: 'anya_l7_scythe',
+  };
+
+  // Deterministic DAG Hash simulation
+  const hashSeed = `${name}@${version}:${arch}:${ramMb}:${activeVariants.sort().join(',')}`;
+  const crypto = require('node:crypto');
+  const dagHash = crypto.createHash('sha256').update(hashSeed).digest('hex');
+  const vfsUri = `vfs://worldtree/cartridges/${dagHash}`;
+
+  return {
+    cartridgeId: name,
+    version,
+    arch,
+    activeVariants,
+    deniedVariants: disabledVariants,
+    boundProviders,
+    allocatedRamMb: ramMb,
+    dagHash,
+    vfsUri,
+  };
+}
+
+router.post('/cartridges/concretize', (req, res) => {
+  const spec = typeof req.body.spec === 'string' ? req.body.spec : '';
+  try {
+    const r = parseAndConcretizeSpec(spec);
+    res.send(`
+      <div class="border border-neutral-800 bg-neutral-900/60 p-4 rounded-lg space-y-3 font-mono text-xs">
+        <div class="flex justify-between items-center border-b border-neutral-800 pb-2">
+          <span class="text-sm font-bold text-[#D4AF37]">${r.cartridgeId}@${r.version}</span>
+          <span class="text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800 px-2 py-0.5 rounded">CONCRETIZED & LAW 03 VERIFIED</span>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-neutral-400">
+          <p><span class="text-neutral-500">Target Arch:</span> <code class="text-neutral-200">${r.arch}</code></p>
+          <p><span class="text-neutral-500">RAM Allocation:</span> <span class="text-emerald-400">${r.allocatedRamMb} MB</span> / 4096 MB Max</p>
+          <p><span class="text-neutral-500">Active Variants:</span> ${r.activeVariants.map(v => `<span class="text-cyan-400">+${v}</span>`).join(' ') || 'none'}</p>
+          <p><span class="text-neutral-500">Bound Spawner:</span> <code class="text-neutral-300">${r.boundProviders.microvm_spawner}</code></p>
+        </div>
+        <div class="pt-2 border-t border-neutral-800 space-y-1 text-[11px]">
+          <p><span class="text-neutral-500">DAG Hash:</span> <code class="text-[#D4AF37]">${r.dagHash}</code></p>
+          <p><span class="text-neutral-500">VFS Prefix:</span> <code class="text-neutral-300">${r.vfsUri}</code></p>
+        </div>
+      </div>
+    `);
+  } catch (err: any) {
+    res.status(400).send(`
+      <div class="border border-red-900 bg-red-950/40 p-3 rounded-lg text-xs font-mono text-red-400">
+        <span class="font-bold">Concretization Failed:</span> ${err.message}
+      </div>
+    `);
+  }
+});
+
 export default router;
