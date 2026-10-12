@@ -129,13 +129,6 @@ hotspots), no LLM, no key.
   transitively for the full blast radius. For structural questions, skip
   ranking and use this directly.
 - Or browse: `graft/INDEX.md` lists every node; follow the links.
-- CAMELOT entry points: runic `//CONTEXT` (`--rune "//CONTEXT" --task
-  "<query|map|grep|callers|skeleton|check|stats>"` prints the canonical graft
-  command without executing it), squire colony
-  `python -m squires.colony graph [--query ...]` (a Graft row also shows in
-  `colony status`), a non-required boot probe, and the advisory
-  `graft-graph-freshness` pre-commit hook — every one degrades to a warning,
-  so a native graft crash never blocks work.
 - Monorepos and folders of multiple repos rank fairly across sub-projects —
   hits carry `[scope/]` labels naming which one they're from. Narrow with
   `graft ask "<task>" --in <scope>/` once you know where you're working.
@@ -146,8 +139,5 @@ needed detail, and then at the exact file:line the node points to — never
 re-read whole files.
 
 After big code changes, refresh the graph with `graft build` (deterministic,
-no API key, $0). On a memory-pressured host the native parse can abort
-mid-build (upstream NanoNets/Graft#122); retry when memory frees —
-`graft check`, the boot probe, and the pre-commit hook all degrade to
-warnings instead of failing.
+no API key, $0).
 <!-- graft:end -->

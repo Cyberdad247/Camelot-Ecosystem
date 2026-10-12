@@ -1,3 +1,4 @@
+| 1906 | **State Attestation Manifest (DST/MCR #8) Assimilation Analysis, Toledo 512B Constraint Model Inscription, Drift Reconciliation (DRIFT-0193..0198) & Graphiti Tier-2 Memory Synchronization** | KING_ARTHUR / MERLIN_Ω / ANYA_Ω / SIR_HELIOS / ARTHUR_OMEGA | ⚜️ AUDITED, DRIFT-SEALED, REFERENCE-ABSORBED & SYNCHRONIZED | Completed exhaustive assimilation analysis and formal reconciliation of State Attestation Manifest (DST/MCR #8) against baseline CAMELOT-DOC-BASELINE-v3.4.2-20261011: (1) Evaluated descriptive accuracy confirming 8 baseline matches and identifying 7 recurring drift defect classes under disposition REJECT_AS_ARCHITECTURAL — RECORD_AS_REFLECTION, (2) Extracted and inscribed Oscar Toledo Gutiérrez's 512-byte x86 assembly constraint model into docs/architecture/microvm_boot_constraints.md as an academic reference boundary for edge micro-agents while rejecting unbacked Kernel CoW deployment claims, (3) Committed formal drift reconciliation record to 03_VAULT/runtime_state/drift_reconciliation_dst_mcr_8.json sealing DRIFT-0193 (4GB node RAM ceiling vs 8GB recurrence), DRIFT-0194 (3.6GB Firnflow proactive cache trigger), DRIFT-0195 (unbacked state transitions), DRIFT-0196 (unbacked verified convex claim), DRIFT-0197 (unbacked invariant parity claim), and DRIFT-0198 (corrupted token residue purge), (4) Ingested temporal fact triplets #119, #120, and #121 into sir_helios_graphiti.db bringing Sir Helios temporal facts to 121, and (5) Reconciled and synchronized all 6 PROVENANCE_LEDGER.md mirrors with exact byte-identical SHA-256 parity. — 2026-10-11 19:26 UTC |
 | 1905 | **REA Reverse Engineering Forensics Assimilation: Scabbard Cartridge Forging (rea-forensics), //REA Runic Routing, Multi-Knight Synergy & HTMX Evidence Cockpit** | KING_ARTHUR / MERLIN_Ω / ANYA_Ω / SIR_HELIOS / SIR_CODEX / JEV_Ω / ARTHUR_OMEGA | ⚜️ ASSIMILATED, CARTRIDGE-SEALED, FORENSICS-OPERATIONALIZED & SYNCHRONIZED | Completed full-stack assimilation of morluto/rea (Reverse Engineer Anything v6.1.0) into Camelot-OS: (1) Executed Squire Ghost privacy & security audit across 2,333 staged files in .camelot/staging/repos/rea confirming 0 critical leaks and air-gap safety, (2) Forged and cryptographically signed Scabbard Cartridge cartridges/rea-forensics (Risk Cap: T1, Ed25519 signed, artifact_hash sha256:d7d36ca..., 512MB RAM profile satisfying Global Law 03 4GB Node Ceiling, packaging reverse-engineer-anything skill), (3) Inscribed position-addressed VFS tether vfs/cartridges/rea-forensics/tether.json and registered cartridge in vfs/worldtree_manifest.json bringing verified cartridge count to 19, (4) Wired //REA runic command and _handle_rea_forensics_dispatch handler into control_plane/runes/runic_router.py with automatic target classification (ASAR/Electron, Native Mach-O/PE/ELF, APK/IPA Mobile packages, EVM bytecode, and telemetry health), (5) Mapped multi-knight operational synergy (SIR_HELIOS as FastMCP lead, MERLIN_Ω as Evidence DAG planner, SIR_CODEX as Z3 invariant prover, JEV_Ω as 1.58-bit offline decompiler, and SIR_SENTINEL for boundary taint audits), (6) Integrated live REA Reverse Engineering Forensics Cockpit into 2-Strand HTMX documentation server (/docs/rea) in control_plane/infra/htmx_server.py with HATEOAS contract validation, (7) Passed all 107 automated unit and regression tests across test_cartridge_manifests.py, test_htmx_webgpu_and_jev.py, and test_rea_forensics_runes.py 100% green, and (8) Reconciled and synchronized all 6 PROVENANCE_LEDGER.md mirrors with exact byte-identical SHA-256 parity. — 2026-10-09 11:25 UTC |
 | 1904 | **Spatial Citadel 3D Cockpit Assimilation: Scabbard Cartridge Forging, R3F Damped Kinematics, //SPATIAL Runic Routing & HTMX Telemetry Integration** | KING_ARTHUR / MERLIN_Ω / ANYA_Ω / SIR_HELIOS / SIR_BORIS / SIR_STITCH / ARTHUR_OMEGA | ⚜️ ASSIMILATED, CARTRIDGE-SEALED, R3F-OPERATIONALIZED & SYNCHRONIZED | Completed end-to-end assimilation of adrianhajdin/3D_portfolio into Camelot-OS: (1) Executed Squire Ghost privacy scan on .camelot/staging/repos/3d_portfolio confirming 0 critical leaks, (2) Forged and cryptographically signed Scabbard Cartridge cartridges/spatial-citadel (Risk Cap: T1, Ed25519 signed, artifact_hash sha256:34f737a4..., 512MB RAM ceiling satisfying Global Law 03, 4-quadrant spatial orientation state machine), (3) Inscribed position-addressed VFS tether vfs/cartridges/spatial-citadel/tether.json and registered cartridge in vfs/worldtree_manifest.json bringing verified cartridge count to 18, (4) Engineered SpatialCitadel R3F component in apps/pwa/src/components/spatial/SpatialCitadel.tsx featuring central Cybertronia Spire, orbiting Luxora Gold rings (#D4AF37), and damped rotational turntable (damping factor 0.95), (5) Wired //SPATIAL runic command and handler into control_plane/runes/runic_router.py for instant quadrant orientation alignment, (6) Integrated live Spatial Citadel 3D Cockpit view into the 2-Strand HTMX documentation server (/docs/spatial) in control_plane/infra/htmx_server.py with HATEOAS validation, (7) Passed 105/105 automated unit and regression tests across test_cartridge_manifests.py, test_firnflow_and_state_service.py, test_htmx_webgpu_and_jev.py, and test_knight_and_squire_templates.py 100% green in 1.01s, and (8) Reconciled and synchronized all 6 PROVENANCE_LEDGER.md mirrors with exact byte-identical SHA-256 parity. — 2026-10-08 22:38 UTC |
 | 1903 | **HTMX Canonical Source of Truth Operationalization: Living Hypermedia Interface (/docs/personalities), Dynamic HATEOAS State Projections & Zero-DOM Drift Sync** | KING_ARTHUR / MERLIN_Ω / ANYA_Ω / SIR_HELIOS / ARTHUR_OMEGA | ⚜️ HTMX-CONVERGED, SOURCE-OF-TRUTH-ANCHORED & SYNCHRONIZED | Operationalized HTMX as the authoritative live source-of-truth across Camelot-OS: (1) Anchored living Knight and Squire personality configuration to the 2-Strand HTMX documentation server (/docs/personalities) rendering real-time archetype tables directly from knight_character_sheets.json, (2) Enforced HATEOAS contract integrity in control_plane/infra/htmx_server.py eliminating client-side Virtual DOM state drift and reducing browser RAM consumption by ~85% (<30MB), (3) Updated tests/control_plane/test_htmx_webgpu_and_jev.py verifying live HATEOAS hypermedia links, (4) Passed all 105 automated unit and regression tests 100% green in 1.53s, and (5) Reconciled and synchronized all 6 PROVENANCE_LEDGER.md mirrors with exact byte-identical SHA-256 parity. — 2026-10-08 20:24 UTC |
@@ -7936,3 +7937,265 @@ line 2] | HYDRATED |
 | 2026-10-10T05:03:05.785994+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //THINK INTEGRATION: CAMELOT_OS — Merge strategy optimization for HTMX and WorldTree.] | HYDRATED |
 | 2026-10-10T05:03:05.792410+00:00 | HYDRATION_MGR | HYDRATE [Intent: //THINK INTEGRATION: CAMELOT_OS — Merge strategy optimization for HTMX and WorldTree., Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL] | HYDRATED |
 | 2026-10-10T05:03:05.803945+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: Omega_BORIS ARCHITECTURE: CAMELOT_OS — Analyze server patterns, state, and broadcast.] | HYDRATED |
+| 2026-10-11T16:39:58.411583+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:40:04.174749+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:40:11.616059+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:40:18.945592+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:40:26.238943+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:40:33.567845+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:40:41.994426+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//CHAMBER candidate_alpha_v2' to Cloud Brain] | HYDRATED |
+| 2026-10-11T16:40:43.570882+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //CHAMBER candidate_alpha_v2] | HYDRATED |
+| 2026-10-11T16:40:45.370604+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //CHAMBER candidate_alpha_v2, Complexity: 9] | HYDRATED |
+| 2026-10-11T16:40:45.372690+00:00 | HYDRATION_MGR | HYDRATE [Intent: //CHAMBER candidate_alpha_v2, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T16:41:50.034761+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER post-purge-probe] | HYDRATED |
+| 2026-10-11T16:41:50.055923+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //LOCK_BIFROST_mTLS_KYBER768 post-purge-probe] | HYDRATED |
+| 2026-10-11T16:41:50.077837+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //ENGAGE_RUST_IRON_DAEMON post-purge-probe] | HYDRATED |
+| 2026-10-11T16:41:50.091966+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //CRYSTALLIZE_GCMN_vMAX post-purge-probe] | HYDRATED |
+| 2026-10-11T16:41:51.883580+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//FORGE_UI_DAG' to Cloud Brain] | HYDRATED |
+| 2026-10-11T16:41:53.412276+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //FORGE_UI_DAG] | HYDRATED |
+| 2026-10-11T16:41:56.706661+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //FORGE_UI_DAG, Complexity: 9] | HYDRATED |
+| 2026-10-11T16:41:56.728116+00:00 | HYDRATION_MGR | HYDRATE [Intent: //FORGE_UI_DAG, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T16:41:58.453915+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//FORGE_SOURCE Phase_1' to Cloud Brain] | HYDRATED |
+| 2026-10-11T16:41:59.989391+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //FORGE_SOURCE Phase_1] | HYDRATED |
+| 2026-10-11T16:42:03.399792+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //FORGE_SOURCE Phase_1, Complexity: 9] | HYDRATED |
+| 2026-10-11T16:42:03.402009+00:00 | HYDRATION_MGR | HYDRATE [Intent: //FORGE_SOURCE Phase_1, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T16:42:41.059883+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-10-11T16:42:41.102459+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //LOCK_BIFROST_mTLS_KYBER768 probe] | HYDRATED |
+| 2026-10-11T16:42:41.149656+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //ENGAGE_RUST_IRON_DAEMON probe] | HYDRATED |
+| 2026-10-11T16:42:41.193529+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //CRYSTALLIZE_GCMN_vMAX probe] | HYDRATED |
+| 2026-10-11T16:42:41.230435+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-10-11T16:42:41.249611+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-10-11T16:42:41.265904+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-10-11T16:42:41.278708+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-10-11T16:42:41.292435+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-10-11T16:42:41.303828+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-10-11T16:42:41.359147+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER file containing a private token] | HYDRATED |
+| 2026-10-11T16:43:09.264087+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:43:09.758623+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:43:10.246928+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:43:10.734147+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:43:11.233011+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:43:11.732081+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:43:11.784128+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //PLAN build cockpit] | HYDRATED |
+| 2026-10-11T16:43:11.788366+00:00 | HYDRATION_MGR | HYDRATE [Intent: //PLAN build cockpit, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL] | HYDRATED |
+| 2026-10-11T16:43:24.370815+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-10-11T16:43:25.907714+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-10-11T16:43:29.438122+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //BOOT, Complexity: 9] | HYDRATED |
+| 2026-10-11T16:43:29.449038+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T16:43:40.129553+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:44:26.061818+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:44:27.044717+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:44:27.994627+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:44:38.183962+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-10-11T16:44:39.714402+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-10-11T16:44:42.945484+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //DAWNING alpha-nexus, Complexity: 9] | HYDRATED |
+| 2026-10-11T16:44:42.948268+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T16:44:47.561155+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-10-11T16:44:49.088583+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-10-11T16:44:52.568610+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //DAWNING alpha-nexus, Complexity: 9] | HYDRATED |
+| 2026-10-11T16:44:52.570861+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T16:44:57.490719+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-10-11T16:44:59.023497+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-10-11T16:45:04.006110+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //DAWNING alpha-nexus, Complexity: 9] | HYDRATED |
+| 2026-10-11T16:45:04.008461+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T16:45:06.083527+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-10-11T16:45:07.615973+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-10-11T16:45:11.073696+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //DAWNING Mixed Case Project, Complexity: 9] | HYDRATED |
+| 2026-10-11T16:45:11.077058+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T16:45:49.535772+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent 'Omega_FatherCamelot contract probe' to Cloud Brain] | HYDRATED |
+| 2026-10-11T16:45:51.060555+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: Omega_FatherCamelot contract probe] | HYDRATED |
+| 2026-10-11T16:45:54.451816+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: Omega_FatherCamelot contract probe, Complexity: 9] | HYDRATED |
+| 2026-10-11T16:45:54.454135+00:00 | HYDRATION_MGR | HYDRATE [Intent: Omega_FatherCamelot contract probe, Tiers: L0_LOCAL_RAW,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T16:46:06.508045+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//EXECUTE_PROMPT forge-0123456789abcdef' to Cloud Brain] | HYDRATED |
+| 2026-10-11T16:46:08.043857+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //EXECUTE_PROMPT forge-0123456789abcdef] | HYDRATED |
+| 2026-10-11T16:46:09.686884+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //EXECUTE_PROMPT forge-0123456789abcdef, Complexity: 9] | HYDRATED |
+| 2026-10-11T16:46:09.689069+00:00 | HYDRATION_MGR | HYDRATE [Intent: //EXECUTE_PROMPT forge-0123456789abcdef, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T16:46:59.386403+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: honcho embed probe, Complexity: 7] | HYDRATED |
+| 2026-10-11T16:47:00.906001+00:00 | HYDRATION_MGR | HYDRATE [Intent: honcho embed probe, Tiers: L1_MEMCASTLE,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T16:47:10.735633+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:47:11.228750+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:47:13.779504+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:47:14.273734+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:47:14.774721+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:47:15.277107+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:50:04.404000+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-10-11T16:50:05.940848+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-10-11T16:50:09.264657+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Complexity: 9] | HYDRATED |
+| 2026-10-11T16:50:09.266740+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T16:50:11.539170+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\camelot-wt\trunk\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\camelot-wt\trunk\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-10-11T16:50:13.068722+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\camelot-wt\trunk\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\camelot-wt\trunk\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-10-11T16:50:16.521038+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\camelot-wt\trunk\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\camelot-wt\trunk\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence, Complexity: 9] | HYDRATED |
+| 2026-10-11T16:50:16.523482+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\camelot-wt\trunk\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\camelot-wt\trunk\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T16:50:18.476561+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-10-11T16:50:20.012253+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-10-11T16:50:23.263666+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Complexity: 9] | HYDRATED |
+| 2026-10-11T16:50:23.265921+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T16:50:25.033088+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-10-11T16:50:26.558697+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-10-11T16:50:29.978516+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //NANO_SWARM_EXPAND supervise status, Complexity: 9] | HYDRATED |
+| 2026-10-11T16:50:29.980975+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T16:51:15.521411+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:51:16.034972+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:51:16.549598+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:51:17.045724+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:51:17.551835+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ghost] | HYDRATED |
+| 2026-10-11T16:52:00.339577+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:52:00.830796+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:52:41.975838+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //FORGE_SQUIRE node=fleet type=scarcity_sentry] | HYDRATED |
+| 2026-10-11T16:52:41.983328+00:00 | HYDRATION_MGR | HYDRATE [Intent: //FORGE_SQUIRE node=fleet type=scarcity_sentry, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL] | HYDRATED |
+| 2026-10-11T16:52:42.069324+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //SCARCITY_GOV health_probe] | HYDRATED |
+| 2026-10-11T16:52:42.081932+00:00 | HYDRATION_MGR | HYDRATE [Intent: //SCARCITY_GOV health_probe, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL] | HYDRATED |
+| 2026-10-11T16:52:57.509884+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T16:52:57.556025+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |
+| 2026-10-11T16:54:03.565462+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree' to Cloud Brain] | HYDRATED |
+| 2026-10-11T16:54:05.094355+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree] | HYDRATED |
+| 2026-10-11T16:54:13.948527+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree, Complexity: 9] | HYDRATED |
+| 2026-10-11T16:54:13.961931+00:00 | HYDRATION_MGR | HYDRATE [Intent: //SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T16:54:15.814349+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BIFROST status' to Cloud Brain] | HYDRATED |
+| 2026-10-11T16:54:17.342385+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BIFROST status] | HYDRATED |
+| 2026-10-11T16:54:20.629337+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //BIFROST status, Complexity: 9] | HYDRATED |
+| 2026-10-11T16:54:20.632064+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BIFROST status, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T16:54:22.404642+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//CLIPROXYAPI echo ping' to Cloud Brain] | HYDRATED |
+| 2026-10-11T16:54:23.939948+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //CLIPROXYAPI echo ping] | HYDRATED |
+| 2026-10-11T16:54:27.447637+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //CLIPROXYAPI echo ping, Complexity: 9] | HYDRATED |
+| 2026-10-11T16:54:27.450029+00:00 | HYDRATION_MGR | HYDRATE [Intent: //CLIPROXYAPI echo ping, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T17:27:17.607956+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:27:23.288762+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:27:30.610160+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:27:38.010707+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:27:45.560503+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:27:53.109118+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:28:01.096229+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//CHAMBER candidate_alpha_v2' to Cloud Brain] | HYDRATED |
+| 2026-10-11T17:28:02.663023+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //CHAMBER candidate_alpha_v2] | HYDRATED |
+| 2026-10-11T17:28:04.355816+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //CHAMBER candidate_alpha_v2, Complexity: 9] | HYDRATED |
+| 2026-10-11T17:28:04.358309+00:00 | HYDRATION_MGR | HYDRATE [Intent: //CHAMBER candidate_alpha_v2, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T17:29:03.578388+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER post-purge-probe] | HYDRATED |
+| 2026-10-11T17:29:03.591996+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //LOCK_BIFROST_mTLS_KYBER768 post-purge-probe] | HYDRATED |
+| 2026-10-11T17:29:03.605050+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //ENGAGE_RUST_IRON_DAEMON post-purge-probe] | HYDRATED |
+| 2026-10-11T17:29:03.616664+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //CRYSTALLIZE_GCMN_vMAX post-purge-probe] | HYDRATED |
+| 2026-10-11T17:29:05.596850+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//FORGE_UI_DAG' to Cloud Brain] | HYDRATED |
+| 2026-10-11T17:29:07.134159+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //FORGE_UI_DAG] | HYDRATED |
+| 2026-10-11T17:29:10.823420+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //FORGE_UI_DAG, Complexity: 9] | HYDRATED |
+| 2026-10-11T17:29:10.825695+00:00 | HYDRATION_MGR | HYDRATE [Intent: //FORGE_UI_DAG, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T17:29:12.459006+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//FORGE_SOURCE Phase_1' to Cloud Brain] | HYDRATED |
+| 2026-10-11T17:29:13.985124+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //FORGE_SOURCE Phase_1] | HYDRATED |
+| 2026-10-11T17:29:17.548724+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //FORGE_SOURCE Phase_1, Complexity: 9] | HYDRATED |
+| 2026-10-11T17:29:17.550680+00:00 | HYDRATION_MGR | HYDRATE [Intent: //FORGE_SOURCE Phase_1, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T17:29:54.995579+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-10-11T17:29:55.044270+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //LOCK_BIFROST_mTLS_KYBER768 probe] | HYDRATED |
+| 2026-10-11T17:29:55.093238+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //ENGAGE_RUST_IRON_DAEMON probe] | HYDRATED |
+| 2026-10-11T17:29:55.141946+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //CRYSTALLIZE_GCMN_vMAX probe] | HYDRATED |
+| 2026-10-11T17:29:55.185360+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-10-11T17:29:55.202283+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-10-11T17:29:55.212998+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-10-11T17:29:55.223770+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-10-11T17:29:55.238966+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-10-11T17:29:55.248999+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-10-11T17:29:55.284434+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER file containing a key token] | HYDRATED |
+| 2026-10-11T17:30:23.454649+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:30:23.958593+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:30:24.464018+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:30:24.963805+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:30:25.454350+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:30:25.953583+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:30:26.013523+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //PLAN build cockpit] | HYDRATED |
+| 2026-10-11T17:30:26.017502+00:00 | HYDRATION_MGR | HYDRATE [Intent: //PLAN build cockpit, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL] | HYDRATED |
+| 2026-10-11T17:30:38.304678+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-10-11T17:30:39.841811+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-10-11T17:30:43.530263+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //BOOT, Complexity: 9] | HYDRATED |
+| 2026-10-11T17:30:43.532903+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T17:30:54.227765+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:31:37.744763+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:31:38.711457+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:31:39.673266+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:31:48.903057+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-10-11T17:31:50.434246+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-10-11T17:31:53.654610+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //DAWNING alpha-nexus, Complexity: 9] | HYDRATED |
+| 2026-10-11T17:31:53.656999+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T17:31:58.387110+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-10-11T17:31:59.928070+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-10-11T17:32:03.302469+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //DAWNING alpha-nexus, Complexity: 9] | HYDRATED |
+| 2026-10-11T17:32:03.304715+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T17:32:08.161071+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-10-11T17:32:09.683801+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-10-11T17:32:12.941095+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //DAWNING alpha-nexus, Complexity: 9] | HYDRATED |
+| 2026-10-11T17:32:12.943364+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T17:32:14.608756+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-10-11T17:32:16.137266+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-10-11T17:32:19.439397+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //DAWNING Mixed Case Project, Complexity: 9] | HYDRATED |
+| 2026-10-11T17:32:19.441820+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T17:32:50.882585+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent 'Omega_FatherCamelot contract probe' to Cloud Brain] | HYDRATED |
+| 2026-10-11T17:32:52.410077+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: Omega_FatherCamelot contract probe] | HYDRATED |
+| 2026-10-11T17:32:55.805160+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: Omega_FatherCamelot contract probe, Complexity: 9] | HYDRATED |
+| 2026-10-11T17:32:55.807380+00:00 | HYDRATION_MGR | HYDRATE [Intent: Omega_FatherCamelot contract probe, Tiers: L0_LOCAL_RAW,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T17:33:07.445368+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//EXECUTE_PROMPT forge-0123456789abcdef' to Cloud Brain] | HYDRATED |
+| 2026-10-11T17:33:08.972984+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //EXECUTE_PROMPT forge-0123456789abcdef] | HYDRATED |
+| 2026-10-11T17:33:10.575894+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //EXECUTE_PROMPT forge-0123456789abcdef, Complexity: 9] | HYDRATED |
+| 2026-10-11T17:33:10.578322+00:00 | HYDRATION_MGR | HYDRATE [Intent: //EXECUTE_PROMPT forge-0123456789abcdef, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T17:34:09.047512+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: honcho embed probe, Complexity: 7] | HYDRATED |
+| 2026-10-11T17:34:10.558244+00:00 | HYDRATION_MGR | HYDRATE [Intent: honcho embed probe, Tiers: L1_MEMCASTLE,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T17:34:20.070380+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:34:20.570736+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:34:23.199040+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:34:23.695641+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:34:24.198069+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:34:24.695126+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:36:21.509686+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-10-11T17:36:23.036891+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-10-11T17:36:26.660149+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Complexity: 9] | HYDRATED |
+| 2026-10-11T17:36:26.662423+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T17:36:28.670796+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\camelot-wt\trunk\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\camelot-wt\trunk\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-10-11T17:36:30.199602+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\camelot-wt\trunk\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\camelot-wt\trunk\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-10-11T17:36:33.881374+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\camelot-wt\trunk\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\camelot-wt\trunk\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence, Complexity: 9] | HYDRATED |
+| 2026-10-11T17:36:33.883638+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\camelot-wt\trunk\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\camelot-wt\trunk\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T17:36:35.869867+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-10-11T17:36:37.405529+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-10-11T17:36:40.871590+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Complexity: 9] | HYDRATED |
+| 2026-10-11T17:36:40.874039+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T17:36:42.796901+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-10-11T17:36:44.339062+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-10-11T17:36:47.701338+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //NANO_SWARM_EXPAND supervise status, Complexity: 9] | HYDRATED |
+| 2026-10-11T17:36:47.703562+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T17:37:19.837574+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:37:20.362636+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:37:20.873786+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:37:21.383697+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:37:21.877635+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ghost] | HYDRATED |
+| 2026-10-11T17:38:03.598101+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:38:04.094755+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:38:45.007514+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //FORGE_SQUIRE node=fleet type=scarcity_sentry] | HYDRATED |
+| 2026-10-11T17:38:45.017070+00:00 | HYDRATION_MGR | HYDRATE [Intent: //FORGE_SQUIRE node=fleet type=scarcity_sentry, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL] | HYDRATED |
+| 2026-10-11T17:38:45.068689+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //SCARCITY_GOV health_probe] | HYDRATED |
+| 2026-10-11T17:38:45.077948+00:00 | HYDRATION_MGR | HYDRATE [Intent: //SCARCITY_GOV health_probe, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL] | HYDRATED |
+| 2026-10-11T17:38:59.347386+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T17:38:59.374713+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |
+| 2026-10-11T17:39:58.457318+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree' to Cloud Brain] | HYDRATED |
+| 2026-10-11T17:39:59.992581+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree] | HYDRATED |
+| 2026-10-11T17:40:03.381552+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree, Complexity: 9] | HYDRATED |
+| 2026-10-11T17:40:03.383317+00:00 | HYDRATION_MGR | HYDRATE [Intent: //SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T17:40:05.138770+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BIFROST status' to Cloud Brain] | HYDRATED |
+| 2026-10-11T17:40:06.668020+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BIFROST status] | HYDRATED |
+| 2026-10-11T17:40:10.256572+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //BIFROST status, Complexity: 9] | HYDRATED |
+| 2026-10-11T17:40:10.259544+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BIFROST status, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T17:40:11.961829+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//CLIPROXYAPI echo ping' to Cloud Brain] | HYDRATED |
+| 2026-10-11T17:40:13.499264+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //CLIPROXYAPI echo ping] | HYDRATED |
+| 2026-10-11T17:40:16.992915+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //CLIPROXYAPI echo ping, Complexity: 9] | HYDRATED |
+| 2026-10-11T17:40:16.995503+00:00 | HYDRATION_MGR | HYDRATE [Intent: //CLIPROXYAPI echo ping, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD,L4_HONCHO] | HYDRATED |
+| 2026-10-11T18:54:39.821707+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T18:54:45.591405+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T18:54:53.071168+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T18:55:00.352532+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T18:55:07.724618+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T18:55:15.139400+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-10-11T23:46:11.862127+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree' to Cloud Brain] | HYDRATED |
+| 2026-10-11T23:46:11.863011+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree] | HYDRATED |
+| 2026-10-11T23:46:15.401719+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree, Complexity: 9] | HYDRATED |
+| 2026-10-11T23:46:15.402281+00:00 | HYDRATION_MGR | HYDRATE [Intent: //SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD] | HYDRATED |
+| 2026-10-11T23:46:17.141174+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BIFROST status' to Cloud Brain] | HYDRATED |
+| 2026-10-11T23:46:17.141974+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BIFROST status] | HYDRATED |
+| 2026-10-11T23:46:20.928022+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //BIFROST status, Complexity: 9] | HYDRATED |
+| 2026-10-11T23:46:20.928732+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BIFROST status, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD] | HYDRATED |
+| 2026-10-11T23:46:22.691906+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//CLIPROXYAPI echo ping' to Cloud Brain] | HYDRATED |
+| 2026-10-11T23:46:22.692626+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //CLIPROXYAPI echo ping] | HYDRATED |
+| 2026-10-11T23:49:38.178478+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ghost] | HYDRATED |
+| 2026-10-11T23:49:48.339089+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_boris] | HYDRATED |
