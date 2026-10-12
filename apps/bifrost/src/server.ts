@@ -18,6 +18,7 @@ import { issueSignedAction } from './issuance';
 import { createOperatorBff } from './operator/bff';
 import { InMemoryEventStore } from './operator/receipts';
 import { verifyManifest, issueLease } from './operator/sentinel';
+import htmxRouter from './htmx_router';
 
 // WebSocket carrying the heartbeat flag used by the reaper loop below.
 interface LiveSocket extends WebSocket {
@@ -90,6 +91,7 @@ const operatorBff = createOperatorBff({
   },
 });
 app.use('/v1/operator', operatorBff);
+app.use('/htmx', htmxRouter);
 
 // ── Canonical Tailscale Mesh Node Inventory ──
 // Must agree with control_plane/infra/mesh_topology.py. `camelot-relay-modal`

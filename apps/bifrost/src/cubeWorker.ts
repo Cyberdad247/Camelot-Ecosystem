@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 import { parentPort, workerData } from 'node:worker_threads';
-import { prisma } from '@sovereign/db';
+import { SovereignDB } from './db/SovereignDB';
 import type { CubeResult, CubeTask } from './microcubic';
 
 // Runs inside an isolated microcube (worker_threads). Performs the command's
@@ -12,30 +12,20 @@ async function run(): Promise<void> {
 
   try {
     if (cmd.action === 'add_transaction') {
-      // Balanced journal entry (debit/credit) — enforced by ledgerValidator.
-      await prisma.journalEntry.create({
-        data: {
-          memo: `Command: add transaction ${cmd.amount}`,
-          lines: {
-            create: [
-              { debit: cmd.amount, credit: 0 },
-              { debit: 0, credit: cmd.amount },
-            ],
-          },
-        },
-      });
+      await SovereignDB.postTransaction('command', 'add_transaction', cmd.amount, 'default-account');
     } else if (cmd.action === 'remind') {
-      await prisma.echoLog.create({ data: { message: `Reminder set for ${cmd.who}` } });
+      await SovereignDB.logMessage('default-thread', 'SYSTEM', `Reminder set for ${cmd.who}`, 'LOGGED');
     } else if (cmd.action === 'order') {
-      await prisma.echoLog.create({ data: { message: `Order placed: ${cmd.item}` } });
+      await SovereignDB.logMessage('default-thread', 'SYSTEM', `Order placed: ${cmd.item}`, 'LOGGED');
     } else {
-      await prisma.echoLog.create({ data: { message: `Unrecognized command: ${cmd.raw}` } });
+      await SovereignDB.logMessage('default-thread', 'SYSTEM', `Unrecognized command: ${cmd.raw}`, 'LOGGED');
     }
 
     const result: CubeResult = { taskId: task.id, command: cmd, persisted: true };
     parentPort?.postMessage(result);
-  } finally {
-    await prisma.$disconnect();
+  } catch (err) {
+    console.error('[CubeWorker] execution failed:', err);
+    throw err;
   }
 }
 
