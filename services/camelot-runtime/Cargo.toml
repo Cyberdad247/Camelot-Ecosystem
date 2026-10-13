@@ -1,0 +1,12 @@
+[package]
+name = "camelot-runtime-svc"
+version = "10001.0.0"
+edition = "2021"
+description = "L4 Cognitive Runtime & Persona Injection"
+
+[dependencies]
+tokio = { version = "1.35", features = ["full", "rt-multi-thread"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tracing = "0.1"
+tracing-subscriber = "0.3"

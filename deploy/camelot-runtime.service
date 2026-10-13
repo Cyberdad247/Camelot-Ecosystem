@@ -1,0 +1,15 @@
+[Unit]
+Description=Camelot-OS L4 Cognitive Runtime
+After=camelot-spawner.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/camelot-runtime
+Restart=always
+RestartSec=3
+User=root
+# Cognitive persona loading and validation
+MemoryMax=256M
+
+[Install]
+WantedBy=multi-user.target

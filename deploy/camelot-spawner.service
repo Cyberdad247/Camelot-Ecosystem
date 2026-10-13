@@ -1,0 +1,15 @@
+[Unit]
+Description=Camelot-OS L2 Kinetic Spawner (Firecracker)
+After=camelot-kernel.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/camelot-spawner
+Restart=always
+RestartSec=3
+User=root
+# Allocate max 1.5GB for up to ten 128MB Firecracker MicroVMs
+MemoryMax=1500M
+
+[Install]
+WantedBy=multi-user.target

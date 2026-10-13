@@ -1,0 +1,15 @@
+[Unit]
+Description=Camelot-OS L1/L2 Bifrost Transport Gateway
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/camelot-transport
+Restart=always
+RestartSec=3
+User=root
+# Gateway operates on zero-copy memfd, requiring minimal RAM
+MemoryMax=128M
+
+[Install]
+WantedBy=multi-user.target

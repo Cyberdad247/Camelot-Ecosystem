@@ -1,12 +1,17 @@
-//! Camelot Transport Kinetic Executable (Week 3 Deliverable)
-//! ========================================================
+//! Camelot-OS Bifrost Gateway Transport Daemon
+//! ============================================
 
-use camelot_transport::{
-    BifrostFrame, BifrostRouter, HateoasBuilder, KnightTelemetryView, MessageType, SseEvent,
-    TransportReceipt,
+mod bifrost;
+mod memfd;
+
+use axum::{
+    routing::{get, post},
+    Router,
 };
-use std::time::Instant;
-use tracing::{info, Level};
+use bifrost::BifrostRouter;
+use memfd::SharedMemBuffer;
+use std::net::SocketAddr;
+use tracing::{info, warn, Level};
 use tracing_subscriber::FmtSubscriber;
 
 #[tokio::main]
@@ -14,81 +19,46 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let subscriber = FmtSubscriber::builder()
         .with_max_level(Level::INFO)
         .finish();
-    tracing::subscriber::set_global_default(subscriber)?;
+    let _ = tracing::subscriber::set_global_default(subscriber);
 
-    let start_time = Instant::now();
-    info!("Booting CAMELOT-OS Transport Layer (v10001.0.0)...");
-    info!("Protocol: Bifrost Duplex UDS/WS | Framing: Pure HATEOAS & SSE Telemetry");
+    info!("Initializing Camelot-OS Bifrost Gateway (v10001.0.0)...");
 
-    // 1. Initialize Bifrost Router with canonical runic routes
-    let mut router = BifrostRouter::new();
+    // Initialize 64KB static shared memory ring buffer for zero-copy IPC
+    let _ipc_buffer = SharedMemBuffer::create("bifrost_shared_ring", 65536)?;
 
-    router.register("//STATUS", Box::new(|frame| {
-        Ok(BifrostFrame::new(
-            MessageType::TelemetryStream,
-            "BIFROST_GATEWAY",
-            &frame.sender,
-            "TELEMETRY: CPU=4.2% RAM=31.4MB/4096MB NODE=COMPLIANT MESH=ONLINE",
-        ))
-    }));
+    // Configure Axum router endpoints
+    let app = Router::new()
+        .route("/health", get(|| async { "OK" }))
+        .route("/execute", post(BifrostRouter::handle_execute));
 
-    router.register("//HELIOS", Box::new(|frame| {
-        Ok(BifrostFrame::new(
-            MessageType::RunicDispatch,
-            "SIR_HELIOS",
-            &frame.sender,
-            "HELIOS_TRUTH_VERIFIED: High-altitude macroscopic audit clean. Zero drift.",
-        ))
-    }));
+    let port: u16 = std::env::var("PORT")
+        .or_else(|_| std::env::var("BIFROST_PORT"))
+        .ok()
+        .and_then(|p| p.parse().ok())
+        .unwrap_or(8080);
 
-    router.register("//HATEOAS", Box::new(|frame| {
-        let view = KnightTelemetryView {
-            name: "SIR_HELIOS".to_string(),
-            status: "ONLINE".to_string(),
-            ram_mb: 32,
-            role: "Sovereign Spire Sentinel".to_string(),
-        };
-        let card = HateoasBuilder::render_knight_card(&view);
-        Ok(BifrostFrame::new(
-            MessageType::HateoasFragment,
-            "BIFROST_GATEWAY",
-            &frame.sender,
-            card,
-        ))
-    }));
+    let addr = SocketAddr::from(([127, 0, 0, 1], port));
 
-    // 2. Dispatch Inbound Runic Frame
-    let inbound_frame = BifrostFrame::new(
-        MessageType::RunicDispatch,
-        "OPERATOR_VIZION",
-        "BIFROST_GATEWAY",
-        "//HATEOAS",
-    );
-    info!("Dispatching inbound runic frame: id={}", inbound_frame.frame_id);
+    let listener = match tokio::net::TcpListener::bind(addr).await {
+        Ok(l) => {
+            info!("Bifrost Transport Gateway listening on http://{}", addr);
+            l
+        }
+        Err(e) if e.kind() == std::io::ErrorKind::AddrInUse && port == 8080 => {
+            let alt_port = 8088;
+            let alt_addr = SocketAddr::from(([127, 0, 0, 1], alt_port));
+            warn!(
+                "Port 8080 in use by host proxy; falling back to http://{}",
+                alt_addr
+            );
+            let l = tokio::net::TcpListener::bind(alt_addr).await?;
+            info!("Bifrost Transport Gateway listening on http://{}", alt_addr);
+            l
+        }
+        Err(e) => return Err(e.into()),
+    };
 
-    let outbound_reply = router.dispatch(&inbound_frame)?;
-    info!("Outbound reply received: msg_type={:?} recipient={}", outbound_reply.msg_type, outbound_reply.recipient);
-
-    // 3. Cryptographic Transport Receipt
-    let receipt = TransportReceipt::generate(&outbound_reply);
-    info!("Transport receipt forged: receipt_id={} receipt_hash={}", receipt.receipt_id, receipt.receipt_hash);
-
-    // 4. SSE Telemetry Stream Event
-    let sse_event = SseEvent::new("knight_status", &outbound_reply.payload)
-        .with_id(&receipt.receipt_id);
-    let sse_wire = sse_event.format();
-    info!("SSE Telemetry packet formatted ({} bytes)", sse_wire.len());
-
-    let elapsed = start_time.elapsed();
-    info!("Transport roundtrip completed in {} ms (Threshold: <10 ms)", elapsed.as_millis());
-
-    println!("\n=== BIFROST TRANSPORT RECEIPT ===");
-    println!("Receipt ID: {}", receipt.receipt_id);
-    println!("Frame ID: {}", receipt.frame_id);
-    println!("Payload Blake3: {}", receipt.payload_hash);
-    println!("Receipt Blake3: {}", receipt.receipt_hash);
-    println!("Roundtrip Latency: {} ms", elapsed.as_millis());
-    println!("SSE Stream Wire:\n{}", sse_wire);
+    axum::serve(listener, app).await?;
 
     Ok(())
 }

@@ -1,9 +1,12 @@
-//! Camelot Runtime Kinetic Executable (Week 4 Deliverable)
-//! ======================================================
+//! Camelot-OS Cognitive Runtime Daemon (Week 4 Deliverable)
+//! =======================================================
+
+mod persona_loader;
 
 use camelot_runtime::{
     CartridgeAdmission, CartridgeManifest, KnightPersona, SymbolectEngine, SymbolectPacket,
 };
+use persona_loader::PersonaLoader;
 use std::time::Instant;
 use tracing::{info, Level};
 use tracing_subscriber::FmtSubscriber;
@@ -13,15 +16,28 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let subscriber = FmtSubscriber::builder()
         .with_max_level(Level::INFO)
         .finish();
-    tracing::subscriber::set_global_default(subscriber)?;
+    let _ = tracing::subscriber::set_global_default(subscriber);
 
     let start_time = Instant::now();
-    info!("Booting CAMELOT-OS Runtime Layer (v10001.0.0)...");
+    info!("Booting Camelot-OS Cognitive Runtime Daemon (v10001.0.0)...");
     info!("Substrate: Persona Registry | Scabbard Cartridges | Triple-QFT Symbolect");
 
-    // 1. Load Persona
+    // Week 4 Execution: Load Persona from VFS
+    let persona_path = "/opt/camelot-os/.agent/cartridges/merlin_omega.json";
+    let active_persona = PersonaLoader::load_from_disk(persona_path)?;
+
+    // Simulate VM ID acquired from camelot-spawner (Week 2)
+    let target_vm = "core-001";
+
+    // Execute the cognitive injection across the hypervisor boundary
+    PersonaLoader::inject_to_vm(&active_persona, target_vm);
+
+    // 1. Calibrate Sovereign Knight Persona
     let helios = KnightPersona::new_helios();
-    info!("Calibrated Persona: knight_id={} role='{}'", helios.knight_id, helios.role);
+    info!(
+        "Calibrated Persona: knight_id={} role='{}'",
+        helios.knight_id, helios.role
+    );
     info!("VFS Coordinate: {}", helios.vfs_coordinate);
 
     // 2. Validate Cartridge Admission
@@ -35,25 +51,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         max_memory_mb: 512,
     };
     CartridgeAdmission::validate(&manifest).map_err(|e| anyhow::anyhow!(e))?;
-    info!("Cartridge admitted: id={} max_memory={}MB (Law 03 Compliant)", manifest.cartridge_id, manifest.max_memory_mb);
-
-    // 2b. Concretize Abstract Cartridge Spec (Spack-assimilated)
-    use camelot_runtime::{AbstractCartridgeSpec, CartridgeConcretizer, HostContext};
-    let spec = AbstractCartridgeSpec::parse(
-        "invisioned-marketing-agency@1.1.0 +scoped_net +vfs_write ~auto_deploy arch=x86_64 mem=512",
-    ).map_err(|e| anyhow::anyhow!(e))?;
-    let concretizer = CartridgeConcretizer::new();
-    let host = HostContext::default();
-    let concrete_dag = concretizer
-        .concretize(
-            &spec,
-            &host,
-            manifest.max_memory_mb,
-            &["scoped_net".into(), "vfs_write".into()],
-            &manifest.capabilities_denied,
-        )
-        .map_err(|e| anyhow::anyhow!(e))?;
-    info!("Concretized Cartridge DAG: Blake3={} VFS={}", concrete_dag.blake3_dag_hash, concrete_dag.vfs_prefix_uri);
+    info!(
+        "Cartridge admitted: id={} max_memory={}MB (Law 03 Compliant)",
+        manifest.cartridge_id, manifest.max_memory_mb
+    );
 
     // 3. Encode Symbolect Dialogue Packet
     let packet = SymbolectPacket {
@@ -73,12 +74,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let receipt_raw = format!("{}:{}:{}", helios.spark_id, manifest.cartridge_id, symbolect_raw);
     let receipt_hash = blake3::hash(receipt_raw.as_bytes()).to_hex().to_string();
 
-    info!("Runtime cycle completed in {} ms (Threshold: <10 ms)", elapsed.as_millis());
+    info!(
+        "Runtime cycle completed in {} ms (Threshold: <10 ms)",
+        elapsed.as_millis()
+    );
+    info!("Runtime daemon holding state. Ready to process execution telemetry.");
 
-    println!("\n=== RUNTIME EXECUTION RECEIPT ===");
-    println!("Knight Spark: {}", helios.spark_id);
-    println!("Admitted Cartridge: {}", manifest.cartridge_id);
-    println!("Symbolect Wire: {}", symbolect_raw);
+    println!("\n=== COGNITIVE RUNTIME EXECUTION RECEIPT ===");
+    println!("Injected Persona: {}", active_persona.identity);
+    println!("Target MicroVM: {}", target_vm);
+    println!("Archetype: {}", active_persona.archetype);
+    println!("Constraints: {:?}", active_persona.constraints);
+    println!("Memory Tier: {}", active_persona.memory_tier);
     println!("Receipt Blake3: {}", receipt_hash);
     println!("Cycle Latency: {} ms", elapsed.as_millis());
 

@@ -57,6 +57,26 @@ impl Ledger {
         Ok(hash)
     }
 
+    pub fn write_explicit_receipt(
+        &mut self,
+        action: &str,
+        actor: &str,
+        status: &str,
+        hash: &str,
+    ) -> Result<()> {
+        let timestamp = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap()
+            .as_secs();
+
+        self.conn.execute(
+            "INSERT INTO receipts (timestamp, action, actor, status, hash) VALUES (?1, ?2, ?3, ?4, ?5)",
+            params![timestamp as i64, action, actor, status, hash],
+        )?;
+
+        Ok(())
+    }
+
     pub fn count_receipts(&self) -> Result<usize> {
         let mut stmt = self.conn.prepare("SELECT COUNT(*) FROM receipts")?;
         let count: usize = stmt.query_row([], |row| row.get(0))?;

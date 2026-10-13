@@ -1,0 +1,15 @@
+[Unit]
+Description=Camelot-OS L3 Sovereign Kernel
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/camelot-kernel
+Restart=always
+RestartSec=3
+User=root
+# Restrict Kernel to 256MB RAM
+MemoryMax=256M
+
+[Install]
+WantedBy=multi-user.target
