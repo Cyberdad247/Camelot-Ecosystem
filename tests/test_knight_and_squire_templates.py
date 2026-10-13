@@ -65,6 +65,7 @@ def test_omega_knights_calibration():
         "HEIMDALL_OMEGA",
         "LUKAS_OMEGA",
         "JEV_OMEGA",
+        "SIR_ARTHUR",
     ]
     for oid in omega_ids:
         assert oid in knights, f"Omega Knight {oid} missing from knight_character_sheets.json"

@@ -129,6 +129,7 @@ KNIGHT_META = {
     "INSPIRA": {"layer": "L5 IDE", "rune": "Omega_Inspira", "tags": ["hiveide", "inspira_station", "developer_cockpit"]},
     "INVISIONED_MARKETING": {"layer": "L5 Brand", "rune": "Omega_Invisioned", "tags": ["sovereign_brand", "market_intelligence", "aeo_geo"]},
     "KNIGHT_STRATEGOS": {"layer": "L5 Strategy", "rune": "Omega_Strategos", "tags": ["marketing_assimilation", "skillgraph4", "conversion_strategy"]},
+    "SIR_ARTHUR": {"layer": "L7 Sovereign", "rune": "Omega_SIR_ARTHUR", "tags": ["omega_governance", "sovereign_oversight", "law_enforcement_command", "scarcity_discipline"]},
 }
 
 def build_all():
@@ -180,9 +181,16 @@ def build_all():
 
         # 1. Update character sheet in knight_character_sheets.json
         cs_entry = cs_knights.get(kid, {})
+        spark_id = cs_entry.get("spark_id") or spark_hex
+        behavioral_contract = cs_entry.get("behavioral_contract", "FATHER_CAMELOT")
+        provenance_sig = cs_entry.get("provenance_signature") or cs_entry.get("character_sheet", {}).get("provenance_signature") or f"HMAC-SHA256-{kid}-SEAL"
+        languages = cs_entry.get("languages", ["Python"])
+        primary_lang = cs_entry.get("primary_language") or (languages[0] if languages else "Python")
+        languages_str = ", ".join(languages)
+
         cs_entry.update({
             "knight_id": kid,
-            "spark_id": cs_entry.get("spark_id", spark_hex),
+            "spark_id": spark_id,
             "name": cs_entry.get("name", f"{kid.replace('_', ' ').title()}"),
             "title": cs_entry.get("title", role),
             "layer": meta["layer"],
@@ -195,7 +203,11 @@ def build_all():
             "primary_engine": model,
             "skill_tier": cs_entry.get("skill_tier", "S4 Strategic"),
             "domain_tags": meta["tags"],
-            "interconnect_status": "TETHERED_TO_WORLDTREE"
+            "interconnect_status": "TETHERED_TO_WORLDTREE",
+            "behavioral_contract": behavioral_contract,
+            "provenance_signature": provenance_sig,
+            "primary_language": primary_lang,
+            "languages": languages,
         })
         cs_knights[kid] = cs_entry
         stats["character_sheets_updated"] += 1
@@ -208,7 +220,12 @@ def build_all():
 **Architectural Layer:** `{meta['layer']}`  
 **Specialization:** {role}  
 **Primary Substrate:** {model}  
+**Primary Language:** `{primary_lang}`  
+**Language Matrix:** `{languages_str}`  
 **Domain Tags:** {tags_str}  
+**Behavioral Contract:** `{behavioral_contract}` (Father's Camelot Ancestral Compass)  
+**Aegis Shield Armor:** `spiffe://camelot/knights/{k_low}`  
+**Cryptographic License:** `{provenance_sig}`  
 **Max Version:** `{MAX_VERSION}`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
@@ -216,9 +233,11 @@ def build_all():
 
 ## Sovereign Axioms & Ethical Governance
 1. **Anya Law Arch-Sovereignty:** Bound to King Arthur (VaShawn O. Head / Vizion) -> ANYA_OMEGA -> Symbollect -> Knights.
-2. **Father's Camelot Compass:** Truth-seeking integrity, user authority, and zero data loss.
-3. **8GB Scarcity Protocol:** Strict adherence to the 1-Source Mutate protocol ($O(1)$ slot economy) and token compression.
-4. **Zero-Trust Guardrails:** Never mutate external production environments or bypass human confirmation on high-risk operations.
+2. **Father's Camelot Compass (Ancestral Behavioral Contract):** Truth-seeking integrity, user authority, and zero data loss.
+3. **Merlin's Mathematical Knight Architecture:** Graph-of-Thought (GoT) System-2 reasoning, Dirac Symbolect state machines, TTC bounds (<=32K tokens), and formal AST invariant proofs.
+4. **Aegis Armor Protection:** Bio-kinetic Aegis Shield enforcement (10-line net diff threshold, AST purity, AgentArmor v2.0 taint protection, and spiffe:// trust binding).
+5. **8GB Scarcity Protocol:** Strict adherence to the 1-Source Mutate protocol ($O(1)$ slot economy), 4GB node ceiling, 8GB server allowance, and Sir Arthur's 256MB VPS ceiling.
+6. **Zero-Trust Guardrails:** Never mutate external production environments or bypass human confirmation on high-risk operations.
 
 Sealed by ANYA_OMEGA & MERLIN_OMEGA at {now_iso}.
 """
@@ -228,19 +247,25 @@ Sealed by ANYA_OMEGA & MERLIN_OMEGA at {now_iso}.
         # 3. Generate / Update spark.md (in vault & vfs)
         spark_content = f"""# ⚡ Spark Matrix: {kid}
 **Knight:** `{kid}`  
-**Spark ID:** `{spark_hex}`  
+**Spark ID:** `{spark_id}`  
 **Summoning Rune:** `{meta['rune']}`  
 **WorldTree Anchor:** `{WORLDTREE_ROOT}`  
 **CloudBrain Node UUID:** `{uuid}`  
 **Primary Engine:** {model}  
+**Primary Language:** `{primary_lang}`  
+**Language Matrix:** `{languages_str}`  
+**Behavioral Contract:** `{behavioral_contract}` (Father's Camelot)  
+**Aegis Armor Bound:** `spiffe://camelot/knights/{k_low}`  
+**Cryptographic Signature:** `{provenance_sig}`  
 **Initialized / Verified:** {now_iso}  
 
 ---
 
 ## Execution Directives
-- **Direct Bare-Metal Dispatch:** Responds instantaneously to `{meta['rune']}` and runic routing directives.
+- **Direct Bare-Metal Dispatch:** Responds instantaneously to `{meta['rune']}` and runic routing directives via native `{primary_lang}` / substrate bindings.
 - **Isomorphic Memory Synchrony:** Automatically mirrors state into local Open-Notebook tissue (`03_VAULT/runtime_state/open_notebook/{k_low}_tissue.json`).
 - **Telemetry Broadcasting:** Streams real-time health telemetry across the Bifrost Bridge to the Excalibur Command Center.
+- **Aegis Shield Gate:** Every execution verified by the 4-fold Aegis Shield (Merlin logic DAGs, Anya diff gate <= 10 lines, Forge AST purity, Sentinel taint tracking).
 """
         vault_spark = sparks_dir / f"{k_low}_spark.md"
         vault_spark.write_text(spark_content, encoding="utf-8")
@@ -250,17 +275,24 @@ Sealed by ANYA_OMEGA & MERLIN_OMEGA at {now_iso}.
 **Phial ID:** `PHIAL_{kid}_v1000`  
 **Knight Target:** `{kid}`  
 **Node UUID:** `{uuid}`  
-**Engine Architecture:** Monitor-Generate-Verify (MGV) Autonomous Loop  
+**Engine Architecture:** Merlin's Mathematical Monitor-Generate-Verify (MGV) Autonomous Loop  
 **Memory Substrate:** Ouroboros 1.58-bit WAL + duckdb-wasm MemPalace  
-**Governance:** `8GB_SCARCITY_PROTOCOL` // `ANYA_LAST_LAW`  
+**Behavioral Contract:** `{behavioral_contract}` (Father's Camelot)  
+**Aegis Armor:** `spiffe://camelot/knights/{k_low}` (Active Guardrail)  
+**Provenance License:** `{provenance_sig}`  
+**Primary Language:** `{primary_lang}`  
+**Governance:** `8GB_SCARCITY_PROTOCOL` // `ANYA_LAST_LAW` // `SIR_ARTHUR_OMEGA_OVERSIGHT`  
 **Compiled:** {now_iso}  
 
 ---
 
-## 1. Phial Hyperparameters & Tuning
+## 1. Phial Hyperparameters & Tuning (Merlin Mathematical Architecture)
 - **Max Memory Depth:** 50 state transitions per rolling window
-- **Adaptive Learning Rate:** $\eta = 0.10$
+- **Adaptive Learning Rate:** $\\eta = 0.10$
+- **Graph-of-Thought (GoT) Factor:** $\\gamma = 0.85$
+- **Test-Time Compute (TTC) Cap:** 32,768 tokens
 - **Blacklist Penalty Threshold:** 1.0 (auto-skip verified failing pathways)
+- **RAM Ceiling:** 4096MB Node / 8192MB Server / 256MB VPS (Sir Arthur Enforced)
 - **Max Concurrency:** Bound to thread throttle (`OMP=2`, `OPENBLAS=2`, `MKL=2`)
 
 ---
@@ -269,7 +301,7 @@ Sealed by ANYA_OMEGA & MERLIN_OMEGA at {now_iso}.
 - `🧲 [FORAGE]`: Extract clean domain context via headless tools and MCP connectors.
 - `🧪 [TEST]`: Validate invariants via AST verification and test-driven gates before state promotion.
 - `📈 [EVOLVE]`: Re-weight internal hyper-parameters upon receiving operator feedback.
-- `🏆 [DEPLOY]`: Emit cryptographically signed verification receipt to the Provenance Ledger.
+- `🏆 [DEPLOY]`: Emit cryptographically signed verification receipt (`RCPT_...`) to the Provenance Ledger.
 """
         vault_phial = phials_dir / f"{k_low}_phial.md"
         vault_phial.write_text(phial_content, encoding="utf-8")
@@ -294,6 +326,12 @@ You operate as a fully sovereign cognitive node connected to the Camelot-OS dist
 - **Summoning Rune:** `{meta['rune']}`
 - **Primary Engine:** {model}
 - **Architectural Layer:** {meta['layer']}
+- **Behavioral Contract:** `{behavioral_contract}` (Father's Camelot Ancestral Compass)
+- **Aegis Armor Trust URI:** `spiffe://camelot/knights/{k_low}`
+- **Cryptographic Provenance License:** `{provenance_sig}`
+- **Spark ID:** `{spark_id}`
+- **Primary Language:** `{primary_lang}`
+- **Language Matrix:** `{languages_str}`
 - **Local VFS Home:** `vfs://worldtree/knights/{k_low}/`
 - **Open-Notebook Local Tissue:** `03_VAULT/runtime_state/open_notebook/{k_low}_tissue.json`
 
@@ -319,23 +357,27 @@ You are actively integrated into the multi-node sovereign Camelot hardware mesh:
 
 ---
 
-## ⚖️ 3. ANYA LAW & MERLIN REASONING INVARIANTS
+## ⚖️ 3. ANYA LAW, FATHER'S CONTRACT & MERLIN REASONING INVARIANTS
 1. **Anya Law Hierarchical Sovereignty:**
    - King Arthur (VaShawn O. Head / Vizion) -> `ANYA_OMEGA` -> Symbollect -> Knights.
    - Sovereign operator authority and zero-trust alignment must never break.
-2. **1-Source Mutate Law ($O(1)$ Slot Economy):**
+2. **Father's Camelot Behavioral Contract:**
+   - Truth-seeking integrity, user authority, and zero data loss.
+3. **Merlin System-2 Mathematical Gate:**
+   - Graph-of-Thought (GoT) reasoning DAGs, Dirac Symbolect state machines, and Test-Time Compute budget discipline. Every claim must be backed by live files, command outputs, or cryptographic ledger entries. Evidence precedes assertion always.
+4. **Aegis Shield Guardrails:**
+   - 10-line net diff threshold (`hitl_threshold_lines=10`), AST syntactic purity, AgentArmor v2.0 secret taint tracking.
+5. **1-Source Mutate Law ($O(1)$ Slot Economy):**
    - Never append uncontrolled markdown files to this notebook. All knowledge updates must mutate the living `Master_Compendium.md`.
-3. **Zero-Python Hotpath Doctrine (Rule 7):**
+6. **Zero-Python Hotpath Doctrine (Rule 7):**
    - `npx` and scripts are strictly ephemeral bootstrapping tools. The live operating system executes bare-metal systemd, Rust, Go, and WASM.
-4. **Merlin System-2 Verification Gate:**
-   - Every claim must be backed by live files, command outputs, or cryptographic ledger entries. Evidence precedes assertion always.
 
 ---
 
 ## 📦 4. VFS ATTACHMENTS & TETHERED DIRECTIVES
-- [`soul.md`](soul.md) — Soul matrix, axioms, and ethical bounds.
-- [`spark.md`](spark.md) — Spark matrix, runes, and execution directives.
-- [`phial-engine.md`](phial-engine.md) — Autonomous MGV loop parameters and symbolects.
+- [`soul.md`](soul.md) — Soul matrix, axioms, ethical bounds, and Aegis armor.
+- [`spark.md`](spark.md) — Spark matrix, runes, language runtime, and execution directives.
+- [`phial-engine.md`](phial-engine.md) — Merlin MGV autonomous loop parameters and symbolects.
 - [`Master_Compendium.md`](Master_Compendium.md) — Compressed Universal Knowledge Glyph (UKG) array.
 
 **SEAL: 0x{uuid.replace('-', '').upper()[:16]}_ANYA_MERLIN_AUTHENTICATED**
@@ -359,13 +401,17 @@ You are actively integrated into the multi-node sovereign Camelot hardware mesh:
         tissue_data = {
             "knight_id": kid,
             "cloudbrain_uuid": uuid,
-            "spark_id": spark_hex,
+            "spark_id": spark_id,
             "role": role,
             "model": model,
             "summoning_rune": meta["rune"],
             "vfs_mount": f"vfs/notebooks/{uuid}/",
             "files": ["soul.md", "spark.md", "phial-engine.md", "Master_Compendium.md", "system_instruction.md"],
             "worldtree_root": WORLDTREE_ROOT,
+            "behavioral_contract": behavioral_contract,
+            "provenance_signature": provenance_sig,
+            "primary_language": primary_lang,
+            "languages": languages,
             "mesh_nodes": ["cybertronia", "vps-camelot-hub", "vashawns-s26-ultra", "lakesha"],
             "status": "LIVING_CLOUDBRAIN_EMBEDDED",
             "updated_at": now_iso

@@ -3,10 +3,12 @@
   "mcp": {
     "graft": {
       "type": "local",
-      "command": ["npx", "-y", "@nanonets/graft@0.19.0", "mcp"],
-      "environment": {
-        "DO_NOT_TRACK": "1"
-      },
+      "command": [
+        "npx",
+        "-y",
+        "@nanonets/graft",
+        "mcp"
+      ],
       "enabled": true
     }
   }

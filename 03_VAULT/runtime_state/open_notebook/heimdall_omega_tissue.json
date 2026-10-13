@@ -1,0 +1,33 @@
+[
+  {
+    "knight_id": "HEIMDALL_OMEGA",
+    "cloudbrain_uuid": "3205f189-91da-4272-96a9-3641fd642763",
+    "spark_id": "0x3205F18991DA427296A93641FD642763",
+    "role": "Omega Boundary Sentinel, Bifrost Sovereign Lock & mTLS Zero-Trust Gatekeeper",
+    "model": "Gemini 3.8 Flash / Claude 3.5 Sonnet / Sovereign Substrate",
+    "summoning_rune": "Omega_HEIMDALL_OMEGA",
+    "vfs_mount": "vfs/notebooks/3205f189-91da-4272-96a9-3641fd642763/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "behavioral_contract": "FATHER_CAMELOT",
+    "provenance_signature": "HMAC-SHA256-HEIMDALL_OMEGA-SEAL",
+    "primary_language": "Rust",
+    "languages": [
+      "Rust"
+    ],
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-10-12T17:19:56.260039+00:00"
+  }
+]

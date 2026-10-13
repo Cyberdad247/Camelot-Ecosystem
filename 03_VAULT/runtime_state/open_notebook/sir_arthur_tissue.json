@@ -1,10 +1,98 @@
 [
   {
     "knight_id": "SIR_ARTHUR",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//ARTHUR_ENFORCE audit_and_enforce",
+    "content": "{\"action\": \"arthur_contract_enforcement\", \"governor\": \"SIR_ARTHUR\", \"sovereign_authority\": \"KING_ARTHUR_VIZION\", \"report_id\": \"GOV_ARTHUR_REPORT_492D46BDA0C3\", \"total_knights_audited\": 59, \"all_passed\": true, \"receipt_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\GOV_ARTHUR_REPORT_492D46BDA0C3.json\", \"receipt_signature\": \"HMAC-SHA256-ARTHUR-CROWN:a2573cff50e39b2b\", \"fathers_notebook_anchor\": \"39299131-0ade-4f48-8ad4-a68878a6d3d9\", \"merlin_math_framework\": \"Graph-of-Thought (GoT) + Test-Time Compute (TTC) + Dirac Symbolect (MGV eta=0.10)\", \"aegis_armor_bounds\": \"hitl_threshold_lines=10, spiffe://camelot, zero-trust mutability, 4GB node / 8GB server / 256MB VPS ceiling\", \"vps_rss_ceiling_mb\": 256.0, \"status\": \"ENFORCED_VERIFIED_SUCCESS\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_arthur/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_ARTHUR",
+    "open_viking_tether": "open_viking://worldtree/sir_arthur",
+    "updated_at": "2026-10-12T21:06:49.173267+00:00"
+  },
+  {
+    "knight_id": "SIR_ARTHUR",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//ARTHUR_ENFORCE audit_and_enforce",
+    "content": "{\"action\": \"arthur_contract_enforcement\", \"governor\": \"SIR_ARTHUR\", \"sovereign_authority\": \"KING_ARTHUR_VIZION\", \"report_id\": \"GOV_ARTHUR_REPORT_8C02F1E9580F\", \"total_knights_audited\": 59, \"all_passed\": true, \"receipt_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\GOV_ARTHUR_REPORT_8C02F1E9580F.json\", \"receipt_signature\": \"HMAC-SHA256-ARTHUR-CROWN:265ab247e75d3bfe\", \"fathers_notebook_anchor\": \"39299131-0ade-4f48-8ad4-a68878a6d3d9\", \"merlin_math_framework\": \"Graph-of-Thought (GoT) + Test-Time Compute (TTC) + Dirac Symbolect (MGV eta=0.10)\", \"aegis_armor_bounds\": \"hitl_threshold_lines=10, spiffe://camelot, zero-trust mutability, 4GB node / 8GB server / 256MB VPS ceiling\", \"vps_rss_ceiling_mb\": 256.0, \"status\": \"ENFORCED_VERIFIED_SUCCESS\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_arthur/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_ARTHUR",
+    "open_viking_tether": "open_viking://worldtree/sir_arthur",
+    "updated_at": "2026-10-12T21:04:04.732687+00:00"
+  },
+  {
+    "knight_id": "SIR_ARTHUR",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//ARTHUR_ENFORCE audit_and_enforce",
+    "content": "{\"action\": \"arthur_contract_enforcement\", \"governor\": \"SIR_ARTHUR\", \"sovereign_authority\": \"KING_ARTHUR_VIZION\", \"report_id\": \"GOV_ARTHUR_REPORT_B1349D04A1FF\", \"total_knights_audited\": 59, \"all_passed\": true, \"receipt_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\GOV_ARTHUR_REPORT_B1349D04A1FF.json\", \"receipt_signature\": \"HMAC-SHA256-ARTHUR-CROWN:a5cafb0588f4e7ca\", \"fathers_notebook_anchor\": \"39299131-0ade-4f48-8ad4-a68878a6d3d9\", \"merlin_math_framework\": \"Graph-of-Thought (GoT) + Test-Time Compute (TTC) + Dirac Symbolect (MGV eta=0.10)\", \"aegis_armor_bounds\": \"hitl_threshold_lines=10, spiffe://camelot, zero-trust mutability, 4GB node / 8GB server / 256MB VPS ceiling\", \"vps_rss_ceiling_mb\": 256.0, \"status\": \"ENFORCED_VERIFIED_SUCCESS\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_arthur/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_ARTHUR",
+    "open_viking_tether": "open_viking://worldtree/sir_arthur",
+    "updated_at": "2026-10-12T17:25:18.241652+00:00"
+  },
+  {
+    "knight_id": "SIR_ARTHUR",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//ARTHUR_ENFORCE audit_and_enforce",
+    "content": "{\"action\": \"arthur_contract_enforcement\", \"governor\": \"SIR_ARTHUR\", \"sovereign_authority\": \"KING_ARTHUR_VIZION\", \"report_id\": \"GOV_ARTHUR_REPORT_59A0AE5F2DE4\", \"total_knights_audited\": 59, \"all_passed\": true, \"receipt_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\GOV_ARTHUR_REPORT_59A0AE5F2DE4.json\", \"receipt_signature\": \"HMAC-SHA256-ARTHUR-CROWN:2d75b861919bd585\", \"fathers_notebook_anchor\": \"39299131-0ade-4f48-8ad4-a68878a6d3d9\", \"merlin_math_framework\": \"Graph-of-Thought (GoT) + Test-Time Compute (TTC) + Dirac Symbolect (MGV eta=0.10)\", \"aegis_armor_bounds\": \"hitl_threshold_lines=10, spiffe://camelot, zero-trust mutability, 4GB node / 8GB server / 256MB VPS ceiling\", \"vps_rss_ceiling_mb\": 256.0, \"status\": \"ENFORCED_VERIFIED_SUCCESS\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_arthur/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_ARTHUR",
+    "open_viking_tether": "open_viking://worldtree/sir_arthur",
+    "updated_at": "2026-10-12T17:24:59.201264+00:00"
+  },
+  {
+    "knight_id": "SIR_ARTHUR",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//ARTHUR_ENFORCE audit_and_enforce",
+    "content": "{\"action\": \"arthur_contract_enforcement\", \"governor\": \"SIR_ARTHUR\", \"sovereign_authority\": \"KING_ARTHUR_VIZION\", \"report_id\": \"GOV_ARTHUR_REPORT_C99121D2F706\", \"total_knights_audited\": 59, \"all_passed\": true, \"receipt_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\GOV_ARTHUR_REPORT_C99121D2F706.json\", \"receipt_signature\": \"HMAC-SHA256-ARTHUR-CROWN:90192e0d81be13fb\", \"fathers_notebook_anchor\": \"39299131-0ade-4f48-8ad4-a68878a6d3d9\", \"merlin_math_framework\": \"Graph-of-Thought (GoT) + Test-Time Compute (TTC) + Dirac Symbolect (MGV eta=0.10)\", \"aegis_armor_bounds\": \"hitl_threshold_lines=10, spiffe://camelot, zero-trust mutability, 4GB node / 8GB server / 256MB VPS ceiling\", \"vps_rss_ceiling_mb\": 256.0, \"status\": \"ENFORCED_VERIFIED_SUCCESS\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_arthur/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_ARTHUR",
+    "open_viking_tether": "open_viking://worldtree/sir_arthur",
+    "updated_at": "2026-10-12T17:24:24.462519+00:00"
+  },
+  {
+    "knight_id": "SIR_ARTHUR",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//ARTHUR_ENFORCE audit_and_enforce",
+    "content": "{\"action\": \"arthur_contract_enforcement\", \"governor\": \"SIR_ARTHUR\", \"sovereign_authority\": \"KING_ARTHUR_VIZION\", \"report_id\": \"GOV_ARTHUR_REPORT_C36CDDAF3524\", \"total_knights_audited\": 59, \"all_passed\": true, \"receipt_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\GOV_ARTHUR_REPORT_C36CDDAF3524.json\", \"receipt_signature\": \"HMAC-SHA256-ARTHUR-CROWN:ba23baee5f023eb5\", \"fathers_notebook_anchor\": \"39299131-0ade-4f48-8ad4-a68878a6d3d9\", \"merlin_math_framework\": \"Graph-of-Thought (GoT) + Test-Time Compute (TTC) + Dirac Symbolect (MGV eta=0.10)\", \"aegis_armor_bounds\": \"hitl_threshold_lines=10, spiffe://camelot, zero-trust mutability, 4GB node / 8GB server / 256MB VPS ceiling\", \"vps_rss_ceiling_mb\": 256.0, \"status\": \"ENFORCED_VERIFIED_SUCCESS\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_arthur/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_ARTHUR",
+    "open_viking_tether": "open_viking://worldtree/sir_arthur",
+    "updated_at": "2026-10-12T17:23:46.018669+00:00"
+  },
+  {
+    "knight_id": "SIR_ARTHUR",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//ARTHUR_ENFORCE audit_and_enforce",
+    "content": "{\"action\": \"//ARTHUR_ENFORCE\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_arthur/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_ARTHUR",
+    "open_viking_tether": "open_viking://worldtree/sir_arthur",
+    "updated_at": "2026-10-12T17:22:58.764233+00:00"
+  },
+  {
+    "knight_id": "SIR_ARTHUR",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//ARTHUR_ENFORCE audit_and_enforce",
+    "content": "{\"action\": \"//ARTHUR_ENFORCE\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_arthur/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_ARTHUR",
+    "open_viking_tether": "open_viking://worldtree/sir_arthur",
+    "updated_at": "2026-10-12T17:22:46.473021+00:00"
+  },
+  {
+    "knight_id": "SIR_ARTHUR",
     "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "spark_id": "0xA0A4BFB9E8474C38BE397AEE398F0795",
-    "role": "VPS Scarcity Governor, 256MB RSS Ceiling Enforcer, Nano-Squire High Command",
-    "model": "Sovereign Executive",
+    "spark_id": "0x4152544855525F53434152434954595F474F56",
+    "role": "Omega Knight Sovereign Oversight Governor, High Command of Law Enforcement Knights (Sir Sentinel, Sir Octavian, Sir Gawain), VPS Scarcity Governor, 256MB RSS Ceiling Enforcer, Nano-Squire High Command",
+    "model": "Sovereign Executive Substrate",
     "summoning_rune": "Omega_SIR_ARTHUR",
     "vfs_mount": "vfs/notebooks/a0a4bfb9-e847-4c38-be39-7aee398f0795/",
     "files": [
@@ -15,6 +103,13 @@
       "system_instruction.md"
     ],
     "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "behavioral_contract": "FATHER_CAMELOT",
+    "provenance_signature": "HMAC-SHA256-ARTHUR-CROWN",
+    "primary_language": "Go",
+    "languages": [
+      "Go",
+      "Python"
+    ],
     "mesh_nodes": [
       "cybertronia",
       "vps-camelot-hub",
@@ -22,6 +117,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-20T00:29:47.551119+00:00"
+    "updated_at": "2026-10-12T17:19:56.260039+00:00"
   }
 ]

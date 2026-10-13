@@ -15,6 +15,12 @@
       "system_instruction.md"
     ],
     "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "behavioral_contract": "FATHER_CAMELOT",
+    "provenance_signature": "HMAC-SHA256-ALPHA_OMEGA-SEAL",
+    "primary_language": "Python",
+    "languages": [
+      "Python"
+    ],
     "mesh_nodes": [
       "cybertronia",
       "vps-camelot-hub",
@@ -22,6 +28,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-20T00:29:47.551119+00:00"
+    "updated_at": "2026-10-12T17:19:56.260039+00:00"
   }
 ]

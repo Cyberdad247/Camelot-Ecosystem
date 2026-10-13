@@ -65,7 +65,7 @@ All Knights tether into the WorldTree Root Node (`a0a4bfb9-e847-4c38-be39-7aee39
 | **INVISIONED_MARKETING** | Invisioned Marketing Sovereign CloudBrain & Brand Direction | WorldTree Substrate | `a0a4bfb9-e847-4c38-be39-7aee398f0795` | `Omega_Invisioned` |
 | **KNIGHT_STRATEGOS** | Marketing Assimilation DAG, Videneptus SkillGraph4 & AEO/GEO | Gemini 3.8 Flash | `a0a4bfb9-e847-4c38-be39-7aee398f0795` | `Omega_Strategos` |
 | **SIR_KAY** | High Seneschal, Chief Engineering Director, Kinetic Department Lead | Gemini 3 Pro / GPT-5.5 | `7e4a8c12-f9b3-d650-e1a8-c7b2d3e4f5a6` | `Omega_SIR_KAY` |
-| **SIR_ARTHUR** | VPS Scarcity Governor, 256MB RSS Ceiling Enforcer, Nano-Squire High Command | Sovereign Executive | `a0a4bfb9-e847-4c38-be39-7aee398f0795` | `Omega_SIR_ARTHUR` |
+| **SIR_ARTHUR** | Omega Sovereign Oversight Governor, High Command of Law Enforcement Knights (Sir Sentinel, Sir Octavian, Sir Gawain), VPS Scarcity Command | Sovereign Executive Substrate | `a0a4bfb9-e847-4c38-be39-7aee398f0795` | `Omega_SIR_ARTHUR` |
 | **LUKAS_OMEGA** | L2 Kinetic Actuator & Host Daemon Governor (Reya OS) | Rust 1.96 / Linux Bare Metal | `a0a4bfb9-e847-4c38-be39-7aee398f0795` | `Omega_Lukas` |
 | **JEV_OMEGA** | Offline System-2 Orchestrator w/ Candy EQ | SmolLM3-3B 1.58-bit Ternary Core | `a0a4bfb9-e847-4c38-be39-7aee398f0795` | `Omega_Jev` |
 | **SIR_LINK** | Sovereign Shortlink Dispatch, URL Routing & Attribution | Go Bifrost / Dub Cartridge | `a0a4bfb9-e847-4c38-be39-7aee398f0795` | `Omega_SirLink` |

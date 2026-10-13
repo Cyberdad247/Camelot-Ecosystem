@@ -2,7 +2,7 @@
   {
     "knight_id": "LADY_APIS",
     "cloudbrain_uuid": "378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f",
-    "spark_id": "0x378D6049FFC34ED3A9E747FFC5C0AC3F",
+    "spark_id": "0x378D6049FFC34ED3A9E74FFC5C0AC3F",
     "role": "Bio-Kinetic Swarm/Horde Conductor & BASHR Forager",
     "model": "Gemini 3.8 Flash / NullClaw",
     "summoning_rune": "Omega_Apis",
@@ -15,6 +15,12 @@
       "system_instruction.md"
     ],
     "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "behavioral_contract": "FATHER_CAMELOT",
+    "provenance_signature": "HMAC-SHA256-LADY_APIS-SEAL",
+    "primary_language": "Shell/PowerShell",
+    "languages": [
+      "Shell/PowerShell"
+    ],
     "mesh_nodes": [
       "cybertronia",
       "vps-camelot-hub",
@@ -22,6 +28,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-20T00:29:47.551119+00:00"
+    "updated_at": "2026-10-12T17:19:56.260039+00:00"
   }
 ]

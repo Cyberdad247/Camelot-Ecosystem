@@ -1,10 +1,33 @@
-{
-  "knight_id": "SIR_LINK",
-  "vfs_uri": "vfs://worldtree/knights/sir_link/tether.json",
-  "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-  "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-  "title": "Sovereign Shortlink Dispatch, URL Routing and Attribution",
-  "role": "High Herald of Sovereign Redirection and Dub Attribution",
-  "substrate": "Go Bifrost / Dub Cartridge",
-  "last_sync": "2026-10-07T13:45:00.000000+00:00"
-}
+[
+  {
+    "knight_id": "SIR_LINK",
+    "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "spark_id": "0x5C8BA9021D3B4EC9B71F84979CDC55BA",
+    "role": "Sovereign Shortlink Dispatch, URL Routing & Attribution",
+    "model": "Go Bifrost / Dub Cartridge",
+    "summoning_rune": "Omega_SIR_LINK",
+    "vfs_mount": "vfs/notebooks/a0a4bfb9-e847-4c38-be39-7aee398f0795/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "behavioral_contract": "FATHER_CAMELOT",
+    "provenance_signature": "HMAC-SHA256-SIR_LINK-SEAL",
+    "primary_language": "Go",
+    "languages": [
+      "Go"
+    ],
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-10-12T17:19:56.260039+00:00"
+  }
+]

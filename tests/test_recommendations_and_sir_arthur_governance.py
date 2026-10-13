@@ -67,9 +67,10 @@ def test_sir_arthur_scarcity_governor_role_and_character_sheet():
 
     assert "SIR_ARTHUR" in data["knights"]
     arthur = data["knights"]["SIR_ARTHUR"]
-    assert arthur["role"] == "VPS Scarcity Governor, 256MB RSS Ceiling Enforcer, Nano-Squire High Command"
+    assert "Omega Knight Sovereign Oversight Governor" in arthur["role"]
+    assert "VPS Scarcity Governor" in arthur["role"]
     assert arthur["cloudbrain_uuid"] == "a0a4bfb9-e847-4c38-be39-7aee398f0795", "Sir Arthur anchored to World Tree Root"
-    assert len(arthur["responsibilities"]) == 4
+    assert len(arthur["responsibilities"]) >= 4
     assert any("256MB RSS" in r for r in arthur["responsibilities"])
 
     # Verify vps_fallback_governing_law

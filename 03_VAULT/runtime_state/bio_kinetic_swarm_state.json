@@ -1,26 +1,12 @@
 {
-  "timestamp": 1791098675.7045052,
+  "timestamp": 1791739836.4411473,
   "governor": "BIO_KINETIC_SWARM",
   "cloudbrain_uuid": "93b21c40-10ff-4e89-a212-08f37b1297e1",
   "cellular_diode_enforced": true,
   "nanobots_active": true,
   "tasks_executed": 3,
   "results": {
-    "cell_sir_codex_1d1621": {
-      "knight_id": "SIR_CODEX",
-      "domain": "Parallel_Task_1",
-      "status": "NOMINAL",
-      "payload": "Task 1 Success",
-      "reports": []
-    },
-    "cell_sir_syntax_6817ee": {
-      "knight_id": "SIR_SYNTAX",
-      "domain": "Parallel_Task_3",
-      "status": "NOMINAL",
-      "payload": "Task 3 Success",
-      "reports": []
-    },
-    "cell_sir_forge_0f5530": {
+    "cell_sir_forge_7f9a1a": {
       "knight_id": "SIR_FORGE",
       "domain": "Parallel_Task_2_Failing",
       "status": "ISOLATED_FAILURE",
@@ -30,14 +16,28 @@
       },
       "reports": [
         {
-          "nanobot_id": "nano_be0eb7",
+          "nanobot_id": "nano_5c60e1",
           "sentry_type": "AST_SYNTAX",
           "status": "FAULT_DETECTED",
           "diagnostics": "Unhandled error trapped in cellular diode: Unrecoverable failure",
           "repaired_code": null,
-          "timestamp": 1791098675.704089
+          "timestamp": 1791739836.4406059
         }
       ]
+    },
+    "cell_sir_syntax_570d0b": {
+      "knight_id": "SIR_SYNTAX",
+      "domain": "Parallel_Task_3",
+      "status": "NOMINAL",
+      "payload": "Task 3 Success",
+      "reports": []
+    },
+    "cell_sir_codex_0916ae": {
+      "knight_id": "SIR_CODEX",
+      "domain": "Parallel_Task_1",
+      "status": "NOMINAL",
+      "payload": "Task 1 Success",
+      "reports": []
     }
   }
 }

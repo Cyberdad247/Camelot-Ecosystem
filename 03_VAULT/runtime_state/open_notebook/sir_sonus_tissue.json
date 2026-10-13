@@ -1,72 +1,6 @@
 [
   {
     "knight_id": "SIR_SONUS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//channel channel Sir Lukas now",
-    "content": "Alias for //REYA_CHANNEL voice persona interchange",
-    "vfs_path": "vfs://worldtree/knights/sir_sonus/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_SONUS",
-    "open_viking_tether": "open_viking://worldtree/sir_sonus",
-    "updated_at": "2026-10-04T23:49:45.585093+00:00"
-  },
-  {
-    "knight_id": "SIR_SONUS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//channel channel Sir Lukas now",
-    "content": "Alias for //REYA_CHANNEL voice persona interchange",
-    "vfs_path": "vfs://worldtree/knights/sir_sonus/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_SONUS",
-    "open_viking_tether": "open_viking://worldtree/sir_sonus",
-    "updated_at": "2026-10-04T23:49:28.369820+00:00"
-  },
-  {
-    "knight_id": "SIR_SONUS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//channel channel Sir Lukas now",
-    "content": "Alias for //REYA_CHANNEL voice persona interchange",
-    "vfs_path": "vfs://worldtree/knights/sir_sonus/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_SONUS",
-    "open_viking_tether": "open_viking://worldtree/sir_sonus",
-    "updated_at": "2026-10-04T23:49:06.044912+00:00"
-  },
-  {
-    "knight_id": "SIR_SONUS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//REYA_CHANNEL switch to Sir Boris please",
-    "content": "Dynamic voice persona interchange across Round Table Knights via Reya Universal Fabric",
-    "vfs_path": "vfs://worldtree/knights/sir_sonus/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_SONUS",
-    "open_viking_tether": "open_viking://worldtree/sir_sonus",
-    "updated_at": "2026-10-04T23:48:43.062431+00:00"
-  },
-  {
-    "knight_id": "SIR_SONUS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//REYA_CHANNEL switch to Sir Boris please",
-    "content": "Dynamic voice persona interchange across Round Table Knights via Reya Universal Fabric",
-    "vfs_path": "vfs://worldtree/knights/sir_sonus/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_SONUS",
-    "open_viking_tether": "open_viking://worldtree/sir_sonus",
-    "updated_at": "2026-10-04T23:48:32.313112+00:00"
-  },
-  {
-    "knight_id": "SIR_SONUS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//REYA_CHANNEL switch to Sir Boris please",
-    "content": "Dynamic voice persona interchange across Round Table Knights via Reya Universal Fabric",
-    "vfs_path": "vfs://worldtree/knights/sir_sonus/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_SONUS",
-    "open_viking_tether": "open_viking://worldtree/sir_sonus",
-    "updated_at": "2026-10-04T23:48:06.355624+00:00"
-  },
-  {
-    "knight_id": "SIR_SONUS",
     "cloudbrain_uuid": "6272aa35-c285-4edc-81bc-2824ab519edf",
     "spark_id": "0x6272AA35C2854EDC81BC2824AB519EDF",
     "role": "Multivoice Audio Routing & Aoede S2S",
@@ -81,6 +15,12 @@
       "system_instruction.md"
     ],
     "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "behavioral_contract": "FATHER_CAMELOT",
+    "provenance_signature": "HMAC-SHA256-SIR_SONUS-SEAL",
+    "primary_language": "Python",
+    "languages": [
+      "Python"
+    ],
     "mesh_nodes": [
       "cybertronia",
       "vps-camelot-hub",
@@ -88,6 +28,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-20T00:29:47.551119+00:00"
+    "updated_at": "2026-10-12T17:19:56.260039+00:00"
   }
 ]

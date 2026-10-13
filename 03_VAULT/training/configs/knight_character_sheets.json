@@ -59,7 +59,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-ANYA_OMEGA-SEAL"
     },
     "MERLIN_OMEGA": {
       "knight_id": "MERLIN_OMEGA",
@@ -116,7 +117,8 @@
       "languages": [
         "Go"
       ],
-      "primary_language": "Go"
+      "primary_language": "Go",
+      "provenance_signature": "HMAC-SHA256-MERLIN_OMEGA-SEAL"
     },
     "SIR_BORIS": {
       "knight_id": "SIR_BORIS",
@@ -174,7 +176,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-SIR_BORIS-SEAL"
     },
     "SIR_CODEX": {
       "knight_id": "SIR_CODEX",
@@ -232,7 +235,8 @@
       "languages": [
         "Rust"
       ],
-      "primary_language": "Rust"
+      "primary_language": "Rust",
+      "provenance_signature": "HMAC-SHA256-SIR_CODEX-SEAL"
     },
     "SIR_FORGE": {
       "knight_id": "SIR_FORGE",
@@ -272,7 +276,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-SIR_FORGE-SEAL"
     },
     "SIR_ALEX": {
       "knight_id": "SIR_ALEX",
@@ -312,7 +317,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-SIR_ALEX-SEAL"
     },
     "SIR_SENTINEL": {
       "knight_id": "SIR_SENTINEL",
@@ -352,7 +358,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-SIR_SENTINEL-SEAL"
     },
     "SIR_DEBUG": {
       "knight_id": "SIR_DEBUG",
@@ -391,7 +398,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-SIR_DEBUG-SEAL"
     },
     "SIR_GHOST": {
       "knight_id": "SIR_GHOST",
@@ -431,7 +439,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-SIR_GHOST-SEAL"
     },
     "LADY_APIS": {
       "knight_id": "LADY_APIS",
@@ -470,7 +479,8 @@
       "languages": [
         "Shell/PowerShell"
       ],
-      "primary_language": "Shell/PowerShell"
+      "primary_language": "Shell/PowerShell",
+      "provenance_signature": "HMAC-SHA256-LADY_APIS-SEAL"
     },
     "SIR_HELIO": {
       "knight_id": "SIR_HELIO",
@@ -513,7 +523,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-SIR_HELIO-SEAL"
     },
     "HERMES_PRIME": {
       "knight_id": "HERMES_PRIME",
@@ -580,7 +591,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-VIKING-BLOCK"
     },
     "LADY_MNEMOSYNE": {
       "knight_id": "LADY_MNEMOSYNE",
@@ -619,14 +631,15 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-LADY_MNEMOSYNE-SEAL"
     },
     "SIR_HEIMDALL": {
       "knight_id": "SIR_HEIMDALL",
       "spark_id": "0x3205F18991DA427296A93641FD642763",
       "name": "Sir Heimdall Omega (The Omniscient Sentinel & Bifrost Arch-Guardian)",
       "title": "Bifrost Sovereign Sentinel & Omega Boundary Arch-Guardian",
-      "layer": "L6 Omega Sentinel",
+      "layer": "L3 Perimeter",
       "role": "Omega Boundary Sentinel, Bifrost Sovereign Lock & mTLS Zero-Trust Gatekeeper",
       "summoning_rune": "Omega_Heimdall",
       "cloudbrain_uuid": "3205f189-91da-4272-96a9-3641fd642763",
@@ -644,13 +657,9 @@
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
       "domain_tags": [
-        "omega_sentinel",
         "bifrost_guardian",
         "mtls_boundary",
-        "perimeter_lock",
-        "warp_gate_gatekeeper",
-        "zero_trust_attestation",
-        "system2_sentinel"
+        "perimeter_lock"
       ],
       "behavioral_contract": "FATHER_CAMELOT",
       "mbti": "INFJ",
@@ -662,7 +671,8 @@
       "languages": [
         "Rust"
       ],
-      "primary_language": "Rust"
+      "primary_language": "Rust",
+      "provenance_signature": "HMAC-SHA256-SIR_HEIMDALL-SEAL"
     },
     "SIR_GALAHAD": {
       "knight_id": "SIR_GALAHAD",
@@ -700,7 +710,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-SIR_GALAHAD-SEAL"
     },
     "ARTHUR_OMEGA": {
       "knight_id": "ARTHUR_OMEGA",
@@ -739,7 +750,8 @@
       "languages": [
         "Go"
       ],
-      "primary_language": "Go"
+      "primary_language": "Go",
+      "provenance_signature": "HMAC-SHA256-ARTHUR_OMEGA-SEAL"
     },
     "SIR_STITCH": {
       "knight_id": "SIR_STITCH",
@@ -778,7 +790,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-SIR_STITCH-SEAL"
     },
     "SIR_ALCHEMIST": {
       "knight_id": "SIR_ALCHEMIST",
@@ -817,7 +830,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-SIR_ALCHEMIST-SEAL"
     },
     "SIR_RUSTCLAW": {
       "knight_id": "SIR_RUSTCLAW",
@@ -857,7 +871,8 @@
         "Rust",
         "Go"
       ],
-      "primary_language": "Rust"
+      "primary_language": "Rust",
+      "provenance_signature": "HMAC-SHA256-SIR_RUSTCLAW-SEAL"
     },
     "SIR_HERMES": {
       "knight_id": "SIR_HERMES",
@@ -921,7 +936,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-VIKING-BLOCK"
     },
     "SIR_LANCELOT": {
       "knight_id": "SIR_LANCELOT",
@@ -960,7 +976,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-SIR_LANCELOT-SEAL"
     },
     "LADY_GUINEVERE": {
       "knight_id": "LADY_GUINEVERE",
@@ -999,7 +1016,8 @@
       "languages": [
         "Go"
       ],
-      "primary_language": "Go"
+      "primary_language": "Go",
+      "provenance_signature": "HMAC-SHA256-LADY_GUINEVERE-SEAL"
     },
     "SIR_MNEMO": {
       "knight_id": "SIR_MNEMO",
@@ -1038,7 +1056,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-SIR_MNEMO-SEAL"
     },
     "SIR_SONUS": {
       "knight_id": "SIR_SONUS",
@@ -1088,7 +1107,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-SIR_SONUS-SEAL"
     },
     "SIR_AURELIUS": {
       "knight_id": "SIR_AURELIUS",
@@ -1126,7 +1146,8 @@
       "languages": [
         "Rust"
       ],
-      "primary_language": "Rust"
+      "primary_language": "Rust",
+      "provenance_signature": "HMAC-SHA256-SIR_AURELIUS-SEAL"
     },
     "SIR_PROXY": {
       "knight_id": "SIR_PROXY",
@@ -1164,7 +1185,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-SIR_PROXY-SEAL"
     },
     "LADY_VERITAS": {
       "knight_id": "LADY_VERITAS",
@@ -1202,7 +1224,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-LADY_VERITAS-SEAL"
     },
     "SIR_OCTAVIAN": {
       "knight_id": "SIR_OCTAVIAN",
@@ -1241,7 +1264,8 @@
         "Go",
         "Python"
       ],
-      "primary_language": "Go"
+      "primary_language": "Go",
+      "provenance_signature": "HMAC-SHA256-SIR_OCTAVIAN-SEAL"
     },
     "SIR_GAWAIN": {
       "knight_id": "SIR_GAWAIN",
@@ -1281,7 +1305,8 @@
         "Go",
         "Python"
       ],
-      "primary_language": "Rust"
+      "primary_language": "Rust",
+      "provenance_signature": "HMAC-SHA256-SIR_GAWAIN-SEAL"
     },
     "SIR_MARCUS": {
       "knight_id": "SIR_MARCUS",
@@ -1319,7 +1344,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-SIR_MARCUS-SEAL"
     },
     "SIR_OPENCLAW": {
       "knight_id": "SIR_OPENCLAW",
@@ -1357,7 +1383,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-SIR_OPENCLAW-SEAL"
     },
     "SIR_ZEROCLAW": {
       "knight_id": "SIR_ZEROCLAW",
@@ -1395,7 +1422,8 @@
       "languages": [
         "Rust"
       ],
-      "primary_language": "Rust"
+      "primary_language": "Rust",
+      "provenance_signature": "HMAC-SHA256-SIR_ZEROCLAW-SEAL"
     },
     "SIR_SCAVENGER": {
       "knight_id": "SIR_SCAVENGER",
@@ -1433,7 +1461,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-SIR_SCAVENGER-SEAL"
     },
     "SIR_VAELEN": {
       "knight_id": "SIR_VAELEN",
@@ -1471,7 +1500,8 @@
       "languages": [
         "Shell/PowerShell"
       ],
-      "primary_language": "Shell/PowerShell"
+      "primary_language": "Shell/PowerShell",
+      "provenance_signature": "HMAC-SHA256-SIR_VAELEN-SEAL"
     },
     "SIR_VALERIAN": {
       "knight_id": "SIR_VALERIAN",
@@ -1509,7 +1539,8 @@
       "languages": [
         "Rust"
       ],
-      "primary_language": "Rust"
+      "primary_language": "Rust",
+      "provenance_signature": "HMAC-SHA256-SIR_VALERIAN-SEAL"
     },
     "SIR_HUGGINGFACE": {
       "knight_id": "SIR_HUGGINGFACE",
@@ -1548,7 +1579,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-SIR_HUGGINGFACE-SEAL"
     },
     "HERMES_AGENT_EVOLUTION": {
       "knight_id": "HERMES_AGENT_EVOLUTION",
@@ -1611,7 +1643,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-VIKING-BLOCK"
     },
     "ANYA_QUANTUM_MANTRA": {
       "knight_id": "ANYA_QUANTUM_MANTRA",
@@ -1642,7 +1675,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-ANYA_QUANTUM_MANTRA-SEAL"
     },
     "BIO_KINETIC_SWARM": {
       "knight_id": "BIO_KINETIC_SWARM",
@@ -1674,7 +1708,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-BIO_KINETIC_SWARM-SEAL"
     },
     "CAMELOT_V1000": {
       "knight_id": "CAMELOT_V1000",
@@ -1706,7 +1741,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-CAMELOT_V1000-SEAL"
     },
     "BIFROST": {
       "knight_id": "BIFROST",
@@ -1739,7 +1775,8 @@
         "Rust",
         "TypeScript"
       ],
-      "primary_language": "Rust"
+      "primary_language": "Rust",
+      "provenance_signature": "HMAC-SHA256-BIFROST-SEAL"
     },
     "FATHER_CAMELOT": {
       "knight_id": "FATHER_CAMELOT",
@@ -1778,7 +1815,8 @@
       "languages": [
         "Go"
       ],
-      "primary_language": "Go"
+      "primary_language": "Go",
+      "provenance_signature": "HMAC-SHA256-FATHER_CAMELOT-SEAL"
     },
     "WORLD_TREE": {
       "knight_id": "WORLD_TREE",
@@ -1810,7 +1848,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-WORLD_TREE-SEAL"
     },
     "ALPHA_OMEGA": {
       "knight_id": "ALPHA_OMEGA",
@@ -1842,7 +1881,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-ALPHA_OMEGA-SEAL"
     },
     "SIR_HELIOS": {
       "knight_id": "SIR_HELIOS",
@@ -1909,7 +1949,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-SIR_HELIOS-SEAL"
     },
     "LADY_MNEMOSYNE_\u03a9": {
       "knight_id": "LADY_MNEMOSYNE_\u03a9",
@@ -1958,7 +1999,8 @@
       "languages": [
         "Go"
       ],
-      "primary_language": "Go"
+      "primary_language": "Go",
+      "provenance_signature": "HMAC-SHA256-LADY_MNEMOSYNE_\u03a9-SEAL"
     },
     "ANTIGRAVITY": {
       "knight_id": "ANTIGRAVITY",
@@ -1990,7 +2032,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-ANTIGRAVITY-SEAL"
     },
     "KICKBOX": {
       "knight_id": "KICKBOX",
@@ -2022,7 +2065,8 @@
       "languages": [
         "TypeScript"
       ],
-      "primary_language": "TypeScript"
+      "primary_language": "TypeScript",
+      "provenance_signature": "HMAC-SHA256-KICKBOX-SEAL"
     },
     "INSPIRA": {
       "knight_id": "INSPIRA",
@@ -2054,7 +2098,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-INSPIRA-SEAL"
     },
     "INVISIONED_MARKETING": {
       "knight_id": "INVISIONED_MARKETING",
@@ -2086,7 +2131,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-INVISIONED_MARKETING-SEAL"
     },
     "KNIGHT_STRATEGOS": {
       "knight_id": "KNIGHT_STRATEGOS",
@@ -2118,7 +2164,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-KNIGHT_STRATEGOS-SEAL"
     },
     "SIR_KAY": {
       "knight_id": "SIR_KAY",
@@ -2156,7 +2203,8 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-SIR_KAY-SEAL"
     },
     "HERMES_PRIME_VFS_FORGE": {
       "knight_id": "HERMES_PRIME_VFS_FORGE",
@@ -2220,59 +2268,67 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-VIKING-BLOCK"
     },
     "SIR_ARTHUR": {
       "knight_id": "SIR_ARTHUR",
       "spark_id": "0x4152544855525F53434152434954595F474F56",
-      "name": "Sir Arthur (VPS Scarcity Governor)",
-      "title": "High Commander of Resource Boundaries & VPS Scarcity Governor",
-      "layer": "L4 Tactical",
-      "role": "VPS Scarcity Governor, 256MB RSS Ceiling Enforcer, Nano-Squire High Command",
+      "name": "Sir Arthur \u03a9 (Omega Sovereign Governor)",
+      "title": "Omega Knight of Sovereign Oversight, High Governor of Law Enforcement Knights & VPS Scarcity Command",
+      "layer": "L7 Sovereign",
+      "role": "Omega Knight Sovereign Oversight Governor, High Command of Law Enforcement Knights (Sir Sentinel, Sir Octavian, Sir Gawain), VPS Scarcity Governor, 256MB RSS Ceiling Enforcer, Nano-Squire High Command",
       "summoning_rune": "Omega_SIR_ARTHUR",
       "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
       "vfs_path": "vfs://worldtree/knights/sir_arthur/tether.json",
       "mempalace_wing": "WING_WORLDTREE_SIR_ARTHUR",
       "open_viking_node": "open_viking://worldtree/sir_arthur",
-      "primary_engine": "Sovereign Executive",
-      "skill_tier": "S5 Strategic",
+      "primary_engine": "Sovereign Executive Substrate",
+      "skill_tier": "S5 Sovereign",
       "ocean_vector": {
-        "O": 0.91,
-        "C": 0.98,
-        "E": 0.94,
-        "A": 0.65,
-        "N": 0.12
+        "O": 0.95,
+        "C": 0.99,
+        "E": 0.95,
+        "A": 0.7,
+        "N": 0.05
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
       "domain_tags": [
-        "tactical",
-        "kinetic"
+        "omega_governance",
+        "sovereign_oversight",
+        "law_enforcement_command",
+        "scarcity_discipline"
       ],
       "responsibilities": [
-        "Enforce 256MB RSS boundary and memory scarcity ceiling under the 4GB VPS constraint",
+        "Exercise Arch-Sovereign Omega Knight oversight authority across Round Table law enforcement and governance Knights (Sir Sentinel, Sir Octavian, Sir Gawain, Sir Ghost, Sir Galahad)",
+        "Enforce 256MB RSS boundary and memory scarcity ceiling under the 4GB VPS constraint and Global Law 03",
         "Supervise BoundedEdgeOutbox (MAX_OUTBOX_ENTRIES = 1000) and evict non-critical tasks during memory spikes",
         "Govern all node-level Nano-Squires, collecting their telemetry and escalating high-priority alerts to Sovereign High Command",
         "Rule on offline autonomous mode and restricted-safe state transitions"
       ],
       "character_sheet": {
-        "pantheon_class": "Sovereign Scarcity Command",
-        "archetype": "Titanium Law Arbiter",
+        "pantheon_class": "Omega Sovereign Oversight Command",
+        "archetype": "Titanium Law Arbiter & High Governor",
         "stats": {
-          "intellect": 98,
+          "intellect": 99,
           "governance_authority": 100,
           "scarcity_discipline": 100,
-          "mesh_resonance": 99,
-          "tactical_defense": 97
+          "mesh_resonance": 100,
+          "tactical_defense": 99
         },
-        "governing_law": "VPS_SCARCITY_LAW_4GB // MAX_RSS_256MB",
+        "governing_law": "OMEGA_GOVERNANCE_OVERRIDE // VPS_SCARCITY_LAW_4GB // MAX_RSS_256MB",
         "worldtree_anchor": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
         "active_subsystems": [
+          "Omega Knight Oversight Matrix (control_plane/runners/vkg_execution_engine.py)",
           "VPS Fallback Governor (control_plane/dispatch/vps_fallback_governing_law.py)",
           "Bounded Edge Outbox (MAX_ENTRIES=1000)",
+          "Law Enforcement Knights Command Mesh (SIR_SENTINEL, SIR_OCTAVIAN, SIR_GAWAIN)",
           "Nano-Squire High Command Mesh",
           "Sovereign Escalation Channel"
         ],
         "special_invocations": [
+          "//KNIGHT_GOV",
+          "//OVERSIGHT",
           "//SCARCITY_GOV",
           "//NANO_SQUIRE_STATUS",
           "//RESTRICTED_SAFE"
@@ -2283,22 +2339,24 @@
       "mbti": "ENFJ",
       "mbti_profile": {
         "code": "ENFJ",
-        "archetype": "Protagonist / Sovereign Guide",
-        "dynamic_role": "VPS Scarcity Governor, 256MB RSS Ceiling Enforcer, Nano-Squire High Command"
+        "archetype": "Protagonist / Omega Sovereign Guide",
+        "dynamic_role": "Omega Knight Sovereign Oversight Governor & High Command of Law Enforcement Knights"
       },
       "languages": [
-        "Go"
+        "Go",
+        "Python"
       ],
-      "primary_language": "Go"
+      "primary_language": "Go",
+      "provenance_signature": "HMAC-SHA256-ARTHUR-CROWN"
     },
     "LADY_ALEXANDRIA": {
       "knight_id": "LADY_ALEXANDRIA",
       "spark_id": "0x7E3A19C08D4549FEB2E119A5C70942A1",
       "name": "Lady Alexandria (Keeper of the Cryptographic Keypass Archives)",
       "title": "Lexicon of Knowledge & Warp Gate Keypass Sovereign",
-      "layer": "L5 Agentic",
+      "layer": "L4 Tactical",
       "role": "Cryptographic Keypass Vault & Living Archive Sovereign",
-      "summoning_rune": "Omega_Alexandria",
+      "summoning_rune": "Omega_LADY_ALEXANDRIA",
       "cloudbrain_uuid": "7e3a19c0-8d45-49fe-b2e1-19a5c70942a1",
       "vfs_path": "vfs://worldtree/knights/lady_alexandria/tether.json",
       "mempalace_wing": "WING_WORLDTREE_LADY_ALEXANDRIA",
@@ -2314,11 +2372,8 @@
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
       "domain_tags": [
-        "cryptography",
-        "keypass",
-        "warp_gates",
-        "knowledge_vault",
-        "spark_id"
+        "tactical",
+        "kinetic"
       ],
       "behavioral_contract": "FATHER_CAMELOT",
       "mbti": "INFJ",
@@ -2330,20 +2385,21 @@
       "languages": [
         "Python"
       ],
-      "primary_language": "Python"
+      "primary_language": "Python",
+      "provenance_signature": "HMAC-SHA256-LADY_ALEXANDRIA-SEAL"
     },
     "HEIMDALL_OMEGA": {
       "knight_id": "HEIMDALL_OMEGA",
       "spark_id": "0x3205F18991DA427296A93641FD642763",
       "name": "Sir Heimdall Omega (The Omniscient Sentinel & Bifrost Arch-Guardian)",
       "title": "Bifrost Sovereign Sentinel & Omega Boundary Arch-Guardian",
-      "layer": "L6 Omega Sentinel",
+      "layer": "L4 Tactical",
       "role": "Omega Boundary Sentinel, Bifrost Sovereign Lock & mTLS Zero-Trust Gatekeeper",
-      "summoning_rune": "Omega_Heimdall",
+      "summoning_rune": "Omega_HEIMDALL_OMEGA",
       "cloudbrain_uuid": "3205f189-91da-4272-96a9-3641fd642763",
-      "vfs_path": "vfs://worldtree/knights/sir_heimdall/tether.json",
-      "mempalace_wing": "WING_WORLDTREE_SIR_HEIMDALL",
-      "open_viking_node": "open_viking://worldtree/sir_heimdall",
+      "vfs_path": "vfs://worldtree/knights/heimdall_omega/tether.json",
+      "mempalace_wing": "WING_WORLDTREE_HEIMDALL_OMEGA",
+      "open_viking_node": "open_viking://worldtree/heimdall_omega",
       "primary_engine": "Gemini 3.8 Flash / Claude 3.5 Sonnet / Sovereign Substrate",
       "skill_tier": "S5 Strategic",
       "ocean_vector": {
@@ -2355,13 +2411,8 @@
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
       "domain_tags": [
-        "omega_sentinel",
-        "bifrost_guardian",
-        "mtls_boundary",
-        "perimeter_lock",
-        "warp_gate_gatekeeper",
-        "zero_trust_attestation",
-        "system2_sentinel"
+        "tactical",
+        "kinetic"
       ],
       "behavioral_contract": "FATHER_CAMELOT",
       "mbti": "INFJ",
@@ -2373,16 +2424,17 @@
       "languages": [
         "Rust"
       ],
-      "primary_language": "Rust"
+      "primary_language": "Rust",
+      "provenance_signature": "HMAC-SHA256-HEIMDALL_OMEGA-SEAL"
     },
     "LUKAS_OMEGA": {
       "knight_id": "LUKAS_OMEGA",
       "spark_id": "0x7B9C1024D98A4BC2A18F93765CDC88FE",
       "name": "Lukas Omega (Kinetic Actuator)",
       "title": "L2 Bare-Metal Actuator & Host Daemon Governor",
-      "layer": "L2 Kinetic",
+      "layer": "L4 Tactical",
       "role": "L2 Kinetic Actuator & Host Daemon Governor (Reya OS)",
-      "summoning_rune": "Omega_Lukas",
+      "summoning_rune": "Omega_LUKAS_OMEGA",
       "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
       "vfs_path": "vfs://worldtree/knights/lukas_omega/tether.json",
       "mempalace_wing": "WING_WORLDTREE_LUKAS_OMEGA",
@@ -2398,10 +2450,8 @@
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
       "domain_tags": [
-        "process_governor",
-        "pid_control",
-        "bare_metal",
-        "sandlock"
+        "tactical",
+        "kinetic"
       ],
       "behavioral_contract": "FATHER_CAMELOT",
       "mbti": "ESTP",
@@ -2432,16 +2482,17 @@
         "Rust",
         "Go"
       ],
-      "primary_language": "Rust"
+      "primary_language": "Rust",
+      "provenance_signature": "HMAC-SHA256-LUKAS_OMEGA-SEAL"
     },
     "JEV_OMEGA": {
       "knight_id": "JEV_OMEGA",
       "spark_id": "0x4E8AA1295F3B4DC3B81F74919CDC99FA",
       "name": "Jev Omega (Offline System-2 Orchestrator)",
       "title": "SmolLM3 1.58-bit Ternary Core with Candy EQ",
-      "layer": "L3 Cognitive",
+      "layer": "L4 Tactical",
       "role": "Offline System-2 Orchestrator w/ Candy EQ",
-      "summoning_rune": "Omega_Jev",
+      "summoning_rune": "Omega_JEV_OMEGA",
       "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
       "vfs_path": "vfs://worldtree/knights/jev_omega/tether.json",
       "mempalace_wing": "WING_WORLDTREE_JEV_OMEGA",
@@ -2457,10 +2508,8 @@
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
       "domain_tags": [
-        "offline_system2",
-        "ternary_weights",
-        "candy_eq",
-        "lightbot_wasm"
+        "tactical",
+        "kinetic"
       ],
       "behavioral_contract": "FATHER_CAMELOT",
       "mbti": "INTP",
@@ -2490,16 +2539,17 @@
       "languages": [
         "WASM"
       ],
-      "primary_language": "WASM"
+      "primary_language": "WASM",
+      "provenance_signature": "HMAC-SHA256-JEV_OMEGA-SEAL"
     },
     "SIR_LINK": {
       "knight_id": "SIR_LINK",
       "spark_id": "0x5C8BA9021D3B4EC9B71F84979CDC55BA",
       "name": "Sir Link (Sovereign URL & Attribution Courier)",
       "title": "High Herald of Sovereign Redirection & Dub Attribution",
-      "layer": "L4 Gateway",
+      "layer": "L4 Tactical",
       "role": "Sovereign Shortlink Dispatch, URL Routing & Attribution",
-      "summoning_rune": "Omega_SirLink",
+      "summoning_rune": "Omega_SIR_LINK",
       "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
       "vfs_path": "vfs://worldtree/knights/sir_link/tether.json",
       "mempalace_wing": "WING_WORLDTREE_SIR_LINK",
@@ -2515,10 +2565,8 @@
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
       "domain_tags": [
-        "url_shortener",
-        "bifrost_redirect",
-        "dub_engine",
-        "attribution"
+        "tactical",
+        "kinetic"
       ],
       "behavioral_contract": "FATHER_CAMELOT",
       "mbti": "ENFJ",
@@ -2530,9 +2578,10 @@
       "languages": [
         "Go"
       ],
-      "primary_language": "Go"
+      "primary_language": "Go",
+      "provenance_signature": "HMAC-SHA256-SIR_LINK-SEAL"
     }
   },
-  "updated_at": "2026-09-20T00:29:47.551119+00:00",
+  "updated_at": "2026-10-12T17:19:56.260039+00:00",
   "last_synchronized": "2026-09-17T14:50:00.000000+00:00"
 }

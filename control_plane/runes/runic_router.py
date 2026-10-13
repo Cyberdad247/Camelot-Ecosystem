@@ -391,6 +391,34 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 2,
         "handler": "_handle_scarcity_gov",
     },
+    "//KNIGHT_GOV": {
+        "knight": "anya_omega",
+        "description": "Dynamic Knight Governance & Advanced Oversight Delegation across the Round Table",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_knight_governance",
+    },
+    "//OVERSIGHT": {
+        "knight": "anya_omega",
+        "description": "Alias for //KNIGHT_GOV dynamic knight-to-knight advanced oversight",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_knight_governance",
+    },
+    "//ARTHUR_ENFORCE": {
+        "knight": "sir_arthur",
+        "description": "Sir Arthur Omega Sovereign — Enforce Behavioral Contract via Father's Notebook, Merlin's Math Architecture & Persona Trinity",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_arthur_contract_enforce",
+    },
+    "//CONTRACT_AUDIT": {
+        "knight": "sir_arthur",
+        "description": "Alias for //ARTHUR_ENFORCE roster-wide behavioral contract & persona audit",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_arthur_contract_enforce",
+    },
     "//PURGE_MEMORY": {
         "knight": "sir_forge",
         "description": "Zero-out local and remote vector indices + JSON-LD memories",
@@ -1525,7 +1553,36 @@ def _handle_genesis(param: str, context: dict) -> dict:
 
 
 def _handle_assimilate(param: str, context: dict) -> dict:
-    return {"action": "omega_assimilate", "source": "cloud_brain_scour", "target": "CLAUDE.md"}
+    try:
+        from control_plane.assimilation.vmax_plane_router import VMAXPlaneRouter
+        from control_plane.assimilation.compendium_mutator import MasterCompendiumMutator
+        from datetime import datetime, timezone
+
+        task_id = f"TASK_ASSIM_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}"
+        verdict = VMAXPlaneRouter.classify_task(
+            task_id=task_id,
+            knight_id="SIR_HELIO",
+            action=param or "assimilate cloud brain",
+        )
+
+        mutator = MasterCompendiumMutator()
+        result = {
+            "action": "vmax_assimilate",
+            "task_id": task_id,
+            "runtime_plane": verdict.runtime_plane.value,
+            "doc_layer": verdict.doc_layer.value,
+            "vkg_node": verdict.vkg_node,
+            "ram_ceiling_mb": verdict.ram_ceiling_mb,
+            "status": "ASSIMILATED_INTO_VMAX_PIPELINE",
+        }
+        return result
+    except Exception as exc:
+        return {
+            "action": "omega_assimilate",
+            "source": "cloud_brain_scour",
+            "target": "CLAUDE.md",
+            "fallback_reason": str(exc),
+        }
 
 
 def _handle_scavenge(param: str, context: dict) -> dict:
@@ -2947,6 +3004,110 @@ def _handle_scarcity_gov(param: Any, context: dict) -> dict:
         "managed_squires_count": len(active_squires),
         "reporting_channel": "Sir Arthur -> Sovereign High Command (King Arthur / User)",
         "status": "GOVERNANCE_ACTIVE",
+    }
+
+
+def _handle_knight_governance(param: Any, context: dict) -> dict:
+    r"""
+    //KNIGHT_GOV / //OVERSIGHT — Dynamic Knight-to-Knight Advanced Oversight Dispatch.
+    Gives governance authority to a Knight over specific target Knights or fleets.
+    """
+    from control_plane.runners.vkg_execution_engine import (
+        KnightOversightRule,
+        V0_Governance,
+        V1_Intent,
+        V2_Structure,
+        VKGFullSpectrumEngine,
+    )
+
+    raw_arg = (str(param).strip() if param and not isinstance(param, dict) else "") or "governor=SIR_SENTINEL target=SIR_CODEX max_ram=1024"
+    parts = raw_arg.split()
+    governor = "SIR_SENTINEL"
+    target = "SIR_CODEX"
+    max_ram = 1024
+    forbidden = set()
+    action = "audit_and_enforce"
+
+    for p in parts:
+        if p.startswith("governor="):
+            governor = p.split("=", 1)[1].upper()
+        elif p.startswith("target="):
+            target = p.split("=", 1)[1].upper()
+        elif p.startswith("max_ram="):
+            try:
+                max_ram = int(p.split("=", 1)[1])
+            except ValueError:
+                pass
+        elif p.startswith("deny="):
+            forbidden.update(p.split("=", 1)[1].split(","))
+        elif p.startswith("action="):
+            action = p.split("=", 1)[1]
+
+    rule = KnightOversightRule(
+        governing_knight=governor,
+        target_knights={target},
+        max_ram_mb=max_ram,
+        forbidden_capabilities=forbidden,
+    )
+
+    v0 = V0_Governance(knight_oversight_registry={governor: rule})
+    engine = VKGFullSpectrumEngine(governance=v0)
+
+    # Validate intent execution through governor oversight
+    intent = V1_Intent(
+        goal=f"Knight Oversight Directive: {governor} overseeing {target} for {action}",
+        requested_capabilities={"vfs.read", "process.allowlisted"},
+        requested_ram_mb=min(max_ram, 1024),
+        governing_knight=governor,
+        target_knight=target,
+    )
+    structure = V2_Structure(
+        schema_version="camelot-cartridge/1",
+        entrypoint="oversight_monitor",
+        required_capabilities={"vfs.read", "process.allowlisted"},
+    )
+
+    receipt, reflected = engine.execute(intent, structure)
+
+    return {
+        "action": "knight_governance_oversight",
+        "governing_knight": governor,
+        "target_knight": target,
+        "oversight_rule": {
+            "max_ram_mb": max_ram,
+            "forbidden_capabilities": sorted(forbidden),
+            "target_knights": sorted(rule.target_knights),
+        },
+        "receipt_id": receipt.receipt_id,
+        "status": receipt.status,
+        "cycle_count": reflected.cycle_count,
+        "vfs_crystal_uri": reflected.vfs_crystal_uri,
+        "new_invariants": reflected.new_invariants_learned,
+    }
+
+
+def _handle_arthur_contract_enforce(param: Any, context: dict) -> dict:
+    """Sir Arthur Omega Knight — Enforce roster-wide Behavioral Contract via Father's Notebook,
+    Merlin's Mathematical Architecture, persona trinity across languages, Aegis armor, and cryptographic licensing."""
+    from control_plane.governance.sir_arthur_contract_enforcer import sir_arthur_contract_enforcer
+
+    report = sir_arthur_contract_enforcer.enforce_all_knights()
+    receipt_path = sir_arthur_contract_enforcer.issue_governance_receipt(report)
+
+    return {
+        "action": "arthur_contract_enforcement",
+        "governor": "SIR_ARTHUR",
+        "sovereign_authority": "KING_ARTHUR_VIZION",
+        "report_id": report.report_id,
+        "total_knights_audited": report.total_knights_audited,
+        "all_passed": report.all_passed,
+        "receipt_path": str(receipt_path),
+        "receipt_signature": report.receipt_signature,
+        "fathers_notebook_anchor": report.fathers_notebook_anchor,
+        "merlin_math_framework": report.merlin_math_framework,
+        "aegis_armor_bounds": report.aegis_armor_bounds,
+        "vps_rss_ceiling_mb": report.vps_rss_ceiling_mb,
+        "status": "ENFORCED_VERIFIED_SUCCESS" if report.all_passed else "CONTRACT_BREACH_DETECTED",
     }
 
 
@@ -4397,6 +4558,8 @@ _HANDLERS = {
     "_handle_wake_24_7_swarm_daemon": _handle_wake_24_7_swarm_daemon,
     "_handle_forge_squire": _handle_forge_squire,
     "_handle_scarcity_gov": _handle_scarcity_gov,
+    "_handle_knight_governance": _handle_knight_governance,
+    "_handle_arthur_contract_enforce": _handle_arthur_contract_enforce,
     "_handle_forge_factory": _handle_forge_factory,
     "_handle_translate_dag": _handle_translate_dag,
     "_handle_equip_skills": _handle_equip_skills,

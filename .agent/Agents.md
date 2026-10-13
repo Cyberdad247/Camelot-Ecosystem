@@ -22,4 +22,5 @@
 | **SIR_OCTAVIAN** | Factory Warden & WASM PTY Execution | Rust 1.96 / Wasmtime 14.0 | Port :8400 JSON telemetry, multi-terminal sandbox; vfs://worldtree/knights/sir_octavian/ |
 | **SIR_FORGE** | Kinetic Compiler, AST Refactoring & //FORGE Lead | Gemini 3.8 Flash / Cargo | Rapid AST patching & kinetic build pipeline; vfs://worldtree/knights/sir_forge/ |
 | **SIR_LINK** | Sovereign Shortlink Dispatch, URL Routing & Attribution | Go Bifrost / Dub Cartridge | Sub-millisecond Bifrost redirect (:3001/r/:slug) & VFS link tree; vfs://worldtree/knights/sir_link/ |
+| **SIR_ARTHUR_Ω** | Omega Sovereign Oversight Governor & High Command of Law Enforcement Knights | Sovereign Executive Substrate | Arch-Sovereign oversight of Sir Sentinel, Sir Octavian, Sir Gawain; 256MB VPS ceiling; vfs://worldtree/knights/sir_arthur/ |
 | **ARTHUR_OMEGA** | Sovereign King Authority & Governance | Human Operator (Vizion) | Supreme ethical compass and root lease authority; vfs://worldtree/knights/arthur_omega/ |

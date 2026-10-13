@@ -1,0 +1,1144 @@
+{
+  "report_id": "GOV_ARTHUR_REPORT_59A0AE5F2DE4",
+  "governor": "SIR_ARTHUR",
+  "sovereign_authority": "KING_ARTHUR_VIZION",
+  "timestamp": "2026-10-12T17:24:59.069459+00:00",
+  "total_knights_audited": 59,
+  "all_passed": true,
+  "fathers_notebook_anchor": "39299131-0ade-4f48-8ad4-a68878a6d3d9",
+  "merlin_math_framework": "Graph-of-Thought (GoT) + Test-Time Compute (TTC) + Dirac Symbolect (MGV eta=0.10)",
+  "aegis_armor_bounds": "hitl_threshold_lines=10, spiffe://camelot, zero-trust mutability, 4GB node / 8GB server / 256MB VPS ceiling",
+  "vps_rss_ceiling_mb": 256.0,
+  "receipt_signature": "HMAC-SHA256-ARTHUR-CROWN:2d75b861919bd585",
+  "knight_audits": {
+    "ANYA_OMEGA": {
+      "knight_id": "ANYA_OMEGA",
+      "spark_id": "0x32D389065AE84ECCB77E705D12C89F4A",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-ANYA_OMEGA-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/anya_omega",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "MERLIN_OMEGA": {
+      "knight_id": "MERLIN_OMEGA",
+      "spark_id": "0xAF927FDED7EB42EE8C7951B3E78EF39B",
+      "primary_language": "Go",
+      "languages": [
+        "Go"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-MERLIN_OMEGA-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/merlin_omega",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_BORIS": {
+      "knight_id": "SIR_BORIS",
+      "spark_id": "0xF7707DAA2D104DB88FDABE4661A27793",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_BORIS-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_boris",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_CODEX": {
+      "knight_id": "SIR_CODEX",
+      "spark_id": "0xE3B8C190F4A2D765E8B1C9F0A3D4E5B6",
+      "primary_language": "Rust",
+      "languages": [
+        "Rust"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_CODEX-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_codex",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_FORGE": {
+      "knight_id": "SIR_FORGE",
+      "spark_id": "0x91C5DA8BE2DE4A56B7FDC8B76C00AFC7",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_FORGE-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_forge",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_ALEX": {
+      "knight_id": "SIR_ALEX",
+      "spark_id": "0xF490C05ED8C4400887E15F901BF57C6A",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_ALEX-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_alex",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_SENTINEL": {
+      "knight_id": "SIR_SENTINEL",
+      "spark_id": "0x07CBB441F008424C820A85676210BE39",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_SENTINEL-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_sentinel",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_DEBUG": {
+      "knight_id": "SIR_DEBUG",
+      "spark_id": "0xFDC42A4A30604EACB57C8E6009ED634A",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_DEBUG-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_debug",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_GHOST": {
+      "knight_id": "SIR_GHOST",
+      "spark_id": "0x422A184B93E74DFD8A1275D2268B6C60",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_GHOST-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_ghost",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "LADY_APIS": {
+      "knight_id": "LADY_APIS",
+      "spark_id": "0x378D6049FFC34ED3A9E74FFC5C0AC3F",
+      "primary_language": "Shell/PowerShell",
+      "languages": [
+        "Shell/PowerShell"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-LADY_APIS-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/lady_apis",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_HELIO": {
+      "knight_id": "SIR_HELIO",
+      "spark_id": "0x56820318BB91451FAAC44B46424898CF",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_HELIO-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_helio",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "HERMES_PRIME": {
+      "knight_id": "HERMES_PRIME",
+      "spark_id": "0x28F89CB650484B5D9E94376082D24744",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-VIKING-BLOCK",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/hermes_prime",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "LADY_MNEMOSYNE": {
+      "knight_id": "LADY_MNEMOSYNE",
+      "spark_id": "0xA0A4BFB9E8474C38BE397AEE398F0795",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-LADY_MNEMOSYNE-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/lady_mnemosyne",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_HEIMDALL": {
+      "knight_id": "SIR_HEIMDALL",
+      "spark_id": "0x3205F18991DA427296A93641FD642763",
+      "primary_language": "Rust",
+      "languages": [
+        "Rust"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_HEIMDALL-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_heimdall",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_GALAHAD": {
+      "knight_id": "SIR_GALAHAD",
+      "spark_id": "0xE011085314EF403F8DEFBF3A5123986F",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_GALAHAD-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_galahad",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "ARTHUR_OMEGA": {
+      "knight_id": "ARTHUR_OMEGA",
+      "spark_id": "0xCBB310BD987E4B84BF4512D37D09CBEC",
+      "primary_language": "Go",
+      "languages": [
+        "Go"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-ARTHUR_OMEGA-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/arthur_omega",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_STITCH": {
+      "knight_id": "SIR_STITCH",
+      "spark_id": "0x0FDCCDC1A1D248C28948187398BFBEB5",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_STITCH-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_stitch",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_ALCHEMIST": {
+      "knight_id": "SIR_ALCHEMIST",
+      "spark_id": "0xD6BDD57C84D24E24BB10AD1FD179FB04",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_ALCHEMIST-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_alchemist",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_RUSTCLAW": {
+      "knight_id": "SIR_RUSTCLAW",
+      "spark_id": "0x2B3B6EC3E020484D914D92241A97EA55",
+      "primary_language": "Rust",
+      "languages": [
+        "Rust",
+        "Go"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_RUSTCLAW-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_rustclaw",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_HERMES": {
+      "knight_id": "SIR_HERMES",
+      "spark_id": "0x5DC31B8D169D4D4DAB90D12724FCA720",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-VIKING-BLOCK",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_hermes",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_LANCELOT": {
+      "knight_id": "SIR_LANCELOT",
+      "spark_id": "0xD8DD1669AEF44C348C44D9CC5E51E0C9",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_LANCELOT-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_lancelot",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "LADY_GUINEVERE": {
+      "knight_id": "LADY_GUINEVERE",
+      "spark_id": "0x8DCA4A862BB6433296B679899C0A9CCF",
+      "primary_language": "Go",
+      "languages": [
+        "Go"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-LADY_GUINEVERE-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/lady_guinevere",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_MNEMO": {
+      "knight_id": "SIR_MNEMO",
+      "spark_id": "0x8BF3F24EDA2E45B98719162FCD02A80D",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_MNEMO-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_mnemo",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_SONUS": {
+      "knight_id": "SIR_SONUS",
+      "spark_id": "0x6272AA35C2854EDC81BC2824AB519EDF",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_SONUS-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_sonus",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_AURELIUS": {
+      "knight_id": "SIR_AURELIUS",
+      "spark_id": "0x01AURELIUS000000000000000000001",
+      "primary_language": "Rust",
+      "languages": [
+        "Rust"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_AURELIUS-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_aurelius",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_PROXY": {
+      "knight_id": "SIR_PROXY",
+      "spark_id": "0x02PROXY0000000000000000000000002",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_PROXY-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_proxy",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "LADY_VERITAS": {
+      "knight_id": "LADY_VERITAS",
+      "spark_id": "0x03VERITAS000000000000000000003",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-LADY_VERITAS-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/lady_veritas",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_OCTAVIAN": {
+      "knight_id": "SIR_OCTAVIAN",
+      "spark_id": "0x04OCTAVIAN000000000000000000004",
+      "primary_language": "Go",
+      "languages": [
+        "Go",
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_OCTAVIAN-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_octavian",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_GAWAIN": {
+      "knight_id": "SIR_GAWAIN",
+      "spark_id": "0x05GAWAIN00000000000000000000005",
+      "primary_language": "Rust",
+      "languages": [
+        "Rust",
+        "Go",
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_GAWAIN-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_gawain",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_MARCUS": {
+      "knight_id": "SIR_MARCUS",
+      "spark_id": "0x06MARCUS00000000000000000000006",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_MARCUS-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_marcus",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_OPENCLAW": {
+      "knight_id": "SIR_OPENCLAW",
+      "spark_id": "0x07OPENCLAW00000000000000000007",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_OPENCLAW-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_openclaw",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_ZEROCLAW": {
+      "knight_id": "SIR_ZEROCLAW",
+      "spark_id": "0x08ZEROCLAW00000000000000000008",
+      "primary_language": "Rust",
+      "languages": [
+        "Rust"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_ZEROCLAW-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_zeroclaw",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_SCAVENGER": {
+      "knight_id": "SIR_SCAVENGER",
+      "spark_id": "0x09SCAVENGER0000000000000000009",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_SCAVENGER-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_scavenger",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_VAELEN": {
+      "knight_id": "SIR_VAELEN",
+      "spark_id": "0x10VAELEN0000000000000000000010",
+      "primary_language": "Shell/PowerShell",
+      "languages": [
+        "Shell/PowerShell"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_VAELEN-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_vaelen",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_VALERIAN": {
+      "knight_id": "SIR_VALERIAN",
+      "spark_id": "0x11VALERIAN00000000000000000011",
+      "primary_language": "Rust",
+      "languages": [
+        "Rust"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_VALERIAN-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_valerian",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_HUGGINGFACE": {
+      "knight_id": "SIR_HUGGINGFACE",
+      "spark_id": "0xHFHUB777000000000000000000007777",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_HUGGINGFACE-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_huggingface",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "HERMES_AGENT_EVOLUTION": {
+      "knight_id": "HERMES_AGENT_EVOLUTION",
+      "spark_id": "0x24F4A450645649FEBFAB8CFCF7C2A33B",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-VIKING-BLOCK",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/hermes_agent_evolution",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "ANYA_QUANTUM_MANTRA": {
+      "knight_id": "ANYA_QUANTUM_MANTRA",
+      "spark_id": "0x219E765A0C8E4B66B356F277CB441B14",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-ANYA_QUANTUM_MANTRA-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/anya_quantum_mantra",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "BIO_KINETIC_SWARM": {
+      "knight_id": "BIO_KINETIC_SWARM",
+      "spark_id": "0x93B21C4010FF4E89A21208F37B1297E1",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-BIO_KINETIC_SWARM-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/bio_kinetic_swarm",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "CAMELOT_V1000": {
+      "knight_id": "CAMELOT_V1000",
+      "spark_id": "0x8C656CFAA189409EA72D07692A47F17E",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-CAMELOT_V1000-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/camelot_v1000",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "BIFROST": {
+      "knight_id": "BIFROST",
+      "spark_id": "0xCBBB0C3239194B7791581D9F9EBF359F",
+      "primary_language": "Rust",
+      "languages": [
+        "Rust",
+        "TypeScript"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-BIFROST-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/bifrost",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "FATHER_CAMELOT": {
+      "knight_id": "FATHER_CAMELOT",
+      "spark_id": "0x392991310ADE4F488AD4A68878A6D3D9",
+      "primary_language": "Go",
+      "languages": [
+        "Go"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-FATHER_CAMELOT-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/father_camelot",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "WORLD_TREE": {
+      "knight_id": "WORLD_TREE",
+      "spark_id": "0xA0A4BFB9E8474C38BE397AEE398F0795",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-WORLD_TREE-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/world_tree",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "ALPHA_OMEGA": {
+      "knight_id": "ALPHA_OMEGA",
+      "spark_id": "0x2536AEFB937F4A049142D1A2F029D8A7",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-ALPHA_OMEGA-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/alpha_omega",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_HELIOS": {
+      "knight_id": "SIR_HELIOS",
+      "spark_id": "0xAB8AA3592B3B4BC1B41F34979CDC184E",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_HELIOS-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_helios",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "LADY_MNEMOSYNE_\u03a9": {
+      "knight_id": "LADY_MNEMOSYNE_\u03a9",
+      "spark_id": "0xA0A4BFB9E8474C38BE397AEE398F0795",
+      "primary_language": "Go",
+      "languages": [
+        "Go"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-LADY_MNEMOSYNE_\u03a9-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/lady_mnemosyne_\u03c9",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "ANTIGRAVITY": {
+      "knight_id": "ANTIGRAVITY",
+      "spark_id": "0xAB8AA3592B3B4BC1B41F34979CDC184E",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-ANTIGRAVITY-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/antigravity",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "KICKBOX": {
+      "knight_id": "KICKBOX",
+      "spark_id": "0x8531E6D46FC4428FA754B9E9592AC7FF",
+      "primary_language": "TypeScript",
+      "languages": [
+        "TypeScript"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-KICKBOX-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/kickbox",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "INSPIRA": {
+      "knight_id": "INSPIRA",
+      "spark_id": "0xCADFE67E7187472E8BF48A2ADED84E4E",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-INSPIRA-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/inspira",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "INVISIONED_MARKETING": {
+      "knight_id": "INVISIONED_MARKETING",
+      "spark_id": "0xA0A4BFB9E8474C38BE397AEE398F0795",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-INVISIONED_MARKETING-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/invisioned_marketing",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "KNIGHT_STRATEGOS": {
+      "knight_id": "KNIGHT_STRATEGOS",
+      "spark_id": "0xA0A4BFB9E8474C38BE397AEE398F0795",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-KNIGHT_STRATEGOS-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/knight_strategos",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_KAY": {
+      "knight_id": "SIR_KAY",
+      "spark_id": "0x7E4A8C12F9B3D650E1A8C7B2D3E4F5A6",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_KAY-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_kay",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "HERMES_PRIME_VFS_FORGE": {
+      "knight_id": "HERMES_PRIME_VFS_FORGE",
+      "spark_id": "0x28F89CB650484B5D9E94376082D24744",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-VIKING-BLOCK",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/hermes_prime_vfs_forge",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_ARTHUR": {
+      "knight_id": "SIR_ARTHUR",
+      "spark_id": "0x4152544855525F53434152434954595F474F56",
+      "primary_language": "Go",
+      "languages": [
+        "Go",
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-ARTHUR-CROWN",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_arthur",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "LADY_ALEXANDRIA": {
+      "knight_id": "LADY_ALEXANDRIA",
+      "spark_id": "0x7E3A19C08D4549FEB2E119A5C70942A1",
+      "primary_language": "Python",
+      "languages": [
+        "Python"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-LADY_ALEXANDRIA-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/lady_alexandria",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "HEIMDALL_OMEGA": {
+      "knight_id": "HEIMDALL_OMEGA",
+      "spark_id": "0x3205F18991DA427296A93641FD642763",
+      "primary_language": "Rust",
+      "languages": [
+        "Rust"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-HEIMDALL_OMEGA-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/heimdall_omega",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "LUKAS_OMEGA": {
+      "knight_id": "LUKAS_OMEGA",
+      "spark_id": "0x7B9C1024D98A4BC2A18F93765CDC88FE",
+      "primary_language": "Rust",
+      "languages": [
+        "Rust",
+        "Go"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-LUKAS_OMEGA-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/lukas_omega",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "JEV_OMEGA": {
+      "knight_id": "JEV_OMEGA",
+      "spark_id": "0x4E8AA1295F3B4DC3B81F74919CDC99FA",
+      "primary_language": "WASM",
+      "languages": [
+        "WASM"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-JEV_OMEGA-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/jev_omega",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    },
+    "SIR_LINK": {
+      "knight_id": "SIR_LINK",
+      "spark_id": "0x5C8BA9021D3B4EC9B71F84979CDC55BA",
+      "primary_language": "Go",
+      "languages": [
+        "Go"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT",
+      "provenance_signature": "HMAC-SHA256-SIR_LINK-SEAL",
+      "aegis_spiffe_uri": "spiffe://camelot/knights/sir_link",
+      "soul_verified": true,
+      "spark_verified": true,
+      "phial_verified": true,
+      "merlin_math_verified": true,
+      "aegis_armor_verified": true,
+      "contract_verified": true,
+      "passed": true,
+      "violations": []
+    }
+  },
+  "summary_violations": []
+}

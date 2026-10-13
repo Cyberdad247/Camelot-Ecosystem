@@ -1,0 +1,33 @@
+[
+  {
+    "knight_id": "LADY_ALEXANDRIA",
+    "cloudbrain_uuid": "7e3a19c0-8d45-49fe-b2e1-19a5c70942a1",
+    "spark_id": "0x7E3A19C08D4549FEB2E119A5C70942A1",
+    "role": "Cryptographic Keypass Vault & Living Archive Sovereign",
+    "model": "Gemini 3.8 Flash / Claude Sonnet",
+    "summoning_rune": "Omega_LADY_ALEXANDRIA",
+    "vfs_mount": "vfs/notebooks/7e3a19c0-8d45-49fe-b2e1-19a5c70942a1/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "behavioral_contract": "FATHER_CAMELOT",
+    "provenance_signature": "HMAC-SHA256-LADY_ALEXANDRIA-SEAL",
+    "primary_language": "Python",
+    "languages": [
+      "Python"
+    ],
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-10-12T17:19:56.260039+00:00"
+  }
+]
