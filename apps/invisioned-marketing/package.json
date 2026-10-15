@@ -4,7 +4,7 @@
   "private": true,
   "description": "Invisioned Marketing Inc. — Sovereign Digital Factory & Autonomous Agency Application",
   "scripts": {
-    "dev": "next dev -p 3005",
+    "dev": "node ../pwa/node_modules/next/dist/bin/next dev -p 3005",
     "build": "next build",
     "start": "next start -p 3005",
     "lint": "next lint",

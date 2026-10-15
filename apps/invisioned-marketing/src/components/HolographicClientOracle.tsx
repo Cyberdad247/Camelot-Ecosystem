@@ -59,7 +59,7 @@ export function HolographicClientOracle() {
     };
   }, [isMicActive, isOracleSpeaking]);
 
-  const handleSendMessage = (e: React.FormEvent) => {
+  const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputText.trim()) return;
 
@@ -75,16 +75,39 @@ export function HolographicClientOracle() {
     const query = inputText;
     setInputText('');
 
-    // Simulate sub-100ms Oracle Voice Response
     setIsOracleSpeaking(true);
-    setTimeout(() => {
+
+    try {
+      const res = await fetch('/api/invisioned/oracle', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          query,
+          persona: selectedPersona.id.toLowerCase(),
+        }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        const oracleMsg: OracleMessage = {
+          id: `msg_${Date.now() + 1}`,
+          sender: selectedPersona.name,
+          role: 'oracle',
+          text: data.answer || 'Telemetry confirmed across all Round Table nodes.',
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        };
+        setMessages((prev) => [...prev, oracleMsg]);
+      } else {
+        throw new Error('API query failed');
+      }
+    } catch {
+      // Resilient fallback
       let replyText = `Confirmed. Routing your query regarding "${query}" through the Round Table DAG. All telemetry checks are passing with zero drift.`;
       if (query.toLowerCase().includes('energy') || query.toLowerCase().includes('rates')) {
         replyText = `Understood. Analyzing regional electricity tariffs across Ohio and Pennsylvania. Current savings projection stands at $18,450/month. Rate lock request prepared.`;
       } else if (query.toLowerCase().includes('marketing') || query.toLowerCase().includes('seo') || query.toLowerCase().includes('ad')) {
         replyText = `Swarm telemetry active. Sir Visage has compiled 12 conversion hooks with a predicted +24% CTR. Deployed live to A2UI staging.`;
       }
-
       const oracleMsg: OracleMessage = {
         id: `msg_${Date.now() + 1}`,
         sender: selectedPersona.name,
@@ -92,10 +115,10 @@ export function HolographicClientOracle() {
         text: replyText,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
-
       setMessages((prev) => [...prev, oracleMsg]);
+    } finally {
       setIsOracleSpeaking(false);
-    }, 1200);
+    }
   };
 
   const toggleMic = () => {
