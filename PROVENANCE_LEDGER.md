@@ -8482,3 +8482,5 @@ line 2] | HYDRATED |
 | 2026-10-15T09:53:34.346631+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
 | 2026-10-15T09:53:34.850265+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
 | 2026-10-15T09:53:35.358321+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+
+| 900 | **Harness State Transition** | SovereignHarness | ⚠️ DEGRADED | uptime=60s tasks=11 fail=0 probes=4/9 cells=8 |
