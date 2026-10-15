@@ -1,0 +1,53 @@
+{
+  "crystal_id": "VKG_5BB18D058C279F76",
+  "schema_version": "v1000-VKG-SINGULARITY",
+  "anya_seal": "ANYA_IS_THE_GATE",
+  "category": "ARCHITECTURE",
+  "knight": "SIR_HELIOS",
+  "title": "DAX_FULFILLMENT_ORACLE_ECOSYSTEM",
+  "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:DAX_FULFILLMENT_ORACLE_ECOSYSTEM|Camelot-OS|Invisioned|Marketing|Digital|Factory|comprises|primary|client|cartridges|MidasLeadCapture|SovereignCommandDashboard|InteractiveB2BProposal|TenantCartridgeManager|OmniFulfillmentCanvas|HolographicClientOracle|Scarcity|protocol|enforces|Node|ceiling|512MB|WASM|envelope\u27e9",
+  "anchor_tokens": [
+    "DAX_FULFILLMENT_ORACLE_ECOSYSTEM",
+    "Camelot-OS",
+    "Invisioned",
+    "Marketing",
+    "Digital",
+    "Factory",
+    "comprises",
+    "primary",
+    "client",
+    "cartridges",
+    "MidasLeadCapture",
+    "SovereignCommandDashboard",
+    "InteractiveB2BProposal",
+    "TenantCartridgeManager",
+    "OmniFulfillmentCanvas",
+    "HolographicClientOracle",
+    "Scarcity",
+    "protocol",
+    "enforces",
+    "Node",
+    "ceiling",
+    "512MB",
+    "WASM",
+    "envelope"
+  ],
+  "sources_count": 1,
+  "manifest_sha256": "6120b8d0c222f6fc72e1bab162734b815890e89c0f13243ccad5f8f5c6869506",
+  "triplets": [
+    {
+      "head": "Camelot-OS",
+      "relation": "invisioned",
+      "tail": "Marketing Digital Factory comprises 6 primary client cartridges MidasLeadCapture SovereignCommandDashboard InteractiveB2BProposal TenantCartridgeManager OmniFulfillmentCanvas and HolographicClientOracle"
+    },
+    {
+      "head": "Scarcity protocol enforces 4GB Node",
+      "relation": "ceiling",
+      "tail": "and 512MB WASM envelope"
+    }
+  ],
+  "triplet_count": 2,
+  "vfs_coordinate": "vfs://worldtree/crystals/vkg_5bb18d058c279f76.vkg",
+  "created_at": "2026-10-15T15:38:04.333898+00:00",
+  "finalized_content": "The Camelot-OS Invisioned Marketing Digital Factory comprises 6 primary client cartridges: MidasLeadCapture, SovereignCommandDashboard, InteractiveB2BProposal, TenantCartridgeManager, OmniFulfillmentCanvas, and HolographicClientOracle. Scarcity protocol enforces 4GB Node ceiling and 512MB WASM envelope."
+}

@@ -9,7 +9,7 @@
 'use client';
 
 import React, { Suspense, useRef, useState } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, type ThreeEvent } from '@react-three/fiber';
 import type * as THREE from 'three';
 
 export interface SpatialCitadelProps {
@@ -34,18 +34,18 @@ function CitadelTurntable({
   const dampingFactor = 0.95;
 
   // Handle pointer down (mouse or touch)
-  const handlePointerDown = (e: React.PointerEvent) => {
+  const handlePointerDown = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
     setIsRotating(true);
     lastX.current = e.clientX;
   };
 
-  const handlePointerUp = (e: React.PointerEvent) => {
+  const handlePointerUp = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
     setIsRotating(false);
   };
 
-  const handlePointerMove = (e: React.PointerEvent) => {
+  const handlePointerMove = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
     if (isRotating && meshRef.current) {
       const delta = (e.clientX - lastX.current) * 0.005;

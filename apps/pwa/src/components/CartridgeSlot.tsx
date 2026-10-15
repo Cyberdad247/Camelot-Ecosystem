@@ -96,7 +96,85 @@ const DEFAULT_PILLS: WorkflowPill[] = [
     runtime: 'YAML_Z3',
     description: 'Air-gapped secret scanner & credential sanitizer',
   },
+  {
+    id: 'pill_midas_loop',
+    name: 'Midas Loop Lead Terminal',
+    knight: 'SIR_VISAGE / SIR_HYDRON / SIR_STITCH',
+    cloudbrain_uuid: '28d49148-28db-438d-a299-61456fdfdefc',
+    status: 'ACTIVE',
+    category: 'FINANCE',
+    runtime: 'GO_NATIVE',
+    description: 'D.A.X. zero-latency client intent conversion terminal',
+  },
+  {
+    id: 'pill_command_nexus',
+    name: 'Invisioned Command Nexus',
+    knight: 'SIR_BORIS / SIR_CODEX / ANYA_Ω',
+    cloudbrain_uuid: 'ab8aa359-2b3b-4bc1-b41f-34979cdc184e',
+    status: 'ACTIVE',
+    category: 'TELEMETRY',
+    runtime: 'GO_NATIVE',
+    description: 'Sovereign agentic swarm topology & B2B pipeline nexus',
+  },
+  {
+    id: 'pill_b2b_proposal',
+    name: 'Interactive B2B Proposal',
+    knight: 'SIR_STITCH / SIR_HYDRON / MERLIN_Ω',
+    cloudbrain_uuid: '378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f',
+    status: 'ACTIVE',
+    category: 'FINANCE',
+    runtime: 'GO_NATIVE',
+    description: '2.5D spatial client handoff matrix & reactive ROI calculator',
+  },
+  {
+    id: 'pill_cartridge_manager',
+    name: 'Tenant Cartridge Hypervisor',
+    knight: 'ANYA_Ω / SIR_HYDRON / LADY_MNEMOSYNE',
+    cloudbrain_uuid: 'a0a4bfb9-e847-4c38-be39-7aee398f0795',
+    status: 'ACTIVE',
+    category: 'GOVERNANCE',
+    runtime: 'GO_NATIVE',
+    description: 'Hardware-bounded LRU eviction manager & 512MB worker rack',
+  },
+  {
+    id: 'pill_fulfillment_canvas',
+    name: 'Omni-Fulfillment Canvas',
+    knight: 'ANYA_Ω / MERLIN_Ω / SIR_HYDRON',
+    cloudbrain_uuid: 'ab8aa359-2b3b-4bc1-b41f-34979cdc184e',
+    status: 'ACTIVE',
+    category: 'TELEMETRY',
+    runtime: 'GO_NATIVE',
+    description: 'Visual DAG node assembly & multi-agent marketing kitchen',
+  },
+  {
+    id: 'pill_client_oracle',
+    name: 'Holographic Client Oracle',
+    knight: 'LADY_APIS / SIR_HELIO / LAKISHA_HYPERVISOR',
+    cloudbrain_uuid: '56820318-bb91-451f-aac4-4b46424898cf',
+    status: 'ACTIVE',
+    category: 'VOICE',
+    runtime: 'WEBRTC_VAD',
+    description: '2.5D audio-reactive avatar & duplex conversational voice oracle',
+  },
+  {
+    id: 'pill_oracle_portal',
+    name: 'Client Oracle Portal',
+    knight: 'LADY_APIS / SIR_VISAGE / SIR_HYDRON',
+    cloudbrain_uuid: '378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f',
+    status: 'ACTIVE',
+    category: 'FINANCE',
+    runtime: 'GO_NATIVE',
+    description: 'VIP client lounge, real-time ROI telemetry & GraphRAG voice projection',
+  },
 ];
+
+import { MidasLeadCapture } from './MidasLeadCapture';
+import { SovereignCommandDashboard } from './SovereignCommandDashboard';
+import { InteractiveB2BProposal } from './InteractiveB2BProposal';
+import { TenantCartridgeManager } from './TenantCartridgeManager';
+import { OmniFulfillmentCanvas } from './OmniFulfillmentCanvas';
+import { HolographicClientOracle } from './HolographicClientOracle';
+import { ClientOraclePortal } from './ClientOraclePortal';
 
 export function CartridgeSlot() {
   const [pills] = useState<WorkflowPill[]>(DEFAULT_PILLS);
@@ -122,7 +200,7 @@ export function CartridgeSlot() {
       </div>
 
       {/* Pill Selector Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {pills.map((pill) => {
           const isSelected = pill.id === selectedPillId;
           return (
@@ -167,6 +245,43 @@ export function CartridgeSlot() {
           {selectedPill.name} &mdash; <span className="text-slate-400 text-xs font-normal">{selectedPill.description}</span>
         </div>
       </div>
+
+      {/* Active Cartridge Mounting Bay */}
+      {selectedPillId === 'pill_midas_loop' && (
+        <div className="pt-2">
+          <MidasLeadCapture />
+        </div>
+      )}
+      {selectedPillId === 'pill_command_nexus' && (
+        <div className="pt-2">
+          <SovereignCommandDashboard />
+        </div>
+      )}
+      {selectedPillId === 'pill_b2b_proposal' && (
+        <div className="pt-2">
+          <InteractiveB2BProposal />
+        </div>
+      )}
+      {selectedPillId === 'pill_cartridge_manager' && (
+        <div className="pt-2">
+          <TenantCartridgeManager />
+        </div>
+      )}
+      {selectedPillId === 'pill_fulfillment_canvas' && (
+        <div className="pt-2">
+          <OmniFulfillmentCanvas />
+        </div>
+      )}
+      {selectedPillId === 'pill_client_oracle' && (
+        <div className="pt-2">
+          <HolographicClientOracle />
+        </div>
+      )}
+      {selectedPillId === 'pill_oracle_portal' && (
+        <div className="pt-2">
+          <ClientOraclePortal />
+        </div>
+      )}
     </div>
   );
 }
