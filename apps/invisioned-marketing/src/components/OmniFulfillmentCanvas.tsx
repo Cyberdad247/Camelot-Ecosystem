@@ -31,7 +31,7 @@ const DEFAULT_NODES: NodeData[] = [
     agent: 'Anya Ω',
     status: 'COMPLETE',
     position: { x: 40, y: 120 },
-    outputPayload: 'Entity Spec: Invisioned Marketing Inc. (B2B Energy)',
+    outputPayload: 'Entity Spec: Invisioned Marketing Inc. (Omnichannel Agency)',
   },
   {
     id: '2',
@@ -40,7 +40,7 @@ const DEFAULT_NODES: NodeData[] = [
     agent: 'Lady Apis',
     status: 'PROCESSING',
     position: { x: 340, y: 60 },
-    outputPayload: 'Found 14 competitor rate arbitrage vectors',
+    outputPayload: 'Found 14 competitor ad creative & hook vectors',
   },
   {
     id: '3',

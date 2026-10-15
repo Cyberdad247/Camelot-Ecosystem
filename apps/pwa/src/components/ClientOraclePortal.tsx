@@ -84,8 +84,8 @@ export function ClientOraclePortal() {
     setTranscript(`Query received: "${query}". Lady Apis querying WorldTree memory...`);
 
     setTimeout(() => {
-      if (query.toLowerCase().includes('energy') || query.toLowerCase().includes('rate')) {
-        setTranscript('Lady Apis: "Regional PJM energy tariffs show a $14,200 monthly arbitrage buffer. Hedging locked."');
+      if (query.toLowerCase().includes('roas') || query.toLowerCase().includes('ad') || query.toLowerCase().includes('paid')) {
+        setTranscript('Lady Apis: "Multi-channel paid media attribution models show a 4.12x blended ROAS across Meta and Google. Budget scaling unlocked."');
       } else {
         setMetrics((prev) => ({
           ...prev,
@@ -246,7 +246,7 @@ export function ClientOraclePortal() {
               <div className="mt-2 text-3xl font-black font-mono text-gold-royal tracking-tight">
                 +{metrics.roi}%
               </div>
-              <span className="text-[10px] font-mono text-gold-light mt-1 block">Arbitrage Verified</span>
+              <span className="text-[10px] font-mono text-gold-light mt-1 block">ROAS Verified</span>
             </div>
           </div>
 
@@ -280,7 +280,7 @@ export function ClientOraclePortal() {
                 type="text"
                 value={queryInput}
                 onChange={(e) => setQueryInput(e.target.value)}
-                placeholder="Type query (e.g., 'What are our current energy savings?')..."
+                placeholder="Type query (e.g., 'What is our current paid ads ROAS?')..."
                 className="flex-1 bg-[#0B0B0E] border border-slate-700 px-4 py-2.5 text-xs text-slate-100 placeholder-slate-500 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold transition-all rounded font-mono"
               />
               <button

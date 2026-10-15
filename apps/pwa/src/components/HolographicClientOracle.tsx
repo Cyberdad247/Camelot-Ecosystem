@@ -31,7 +31,7 @@ export function HolographicClientOracle() {
       id: 'msg_1',
       sender: 'Lady Apis',
       role: 'oracle',
-      text: 'Greetings, Principal. I am Lady Apis, your sovereign swarm conductor. The live audit on your B2B deregulated energy accounts shows a 14.2% rate arbitrage vector in the PJM territory. Would you like me to dispatch Sir Hydron to lock in the rates?',
+      text: 'Greetings, Principal. I am Lady Apis, your sovereign swarm conductor. The live audit on your multi-channel paid acquisition funnels shows an average 4.12x ROAS with +34.2% lead quality lift. Would you like me to deploy fresh ad creatives across Meta and Google Ads?',
       timestamp: '11:25 AM',
     },
   ]);
@@ -103,10 +103,10 @@ export function HolographicClientOracle() {
     } catch {
       // Resilient fallback
       let replyText = `Confirmed. Routing your query regarding "${query}" through the Round Table DAG. All telemetry checks are passing with zero drift.`;
-      if (query.toLowerCase().includes('energy') || query.toLowerCase().includes('rates')) {
-        replyText = `Understood. Analyzing regional electricity tariffs across Ohio and Pennsylvania. Current savings projection stands at $18,450/month. Rate lock request prepared.`;
-      } else if (query.toLowerCase().includes('marketing') || query.toLowerCase().includes('seo') || query.toLowerCase().includes('ad')) {
-        replyText = `Swarm telemetry active. Sir Visage has compiled 12 conversion hooks with a predicted +24% CTR. Deployed live to A2UI staging.`;
+      if (query.toLowerCase().includes('roas') || query.toLowerCase().includes('ad') || query.toLowerCase().includes('paid')) {
+        replyText = `Understood. Analyzing multi-channel ad attribution across Meta and Google Ads. Current blended ROAS stands at 4.28x with $18,450 net monthly margin lift. Ad creative scaling approved.`;
+      } else if (query.toLowerCase().includes('marketing') || query.toLowerCase().includes('seo') || query.toLowerCase().includes('funnel')) {
+        replyText = `Swarm telemetry active. Sir Visage has compiled 12 high-converting hooks with a predicted +24% CTR. Deployed live to A2UI staging.`;
       }
       const oracleMsg: OracleMessage = {
         id: `msg_${Date.now() + 1}`,
@@ -135,14 +135,14 @@ export function HolographicClientOracle() {
               id: `msg_${Date.now()}`,
               sender: 'Client Principal (Voice Input)',
               role: 'client',
-              text: 'Oracle, give me a status report on our marketing ROI and current energy arbitrations.',
+              text: 'Oracle, give me a status report on our marketing ROI and paid media scale.',
               timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
             },
             {
               id: `msg_${Date.now() + 1}`,
               sender: selectedPersona.name,
               role: 'oracle',
-              text: `Acoustic link verified. Overall pipeline value is up +12% this quarter ($142,500 active ARR). Energy hedging contracts are 100% sealed on Tailscale dark mesh.`,
+              text: `Acoustic link verified. Overall pipeline value is up +12% this quarter ($142,500 active ARR). Paid media ad sets are running at 4.12x blended ROAS with zero CPA fatigue.`,
               timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
             },
           ]);
@@ -339,10 +339,10 @@ export function HolographicClientOracle() {
           <div className="pt-2 flex flex-wrap gap-2 text-[10px] font-mono">
             <button
               type="button"
-              onClick={() => setInputText('Audit our current deregulated energy savings.')}
+              onClick={() => setInputText('Audit our current paid media ROAS and attribution.')}
               className="px-2.5 py-1 bg-[#0B0B0E] border border-slate-800 hover:border-gold/50 text-slate-400 hover:text-gold rounded transition-all"
             >
-              &bull; Energy Savings Audit
+              &bull; Paid Media ROAS Audit
             </button>
             <button
               type="button"

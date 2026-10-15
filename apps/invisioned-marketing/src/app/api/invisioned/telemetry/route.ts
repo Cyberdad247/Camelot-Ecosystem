@@ -47,7 +47,7 @@ export async function GET() {
         state: 'optimizing',
         load: 64,
         tokensProcessed: 231500,
-        currentTask: 'Deregulated Energy Prospect Enrichment',
+        currentTask: 'Omnichannel B2B Ad & Lead Optimization',
       },
       {
         id: 'sir_visage',

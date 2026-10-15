@@ -50,7 +50,7 @@ export function MidasLeadCapture() {
 
   // Recommendation 2: Live Social Proof Ticker
   const [recentWinTicker, setRecentWinTicker] = useState<string>(
-    '⚡ 4 minutes ago: $38,400 projected client savings in Ohio Commercial Energy Audit'
+    '⚡ 4 minutes ago: +142% ROAS surge in Multi-Channel Paid Ads Funnel'
   );
 
   useEffect(() => {
@@ -67,9 +67,9 @@ export function MidasLeadCapture() {
   // Rotate social proof ticker
   useEffect(() => {
     const proofs = [
-      '⚡ 4 minutes ago: $38,400 projected client savings in Ohio Commercial Energy Audit',
-      '💎 12 minutes ago: 4.8x ROAS unlocked for B2B Logistics Swarm in Pennsylvania',
-      '🛡️ 21 minutes ago: Enterprise Partner closed $15,000/mo Autonomous Factory Retainer',
+      '⚡ 4 minutes ago: +142% ROAS surge in Multi-Channel Paid Ads Funnel',
+      '💎 12 minutes ago: 4.8x ROAS unlocked for B2B E-commerce Swarm',
+      '🛡️ 21 minutes ago: Enterprise Partner closed $15,000/mo Autonomous Marketing Retainer',
     ];
     let idx = 0;
     const interval = setInterval(() => {
@@ -386,10 +386,10 @@ export function MidasLeadCapture() {
               WAIT // SOVEREIGN MARGIN ADVISORY
             </div>
             <h3 className="text-lg font-black text-white uppercase">
-              Claim Your Free 60-Second AI Tariff & Marketing Audit
+              Claim Your Free 60-Second AI Paid Media & Funnel Audit
             </h3>
             <p className="text-xs text-slate-300">
-              Before you leave, let our Round Table Swarm scan your commercial energy tariffs and marketing spend for hidden 12–18% rate arbitrage vectors.
+              Before you leave, let our Round Table Swarm scan your Meta/Google ads and conversion funnels for hidden 25–40% ROAS improvement vectors.
             </p>
             <div className="pt-2 flex gap-2">
               <button

@@ -16,7 +16,7 @@ export interface InteractiveB2BProposalProps {
 
 export function InteractiveB2BProposal({
   clientName = 'Enterprise Partner',
-  contractType = 'Deregulated Energy & Marketing Retainer',
+  contractType = 'Autonomous AI Marketing Retainer',
   initialVolume = 50000,
 }: InteractiveB2BProposalProps) {
   const [volume, setVolume] = useState<number>(initialVolume);
@@ -48,7 +48,7 @@ export function InteractiveB2BProposal({
     setTilt({ rotateX: 0, rotateY: 0 });
   };
 
-  // Business Logic Simulation (Deregulated Energy / Agency Retainer)
+  // Business Logic Simulation (AI Digital Marketing ROAS / Agency Retainer)
   const projectedSavings = Math.floor(volume * 0.124);
   const efficiencyGain = ((projectedSavings / volume) * 100).toFixed(1);
   const annualBenefit = projectedSavings * 12;
@@ -165,10 +165,10 @@ export function InteractiveB2BProposal({
               <div className="grid grid-cols-2 gap-4 pt-4 border-t border-[#2A2A35] text-xs font-mono">
                 <div>
                   <span className="text-slate-400">Projected Efficiency Yield:</span>
-                  <div className="text-emerald-400 font-bold mt-0.5">+{efficiencyGain}% Arbitrage</div>
+                  <div className="text-emerald-400 font-bold mt-0.5">+{efficiencyGain}% ROAS Lift</div>
                 </div>
                 <div>
-                  <span className="text-slate-400">Monthly Net Savings:</span>
+                  <span className="text-slate-400">Monthly Net Ad Profit Lift:</span>
                   <div className="text-white font-bold mt-0.5">${projectedSavings.toLocaleString()} / mo</div>
                 </div>
               </div>

@@ -22,12 +22,12 @@ export async function POST(req: NextRequest) {
     // Contextual responses based on knowledge graph keywords
     let responseText = `Telemetry analysis complete for query: "${query}". All active marketing campaigns are tracking above target ROAS with zero detected budget anomalies.`;
 
-    if (/energy|deregulated|kba/i.test(query)) {
-      responseText = `The deregulated commercial energy campaign across Ohio and Pennsylvania closed 18 meter audits this week, projecting $42,600 in annualized client energy savings and generating $7,200 in agency margin.`;
-    } else if (/roi|spend|budget|performance/i.test(query)) {
-      responseText = `Current aggregate ad spend is $14,200 across Meta and Google, delivering a 4.12x blended ROAS and 142 qualified enterprise leads at a cost-per-acquisition of $100.`;
+    if (/seo|organic|rank|traffic/i.test(query)) {
+      responseText = `Organic search visibility is up +44% this month across high-intent commercial keywords. Technical SEO audit completed with 0 crawl errors and top-3 rankings secured for core enterprise queries.`;
+    } else if (/roi|spend|budget|performance|ad|meta|google/i.test(query)) {
+      responseText = `Current aggregate ad spend is $14,200 across Meta Ads and Google Search, delivering a 4.12x blended ROAS and 142 qualified enterprise leads at an optimized cost-per-acquisition of $100.`;
     } else if (/agents|knights|swarm/i.test(query)) {
-      responseText = `The Round Table Swarm is currently operating at 100% capacity with 5 active knights under 782MB RAM, safely bounded by Camelot-OS Global Law 03.`;
+      responseText = `The Round Table Marketing Swarm is operating at 100% capacity with 5 active agentic creative directors and media buyers under 782MB RAM, continuously optimizing bidding strategies.`;
     }
 
     return NextResponse.json({
