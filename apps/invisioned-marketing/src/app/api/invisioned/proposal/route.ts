@@ -15,6 +15,10 @@ interface ProposalPayload {
 }
 
 function getProposalsLedgerPath(): string {
+  const isVercel = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
+  if (isVercel) {
+    return path.join('/tmp', 'invisioned_proposals.jsonl');
+  }
   return path.join(process.cwd(), '..', '..', '03_VAULT', 'runtime_state', 'invisioned_proposals.jsonl');
 }
 
