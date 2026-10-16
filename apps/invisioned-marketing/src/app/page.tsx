@@ -8,6 +8,7 @@ import { TenantCartridgeManager } from '../components/TenantCartridgeManager';
 import { OmniFulfillmentCanvas } from '../components/OmniFulfillmentCanvas';
 import { HolographicClientOracle } from '../components/HolographicClientOracle';
 import { ClientOraclePortal } from '../components/ClientOraclePortal';
+import { WebGpuNeuralAccelerator } from '../components/WebGpuNeuralAccelerator';
 
 type ModuleTab =
   | 'midas'
@@ -97,7 +98,8 @@ export default function InvisionedMarketingHome() {
       </nav>
 
       {/* Main Workspace Mount */}
-      <main className="flex-1 p-6 max-w-7xl w-full mx-auto">
+      <main className="flex-1 p-6 max-w-7xl w-full mx-auto space-y-6">
+        <WebGpuNeuralAccelerator />
         {activeTab === 'midas' && <MidasLeadCapture />}
         {activeTab === 'command' && <SovereignCommandDashboard />}
         {activeTab === 'proposal' && <InteractiveB2BProposal />}
