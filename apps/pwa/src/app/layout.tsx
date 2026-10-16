@@ -3,6 +3,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, Source_Serif_4 } from 'next/font/google';
 import { KoARealmProvider } from '../context/KoARealmProvider';
+import { ServiceWorkerRegister } from '../components/ServiceWorkerRegister';
 import '../styles/globals.css';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://kickbox-audio.vercel.app';
@@ -60,6 +61,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${serif.variable}`}>
       <body>
+        <ServiceWorkerRegister />
         <KoARealmProvider>{children}</KoARealmProvider>
       </body>
     </html>
