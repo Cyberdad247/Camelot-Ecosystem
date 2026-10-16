@@ -36,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         # 2026-06-27 promotion: bump to Node 22 LTS — current LTS since
         # 2024-10-29. Resolves the EBADENGINE warnings on @prisma/client
         # 5.22.0 + transitive deps that demand >=22.22.0. node-version is
