@@ -8,5 +8,5 @@ prometheus_client>=0.17.0
 redis>=8.1.0
 cffi>=2.1.1
 optimum>=2.3.0
-onnxruntime>=1.15.0
+onnxruntime>=1.31.0
 sentence-transformers>=2.2.2
