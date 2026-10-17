@@ -1,21 +1,35 @@
 import { Shield, Clock, Activity, Cpu, HardDrive } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { TelemetryData } from '../types';
+import { MicroSparkline } from './telemetry/MicroSparkline';
+import { MicroPingBadge } from './telemetry/MicroPingBadge';
+import { MicroFPSMeter } from './telemetry/MicroFPSMeter';
 
 export function TelemetryHeader({ telemetry }: { telemetry: TelemetryData | null }) {
   const [time, setTime] = useState(new Date().toLocaleTimeString());
+  const [ramHistory, setRamHistory] = useState<number[]>([1200, 1280, 1340, 1380, 1420]);
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date().toLocaleTimeString()), 1000);
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    if (telemetry?.ramUsageMB) {
+      setRamHistory((prev) => [...prev.slice(-7), telemetry.ramUsageMB]);
+    }
+  }, [telemetry?.ramUsageMB]);
+
   const ramUsageGB = telemetry ? (telemetry.ramUsageMB / 1024).toFixed(2) : '1.14';
   const ramPercent = telemetry ? telemetry.ramPercent : 28.5;
   const isHighRam = ramPercent > 75;
 
   return (
-    <header className="h-16 border-b border-[#D4AF37] bg-[#050510]/90 backdrop-blur-md sticky top-0 z-50 flex items-center justify-between px-3 sm:px-6 relative shadow-[0_4px_20px_rgba(75,0,130,0.4)]">
+    <header
+      role="banner"
+      aria-label="System Telemetry Visor"
+      className="h-16 border-b border-[#D4AF37] bg-[#050510]/95 backdrop-blur-md sticky top-0 z-50 flex items-center justify-between px-3 sm:px-6 relative shadow-[0_4px_20px_rgba(75,0,130,0.4)]"
+    >
       {/* Angular corner clip-path decoration */}
       <div className="absolute bottom-0 left-0 w-8 h-1 bg-[#D4AF37]" />
       <div className="absolute bottom-0 right-0 w-8 h-1 bg-[#D4AF37]" />
@@ -33,44 +47,53 @@ export function TelemetryHeader({ telemetry }: { telemetry: TelemetryData | null
           </div>
         </div>
         <div className="h-6 w-px bg-[#4B0082]" />
-        <span className="text-[10px] sm:text-[11px] text-[#D4AF37] font-['JetBrains_Mono'] border border-[#D4AF37]/50 px-2 py-0.5 rounded-none uppercase flex items-center gap-2 shadow-[0_0_10px_rgba(212,175,55,0.2)] bg-[#D4AF37]/10 font-bold">
+        <span className="text-[10px] sm:text-[11px] text-[#D4AF37] font-mono border border-[#D4AF37]/50 px-2 py-0.5 rounded-none uppercase flex items-center gap-2 shadow-[0_0_10px_rgba(212,175,55,0.2)] bg-[#D4AF37]/10 font-bold">
           <div className="w-2 h-2 bg-[#D4AF37] animate-pulse drop-shadow-[0_0_5px_#D4AF37]" />
           CONVERGED
         </span>
 
         {/* 4GB Strict Boundary Pill */}
-        <span className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-['JetBrains_Mono'] border border-[#4B0082] px-2 py-0.5 bg-black/60 text-[#F1EFF4]/80">
+        <span className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-mono border border-[#4B0082] px-2 py-0.5 bg-black/60 text-[#F1EFF4]/80">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
           4GB RAM STRICT
         </span>
+
+        {/* Micro Ping Badge for S26 Mobile Sentinel */}
+        <div className="hidden xl:block">
+          <MicroPingBadge nodeName="S26-ULTRA" latencyMs={18} status="nominal" />
+        </div>
       </div>
 
-      <div className="flex items-center gap-4 sm:gap-6 text-xs font-['JetBrains_Mono'] text-[#F1EFF4]/80">
-        {/* RAM Telemetry Gauge */}
-        <div className="flex items-center gap-2 border border-[#4B0082]/60 px-2.5 py-1 bg-black/40">
-          <HardDrive className={`w-3.5 h-3.5 ${isHighRam ? 'text-amber-400 animate-pulse' : 'text-[#D4AF37]'}`} />
+      <div className="flex items-center gap-3 sm:gap-5 text-xs font-mono text-[#F1EFF4]/80">
+        {/* RAM Telemetry Gauge with MicroSparkline */}
+        <div className="flex items-center gap-2 border border-[#4B0082]/60 px-2.5 py-1 bg-black/40 rounded">
+          <HardDrive className={`w-3.5 h-3.5 shrink-0 ${isHighRam ? 'text-[#DE4258] animate-pulse' : 'text-[#D4AF37]'}`} />
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5 text-[11px]">
               <span className="text-[#D4AF37] font-bold">RAM:</span>
-              <span className={isHighRam ? 'text-amber-300 font-bold' : 'text-[#F1EFF4]'}>
+              <span className={isHighRam ? 'text-[#DE4258] font-bold' : 'text-[#F1EFF4]'}>
                 {ramUsageGB}GB / 4.0GB
               </span>
               <span className="text-[10px] opacity-70">({ramPercent}%)</span>
             </div>
             {/* Miniature progress meter */}
-            <div className="w-24 sm:w-28 h-1 bg-white/10 mt-0.5 overflow-hidden">
+            <div className="w-20 sm:w-24 h-1 bg-white/10 mt-0.5 overflow-hidden rounded-full">
               <div
-                className={`h-full transition-all duration-500 ${isHighRam ? 'bg-amber-400' : 'bg-[#D4AF37]'}`}
+                className={`h-full transition-all duration-500 rounded-full ${isHighRam ? 'bg-[#DE4258]' : 'bg-[#D4AF37]'}`}
                 style={{ width: `${Math.min(100, ramPercent)}%` }}
               />
             </div>
+          </div>
+          {/* Micro Sparkline */}
+          <div className="hidden md:block pl-1 border-l border-white/10">
+            <MicroSparkline data={ramHistory} color={isHighRam ? 'garnet' : 'gold'} width={44} height={18} />
           </div>
         </div>
 
         {telemetry && (
           <div className="hidden lg:flex items-center gap-4">
             <div className="flex items-center gap-1.5">
-              <Cpu className="w-3.5 h-3.5 text-[#D4AF37]" />
+              <Cpu className="w-3.5 h-3.5 text-[#00F0FF]" />
               LOAD: {telemetry.globalLoad.toFixed(1)}%
             </div>
             <div className="flex items-center gap-1.5">
@@ -79,6 +102,11 @@ export function TelemetryHeader({ telemetry }: { telemetry: TelemetryData | null
             </div>
           </div>
         )}
+
+        {/* 120Hz FPS Meter */}
+        <div className="hidden md:block">
+          <MicroFPSMeter targetFps={120} />
+        </div>
 
         <div className="flex items-center gap-1.5 text-[#F1EFF4] text-xs opacity-90">
           <Clock className="w-3.5 h-3.5 text-[#D4AF37]" />
