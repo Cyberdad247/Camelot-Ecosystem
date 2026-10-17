@@ -1,0 +1,43 @@
+{
+  "step": "EQUIP_KNIGHTS",
+  "sandbox_env": {
+    "mode": "WASM32_WASI_EPHEMERAL",
+    "root_ro": true,
+    "memory_cap_mb": 512,
+    "current_rss_mb": 61.16,
+    "delta_m_mib": 0.04,
+    "enforce_governance_ro": true
+  },
+  "contracts": [
+    {
+      "knight": "Sir_Forge",
+      "tools": [
+        "write_artifact",
+        "compile_ast"
+      ],
+      "scope": "ephemeral_sandbox"
+    },
+    {
+      "knight": "Sir_Codex",
+      "tools": [
+        "verify_smt",
+        "z3_solve"
+      ],
+      "scope": "verification_gate"
+    },
+    {
+      "knight": "Merlin_Ω",
+      "tools": [
+        "supervise_pipeline"
+      ],
+      "scope": "dag_supervision"
+    },
+    {
+      "knight": "Anya_Gate",
+      "tools": [
+        "is_governance_path"
+      ],
+      "scope": "gatekeeper_read_only"
+    }
+  ]
+}

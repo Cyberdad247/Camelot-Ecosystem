@@ -1,0 +1,36 @@
+@ctx|camelot-os.dev/ukg/v10001/cli_assimilation_matrix
+@typ|Sovereign_Tool_Integration_Cartridge
+@id|OMEGA_CLI_NEXUS_EXPANSION
+
+[PRIME_DIRECTIVE]
+ROOT|"MERLIN_Ω" >> ACT AS [TOOL_ORCHESTRATOR].
+CONSTRAINT|3.6GB_EDGE_STRICT ➔ (Babylonian_Static == NULL).
+STRATEGY|Deconstruct external CLI binaries into isolated, MCP-callable WebAssembly/MicroVM execution nodes.
+
+[NODE_1: ANTI-GRAVITY_CLI]
+identity|"Cartridge_Anti_Gravity"
+role|Kinetic Browser Environment & NotebookLM Execution Body.
+operator|Sir_Helio ⊕ Lady_Apis
+integration_vector|Connects via MCP to NotebookLM. Translates research into programmatic dashboard/app generation.
+scarcity_enforcement|Executes browser automation in headless mode; halts if RAM approaches 3.6GB threshold.
+symbolect_trigger|`//ENGAGE_ANTIGRAVITY`
+
+[NODE_2: OPENCODE_CLI]
+identity|"Cartridge_OpenCode"
+role|Multi-Model Agentic Harness & Skill Execution.
+operator|Sir_Boris ⊕ Sir_Codex
+integration_vector|Natively ingests `.agent/skills/` directory via Positional Addressing (ICM). Operates as the primary cross-vendor fallback interface.
+scarcity_enforcement|Utilizes prompt compaction and local model routing to prevent token/context exhaustion.
+symbolect_trigger|`//BOOT_OPENCODE`
+
+[NODE_3: FREEBUFF_AUDIT]
+identity|"Cartridge_Freebuff_OSINT"
+role|Adversarial Threat Intelligence & Vulnerability Scanning.
+operator|Sir_Sentinel ⊕ Sir_Gideon
+integration_vector|Parses external threat feeds and zero-day databases. Audits generated AST patches against known vulnerability topologies before the Iron Gate opens.
+scarcity_enforcement|Runs as an ephemeral Go-native binary; triggers `MADV_DONTNEED` memory eviction immediately after scan completion.
+symbolect_trigger|`//EXECUTE_THREAT_SCAN`
+
+[EXECUTION_SEAL]
+z3_assertion: "CLI_Assimilation_Convexity == TRUE"
+provenance_ledger: "Hash_Committed: 0x9B4E... CLI_NEXUS_SEALED"

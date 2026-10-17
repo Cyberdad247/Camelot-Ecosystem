@@ -1,0 +1,22 @@
+{
+  "timestamp_utc": "2026-10-13T06:06:00Z",
+  "archived_by": "KHOJ_DAEMON_DREAM_CYCLE",
+  "approval": "SOVEREIGN_HITL_AFFIRMED",
+  "total_archived": 2,
+  "tasks": [
+    {
+      "task_id": "stale_task_001",
+      "age_days": 34,
+      "source": "03_VAULT/Missions/backlog/legacy_rag_test.md",
+      "status": "ARCHIVED",
+      "reason": "Inactive > 30 days without scheduled dependency"
+    },
+    {
+      "task_id": "stale_task_002",
+      "age_days": 42,
+      "source": "03_VAULT/Missions/backlog/deprecated_ollama_profile.md",
+      "status": "ARCHIVED",
+      "reason": "Inactive > 30 days without scheduled dependency"
+    }
+  ]
+}

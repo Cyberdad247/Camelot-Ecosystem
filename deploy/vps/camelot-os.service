@@ -1,0 +1,27 @@
+[Unit]
+Description=Camelot-OS v10001 Sovereign Hub (4GB VPS Optimized)
+Documentation=https://camelot-os.dev/ukg/v10001/master_sovereign_manifest
+After=network.target tailscaled.service
+Wants=tailscaled.service
+
+[Service]
+Type=simple
+User=camelot
+Group=camelot
+WorkingDirectory=/opt/camelot-os
+ExecStart=/home/camelot/.cargo/bin/uv run .agent/sync_manager.py
+Restart=always
+RestartSec=5s
+
+# [4GB HARD SCARCITY PROTOCOL ENFORCEMENT]
+# Limits RAM usage strictly to 3.6G on a 4.0G host. Triggers immediate shedding if breached.
+MemoryMax=3.6G
+MemoryHigh=3.2G
+MemorySwapMax=0M
+
+# Security Sandboxing & Hygiene
+ProtectSystem=full
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

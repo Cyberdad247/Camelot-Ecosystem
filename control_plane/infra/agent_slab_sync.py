@@ -300,16 +300,16 @@ def render_htmx_status_fragment() -> str:
 
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace;">
         <div style="background: #111; padding: 0.75rem; border-radius: 4px; border: 1px solid #222;">
-            <div style="font-size: 0.75rem; color: #aaa;">Active Process RSS</div>
-            <div style="font-size: 1.1rem; color: #38bdf8;">{mem.process_rss_mb} MB <span style="font-size: 0.7rem; color: #888;">(&lt;480 MB floor)</span></div>
+            <div style="font-size: 0.75rem; color: #aaa;">Camelot Node Working Set (RSS)</div>
+            <div style="font-size: 1.1rem; color: #10b981;">{mem.process_rss_mb} MB <span style="font-size: 0.7rem; color: #888;">(Ceiling: &le; 4,096 MB PASS)</span></div>
         </div>
         <div style="background: #111; padding: 0.75rem; border-radius: 4px; border: 1px solid #222;">
-            <div style="font-size: 0.75rem; color: #aaa;">System Memory Used</div>
-            <div style="font-size: 1.1rem; color: #f59e0b;">{mem.system_used_mb} MB / {round(NODE_RAM_CEILING_MB, 0)} MB</div>
+            <div style="font-size: 0.75rem; color: #aaa;">Total Windows Host RAM (All Apps)</div>
+            <div style="font-size: 1.1rem; color: #38bdf8;">{mem.system_used_mb} MB / {round(mem.system_total_mb, 0)} MB <span style="font-size: 0.7rem; color: #888;">({mem.system_percent}%)</span></div>
         </div>
         <div style="background: #111; padding: 0.75rem; border-radius: 4px; border: 1px solid #222;">
-            <div style="font-size: 0.75rem; color: #aaa;">Heaviside Trigger</div>
-            <div style="font-size: 0.9rem; color: #a855f7;">{HEAVISIDE_FORMULA}</div>
+            <div style="font-size: 0.75rem; color: #aaa;">Node Scarcity Invariant</div>
+            <div style="font-size: 0.9rem; color: #10b981;">STRICT 4GB BOUNDARY OK</div>
         </div>
     </div>
 

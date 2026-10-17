@@ -13,6 +13,7 @@ use crate::compute::AudioFeatures;
 use std::path::Path;
 
 const LOADER_CANDIDATES: &[&str] = &[
+    "C:\\Windows\\system32\\vulkan-1.dll",
     "/usr/lib/x86_64-linux-gnu/libvulkan.so.1",
     "/usr/lib/x86_64-linux-gnu/libvulkan.so",
     "/usr/lib64/libvulkan.so.1",

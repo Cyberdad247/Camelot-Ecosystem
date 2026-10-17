@@ -1,0 +1,9 @@
+{
+  "task_id": "rune-3066cb2a",
+  "knight": "merlin_omega",
+  "directive": "//PLAN Execute Sovereign Verification DAG across edge nodes",
+  "status": "PLANNED",
+  "execution": "read_only",
+  "requires_human_gate_for_mutations": true,
+  "generated_utc": "2026-10-17T16:23:25.932980+00:00"
+}

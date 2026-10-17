@@ -1,0 +1,7 @@
+{
+  "@context": "https://camelot-os.dev/ukg/v10001/factory_registry",
+  "@type": "Sovereign_Factory_Cartridge",
+  "mounted_repo": "Cyberdad247/arthurian-omni-forge",
+  "active_constitution": "const_engineering_v1",
+  "status": "ARMED_AND_READY"
+}

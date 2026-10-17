@@ -10,14 +10,55 @@ import time
 from datetime import datetime
 from typing import Dict, List, Optional
 
-# Add KERNEL to path for telemetry import
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+# Dynamically map 01_KERNEL namespace to support 'from kernel...' imports
+import importlib.util
+from pathlib import Path
+
+_KERNEL_DIR = Path(__file__).resolve().parents[1]
+_MERLIN_DIR = Path(__file__).resolve().parent
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+
+for p in (_REPO_ROOT, _KERNEL_DIR, _MERLIN_DIR):
+    p_str = str(p)
+    if p_str not in sys.path:
+        sys.path.insert(0, p_str)
+
+if "kernel" not in sys.modules:
+    spec = importlib.util.spec_from_file_location(
+        "kernel", _KERNEL_DIR / "__init__.py", submodule_search_locations=[str(_KERNEL_DIR), str(_MERLIN_DIR)]
+    )
+    if spec and spec.loader:
+        kernel_mod = importlib.util.module_from_spec(spec)
+        sys.modules["kernel"] = kernel_mod
+        spec.loader.exec_module(kernel_mod)
+
+if "kernel.Engines" not in sys.modules and (_MERLIN_DIR / "Engines" / "__init__.py").exists():
+    spec_eng = importlib.util.spec_from_file_location(
+        "kernel.Engines", _MERLIN_DIR / "Engines" / "__init__.py", submodule_search_locations=[str(_MERLIN_DIR / "Engines")]
+    )
+    if spec_eng and spec_eng.loader:
+        mod_eng = importlib.util.module_from_spec(spec_eng)
+        sys.modules["kernel.Engines"] = mod_eng
+        spec_eng.loader.exec_module(mod_eng)
+
+if "kernel.reasoning" not in sys.modules and (_MERLIN_DIR / "reasoning" / "__init__.py").exists():
+    spec_reas = importlib.util.spec_from_file_location(
+        "kernel.reasoning",
+        _MERLIN_DIR / "reasoning" / "__init__.py",
+        submodule_search_locations=[str(_KERNEL_DIR / "reasoning"), str(_MERLIN_DIR / "reasoning")],
+    )
+    if spec_reas and spec_reas.loader:
+        mod_reas = importlib.util.module_from_spec(spec_reas)
+        sys.modules["kernel.reasoning"] = mod_reas
+        spec_reas.loader.exec_module(mod_reas)
+
 try:
     from senses.telemetry_client import RotelClient
     telemetry = RotelClient("merlin_omega")
 except ImportError:
     class DummyLogger:
         def info(self, *args, **kwargs): pass
+        def error(self, *args, **kwargs): pass
     telemetry = DummyLogger()
 
 from kernel.agora.context import SovereignContext
@@ -39,8 +80,38 @@ from kernel.reasoning.prometheus_decomp import prometheus
 from kernel.reasoning.veritas_audit import veritas
 from kernel.security.warden import warden
 
-# ANTIGRAVITY
-from src.tools.antigravity import gravity
+# ANTIGRAVITY SAFE I/O
+try:
+    from src.tools.antigravity import gravity
+except ImportError:
+    class SafeGravity:
+        @staticmethod
+        def read(path: str) -> str:
+            p = Path(path)
+            if not p.is_absolute():
+                p = _REPO_ROOT / path
+            if p.exists():
+                return p.read_text(encoding="utf-8", errors="replace")
+            return ""
+
+        @staticmethod
+        def write(path: str, content: str) -> None:
+            p = Path(path)
+            if not p.is_absolute():
+                p = _REPO_ROOT / path
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text(content, encoding="utf-8")
+
+        @staticmethod
+        def append(path: str, content: str) -> None:
+            p = Path(path)
+            if not p.is_absolute():
+                p = _REPO_ROOT / path
+            p.parent.mkdir(parents=True, exist_ok=True)
+            with p.open("a", encoding="utf-8") as f:
+                f.write(content)
+
+    gravity = SafeGravity()
 
 
 # ==============================================================================

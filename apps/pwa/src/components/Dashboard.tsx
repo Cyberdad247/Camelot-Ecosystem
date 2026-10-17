@@ -20,9 +20,11 @@ import { DesktopGrid } from './DesktopGrid';
 import { AlfredCommandDock } from './AlfredCommandDock';
 import { TwinBrainNodeManager } from './TwinBrainNodeManager';
 import { ThemeToggle } from './ThemeToggle';
+import { WorldTreeWebGpuCanvas } from './WorldTreeWebGpuCanvas';
 
 const TABS = [
   'Overview',
+  'WorldTree Graph',
   'Tenants',
   'Interphase',
   'Desktop Grid',
@@ -102,6 +104,19 @@ export function Dashboard() {
 
         <main className="px-10">
           {active === 'Overview' && <OverviewTab />}
+          {active === 'WorldTree Graph' && (
+            <div className="space-y-6">
+              <div className="border border-gold/30 bg-smoke-900/80 p-6 backdrop-blur-sm">
+                <h2 className="font-display text-2xl text-gold-light tracking-minted">
+                  WorldTree Sovereign Mesh &amp; Knowledge Graph
+                </h2>
+                <p className="mt-1 font-mono text-xs text-white/50">
+                  WebGPU Structure-of-Arrays (SoA) · 60+ FPS Hardware Instancing · 4GB Edge Scarcity Protocol
+                </p>
+              </div>
+              <WorldTreeWebGpuCanvas initialNodeCount={8192} className="min-h-[500px]" />
+            </div>
+          )}
           {active === 'Tenants' && <TenantsTab />}
           {active === 'Interphase' && <InterphaseCartridge />}
           {active === 'Desktop Grid' && <DesktopGrid />}

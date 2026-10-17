@@ -1,21 +1,22 @@
-# 🗺️ CAMELOT APEX: ENTIRE MAP (Radiant v202.2.0)
-**Timestamp:** 2026-02-01T08:45:00.000000
-**Mode:** Kinetic Purity [Active]
-**Sovereign:** VaShawn O. Head
-**Architect:** Merlin_Omega + Anya_v6.5 + Lukas_Edge
+# 🗺️ CAMELOT APEX: ENTIRE MAP (v10001.00-CYBERTRONIA)
+**Node Identity:** `cybertronia` (`100.118.224.52` / Primary Windows Orchestrator)
+**Authoritative Operator:** King Arthur (VaShawn O. Head / Vizion)
+**WorldTree Home Anchor:** `a0a4bfb9-e847-4c38-be39-7aee398f0795`
+**Canonical EntireMap Surface:** [`entiremap.md`](file:///C:/Users/vizio/CAMELOT_OS/entiremap.md)
+**Active CI/CD Snapshot:** [`03_VAULT/runtime_state/snapshots/latest_cybertronia_snapshot.json`](file:///C:/Users/vizio/CAMELOT_OS/03_VAULT/runtime_state/snapshots/latest_cybertronia_snapshot.json)
 
 ---
 
 ## 🏛️ I. THE SINGULARITY LATTICE (Septem Regna)
 | LAYER | NAME | GUARDIAN | tech_stack |
 | :--- | :--- | :--- | :--- |
-| **L7** | **ETHEREAL** | 🎭 Anya | Next.js / Vercel |
-| **L6** | **GOVERNANCE** | 👑 Arthur | Iron Gate / Ledger |
-| **L5** | **AGENTIC** | ⚔️ Paladin | Swarm Protocols |
-| **L4** | **SEMANTIC** | 🧠 Chronos | UKG (JSON-LD) |
-| **L3** | **NEURAL** | 🧙‍♂️ Merlin | Videneptus LaC |
-| **L2** | **KINETIC** | 💻 Lukas | Saltare / Cribo |
-| **L1** | **SUBSTRATE** | 🌑 Morgana | Modal / Docker |
+| **L7** | **ETHEREAL** | 🎭 Anya Ω | Next.js 14 / Vercel / APEE v7.0 / Triple-QFT |
+| **L6** | **GOVERNANCE** | 👑 Arthur Ω | Iron Gate v2 / Provenance Ledger / Z3 Invariants |
+| **L5** | **AGENTIC** | ⚔️ Paladin Octem | Round Table Pantheon / SARDA / Swarm MITOSIS |
+| **L4** | **SEMANTIC** | 🧠 Chronos / Mnemosyne | UKG / VKG Crystals / 24D Leech Lattice ($\Lambda_{24}$) |
+| **L3** | **NEURAL** | 🧙‍♂️ Merlin Ω | Videneptus LaC / MFOE + OCEAN / GoT System-2 |
+| **L2** | **KINETIC** | 💻 Lukas Ω & Sir Codex | PiG Go Harness / Wasmtime / Bare Metal (ΔM ≤ 0.12 MiB) |
+| **L1** | **SUBSTRATE** | 🌑 Sir Helios & Heimdall | FastMCP / Tailscale Mesh / 4GB Node Ceiling |
 
 ---
 

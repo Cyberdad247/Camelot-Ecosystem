@@ -15,6 +15,8 @@ from control_plane.quantization.frontier_compressor import (
     AttentionEvictionState,
     CompressedKIVICache,
     KIVICacheCompressor,
+    LeechLattice24Quantizer,
+    PackedLeechEmbedding,
     PackedTernaryWeights,
     SnapKVAttentionGovernor,
     SpeculativeDraftCascade,
@@ -169,3 +171,49 @@ def test_speculative_draft_cascade_verification():
     target_p_low = np.array([0.95, 0.001, 0.85, 0.85])
     res_mismatch = SpeculativeDraftCascade.verify_tokens(draft, draft_p, target_p_low, seed=42)
     assert res_mismatch.num_accepted == 1  # only first accepted
+
+
+def test_leech_lattice_24_quantization():
+    """Verify Leech Lattice 24D Sub-Vector Quantizer compression and reconstruction fidelity."""
+    rng = np.random.default_rng(2026)
+
+    # 1. Test 768-dim embedding (Divisible by 24: 32 blocks)
+    emb_768 = rng.normal(0, 1, 768).astype(np.float32)
+    emb_768 /= np.linalg.norm(emb_768)
+
+    # Stage 1: Ultra-compact (>=35x compression)
+    packed_s1 = LeechLattice24Quantizer.quantize(emb_768, stages=1)
+    assert isinstance(packed_s1, PackedLeechEmbedding)
+    assert packed_s1.num_blocks == 32
+    recon_s1 = LeechLattice24Quantizer.dequantize(packed_s1)
+    assert recon_s1.shape == (768,)
+    ratio_s1 = LeechLattice24Quantizer.compression_ratio(emb_768, packed_s1)
+    assert ratio_s1 >= 35.0
+    cos_s1 = float(np.dot(emb_768, recon_s1) / (np.linalg.norm(recon_s1) + 1e-12))
+    assert cos_s1 >= 0.65
+
+    # Stage 2: Balanced high-fidelity (>=20x compression, >=0.80 CosSim)
+    packed_s2 = LeechLattice24Quantizer.quantize(emb_768, stages=2)
+    recon_s2 = LeechLattice24Quantizer.dequantize(packed_s2)
+    ratio_s2 = LeechLattice24Quantizer.compression_ratio(emb_768, packed_s2)
+    assert ratio_s2 >= 20.0
+    cos_s2 = float(np.dot(emb_768, recon_s2) / (np.linalg.norm(recon_s2) + 1e-12))
+    assert cos_s2 >= 0.80
+
+    # 2. Test Non-Multiple Dimension Padding (e.g., 100 dimensions)
+    emb_100 = rng.normal(0, 1, 100).astype(np.float32)
+    packed_100 = LeechLattice24Quantizer.quantize(emb_100, stages=2)
+    recon_100 = LeechLattice24Quantizer.dequantize(packed_100)
+    assert recon_100.shape == (100,)
+    assert packed_100.padded_dim == 120  # next multiple of 24 is 120 (5 blocks)
+    assert packed_100.num_blocks == 5
+
+    # 3. Test 1536-dim embedding (Divisible by 24: 64 blocks)
+    emb_1536 = rng.normal(0, 1, 1536).astype(np.float32)
+    packed_1536 = LeechLattice24Quantizer.quantize(emb_1536, stages=2)
+    recon_1536 = LeechLattice24Quantizer.dequantize(packed_1536)
+    assert recon_1536.shape == (1536,)
+    assert packed_1536.num_blocks == 64
+    ratio_1536 = LeechLattice24Quantizer.compression_ratio(emb_1536, packed_1536)
+    assert ratio_1536 >= 20.0
+

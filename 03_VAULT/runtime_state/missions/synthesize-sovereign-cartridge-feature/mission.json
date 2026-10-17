@@ -1,0 +1,23 @@
+{
+  "schema": "camelot.mission/1",
+  "mission_id": "synthesize-sovereign-cartridge-feature",
+  "objective": "Synthesize Sovereign Cartridge Feature",
+  "steps": [
+    "INTENT",
+    "SPEC",
+    "PLAN",
+    "DAG",
+    "SANDBOX",
+    "VERIFICATION",
+    "RECEIPT"
+  ],
+  "status": "SEALED",
+  "artifacts": {
+    "blueprint.json": "e98aed2c7788ffe75b9f84ce5dd5179fd1a3059a67abcd51809fb50a112b9179",
+    "task_dag.json": "7195ad4db54ad1596d0d272addb8156bf6c5f3c3416bd92c5ff7e5bc7dfb3074",
+    "skills_manifest.json": "9e5708749d55906aa2e4b91c242a2897c63f5b7b11dcb154de6345be68fffb84",
+    "verification.json": "b1a802148acc6a88f8f0e127df2014be98640cd9aaf629328b482a5041d77644"
+  },
+  "created_at": "2026-10-14T23:21:44Z",
+  "updated_at": "2026-10-14T23:21:44Z"
+}

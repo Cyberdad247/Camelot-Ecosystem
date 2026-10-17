@@ -1,0 +1,73 @@
+{
+  "step": "DECOMPOSE_TASK_DAG",
+  "mission_id": "test-factory-pipeline",
+  "pipeline": "ARTHURIAN_OMNI_FORGE_7_STAGE",
+  "nodes": [
+    {
+      "id": "n1_intent",
+      "task": "Validate and sanitize intent",
+      "assignee": "Anya_Ω",
+      "deps": []
+    },
+    {
+      "id": "n2_spec",
+      "task": "Enforce const_engineering_v1 spec",
+      "assignee": "Merlin_Ω",
+      "deps": [
+        "n1_intent"
+      ]
+    },
+    {
+      "id": "n3_scaffold",
+      "task": "Compile AST and isolate sandbox",
+      "assignee": "Sir_Forge",
+      "deps": [
+        "n2_spec"
+      ]
+    },
+    {
+      "id": "n4_exec",
+      "task": "WASM32-WASI sandboxed execution (<512MB)",
+      "assignee": "Sir_Octavian",
+      "deps": [
+        "n3_scaffold"
+      ]
+    },
+    {
+      "id": "n5_verify",
+      "task": "Z3 proofing & convexity check",
+      "assignee": "Sir_Codex",
+      "deps": [
+        "n4_exec"
+      ]
+    },
+    {
+      "id": "n6_seal",
+      "task": "Cryptographic receipt crystallization",
+      "assignee": "Sir_Helios",
+      "deps": [
+        "n5_verify"
+      ]
+    }
+  ],
+  "parallel_stages": [
+    [
+      "n1_intent"
+    ],
+    [
+      "n2_spec"
+    ],
+    [
+      "n3_scaffold"
+    ],
+    [
+      "n4_exec"
+    ],
+    [
+      "n5_verify"
+    ],
+    [
+      "n6_seal"
+    ]
+  ]
+}

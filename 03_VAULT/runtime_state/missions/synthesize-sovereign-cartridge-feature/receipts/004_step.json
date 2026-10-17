@@ -1,0 +1,8 @@
+{
+  "artifact": "verification.json",
+  "path": "03_VAULT\\runtime_state\\missions\\synthesize-sovereign-cartridge-feature\\verification.json",
+  "sha256": "b1a802148acc6a88f8f0e127df2014be98640cd9aaf629328b482a5041d77644",
+  "bytes": 576,
+  "written_at": "2026-10-14T23:21:44Z",
+  "receipt_no": 4
+}

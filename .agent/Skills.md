@@ -3,9 +3,15 @@
 
 | Skill ID | Trigger Rune / Command | Executor | Execution Bounds & Payload |
 | :--- | :--- | :--- | :--- |
+| **`cloudflare_waf`** | `//EXECUTE_THREAT_SCAN` / `//WAF_SHIELD` | SIR_SENTINEL | Programmatic Cloudflare edge WAF rules via `cloudflare-go`, IP blocking & Zero Trust Kyber-768 tunnel lock |
+| **`pig_execute`** | `//PIG_RUN <agent>` | SIR_CODEX / LUKAS_Ω | Go-native static binary agent harness execution (`<5ms` cold boot, Δ ≤ 0.12 MiB memory slice) |
 | **`helios_audit`** | `//HELIOS_AUDIT` / `//HELIOS_MACRO` | SIR_HELIOS | Macroscopic structural alignment, 1M+ context ingestion, multimodal shatterpoint audit |
 | **`cloudbrain_sync`** | `//CLOUDBRAIN_SYNC` | SIR_HELIOS | Dynamic sync to Sir Helios CloudBrain node (`ab8aa359-2b3b-4bc1-b41f-34979cdc184e`) & Graphiti temporal DB |
 | **`vfs_resolve`** | `//VFS_RESOLVE <path>` | SIR_HELIOS | Resolve coordinate across World Tree on Cybertronia (`100.118.224.52`) |
+| **`digital_factory`** | `//DEPLOY_FACTORY_PIPELINE` | MERLIN_Ω ⊕ SIR_FORGE | 7-Stage continuous production state machine (`.agent/cartridges/omni-forge/`, 512MB RAM cap) |
+| **`anti_gravity`** | `//ENGAGE_ANTIGRAVITY` | SIR_HELIO ⊕ LADY_APIS | Headless browser execution from NotebookLM research parameters (`MemoryMax=512M`) |
+| **`opencode_harness`** | `//BOOT_OPENCODE` | SIR_BORIS ⊕ SIR_CODEX | Multi-model agent harness ingesting `.agent/skills/` via Positional Addressing (ICM) |
+| **`freebuff_audit`** | `//EXECUTE_THREAT_SCAN` | SIR_SENTINEL ⊕ SIR_GIDEON | Zero-day vulnerability scanning & AST patch audit before git commit (`MADV_DONTNEED`) |
 | **`vps_init`** | `//INIT_VPS_ENVIRONMENT` | MERLIN_Ω | Bare-metal namespaces (`unshare`), cgroups v2 slices, zero Docker |
 | **`ingress_lock`** | `//LOCK_NETWORK_INGRESS` | SIR_HEIMDALL | UFW default-deny, Tailscale0 mTLS boundary lock, Paladin Octem Z3 static analysis |
 | **`swarm_wake`** | `//WAKE_24_7_SWARM_DAEMON` | HERMES_PRIME | 24/7 background scheduler, Lady Apis BASHR R&D, SQLite-VSS / FirnFlow NVMe mount |
@@ -14,25 +20,5 @@
 | **`repo_assimilate`**| `//ASSIMILATE_REPO <url>` | ANYA_Ω | Isolated Git worktree branching, cartridge synthesis, single-trunk purge |
 | **`bio_apis`** | `//APIS` | LADY_APIS | SKILL_APIS_BIO_KINETIC_HARNESS: Passive SWARM vs. Aggressive HORDE mode shift, batch creation, minute-loop |
 | **`bio_horde`** | `//HORDE <spec>` | LADY_APIS | Map-Reduce parallel batch code creation, reverse engineering strikes & refactoring |
-| **`bio_batch`** | `//BATCH_CREATE` | LADY_APIS | Batch creation mode: parallel dispatch of SSU tasks under 4-Knight Aegis Shield |
-| **`bio_chimera`** | `//CHIMERA` | LADY_APIS | Ancestral Chimera Research Swarm Protocol v400.0: 3-round war-room research & synthesis (ba87d454) |
-| **`bio_formica`** | `//FORMICA` | LADY_APIS | Concurrent Map-Reduce micro-execution across 15-50 micro-worker ants (150-token lifecycle) |
-| **`bio_beaver`** | `//BEAVER` | SIR_FORGE | SSU generation, strict DRY code construction, 12-col grid validation (≤18 MiB) |
-| **`bio_gorilla`** | `//GORILLA` | SIR_FORGE | Heavyweight tool use and typed SDK connectivity to AWS, Stripe, CloudBrain |
-| **`bio_arachne`** | `//ARACHNE` | SIR_BORIS | AsyncStealthySession, visual layout parsing, multi-profile scraping loops |
-| **`bio_simian`** | `//SIMIAN` | SIR_SENTINEL | Chaos Monkey entropy injection, fault injection, port crashing & auto-recovery audit |
-| **`bio_owl`** | `//OWL` | MERLIN_Ω | Tree of Thoughts (ToT), Vidal-Foresight simulation, 3-move consequence model |
-| **`bio_octopus`** | `//OCTOPUS` | SIR_DEBUG | Multi-threaded AST self-healing, PIV loop repair, stack-trace root cause analysis |
-| **`bio_mantis`** | `//MANTIS` | SIR_CODEX | Surgical AST micro-excision, concrete syntax tree dead-block elimination |
-| **`bio_falcon`** | `//FALCON` | SIR_LUCAS | Sub-10ms line-rate telemetry sniffer, anomaly detection & packet capture |
-| **`bio_chameleon`**| `//CHAMELEON`| LADY_GUINEVERE | Polymorphic theme shifting, Luxora Gold Brutalist layout adaptation |
-| **`bio_elephant`** | `//ELEPHANT` | LADY_MNEMOSYNE | Long-term unforgettable MemPalace vector & SQLite FTS5 graph indexing |
-| **`bio_lobo`** | `//LOBO` | KNIGHT_STRATEGOS | Speed-to-revenue filtration, high-ticket workflow, $0-investment validation |
-| **`bio_vulpis`** | `//VULPIS` | LADY_GUINEVERE | SEO/GEO optimization, multi-channel syndication, engagement loop tracking |
-| **`bio_phoenix`** | `//PHOENIX` | SIR_DEBUG | ReZero protocol execution, automated git rollback, Z3 symbolic traceback |
-| **`bio_corvus`** | `//CORVUS` / `//REVERSE_ENGINEER` | SIR_CODEX | Dead-drop extraction, reverse-engineering historical commits, AST decomposition & artifact-to-skill synthesis |
-| **`bio_ghost`** | `//GHOST` | SIR_GHOST | Air-gapped isolation, Tor Signal.NEWNYM rotation, zero cloud egress |
-| **`bio_delphinus`**| `//DELPHINUS`| SIR_SONUS | High-frequency acoustic resonance, Aoede duplex speech-to-speech audio routing |
-| **`bio_scorpio`** | `//SCORPIO` | SIR_GIDEON | GIDEON 13-gate forensic risk needle, adversarial compliance puncture |
-| **`bio_octavian`** | `//OCTAVIAN` | SIR_OCTAVIAN | Split-brain IPC sync, 8-terminal execution management, IP copyright tagging (:8400) |
-| **`bio_alchemist`**| `//ALCHEMIST`| SIR_ALCHEMIST | TurboQuant 3-bit / BitNet b1.58 quantization & token compression under 8GB RAM |
+| **`bio_octavian`** | `//OCTAVIAN` | SIR_OCTAVIAN | Microsecond WASM execution & 8-terminal PTY sandboxing (:8400) |
+| **`bio_delphinus`**| `//DELPHINUS`| SIR_SONUS | High-frequency acoustic resonance, Aoede duplex speech-to-speech audio routing (:7680) |

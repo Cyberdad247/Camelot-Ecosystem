@@ -464,8 +464,11 @@ name = "camelot-transport"
 version = "10001.0.0"
 dependencies = [
  "anyhow",
+ "axum",
  "blake3",
+ "camelot-kernel",
  "chrono",
+ "libc",
  "serde",
  "serde_json",
  "tokio",

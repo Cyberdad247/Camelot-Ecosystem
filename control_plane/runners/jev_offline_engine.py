@@ -41,6 +41,25 @@ logger = logging.getLogger("jev_offline_engine")
 CAMELOT_HOME = Path(__file__).resolve().parent.parent.parent
 MAX_OFFLINE_RAM_MB = 1200.0  # 1.2 GB active floor inside 4GB node ceiling
 
+# Native C++ BitNet b1.58 Acceleration Bridge
+_NATIVE_DLL_PATH = CAMELOT_HOME / "bin" / "bitnet_engine.dll"
+_NATIVE_BITNET = None
+if _NATIVE_DLL_PATH.exists():
+    try:
+        import ctypes
+        _NATIVE_BITNET = ctypes.CDLL(str(_NATIVE_DLL_PATH))
+        _NATIVE_BITNET.bitnet_packed_gemv.argtypes = [
+            ctypes.c_size_t,
+            ctypes.c_size_t,
+            ctypes.POINTER(ctypes.c_uint8),
+            ctypes.POINTER(ctypes.c_float),
+            ctypes.POINTER(ctypes.c_float),
+        ]
+        _NATIVE_BITNET.bitnet_packed_gemv.restype = None
+    except Exception as _e:
+        logger.warning(f"Could not load native bitnet_engine.dll: {_e}")
+        _NATIVE_BITNET = None
+
 
 @dataclass
 class TernaryMatrix158b:
@@ -84,7 +103,22 @@ class TernaryMatrix158b:
         return 0
 
     def vec_mul(self, vec: List[float]) -> List[float]:
-        """Ternary-vector multiply: uses only additions and subtractions (no float mults for weights)."""
+        """Ternary-vector multiply: accelerated via native C++ BitNet engine."""
+        if _NATIVE_BITNET is not None and len(vec) >= self.cols:
+            import ctypes
+            out = (ctypes.c_float * self.rows)()
+            in_arr = (ctypes.c_float * self.cols)(*vec[:self.cols])
+            packed_buf = (ctypes.c_uint8 * len(self.data)).from_buffer(self.data)
+            _NATIVE_BITNET.bitnet_packed_gemv(
+                self.rows,
+                self.cols,
+                packed_buf,
+                in_arr,
+                out,
+            )
+            return [float(x) for x in out]
+
+        # Fallback pure Python reference implementation
         output = [0.0] * self.rows
         cols = min(self.cols, len(vec))
         for r in range(self.rows):

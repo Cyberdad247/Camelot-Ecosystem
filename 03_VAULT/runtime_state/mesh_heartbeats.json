@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-05T16:43:43.981048+00:00",
+  "timestamp": "2026-10-17T16:23:22.606376+00:00",
   "host_tailscale_ip": "100.118.224.52",
   "tailscale_service_running": true,
   "cloudflare_warp_active": false,
@@ -25,7 +25,7 @@
       "name": "VPS_HUB_RELAY",
       "target": "100.110.180.18:8095",
       "reachable": true,
-      "latency_ms": 110.01,
+      "latency_ms": 312.76,
       "protocol": "mTLS/Bifrost",
       "notes": "Hermes Prime cloud control plane & rendezvous"
     }

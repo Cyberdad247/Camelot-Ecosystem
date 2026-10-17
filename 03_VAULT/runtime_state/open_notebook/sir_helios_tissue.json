@@ -23,11 +23,14 @@
     ],
     "mesh_nodes": [
       "cybertronia",
-      "vps-camelot-hub",
       "vashawns-s26-ultra",
-      "lakesha"
+      "vps-camelot-hub",
+      "fothers-camelot",
+      "lakesha",
+      "macbook-pro-3",
+      "moto-g-power-5g---2024"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-10-12T17:19:56.260039+00:00"
+    "updated_at": "2026-10-14T23:55:17.393889+00:00"
   }
 ]

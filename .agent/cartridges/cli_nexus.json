@@ -1,0 +1,7 @@
+{
+  "@context": "https://camelot-os.dev/ukg/v10001/cli_nexus",
+  "@type": "Sovereign_CLI_Cartridge",
+  "mounted_tools": ["anti-gravity", "opencode", "freebuff"],
+  "security_gate": "ANYA_LAST_LAW",
+  "status": "ARMED"
+}

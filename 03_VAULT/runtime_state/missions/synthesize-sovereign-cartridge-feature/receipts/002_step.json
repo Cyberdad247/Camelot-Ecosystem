@@ -1,0 +1,8 @@
+{
+  "artifact": "task_dag.json",
+  "path": "03_VAULT\\runtime_state\\missions\\synthesize-sovereign-cartridge-feature\\task_dag.json",
+  "sha256": "7195ad4db54ad1596d0d272addb8156bf6c5f3c3416bd92c5ff7e5bc7dfb3074",
+  "bytes": 1389,
+  "written_at": "2026-10-14T23:21:44Z",
+  "receipt_no": 2
+}

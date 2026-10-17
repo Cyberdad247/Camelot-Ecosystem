@@ -1,12 +1,12 @@
 {
   "schema_version": "camelot-evidence/v1",
   "evidence_id": "EVD-HTMX-SITE-001",
-  "timestamp": "2026-10-12T00:52:40.496424+00:00",
+  "timestamp": "2026-10-17T01:20:22.839166+00:00",
   "artifact": {
     "name": "evd_htmx_site_001.html",
     "path": "03_VAULT/runtime_state/evidence/evd_htmx_site_001.html",
-    "size_bytes": 11561,
-    "sha256": "ba91a344eb494d1b9e7fafd58ff996ca69c1b899d9dd643e33f665cc85c8b781"
+    "size_bytes": 11887,
+    "sha256": "10ebfa32f30decef5a1ca963a5f5c6a780c2f758ff20f04b11a32bf263028dae"
   },
   "verified_invariants": [
     "Pure HATEOAS server-driven state transitions (Zero client JS framework)",

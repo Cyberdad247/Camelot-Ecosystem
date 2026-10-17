@@ -1,0 +1,32 @@
+{
+  "crystal_id": "VKG_626C71908972E035",
+  "schema_version": "v1000-VKG-SINGULARITY",
+  "anya_seal": "ANYA_IS_THE_GATE",
+  "category": "WEBGPU_GRAPH_DELTA",
+  "knight": "SIR_HELIOS",
+  "title": "WebGPU Graph Delta Streaming Test",
+  "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:WebGPU|Graph|Delta|Streaming|Test|WebGPU|compute|shaders|stream|incremental|triplets|into|Structure-of-Arrays|buffers\u27e9",
+  "anchor_tokens": [
+    "WebGPU",
+    "Graph",
+    "Delta",
+    "Streaming",
+    "Test",
+    "WebGPU",
+    "compute",
+    "shaders",
+    "stream",
+    "incremental",
+    "triplets",
+    "into",
+    "Structure-of-Arrays",
+    "buffers"
+  ],
+  "sources_count": 1,
+  "manifest_sha256": "73262da531e51502d1aae41177ad97864d158beb16de0a8bdd221b749fb60914",
+  "triplets": [],
+  "triplet_count": 0,
+  "vfs_coordinate": "vfs://worldtree/crystals/vkg_626c71908972e035.vkg",
+  "created_at": "2026-10-17T16:30:05.630555+00:00",
+  "finalized_content": "WebGPU compute shaders stream incremental AST triplets into Structure-of-Arrays buffers."
+}

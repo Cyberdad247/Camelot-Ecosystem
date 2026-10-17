@@ -1753,3 +1753,23 @@ SIR_ALEX (Cognitive) and SIR_BORIS (Orchestration) review weekly for persona evo
 ## Archivist Scan — 2026-07-04T02:11:28.710915+00:00 (263ms)
 
 ### Skills: 8/8 @ v400.1.0 OK
+
+### [🧠Δ] Reflexion: TASK_ALPHA_01 — 2026-10-17 00:15:38Z
+- **Error:** `Memory leak in loop`
+- **Root Cause:** Unbounded list accumulation
+- **Remediation Invariant:** Apply FirnFlow cache flush
+
+### [🧠Δ] Reflexion: TASK_ALPHA_01 — 2026-10-17 00:17:53Z
+- **Error:** `Memory leak in loop`
+- **Root Cause:** Unbounded list accumulation
+- **Remediation Invariant:** Apply FirnFlow cache flush
+
+### [🧠Δ] Reflexion: TASK_ALPHA_01 — 2026-10-17 00:30:12Z
+- **Error:** `Memory leak in loop`
+- **Root Cause:** Unbounded list accumulation
+- **Remediation Invariant:** Apply FirnFlow cache flush
+
+### [🧠Δ] Reflexion: TASK_ALPHA_01 — 2026-10-17 00:46:38Z
+- **Error:** `Memory leak in loop`
+- **Root Cause:** Unbounded list accumulation
+- **Remediation Invariant:** Apply FirnFlow cache flush

@@ -1,0 +1,27 @@
+[Unit]
+Description=Camelot-OS Cloudroom Autonomous Agent Host (Rust Runtime)
+Documentation=https://github.com/Cyberdad247/cloudroom-core
+After=network.target tailscaled.service
+
+[Service]
+Type=simple
+User=camelot
+Group=camelot
+WorkingDirectory=/opt/camelot/cloudroom
+ExecStart=/usr/local/bin/cloudroom-core --config /etc/camelot/cloudroom.toml
+Restart=always
+RestartSec=5s
+
+# Strict Camelot-OS VPS Resource Ceilings (Hermes Prime slice)
+MemoryMax=1024M
+MemoryHigh=768M
+CPUQuota=150%
+
+# Security Sandboxing
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/opt/camelot/cloudroom/workspaces /var/log/cloudroom
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

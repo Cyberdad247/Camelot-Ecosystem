@@ -1,0 +1,62 @@
+{
+  "active_mode": "VPS_FOREFRONT",
+  "forefront_node": "vps_hub_kvm563",
+  "fabric_nodes": {
+    "vps_hub_kvm563": {
+      "node_id": "vps_hub_kvm563",
+      "display_name": "Sovereign VPS Hub (KVM563)",
+      "tailscale_ip": "100.110.180.18",
+      "public_ip": "162.35.107.134",
+      "role": "SOVEREIGN_FOREFRONT_HUB",
+      "ram_ceiling_mb": 4096,
+      "is_active": true,
+      "last_heartbeat": "2026-10-16T11:23:22.623456+00:00"
+    },
+    "cybertronia": {
+      "node_id": "cybertronia",
+      "display_name": "Cybertronia (Primary Windows Host)",
+      "tailscale_ip": "100.118.224.52",
+      "public_ip": null,
+      "role": "EDGE_FABRIC_EXTENSION",
+      "ram_ceiling_mb": 4096,
+      "is_active": true,
+      "last_heartbeat": "2026-10-16T11:23:22.623456+00:00"
+    },
+    "excalibur_mobile": {
+      "node_id": "vashawns-s26-ultra",
+      "display_name": "Excalibur S26 Ultra Cockpit",
+      "tailscale_ip": "100.106.246.126",
+      "public_ip": null,
+      "role": "KINETIC_MOBILE_SENTINEL",
+      "ram_ceiling_mb": 4096,
+      "is_active": true,
+      "last_heartbeat": "2026-10-16T11:23:22.623456+00:00"
+    },
+    "lakesha": {
+      "node_id": "lakesha",
+      "display_name": "Lakisha Voice Node",
+      "tailscale_ip": "100.100.155.55",
+      "public_ip": null,
+      "role": "MULTIVOICE_AUDIO_SENTINEL",
+      "ram_ceiling_mb": 4096,
+      "is_active": true,
+      "last_heartbeat": "2026-10-16T11:23:22.623456+00:00"
+    },
+    "fothers_camelot": {
+      "node_id": "fothers-camelot",
+      "display_name": "Fothers Secondary Node",
+      "tailscale_ip": "100.121.48.50",
+      "public_ip": null,
+      "role": "DISTRIBUTED_SQUIRE_RUNNER",
+      "ram_ceiling_mb": 4096,
+      "is_active": true,
+      "last_heartbeat": "2026-10-16T11:23:22.623456+00:00"
+    }
+  },
+  "bifrost_bridge_active": true,
+  "bifrost_url": "http://127.0.0.1:3001",
+  "local_fallback_engaged": false,
+  "last_transition_utc": "2026-10-16T11:23:31.448382+00:00",
+  "evolution_cycle_count": 3,
+  "apex_version": "v10001.00-CYBERTRONIA-APEX"
+}

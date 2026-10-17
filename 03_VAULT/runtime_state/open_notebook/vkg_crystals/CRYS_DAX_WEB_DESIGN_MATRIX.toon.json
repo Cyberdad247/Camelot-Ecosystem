@@ -1,0 +1,61 @@
+{
+  "@context": "https://camelot-os.dev/ukg/v10000/dax_skill_matrix",
+  "@type": "Sovereign_Dynamic_Architectural_Executable",
+  "id": "CRYS_DAX_MATRIX_1727899999",
+  "timestamp": "2026-10-02T14:10:00Z",
+  "orchestration_engine": "MERLIN_Ω (L3_System_2_DAG_Planner)",
+  "dax_vanguard_routing": {
+    "SIR_VISAGE": {
+      "role": "Aesthetic_Resonance",
+      "loaded_skills": [
+        "ui-ux-pro-max-skill::design_system_generator",
+        "mengto::design-first-ui-prompting",
+        "opendesign::brand-systems"
+      ],
+      "constraints": [
+        "60-30-10_Chromatic_Rule",
+        "Strict_Anti_Pattern_Filtering"
+      ]
+    },
+    "SIR_HYDRON": {
+      "role": "Declarative_Scaffolder",
+      "loaded_skills": [
+        "mengto::html-to-interaction-prompts",
+        "opendesign::web-prototype",
+        "shadcn-ui::component-generation"
+      ],
+      "constraints": [
+        "A2UI_JSONL_Streaming",
+        "Tailwind_v4_Fluid_Scaling"
+      ]
+    },
+    "SIR_STITCH": {
+      "role": "Kinetic_Weaver",
+      "loaded_skills": [
+        "opendesign::motion-frames",
+        "mengto::optimize-web-animations",
+        "spline::3d-webgpu-integration"
+      ],
+      "constraints": [
+        "Doherty_Threshold_<400ms",
+        "CLS_0.00_Enforced"
+      ]
+    },
+    "SALLY_AUDITOR": {
+      "role": "QA_Accessibility_Gauntlet",
+      "loaded_skills": [
+        "agency-agents::accessibility-auditor",
+        "agency-agents::evidence-collector"
+      ],
+      "constraints": [
+        "WCAG_2.1_AA_Compliance",
+        "Z3_Symbolic_AST_Verification"
+      ]
+    }
+  },
+  "execution_laws": {
+    "JIT_SKILL_LOADING": "Agents load SKILL.md context ONLY when task-relevant; unloads immediately upon AST verification.",
+    "HOTPATH_PURITY": "Zero Python/Node execution in layout calculation or shader pipeline; pure native WASM & WebGPU.",
+    "SCARCITY_ENFORCEMENT": "All UI render graphs must operate under the 4GB node ceiling without DOM tree bloat."
+  }
+}

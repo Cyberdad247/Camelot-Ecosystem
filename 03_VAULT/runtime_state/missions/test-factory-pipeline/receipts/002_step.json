@@ -1,0 +1,8 @@
+{
+  "artifact": "task_dag.json",
+  "path": "03_VAULT\\runtime_state\\missions\\test-factory-pipeline\\task_dag.json",
+  "sha256": "ebe2f8a4b733cdc45dd2074986760d6b92ff62411d59cb30b1c894c90fecfee2",
+  "bytes": 1372,
+  "written_at": "2026-10-14T23:21:52Z",
+  "receipt_no": 2
+}

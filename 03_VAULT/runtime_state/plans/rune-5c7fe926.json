@@ -1,0 +1,9 @@
+{
+  "task_id": "rune-5c7fe926",
+  "knight": "merlin_omega",
+  "directive": "//PLAN",
+  "status": "PLANNED",
+  "execution": "read_only",
+  "requires_human_gate_for_mutations": true,
+  "generated_utc": "2026-10-13T08:21:24.385783+00:00"
+}

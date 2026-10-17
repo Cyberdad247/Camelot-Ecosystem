@@ -1,0 +1,42 @@
+{
+  "$schema": "https://camelot-os.dev/schemas/vkg_crystal.json",
+  "crystal_id": "OMEGA_CLI_NEXUS_EXPANSION",
+  "type": "Sovereign_Tool_Integration_Cartridge",
+  "context": "camelot-os.dev/ukg/v10001/cli_assimilation_matrix",
+  "prime_directive": {
+    "root": "MERLIN_Ω",
+    "role": "TOOL_ORCHESTRATOR",
+    "constraint": "3.6GB_EDGE_STRICT",
+    "strategy": "Deconstruct external CLI binaries into isolated, MCP-callable WebAssembly/MicroVM execution nodes."
+  },
+  "nodes": [
+    {
+      "node_id": "NODE_1_ANTIGRAVITY",
+      "identity": "Cartridge_Anti_Gravity",
+      "role": "Kinetic Browser Environment & NotebookLM Execution Body",
+      "operators": ["SIR_HELIO", "LADY_APIS"],
+      "symbolect_trigger": "//ENGAGE_ANTIGRAVITY",
+      "scarcity_enforcement": "Executes browser automation in headless mode; halts if RAM approaches 3.6GB threshold."
+    },
+    {
+      "node_id": "NODE_2_OPENCODE",
+      "identity": "Cartridge_OpenCode",
+      "role": "Multi-Model Agentic Harness & Skill Execution",
+      "operators": ["SIR_BORIS", "SIR_CODEX"],
+      "symbolect_trigger": "//BOOT_OPENCODE",
+      "scarcity_enforcement": "Utilizes prompt compaction and local model routing to prevent token/context exhaustion."
+    },
+    {
+      "node_id": "NODE_3_FREEBUFF",
+      "identity": "Cartridge_Freebuff_OSINT",
+      "role": "Adversarial Threat Intelligence & Vulnerability Scanning",
+      "operators": ["SIR_SENTINEL", "SIR_GIDEON"],
+      "symbolect_trigger": "//EXECUTE_THREAT_SCAN",
+      "scarcity_enforcement": "Runs as an ephemeral Go-native binary; triggers MADV_DONTNEED memory eviction immediately after scan completion."
+    }
+  ],
+  "verification": {
+    "z3_assertion": "CLI_Assimilation_Convexity == TRUE",
+    "status": "ATTESTED_SEALED"
+  }
+}

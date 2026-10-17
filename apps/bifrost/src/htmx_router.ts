@@ -78,6 +78,7 @@ router.get('/dashboard', (_req, res) => {
         </div>
         <div class="flex items-center space-x-3">
           <a href="/htmx/explorer" class="text-xs bg-[#D4AF37]/20 border border-[#D4AF37]/50 text-[#D4AF37] px-3 py-1.5 rounded hover:bg-[#D4AF37]/30 transition">Code Explorer (Godbolt)</a>
+          <a href="/htmx/worldtree" class="text-xs bg-[#38bdf8]/20 border border-[#38bdf8]/50 text-[#38bdf8] px-3 py-1.5 rounded hover:bg-[#38bdf8]/30 transition">WorldTree WebGPU Graph</a>
           <div id="swarm-metrics" hx-get="/htmx/metrics/swarm" hx-trigger="every 3s" class="text-xs bg-neutral-900 px-3 py-1.5 rounded border border-neutral-800">
             Swarm: Nominal | Ceilings: Law 03 Enforced
           </div>
@@ -554,6 +555,39 @@ router.post('/cartridges/concretize', (req, res) => {
       </div>
     `);
   }
+});
+
+/**
+ * //WORLDTREE: WebGPU Graph Canvas & HATEOAS State
+ */
+router.get('/worldtree', (_req, res) => {
+  res.send(`
+    <div id="worldtree-bifrost-container" class="p-6 bg-neutral-950 text-neutral-200 font-mono min-h-screen">
+      <div class="border-b border-neutral-800 pb-4 mb-6 flex justify-between items-center">
+        <div>
+          <h1 class="text-xl font-bold text-[#D4AF37]">WORLDTREE KNOWLEDGE GRAPH</h1>
+          <p class="text-xs text-neutral-500 mt-1">Structure-of-Arrays (SoA) Buffers · WebGPU Compute &amp; Instanced Rendering</p>
+        </div>
+        <div class="flex items-center space-x-3">
+          <a href="/htmx/dashboard" class="text-xs bg-neutral-800 hover:bg-neutral-700 text-white px-3 py-1.5 rounded transition">Back to Dashboard</a>
+        </div>
+      </div>
+      <div class="border border-neutral-800 bg-neutral-900/40 p-4 rounded-lg space-y-3">
+        <div class="flex justify-between items-center text-xs">
+          <span class="text-emerald-400">● 60+ FPS HARDWARE PIPELINE READY</span>
+          <span class="text-neutral-500">Global Law 03: &lt;4.0 GB Node Ceiling</span>
+        </div>
+        <div class="text-xs text-neutral-400">
+          Connected to Canonical 2-Strand HTMX Server at <code class="text-[#D4AF37]">http://127.0.0.1:8096/docs/worldtree-graph</code>
+        </div>
+        <div class="pt-3">
+          <a href="http://127.0.0.1:8096/docs/worldtree-graph" target="_blank" class="text-xs bg-[#D4AF37] hover:bg-[#b5952f] text-black font-bold px-4 py-2 rounded inline-block transition">
+            Launch Standalone WebGPU Cockpit ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  `);
 });
 
 export default router;

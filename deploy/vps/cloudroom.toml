@@ -1,0 +1,22 @@
+# Camelot-OS Cloudroom Core Daemon Configuration
+# Bound to Tailscale mesh on vps-camelot-hub (Hermes Prime co-pilot)
+
+[server]
+host = "100.110.180.18"
+port = 8420
+log_level = "info"
+
+[sandboxes]
+base_dir = "/opt/camelot/cloudroom/workspaces"
+default_shell = "/bin/bash"
+max_concurrent_agents = 4
+idle_timeout_seconds = 3600
+
+[resources]
+max_memory_per_agent_mb = 512
+total_pool_memory_mb = 2048
+
+[telemetry]
+enable_metrics = true
+metrics_port = 8421
+inspira_forwarding = true

@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "camelot-omni-nexus": {
+      "command": "go",
+      "args": [
+        "run",
+        "control_plane/multivoice_router.go",
+        "control_plane/mcp_server.go"
+      ],
+      "env": {
+        "BIFROST_PORT": "8080",
+        "SCARCITY_ENFORCED": "true"
+      }
+    }
+  }
+}

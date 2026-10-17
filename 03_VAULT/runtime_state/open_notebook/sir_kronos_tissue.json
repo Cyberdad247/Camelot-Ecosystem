@@ -1,0 +1,13 @@
+[
+  {
+    "knight_id": "SIR_KRONOS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//MRP",
+    "content": "{\"action\": \"mrp_verification\", \"mrp\": {\"mrp_id\": \"MRP_238EB4E0F51C\", \"briefing_hash\": \"sha256:tri_core_baseline\", \"bewertungsmatrix\": {\"gruendlichkeit\": 0.96, \"ordnung\": 0.95, \"effizienz\": 0.94, \"composite_score\": 0.9515}, \"kronos_audit_passed\": true, \"vulnerabilities_mitigated\": 3, \"z3_symbolic_proof\": \"CONVEX_VALIDATED\", \"ram_peak_mb\": 45.6, \"hitl_status\": \"{\\ud83d\\udc64\\u2705}_PENDING\", \"execution_symbolects\": [\"\\u26a1\", \"\\ud83d\\udca1\", \"\\u2699\\ufe0f\", \"\\ud83d\\udc64\\u2705\", \"\\ud83e\\uddf1...\", \"\\ud83d\\udc41\\ufe0f\\ud83d\\udde8\\ufe0f \\u27a1\\ufe0f \\ud83d\\udc89\", \"\\ud83e\\udde0\\u0394\", \"<\\ud83c\\udfc6+>\"], \"receipt_hash\": \"e6054c0b60d584edac6e93f3955f1721e2f0794eacf7caceeb18fa273ef791e1\", \"timestamp\": \"2026-10-17T00:15:08.638013+00:00\"}, \"is_mergeable_prerequisites\": true, \"status\": \"MRP_VERIFIED\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_kronos/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_KRONOS",
+    "open_viking_tether": "open_viking://worldtree/sir_kronos",
+    "updated_at": "2026-10-17T00:15:08.690799+00:00"
+  }
+]

@@ -31,6 +31,7 @@ logger = logging.getLogger("FinalizeVKGCrystal")
 VKG_CRYSTAL_DIR = REPO_ROOT / "03_VAULT" / "runtime_state" / "open_notebook" / "vkg_crystals"
 UKG_NODES_DIR = REPO_ROOT / "03_VAULT" / "UKG" / "nodes"
 NAV_INDEX_PATH = REPO_ROOT / "03_VAULT" / "runtime_state" / "open_notebook" / "vkg_nav_index.json"
+GRAPH_DELTAS_PATH = REPO_ROOT / "03_VAULT" / "runtime_state" / "open_notebook" / "graph_deltas.jsonl"
 
 VKG_CRYSTAL_DIR.mkdir(parents=True, exist_ok=True)
 UKG_NODES_DIR.mkdir(parents=True, exist_ok=True)
@@ -109,6 +110,63 @@ def _update_nav_index(entry: Dict[str, Any]) -> None:
         NAV_INDEX_PATH.write_text(json.dumps(index, indent=2), encoding="utf-8")
 
 
+def _emit_graph_delta_event(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """Emit an incremental graph delta event for live WebGPU canvas streaming."""
+    cid = payload.get("crystal_id", "")
+    knight_id = payload.get("knight", "").lower()
+    title = payload.get("title", "")
+    triplets = payload.get("graphify_triplets", [])
+
+    new_node = {
+        "id": cid,
+        "label": f"💎 {title[:28]}",
+        "type": "crystal",
+        "color": "#10B981",
+        "radius": 5.0,
+        "vfs_coord": payload.get("vfs_coordinate", ""),
+    }
+
+    new_edges = [{
+        "source": knight_id if knight_id else "cybertronia",
+        "target": cid,
+        "weight": 0.5,
+        "relation": "crystallizes",
+    }]
+    for t in triplets[:5]:
+        tail = t.get("tail", "").strip()
+        if tail:
+            new_edges.append({
+                "source": cid,
+                "target": tail[:24].replace(" ", "_").lower(),
+                "weight": 0.4,
+                "relation": t.get("relation", "links_to"),
+            })
+
+    now_iso = datetime.now(timezone.utc).isoformat()
+    evt_hash = hashlib.sha256(f"{cid}:{now_iso}".encode("utf-8")).hexdigest()[:12]
+    delta_record = {
+        "event_id": f"evt_{evt_hash}",
+        "timestamp": now_iso,
+        "action": "CRYSTAL_FORGED",
+        "crystal_id": cid,
+        "node": new_node,
+        "edges": new_edges,
+        "soa_delta": {
+            "nodes_added": 1,
+            "edges_added": len(new_edges),
+        },
+    }
+
+    try:
+        GRAPH_DELTAS_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with open(GRAPH_DELTAS_PATH, "a", encoding="utf-8") as f:
+            f.write(json.dumps(delta_record) + "\n")
+    except Exception as e:
+        logger.warning(f"Failed to append to graph_deltas.jsonl: {e}")
+
+    return delta_record
+
+
 def finalize_open_notebook_crystal(
     *,
     knight_id: str,
@@ -168,6 +226,9 @@ def finalize_open_notebook_crystal(
 
     # 6. Update Navigation Index
     _update_nav_index(crystal_payload)
+
+    # 7. Emit live incremental graph delta for WebGPU streaming
+    _emit_graph_delta_event(crystal_payload)
 
     return crystal_payload
 

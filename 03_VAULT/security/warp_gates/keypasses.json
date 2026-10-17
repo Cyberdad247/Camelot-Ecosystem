@@ -6,8 +6,8 @@
     "SIR_HEIMDALL",
     "LADY_ALEXANDRIA"
   ],
-  "updated_at": "2026-10-12T02:31:40.935446+00:00",
-  "total_keypasses": 13,
+  "updated_at": "2026-10-17T16:23:51.565876+00:00",
+  "total_keypasses": 14,
   "keypasses": {
     "MERLIN_OMEGA": {
       "keypass_id": "KP-MERLIN_OMEGA-AF927FDE",
@@ -233,6 +233,24 @@
       "secret_salt": "a8fc0e75ae566154e0059c45a8225113",
       "issued_at": "2026-10-04T16:14:30.100708+00:00",
       "tier": "ARCH",
+      "expires_at": "FOREVER",
+      "capabilities": [
+        "SOCKET_BYPASS",
+        "OUT_OF_BAND_RENDEZVOUS",
+        "VAULT_EMERGENCY_UNSEAL",
+        "TELEMETRY_OVERRIDE"
+      ],
+      "status": "ACTIVE",
+      "issuer": "LADY_ALEXANDRIA_KEYPASS_VAULT"
+    },
+    "FOTHERS_CAMELOT": {
+      "keypass_id": "KP-FOTHERS_CAMELOT-99276D49",
+      "knight_id": "FOTHERS_CAMELOT",
+      "spark_id": "0x99276D492CCA7058631F48D3B1B9C2CE",
+      "forever_access_key": "WARP-PASS-99276D49-835C4E26C210421247C7D8867AFB5B86",
+      "secret_salt": "4baa2a18d5396c6e76f56c1572ed9075",
+      "issued_at": "2026-10-14T00:50:51.307133+00:00",
+      "tier": "SOVEREIGN",
       "expires_at": "FOREVER",
       "capabilities": [
         "SOCKET_BYPASS",

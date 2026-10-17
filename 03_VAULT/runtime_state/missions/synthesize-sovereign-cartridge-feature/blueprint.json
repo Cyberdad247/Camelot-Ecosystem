@@ -1,0 +1,19 @@
+{
+  "step": "ARCHITECT_SPEC",
+  "mission_id": "synthesize-sovereign-cartridge-feature",
+  "constitution": "const_engineering_v1",
+  "mounted_repo": "Cyberdad247/arthurian-omni-forge",
+  "operator": "Merlin_Ω ⊕ Sir_Forge",
+  "constraints": {
+    "memory_cap_mb": 512,
+    "root_ro": true,
+    "zero_leak_delta_m_mib": 0.12,
+    "governance_bypass": false
+  },
+  "schemas": {
+    "InputIntent": "camelot.omni_forge.intent/1",
+    "TaskDAG": "camelot.omni_forge.dag/1",
+    "VerificationReceipt": "camelot.omni_forge.receipt/1"
+  },
+  "governance_writes": "forbidden"
+}

@@ -171,7 +171,7 @@ class AlexandriaKeypassVault:
         """Strictly enforces that ONLY Omega Level Knights, Arch, and Sovereign level Personas can hold Keypasses."""
         k = knight_id.upper()
         # Sovereign root and master override
-        if k in ("ANYA_OMEGA", "ARTHUR_OMEGA", "ARCH_SOVEREIGN", "VA_SHAWN"):
+        if k in ("ANYA_OMEGA", "ARTHUR_OMEGA", "ARCH_SOVEREIGN", "VA_SHAWN", "FOTHERS_CAMELOT"):
             return True, "SOVEREIGN"
         if k in ("MERLIN_OMEGA", "ALPHA_OMEGA", "SIR_HEIMDALL", "HEIMDALL_OMEGA"):
             return True, "OMEGA"
@@ -245,6 +245,8 @@ class AlexandriaKeypassVault:
             return "0xAB8AA3592B3B4BC1B41F34979CDC184E"
         if k_upper in ("SIR_HELIO", "EXCALIBUR_MOBILE", "SIR_HELIO_MOBILE"):
             return "0x56820318BB91451FAAC44B46424898CF"
+        if k_upper == "FOTHERS_CAMELOT":
+            return "0x99276D492CCA7058631F48D3B1B9C2CE"
         if _SHEETS_PATH.exists():
             try:
                 data = json.loads(_SHEETS_PATH.read_text(encoding="utf-8"))
