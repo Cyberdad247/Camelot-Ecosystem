@@ -50,6 +50,20 @@ const KNIGHTS: Record<string, KnightTelemetry> = {
     ramMb: 32,
     sparkId: '0x3205F18991DA427296A93641FD642763',
   },
+  JEV_OMEGA: {
+    name: 'JEV_OMEGA',
+    role: 'Offline System-2 Orchestrator w/ Candy EQ (SmolLM3-3B 1.58b Ternary)',
+    status: 'ONLINE_FOSS',
+    ramMb: 1,
+    sparkId: '0xJEVOMEGATERNARYCORE158',
+  },
+  LUKAS_OMEGA: {
+    name: 'LUKAS_OMEGA',
+    role: 'L2 Kinetic Actuator & Host Daemon Governor (Reya OS sub-5ms)',
+    status: 'BARE_METAL',
+    ramMb: 48,
+    sparkId: '0xLUKASREYAOSACTUATOR',
+  },
 };
 
 function renderKnightCard(k: KnightTelemetry): string {

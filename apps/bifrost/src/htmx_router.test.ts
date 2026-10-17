@@ -39,7 +39,29 @@ describe('Bifrost HATEOAS / HTMX Router', () => {
     expect(res.text).toContain('SIR_HELIOS');
     expect(res.text).toContain('MERLIN_OMEGA');
     expect(res.text).toContain('ANYA_OMEGA');
+    expect(res.text).toContain('JEV_OMEGA');
+    expect(res.text).toContain('LUKAS_OMEGA');
     expect(res.text).toContain('hx-get="/htmx/knights/SIR_HELIOS/inspect"');
+    expect(res.text).toContain('hx-get="/htmx/knights/JEV_OMEGA/inspect"');
+  });
+
+  it('renders deep telemetry for JEV_OMEGA (SmolLM3 1.58b System-2)', async () => {
+    const res = await new Promise<{ status: number; text: string }>((resolve) => {
+      const server = app.listen(0, async () => {
+        const addr = server.address();
+        const port = typeof addr === 'object' && addr ? addr.port : 0;
+        const resp = await fetch(`http://127.0.0.1:${port}/htmx/knights/jev_omega/inspect`);
+        const text = await resp.text();
+        server.close(() => resolve({ status: resp.status, text }));
+      });
+    });
+
+    expect(res.status).toBe(200);
+    expect(res.text).toContain('JEV_OMEGA');
+    expect(res.text).toContain('0xJEVOMEGATERNARYCORE158');
+    expect(res.text).toContain('ONLINE_FOSS');
+    expect(res.text).toContain('SmolLM3-3B 1.58b Ternary');
+    expect(res.text).toContain('1 MB');
   });
 
   it('renders deep telemetry for a specific knight', async () => {

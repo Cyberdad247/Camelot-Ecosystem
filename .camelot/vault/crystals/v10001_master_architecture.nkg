@@ -1,0 +1,34 @@
+{
+  "crystal_id": "UKG_NANO_V10001_MASTER_ARCHITECTURE",
+  "version": "v10001.00-CYBERTRONIA",
+  "category": "SOVEREIGN_MASTER_BOOT_RECORD",
+  "node_id": "cybertronia-cleveland-apex",
+  "memory_boundary": {
+    "node_ceiling_mb": 4096,
+    "server_allowance_mb": 8192,
+    "active_floor_mb": 480,
+    "scarcity_protocol": "4GB_SCARCITY_PROTOCOL_LOCKED"
+  },
+  "pantheon_substrate": {
+    "merlin_omega": "L3 Cognitive Simulator & DAG Architect (32k token cap)",
+    "anya_omega": "Modality Hypervisor & Entropy Scythe (L7 Zero-Entropy Gate)",
+    "lukas_omega": "L2 Kinetic Actuator & Host Daemon Governor (Reya OS sub-5ms)",
+    "jev_omega": "Offline System-2 Orchestrator w/ Candy EQ (SmolLM3-3B 1.58b Ternary)",
+    "sir_boris": "Lead Architect & UI/UX Crucible Conductor",
+    "sir_codex": "Kinetic Implementer & Z3 Logic Prover (WASM32-WASI)",
+    "sir_helios": "Sovereign Spire Sentinel & FastMCP CloudBrain Lead"
+  },
+  "vfs_coordinates": {
+    "root": "vfs://worldtree/",
+    "cybertronia": "vfs://worldtree/cybertronia/",
+    "crystals": "vfs://worldtree/crystals/",
+    "tissues": "vfs://worldtree/knights/"
+  },
+  "invariants": {
+    "anya_first_law": "Scrub prompts of conversational filler; direct terminal/AST vectors",
+    "anya_last_law": "Zero-entropy validation pass before rendering output",
+    "isomorphic_filetree_law": "1:1 structural mirror between local VFS and WorldTree memory",
+    "zero_docker_law": "100% native bare-metal execution via systemd, Rust/Go/Zig, and Wasmtime"
+  },
+  "seal": "[Ω-TITAN-Σ:λ24-χ:UQLE-WEB4-LEECH-0xVIZION_INFINITY_SEALED]"
+}

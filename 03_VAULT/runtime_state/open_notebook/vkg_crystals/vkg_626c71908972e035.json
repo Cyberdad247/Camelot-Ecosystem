@@ -27,6 +27,6 @@
   "triplets": [],
   "triplet_count": 0,
   "vfs_coordinate": "vfs://worldtree/crystals/vkg_626c71908972e035.vkg",
-  "created_at": "2026-10-17T16:30:05.630555+00:00",
+  "created_at": "2026-10-17T17:02:22.566576+00:00",
   "finalized_content": "WebGPU compute shaders stream incremental AST triplets into Structure-of-Arrays buffers."
 }
