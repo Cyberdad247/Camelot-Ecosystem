@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import { Shield, Layers, Building2, Factory, Disc, Lock, Smartphone } from 'lucide-react';
 import { CartridgeId, CartridgeMetadata } from '../types';
 import { cn } from '../lib/utils';
+import { triggerHaptic } from '../lib/haptics';
 
 interface Props {
   activeCartridge: CartridgeId;
@@ -80,29 +82,64 @@ export function TenantCarousel({
   leaseId,
   operator
 }: Props) {
+  // Global Hotkeys: Number keys 1-5 switch cartridges
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't trigger if user is typing in an input
+      if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement)?.tagName)) {
+        return;
+      }
+      const keyNum = parseInt(e.key, 10);
+      if (keyNum >= 1 && keyNum <= CARTRIDGES.length) {
+        const target = CARTRIDGES[keyNum - 1];
+        if (target && target.id !== activeCartridge) {
+          triggerHaptic('tap');
+          onSelectCartridge(target.id);
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeCartridge, onSelectCartridge]);
+
+  const handleSelect = (id: CartridgeId) => {
+    triggerHaptic('tap');
+    onSelectCartridge(id);
+  };
+
+  const handleLock = () => {
+    triggerHaptic('heavy');
+    onLockVault();
+  };
+
   return (
-    <div className="w-full border-b border-[#D4AF37]/30 bg-[#050510]/95 backdrop-blur-md px-2 sm:px-6 py-2.5 flex flex-col md:flex-row items-center justify-between gap-2.5 z-30">
-      
+    <nav
+      aria-label="Tenant Cartridge Carousel"
+      className="w-full border-b border-[#D4AF37]/30 bg-[#050510]/95 backdrop-blur-md px-2 sm:px-6 py-2 flex flex-col md:flex-row items-center justify-between gap-2.5 z-30"
+    >
       {/* Left: Tenant Carousel Pills */}
       <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 scrollbar-none">
         <div className="hidden lg:flex items-center gap-1.5 text-xs font-['Cinzel'] font-bold text-[#D4AF37] pr-2 border-r border-[#4B0082]">
           <Layers className="w-4 h-4 text-[#D4AF37]" />
-          <span>TENANT CAROUSEL</span>
+          <span>CAROUSEL</span>
         </div>
 
-        {CARTRIDGES.map((cartridge) => {
+        {CARTRIDGES.map((cartridge, idx) => {
           const isActive = activeCartridge === cartridge.id;
           return (
             <button
               key={cartridge.id}
-              onClick={() => onSelectCartridge(cartridge.id)}
+              onClick={() => handleSelect(cartridge.id)}
+              aria-current={isActive ? 'page' : undefined}
               className={cn(
-                "px-2.5 sm:px-3.5 py-1.5 text-xs font-['Cinzel'] tracking-wider flex items-center gap-2 whitespace-nowrap transition-all border min-h-[36px]",
+                "px-3 sm:px-3.5 py-2 text-xs font-['Cinzel'] tracking-wider flex items-center gap-2 whitespace-nowrap transition-all border rounded-md min-h-[44px] cursor-pointer",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]",
                 isActive
-                  ? "bg-[#D4AF37]/20 border-[#D4AF37] text-[#D4AF37] font-bold shadow-[0_0_12px_rgba(212,175,55,0.4)]"
+                  ? "bg-[#D4AF37]/20 border-[#D4AF37] text-[#D4AF37] font-bold shadow-[0_0_15px_rgba(212,175,55,0.4)]"
                   : "bg-black/40 border-[#4B0082]/60 text-[#F1EFF4]/70 hover:text-[#F1EFF4] hover:border-[#D4AF37]/40"
               )}
             >
+              <span className="text-[10px] font-mono text-[#D4AF37]/70 font-bold">[{idx + 1}]</span>
               {cartridge.id === 'ecosystem-pwa' && <Smartphone className="w-3.5 h-3.5 text-purple-400" />}
               {cartridge.id === 'excalibur-ecc' && <Shield className="w-3.5 h-3.5 text-[#D4AF37]" />}
               {cartridge.id === 'kba-executive' && <Building2 className="w-3.5 h-3.5 text-[#9D4EDD]" />}
@@ -120,19 +157,18 @@ export function TenantCarousel({
         <div className="text-[10px] font-['JetBrains_Mono'] text-[#F1EFF4]/70 hidden sm:block">
           <span className="text-[#D4AF37]">OPERATOR:</span> {operator}
           <span className="mx-2 text-[#4B0082]">|</span>
-          <span className="text-green-400">LEASE:</span> {leaseId ? leaseId.substring(0, 18) : 'ACTIVE'}...
+          <span className="text-[#10B981]">LEASE:</span> {leaseId ? leaseId.substring(0, 18) : 'ACTIVE'}...
         </div>
 
         <button
-          onClick={onLockVault}
-          className="px-3 py-1.5 border border-red-500/60 bg-red-950/40 text-red-300 hover:bg-red-900/60 hover:border-red-400 font-['Cinzel'] text-xs font-bold tracking-widest flex items-center gap-1.5 transition-all min-h-[36px]"
+          onClick={handleLock}
+          className="px-3.5 py-2 border border-[#DE4258]/60 bg-[#DE4258]/15 text-[#DE4258] hover:bg-[#DE4258]/30 hover:border-[#DE4258] font-['Cinzel'] text-xs font-bold tracking-widest flex items-center gap-1.5 transition-all min-h-[44px] rounded-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DE4258]"
           title="Lock Tenant Carousel and re-engage Excalibur Bio-Auth Gate"
         >
           <Lock className="w-3.5 h-3.5" />
           <span>SEAL VAULT</span>
         </button>
       </div>
-
-    </div>
+    </nav>
   );
 }

@@ -1,5 +1,33 @@
+/* Tier 1: Ground Plate (Sub-panels, list cards, background modules) */
+.glass-panel-ground {
+  background: rgba(5, 5, 16, 0.70);
+  border: 1px solid rgba(241, 239, 244, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Tier 2: Sovereign Focus (Active cartridges, selected nodes, action panels) */
+.glass-panel-sovereign {
+  background: rgba(5, 5, 16, 0.82);
+  border: 1px solid rgba(212, 175, 55, 0.40);
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.20), inset 0 0 15px rgba(212, 175, 55, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Tier 3: Tactical Visor (Command bar, biometric airlock, modals) */
+.glass-panel-visor {
+  background: rgba(5, 5, 16, 0.94);
+  border: 1px solid rgba(157, 78, 221, 0.50);
+  box-shadow: 0 0 45px rgba(75, 0, 130, 0.50), inset 0 0 25px rgba(157, 78, 221, 0.08);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+/* Legacy & Semantic Color Variants */
 .glass-panel-gold {
-  background: rgba(5, 5, 16, 0.75);
+  background: rgba(5, 5, 16, 0.78);
   border: 1px solid rgba(212, 175, 55, 0.35);
   box-shadow: 0 0 25px rgba(212, 175, 55, 0.18), inset 0 0 15px rgba(212, 175, 55, 0.05);
   backdrop-filter: blur(16px);
@@ -7,17 +35,23 @@
 }
 
 .glass-panel-purple {
-  background: rgba(5, 5, 16, 0.75);
-  border: 1px solid rgba(75, 0, 130, 0.4);
-  box-shadow: 0 0 25px rgba(75, 0, 130, 0.25), inset 0 0 15px rgba(75, 0, 130, 0.08);
+  background: rgba(5, 5, 16, 0.78);
+  border: 1px solid rgba(75, 0, 130, 0.45);
+  box-shadow: 0 0 25px rgba(75, 0, 130, 0.30), inset 0 0 15px rgba(75, 0, 130, 0.08);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
 
 .glass-panel-obsidian {
-  background: rgba(5, 5, 16, 0.85);
+  background: rgba(5, 5, 16, 0.88);
   border: 1px solid rgba(241, 239, 244, 0.12);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+}
+
+/* Focus and Accessibility Outlines */
+:focus-visible {
+  outline: 2px solid #D4AF37 !important;
+  outline-offset: 2px !important;
 }

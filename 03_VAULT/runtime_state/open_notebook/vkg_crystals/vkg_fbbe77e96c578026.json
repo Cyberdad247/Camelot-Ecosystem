@@ -1,0 +1,231 @@
+{
+  "crystal_id": "VKG_FBBE77E96C578026",
+  "schema_version": "v1000-VKG-SINGULARITY",
+  "anya_seal": "ANYA_IS_THE_GATE",
+  "category": "CAMELOT_SYSTEMS_ARCHITECTURE",
+  "knight": "SIR_BORIS",
+  "title": "Excalibur UI/UX Design System",
+  "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Excalibur|UI/UX|Design|System|EXCALIBUR-CMD-1|Sovereign|Edge|UI/UX|Design|System|Specification|**Document|ID:**|`SPEC-EXCALIBUR-UIUX-V1000`|**System|Version:**|`v10001.00-CYBERTRONIA`|**Architects:**|SIR_BORIS|UI/UX|Vanguard|MERLIN_\u03a9|Task|SIR_HELIOS|Telemetry|ANYA_\u03a9|Gate|**Base|Repository|Reference:**|Cyberdad247/Excalibur_cmd-1](https://github.com/Cyberdad247/Excalibur_cmd-1|`apps/excalibur-cmd-1`|**Hardware|Profile:**|Edge|Node|4.0GB|strict|ceiling|Samsung|Ultra|120Hz\u27e9",
+  "anchor_tokens": [
+    "Excalibur",
+    "UI/UX",
+    "Design",
+    "System",
+    "EXCALIBUR-CMD-1",
+    "Sovereign",
+    "Edge",
+    "UI/UX",
+    "Design",
+    "System",
+    "Specification",
+    "**Document",
+    "ID:**",
+    "`SPEC-EXCALIBUR-UIUX-V1000`",
+    "**System",
+    "Version:**",
+    "`v10001.00-CYBERTRONIA`",
+    "**Architects:**",
+    "SIR_BORIS",
+    "UI/UX",
+    "Vanguard",
+    "MERLIN_\u03a9",
+    "Task",
+    "SIR_HELIOS",
+    "Telemetry",
+    "ANYA_\u03a9",
+    "Gate",
+    "**Base",
+    "Repository",
+    "Reference:**",
+    "Cyberdad247/Excalibur_cmd-1](https://github.com/Cyberdad247/Excalibur_cmd-1",
+    "`apps/excalibur-cmd-1`",
+    "**Hardware",
+    "Profile:**",
+    "Edge",
+    "Node",
+    "4.0GB",
+    "strict",
+    "ceiling",
+    "Samsung",
+    "Ultra",
+    "120Hz"
+  ],
+  "sources_count": 1,
+  "manifest_sha256": "7eb66e4ac867907c2e4cced0c38f35121a22f8f960a71f15359075c0360d76c2",
+  "triplets": [
+    {
+      "head": "**Hardware Profile:** Edge Node 4.0GB RAM strict",
+      "relation": "ceiling",
+      "tail": "\u00b7 Samsung S26 Ultra 120Hz / Windows Native"
+    },
+    {
+      "head": "**Excalibur Command Center excalibur-cmd-1`)**",
+      "relation": "is_a",
+      "tail": "primary kinetic cockpit and mobile-edge command interface for Camelot-OS"
+    },
+    {
+      "head": "Built on React 19 Tailwind CSS Vite and Zustand it must deliver the ergonomics of an aerospace HUD",
+      "relation": "combined",
+      "tail": "regal sovereign aesthetics of the Camelot Pantheon"
+    },
+    {
+      "head": "- **Zero UI Slop:** High-density information display without",
+      "relation": "cluttered",
+      "tail": "visual noise"
+    },
+    {
+      "head": "- **Obsidian & Luxora Gold:** Obsidian deep-space backdrops #050510",
+      "relation": "intersected",
+      "tail": "sharp Luxora Gold #D4AF37 hairline dividers and tactical corner brackets"
+    },
+    {
+      "head": "- **120Hz Edge Ergonomics:**",
+      "relation": "optimized",
+      "tail": "Samsung Galaxy S26 Ultra Adreno 840 GPU and 4K desktop command centers with sub-16ms touch-to-visual response and 44px minimum tap targets"
+    },
+    {
+      "head": "SUSPENSE[\"Zero-CLS Suspense Code",
+      "relation": "splitting",
+      "tail": "<18MB RAM"
+    },
+    {
+      "head": "| --obsidian-subtle | #0B0B1A | rgba(11 11 26 0.85)`| Panel",
+      "relation": "elevated",
+      "tail": "surface | 1.15:1 |"
+    },
+    {
+      "head": "| --luxora-gold-dim`| #8C7424 | rgba(140 116 36 1.0 | Secondary labels",
+      "relation": "disabled",
+      "tail": "borders | 4.61:1 Passes AA |"
+    },
+    {
+      "head": "- **Display Serif Cinzel serif):**",
+      "relation": "used",
+      "tail": "exclusively for system titles Knight names Cartridge headers and modal titles"
+    },
+    {
+      "head": "- **Editorial Body Spectral serif):**",
+      "relation": "used",
+      "tail": "executive descriptions contract briefs and dialogue"
+    },
+    {
+      "head": "- **Telemetry Monospace JetBrains Mono monospace):**",
+      "relation": "used",
+      "tail": "port addresses hashes memory counters runes and JSON nodes"
+    },
+    {
+      "head": "\u2502 \u251c\u2500\u2500 TacticalSlider.tsx # Hardware",
+      "relation": "throttling",
+      "tail": "and volume sliders"
+    },
+    {
+      "head": "\u2502 \u251c\u2500\u2500 TelemetryHeader.tsx # Persistent 4GB",
+      "relation": "ceiling",
+      "tail": "& SSE link telemetry visor"
+    },
+    {
+      "head": "\u2502 \u2514\u2500\u2500 NetworkMeshNode.tsx # Real-time Tailscale IP &",
+      "relation": "ping",
+      "tail": "latency card"
+    },
+    {
+      "head": "\u2502 \u251c\u2500\u2500 CartridgeSlot.tsx #",
+      "relation": "standardized",
+      "tail": "hot-swappable cartridge envelope"
+    },
+    {
+      "head": "\u2502 \u251c\u2500\u2500 CartridgeLoadingFallback.tsx # Zero-CLS",
+      "relation": "animated",
+      "tail": "skeleton state"
+    },
+    {
+      "head": "\u251c\u2500\u2500 CommandVisorModal.tsx # Cmd+K",
+      "relation": "floating",
+      "tail": "sovereign runic palette"
+    },
+    {
+      "head": "- **Visuals:** Semantic",
+      "relation": "colored",
+      "tail": "dot with outer halo"
+    },
+    {
+      "head": "- **Invariants:** If value exceeds 85%",
+      "relation": "ceiling",
+      "tail": "auto-shifts to garnet warning hue #DE4258"
+    },
+    {
+      "head": "- **Thumb Zone Anchor:** All primary navigation",
+      "relation": "alfred",
+      "tail": "Audio controls and node action triggers sit within the bottom 35% of the viewport h <= 300px"
+    },
+    {
+      "head": "-",
+      "relation": "triggered",
+      "tail": "typing // anywhere or pressing Cmd+K / Ctrl+K"
+    },
+    {
+      "head": "### 4.3 Dynamic Cartridge",
+      "relation": "splitting",
+      "tail": "& Scarcity Protocol"
+    },
+    {
+      "head": "- Cartridges",
+      "relation": "is_a",
+      "tail": "dynamically code-split via lazy and wrapped in <ErrorBoundary>"
+    },
+    {
+      "head": "- Total memory footprint per",
+      "relation": "unmounted",
+      "tail": "cartridge 0 MB"
+    },
+    {
+      "head": "- Active",
+      "relation": "working",
+      "tail": "set per cartridge strictly bounded < 24 MB"
+    },
+    {
+      "head": "- Real-time telemetry counters",
+      "relation": "use",
+      "tail": "aria-live=\"polite with aria-atomic=\"true to prevent voice flooding"
+    },
+    {
+      "head": "- Critical system alerts",
+      "relation": "use",
+      "tail": "role=\"alert and aria-live=\"assertive"
+    },
+    {
+      "head": "- Pulsing glass glows and scanlines",
+      "relation": "is_a",
+      "tail": "replaced by static hairline borders"
+    },
+    {
+      "head": "- Page transitions switch",
+      "relation": "sliding",
+      "tail": "300ms transforms to instantaneous 0ms opacity cuts"
+    },
+    {
+      "head": "Implementation",
+      "relation": "phasing",
+      "tail": "& Task DAG Merlin \u03a9"
+    },
+    {
+      "head": "- Enhance TelemetryHeader.tsx to display real-time memory usage against the 4096MB",
+      "relation": "ceiling",
+      "tail": "dynamic warning thresholds"
+    },
+    {
+      "head": "### Phase 4 S26 Ultra 120Hz Touch &",
+      "relation": "alfred",
+      "tail": "Audio Dock"
+    },
+    {
+      "head": "-",
+      "relation": "run",
+      "tail": "automated tests App.test.ts and component test suites"
+    }
+  ],
+  "triplet_count": 34,
+  "vfs_coordinate": "vfs://worldtree/crystals/vkg_fbbe77e96c578026.vkg",
+  "created_at": "2026-10-17T21:22:28.472884+00:00",
+  "finalized_content": "# EXCALIBUR-CMD-1: Sovereign Edge UI/UX Design System Specification\n**Document ID:** `SPEC-EXCALIBUR-UIUX-V1000`  \n**System Version:** `v10001.00-CYBERTRONIA`  \n**Architects:** SIR_BORIS (UI/UX Vanguard) \u2694\ufe0f \u00b7 MERLIN_\u03a9 (Task DAG) \ud83e\udde0 \u00b7 SIR_HELIOS (Telemetry) \ud83d\udef0\ufe0f \u00b7 ANYA_\u03a9 (Gate) \ud83c\udfad  \n**Base Repository Reference:** [Cyberdad247/Excalibur_cmd-1](https://github.com/Cyberdad247/Excalibur_cmd-1) (`apps/excalibur-cmd-1`)  \n**Hardware Profile:** Edge Node (4.0GB RAM strict ceiling \u00b7 Samsung S26 Ultra 120Hz / Windows Native)  \n\n---\n\n## 1. Executive Summary & Aesthetic Vision\n\nThe **Excalibur Command Center (`excalibur-cmd-1`)** is the primary kinetic cockpit and mobile-edge command interface for Camelot-OS. Built on React 19, Tailwind CSS, Vite, and Zustand, it must deliver the ergonomics of an aerospace HUD combined with the regal sovereign aesthetics of the Camelot Pantheon.\n\n### The Sovereign Brutalist Glass Aesthetic\n- **Zero UI Slop:** High-density information display without cluttered visual noise.\n- **Obsidian & Luxora Gold:** Obsidian deep-space backdrops (`#050510`) intersected by sharp Luxora Gold (`#D4AF37`) hairline dividers and tactical corner brackets.\n- **Glassmorphic Precision:** Multi-tier backdrop blur (12px to 24px) with subtle ambient luminous falloffs.\n- **120Hz Edge Ergonomics:** Optimized for the Samsung Galaxy S26 Ultra (Adreno 840 GPU) and 4K desktop command centers with sub-16ms touch-to-visual response and 44px minimum tap targets.\n\n```mermaid\nflowchart TD\n    subgraph FOUNDATION[\"Design Foundations\"]\n        TOKENS[\"Design Tokens (tokens.css)\"]\n        TYPO[\"Typography (Cinzel / Spectral / JetBrains Mono)\"]\n        ELEV[\"Elevation & Glassmorphism (12-24px Blur)\"]\n        BREAK[\"Breakpoints (S26 Ultra 480px / Desktop 1600px)\"]\n    end\n\n    subgraph ATOMIC_SYSTEM[\"Atomic Component Architecture\"]\n        ATOMS[\"Atoms (TacticalButton, BadgeGlyph, GlassPanel, MetricStat)\"]\n        MOLECULES[\"Molecules (KnightVisor, CartridgeSlot, AlfredAudioDock, TelemetryHUD)\"]\n        ORGANISMS[\"Organisms (HolographicGlobe, TenantCarousel, CommandVisor, BioAuthModal)\"]\n    end\n\n    subgraph INTERACTION[\"Interaction & Ergonomics\"]\n        HAPTIC[\"Web Haptics API (10-30ms Micro-Pulses)\"]\n        HOTKEYS[\"Keyboard Runes (//, Esc, 1-5, Space)\"]\n        SUSPENSE[\"Zero-CLS Suspense Code Splitting (<18MB RAM)\"]\n    end\n\n    subgraph A11Y_PERF[\"A11y & Edge Invariants\"]\n        WCAG[\"WCAG 2.1 AA/AAA (Contrast > 7:1)\"]\n        REDUCED[\"prefers-reduced-motion Directives\"]\n        RAM_GOV[\"Strict 4.0GB RAM Node Boundary\"]\n    end\n\n    FOUNDATION --> ATOMIC_SYSTEM\n    ATOMIC_SYSTEM --> INTERACTION\n    INTERACTION --> A11Y_PERF\n```\n\n---\n\n## 2. Global Style Guide & Token Architecture\n\n### 2.1 Sovereign Palette Tokens\n\n| Token Name | Hex Value | RGBA Fallback | Role / Application | WCAG Contrast on Obsidian |\n|---|---|---|---|---|\n| `--obsidian-void` | `#050510` | `rgba(5, 5, 16, 1.0)` | Primary canvas and viewport root | N/A (Base) |\n| `--obsidian-subtle` | `#0B0B1A` | `rgba(11, 11, 26, 0.85)`| Panel elevated surface | 1.15:1 |\n| `--luxora-gold` | `#D4AF37` | `rgba(212, 175, 55, 1.0)` | Sovereign highlights, active states, borders | **8.92:1** (Passes AAA) |\n| `--luxora-gold-dim`| `#8C7424` | `rgba(140, 116, 36, 1.0)` | Secondary labels, disabled borders | 4.61:1 (Passes AA) |\n| `--royal-purple` | `#4B0082` | `rgba(75, 0, 130, 1.0)` | Sovereign depth accents, mesh links | 2.12:1 (Structural only) |\n| `--royal-purple-glow`| `#9D4EDD` | `rgba(157, 78, 221, 1.0)`| Interactive hover glow, mobile border | 5.34:1 (Passes AA) |\n| `--vellum-pure` | `#F1EFF4` | `rgba(241, 239, 244, 1.0)`| Primary typography, headers, body | **17.84:1** (Passes AAA) |\n| `--vellum-muted` | `#9E9AA7` | `rgba(158, 154, 167, 1.0)`| Captions, timestamps, secondary metrics | **6.45:1** (Passes AA) |\n| `--cyan-warp` | `#00F0FF` | `rgba(0, 240, 255, 1.0)` | Active network telemetry, SSE stream live | **13.2:1** (Passes AAA) |\n| `--garnet-alert` | `#DE4258` | `rgba(222, 66, 88, 1.0)` | Critical faults, memory pressure, alerts | **5.18:1** (Passes AA) |\n| `--emerald-seal` | `#10B981` | `rgba(16, 185, 129, 1.0)` | Cryptographic verification, online status | **7.82:1** (Passes AAA) |\n\n### 2.2 Typography Scale & Hierarchy\n\n- **Display Serif (`Cinzel`, serif):** Used exclusively for system titles, Knight names, Cartridge headers, and modal titles.\n  - `text-display-lg`: `2.25rem` (36px), `tracking-[0.15em]`, uppercase.\n  - `text-display-md`: `1.50rem` (24px), `tracking-[0.10em]`, uppercase.\n  - `text-display-sm`: `1.125rem` (18px), `tracking-[0.08em]`, uppercase.\n- **Editorial Body (`Spectral`, serif):** Used for executive descriptions, contract briefs, and dialogue.\n  - `text-body-md`: `1.0rem` (16px), `line-height: 1.6`, font-normal.\n  - `text-body-sm`: `0.875rem` (14px), `line-height: 1.5`, font-normal.\n- **Telemetry Monospace (`JetBrains Mono`, monospace):** Used for port addresses, hashes, memory counters, runes, and JSON nodes.\n  - `text-mono-md`: `0.875rem` (14px), `letter-spacing: -0.02em`.\n  - `text-mono-sm`: `0.75rem` (12px), tabular-nums.\n  - `text-mono-xs`: `0.6875rem` (11px), uppercase tabular-nums.\n\n### 2.3 Glassmorphic Density & Elevation Matrix\n\n```css\n/* Tier 1: Ground Plate (Cards & Sub-panels) */\n.glass-panel-ground {\n  background: rgba(5, 5, 16, 0.70);\n  border: 1px solid rgba(241, 239, 244, 0.08);\n  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);\n  backdrop-filter: blur(12px);\n  -webkit-backdrop-filter: blur(12px);\n}\n\n/* Tier 2: Sovereign Focus (Selected Nodes & Active Cartridges) */\n.glass-panel-sovereign {\n  background: rgba(5, 5, 16, 0.82);\n  border: 1px solid rgba(212, 175, 55, 0.40);\n  box-shadow: 0 0 30px rgba(212, 175, 55, 0.20), inset 0 0 15px rgba(212, 175, 55, 0.06);\n  backdrop-filter: blur(20px);\n  -webkit-backdrop-filter: blur(20px);\n}\n\n/* Tier 3: Tactical Visor (Command Visor & Biometric Airlock) */\n.glass-panel-visor {\n  background: rgba(5, 5, 16, 0.94);\n  border: 1px solid rgba(157, 78, 221, 0.50);\n  box-shadow: 0 0 45px rgba(75, 0, 130, 0.50), inset 0 0 25px rgba(157, 78, 221, 0.08);\n  backdrop-filter: blur(24px);\n  -webkit-backdrop-filter: blur(24px);\n}\n```\n\n---\n\n## 3. Component Library Architecture\n\n### 3.1 Directory Structure\n```text\napps/excalibur-cmd-1/src/components/\n\u251c\u2500\u2500 ui/\n\u2502   \u251c\u2500\u2500 GlassPanel.tsx          # Multi-density glass with brutalist tactical corner ticks\n\u2502   \u251c\u2500\u2500 TacticalButton.tsx      # Haptic-enabled kinetic action trigger (gold/purple/danger)\n\u2502   \u251c\u2500\u2500 BadgeGlyph.tsx          # Real-time state badge (ONLINE, AIR-GAP, DEGRADED)\n\u2502   \u251c\u2500\u2500 MetricStat.tsx          # Monotonic counter with trend arrow and unit label\n\u2502   \u251c\u2500\u2500 CommandInput.tsx        # Terminal prompt input with rune auto-completion\n\u2502   \u251c\u2500\u2500 TacticalSlider.tsx      # Hardware throttling and volume sliders\n\u2502   \u2514\u2500\u2500 TooltipVisor.tsx        # High-contrast instant telemetry tooltip\n\u251c\u2500\u2500 telemetry/\n\u2502   \u251c\u2500\u2500 TelemetryHeader.tsx     # Persistent 4GB ceiling & SSE link telemetry visor\n\u2502   \u251c\u2500\u2500 MemoryGauge.tsx         # Circular/Linear 4096MB scarcity indicator\n\u2502   \u2514\u2500\u2500 NetworkMeshNode.tsx     # Real-time Tailscale IP & ping latency card\n\u251c\u2500\u2500 cartridges/\n\u2502   \u251c\u2500\u2500 CartridgeSlot.tsx       # Standardized hot-swappable cartridge envelope\n\u2502   \u251c\u2500\u2500 CartridgeLoadingFallback.tsx # Zero-CLS animated skeleton state\n\u2502   \u2514\u2500\u2500 TenantCarousel.tsx      # Top-level executive workspace switcher\n\u251c\u2500\u2500 audio/\n\u2502   \u251c\u2500\u2500 AlfredDock.tsx          # Dynamic audio engine dock & mic visualizer\n\u2502   \u2514\u2500\u2500 AudioWaveform.tsx       # 60fps WebGL/Canvas audio spectrum analyzer\n\u2514\u2500\u2500 command/\n    \u251c\u2500\u2500 CommandVisorModal.tsx   # Cmd+K floating sovereign runic palette\n    \u2514\u2500\u2500 BioAuthModal.tsx        # Multi-factor biometric verification modal\n```\n\n### 3.2 Core Component Specifications\n\n#### A. `TacticalButton`\n- **Props:** `variant: 'gold' | 'purple' | 'ghost' | 'danger'`, `size: 'sm' | 'md' | 'lg'`, `haptic?: boolean`, `icon?: LucideIcon`, `loading?: boolean`.\n- **Invariants:** Minimum height `44px` on mobile; active scale down to `0.97`; sound/haptic trigger on pointer-down; corner notches in gold.\n\n#### B. `BadgeGlyph`\n- **Props:** `status: 'ONLINE' | 'OFFLINE' | 'SYNCING' | 'AIRGAP' | 'DEGRADED'`, `pulse?: boolean`.\n- **Visuals:** Semantic colored dot with outer halo; monospace text; Triple-QFT glyph symbol (`\u26a1`, `\ud83d\udee1\ufe0f`, `\ud83d\udd12`, `\ud83c\udf10`).\n\n#### C. `MetricStat`\n- **Props:** `label: string`, `value: number | string`, `unit?: string`, `ceiling?: number`, `delta?: number`.\n- **Invariants:** If value exceeds 85% of ceiling, auto-shifts to garnet warning hue (`#DE4258`).\n\n---\n\n## 4. Interaction Patterns & Ergonomics\n\n### 4.1 Mobile Edge Ergonomics (Samsung S26 Ultra Target)\n- **Thumb Zone Anchor:** All primary navigation, Alfred Audio controls, and node action triggers sit within the bottom 35% of the viewport (`h <= 300px`).\n- **Touch Target Law:** Zero interactive touch elements smaller than `44px x 44px` (`min-h-[44px] min-w-[44px]`).\n- **Haptic Tactility:** Subtle micro-vibrations for tactile confirmations:\n  ```typescript\n  export const triggerHaptic = (type: 'tick' | 'success' | 'warning' | 'heavy' = 'tick') => {\n    if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {\n      switch (type) {\n        case 'tick': navigator.vibrate(8); break;\n        case 'success': navigator.vibrate([10, 30, 20]); break;\n        case 'warning': navigator.vibrate([40, 20, 40]); break;\n        case 'heavy': navigator.vibrate(50); break;\n      }\n    }\n  };\n  ```\n\n### 4.2 Keyboard Command Visor (`//`)\n- Triggered by typing `//` anywhere or pressing `Cmd+K` / `Ctrl+K`.\n- Instant search across:\n  - All 38 Knights (`Omega_Helios`, `Omega_Boris`, `Omega_Codex`)\n  - All 52 Cartridges (`kba-executive`, `digital-factory`, `1vizion-rcrds`)\n  - Operational Runes (`//STATUS`, `//FORGE`, `//SCAN`, `//HEAL`)\n\n### 4.3 Dynamic Cartridge Splitting & Scarcity Protocol\n- Cartridges are dynamically code-split via `lazy()` and wrapped in `<ErrorBoundary>`.\n- Total memory footprint per unmounted cartridge: `0 MB`.\n- Active working set per cartridge: strictly bounded `< 24 MB`.\n\n---\n\n## 5. Accessibility Standards (WCAG 2.1 AA/AAA)\n\n1. **High Contrast Invariants:**\n   - Text on Obsidian (`#050510`) must strictly maintain contrast ratio $\\ge 7:1$ for normal body text and $\\ge 4.5:1$ for large display headers.\n   - Vellum pure (`#F1EFF4`) on Obsidian provides **17.84:1** (Far exceeds AAA).\n   - Luxora Gold (`#D4AF37`) provides **8.92:1** (Passes AAA).\n2. **Accessible Landmarks:**\n   - Navigation: `<nav aria-label=\"Tenant Cartridge Carousel\">`\n   - Telemetry: `<header role=\"banner\" aria-label=\"System Telemetry Visor\">`\n   - Active Console: `<main role=\"main\" aria-label=\"Excalibur Command Center Workspace\">`\n   - Audio Engine: `<aside role=\"complementary\" aria-label=\"Alfred Audio Controller\">`\n3. **Screen Reader Live Regions:**\n   - Real-time telemetry counters use `aria-live=\"polite\"` with `aria-atomic=\"true\"` to prevent voice flooding.\n   - Critical system alerts use `role=\"alert\"` and `aria-live=\"assertive\"`.\n4. **Reduced Motion Adaptation:**\n   - Honors `@media (prefers-reduced-motion: reduce)`:\n     - Holographic Globe stops auto-rotation.\n     - Pulsing glass glows and scanlines are replaced by static hairline borders.\n     - Page transitions switch from sliding 300ms transforms to instantaneous 0ms opacity cuts.\n\n---\n\n## 6. Implementation Phasing & Task DAG (Merlin \u03a9)\n\n```mermaid\nflowchart TD\n    N01[\"Phase 1: Token Engine & Tailwind v4 Refactor (src/styles/tokens.css)\"]\n    N02[\"Phase 2: Atomic Component Suite (components/ui/*)\"]\n    N03[\"Phase 3: Telemetry & Navigation Ergonomics (TelemetryHeader & TenantCarousel)\"]\n    N04[\"Phase 4: S26 Ultra 120Hz Touch & Web Haptics Engine\"]\n    N05[\"Phase 5: A11y Verification, Contrast Audit & Vitest Test Suite\"]\n\n    N01 --> N02\n    N02 --> N03\n    N03 --> N04\n    N04 --> N05\n```\n\n### Phase 1: Token Engine & CSS Variables Refactor\n- Update [tokens.css](file:///C:/Users/vizio/CAMELOT_OS/apps/excalibur-cmd-1/src/styles/tokens.css) to declare full palette, typography scales, elevation blur steps, and z-index layers.\n- Ensure Tailwind CSS configuration correctly maps all tokens to utility classes.\n\n### Phase 2: Atomic Component Suite Implementation\n- Create reusable atoms in `apps/excalibur-cmd-1/src/components/ui/`:\n  - `TacticalButton.tsx`\n  - `BadgeGlyph.tsx`\n  - `MetricStat.tsx`\n  - `CommandInput.tsx`\n\n### Phase 3: Ergonomic Navigation & Telemetry\n- Enhance `TelemetryHeader.tsx` to display real-time memory usage against the 4096MB ceiling with dynamic warning thresholds.\n- Upgrade `TenantCarousel.tsx` with smooth keyboard navigation (`1-5`) and mobile-swipe ergonomics.\n\n### Phase 4: S26 Ultra 120Hz Touch & Alfred Audio Dock\n- Integrate `triggerHaptic` on all interactive triggers.\n- Polish `AlfredDock.tsx` with a lightweight 60fps canvas visualizer that respects `prefers-reduced-motion`.\n\n### Phase 5: Verification & Accessibility Gate\n- Run automated tests (`App.test.ts` and component test suites).\n- Verify WCAG 2.1 AAA contrast ratios and ARIA landmark compliance.\n"
+}

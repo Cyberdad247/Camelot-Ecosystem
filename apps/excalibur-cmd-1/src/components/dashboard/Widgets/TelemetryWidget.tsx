@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Cpu, Activity, ShieldCheck, Zap, Server } from 'lucide-react';
+import { Activity, ShieldCheck, HardDrive } from 'lucide-react';
+import { BadgeGlyph } from '../../ui/BadgeGlyph';
+import { MetricStat } from '../../ui/MetricStat';
 
 export function TelemetryWidget() {
   const [ramUsageMb, setRamUsageMb] = useState(1480);
-  const [nodesActive, setNodesActive] = useState(7);
-  const [cgroupLimit] = useState(4096); // 4GB Strict hardware boundary
+  const [nodesActive] = useState(7);
+  const cgroupLimit = 4096; // 4GB Strict hardware boundary
   const [cpuLoad, setCpuLoad] = useState(24);
 
   useEffect(() => {
@@ -29,44 +31,38 @@ export function TelemetryWidget() {
             HARDWARE SCARCITY TELEMETRY
           </h4>
         </div>
-        <span className="text-[10px] font-mono px-2 py-0.5 border border-emerald-500/50 text-emerald-400 bg-emerald-950/30 rounded">
-          NOMINAL
-        </span>
+        <BadgeGlyph status="ONLINE" label="NOMINAL" size="sm" />
       </div>
 
       <div className="space-y-2">
-        <div className="flex justify-between text-xs font-['JetBrains_Mono']">
-          <span className="text-[#F1EFF4]/70 flex items-center gap-1.5">
-            <Cpu className="w-3.5 h-3.5 text-[#D4AF37]" />
-            RAM (4GB HARD CEILING)
-          </span>
-          <span className="font-bold text-[#D4AF37]">
-            {ramUsageMb} MB / {cgroupLimit} MB ({ramPercentage}%)
-          </span>
-        </div>
+        <MetricStat
+          label="RAM WORKING SET"
+          value={ramUsageMb}
+          unit="MB"
+          ceiling={cgroupLimit}
+          delta={ramPercentage > 50 ? 2 : -1}
+          warningThreshold={75}
+          criticalThreshold={90}
+        />
+      </div>
 
-        {/* Progress bar */}
-        <div className="w-full bg-black/80 h-2.5 rounded-full overflow-hidden border border-[#4B0082]/60 p-[1px]">
-          <div
-            className="h-full bg-gradient-to-r from-emerald-500 via-[#D4AF37] to-amber-500 rounded-full transition-all duration-500"
-            style={{ width: `${ramPercentage}%` }}
-          />
+      <div className="grid grid-cols-2 gap-2 pt-1 font-mono text-xs">
+        <MetricStat
+          label="CPU LOAD"
+          value={cpuLoad}
+          unit="%"
+          ceiling={100}
+        />
+        <div className="flex flex-col justify-center p-2.5 rounded-lg border border-white/10 bg-[#050510]/60 backdrop-blur-md">
+          <span className="text-[10px] text-[#9E9AA7] uppercase">ACTIVE NODES</span>
+          <span className="text-base font-bold text-[#9D4EDD] mt-0.5">
+            {nodesActive} MicroVMs
+          </span>
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-2 pt-2 text-[11px] font-['JetBrains_Mono']">
-        <div className="p-2 bg-black/60 border border-white/5 rounded flex items-center justify-between">
-          <span className="text-white/50">CPU LOAD:</span>
-          <span className="text-emerald-400 font-bold">{cpuLoad}%</span>
-        </div>
-        <div className="p-2 bg-black/60 border border-white/5 rounded flex items-center justify-between">
-          <span className="text-white/50">ACTIVE NODES:</span>
-          <span className="text-purple-300 font-bold">{nodesActive} MicroVMs</span>
-        </div>
-      </div>
-
-      <div className="text-[10px] font-['JetBrains_Mono'] text-[#F1EFF4]/60 flex items-center gap-1.5 pt-1">
-        <ShieldCheck className="w-3 h-3 text-[#D4AF37]" />
+      <div className="text-[10px] font-mono text-[#F1EFF4]/70 flex items-center gap-1.5 pt-1">
+        <ShieldCheck className="w-3.5 h-3.5 text-[#D4AF37]" />
         <span>CGROUP BOUNDARY ENFORCED: Zero-Docker WASM / Unikernels only</span>
       </div>
     </div>
