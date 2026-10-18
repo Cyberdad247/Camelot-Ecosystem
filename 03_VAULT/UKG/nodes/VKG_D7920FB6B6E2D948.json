@@ -1,0 +1,88 @@
+{
+  "crystal_id": "VKG_D7920FB6B6E2D948",
+  "schema_version": "v1000-VKG-SINGULARITY",
+  "anya_seal": "ANYA_IS_THE_GATE",
+  "category": "CAMELOT_SYSTEMS_ARCHITECTURE",
+  "knight": "SIR_HELIOS",
+  "title": "VPS KVM563 Synchronization to New Camelot-OS Architecture",
+  "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:KVM563|Synchronization|Camelot-OS|Architecture|Synchronized|sovereign|KVM563|/opt/camelot-ecosystem|feat/invisioned-marketing-digital-factory|commit|8dba5e42|Verified|Hermes|HERMES_PRIME|container|dashboard|9119|gateway|8642|active|research|cycle|timer|Verified|Heimdall|restored|Bifrost|gateway|3001|clean|DATABASE_URL|binding|apps/bifrost/.env|Rebuilt|verified|apps/bifrost|Prisma|Client|apps/excalibur-cmd-1|production|client|bundle|96.82|Veri\u27e9",
+  "anchor_tokens": [
+    "KVM563",
+    "Synchronization",
+    "Camelot-OS",
+    "Architecture",
+    "Synchronized",
+    "sovereign",
+    "KVM563",
+    "/opt/camelot-ecosystem",
+    "feat/invisioned-marketing-digital-factory",
+    "commit",
+    "8dba5e42",
+    "Verified",
+    "Hermes",
+    "HERMES_PRIME",
+    "container",
+    "dashboard",
+    "9119",
+    "gateway",
+    "8642",
+    "active",
+    "research",
+    "cycle",
+    "timer",
+    "Verified",
+    "Heimdall",
+    "restored",
+    "Bifrost",
+    "gateway",
+    "3001",
+    "clean",
+    "DATABASE_URL",
+    "binding",
+    "apps/bifrost/.env",
+    "Rebuilt",
+    "verified",
+    "apps/bifrost",
+    "Prisma",
+    "Client",
+    "apps/excalibur-cmd-1",
+    "production",
+    "client",
+    "bundle",
+    "96.82",
+    "Veri"
+  ],
+  "sources_count": 1,
+  "manifest_sha256": "84775ccd6d33f91ddcf30ed1bc9049dd462e0b4dcf4000766761c8ee7a3a8c40",
+  "triplets": [
+    {
+      "head": "Synchronized sovereign VPS Hub KVM563 /opt/camelot-ecosystem to feat/invisioned-marketing-digital-factory at commit 8dba5e42 1",
+      "relation": "verified",
+      "tail": "Sir Hermes HERMES_PRIME container dashboard on 9119 gateway on 8642 and active 60s MGV research cycle timer"
+    },
+    {
+      "head": "2",
+      "relation": "verified",
+      "tail": "Sir Heimdall and restored Bifrost gateway 3001 with clean DATABASE_URL binding in apps/bifrost/.env"
+    },
+    {
+      "head": "3 Rebuilt and",
+      "relation": "verified",
+      "tail": "apps/bifrost Prisma Client + tsc and apps/excalibur-cmd-1 production client bundle 96.82 kB"
+    },
+    {
+      "head": "4",
+      "relation": "verified",
+      "tail": "active services camelot-bifrost PID 1477013 camelot-vps-mesh 8095 camelot-edge-bus camelot-watchtower 60s tick timer and camelot-hermes-prime"
+    },
+    {
+      "head": "5",
+      "relation": "confirmed",
+      "tail": "end-to-end socket reachability probe from Cybertronia to VPS 100.110.180.18:3001 in 117ms with nominal heartbeat"
+    }
+  ],
+  "triplet_count": 5,
+  "vfs_coordinate": "vfs://worldtree/crystals/vkg_d7920fb6b6e2d948.vkg",
+  "created_at": "2026-10-18T22:04:25.819632+00:00",
+  "finalized_content": "Synchronized sovereign VPS Hub KVM563 (/opt/camelot-ecosystem) to feat/invisioned-marketing-digital-factory at commit 8dba5e42: 1) Verified Sir Hermes (HERMES_PRIME) container, dashboard on :9119, gateway on :8642, and active 60s MGV research cycle timer. 2) Verified Sir Heimdall and restored Bifrost gateway (:3001) with clean DATABASE_URL binding in apps/bifrost/.env. 3) Rebuilt and verified apps/bifrost (Prisma Client + tsc) and apps/excalibur-cmd-1 production client bundle (96.82 kB). 4) Verified active services: camelot-bifrost (PID 1477013), camelot-vps-mesh (:8095), camelot-edge-bus, camelot-watchtower (60s tick timer), and camelot-hermes-prime. 5) Confirmed end-to-end socket reachability probe from Cybertronia to VPS (100.110.180.18:3001) in 117ms with nominal heartbeat."
+}
