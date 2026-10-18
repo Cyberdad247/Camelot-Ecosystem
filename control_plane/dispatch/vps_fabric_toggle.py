@@ -24,11 +24,12 @@ import enum
 import json
 import logging
 import os
+import socket
 import time
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 _STATE_PATH = _REPO_ROOT / "03_VAULT" / "runtime_state" / "vps_fabric_toggle_state.json"
@@ -231,6 +232,130 @@ class DynamicTopologyManager:
             "timestamp": datetime.now(timezone.utc).isoformat(),
         }
 
+    def check_vps_reachability(
+        self,
+        tailscale_ip: str = "100.110.180.18",
+        public_ip: str = "162.35.107.134",
+        ports: Optional[List[int]] = None,
+        timeout_sec: float = 2.0,
+    ) -> Dict[str, Any]:
+        """
+        Actively probes reachability to VPS Hub via Tailscale IP or public IP fallback.
+        Checks Bifrost gateway (:3001), Mesh Bridge (:8095), or Edge Bus (:8096).
+        """
+        if ports is None:
+            ports = [3001, 8095, 8096]
+
+        candidates = [(tailscale_ip, p) for p in ports] + [(public_ip, p) for p in ports]
+        reachable_endpoint = None
+        latencies_ms: Dict[str, float] = {}
+
+        for host, port in candidates:
+            endpoint_str = f"{host}:{port}"
+            t0 = time.perf_counter()
+            try:
+                with socket.create_connection((host, port), timeout=timeout_sec):
+                    elapsed_ms = round((time.perf_counter() - t0) * 1000, 2)
+                    latencies_ms[endpoint_str] = elapsed_ms
+                    reachable_endpoint = endpoint_str
+                    break
+            except (socket.timeout, OSError, ConnectionRefusedError):
+                continue
+
+        is_reachable = reachable_endpoint is not None
+        now_str = datetime.now(timezone.utc).isoformat()
+        if is_reachable and "vps_hub_kvm563" in self.config.fabric_nodes:
+            self.config.fabric_nodes["vps_hub_kvm563"]["last_heartbeat"] = now_str
+            self.config.fabric_nodes["vps_hub_kvm563"]["is_active"] = True
+
+        return {
+            "reachable": is_reachable,
+            "connected_endpoint": reachable_endpoint,
+            "latencies_ms": latencies_ms,
+            "timestamp": now_str,
+        }
+
+    def poll_and_reconcile(
+        self,
+        consecutive_failures: int = 0,
+        max_failures: int = 3,
+        probe_timeout_sec: float = 2.0,
+    ) -> Tuple[Dict[str, Any], int]:
+        """
+        Single-step watchdog probe and state reconciliation:
+        - If reachable and local fallback was engaged: automatically restores VPS_FOREFRONT.
+        - If unreachable >= max_failures and not in local fallback: automatically triggers local fallback.
+        Returns: (status_dict, new_consecutive_failures)
+        """
+        probe = self.check_vps_reachability(timeout_sec=probe_timeout_sec)
+        is_reachable = probe["reachable"]
+
+        if is_reachable:
+            new_failures = 0
+            if self.config.local_fallback_engaged:
+                restoration = self.restore_vps_forefront()
+                return {
+                    "action": "AUTO_RESTORED_VPS_FOREFRONT",
+                    "probe": probe,
+                    "topology": restoration,
+                }, new_failures
+            else:
+                self._save()
+                return {
+                    "action": "HEARTBEAT_NOMINAL",
+                    "probe": probe,
+                    "mode": self.config.active_mode.value,
+                }, new_failures
+        else:
+            new_failures = consecutive_failures + 1
+            if new_failures >= max_failures and not self.config.local_fallback_engaged:
+                fallback = self.trigger_local_fallback(
+                    reason=f"VPS_UNREACHABLE_AFTER_{new_failures}_CONSECUTIVE_FAILURES"
+                )
+                return {
+                    "action": "AUTO_TRIGGERED_LOCAL_FALLBACK",
+                    "probe": probe,
+                    "failures": new_failures,
+                    "topology": fallback,
+                }, new_failures
+            else:
+                return {
+                    "action": "HEARTBEAT_MISSED",
+                    "probe": probe,
+                    "failures": new_failures,
+                    "max_failures": max_failures,
+                    "mode": self.config.active_mode.value,
+                }, new_failures
+
+    def run_watchdog_loop(
+        self,
+        interval_sec: float = 5.0,
+        max_failures: int = 3,
+        max_ticks: Optional[int] = None,
+    ) -> None:
+        """Runs the continuous automated watchdog loop."""
+        consecutive_failures = 0
+        ticks = 0
+        logging.info(
+            f"[DynamicTopologyManager] Starting VPS Watchdog Loop (interval={interval_sec}s, max_failures={max_failures})..."
+        )
+        try:
+            while max_ticks is None or ticks < max_ticks:
+                result, consecutive_failures = self.poll_and_reconcile(
+                    consecutive_failures=consecutive_failures,
+                    max_failures=max_failures,
+                )
+                print(
+                    f"[{datetime.now(timezone.utc).strftime('%H:%M:%S')}] Watchdog Action: {result['action']} "
+                    f"(Failures: {consecutive_failures}/{max_failures}, Endpoint: {result.get('probe', {}).get('connected_endpoint', 'NONE')})"
+                )
+                ticks += 1
+                if max_ticks is not None and ticks >= max_ticks:
+                    break
+                time.sleep(interval_sec)
+        except KeyboardInterrupt:
+            print("[DynamicTopologyManager] Watchdog loop stopped by user.")
+
     def get_status(self) -> Dict[str, Any]:
         return asdict(self.config)
 
@@ -248,6 +373,11 @@ if __name__ == "__main__":
     parser.add_argument("--fallback", action="store_true", help="Engage local Cybertronia fallback")
     parser.add_argument("--restore", action="store_true", help="Restore VPS forefront mode")
     parser.add_argument("--route", type=str, help="Route test task through the fabric")
+    parser.add_argument("--probe", action="store_true", help="Run a single reachability probe against VPS endpoints")
+    parser.add_argument("--watch", action="store_true", help="Run automated heartbeat watchdog loop")
+    parser.add_argument("--interval", type=float, default=5.0, help="Watchdog poll interval in seconds")
+    parser.add_argument("--max-failures", type=int, default=3, help="Consecutive failures before fallback")
+    parser.add_argument("--ticks", type=int, default=None, help="Number of ticks to run (default: infinite)")
     args = parser.parse_args()
 
     mgr = get_topology_manager()
@@ -263,5 +393,14 @@ if __name__ == "__main__":
     elif args.route:
         res = mgr.route_task_to_fabric(args.route, {})
         print(json.dumps(res, indent=2))
+    elif args.probe:
+        res, _ = mgr.poll_and_reconcile()
+        print(json.dumps(res, indent=2))
+    elif args.watch:
+        mgr.run_watchdog_loop(
+            interval_sec=args.interval,
+            max_failures=args.max_failures,
+            max_ticks=args.ticks,
+        )
     else:
         print(json.dumps(mgr.get_status(), indent=2))

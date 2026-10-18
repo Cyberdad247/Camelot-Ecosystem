@@ -7,6 +7,7 @@ import { TelemetryWidget } from './Widgets/TelemetryWidget';
 import { ReceiptWidget } from './Widgets/ReceiptWidget';
 import { CommandBar } from './CommandBar';
 import { GlassPanel } from '../ui/GlassPanel';
+import { MicroTelemetryStrip } from '../telemetry';
 import { HardDrive, ShoppingBag, Scroll, Users, LayoutDashboard, Smartphone, Monitor } from 'lucide-react';
 
 export const DesktopGrid = () => {
@@ -117,6 +118,9 @@ export const DesktopGrid = () => {
 
       {activeView === 'dashboard' && (
         <div className="space-y-6">
+          {/* Micro Telemetry Overview Strip */}
+          <MicroTelemetryStrip />
+
           {/* Quick Apps Row */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <GlassPanel

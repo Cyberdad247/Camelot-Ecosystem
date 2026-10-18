@@ -436,7 +436,16 @@
       "vfs_coordinate": "vfs://worldtree/crystals/vkg_4596cba14e833e51.vkg",
       "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Forefront|Cybertronia|Fallback|Verification|Verified|KVM563|162.35.107.134|100.110.180.18|actively|front|running|under|VPS_FOREFRONT|topology|mode|Hermes|Prime|Heimdall|governing|Bifrost|Gateway|port|3001|Mesh|Bridge|8095|Local|Cybertronia|node|100.118.224.52|verified|Edge|Fabric|Extension|autonomous|fallback|host|armed|bounded|SQLite|outbox|sub-5ms|local|Bifrost|bridge|fallback|upstream|connectivity|degrades\u27e9",
       "added_at": "2026-10-18T20:22:23.074985+00:00"
+    },
+    {
+      "crystal_id": "VKG_7D17B742B2F6FF3D",
+      "knight": "SIR_HELIOS",
+      "title": "Excalibur DesktopGrid MicroTelemetry Integration and Automated VPS Fallback Watchdog",
+      "category": "CAMELOT_SYSTEMS_ARCHITECTURE",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_7d17b742b2f6ff3d.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Excalibur|DesktopGrid|MicroTelemetry|Integration|Automated|Fallback|Watchdog|Implemented|architectural|recommendations|Mounted|MicroTelemetryStrip|directly|into|DesktopGrid|dashboard|view|apps/excalibur-cmd-1|providing|live|at-a-glance|scarcity|load|metrics|adhering|hardware|boundary|Engineered|automated|watchdog|probe|reconciliation|loop|control_plane/dispatch/vps_fabric_toggle.py|socket|reachability|test|across|Tailscale|100.110.180.18:3001|public|162.35.107.134:3001|automatic|local|fallback|consecutive|fail\u27e9",
+      "added_at": "2026-10-18T20:34:18.325056+00:00"
     }
   ],
-  "updated_at": "2026-10-18T20:22:23.355586+00:00"
+  "updated_at": "2026-10-18T20:34:18.544466+00:00"
 }
