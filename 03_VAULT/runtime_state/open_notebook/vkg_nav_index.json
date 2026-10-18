@@ -427,7 +427,16 @@
       "vfs_coordinate": "vfs://worldtree/crystals/vkg_9423ed1e2ec460c3.vkg",
       "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Camelot-OS|Awakening|Boot|Verification|Camelot-OS|v999.3|Sovereign|Lattice|universal|boot|sequence|awakened|Required|core|services|green|CLIProxyAPI|8080|Defense|Grid|Kinetic|Edge|3001|Morgana|Bridge|8001|phases|operational|Antigravity|Safe|engaged|Squire|PageKeeper|memory|governance|enforced|under|node|ceiling\u27e9",
       "added_at": "2026-10-18T20:16:55.149287+00:00"
+    },
+    {
+      "crystal_id": "VKG_4596CBA14E833E51",
+      "knight": "SIR_HELIOS",
+      "title": "VPS Forefront and Cybertronia Fallback Verification",
+      "category": "CAMELOT_SYSTEMS_ARCHITECTURE",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_4596cba14e833e51.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Forefront|Cybertronia|Fallback|Verification|Verified|KVM563|162.35.107.134|100.110.180.18|actively|front|running|under|VPS_FOREFRONT|topology|mode|Hermes|Prime|Heimdall|governing|Bifrost|Gateway|port|3001|Mesh|Bridge|8095|Local|Cybertronia|node|100.118.224.52|verified|Edge|Fabric|Extension|autonomous|fallback|host|armed|bounded|SQLite|outbox|sub-5ms|local|Bifrost|bridge|fallback|upstream|connectivity|degrades\u27e9",
+      "added_at": "2026-10-18T20:22:23.074985+00:00"
     }
   ],
-  "updated_at": "2026-10-18T20:16:55.420913+00:00"
+  "updated_at": "2026-10-18T20:22:23.355586+00:00"
 }
