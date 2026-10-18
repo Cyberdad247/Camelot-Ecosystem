@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: 'Visual DAG node campaign assembly line and robotic agency execution kitchen.',
 };
 
+export const dynamic = 'force-dynamic';
+
 export default function CanvasPage() {
   return (
     <div className="min-h-screen bg-[#0B0B0E] p-6 max-w-7xl mx-auto font-mono">

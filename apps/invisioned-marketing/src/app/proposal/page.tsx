@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: 'Cryptographically signed agency agreements, ROI modeling, and performance retainers.',
 };
 
+export const dynamic = 'force-dynamic';
+
 export default function ProposalPage() {
   return (
     <div className="min-h-screen bg-[#0B0B0E] p-6 max-w-7xl mx-auto font-mono">
