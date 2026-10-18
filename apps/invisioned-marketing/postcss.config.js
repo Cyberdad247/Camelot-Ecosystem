@@ -1,8 +1,8 @@
-const path = require('node:path');
+// SPDX-License-Identifier: MIT
 
 module.exports = {
-  plugins: [
-    require(path.resolve(__dirname, '../pwa/node_modules/tailwindcss')),
-    require('autoprefixer'),
-  ],
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
 };
