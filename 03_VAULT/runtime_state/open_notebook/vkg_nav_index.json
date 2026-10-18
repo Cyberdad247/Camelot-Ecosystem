@@ -418,7 +418,16 @@
       "vfs_coordinate": "vfs://worldtree/crystals/vkg_e5bc5f4f84395d38.vkg",
       "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Cybertronia|Watchtower|Squire|Audit|Cybertronia|Watchtower|sensor|active|verified|byte|corruption|findings|strict|node|ceiling|compliance|Squire|Colony|Clarity|Core|v1.0.0|executed|full|7-stage|pipeline|SCAN|INDEX|GHOST|SWEEP|JUDGE|SENTINEL|MASON|across|apps/excalibur-cmd-1|files|scanned|symbols|indexed|critical|secrets|pristine|0.0/100|risk|assessment|score\u27e9",
       "added_at": "2026-10-18T20:06:09.767380+00:00"
+    },
+    {
+      "crystal_id": "VKG_9423ED1E2EC460C3",
+      "knight": "MERLIN_OMEGA",
+      "title": "Camelot-OS Awakening Boot Verification",
+      "category": "CAMELOT_SYSTEMS_ARCHITECTURE",
+      "vfs_coordinate": "vfs://worldtree/crystals/vkg_9423ed1e2ec460c3.vkg",
+      "glyph": "|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \u27e8Omega:Camelot-OS|Awakening|Boot|Verification|Camelot-OS|v999.3|Sovereign|Lattice|universal|boot|sequence|awakened|Required|core|services|green|CLIProxyAPI|8080|Defense|Grid|Kinetic|Edge|3001|Morgana|Bridge|8001|phases|operational|Antigravity|Safe|engaged|Squire|PageKeeper|memory|governance|enforced|under|node|ceiling\u27e9",
+      "added_at": "2026-10-18T20:16:55.149287+00:00"
     }
   ],
-  "updated_at": "2026-10-18T20:06:10.061887+00:00"
+  "updated_at": "2026-10-18T20:16:55.420913+00:00"
 }
