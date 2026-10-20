@@ -105,7 +105,6 @@ LOG = logging.getLogger('VpsMobileMeshBridge')
 
 VPS_HOST = '162.35.107.134'
 VPS_TAILSCALE_IP = '100.110.180.18'
-VPS_KBA_TAILSCALE = '100.71.218.75'
 FATHERS_CAMELOT_TAILSCALE = '100.121.48.50'
 MOBILE_TAILSCALE_IP = '100.106.246.126'
 LOCAL_CYBERTRONIA_IP = '100.118.224.52'
@@ -124,25 +123,27 @@ def load_mesh_topology() -> dict:
                 return json.load(f)
         except Exception as e:
             LOG.warning(f"Failed to read topology file: {e}")
-    return {
-        "system": "CAMELOT-OS Sovereign Autonomous Ecosystem",
-        "nodes": {
-            "cybertronia": {"tailscale_ip": LOCAL_CYBERTRONIA_IP, "role": "Primary Kinetic Execution Node"},
-            "vashawns_s26_ultra": {"tailscale_ip": MOBILE_TAILSCALE_IP, "role": "Excalibur Command Center"},
-            "fothers_camelot": {"tailscale_ip": FATHERS_CAMELOT_TAILSCALE, "role": "Secondary Windows Node"},
-            "lakesha": {"tailscale_ip": "100.100.155.55", "role": "Lakisha Voice OS Host"},
-            "camelot_relay_modal": {"tailscale_ip": "100.84.98.39", "role": "Cloud Relay & Modal Bridge"},
-            "kba_services": {"tailscale_ip": VPS_KBA_TAILSCALE, "role": "KBA Remote Services"},
-            "motorola_moto_g_power": {"tailscale_ip": "100.89.129.105", "role": "Auxiliary Mobile Sentinel"},
-            "vps_hub_kvm563": {
-                "public_ip": VPS_HOST,
-                "tailscale_ip": VPS_KBA_TAILSCALE,
-                "role": "Camelot-OS Sovereign Hub & Control Plane",
-                "governing_knights": ["HERMES_PRIME", "SIR_HEIMDALL"],
-                "always_on": True,
+    try:
+        from control_plane.infra.mesh_topology import canonical_topology_dict
+        return canonical_topology_dict()
+    except Exception:
+        return {
+            "system": "CAMELOT-OS Sovereign Autonomous Ecosystem",
+            "nodes": {
+                "cybertronia": {"tailscale_ip": LOCAL_CYBERTRONIA_IP, "role": "Primary Kinetic Execution Node"},
+                "vashawns_s26_ultra": {"tailscale_ip": MOBILE_TAILSCALE_IP, "role": "Excalibur Command Center"},
+                "fothers_camelot": {"tailscale_ip": FATHERS_CAMELOT_TAILSCALE, "role": "Secondary Windows Node"},
+                "lakesha": {"tailscale_ip": "100.100.155.55", "role": "Lakisha Voice OS Host"},
+                "motorola_moto_g_power": {"tailscale_ip": MOTO_TAILSCALE_IP, "role": "Auxiliary Mobile Sentinel"},
+                "vps_hub_kvm563": {
+                    "public_ip": VPS_HOST,
+                    "tailscale_ip": VPS_TAILSCALE_IP,
+                    "role": "Camelot-OS Sovereign Hub & Control Plane",
+                    "governing_knights": ["HERMES_PRIME", "SIR_HEIMDALL"],
+                    "always_on": True,
+                }
             }
         }
-    }
 
 def is_mesh_request_authorized(headers: dict, client_addr: str = "127.0.0.1") -> bool:
     """Require runtime mesh token OR valid Warp Gate Forever Keypass (Lady Alexandria / Heimdall)."""
