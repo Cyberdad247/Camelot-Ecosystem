@@ -102,7 +102,7 @@ gateway = [
 web = [
     "playwright-stealth>=1.0.0",
     "fire",
-    "scrapling==0.4.7",
+    "scrapling==0.5",
 ]
 
 # All optional groups — install with: pip install -e ".[all]"
