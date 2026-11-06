@@ -20,8 +20,11 @@ Enforces production-grade Tier 3/4 memory resilience:
 from __future__ import annotations
 
 import asyncio
+import contextlib
 import json
 import logging
+import os
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -40,12 +43,40 @@ NOTEBOOKLM_SOURCE_LIMIT = 50
 NOTEBOOKLM_COMPACTION_THRESHOLD = 45
 
 
+@contextlib.contextmanager
+def _locked_open(file_path: Path, mode: str = "a", encoding: str = "utf-8"):
+    """Cross-platform advisory file locking for persistent JSONL outbox buffers."""
+    file_path.parent.mkdir(parents=True, exist_ok=True)
+    f = file_path.open(mode, encoding=encoding, errors="replace")
+    try:
+        if sys.platform != "win32":
+            import fcntl
+            fcntl.flock(f.fileno(), fcntl.LOCK_EX)
+        yield f
+    finally:
+        try:
+            if sys.platform != "win32":
+                import fcntl
+                fcntl.flock(f.fileno(), fcntl.LOCK_UN)
+        except Exception:
+            pass
+        f.close()
+
+
 class CloudBrainOutbox:
     """Production outbox buffer for Google NotebookLM CloudBrain mesh."""
 
-    def __init__(self, outbox_path: Optional[Path] = None):
+    def __init__(self, outbox_path: Optional[Path] = None, dlq_path: Optional[Path] = None):
         self.path = outbox_path or OUTBOX_FILE
+        self.dlq_path = dlq_path or OUTBOX_DLQ
         self.path.parent.mkdir(parents=True, exist_ok=True)
+        self.dlq_path.parent.mkdir(parents=True, exist_ok=True)
+        self._lock: Optional[asyncio.Lock] = None
+
+    def _get_async_lock(self) -> asyncio.Lock:
+        if self._lock is None:
+            self._lock = asyncio.Lock()
+        return self._lock
 
     def enqueue(
         self,
@@ -69,7 +100,7 @@ class CloudBrainOutbox:
             "retry_count": 0,
             "metadata": metadata or {},
         }
-        with self.path.open("a", encoding="utf-8") as f:
+        with _locked_open(self.path, "a", encoding="utf-8") as f:
             f.write(json.dumps(entry) + "\n")
         LOG.info(f"[OUTBOX] Enqueued {item_type} '{title}' for {knight_id}")
         return entry
@@ -101,61 +132,64 @@ class CloudBrainOutbox:
         return entries
 
     async def flush(self) -> Dict[str, Any]:
-        """Attempt to flush all pending items to NotebookLM."""
-        entries = self.read_all_pending()
-        if not entries:
-            return {"status": "EMPTY", "processed": 0, "succeeded": 0, "failed": 0}
+        """Attempt to flush all pending items to NotebookLM with async-locking and atomic disk write."""
+        async with self._get_async_lock():
+            entries = self.read_all_pending()
+            if not entries:
+                return {"status": "EMPTY", "processed": 0, "succeeded": 0, "failed": 0}
 
-        try:
-            from vfs.notebooklm_client import push_note_async, push_source_async
-        except ImportError:
-            return {"status": "SDK_UNAVAILABLE", "processed": 0, "succeeded": 0, "failed": len(entries)}
-
-        remaining = []
-        succeeded = 0
-        failed = 0
-
-        for item in entries:
-            success = False
             try:
-                if item["item_type"] == "NOTE":
-                    success = await push_note_async(item["knight_id"], item["title"], item["content"])
-                elif item["item_type"] in ("SOURCE", "GRAPH_DELTA"):
-                    success = await push_source_async(item["knight_id"], item["title"], item["content"])
-            except Exception as e:
-                LOG.error(f"[OUTBOX] Flush error for {item['id']}: {e}")
+                from vfs.notebooklm_client import push_note_async, push_source_async
+            except ImportError:
+                return {"status": "SDK_UNAVAILABLE", "processed": 0, "succeeded": 0, "failed": len(entries)}
+
+            remaining = []
+            succeeded = 0
+            failed = 0
+
+            for item in entries:
                 success = False
+                try:
+                    if item["item_type"] == "NOTE":
+                        success = await push_note_async(item["knight_id"], item["title"], item["content"])
+                    elif item["item_type"] in ("SOURCE", "GRAPH_DELTA"):
+                        success = await push_source_async(item["knight_id"], item["title"], item["content"])
+                except Exception as e:
+                    LOG.error(f"[OUTBOX] Flush error for {item['id']}: {e}")
+                    success = False
 
-            if success:
-                succeeded += 1
-            else:
-                failed += 1
-                item["retry_count"] = item.get("retry_count", 0) + 1
-                if item["retry_count"] <= 5:
-                    remaining.append(item)
+                if success:
+                    succeeded += 1
                 else:
-                    # Move to dead-letter queue after 5 retries
-                    with OUTBOX_DLQ.open("a", encoding="utf-8") as dlq:
-                        dlq.write(json.dumps(item) + "\n")
+                    failed += 1
+                    item["retry_count"] = item.get("retry_count", 0) + 1
+                    if item["retry_count"] <= 5:
+                        remaining.append(item)
+                    else:
+                        # Move to dead-letter queue after 5 retries
+                        with _locked_open(self.dlq_path, "a", encoding="utf-8") as dlq:
+                            dlq.write(json.dumps(item) + "\n")
 
-        # Rewrite outbox with remaining pending items
-        with self.path.open("w", encoding="utf-8") as f:
-            for item in remaining:
-                f.write(json.dumps(item) + "\n")
+            # Atomically rewrite outbox with remaining pending items via temp file swap
+            temp_path = self.path.with_name(f"{self.path.name}.tmp.{uuid4().hex[:8]}")
+            with temp_path.open("w", encoding="utf-8") as f:
+                for item in remaining:
+                    f.write(json.dumps(item) + "\n")
+            temp_path.replace(self.path)
 
-        res = {
-            "status": "FLUSHED" if failed == 0 else "PARTIAL_RETRY",
-            "processed": len(entries),
-            "succeeded": succeeded,
-            "failed": failed,
-            "remaining": len(remaining),
-            "timestamp": datetime.now(timezone.utc).isoformat(),
-        }
-        try:
-            OUTBOX_DRAIN_STATUS.write_text(json.dumps(res, indent=2), encoding="utf-8")
-        except Exception:
-            pass
-        return res
+            res = {
+                "status": "FLUSHED" if failed == 0 else "PARTIAL_RETRY",
+                "processed": len(entries),
+                "succeeded": succeeded,
+                "failed": failed,
+                "remaining": len(remaining),
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+            }
+            try:
+                OUTBOX_DRAIN_STATUS.write_text(json.dumps(res, indent=2), encoding="utf-8")
+            except Exception:
+                pass
+            return res
 
     async def run_drain_loop(self, interval_seconds: int = 900, max_iterations: Optional[int] = None) -> None:
         """Continuous background drain loop for headless production execution."""
