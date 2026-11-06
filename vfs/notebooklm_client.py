@@ -50,15 +50,16 @@ except ImportError:
 def _run_async(coro):
     """Run an async coroutine synchronously — safe for non-async callers."""
     try:
-        loop = asyncio.get_event_loop()
-        if loop.is_running():
-            import concurrent.futures
-            with concurrent.futures.ThreadPoolExecutor() as pool:
-                future = pool.submit(asyncio.run, coro)
-                return future.result()
-        return loop.run_until_complete(coro)
+        loop = asyncio.get_running_loop()
     except RuntimeError:
-        return asyncio.run(coro)
+        loop = None
+
+    if loop is not None and loop.is_running():
+        import concurrent.futures
+        with concurrent.futures.ThreadPoolExecutor() as pool:
+            future = pool.submit(asyncio.run, coro)
+            return future.result()
+    return asyncio.run(coro)
 
 
 # ── Core async operations ────────────────────────────────────────────────────
@@ -85,7 +86,10 @@ async def _get_client() -> Optional[Any]:
 
     try:
         # Use NotebookLMClient.from_storage for full L1/L2/L3 rotation and cookie support
-        return await NotebookLMClient.from_storage(path=auth_path)
+        cm = NotebookLMClient.from_storage(path=auth_path)
+        if hasattr(cm, "__aenter__"):
+            return await cm.__aenter__()
+        return await cm
     except Exception as e:
         LOG.debug(f"[NLM] from_storage failed ({e}), attempting direct cookie extraction fallback...")
 
@@ -123,18 +127,29 @@ async def _open_client():
         yield None
         return
 
-    try:
-        async with NotebookLMClient.from_storage() as client:
-            yield client
-            return
-    except Exception as e:
-        LOG.debug(f"[NLM] Context manager from_storage failed ({e}), trying _get_client()...")
+    possible_paths = [
+        Path.home() / ".notebooklm" / "profiles" / "default" / "storage_state.json",
+        Path.home() / ".notebooklm" / "storage_state.json",
+        Path(r"C:\Users\vizio\.notebooklm\storage_state.json"),
+    ]
+    auth_path = next((p for p in possible_paths if p.exists()), None)
+
+    if auth_path:
+        try:
+            async with NotebookLMClient.from_storage(path=auth_path) as client:
+                yield client
+                return
+        except Exception as e:
+            LOG.debug(f"[NLM] Context manager from_storage({auth_path}) failed ({e}), trying _get_client()...")
 
     client = await _get_client()
     if client is None:
         yield None
         return
-    async with client:
+    if hasattr(client, "__aenter__"):
+        async with client:
+            yield client
+    else:
         yield client
 
 
@@ -161,15 +176,25 @@ async def _find_notebook_by_id(client, notebook_id: str) -> Optional[Any]:
 
 
 async def push_note_async(knight_id: str, title: str, content: str) -> bool:
-    """Push a note to a knight's Notebook (async)."""
+    """Push a note to a knight's Notebook (async). Falls back to outbox when unauthenticated."""
     async with _open_client() as client:
         if not client:
-            return False
+            try:
+                from vfs.cloudbrain_outbox import CloudBrainOutbox
+                outbox = CloudBrainOutbox()
+                outbox.enqueue("NOTE", knight_id, title, content)
+                LOG.info(f"[NLM_OUTBOX] Auth unavailable. Note buffered in outbox for {knight_id}")
+                return True
+            except Exception as e:
+                LOG.error(f"[NLM_OUTBOX] Failed buffering note in outbox: {e}")
+                return False
         try:
             from memory.cloudbrain_connector import KNIGHT_NOTEBOOKS
         except ImportError:
             KNIGHT_NOTEBOOKS = {}
         notebook_id = KNIGHT_NOTEBOOKS.get(knight_id.upper())
+        if not notebook_id and _NOTEBOOK_UUID_RE.match(knight_id):
+            notebook_id = knight_id.lower()
         if not notebook_id:
             LOG.warning(f"[NLM] No notebook mapped for {knight_id}")
             return False
@@ -189,15 +214,25 @@ async def push_note_async(knight_id: str, title: str, content: str) -> bool:
 
 
 async def push_source_async(knight_id: str, title: str, content: str) -> bool:
-    """Push a text source to a knight's Notebook (async)."""
+    """Push a text source to a knight's Notebook (async). Falls back to outbox when unauthenticated."""
     async with _open_client() as client:
         if not client:
-            return False
+            try:
+                from vfs.cloudbrain_outbox import CloudBrainOutbox
+                outbox = CloudBrainOutbox()
+                outbox.enqueue("SOURCE", knight_id, title, content)
+                LOG.info(f"[NLM_OUTBOX] Auth unavailable. Source buffered in outbox for {knight_id}")
+                return True
+            except Exception as e:
+                LOG.error(f"[NLM_OUTBOX] Failed buffering source in outbox: {e}")
+                return False
         try:
             from memory.cloudbrain_connector import KNIGHT_NOTEBOOKS
         except ImportError:
             KNIGHT_NOTEBOOKS = {}
         notebook_id = KNIGHT_NOTEBOOKS.get(knight_id.upper())
+        if not notebook_id and _NOTEBOOK_UUID_RE.match(knight_id):
+            notebook_id = knight_id.lower()
         if not notebook_id:
             return False
 
@@ -247,6 +282,8 @@ async def query_notebook_async(knight_id: str, question: str) -> Optional[str]:
         except ImportError:
             KNIGHT_NOTEBOOKS = {}
         notebook_id = KNIGHT_NOTEBOOKS.get(knight_id.upper())
+        if not notebook_id and _NOTEBOOK_UUID_RE.match(knight_id):
+            notebook_id = knight_id.lower()
         if not notebook_id:
             return None
         nb = await _find_notebook_by_id(client, notebook_id)
