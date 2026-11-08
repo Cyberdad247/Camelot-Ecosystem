@@ -2,9 +2,25 @@
 
 /* Fonts are loaded via next/font in app/layout.tsx (self-hosted, no render-blocking request). */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Tailwind 4: the three @tailwind directives became one import. The explicit
+   @config keeps this app on tailwind.config.js exactly as v3 resolved it — the
+   repo also carries a tailwind.config.ts with extra tokens, but v3 picked .js
+   first, so switching would silently change which classes exist. */
+@import "tailwindcss";
+@config "../../tailwind.config.js";
+
+/* v4 changed the default border colour from gray-200 to currentColor and the
+   default ring width from 3px to 1px. Restoring the border default keeps the
+   existing panels looking the same; the ring width stays at v4's. */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
 
 body {
   @apply bg-[#050507] font-sans text-white antialiased;

@@ -316,22 +316,19 @@ if ! has_dist && [[ "$BUILD" -eq 1 ]]; then
   # by npm 11 is rejected by npm 10 with "Missing: ... from lock file". npx runs
   # the pinned version without changing the hub's global npm.
   #
-  # --legacy-peer-deps is still required, but no longer because the workspaces
-  # disagree: all of them now declare React 18, matching the root override and
-  # Next 14. The remaining conflict is one external package — apps/pwa's
-  # @agent-native/core peers on react >=19.2.7, which cannot coexist with Next 14's
-  # React 18. Strict resolution fails on that peer alone; every published version
-  # of that package declares it, so the choice is Next 15 + React 19 or dropping
-  # the dependency, not a version bump.
+  # No --legacy-peer-deps: the tree resolves strictly (React 19.3.1 on every
+  # workspace, Next 15, Tailwind 4 in the PWA so @agent-native/core's
+  # `tailwindcss >=4` peer is satisfied). Keep it that way — a flag here would
+  # hide the next genuine conflict the way it hid this one.
   # The npm install fallback stays only as a safety net: it resolves fresh instead
   # of reproducing the lockfile, so it announces itself rather than failing quietly.
   # export, not a VAR=value prefix on the group below: `VAR=x { ...; }` is not a
   # command position, so bash aborts with "syntax error near unexpected token `}'"
   # and the build silently never runs.
   run_remote "cd '$DIR' && export DATABASE_URL='postgresql://placeholder:placeholder@localhost:5432/placeholder?schema=public' && \
-      { npx -y npm@11.11.0 ci --no-audit --no-fund --legacy-peer-deps || \
+      { npx -y npm@11.11.0 ci --no-audit --no-fund || \
         { echo '  npm ci rejected the lockfile — using npm install (not lockfile-reproducible)'; \
-          npx -y npm@11.11.0 install --no-audit --no-fund --legacy-peer-deps; }; } > /tmp/camelot-deploy-build.log 2>&1 && \
+          npx -y npm@11.11.0 install --no-audit --no-fund; }; } > /tmp/camelot-deploy-build.log 2>&1 && \
       npx -y npm@11.11.0 --prefix apps/bifrost run build >> /tmp/camelot-deploy-build.log 2>&1 && echo '  build finished'"
   # tsc compiles only src/**/*.ts, so Prisma's generated .js client never lands in
   # dist/ by itself — and dist/db/SovereignDB.js requires ../generated/client at
