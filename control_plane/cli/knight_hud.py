@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import socket
 import sys
 import time
@@ -430,13 +431,19 @@ KNIGHT_REGISTRY: Dict[str, Dict[str, Any]] = {
     },
 }
 
+# The mesh bridge and edge bus run on the hub and bind the tailnet interface only
+# (CAMELOT_EDGE_BUS_BIND_HOST=100.110.180.18), so probing them at loopback from the
+# workstation reports a healthy hub as offline. This HUD runs on the workstation, so
+# the hub's tailnet address is the correct target; override for a different hub.
+HUB_TAILSCALE_IP = os.getenv("CAMELOT_HUB_TAILSCALE_IP", "100.110.180.18")
+
 ROUTER_PROBES: List[Dict[str, Any]] = [
     {"name": "OmniRoute Gateway", "host": "127.0.0.1", "port": 20128, "path": "/v1/models", "role": "350+ Providers, RTK+Caveman"},
     {"name": "9Router Engine", "host": "127.0.0.1", "port": 8079, "path": "/v1/models", "role": "Multi-Account, RTK Diff Compaction"},
     {"name": "Bifrost Gateway", "host": "127.0.0.1", "port": 3001, "path": "/health", "role": "Mesh Gateway & Intercom Bridge"},
     {"name": "CLIProxyAPI", "host": "127.0.0.1", "port": 8080, "path": "/v1/models", "role": "Cloud Brain Heavy Inference"},
     {"name": "BitRouter", "host": "127.0.0.1", "port": 8078, "path": "/v1/models", "role": "Agentic Cost-Optimized Gateway"},
-    {"name": "Mesh Bridge", "host": "127.0.0.1", "port": 8095, "path": "/mesh/status", "role": "Cybertronia <-> S26 Ultra Mesh"},
+    {"name": "Mesh Bridge", "host": HUB_TAILSCALE_IP, "port": 8095, "path": "/mesh/status", "role": "Cybertronia <-> S26 Ultra Mesh"},
     {"name": "Gemini Live Gateway", "host": "127.0.0.1", "port": 8765, "path": "", "role": "BidiStream Multimodal WebSocket"},
     {"name": "Morgana Rust Bridge", "host": "127.0.0.1", "port": 8001, "path": "/health", "role": "Secure Gateway Service"},
 ]
