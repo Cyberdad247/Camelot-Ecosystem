@@ -24,6 +24,15 @@
 #   bash scripts/ops/deploy-hub.sh --dry-run --activate
 #   bash scripts/ops/deploy-hub.sh --no-build          # skip the bifrost build step
 #   bash scripts/ops/deploy-hub.sh --rollback          # cut back to the previous release
+#   bash scripts/ops/deploy-hub.sh --prune             # prune old releases, change nothing else
+#
+# Retention:
+#   Releases accumulate forever by default — each cutover stages a new one and a
+#   deploy only ever adds. Others holding rollback material would not know which
+#   trees are still needed, so the budget is a number here (CAMELOT_KEEP, default
+#   5): the newest N releases plus whatever is live survive, everything older is
+#   removed after a *verified* cutover. Never before: pruning first would delete
+#   the tree a failing deploy is about to roll back to.
 #
 # Environment:
 #   CAMELOT_HUB        ssh target          (default: vps-camelot-hub)
@@ -31,6 +40,7 @@
 #   CAMELOT_LIVE       live tree on hub    (default: /opt/camelot-ecosystem)
 #   CAMELOT_UNITS      units to restart    (default: camelot-vps-mesh camelot-edge-bus camelot-bifrost)
 #   CAMELOT_STATE      mutable state root  (default: /opt/camelot-state)
+#   CAMELOT_KEEP       releases to keep    (default: 5, live always kept)
 
 set -euo pipefail
 
@@ -42,9 +52,10 @@ UNITS="${CAMELOT_UNITS:-camelot-vps-mesh camelot-edge-bus camelot-bifrost}"
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 REF="HEAD"
-MODE="stage" # stage | activate | rollback
+MODE="stage" # stage | activate | rollback | prune
 DRY_RUN=0
 BUILD=1
+KEEP="${CAMELOT_KEEP:-5}"
 
 SSH=(ssh -o BatchMode=yes -o ConnectTimeout=15 "$HUB")
 SCP=(scp -o BatchMode=yes -o ConnectTimeout=15)
@@ -95,6 +106,70 @@ exit $fail
 EOF
 }
 
+# Prune is the one destructive step in this script, so it is written to be boring
+# and bounded: it only ever removes paths under $RELEASES whose name is a commit
+# sha, and it can never select the live release. Legacy aliases ($LIVE.legacy-*)
+# are symlinks moved aside by previous cutovers — cheap to keep, but stale ones
+# pointing at pruned trees are noise in every "what is here" listing, so the
+# newest is kept as a manual rescue handle and the rest go.
+do_prune() {
+  [[ "$KEEP" =~ ^[0-9]+$ ]] || die "CAMELOT_KEEP must be a number, got '$KEEP'"
+  say "Prune $RELEASES (keeping $KEEP newest + live)"
+  # In dry-run every remote read is a *print*, so parsing its output would invent
+  # release names out of the command text itself. Report the policy and stop.
+  if [[ "$DRY_RUN" -eq 1 ]]; then
+    echo "  dry-run: would keep the newest $KEEP sha-named releases plus whatever $LIVE points at,"
+    echo "           delete older ones, stale .incoming-*.tar.gz (>1h), and all but the newest $LIVE.legacy-*"
+    return 0
+  fi
+  local live list keepers doomed path n=0
+  live=$(run_remote "readlink -f '$LIVE' 2>/dev/null || true")
+  list=$(run_remote "ls -1dt '$RELEASES'/*/ 2>/dev/null | sed 's:/$::' || true")
+  if [[ -z "$list" ]]; then
+    ok "no releases staged — nothing to prune"
+    return 0
+  fi
+  # Newest first, minus the live tree. The first $KEEP are the rollback window.
+  keepers=$(printf '%s\n' "$list" | grep -vxF "${live:-/nonexistent}" | head -n "$KEEP")
+  doomed=$(printf '%s\n' "$list" | grep -vxF "${live:-/nonexistent}" | tail -n "+$((KEEP + 1))")
+  printf '%s\n' "$keepers" | while read -r path; do [[ -n "$path" ]] && printf '  \033[32mkeep\033[0m   %s\n' "$(basename "$path")"; done
+  if [[ -n "$live" ]]; then printf '  \033[32mkeep\033[0m   %s (live)\n' "$(basename "$live")"; fi
+  if [[ -z "$doomed" ]]; then
+    ok "within budget — nothing to remove"
+    return 0
+  fi
+  while read -r path; do
+    [[ -n "$path" ]] || continue
+    # Two independent guards: the path must sit directly in $RELEASES and its name
+    # must look like a commit. A glob that expanded unexpectedly (or an empty live
+    # target turning a filter into a no-op) then deletes nothing.
+    if [[ "$(dirname "$path")" != "$RELEASES" ]]; then
+      warn "skipping $path — not directly under $RELEASES"; continue
+    fi
+    if ! [[ "$(basename "$path")" =~ ^[0-9a-f]{7,40}$ ]]; then
+      warn "skipping $path — name is not a commit sha"; continue
+    fi
+    if [[ -e "$LIVE" && "$(run_remote "readlink -f '$LIVE'")" == "$path" ]]; then
+      warn "skipping $path — it is live"; continue
+    fi
+    run_remote "rm -rf '$path'" && { n=$((n + 1)); printf '  \033[33mpruned\033[0m %s\n' "$(basename "$path")"; }
+  done <<< "$doomed"
+  ok "pruned $n release(s)"
+
+  # Interrupted uploads leave .incoming-<sha>.tar.gz behind; they are never valid
+  # releases and can be a hundred megabytes each.
+  run_remote "find '$RELEASES' -maxdepth 1 -name '.incoming-*.tar.gz' -mmin +60 -print -delete | sed 's/^/  pruned /'" || true
+
+  # Legacy aliases: keep the newest, drop the rest (and any already broken).
+  local aliases
+  aliases=$(run_remote "ls -1dt '$LIVE'.legacy-* 2>/dev/null || true")
+  if [[ -n "$aliases" ]]; then
+    printf '%s\n' "$aliases" | tail -n +2 | while read -r path; do
+      [[ -n "$path" ]] && run_remote "rm -rf '$path'" && printf '  \033[33mpruned\033[0m %s\n' "$(basename "$path")"
+    done
+  fi
+}
+
 do_rollback() {
   local current target
   current=$(run_remote "readlink -f '$LIVE' || true")
@@ -123,6 +198,8 @@ while [[ $# -gt 0 ]]; do
     --host)      HUB="${2:?--host needs a value}"; SSH=(ssh -o BatchMode=yes -o ConnectTimeout=15 "$HUB"); SCP=(scp -o BatchMode=yes -o ConnectTimeout=15); shift 2 ;;
     --activate)  MODE="activate"; shift ;;
     --rollback)  MODE="rollback"; shift ;;
+    --prune)     MODE="prune"; shift ;;
+    --keep)      KEEP="${2:?--keep needs a value}"; shift 2 ;;
     --dry-run)   DRY_RUN=1; shift ;;
     --no-build)  BUILD=0; shift ;;
     -h|--help)   sed -n '1,34p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
@@ -134,6 +211,11 @@ cd "$REPO_ROOT"
 
 if [[ "$MODE" == "rollback" ]]; then
   do_rollback
+  exit 0
+fi
+
+if [[ "$MODE" == "prune" ]]; then
+  do_prune
   exit 0
 fi
 
@@ -351,6 +433,15 @@ else
   do_rollback
   die "deploy of $SHORT rolled back; hub is on the previous release"
 fi
+
+# ── 6. retention ──────────────────────────────────────────────────────────────
+# Only after the health gate passed: at this point the previous release is
+# rollback material for a cutover that has already been verified, so the oldest
+# trees beyond the budget are safe to drop. On the rolled-back path do_rollback
+# exits before reaching here — which is exactly the guarantee needed, since a
+# failed deploy must not have had its fallback pruned.
+say "6) prune old releases"
+do_prune
 
 say "Done — $SHORT is live"
 run_remote "cat '$DIR/DEPLOY_MANIFEST.json'"
