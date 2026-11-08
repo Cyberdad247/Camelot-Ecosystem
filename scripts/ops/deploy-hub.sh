@@ -72,7 +72,11 @@ run_remote() {
     printf '  \033[36mdry-run\033[0m would run on %s: %s\n' "$HUB" "$1"
     return 0
   fi
-  "${SSH[@]}" "$1"
+  # stdin from /dev/null, always: ssh forwards its stdin to the remote command, so a
+  # call made from inside `while read` consumed the loop's remaining input. Each
+  # cleanup loop then deleted exactly one item and reported success — the failure
+  # mode is a loop that silently stops, not an error.
+  "${SSH[@]}" "$1" < /dev/null
 }
 
 # Health is checked from the hub's own perspective, and from the interface each
@@ -134,9 +138,11 @@ do_prune() {
   doomed=$(printf '%s\n' "$list" | grep -vxF "${live:-/nonexistent}" | tail -n "+$((KEEP + 1))")
   printf '%s\n' "$keepers" | while read -r path; do [[ -n "$path" ]] && printf '  \033[32mkeep\033[0m   %s\n' "$(basename "$path")"; done
   if [[ -n "$live" ]]; then printf '  \033[32mkeep\033[0m   %s (live)\n' "$(basename "$live")"; fi
+  # Not an early return: being within the release budget is the *normal* state, and
+  # returning here skipped the archive and legacy-alias cleanup below — the prune
+  # reported success while four stale aliases stayed on the hub.
   if [[ -z "$doomed" ]]; then
-    ok "within budget — nothing to remove"
-    return 0
+    ok "within budget — no releases to remove"
   fi
   while read -r path; do
     [[ -n "$path" ]] || continue
