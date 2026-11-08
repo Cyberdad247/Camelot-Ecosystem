@@ -72,7 +72,10 @@ health_payload() {
   cat <<'EOF'
 set -u
 fail=0
-code() { curl -s -o /dev/null -m 4 -w '%{http_code}' "$1" 2>/dev/null || echo 000; }
+# curl prints its -w value even when the connection fails, so `|| echo 000` appended
+# a second 000 and the probe logged "000000" — an unreadable number in exactly the
+# report someone reads during an outage.
+code() { local c; c=$(curl -s -o /dev/null -m 4 -w '%{http_code}' "$1" 2>/dev/null); printf '%s' "${c:-000}"; }
 b=$(code http://127.0.0.1:3001/health)          # bifrost binds all interfaces
 m=$(code http://100.110.180.18:8095/mesh/status) # tailnet-only; 401 = alive, auth-gated
 e=$(code http://100.110.180.18:8096/healthz)     # tailnet-only
@@ -99,7 +102,13 @@ do_rollback() {
   # legacy trees earlier cutovers moved aside. Restricting rollback to $RELEASES
   # made it fail on a first deploy — the only working tree was the one just moved
   # aside, so the one moment rollback is most needed was the moment it was empty.
-  target=$(run_remote "ls -1dt $RELEASES/*/ $LIVE.legacy-*/ 2>/dev/null | sed 's:/*\$::' | grep -vx '$current' | head -1")
+  # Prefer a canonical staged release over a legacy alias, so a rollback leaves
+  # $LIVE pointing at /opt/camelot-releases/<sha> rather than at
+  # /opt/camelot-ecosystem.legacy-<ts> (which is itself a symlink to a release —
+  # same bytes, but the alias makes "what is live" ambiguous for the next cutover).
+  pick() { run_remote "ls -1dt $1 2>/dev/null | sed 's:/*\$::' | grep -vx '$current' | head -1"; }
+  target=$(pick "$RELEASES/*/")
+  [[ -n "$target" ]] || target=$(pick "$LIVE.legacy-*/")
   [[ -n "$target" ]] || die "no other tree available to roll back to"
   say "Rolling back $LIVE -> $target"
   run_remote "ln -sfn '$target' '$LIVE.tmp' && mv -Tf '$LIVE.tmp' '$LIVE' && readlink -f '$LIVE'"
@@ -219,14 +228,19 @@ if ! has_dist && [[ "$BUILD" -eq 1 ]]; then
   # by npm 11 is rejected by npm 10 with "Missing: ... from lock file". npx runs
   # the pinned version without changing the hub's global npm.
   #
-  # --legacy-peer-deps is required because the workspaces genuinely disagree:
-  # apps/pwa and bifrost-board pin react ^18.2.0 while camelot-vps-hub,
-  # excalibur-cmd-1 and multivoice-router pin ^19. npm's strict peer resolution
-  # refuses to satisfy both, so the lockfile is generated and consumed in legacy
-  # mode — that is the resolution this repo actually installs with.
+  # --legacy-peer-deps is still required, but no longer because the workspaces
+  # disagree: all of them now declare React 18, matching the root override and
+  # Next 14. The remaining conflict is one external package — apps/pwa's
+  # @agent-native/core peers on react >=19.2.7, which cannot coexist with Next 14's
+  # React 18. Strict resolution fails on that peer alone; every published version
+  # of that package declares it, so the choice is Next 15 + React 19 or dropping
+  # the dependency, not a version bump.
   # The npm install fallback stays only as a safety net: it resolves fresh instead
   # of reproducing the lockfile, so it announces itself rather than failing quietly.
-  run_remote "cd '$DIR' && DATABASE_URL='postgresql://placeholder:placeholder@localhost:5432/placeholder?schema=public' \
+  # export, not a VAR=value prefix on the group below: `VAR=x { ...; }` is not a
+  # command position, so bash aborts with "syntax error near unexpected token `}'"
+  # and the build silently never runs.
+  run_remote "cd '$DIR' && export DATABASE_URL='postgresql://placeholder:placeholder@localhost:5432/placeholder?schema=public' && \
       { npx -y npm@11.11.0 ci --no-audit --no-fund --legacy-peer-deps || \
         { echo '  npm ci rejected the lockfile — using npm install (not lockfile-reproducible)'; \
           npx -y npm@11.11.0 install --no-audit --no-fund --legacy-peer-deps; }; } > /tmp/camelot-deploy-build.log 2>&1 && \
