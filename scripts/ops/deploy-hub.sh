@@ -325,11 +325,15 @@ if ! has_dist && [[ "$BUILD" -eq 1 ]]; then
   # export, not a VAR=value prefix on the group below: `VAR=x { ...; }` is not a
   # command position, so bash aborts with "syntax error near unexpected token `}'"
   # and the build silently never runs.
+  # `|| die` and not bare: under `set -e` a failing remote command aborted the
+  # script with a bare exit code (2) and no explanation, which reads like a crash
+  # rather than a build error — the actual cause was 58 lines into this log.
   run_remote "cd '$DIR' && export DATABASE_URL='postgresql://placeholder:placeholder@localhost:5432/placeholder?schema=public' && \
       { npx -y npm@11.11.0 ci --no-audit --no-fund || \
         { echo '  npm ci rejected the lockfile — using npm install (not lockfile-reproducible)'; \
           npx -y npm@11.11.0 install --no-audit --no-fund; }; } > /tmp/camelot-deploy-build.log 2>&1 && \
-      npx -y npm@11.11.0 --prefix apps/bifrost run build >> /tmp/camelot-deploy-build.log 2>&1 && echo '  build finished'"
+      npx -y npm@11.11.0 --prefix apps/bifrost run build >> /tmp/camelot-deploy-build.log 2>&1 && echo '  build finished'" \
+    || die "build failed inside the release — see /tmp/camelot-deploy-build.log on $HUB (nothing was cut over)"
   # tsc compiles only src/**/*.ts, so Prisma's generated .js client never lands in
   # dist/ by itself — and dist/db/SovereignDB.js requires ../generated/client at
   # runtime, which threw MODULE_NOT_FOUND on the first cutover. Copy it here as
