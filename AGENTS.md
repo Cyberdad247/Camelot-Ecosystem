@@ -73,7 +73,7 @@ Order for JS changes: `lint -> typecheck -> scoped test -> build` (mirrors `ci.y
 
 - `LakishaHUD.tsx`: all hooks (`useState/useEffect/useRef`) BEFORE the `if (!isUnlocked) return ...` early-return; speech I/O gated behind explicit user tap (autoplay policy).
 - `'use client'` required above any file using `next/dynamic({ssr:false})`; no `as any` to mask narrowing.
-- `tailwind.config.ts` is source of truth for `fontFamily`/`letterSpacing` — new `className` tokens must resolve there; `tsconfig` `@/*` → `./src/*`.
+- `tailwind.config.js` is the only theme source for `fontFamily`/`letterSpacing` — new `className` tokens must resolve there (v4 loads it via `@config`, and cannot load a `.ts` config, so a second config file would be dead weight); `tsconfig` `@/*` → `./src/*`.
 - Design law: Tailwind + Luxora Gold `#D4AF37` highlights.
 
 ## Reference (read on demand, not all at once)

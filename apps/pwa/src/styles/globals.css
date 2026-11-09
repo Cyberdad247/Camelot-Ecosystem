@@ -3,9 +3,9 @@
 /* Fonts are loaded via next/font in app/layout.tsx (self-hosted, no render-blocking request). */
 
 /* Tailwind 4: the three @tailwind directives became one import. The explicit
-   @config keeps this app on tailwind.config.js exactly as v3 resolved it — the
-   repo also carries a tailwind.config.ts with extra tokens, but v3 picked .js
-   first, so switching would silently change which classes exist. */
+   @config names the theme source outright, because v4 does not auto-discover a
+   config and cannot load TypeScript at all — so this path is the only thing
+   keeping the app's tokens in play. */
 @import "tailwindcss";
 @config "../../tailwind.config.js";
 
