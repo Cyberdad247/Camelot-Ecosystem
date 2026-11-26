@@ -43,19 +43,68 @@ export function HolographicClientOracle() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Audio waveform animation when active or speaking
+  // Real-time Web Audio API 16-bar frequency visualizer when mic is active,
+  // with graceful animated fallback when oracle is speaking or mic is unavailable.
   useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
-    if (isMicActive || isOracleSpeaking) {
+    let interval: ReturnType<typeof setInterval> | null = null;
+    let rafId: number | null = null;
+    let audioCtx: AudioContext | null = null;
+    let mediaStream: MediaStream | null = null;
+    let cancelled = false;
+
+    const startFallbackWaveform = () => {
       interval = setInterval(() => {
         setWaveformBars(Array.from({ length: 16 }, () => Math.floor(Math.random() * 85 + 15)));
         setAudioLatencyMs(Math.floor(Math.random() * 6 + 14));
       }, 90);
+    };
+
+    if (isMicActive && typeof navigator !== 'undefined' && navigator.mediaDevices?.getUserMedia) {
+      navigator.mediaDevices
+        .getUserMedia({ audio: true })
+        .then((stream) => {
+          if (cancelled) {
+            stream.getTracks().forEach((t) => t.stop());
+            return;
+          }
+          mediaStream = stream;
+          const AudioContextCtor =
+            window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+          audioCtx = new AudioContextCtor();
+          const source = audioCtx.createMediaStreamSource(stream);
+          const analyser = audioCtx.createAnalyser();
+          analyser.fftSize = 64;
+          source.connect(analyser);
+
+          const bins = new Uint8Array(analyser.frequencyBinCount);
+          const sampleFrame = () => {
+            if (cancelled) return;
+            analyser.getByteFrequencyData(bins);
+            const bars = Array.from({ length: 16 }, (_, idx) => {
+              const raw = bins[idx] ?? 0;
+              return Math.max(12, Math.min(100, Math.round((raw / 255) * 100)));
+            });
+            setWaveformBars(bars);
+            setAudioLatencyMs(Math.max(8, Math.round((audioCtx?.baseLatency ?? 0.015) * 1000)));
+            rafId = requestAnimationFrame(sampleFrame);
+          };
+          rafId = requestAnimationFrame(sampleFrame);
+        })
+        .catch(() => {
+          if (!cancelled) startFallbackWaveform();
+        });
+    } else if (isMicActive || isOracleSpeaking) {
+      startFallbackWaveform();
     } else {
       setWaveformBars([12, 18, 14, 22, 16, 20, 14, 24, 18, 16, 22, 14, 12, 18, 15, 14]);
     }
+
     return () => {
+      cancelled = true;
       if (interval) clearInterval(interval);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      if (mediaStream) mediaStream.getTracks().forEach((t) => t.stop());
+      if (audioCtx) void audioCtx.close();
     };
   }, [isMicActive, isOracleSpeaking]);
 

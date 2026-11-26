@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: MIT
-import { promises as fs } from 'node:fs';
-import path from 'node:path';
 import crypto from 'node:crypto';
 import { type NextRequest, NextResponse } from 'next/server';
+import { persistHybridRecord, readLedgerRecords } from '../../../../lib/invisionedStore';
 
 interface ProposalPayload {
   clientName: string;
@@ -12,14 +11,6 @@ interface ProposalPayload {
   selectedTier: string;
   contractTerms: string;
   signedBy: string;
-}
-
-function getProposalsLedgerPath(): string {
-  const isVercel = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
-  if (isVercel) {
-    return path.join('/tmp', 'invisioned_proposals.jsonl');
-  }
-  return path.join(process.cwd(), '..', '..', '03_VAULT', 'runtime_state', 'invisioned_proposals.jsonl');
 }
 
 export async function POST(req: NextRequest) {
@@ -54,17 +45,14 @@ export async function POST(req: NextRequest) {
       stagedCrystalRef: `vkg_crystal_${proposalId}`,
     };
 
-    const targetPath = getProposalsLedgerPath();
-    const parentDir = path.dirname(targetPath);
-    await fs.mkdir(parentDir, { recursive: true });
-
-    await fs.appendFile(targetPath, JSON.stringify(proposalRecord) + '\n', 'utf-8');
+    const persistence = await persistHybridRecord('proposals', 'invisioned_proposals.jsonl', proposalRecord);
 
     return NextResponse.json({
       success: true,
       proposalId,
       agreementHash,
       timestamp,
+      persistenceMode: persistence.mode,
       message: 'Proposal agreement cryptographically signed and archived.',
     });
   } catch (error) {
@@ -77,15 +65,8 @@ export async function POST(req: NextRequest) {
 
 export async function GET() {
   try {
-    const targetPath = getProposalsLedgerPath();
-    try {
-      const data = await fs.readFile(targetPath, 'utf-8');
-      const lines = data.split('\n').filter(Boolean);
-      const proposals = lines.map((line) => JSON.parse(line));
-      return NextResponse.json({ success: true, count: proposals.length, proposals });
-    } catch {
-      return NextResponse.json({ success: true, count: 0, proposals: [] });
-    }
+    const proposals = await readLedgerRecords('invisioned_proposals.jsonl');
+    return NextResponse.json({ success: true, count: proposals.length, proposals });
   } catch (error) {
     return NextResponse.json(
       { error: 'Failed to read proposals ledger', detail: String(error) },

@@ -7,6 +7,30 @@ interface OracleQueryPayload {
   sessionId?: string;
 }
 
+function buildAudioStreamConfig() {
+  const primaryEndpoint = process.env.ORACLE_AUDIO_WS || 'ws://127.0.0.1:7680/ws';
+  const elevenLabsAgentId = process.env.ELEVENLABS_AGENT_ID;
+  return {
+    voiceSampleRate: 24000,
+    vadThresholdMs: 80,
+    codec: 'audio/pcm',
+    duplexEndpoint: primaryEndpoint,
+    fallbackProvider: elevenLabsAgentId ? 'elevenlabs_conversational_ai' : 'local_sir_sonus',
+    fallbackEndpoint: elevenLabsAgentId
+      ? `wss://api.elevenlabs.io/v1/convai/conversation?agent_id=${encodeURIComponent(elevenLabsAgentId)}`
+      : null,
+  };
+}
+
+export async function GET() {
+  return NextResponse.json({
+    status: 'READY',
+    service: 'SIR_SONUS_DUPLEX_SIGNALING_GATEWAY',
+    timestamp: new Date().toISOString(),
+    audioStreamConfig: buildAudioStreamConfig(),
+  });
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = (await req.json()) as Partial<OracleQueryPayload>;
@@ -36,12 +60,7 @@ export async function POST(req: NextRequest) {
       persona,
       query,
       answer: responseText,
-      audioStreamConfig: {
-        voiceSampleRate: 24000,
-        vadThresholdMs: 80,
-        codec: 'audio/pcm',
-        duplexEndpoint: process.env.ORACLE_AUDIO_WS || 'ws://127.0.0.1:7680/ws',
-      },
+      audioStreamConfig: buildAudioStreamConfig(),
       a2ui: {
         componentType: 'MetricCard',
         data: {
